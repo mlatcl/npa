@@ -1,0 +1,701 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass exam
+\begin_preamble
+\newcommand{\answer}[2]{}
+\newcommand{\masters}[2]{#2}
+\end_preamble
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize 11
+\spacing single 
+\papersize a4paper
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Pressmark
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+masters{
+\end_inset 
+
+COM6131
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{
+\end_inset 
+
+COM3270
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}
+\end_inset 
+
+
+\layout Examtitle
+
+NETWORK PERFORMANCE ANALYSIS
+\layout examdate
+
+AUTUMN SEMESTER 2002--2003
+\layout Examtime
+
+2 HOURS
+\layout Exam
+
+\SpecialChar ~
+
+\begin_deeper 
+\layout Question
+
+In an 
+\begin_inset Formula $M/G/1$
+\end_inset 
+
+ queue inter-arrival times are exponentially distributed and service times
+ are `generally' distributed.
+ 
+\begin_deeper 
+\layout Qupart
+
+Use the concept of residual service time to show that, assuming customers
+ are served in the order that they arrive, the average waiting time is given
+ by
+\begin_inset Formula \[
+\bar{W}=\frac{\bar{R}}{1-\rho},\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $\bar{R}$
+\end_inset 
+
+ is the average residual service time and 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ is the queue utilization factor.
+ Use diagrams, where necessary, to explain your reasoning and state your
+ assumptions clearly.
+\begin_deeper 
+\layout Mypercent
+
+50
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Qupart
+
+Use a graphical argument to derive a formula for the residual service time,
+ then combine this equation with the formula for the average waiting time
+ above to show that
+\begin_inset Formula \[
+\bar{W}=\frac{\lambda\left\langle X^{2}\right\rangle }{2\left(1-\rho\right)},\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ is the arrival rate and 
+\begin_inset Formula $\left\langle X^{2}\right\rangle $
+\end_inset 
+
+ is the expectation of the squared service time.
+\begin_deeper 
+\layout Mypercent
+
+40
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Qupart
+
+The equation you have derived is easily recognized as the Pollaczek-Khinchin
+ formula.
+ Use it to derive the average waiting time in an 
+\begin_inset Formula $M/D/1$
+\end_inset 
+
+ queue.
+\begin_deeper 
+\layout Mypercent
+
+10
+\end_deeper 
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+turnover
+\end_inset 
+
+
+\layout Question
+
+You are presented with the following portion of Tcl code designed for the
+ network simulator NS2.
+\begin_deeper 
+\layout LyX-Code
+
+set node1 [$ns node]
+\newline 
+set node2 [$ns node]
+\newline 
+set node3 [$ns node]
+\newline 
+set node4 [$ns node]
+\newline 
+
+\newline 
+$node1 set multiPath_ 1
+\newline 
+
+\newline 
+set link1 [$ns duplex-link $node1 $node2 1Kb 0ms DropTail]
+\newline 
+set link2 [$ns duplex-link $node1 $node3 1Kb 0ms DropTail]
+\newline 
+set link3 [$ns duplex-link $node2 $node4 1Kb 0ms DropTail]
+\newline 
+set link4 [$ns duplex-link $node3 $node4 1Kb 0ms DropTail]
+\newline 
+
+\newline 
+set src [new Agent/UDP]
+\newline 
+$ns attach-agent $node1 $src
+\newline 
+set sink [new Agent/Null]
+\newline 
+$ns attach-agent $node4 $sink
+\newline 
+
+\layout Qupart
+
+Assuming that only the specified nodes exist, draw the network topology
+ showing the associated routes.
+\begin_deeper 
+\layout Mypercent
+
+25
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Qupart
+
+State the assumptions behind the Kleinrock Independence approximation.
+ Discuss to what extent they are valid for this network topology.
+\begin_deeper 
+\layout Mypercent
+
+35
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Qupart
+
+Packet arrivals occur as a Poisson distribution at 
+\begin_inset LatexCommand \url{node1}
+
+\end_inset 
+
+ with a rate of 2 per second.
+ Packet lengths are distributed as an exponential distribution with a mean
+ of 0.5 Kb
+\begin_inset Note
+collapsed false
+
+\layout Standard
+
+There was an error in the orginal paper here where this was 2.
+\end_inset 
+
+.
+ Assuming that packets are sent randomly along all possible routes with
+ equal probability, use Kleinrock's independence assumption to estimate
+ the steady state average number of packets that are at each link.
+\begin_deeper 
+\layout Mypercent
+
+25
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Qupart
+
+What is the expected delay for each route through the network?
+\layout Mypercent
+
+15
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+continued
+\end_inset 
+
+
+\layout Question
+
+
+\series bold 
+Hand in the Erlang C curves provided with your answer to this question.
+\layout Question
+
+Northern Telecom has just completed the purchase of several local telecommunicat
+ions companies, each with their own regional support teams.
+ There are three regional support teams.
+ The number of staff in each team and the call rate for each team's centre
+ is given in the following table.
+ You can assume that calls arrive as a Poisson process and that the service
+ times are exponentially distributed.
+\begin_deeper 
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="4">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0pt">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Region
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+A
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+B
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+C
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $m$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+10
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+13
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+10
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+customers/hour
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+120
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+160
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+100
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Qupart
+
+Given that the average holding time, 
+\begin_inset Formula $\tau$
+\end_inset 
+
+, for support queries is 3 minutes, use the Erlang C curves at the back
+ of the paper to give, for each region, the probability of queueing, 
+\begin_inset Formula $C\left(m,a\right)$
+\end_inset 
+
+.
+\begin_inset Note
+collapsed false
+
+\layout Standard
+
+Five for each answer
+\end_inset 
+
+ 
+\begin_deeper 
+\layout Mypercent
+
+30
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Qupart
+
+The formula for the average queue length in an 
+\begin_inset Formula $M/M/m$
+\end_inset 
+
+ system is
+\begin_inset Formula \[
+\bar{N}_{Q}=\frac{\rho}{1-\rho}C\left(m,a\right)\]
+
+\end_inset 
+
+Use Little's formula to compute the formula for the average queueing time,
+ and hence compute the expected queueing time for each call centre.
+\begin_inset Note
+collapsed false
+
+\layout Standard
+
+Ten for the formula three for each answer.
+\end_inset 
+
+
+\begin_deeper 
+\layout Mypercent
+
+30
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Qupart
+
+Given that the average queueing time for customers who 
+\emph on 
+don't
+\emph default 
+ queue is zero.
+ What is the average queueing time for customers who 
+\emph on 
+do
+\emph default 
+ queue?
+\begin_deeper 
+\layout Mypercent
+
+20
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Qupart
+
+The company wishes to cut costs by merging the call centres to one location.
+ Assuming that the total traffic level, the average holding time and the
+ total staff numbers stay the same what will be the average queueing time
+ for the new centre? 
+\begin_deeper 
+\layout Mypercent
+
+20
+\end_deeper 
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+turnover
+\end_inset 
+
+
+\layout Question
+
+A call centre employs thirty operators selling tickets for a major sporting
+ event.
+ The call centre has sixty lines in total.
+ When all operators are active new calls are placed in a queue for the first
+ available operator.
+ The call centre is to be modelled as an 
+\begin_inset Formula $M/M/m/n$
+\end_inset 
+
+ queue, 
+\emph on 
+i.e.
+
+\emph default 
+ a queue in which there are 
+\begin_inset Formula $m$
+\end_inset 
+
+ servers and a maximum state of 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+\begin_deeper 
+\layout Qupart
+
+Draw a state diagram representing the queueing system.
+\begin_deeper 
+\layout Mypercent
+
+30
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Qupart
+
+Write down the detailed balance equations for the two cases where the queue
+ state 
+\begin_inset Formula $k<m$
+\end_inset 
+
+ and when 
+\begin_inset Formula $m\leq k<n$
+\end_inset 
+
+.
+\begin_deeper 
+\layout Mypercent
+
+20
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Qupart
+
+For each of the two cases outlined in the previous part write down the steady
+ state distribution as a function of 
+\begin_inset Formula $P\left(0\right)$
+\end_inset 
+
+, the probability of the system being empty.
+ 
+\begin_deeper 
+\layout Mypercent
+
+30
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Qupart
+
+Use the fact that the steady state distribution must be normalized to show
+ that 
+\begin_inset Formula \[
+P\left(0\right)=\left[\sum_{k=0}^{m}\frac{a^{k}}{k!}+\sum_{k=m+1}^{n}\frac{a^{k}}{m!m^{k-m}}\right]^{-1}\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $a=\frac{\lambda}{\mu}$
+\end_inset 
+
+, 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ is the arrival rate and 
+\begin_inset Formula $\mu$
+\end_inset 
+
+ is the rate of the service time distribution.
+\begin_deeper 
+\layout Mypercent
+
+20
+\end_deeper 
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Standard
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+questionsend
+\layout Standard
+
+\backslash 
+myfooter{}
+\backslash 
+newpage
+\backslash 
+myheader
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+topmargin -1.8cm 
+\backslash 
+raggedleft{{
+\backslash 
+bf Registration Number 
+\backslash 
+rule{4cm}{.5pt}}}
+\backslash 
+newcommand{
+\backslash 
+figureTextSize}{
+\backslash 
+tiny}
+\end_inset 
+
+
+\layout Standard
+\align center 
+
+\begin_inset Include \input{diagrams/erlangCCurves0to20.eepic}
+preview false
+
+\end_inset 
+
+
+\the_end

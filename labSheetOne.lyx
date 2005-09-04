@@ -1,0 +1,287 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\begin_preamble
+\usepackage{neilbib,epic,eepic}
+\input{neilutils}
+\bibliographystyle{neilbib}
+\title{COM6130 --- Coursework}
+\author{Neil Lawrence}
+
+\date{October 18, 2001}
+\end_preamble
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\float_placement h
+\paperfontsize default
+\spacing single 
+\papersize a4paper
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+Network Performance Analysis --- Lab Sheet 1
+\newline 
+
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ Simulation
+\layout Author
+
+Neil Lawrence
+\layout Date
+
+October 18th, 2004
+\layout Standard
+
+In this Lab you will build a discrete time simulation of a queue in MATLAB.
+ You will investigate the statistics associated with this simulation and
+ compare them with analytically computed values.
+ 
+\layout Enumerate
+
+Create a discrete simulation of an 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue in MATLAB.
+ The state diagram for the discrete approximation to the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue is given below.
+\begin_deeper 
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/discreteMM1State.eps
+	width 80text%
+
+\end_inset 
+
+
+\layout Standard
+
+In your simulation use discrete time-steps of 
+\begin_inset Formula $\Delta t=0.01$
+\end_inset 
+
+ and set the probability of a `birth' to 
+\begin_inset Formula $P\left(b\right)=\lambda\Delta t$
+\end_inset 
+
+ and the probability of a `death' to 
+\begin_inset Formula $P\left(d\right)=\mu\Delta t$
+\end_inset 
+
+.
+\layout Standard
+
+First run the simulation with 
+\begin_inset Formula $\lambda=1$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mu=2$
+\end_inset 
+
+ , 
+\emph on 
+i.e.
+
+\emph default 
+ at each time step, the probability of changing state by 
+\begin_inset Formula $+1$
+\end_inset 
+
+ is equal to 
+\begin_inset Formula $\lambda\Delta t$
+\end_inset 
+
+, the probability of changing state by 
+\begin_inset Formula $-1$
+\end_inset 
+
+ is equal to 
+\begin_inset Formula $\mu\Delta t$
+\end_inset 
+
+ and the probability of no change of state is 
+\begin_inset Formula $1-(\lambda+\mu)\Delta t$
+\end_inset 
+
+.
+ Run your queueing model for 
+\begin_inset Formula $1000$
+\end_inset 
+
+ seconds (equivalent to 
+\begin_inset Formula $100,000$
+\end_inset 
+
+ iterations or time steps), store the state of the queue at each time step.
+ This stored set of states can be viewed as a set of samples from the probabilis
+tic model that your queue represents.
+ 
+\layout Standard
+
+[
+\emph on 
+While you wait for simulations to run you might like to start looking at
+ the questions below
+\emph default 
+].
+\end_deeper 
+\layout Enumerate
+
+Produce a normalized histogram of the samples.
+ 
+\begin_inset LatexCommand \label{histogram}
+
+\end_inset 
+
+
+\begin_deeper 
+\layout Standard
+
+[
+\emph on 
+Hint: A normalized histogram is one where the area of the bars adds up to
+ one instead of the number of counts.
+\emph default 
+] 
+\end_deeper 
+\layout Enumerate
+
+Compute the mean of the samples (the sample mean).
+ 
+\begin_inset LatexCommand \label{sampleMean}
+
+\end_inset 
+
+
+\layout Enumerate
+
+Run your model again with 
+\begin_inset Formula $\lambda=1.9$
+\end_inset 
+
+, keeping 
+\begin_inset Formula $\mu=2$
+\end_inset 
+
+.
+ Repeat steps 
+\begin_inset LatexCommand \ref{histogram}
+
+\end_inset 
+
+ to 
+\begin_inset LatexCommand \ref{sampleMean}
+
+\end_inset 
+
+ for these new values.
+ Are the sample based estimates more or less accurate for this system? Comment
+ on why they are more or less accurate.
+ 
+\layout Enumerate
+
+Use the detailed balance equations to derive the steady-state probabilities
+ for each state in your model and use these steady-state probabilities to
+ derive the distribution's mean.
+ 
+\begin_inset LatexCommand \label{trueMean}
+
+\end_inset 
+
+
+\layout Enumerate
+
+Compare the computed probabilities from 
+\begin_inset LatexCommand \ref{trueMean}
+
+\end_inset 
+
+ to the normalized frequency counts from the histogram found in 
+\begin_inset LatexCommand \ref{histogram}
+
+\end_inset 
+
+ by plotting them together.
+ Compare the mean of your samples from 
+\begin_inset LatexCommand \ref{sampleMean}
+
+\end_inset 
+
+ to the analytical mean computed in 
+\begin_inset LatexCommand \ref{trueMean}
+
+\end_inset 
+
+.
+ Comment on differences between the analytically computed values and those
+ computed from the samples.
+ 
+\begin_inset LatexCommand \label{comparison}
+
+\end_inset 
+
+
+\layout Enumerate
+
+In this coursework assignment you have developed a simulation of a simple
+ Markov birth death process.
+ You have examined the statistics of your simulation and compared them to
+ analytically computed values.
+ 
+\begin_deeper 
+\layout Standard
+
+Real networks are more complex than the simple network we describe here.
+ Many cannot be studied analytically and therefore their statistics must
+ be determined through simulation.
+ Summarize what you have learned from the simple example above about the
+ possible dangers of such simulations.
+ 
+\end_deeper 
+\layout Standard
+
+Useful matlab commands.
+\layout LyX-Code
+
+% you can use hist for obtaining bin frequencies
+\layout LyX-Code
+
+n = hist(state, max(state)+1)
+\newline 
+bar(n/sum(n))
+\newline 
+rand
+\newline 
+sum
+\layout LyX-Code
+
+\layout LyX-Code
+
+\layout LyX-Code
+
+\the_end

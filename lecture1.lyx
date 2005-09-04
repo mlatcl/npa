@@ -1,0 +1,773 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass notes
+\begin_preamble
+\usepackage{neilbib}
+%\input{neilutils}
+%\bibliographystyle{neilbib}
+%\title{COM6130 --- Lecture 1\\Introduction}
+%\author{Neil Lawrence}
+
+%\date{October 4, 2001}
+\end_preamble
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize a4paper
+\paperpackage widemarginsa4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+
+\layout Title
+
+Network Performance Analysis
+\layout Author
+
+Neil Lawrence
+\layout Date
+
+Autumn Term 2004-2005
+\layout Chapter
+
+Introduction and Background
+\layout Description
+
+Lectures Mondays 15:10 - 17:00 pm (St Georges LT1) 
+\layout Description
+
+Tutorials Tuesdays 16:10 pm - 17:00 pm (St Georges LT22).
+ First one Week 3 - Tonatiuh Pena Centeno is your teaching assistant.
+ 
+\layout Description
+
+Evaluation Exam.
+ 
+\layout Description
+
+Reading\SpecialChar ~
+Week The reading weeks will be week 11 & 12.
+\layout Section
+
+Reading List
+\layout Standard
+
+The course is based primarily on 
+\begin_inset LatexCommand \cite{Bertsekas:data92}
+
+\end_inset 
+
+.
+ The relevant parts of the book are as follows.
+ 
+\layout Description
+
+Chapter\SpecialChar ~
+1 For background reading and review.
+ 
+\layout Description
+
+Chapter\SpecialChar ~
+3 Section 3.1 -- 3.5 For queueing models.
+ 
+\layout Description
+
+Chapter\SpecialChar ~
+4 In less detail: Section 4.1 -- 4.4, Section 4.5.2, 4.5.3.
+ 
+\layout Standard
+
+For additional background reading you may wish to consult some of the books
+ listed below, 
+\begin_inset LatexCommand \cite{Tanenbaum:computer96}
+
+\end_inset 
+
+ is the standard text for Introductory courses, but has little coverage
+ on queueing theory.
+ 
+\begin_inset LatexCommand \cite{Chan:performance00}
+
+\end_inset 
+
+ is an alternative text for details on queues.
+\layout Section
+
+Introduction
+\layout Standard
+
+Welcome to Network Performance Analysis, 20 lectures and lab sessions on
+ queueing theory and network simulation.
+ In the first lectures we will try and place the theory that is to follow
+ in some context.
+ Queueing theory dates back to the begining of the 20th Century and the
+ pioneering work of Agner Krarup Erlang (1878-1929) a Danish Telecoms Engineer
+ who published the first paper on queueing theory 
+\begin_inset LatexCommand \cite{Erlang:theory09}
+
+\end_inset 
+
+.
+ 
+\layout Standard
+
+In these first two lectures we will introduce the background for the material
+ which follows: the development of worldwide communication networks.
+ For futher reading please check 
+\begin_inset LatexCommand \url{http://www.wikipedia.org}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \url{http://www.computerhistory.org}
+
+\end_inset 
+
+.
+\layout Subsection
+
+Milestones
+\layout Standard
+
+Perhaps the first major development in telecommunications was 
+\emph on 
+the telegraph
+\emph default 
+.
+ Samuel F.
+ B.
+ Morse developed ideas for the electrical telegraph which exploited the
+ relationship between magnetism and electricity.
+ His first working system sent a short message from Baltimore to Washington
+ D.C.
+ (two cities that are conveniently close together!).
+ It was sent on May 24th, 1844: `What hath God wrought?'.
+ Ten years later 23,000 miles of wire across the United States.
+ 
+\layout Standard
+
+At the time, a key limitation of the telegraph was that it only provided
+ one channel per wire for communication.
+ Work in using a single wire for multiple channels indirectly led to the
+ invention of 
+\emph on 
+the telephone 
+\emph default 
+which was patented by Alexander Graham Bell (1847-1922) in March 7th, 1876.
+\layout Standard
+
+The development of a 
+\emph on 
+wireless telegraphy
+\emph default 
+ system by the Italian born engineer Guglielmo Marconi (1874-1937), patented
+ in July 1897, led to the foundation of the Wireless Telegraph & Signal
+ Company.
+ By December 1901 short wave transmission across the Atlantic between England
+ and Canada (over 2,100 miles).
+ 
+\layout Subsection
+
+Circuit Switching Networks
+\layout Standard
+
+Initially, telephone call routing was achieved manually.
+ Operators at the exchange used patch boards to make physical connections
+ between the callers.
+ The invention, by Almon Strowger (1839-1902), of the 
+\emph on 
+automatic telephone exchange
+\emph default 
+ (through the Strowger switch) in 1891 brought about the need for a theoretical
+ study of the operation of telephone exchanges.
+ 
+\layout Standard
+
+The network of interconnected phone lines is now known as a circuit switching
+ network.
+ It is a network of lines which can be switched between two subscribers
+ to form a connection.
+ 
+\layout Standard
+
+Erlang's contribution was to provide theoretical studies of these networks
+ which allowed telephone exchanges to be designed to meet demand.
+\layout Subsection
+
+Information Theory
+\layout Standard
+
+As 'phone networks developed the need for underlying theory grew.
+ Networks transmit `information' but to discuss concepts such as channel
+ capacity with out a formal definition for information is meaningless.
+ Claude E.
+ Shannon (1916-2001) wrote a seminal paper 
+\emph on 
+A Mathematical Theory of Communication
+\emph default 
+ 
+\begin_inset LatexCommand \cite{Shannon:info48}
+
+\end_inset 
+
+ which founded the field of information theory and revolutionized the way
+ we look at telecommunication.
+ This work enabled us to discuss concepts such as the capacity of a channel
+ with a well founded underlying mathematical theory.
+ We will not cover the ideas from this course here, but some students will
+ learn more about this in the module COM6862: 
+\emph on 
+Applications of Coding, Information and Learning Theories
+\emph default 
+.
+\layout Subsection
+
+Packet Switching Networks
+\layout Standard
+
+Circuit switched networks were designed with telephone communication between
+ two correspondents.
+ These were the first worldwide communication networks.
+ However, by the early 1960s the need a new type of communications network
+ was arising.
+ In circuit switching networks, a permamently open line connects the corresponde
+nts.
+ A fixed bandwidth is available to them for communication.
+ If they do not use this bandwidth it cannot be made available to other
+ network users.
+ In 
+\emph on 
+packet switching networks
+\emph default 
+ or store and forward switching networks the bandwidth is not reserved in
+ this way: it is distributed across the entire network user base.
+ The information I send (whether it be my voice like in a phone conversation
+ and VoIP
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+Voice over IP, the protocol for having phone conversations over the internet.
+\end_inset 
+
+ or an FTP
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+FTP is the file transfer protocol, a much older protocol which dates back
+ to the formation of the ARPANET.
+\end_inset 
+
+ session) is split into packets which are routed across the network to the
+ desired destination.
+ If a required communication line is in use the packet is stored in a queue
+ until the line becomes available (thus the name store and forward switching).
+ The ideas behind packet switching networks were developed independantly
+ by Paul Baran (1926-) at the RAND corporation in the U.S.
+ and Donald Davies (1924-2000) of the National Physical Laboratory in the
+ U.K..
+ Leonard Kleinrock's (1934-) 1962 thesis (later published as a book 
+\begin_inset LatexCommand \cite{Kleinrock:communication64}
+
+\end_inset 
+
+) provided a mathematical theory that underpinned these networks.
+\layout Standard
+
+
+\begin_inset Note
+collapsed false
+
+\layout Standard
+
+Student exercise: sumarise diferences between packet switched and circuit
+ switched networks.
+\end_inset 
+
+
+\layout Subsection
+
+ARPA net
+\layout Standard
+
+The Advanced Research Projects Agency (ARPA) funded a network that actually
+ implemented these ideas.
+ In 1969 the ARPA network connected four nodes at the University of California,
+ Los Angeles (UCSB); the Stanford Research Institute; the University of
+ California, Santa Barbara (UCSB) and the University of Utah.
+ By 1975 (see Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:arpaNet1975}
+
+\end_inset 
+
+) the network had expanded to cover most of the major universities (61 nodes)
+ in the U.S.
+ as well as a node at University College London in the U.K..
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/1975_net_map.gif
+	scale 50
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+The ARPANET in 1975, image courtesy of the Computer History Museum, 
+\begin_inset LatexCommand \url{http://www.computerhistory.org}
+
+\end_inset 
+
+.
+ Some abbreviations: UCB - University of California at Berkeley; UCSD -
+ University of California at San Diego; UCLA - University of California
+ at Los Angeles; PDP-XX - the PDP machines were early mini-computers made
+ by DEC with a price tag of around $20,000.
+ The machines starting with 360 and 370 are IBM mainframe machines.
+ Note the transatlantic link to London and the link over the Pacific to
+ Hawaii.
+ There are 61 nodes in total on this network.
+\begin_inset LatexCommand \label{cap:arpaNet1975}
+
+\end_inset 
+
+
+\end_inset 
+
+Advanced Research Project's Agency, 1969, The first network for computer
+ communications and the direct predecessor of ...
+ 
+\layout Subsection
+
+The Internet 
+\layout Standard
+
+formed by interconnection of ARPA net and networks from IBM, DEC and others.
+ Relies on ...
+ 
+\layout Subsection
+
+TCP/IP 
+\layout Standard
+
+Vinton G.
+ Cerf and Robert E.
+ Kahn, May, 1974.
+ `A protocol for packet network interconnection'.
+ 32 bit number of which the first 8 bits specifies the network (256 networks
+ in the world) this became a problem with the introduction of ...
+ 
+\layout Subsection
+
+Local Area Networks 
+\layout Standard
+
+Xerox Late 1970s - the Ethernet.
+ Xerox was interested in how computer communications would replace paper
+ in the office.
+ The Ethernet is therefore a home or office based network.
+\layout Section
+
+Network Performance Analysis
+\layout Standard
+
+This course, will seek to teach the methods and tools for analysis of these
+ systems.
+ 
+\layout Standard
+
+The core tools of the analysis are probability based.
+ 
+\layout Standard
+
+The assumption is that the network traffic is probabilistic.
+ 
+\layout Standard
+
+For analysis of networks we are interested in: 
+\layout Itemize
+
+Design Issues.
+ 
+\layout Itemize
+
+Quality Issues.
+ 
+\layout Standard
+
+These are important because: Resources are finite - bandwidth limitations,
+ processor speeds and limited buffer sizes.
+ 
+\layout Section
+
+Terminology
+\layout Standard
+
+A 
+\emph on 
+session
+\emph default 
+ is a series of interactions between two users.
+ The interactions themselves consist of 
+\emph on 
+messages
+\emph default 
+ each of which may be split into 
+\emph on 
+packets
+\emph default 
+.
+ 
+\layout Standard
+
+One example of a session would be this lecture.
+ The session consists of a mainly one-way communication between me, the
+ server, and you multiple clients.
+ In this case most of the information transfer is one-way with me sending
+ a series of messages, each involving a different subject: My Identity,
+ The History of Communication, this courses subject matter etc.
+ and you acknowledging by your lively reactions.
+ Each message consists of a series of packets, in this case perhaps the
+ sentences that I speak.
+ The communication medium is the air between us.
+ 
+\layout Subsection
+
+Session Characteristics
+\layout Enumerate
+
+Message arrival rate and variability of arrivals.
+ We can seek to model the arrivals as: 
+\emph on 
+Poisson arrivals
+\emph default 
+, 
+\emph on 
+deterministic arrivals
+\emph default 
+, 
+\emph on 
+uniform arrivals
+\emph default 
+.
+\layout Enumerate
+
+Session holding time: The length of a session.
+\layout Enumerate
+
+Expected message length and length distribution, message lengths can be
+ modeled as 
+\emph on 
+exponential distributions
+\emph default 
+,
+\emph on 
+ uniform length
+\emph default 
+.
+\layout Enumerate
+
+Allowable delay - acceptable expected delays vary.
+ The acceptable delay is low for packetized voice and quite high for ftp
+ (file transfer).
+ 
+\layout Enumerate
+
+Reliability - Banking data 
+\emph on 
+must
+\emph default 
+ be error free but other data types, such as e-mail, could have bit errors
+ without major consequences.
+\layout Enumerate
+
+Message and packet ordering - Packets must be delivered in the correct order
+ or sorted.
+ For databases messages must also be ordered.
+\layout Section
+
+Network Types
+\layout Standard
+
+We will focus on the two principal networks of interest: 
+\layout Description
+
+Circuit-Switching Used for telephone routing.
+ Guarantees an open `channel' between two peers.
+ 
+\layout Description
+
+Store-and-Forward\SpecialChar ~
+Switching Used for data.
+ May operate via 
+\begin_deeper 
+\layout Description
+
+Dynamic\SpecialChar ~
+Routing Each packet of the message moves through the network independentl
+y.
+ 
+\layout Description
+
+Virtual\SpecialChar ~
+Circuit\SpecialChar ~
+Routing A fixed path through the network is provided for the
+ entire message.
+ 
+\end_deeper 
+\layout Subsection
+
+Characteristics of the Systems
+\layout Description
+
+Circuit\SpecialChar ~
+Switching is wasteful in terms of bandwidth, as the communicating
+ nodes may not be utilizing all the available bandwidth reserved for them
+ all of the time.
+ However, once connection is established, a guaranteed channel is provided
+ with a known communication delay associated with it.
+ Note that the sum of rates for all sessions using a link cannot exceed
+ the total capacity of the link.
+ New sessions must be rejected when the link capacity is reached.
+ The approach is used for telephone networks where the session rate, 
+\begin_inset Formula $r_{s}$
+\end_inset 
+
+, is the same for each session.
+ Switching would be more complex for data networks and the nature of transmissio
+n may also mean that the links are efficiently utilized 
+\layout Description
+
+Store-and-Forward\SpecialChar ~
+Switching makes efficient use of bandwidth because whilst
+ communication between two nodes may be idle for a period of time, packets
+ from another communication may be sent along the same line.
+\layout Standard
+
+Alice and Bob both have telephone lines.
+ Alice decides to call Bob using the phone line.
+ Here the make use of a circuit switching network provided by their telephone
+ supplier.
+ The session dominates both phone lines preventing use by other `clients'.
+\layout Standard
+\added_space_top 0.3cm \added_space_bottom 0.3cm \align center 
+
+\begin_inset Graphics
+	filename diagrams/aliceBobCircuit.eps
+	display monochrome
+	width 70text%
+
+\end_inset 
+
+
+\layout Standard
+
+Alternatively Alice and Bob use MSN messenger to communicate (either via
+ voice or typing), and Bob's friend Carol shares his fixed land line connection
+ to access David's web server.
+\layout Standard
+\added_space_top 0.3cm \added_space_bottom 0.3cm \align center 
+
+\begin_inset Graphics
+	filename diagrams/aliceBobPacket.eps
+	display monochrome
+	width 70text%
+
+\end_inset 
+
+
+\layout Standard
+
+Now the fixed land line is managed by some form of router in the local area
+ network in Bob's house.
+ The advantage is that Bob and Carol may both use the land line for communicatio
+n the disadvantage is that if the land line becomes congested 
+\emph on 
+e.g.
+
+\emph default 
+ as a result of Carol downloading a large file from David's web server,
+ Bob will notice a variable delay (delays also occur with circuit switching
+ but they are known as transmission delays and should be of fixed length)
+ in his communication with Alice due to queueing occurring at his Internet
+ Service Provider and in his LAN's router.
+ This can be particularly irritating for voice conversation, as anyone who
+ has used MSN messenger for voice communication will attest.
+ 
+\layout Section
+
+The Layered Model
+\layout Standard
+
+We now review the layered model for TCP/IP networks, you are referred to
+ Tanenbaum (4th Edition pg.
+ 41) for more details.
+\layout Standard
+\added_space_top 0.3cm \added_space_bottom 0.3cm \align center 
+
+\begin_inset Graphics
+	filename diagrams/layeredModel.eps
+	display monochrome
+	width 70text%
+
+\end_inset 
+
+
+\layout Standard
+
+The traditional OSI Reference model contains seven layers which reflect
+ in a network how communication occurs at different layers using different
+ protocols.
+ By way of reviewing the TCP model we introduce a layered representation
+ of the TCP/IP model which underlies the internet.
+ As we mentioned above TCP/IP was introduced in 1974 as a standard which
+ interconnects between networks.
+ This is achieved through the Internet Protocol.
+ The TCP/IP reference model is much more compact and will serve as a useful
+ reminder.
+\layout Description
+
+Application\SpecialChar ~
+Layer This layer represents the interface to the user and consists
+ of applications which are commonly used by users.
+ As well as the examples in the diagram packetized voice communications,
+ electronic news, HTTP and its secure variants etc.
+\layout Description
+
+The\SpecialChar ~
+Transport\SpecialChar ~
+Layer The layer above the internet layer is known as the transport
+ layer and contains two protocols.
+ The Transmission Control Protocol (TCP) allows applications to communicate
+ in a lossless manner, 
+\emph on 
+i.e.
+ 
+\emph default 
+any packets which are dropped are retransmitted.
+ It also implements flow control in an effort to prevent network congestion
+ and reorders arrivals at the destination.
+ The User Datagram Protocol (UDP) is an unreliable protocol for applications
+ which wish to provide their own sequencing and flow control (e.g.
+ voice transmission or video).
+\layout Description
+
+The\SpecialChar ~
+Internet\SpecialChar ~
+Layer The key to the success of TCP/IP is the Internet Protocol.
+ Its objective is to allow the interfacing of different networks by allowing
+ hosts to place packets on any network and enabling them to travel to any
+ other network.
+ 
+\layout Section
+
+Communication Media
+\layout Standard
+
+Circuit switching networks may share a communication line but this is done
+ through multiplexing where a fixed proportion of the communication channel
+ is dedicated to the session.
+ The multiplexing may be time division multiplexing or frequency division
+ multiplexing.
+ The former splits the communication channel into time slots and allocates
+ each to a different session, the latter uses different portions of the
+ frequency bandwidth for each channel.
+ Both are not 100% efficient (time multiplexing requires a small amount
+ of time for switching to occur, and frequency division multiplexing requires
+ a small `buffer' band of frequencies between each session.
+ Packet switching networks dedicate communication bandwidth to each channel
+ as required.
+ In a simple first in first out system, packets arrive and, if the queue
+ is empty, they are transmitted.
+ Otherwise they are stored and await their turn for transmission.
+ Thus there are two delays: a queueing delay and a transmission delay.
+ The queueing delay is variable, whilst the transmission delay will be fixed
+ and given by the packet length multiplied by the transmission rate of the
+ channel.
+\layout Standard
+
+Radio transmission is a communication medium which dates back to Marconi.
+ Transmission may occur across several bandwidths.
+ Traditionally radio broadcast occurs through frequency division multiplexing.
+ Radio communication involves taking turns to communicate over the channel
+ (half-duplex).
+ The most basic wireless packet networks (
+\emph on 
+e.g.
+ 
+\emph default 
+ALOHA) used one channel to broadcast their packets over.
+ Delays may occur due to collisions.
+ A collision is when two systems both attempt to communicate on the same
+ channel at the same time.
+ Both packets are then lost and such losses need to be detected.
+\layout Standard
+
+Similar principles occur for 
+\emph on 
+e.g.
+
+\emph default 
+ thinwire Ethernet, in this case the communication medium is a coaxial cable.
+ 
+\layout Section
+
+The Road Ahead
+\layout Description
+
+Probability\SpecialChar ~
+Review Review of probability theory.
+ 
+\layout Description
+
+Simple\SpecialChar ~
+Queuing\SpecialChar ~
+models Simple models of queues based on probability theory.
+ Little's Law, M/M/1 queue, M/M/
+\begin_inset Formula $\infty$
+\end_inset 
+
+, M/M/m, M/M/m/m and M/G/1.
+ 
+\layout Description
+
+Advanced\SpecialChar ~
+Topics Simulation, Congestion Pricing, Networks of Queues ...
+ it depends!
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[abbrv]{lawrence,other,zbooks}
+
+\end_inset 
+
+
+\the_end

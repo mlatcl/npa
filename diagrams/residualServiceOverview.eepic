@@ -1,0 +1,73 @@
+\setlength{\unitlength}{0.00087489in}
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+{\renewcommand{\dashlinestretch}{30}
+\begin{picture}(6000, 1600)(0, -300)
+
+%\allinethickness{0.5pt}
+
+\put(552, 1120){\makebox(0, 0){\sc Arriving Packet}}
+\path(12, 720)(1182, 720)(1182, 360)
+	(12, 360)(12, 720)
+\put(552, 540){\makebox(0, 0){$i$}}
+
+\put(2824.5, 1120){\makebox(0, 0){\sc Waiting Packets}}
+\path(1812, 720)(2622, 720)(2622, 360)
+	(1812, 360)(1812, 720)
+%\allinethickness{0.25pt}
+\path(1932, 210)(1812, 180)(1932, 150)
+\path(1812, 180)(2622, 180)
+\path(2502, 150)(2622, 180)(2502, 210)
+\put(2217, 540){\makebox(0, 0){$i-1$}}
+\put(2172, 50){\makebox(0, 0){$X_{i-1}$}}
+
+%\allinethickness{0.5pt}
+\path(2622, 720)(3837, 720)(3837, 360)
+	(2622, 360)(2622, 720)
+%\allinethickness{0.25pt}
+\path(2742, 210)(2622, 180)(2742, 150)
+\path(2622, 180)(3837, 180)
+\path(3717, 150)(3837, 180)(3717, 210)
+\put(3252, 540){\makebox(0, 0){$i-2$}}
+\put(3252, 50){\makebox(0, 0){$X_{i-2}$}}
+
+%\allinethickness{0.5pt}
+\dashline{60}(3837, 360)(4177, 360)
+\dashline{60}(3837, 720)(4177, 720)
+
+\path(4177, 720)(4782, 720)(4782, 360)
+	(4177, 360)(4177, 720)
+%\allinethickness{0.25pt}
+\path(4297, 210)(4177, 180)(4297, 150)
+\path(4177, 180)(4782, 180)
+\path(4662, 150)(4782, 180)(4662, 210)
+\put(4457, 540){\makebox(0, 0){$i - (k_i - 1)$}}
+\put(4457, 50){\makebox(0, 0){$X_{i-(k_i - 1)}$}}
+
+\put(5232, 1120){\makebox(0, 0){\begin{tabular}{c}\sc Packet\\\sc Being\\\sc Served\end{tabular}}}
+%\allinethickness{0.5pt}
+\path(5682, 720)(4782, 720)(4782, 360)(5682, 360)
+%\allinethickness{0.25pt}
+\path(5682, 180)(4782, 180)
+\path(4902, 210)(4782, 180)(4902, 150)
+\put(5232, 540){\makebox(0, 0){$i - k_i$}}
+\put(5232, 50){\makebox(0, 0){$R_i$}}
+
+
+%\allinethickness{1pt}
+\path(5682, -200)(5682, 900)
+\put(5800, 350){\makebox(0, 0){\rotatebox{90}{{\sc Server}}}} % Y label
+
+\path(1932, -70)(1812, -100)(1932, -130)
+\path(1812, -100)(5682, -100)
+\path(5562, -130)(5682, -100)(5562, -70)
+\put(3747, -260){\makebox(0, 0){$W_i$}}
+
+ 
+\end{picture}
+}

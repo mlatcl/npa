@@ -1,0 +1,31 @@
+\setlength{\unitlength}{0.00055in}
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+{\renewcommand{\dashlinestretch}{30}
+\begin{picture}(9334,1377)(0,-10)
+\allinethickness{1pt}
+\path(12,750)(1812,750)
+\path(1692.000,720.000)(1812.000,750.000)(1692.000,780.000)
+\path(1812,1050)(3012,1050)(3012,750)
+	(4212,750)(3012,750)(3012,450)(1812,450)
+\path(4212,1350)(6537,1350)(6537,150)
+	(4212,150)(4212,1350)
+\path(6537,750)(8337,750)
+\path(8217.000,720.000)(8337.000,750.000)(8217.000,780.000)
+\allinethickness{2pt}
+\path(2712,975)(2712,525)
+\path(2412,975)(2412,525)
+\path(2112,975)(2112,525)
+\allinethickness{1pt}
+\put(2337,0){\makebox(0,0){Queue}}
+\put(880,825){\makebox(0,0){$a$}}
+\put(880,375){\makebox(0,0){\begin{tabular}{c}Poisson offered\\load with rate $\lambda$\end{tabular}}}
+\put(5374,750){\makebox(0,0){\begin{tabular}{c}$m$-exponential lines,\\each with rate $\mu$\end{tabular}}}
+\put(7212,450){\makebox(0,0){\begin{tabular}{c}Carried\\load, $a^\prime$\end{tabular}}}
+\end{picture}
+}

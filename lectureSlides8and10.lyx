@@ -1,0 +1,4656 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass foils
+\begin_preamble
+\newcommand{\answer}[2]{#1}
+\end_preamble
+\options 20pt,dvips
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\float_placement ht
+\paperfontsize default
+\spacing single 
+\papersize Custom
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\bullet 0
+	2
+	20
+	-1
+\end_bullet
+\bullet 1
+	5
+	4
+	-1
+\end_bullet
+
+\layout Left Header
+
+Neil Lawrence
+\layout Right Header
+
+Network Performance Analysis
+\layout My Logo
+
+
+\begin_inset Graphics
+	filename /share/mlhome/neil/tex/inputs/sheffieldlogo.eps
+	lyxscale 40
+	scale 40
+
+\end_inset 
+
+
+\layout Right Footer
+
+
+\begin_inset Graphics
+	filename /home/neil/tex/inputs/dcslogo.eps
+	lyxscale 120
+	scale 140
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+quad 
+\end_inset 
+
+
+\family sans 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+thepage{}
+\end_inset 
+
+
+\layout Title
+
+Network Performance Analysis
+\layout Author
+
+Neil Lawrence
+\layout Date
+
+Autumn Term 2004-2005
+\layout ShortFoilhead
+
+Networks of Queues and Simulation 
+\layout Itemize
+
+So far in the course we have looked at queueing models in isolation.
+ 
+\layout Itemize
+
+We will now turn briefly to some of the issues that arise when they are
+ combined.
+ 
+\layout Itemize
+
+We will start by considering a simple combination of two 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queues.
+ 
+\layout ShortFoilhead
+
+`
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+' Queues in Tandem
+\begin_inset LatexCommand \label{sec:tandemQueuesOne}
+
+\end_inset 
+
+
+\layout Itemize
+
+Consider a simple system involving two transmission lines in tandem.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/MM1tandem.eps
+	width 100text%
+
+\end_inset 
+
+
+\layout Caption
+
+Two queues in tandem
+\end_inset 
+
+
+\layout Itemize
+
+Packets have a fixed length and their transmission times are proportional
+ to their length.
+ 
+\layout Itemize
+
+Packet lengths are exponentially distributed and arrivals occur at the first
+ queue as a Poisson process.
+\layout ShortFoilhead
+
+Implications
+\layout Itemize
+
+The first queue may be modelled as 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+, but the second queue cannot be.
+ 
+\begin_deeper 
+\layout Itemize
+
+A packet which is large will take a long time in the first queue.
+ During this time the second queue will have a chance to clear.
+ 
+\layout Itemize
+
+The result will be that for the second queue larger packets are likely to
+ arrive when the queue is smaller.
+ 
+\layout Itemize
+
+This means that a large packet will typically experience less delay at the
+ second queue than a small one.
+ 
+\end_deeper 
+\layout ShortFoilhead
+
+Analogy
+\layout Itemize
+
+One analogy for this situation is a slow moving vehicle on a road.
+\layout Itemize
+
+From this vehicle's driver's perception there is very little traffic on
+ the road because the slow moving vehicle never catches up with any.
+\layout Itemize
+
+A similar thing occurs with 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queues in tandem.
+ 
+\layout Itemize
+
+A large packet arrives at the second queue to find it has less packets because
+ the smaller packets have had time to be processed.
+ 
+\layout ShortFoilhead
+
+Lack of Independence
+\layout Itemize
+
+The first queue destroys the independence of the packet length and the state
+ of the second queue.
+ 
+\layout Itemize
+
+This problem is difficult to deal with analytically.
+ 
+\begin_deeper 
+\layout Itemize
+
+To proceed with our analysis we will need to break this dependency.
+ 
+\layout Itemize
+
+This can be achieved by considering service times for each packet to be
+ statistically independent at each queue.
+\end_deeper 
+\layout ShortFoilhead
+
+Time Reversibility --- Burke's Theorem
+\layout Itemize
+
+In the analysis of the Markov chain systems we have seen so far we relied
+ on detailed balance.
+\layout Itemize
+
+Detailed balance equations are a special case of global balance equations
+ which arise when transitions only occur between neighbouring states in
+ the Markov chain.
+ 
+\layout Itemize
+
+Detailed balance can be applied to find the stationary distribution in any
+ birth-death processes.
+\layout Itemize
+
+Burke's theorem leads to an additional special property of birth-death processes
+ known as 
+\emph on 
+time reversibility
+\emph default 
+.
+ 
+\layout ShortFoilhead
+
+Time Reversibility
+\layout Itemize
+
+The principle with time reversibility is as follows: 
+\begin_deeper 
+\layout Itemize
+
+for a birth-death process at steady state the arrival process is Poisson
+ with rate 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+.
+ Time reversibility states that the 
+\emph on 
+departure process
+\emph default 
+ will also be Poisson with rate 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+.
+\end_deeper 
+\layout Itemize
+
+A proof is given in Section\SpecialChar ~
+3.7 of Bertsekas and Gallager.
+ 
+\layout ShortFoilhead
+
+Time Revesibility Intuition
+\layout Itemize
+
+Consider the following `intuition' for the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue.
+ 
+\layout Itemize
+
+The service rate for the system is given by 
+\begin_inset Formula $\mu$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+The service rate is 
+\emph on 
+not
+\emph default 
+ the departure rate because a departure can only occur when the system has
+ a state 
+\begin_inset Formula $k>0$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+This condition is satisfied for a fraction of the time which is given by
+ the utilization factor 
+\begin_inset Formula $\rho$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+The departure rate is therefore given by 
+\begin_inset Formula \[
+\mu\rho=\mu\frac{\lambda}{\mu}=\lambda\]
+
+\end_inset 
+
+.
+ 
+\layout ShortFoilhead
+
+Burke's Theorem
+\layout Itemize
+
+Burke's theorem follows on from time reversibility.
+ It states that 
+\begin_deeper 
+\layout Itemize
+
+if an 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+, an 
+\begin_inset Formula $M/M/m$
+\end_inset 
+
+ or an 
+\begin_inset Formula $M/M/\infty$
+\end_inset 
+
+ queue at its stationary distribution has a Poisson arrival process with
+ a rate 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ 
+\layout Itemize
+
+then the departure process is also Poisson with rate 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+Furthermore the number of the customers in the system at time 
+\begin_inset Formula $t$
+\end_inset 
+
+ is 
+\emph on 
+independent
+\emph default 
+ of the sequence of departure times prior to 
+\begin_inset Formula $t$
+\end_inset 
+
+.
+ 
+\end_deeper 
+\layout Itemize
+
+Queues with loss are slightly more complex because the arrival process does
+ not have rate 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ due to blocked packets.
+\layout ShortFoilhead
+
+Burke's Theorem
+\layout Itemize
+
+The second property is worthy of comment as it seems counterintuitive.
+ 
+\layout Itemize
+
+You might expect that if there were a rapid series of departures from the
+ queue then the queue would be shorter than normal,
+\layout Itemize
+
+Burke's theorem tells us that this is not the case.
+ 
+\layout Itemize
+
+From this we can infer that the state of a queue 
+\emph on 
+before 
+\emph default 
+a rapid series of departures is about to occur must be abnormally high.
+ 
+\layout Itemize
+
+Otherwise it 
+\emph on 
+would
+\emph default 
+ be abnormally low after the departures which Burke's theorem tells us is
+ not the case.
+\layout ShortFoilhead
+
+
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ Queues in Tandem Revisited
+\layout Itemize
+
+Lets return to the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queues in tandem.
+ 
+\layout Itemize
+
+Burke's theorem tells us that the departure process from the first queue
+ will be a Poisson with rate 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+We allow service times at the second queue to be independent of service
+ times at the first queue.
+\begin_deeper 
+\layout Itemize
+
+This breaks the dependence of the queue length at the second queue on the
+ service time at the second queue.
+ 
+\layout Itemize
+
+In this case the system can be modelled as two 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queues.
+ 
+\end_deeper 
+\layout ShortFoilhead
+
+M/M/1 in Tandem
+\layout Itemize
+
+If the service time distributions at the two queues are governed by exponential
+ distributions with rate parameters 
+\begin_inset Formula $\mu_{1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mu_{2}$
+\end_inset 
+
+.
+ 
+\begin_deeper 
+\layout Itemize
+
+This leads to utilization factors for each queue as 
+\begin_inset Formula $\rho_{1}=\frac{\lambda}{\mu_{1}}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\rho_{2}=\frac{\lambda}{\mu_{2}}$
+\end_inset 
+
+ .
+\layout Itemize
+
+The distributions for the states of the systems are given by
+\begin_inset Formula \[
+p\left(k_{1}\right)=\rho_{1}^{k_{1}}\left(1-\rho_{1}\right)\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+p\left(k_{2}\right)=\rho_{2}^{k_{2}}\left(1-\rho_{2}\right).\]
+
+\end_inset 
+
+
+\layout Itemize
+
+The joint distribution for both systems is then
+\begin_inset Formula \begin{eqnarray*}
+p\left(k_{1},k_{2}\right) & = & p\left(k_{1}\right)p\left(k_{2}\right)\\
+ & = & \rho_{1}^{k_{1}}\left(1-\rho_{1}\right)\rho_{2}^{k_{2}}\left(1-\rho_{2}\right)\end{eqnarray*}
+
+\end_inset 
+
+because the two queues can be viewed independently.
+ 
+\layout Itemize
+
+As a result the average delay in the system can be computed as the sum of
+ the average delays in each queue
+\begin_inset Formula \[
+\bar{T}=\bar{T}_{1}+\bar{T}_{2}=\frac{1}{\mu_{1}-\lambda}+\frac{1}{\mu_{2}-\lambda}.\]
+
+\end_inset 
+
+
+\end_deeper 
+\layout ShortFoilhead
+
+Relation to Reality
+\layout Itemize
+
+This will typically be larger than the actual delay because
+\begin_deeper 
+\begin_deeper 
+\layout Itemize
+
+when the queue length is correlated with packet size 
+\layout Itemize
+
+a large packet will find the second queue to be smaller than normal 
+\layout Itemize
+
+and would therefore spend less time than might be expected in the system.
+ 
+\end_deeper 
+\end_deeper 
+\layout ShortFoilhead
+
+Kleinrock's Independence Approximation
+\layout Itemize
+
+Kleinrock's independence approximation suggests assuming independence for
+ every node in the network.
+ 
+\layout Itemize
+
+The approximation is good if if large numbers of packets from outside the
+ network are introduced at every queue.
+\layout Itemize
+
+Consider a general network with labelled nodes and links between these nodes.
+ 
+\layout Itemize
+
+There are several packet streams in the network, each stream has a rate
+ of 
+\begin_inset Formula $x_{s}$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+We define 
+\begin_inset Formula $f_{ij}\left(s\right)$
+\end_inset 
+
+ as the fraction of packets from stream 
+\begin_inset Formula $s$
+\end_inset 
+
+ that cross the link between 
+\begin_inset Formula $i$
+\end_inset 
+
+ and 
+\begin_inset Formula $j$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+The rate associated with a link between node 
+\begin_inset Formula $i$
+\end_inset 
+
+ and 
+\begin_inset Formula $j$
+\end_inset 
+
+ is then 
+\begin_inset Formula \begin{eqnarray*}
+\lambda_{ij} & = & \sum_{s\textrm{ }}f_{ij}\left(s\right)x_{s}.\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Kleinrock's Independence Approximation
+\layout Itemize
+
+Kleinrock suggested that merging traffic streams on a transmission line
+ has the effect of restoring independence of arrival and service times.
+ 
+\layout Itemize
+
+The approach is to assume that each link can be treated as an 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue.
+ This is a good approximation for 
+\begin_deeper 
+\layout Enumerate
+
+arrivals which occur as a Poisson process 
+\layout Enumerate
+
+exponentially distributed packets
+\layout Enumerate
+
+densely connected networks 
+\layout Enumerate
+
+moderate-heavy traffic.
+\end_deeper 
+\layout Itemize
+
+Given this assumption, from the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue, we know that the average number at each link is 
+\begin_inset Formula \[
+\bar{N}_{ij}=\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}}\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+The Average in the System
+\layout Itemize
+
+Thus the average number in the entire system is
+\begin_inset Formula \begin{eqnarray*}
+\bar{N} & = & \sum_{ij}\bar{N}_{ij}\\
+ & = & \sum_{ij}\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}}\end{eqnarray*}
+
+\end_inset 
+
+
+\layout Itemize
+
+Average delay at each link is given by Little's theorem
+\begin_inset Formula \[
+\bar{T}_{ij}=\frac{1}{\mu_{ij}-\lambda_{ij}}.\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Example --- A Simple Network
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/kleinrockNetwork.eps
+	scale 50
+
+\end_inset 
+
+
+\layout Caption
+
+A small network with five nodes.
+\begin_inset LatexCommand \label{cap:fiveNodeNetwork}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\series bold 
+Question
+\layout Standard
+
+Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:fiveNodeNetwork}
+
+\end_inset 
+
+ shows a simple five node network.
+ In the network flow only occurs from lower numbered nodes to higher numbered
+ nodes.
+ The connections in the network have average service times in milliseconds
+ as follows:
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="6" columns="6">
+<features>
+<column alignment="center" valignment="top" rightline="true" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<row bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\bar{X}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.05
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.05
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.0333
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.05
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.05
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.033
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Standard
+
+Different routes through the network are indicated with thick lines.
+ Each route has a rate associated with it as follows
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="8">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $x_{1}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $x_{2}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $x_{3}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $x_{4}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $x_{5}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $x_{6}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $x_{7}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\lambda$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+10
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+7
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+12
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+8
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Standard
+
+According to the Kleinrock independence assumption, what is the most congested
+ link? What is the quickest route between node 1 & 5?
+\layout ShortFoilhead
+
+Answer
+\layout Standard
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+From the diagram we can see which links traffic flows down.
+ Let us take each link in turn.
+ Using the superposition of Poisson flows we have
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+tiny
+\end_inset 
+
+\SpecialChar ~
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="6" columns="6">
+<features>
+<column alignment="center" valignment="top" rightline="true" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<row bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\lambda$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $x_{1}+x_{2}=15$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $x_{3}=7$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $x_{4}+x_{5}=16$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $x_{2}=10$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $x_{3}+x_{6}=15$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $x_{4}+x_{7}=16$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+tiny
+\end_inset 
+
+\SpecialChar ~
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="6" columns="6">
+<features>
+<column alignment="center" valignment="top" rightline="true" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<row bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\rho=\lambda\bar{X}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $15\times0.05=\frac{3}{4}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $7\times0.05=\frac{7}{20}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $16\times0.0333=\frac{8}{15}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $10\times0.05=\frac{1}{2}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $15\times0.05=\frac{3}{4}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $16\times0.033=\frac{8}{15}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+\SpecialChar ~
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+normalsize
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Answer Contd
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="6" columns="6">
+<features>
+<column alignment="center" valignment="top" rightline="true" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<row bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $1-\rho$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\frac{1}{4}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\frac{13}{20}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\frac{7}{15}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\frac{1}{2}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\frac{1}{4}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\frac{7}{15}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="6" columns="6">
+<features>
+<column alignment="center" valignment="top" rightline="true" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<row bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $N=\frac{\rho}{1-\rho}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $3$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\frac{7}{13}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\frac{8}{7}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\frac{8}{7}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+normalsize
+\end_inset 
+
+
+\layout Standard
+
+
+\series bold 
+The most congested links are from 1 to 2 and 3 to 5.
+\layout ShortFoilhead
+
+Answer Contd
+\layout Standard
+
+To compute the answer to the second part we need the average delay at each
+ link
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+tiny 
+\end_inset 
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="6" columns="6">
+<features>
+<column alignment="center" valignment="top" rightline="true" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<row bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\bar{T}=\frac{\bar{X}}{1-\rho}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $4\times0.05=\frac{1}{5}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\frac{20}{13}\times0.05=\frac{1}{13}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\frac{15}{7}\times0.033=\frac{1}{14}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+5
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $2\times0.05=\frac{1}{10}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $4\times0.05=\frac{1}{5}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\frac{15}{7}\times0.033=\frac{1}{14}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+-
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+normalsize
+\end_inset 
+
+
+\layout Standard
+
+This means that to go via node 2 takes 
+\begin_inset Formula $\frac{1}{5}+\frac{1}{10}=0.3$
+\end_inset 
+
+ via node 3 takes 
+\begin_inset Formula $\frac{1}{13}+\frac{1}{5}=0.277$
+\end_inset 
+
+ via node 4 it takes 
+\begin_inset Formula $\frac{1}{14}+\frac{1}{14}=\frac{1}{7}=0.1429$
+\end_inset 
+
+ according to Kleinrock's independence assumption.
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{20}
+\end_inset 
+
+
+\layout Standard
+
+Here we have assumed that there is no further delay associated with each
+ link (propagation, processing).
+ In practice such delays may arise however we shall not consider them.
+ See Bertsekas & Gallager Section 3.6.1 for more details.
+\layout ShortFoilhead
+
+Jackson's Theorem
+\layout Itemize
+
+While Kleinrock's independence assumption approximates the activities at
+ each queue as 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queues, Jackson's theorem provides a result for the number in the queueing
+ system as a whole.
+ 
+\layout Itemize
+
+Some analysis of the system is given in Section\SpecialChar ~
+3.8 of Bertsekas and Gallager.
+ 
+\layout Itemize
+
+For our purposes it is sufficient to give the assumptions and the result.
+ 
+\begin_deeper 
+\layout Itemize
+
+there is no correlation between service times and queue lengths.
+ 
+\layout Itemize
+
+randomisation is used to divide the traffic along different routes through
+ the network.
+ 
+\end_deeper 
+\layout Itemize
+
+Given these assumptions the average number of packets in the network is
+ given by
+\begin_inset Formula \[
+N=\sum_{i,j}\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}}.\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Network Simulation
+\layout Itemize
+
+The approximations we have outlined so far may be useful for `back of the
+ envelope' style calculations.
+ 
+\layout Itemize
+
+In practice though it is highly likely that you will wish to simulate the
+ system.
+ 
+\layout Itemize
+
+There are a range of simulation packages available.
+ 
+\layout Itemize
+
+We will introduce a simple one based on the Tcl scripting language called
+ `The Network Simulator' or ns-2 (
+\begin_inset LatexCommand \url{http://www.isi.edu/nsnam/ns/}
+
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+It is a discrete event simulator aimed at networking research.
+ 
+\layout Itemize
+
+It supports a range of protocols including TCP and multicast protocols and
+ it is straightforward to extend using C++.
+ 
+\layout Itemize
+
+It is a powerful research tool which has the added advantage of being freely
+ available.
+ 
+\layout Itemize
+
+It is installed in the Lewin Laboratory on the Linux systems.
+ 
+\layout Itemize
+
+If you require a personal installation, it can be installed through the
+ Cygwin (
+\begin_inset LatexCommand \url{http://www.cygwin.com}
+
+\end_inset 
+
+) API.
+ 
+\layout ShortFoilhead
+
+Network Simulation with NS2
+\layout Itemize
+
+As a lab class in week 9 you will simulate some simple queues in NS2 and
+ compare the simulations with some results obtained using Kleinrock's independen
+ce assumption.
+ 
+\layout Itemize
+
+The lab class will be completed in Linux so please make sure you know your
+ Unix password for the DCS system before the lab start.
+ 
+\layout Itemize
+
+The lab sheet has some notes on simple commands you will need.
+ 
+\layout Itemize
+
+If you are unfamiliar with Linux it is suggested that you try them out before
+ starting the lab.
+\layout ShortFoilhead
+
+Multiaccess Systems
+\layout Itemize
+
+Finally we briefly review multiaccess systems.
+ 
+\layout Itemize
+
+These are systems where there is one communication channel and multiple
+ stations (or nodes) making use of it.
+ 
+\layout Itemize
+
+Examples of multiaccess systems include: Satellite systems; packet radio
+ networks; a multitapped bus.
+ 
+\layout ShortFoilhead
+
+LANs
+\layout Itemize
+
+A very common example of multi-access channels is the local area network.
+\begin_deeper 
+\layout Itemize
+
+In a local area network transmission rates are around 10Mbps to 1Gbps.
+ 
+\layout Itemize
+
+Transmission distances range from a few meters to several kilometres.
+ 
+\layout Itemize
+
+The required error rates are low: typically from 
+\begin_inset Formula $10^{-8}$
+\end_inset 
+
+ to 
+\begin_inset Formula $10^{-11}$
+\end_inset 
+
+, that's about 1 error every Gigabyte.
+\end_deeper 
+\layout Itemize
+
+Typically we are interested in the throughput of the network --- the amount
+ of data or messages passing through the network each second.
+ 
+\layout Itemize
+
+If the number of overhead bits (associated with network administration 
+\emph on 
+etc
+\emph default 
+.) is low then this is approximately equal to the utilization factor 
+\begin_inset Formula $\rho$
+\end_inset 
+
+.
+\layout ShortFoilhead
+
+Channel Multiplexing
+\layout Itemize
+
+Until the introduction of the ALOHA network the standard approach to splitting
+ a channel was through multiplexing.
+ 
+\layout Itemize
+
+We will now briefly review this approach to multiplexing using Example\SpecialChar ~
+3.9
+ from Bertsekas and Gallagher.
+\layout Itemize
+
+Assume we have 
+\begin_inset Formula $m$
+\end_inset 
+
+ statistically independent Poisson streams.
+ 
+\layout Itemize
+
+Each has arrival rate 
+\begin_inset Formula $\frac{\lambda}{m}$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+The packets to be transmitted are assumed to have an exponentially distributed
+ length.
+\layout Itemize
+
+For a given bandwidth this leads to a service time distribution for the
+ whole transmission line which is an exponential with a rate parameter 
+\begin_inset Formula $\mu$
+\end_inset 
+
+.
+\layout ShortFoilhead
+
+Statistical Multiplexing
+\layout Itemize
+
+System 1: merge the Poisson streams together, through statistical multiplexing.
+ 
+\layout Itemize
+
+The superposition property of the Poisson distribution tells us that they
+ become a Poisson stream with rate 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+If the transmission times are exponentially distributed the average delay,
+ from the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue, will be
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Formula \[
+\bar{T}=\frac{1}{\mu-\lambda}.\]
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{3}
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Time or Frequency Division Multiplexing
+\layout Itemize
+
+System 2: provide each communication channel with a separate `circuit'.
+\layout Itemize
+
+The transmission line needs to be split into 
+\begin_inset Formula $m$
+\end_inset 
+
+ separate channels.
+ 
+\layout Itemize
+
+Each of these separate channels will now have service time distributions
+ with a reduced rated 
+\begin_inset Formula $\frac{\mu}{m}$
+\end_inset 
+
+.
+\layout Itemize
+
+Delay in this system will now be
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Formula \[
+\bar{T}=\frac{1}{\frac{\mu}{m}-\frac{\lambda}{m}}=\frac{m}{\mu-\lambda}\]
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{3}
+\end_inset 
+
+which is 
+\begin_inset Formula $m$
+\end_inset 
+
+ times larger than that for statistical multiplexing.
+ 
+\layout ShortFoilhead
+
+Why does this happen?
+\layout Standard
+
+The reduction in delay arises from the fact that when only one of the 
+\begin_inset Formula $m$
+\end_inset 
+
+ channels is transmitting with statistical multiplexing it can use the entire
+ bandwidth of the channel but with time or frequency division multiplexing
+ 
+\begin_inset Formula $\frac{m-1}{m}$
+\end_inset 
+
+ of the bandwidth is wasted.
+\layout ShortFoilhead
+
+Multiaccess Systems
+\layout Itemize
+
+In multiaccess systems splitting the channel using time division multiplexing
+ is known as time division multiple access (TDMA).
+ 
+\layout Itemize
+
+Similarly splitting the channel using frequency division multiplexing is
+ known as frequency division multiple access (FDMA).
+\layout Itemize
+
+We have already shown that statistical multiplexing can make more efficient
+ use of bandwidth than time or frequency based multiplexing.
+ 
+\layout Itemize
+
+However in a multiaccess system it can be difficult to implement in the
+ manner discussed above.
+ 
+\layout ShortFoilhead
+
+Multiplexing for Multiaccess
+\layout Itemize
+
+We assumed that the all the transmissions could be queued in a single 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue.
+ 
+\layout Itemize
+
+In a local area network the transmitting stations (or nodes) are distributed
+ across different portions of the network as are the receiving nodes.
+\layout Itemize
+
+Forming a single queue is not possible without some form of centralised
+ control.
+ 
+\layout Itemize
+
+TDMA and FDMA can be implemented by by dedicating one channel for each station
+ to transmit on, but allowing each station to receive on any channel.
+ 
+\layout Itemize
+
+This allows for an analysis of the type we described above.
+ However, it is not clear how to perform statistical multiplexing in these
+ circumstances.
+ 
+\layout ShortFoilhead
+
+Random Access
+\layout Itemize
+
+When we have stations distributed across a single communication channel
+ would be to have a centralised computer attempting to control which computer
+ is able to access our transmission lines at what times.
+ 
+\layout Itemize
+
+However, we may wish communication to occur without centralised control.
+ In this case we may choose a 
+\emph on 
+random access
+\emph default 
+ solution.
+\layout Itemize
+
+We will consider random access networks where there is one communication
+ channel on which all the nodes communicate
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+It could be the case that only a subset of the nodes have access to the
+ channel.
+ 
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+Each station sends a packet immediately whenever it has a packet to send.
+ This means that packets can collide and may have to be resent.
+ 
+\layout ShortFoilhead
+
+Pure ALOHA Networks
+\layout Itemize
+
+ALOHA network was developed at the University of Hawaii.
+\layout Itemize
+
+Packet radio network which communicated between different stations on the
+ Hawaiian islands.
+ 
+\layout Itemize
+
+For the ALOHA network 
+\begin_deeper 
+\layout Itemize
+
+all stations attempt to communicate on the same channel.
+ 
+\layout Itemize
+
+When a station attempts to transmit, it detects if its transmission has
+ interfered with an existing transmission: this is known as a 
+\emph on 
+collision
+\emph default 
+.
+ 
+\layout Itemize
+
+If a collision occurs the station becomes 
+\emph on 
+backlogged 
+\emph default 
+and attempts to transmit at a later time.
+ 
+\layout Itemize
+
+If both stations attempted to retransmit after the same period of time they
+ would simply collide again.
+ 
+\layout Itemize
+
+To avoid this problem the stations normally wait for a random period of
+ time before retransmitting.
+\end_deeper 
+\layout ShortFoilhead
+
+ALOHA
+\layout Itemize
+
+For this network we assume that each station can tell whether the transmitted
+ packets were correctly received.
+ 
+\layout Itemize
+
+Furthermore, we assume that each packet requires 1 `time unit' for transmission.
+ This means that if a packet of interest is sent at time 
+\begin_inset Formula $t$
+\end_inset 
+
+, then any other packet sent between time 
+\begin_inset Formula $t-1$
+\end_inset 
+
+ and time 
+\begin_inset Formula $t+1$
+\end_inset 
+
+ will collide with our packet.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename diagrams/pureALOHA.eps
+	width 100text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+Pure ALOHA, packets collide with any other packet transmitted within one
+ time unit of their transmission.
+ The diagram shows a packet sent at 
+\begin_inset Formula $t$
+\end_inset 
+
+ and packets sent at 
+\begin_inset Formula $t+1$
+\end_inset 
+
+ and 
+\begin_inset Formula $t-1$
+\end_inset 
+
+.
+ Any packet sent after 
+\begin_inset Formula $t-1$
+\end_inset 
+
+ and before 
+\begin_inset Formula $t+1$
+\end_inset 
+
+ will collide with the packet sent at 
+\begin_inset Formula $t$
+\end_inset 
+
+.
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Simple Analysis
+\layout Itemize
+
+The arrival rate for packets at all stations is a Poisson process with rate
+ 
+\begin_inset Formula $\lambda.$
+\end_inset 
+
+ 
+\layout Itemize
+
+We assume that the number of stations is very large (infinite) so that an
+ individual station's packet rate is an insignificant proportion of 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+, 
+\emph on 
+i.e.
+
+\emph default 
+ 
+\begin_inset Formula \[
+\frac{\lambda_{n}}{\lambda}=\lim_{\delta\rightarrow0}\delta=0.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+We denote the number of backlogged stations at any particular time as 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ 
+\layout ShortFoilhead
+
+Backlogged Stations
+\layout Itemize
+
+A station is considered backlogged between the time that it became aware
+ that its previous transmission failed and the time of a successful transmission.
+\layout Itemize
+
+Once a station is aware that a transmission was unsuccessful it waits for
+ 
+\begin_inset Formula $T_{i}$
+\end_inset 
+
+ time units to retransmit where the distribution over these waits is given
+ by
+\begin_inset Formula \[
+p\left(T_{i}\right)=\mu\exp\left(-\mu T_{i}\right).\]
+
+\end_inset 
+
+
+\layout Itemize
+
+If 
+\begin_inset Formula $n$
+\end_inset 
+
+ nodes are backlogged then the arrivals from backlogged nodes is a Poisson
+ process with rate 
+\begin_inset Formula $n\mu$
+\end_inset 
+
+.
+\layout Itemize
+
+The overall `arrival process' for the system is Poisson with a rate 
+\begin_inset Formula $G\left(n\right)=\lambda+n\mu$
+\end_inset 
+
+.
+\layout ShortFoilhead
+
+Pure ALOHA
+\layout Itemize
+
+The probability that there are no arrivals in an interval of 2 time units
+ for a Poisson process with rate 
+\begin_inset Formula $G\left(n\right)$
+\end_inset 
+
+ is given by 
+\begin_inset Formula \[
+p\left(k=0|G\left(n\right),2\right)=\exp\left(-2G\left(n\right)\right).\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Therefore this is the probability that there is no collision between the
+ packet of interest and any other packets in the network.
+\layout Itemize
+
+It is therefore the probability of a successful transmission.
+ 
+\layout ShortFoilhead
+
+Throughput
+\layout Itemize
+
+The rate of attempted transmissions is 
+\begin_inset Formula $G\left(n\right)$
+\end_inset 
+
+ so the rate of successful transmissions is given by
+\begin_inset Formula \[
+G^{\prime}\left(n\right)=G\left(n\right)\exp\left(-2G\left(n\right)\right),\]
+
+\end_inset 
+
+
+\layout Itemize
+
+This is known as the throughput.
+ 
+\layout Itemize
+
+It is the number of packets that successfully reach their destination.
+ The throughput is plotted as a function of 
+\begin_inset Formula $G$
+\end_inset 
+
+ .
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed true
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename diagrams/pureALOHAThroughput.eps
+	width 60text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{8}
+\end_inset 
+
+
+\layout Caption
+
+Throughput for pure ALOHA as a function of 
+\begin_inset Formula $G$
+\end_inset 
+
+.
+\begin_inset LatexCommand \label{cap:pureALOHAThroughput}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Maximum Throughput
+\layout Itemize
+
+The curve goes up to a maximum point and drops down thereafter.
+ 
+\layout Itemize
+
+We can find the maximum of the throughput by looking for points where the
+ gradient of the throughput is zero.
+ 
+\layout Itemize
+
+Taking the gradient of 
+\begin_inset Formula $G^{\prime}$
+\end_inset 
+
+ with respect to 
+\begin_inset Formula $G$
+\end_inset 
+
+ gives
+\begin_inset Formula \[
+\frac{dG^{\prime}}{dG}=\exp\left(-2G\right)-2G\exp\left(-2G\right).\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Stationary Points
+\layout Itemize
+
+To find the stationary points we set this equation to zero and solve for
+ 
+\begin_inset Formula $G$
+\end_inset 
+
+.
+ The equation becomes
+\begin_inset Formula \[
+\exp\left(-2G\right)-2G\exp\left(-2G\right)=0\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+\left(1-2G\right)\exp\left(-2G\right)=0\]
+
+\end_inset 
+
+
+\begin_deeper 
+\layout Itemize
+
+So either 
+\begin_inset Formula $\exp\left(-2G\right)=0$
+\end_inset 
+
+, which in turn implies that 
+\begin_inset Formula $G\rightarrow\infty$
+\end_inset 
+
+ or 
+\layout Itemize
+
+
+\begin_inset Formula $1-2G=0$
+\end_inset 
+
+ which implies 
+\begin_inset Formula $G=\frac{1}{2}$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+The first solution is a minimum (and the throughput is zero) and the second
+ solution is a maximum.
+ 
+\end_deeper 
+\layout Itemize
+
+The maximum is the maximum possible throughput for the system and is given
+ when 
+\begin_inset Formula $G=\frac{1}{2}$
+\end_inset 
+
+.
+ 
+\layout ShortFoilhead
+
+Maximum Throughput
+\layout Itemize
+
+Substituting into the equation for the throughput we find that the maximum
+ is 
+\begin_inset Formula $\frac{1}{2}\exp\left(-1\right)=\frac{1}{2e}\approx0.184$
+\end_inset 
+
+.
+ This maximum throughput shows that at best the channel is in use only about
+ 18% of the time
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+Note that since the service time is fixed at 
+\begin_inset Formula $X_{n}=1$
+\end_inset 
+
+ for all 
+\begin_inset Formula $n$
+\end_inset 
+
+ then the utilisation for this system is given by 
+\begin_inset Formula $\rho=\lambda\bar{X}=\lambda.$
+\end_inset 
+
+
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+The system will be in equilibrium if the throughput equals 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+.
+ 
+\layout ShortFoilhead
+
+Analysis of Backlog Delay
+\layout Itemize
+
+Recall our assumption that a backlogged node waits for a time, 
+\begin_inset Formula $T_{i}$
+\end_inset 
+
+, before attempting to retransmit, 
+\begin_inset Formula \[
+p\left(T_{i}\right)=\mu\exp\left(-\mu T_{i}\right).\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+Given this assumption, can we compute the delay associated with this backlogged
+ node? 
+\layout Itemize
+
+Since the node may experience several collisions, the wait associated with
+ the backlog will involve a sum over the random variable 
+\begin_inset Formula $T_{i}$
+\end_inset 
+
+.
+ It turns out to be an 
+\emph on 
+Erlang distribution
+\emph default 
+.
+\layout ShortFoilhead
+
+Sums of Exponential Variables and the Erlang Distribution
+\begin_inset LatexCommand \label{sub:erlang}
+
+\end_inset 
+
+
+\layout Itemize
+
+If a random variable, 
+\begin_inset Formula $x$
+\end_inset 
+
+, is exponentially distributed with rate parameter 
+\begin_inset Formula $b$
+\end_inset 
+
+.
+ The sum of 
+\begin_inset Formula $a$
+\end_inset 
+
+ random variables, each of which is exponentially distributed with rate
+ parameter 
+\begin_inset Formula $b$
+\end_inset 
+
+ is distributed as an 
+\emph on 
+Erlang distribution.
+ 
+\layout Itemize
+
+Consider variables a set of 
+\begin_inset Formula $a$
+\end_inset 
+
+ variables
+\begin_inset Formula $\left(x_{1}\dots x_{a}\right)$
+\end_inset 
+
+ ,
+\begin_inset Formula \[
+p\left(x_{i}|b\right)=b\exp\left(-bx_{i}\right).\]
+
+\end_inset 
+
+
+\layout Itemize
+
+We define the sum of the values to be, 
+\begin_inset Formula $z=\sum_{i=1}^{a}x_{i}$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+The distribution governing 
+\begin_inset Formula $z$
+\end_inset 
+
+ is then an 
+\emph on 
+Erlang distribution
+\emph default 
+, given by 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Formula \[
+p\left(z|a,b\right)=\frac{b^{a}}{\left(a-1\right)!}z^{a-1}\exp\left(-bz\right).\]
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{4}
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Notes on Erlang
+\layout Itemize
+
+Note that this distribution is a generalisation of the exponential distribution
+ because the exponential is the special case where 
+\begin_inset Formula $a=1$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+This clearly should be the case because if 
+\begin_inset Formula $a=1$
+\end_inset 
+
+ then the `sum' of that variable will simply be the variable itself.
+ 
+\layout ShortFoilhead
+
+Erlang Distribution Mean and Variance
+\layout Standard
+
+The mean of the Erlang distribution is given by 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Formula \[
+\left\langle z\right\rangle _{p\left(z|a,b\right)}=\frac{a}{b}\]
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{3}
+\end_inset 
+
+ and the variance is 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Formula \[
+\textrm{var}\left(z\right)=\frac{a}{b^{2}}.\]
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{3}
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Delay Associated with Backlogs
+\layout Itemize
+
+If the node retransmits 
+\begin_inset Formula $k$
+\end_inset 
+
+ times then the distribution over the total time required, 
+\begin_inset Formula $W=\sum_{i=1}^{k}T_{i}$
+\end_inset 
+
+, comes from the sum of 
+\begin_inset Formula $k$
+\end_inset 
+
+ independent exponentially distributed variables.
+ 
+\layout Itemize
+
+We know that the resulting variable 
+\begin_inset Formula $X$
+\end_inset 
+
+ is Erlang distributed with parameters 
+\begin_inset Formula $\mu$
+\end_inset 
+
+ and 
+\begin_inset Formula $k$
+\end_inset 
+
+, 
+\begin_inset Formula \[
+p\left(W|k,\mu\right)=\frac{\mu^{k}}{\left(a-1\right)!}W^{k-1}\exp\left(-\mu W\right).\]
+
+\end_inset 
+
+
+\layout Itemize
+
+The probability of transmitting after 
+\begin_inset Formula $k$
+\end_inset 
+
+ attempts is given by 
+\begin_inset Formula \[
+p\left(k\right)=q\left(1-q\right)^{k-1}.\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $q$
+\end_inset 
+
+ is the probability of a successful transmission
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+Compare this with the ARQ system we analysed in the chapter on 
+\begin_inset Formula $M/G/1$
+\end_inset 
+
+ queues.
+ There we were considering errors (unsuccessful transmissions) so 
+\begin_inset Formula $p=\left(1-q\right)$
+\end_inset 
+
+.
+\end_inset 
+
+.
+ For pure ALOHA 
+\begin_inset Formula $q=\exp\left(-2G\right)$
+\end_inset 
+
+.
+\layout ShortFoilhead
+
+Distribution for 
+\begin_inset Formula $W$
+\end_inset 
+
+
+\layout Itemize
+
+From the product rule and the sum rule we know that the probability distribution
+ for 
+\begin_inset Formula $W$
+\end_inset 
+
+ is given by
+\begin_inset Formula \begin{eqnarray*}
+p\left(W|\mu\right) & = & \sum_{k=1}^{\infty}p\left(W|k,\mu\right)p\left(k\right),\end{eqnarray*}
+
+\end_inset 
+
+ 
+\begin_inset Formula \[
+p\left(W|\mu\right)=\sum_{k=1}^{\infty}q\left(1-q\right)^{k-1}\frac{\mu^{k}}{\left(k-1\right)!}W^{k-1}\exp\left(-\mu W\right),\]
+
+\end_inset 
+
+substituting 
+\begin_inset Formula $\dot{k}=k-1$
+\end_inset 
+
+
+\begin_inset Formula \[
+p\left(W|\mu\right)=\sum_{k=0}^{\infty}q\left(1-q\right)^{\dot{k}}\frac{\mu^{\dot{k}+1}}{\dot{k}!}X^{\dot{k}}\exp\left(-\mu W\right),\]
+
+\end_inset 
+
+extracting the 
+\begin_inset Formula $q$
+\end_inset 
+
+, the exponential term and one of the 
+\begin_inset Formula $\mu$
+\end_inset 
+
+s from the product we rewrite as,
+\begin_inset Formula \begin{equation}
+p\left(X|\mu\right)=q\mu\exp\left(-\mu W\right)\sum_{k=0}^{\infty}\frac{\left(\mu\left(1-q\right)W\right)^{\dot{k}}}{\dot{k}!},\label{eq:pXgivenMuWithSum}\end{equation}
+
+\end_inset 
+
+The term inside the sum is then recognised as being of the form
+\begin_inset Formula \[
+\exp\left(x\right)=\sum_{k=0}^{\infty}\frac{x^{\dot{k}}}{\dot{k}!}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+\sum_{k=0}^{\infty}\frac{\left(\mu\left(1-q\right)W\right)^{\dot{k}}}{\dot{k}!}=\exp\left(\mu\left(1-q\right)W\right),\]
+
+\end_inset 
+
+which can be substituted back into (
+\begin_inset LatexCommand \ref{eq:pXgivenMuWithSum}
+
+\end_inset 
+
+) to obtain
+\begin_inset Formula \begin{eqnarray*}
+p\left(W|\mu\right) & = & q\mu\exp\left(-\mu W\right)\exp\left(\mu\left(1-q\right)W\right),\\
+ & = & q\mu\exp\left(-q\mu W\right)\end{eqnarray*}
+
+\end_inset 
+
+which is recognised as an exponential distribution with rate parameter 
+\begin_inset Formula $\mu^{\prime}=q\mu=\mu\exp\left(-2G\right)$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+Using the fact that 
+\begin_inset Formula $G$
+\end_inset 
+
+ is a function of 
+\begin_inset Formula $\mu$
+\end_inset 
+
+ we can write
+\begin_inset Formula \begin{equation}
+\mu^{\prime}=\mu\exp\left(-2\left(\lambda+n\mu\right)\right).\label{eq:rateFunctionALOHA}\end{equation}
+
+\end_inset 
+
+
+\layout Itemize
+
+So the service rate is a function of 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+, 
+\begin_inset Formula $n$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mu$
+\end_inset 
+
+.
+\layout ShortFoilhead
+
+Optimum value of 
+\begin_inset Formula $\mu$
+\end_inset 
+
+
+\layout Itemize
+
+For a given value of 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ and 
+\begin_inset Formula $n$
+\end_inset 
+
+ there is a optimal value for 
+\begin_inset Formula $\mu$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+This value of 
+\begin_inset Formula $\mu$
+\end_inset 
+
+ can be found by seeking the maximum rate, this is done by differentiating
+ with respect to 
+\begin_inset Formula $\mu$
+\end_inset 
+
+ 
+\begin_inset Formula \[
+\frac{d\mu^{\prime}}{d\mu}=\exp\left(-2\left(\lambda+n\mu\right)\right)-2n\mu\exp\left(-2\left(\lambda+n\mu\right)\right)\]
+
+\end_inset 
+
+and setting the result to zero to find the stationary points,
+\begin_inset Formula \[
+\exp\left(-2\left(\lambda+n\mu\right)\right)-2n\mu\exp\left(-2\left(\lambda+n\mu\right)\right)=0,\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+\left(1-2n\mu\right)\exp\left(-2\left(\lambda+n\mu\right)\right)=0.\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Solutions for 
+\begin_inset Formula $\mu$
+\end_inset 
+
+
+\layout Itemize
+
+There are two solutions to this equation.
+ The first is 
+\begin_inset Formula $\exp\left(-2\left(\lambda+n\mu\right)\right)=0$
+\end_inset 
+
+, meaning that 
+\begin_inset Formula $\lambda+n\mu\rightarrow\infty$
+\end_inset 
+
+.
+ This solution is a minimiser .
+ The other solution is given when 
+\begin_inset Formula \[
+0=1-2n\mu\]
+
+\end_inset 
+
+or
+\begin_inset Formula \[
+\mu=\frac{1}{2n},\]
+
+\end_inset 
+
+ this turns out to be a maximum of (
+\begin_inset LatexCommand \ref{eq:rateFunctionALOHA}
+
+\end_inset 
+
+).
+ 
+\layout ShortFoilhead
+
+Notes on Optimum
+\layout Itemize
+
+By maximising the `rate' parameter 
+\begin_inset Formula $\mu^{\prime}$
+\end_inset 
+
+ we minimise the average delay associated with the backlog, which is given
+ by 
+\begin_inset Formula $\bar{W}=\frac{1}{\mu^{\prime}}$
+\end_inset 
+
+.
+\layout Itemize
+
+By setting 
+\begin_inset Formula $\mu=\frac{1}{2n}$
+\end_inset 
+
+ we find a minimum for the average delay: 
+\begin_inset Formula \[
+\bar{W}_{\textrm{min}}=2n\exp\left(2\lambda+1\right)\]
+
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+In practice it may be difficult to set the rate 
+\begin_inset Formula $\mu$
+\end_inset 
+
+ to something that is dependent on the number of backlogged nodes.
+ 
+\layout Itemize
+
+This is because the number of backlogged nodes can only be known by nodes
+ communicating their status over the network, we have not allowed for such
+ a mechanism in our analysis.
+ 
+\layout Itemize
+
+Note that the minimum average delay goes up linearly with the number of
+ backlogged nodes and 
+\emph on 
+exponentially
+\emph default 
+ with the rate of arrivals for the system, 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+.
+ 
+\layout ShortFoilhead
+
+Slotted ALOHA
+\layout Itemize
+
+A simple improvement to the ALOHA system comes from constraining when packets
+ can be sent.
+ 
+\layout Itemize
+
+Instead of allowing stations to transmit immediately they receive a packet
+ each station waits for the beginning of a `slot' to start transmitting.
+ 
+\layout Itemize
+
+These slots are synchronised across the entire network.
+ 
+\layout Itemize
+
+In this system a collision occurs if another station attempts to transmit
+ in the same slot.
+ 
+\layout Itemize
+
+This happens if another station received a packet for transmission in the
+ preceding slot.
+\layout Itemize
+
+If each slot is one time unit in length the probability of this event is
+ given by
+\begin_inset Formula \[
+p\left(k=0|G\left(n\right),2\right)=\exp\left(-G\left(n\right)\right).\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Slotted ALOHA
+\layout Itemize
+
+The probability is smaller than for pure ALOHA because the `vulnerable period'
+ for a collision is smaller (half the length of before).
+ 
+\layout Itemize
+
+A collision now only occurs if another station attempts to transmit in the
+ same slot.
+ As a result the rate of successful transmissions is given by
+\begin_inset Formula \[
+G^{\prime}\left(n\right)=G\left(n\right)\exp\left(-G\left(n\right)\right),\]
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename diagrams/slottedALOHAThroughput.eps
+	width 60text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{8}
+\end_inset 
+
+
+\layout Caption
+
+Throughput for slotted ALOHA as a function of 
+\begin_inset Formula $G$
+\end_inset 
+
+.
+\begin_inset LatexCommand \label{cap:slottedALOHAThroughput}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Smaller Vulnerable period
+\layout Standard
+
+The smaller vulnerable period leads to a greater maximum throughput which
+ is now found at 
+\begin_inset Formula $G=1$
+\end_inset 
+
+.
+ The maximum throughput is 
+\begin_inset Formula $\frac{1}{e}$
+\end_inset 
+
+.
+ Slotted ALOHA therefore can be twice as efficient as pure ALOHA.
+ 
+\layout ShortFoilhead
+
+References
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[abbrv]{lawrence,other,zbooks}
+
+\end_inset 
+
+
+\the_end

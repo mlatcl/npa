@@ -1,0 +1,117 @@
+#LyX 1.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 218
+\textclass article
+\begin_preamble
+\usepackage{neilbib}
+\bibliographystyle{neilbib}
+\end_preamble
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize a4paper
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+Network Performance Analysis COM6131/COM3270
+\newline 
+
+\begin_inset LatexCommand \url{http://www.dcs.shef.ac.uk/~neil/NPA/index.html}
+
+\end_inset 
+
+
+\layout Author
+
+Neil Lawrence 
+\begin_inset LatexCommand \url{neil@dcs.shef.ac.uk}
+
+\end_inset 
+
+
+\layout Date
+
+October 2nd, 2002
+\layout Section*
+\align center 
+Times
+\layout Description
+
+Lectures Wednesdays 2:10 pm - 16:00 pm (St Georges LT7) 
+\layout Description
+
+Tutorials Thursdays 12:10 pm - 13:00 pm (ARTS Tower LT3).
+ First one Week 3 - Tonatiuh Pena Centeno is your teaching assistant.
+ 
+\layout Description
+
+Evaluation 70% Exam 30% course work.
+ 
+\layout Section*
+\align center 
+Reading List
+\layout Standard
+
+The course is based primarily on 
+\begin_inset LatexCommand \cite{Bertsekas:data92}
+
+\end_inset 
+
+.
+ The relevant parts of the book are as follows.
+ 
+\layout Description
+
+Chapter\SpecialChar ~
+1 For background reading and review.
+ 
+\layout Description
+
+Chapter\SpecialChar ~
+3 Section 3.1 -- 3.5 For queueing models.
+ 
+\layout Description
+
+Chapter\SpecialChar ~
+4 In less detail: Section 4.1 -- 4.4, Section 4.5.2, 4.5.3.
+ 
+\layout Standard
+
+For additional background reading you may wish to consult some of the books
+ listed below, 
+\begin_inset LatexCommand \cite{Tanenbaum:computer96}
+
+\end_inset 
+
+ is the standard text for Introductory courses, but has little coverage
+ on queueing theory.
+ 
+\begin_inset LatexCommand \cite{Chan:performance00}
+
+\end_inset 
+
+ is an alternative text for details on queues.
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[neilbib]{lawrence_books}
+
+\end_inset 
+
+
+\the_end

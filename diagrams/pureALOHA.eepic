@@ -1,0 +1,32 @@
+\setlength{\unitlength}{0.00083333in}
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+{\renewcommand{\dashlinestretch}{30}
+\begin{picture}(7473,1539)(0,-10)
+\put(0, -10){\makebox(0,0){.}}
+\put(7473, 1529){\makebox(0,0){.}}
+\path(12,837)(7212,837)
+\path(2412,987)(2412,687)
+\path(7212,987)(7212,687)
+\path(4812,987)(4812,687)
+\path(2412,1212)(4812,1212)(4812,1512)
+	(2412,1512)(2412,1212)
+\path(4812,12)(7212,12)(7212,312)
+	(4812,312)(4812,12)
+\path(12,987)(12,687)
+\path(12,12)(2412,12)(2412,312)
+	(12,312)(12,12)
+\put(7212,487){\makebox(0,0){$t-1$}}
+\put(2412,487){\makebox(0,0){$t+1$}}
+\put(12,487){\makebox(0,0){$t+2$}}
+\put(4812,487){\makebox(0,0){$t$}}
+\put(1212,162){\makebox(0,0){packet sent at $t+1$}}
+\put(3612,1362){\makebox(0,0){packet sent at $t$}}
+\put(6012,162){\makebox(0,0){packet sent at $t-1$}}
+\end{picture}
+}

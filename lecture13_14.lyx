@@ -1,0 +1,1046 @@
+#LyX 1.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 220
+\textclass amsart
+\begin_preamble
+\usepackage{epic,eepic,epsfig}
+\end_preamble
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+Lectures 13 & 14
+\layout Section
+
+
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $G$
+\end_inset 
+
+/
+\begin_inset Formula $1$
+\end_inset 
+
+ Queue
+\layout Subsection*
+
+Pollaczek-Khinchin formula
+\layout Standard
+
+If service times are general we cannot use birth death processes to analyse
+ the system.
+ 
+\layout Standard
+
+Instead we derive the Pollaczek-Khinchin formula.
+ This formula gives an expression for the expected waiting time in the queue
+ for any distribution of service times.
+ 
+\begin_inset Formula \[
+\bar{W}=\frac{\lambda \left\langle X^{2}\right\rangle }{2(1-\rho )}\]
+
+\end_inset 
+
+ where 
+\begin_inset Formula $\bar{W}$
+\end_inset 
+
+ is expected waiting time, 
+\begin_inset Formula $\left\langle X^{2}\right\rangle =\left\langle X^{2}\right\rangle _{p(X)}$
+\end_inset 
+
+, 
+\begin_inset Formula $\rho =\lambda \bar{X}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\bar{X}=\left\langle X\right\rangle _{p(X)}$
+\end_inset 
+
+.
+ 
+\layout Subsection*
+
+Proof of Pollaczek-Khinchin Formula
+\layout Standard
+
+We assume that we have a FIFO queue, 
+\emph on 
+i.e.
+ 
+\emph default 
+customers are served in the order they arrive.
+ We also assume that arrival times are independent of service times.
+ We will utilise a new concept known as Mean Residual Service Time.
+ 
+\layout Subsubsection*
+
+The Residual Service Time
+\layout Standard
+
+Some definitions: 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features firstHeadEmpty="true">
+<column alignment="right" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<row endhead="true">
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $W_{i}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+=
+\end_inset 
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ Waiting time in queue of 
+\begin_inset Formula $i$
+\end_inset 
+
+th customer.
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $R_{i}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+=
+\end_inset 
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ `Residual service time' seen by the 
+\begin_inset Formula $i$
+\end_inset 
+
+th customer.
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $X_{i}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+=
+\end_inset 
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ Service time of the 
+\begin_inset Formula $i$
+\end_inset 
+
+th customer.
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $k_{i}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+=
+\end_inset 
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ Number of customers in the system when the 
+\begin_inset Formula $i$
+\end_inset 
+
+th customer arrives.
+ 
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Include \input{diagrams/residualServiceOverview.eepic}
+
+\end_inset 
+
+
+\layout Caption
+
+Graphical representation of residual service time.
+\end_inset 
+
+
+\layout Standard
+
+From these definitions we may immediately write down 
+\begin_inset Formula \[
+W_{i}=R_{i}+\sum _{j=i-(k_{i}-1)}^{i-1}X_{j}\]
+
+\end_inset 
+
+ summing both sides across 
+\begin_inset Formula $i$
+\end_inset 
+
+ we obtain 
+\begin_inset Formula \[
+\sum _{i=1}^{I}W_{i}=\sum _{i=1}^{I}R_{i}+\sum _{i=1}^{I}\sum _{j=i-(k_{i}-1)}^{i-1}X_{j}\]
+
+\end_inset 
+
+ dividing through by 
+\begin_inset Formula $I$
+\end_inset 
+
+ gives us 
+\begin_inset Formula \[
+\sum _{i=1}^{I}\frac{W_{i}}{I}=\sum _{i=1}^{I}\frac{R_{i}}{I}+\sum _{i=1}^{I}\sum _{j=i-(k_{i}-1)}^{i-1}\frac{X_{j}}{I}\]
+
+\end_inset 
+
+ in the limit as 
+\begin_inset Formula $I\rightarrow \infty $
+\end_inset 
+
+ this becomes 
+\begin_inset Formula \[
+\lim _{I\rightarrow \infty }\sum _{i=1}^{I}\frac{W_{i}}{I}=\lim _{I\rightarrow \infty }\sum _{i=1}^{I}\frac{R_{i}}{I}+\lim _{I\rightarrow \infty }\sum _{i=1}^{I}\frac{(k_{i}-1)X_{i}}{I}\]
+
+\end_inset 
+
+assuming time averages are equivalent to steady state averages this gives
+ 
+\begin_inset Formula \[
+\left\langle W\right\rangle =\left\langle R\right\rangle +\left\langle \left(k-1\right)X\right\rangle \]
+
+\end_inset 
+
+ Now since the length of the queue as seen by the 
+\begin_inset Formula $i$
+\end_inset 
+
+th arrival is independent of the 
+\begin_inset Formula $i$
+\end_inset 
+
+th arrival's length this means 
+\begin_inset Formula $\left\langle (k-1)X\right\rangle =\left\langle k-1\right\rangle \left\langle X\right\rangle $
+\end_inset 
+
+ and since 
+\begin_inset Formula $(k-1)$
+\end_inset 
+
+ is the length of the queue we may write 
+\begin_inset Formula \[
+\bar{W}=\bar{R}+\bar{N}_{Q}\bar{X}\]
+
+\end_inset 
+
+ Using Little's theorem 
+\begin_inset Formula \[
+\bar{N}_{Q}=\lambda \bar{W}\]
+
+\end_inset 
+
+ we can obtain 
+\begin_inset Formula \[
+\bar{W}=\bar{R}+\lambda \bar{X}\bar{W}\]
+
+\end_inset 
+
+ and the fact that 
+\begin_inset Formula $\rho =\lambda \bar{X}$
+\end_inset 
+
+ gives us 
+\begin_inset Formula \[
+\bar{W}=\bar{R}+\rho \bar{W}\]
+
+\end_inset 
+
+ Leading to 
+\begin_inset Formula \begin{equation}
+\bar{W}=\frac{\bar{R}}{1-\rho }\label{eqn:arrivals}\end{equation}
+
+\end_inset 
+
+ It remains to calculate 
+\begin_inset Formula $\bar{R}$
+\end_inset 
+
+.
+ 
+\layout Subsubsection*
+
+Residual Service Time from Departures Perspective
+\layout Standard
+
+Plot of the residual service time over time.
+ Here 
+\begin_inset Formula $M\left(t\right)$
+\end_inset 
+
+ is the number of service completions in the interval 
+\begin_inset Formula $[0,\, t]$
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Include \input{./diagrams/residualTime.eepic}
+
+\end_inset 
+
+
+\layout Caption
+
+Graphical computation of mean residual time.
+\end_inset 
+
+
+\layout Standard
+
+The time average of the mean residual service time can be calculated in
+ terms of the area under the curve, 
+\begin_inset Formula $A(t)$
+\end_inset 
+
+ which in turn is the area under each of the triangles which may be written
+ 
+\begin_inset Formula \[
+A(t)=\frac{1}{2}\sum _{i=1}^{M(t)}X_{i}^{2}\]
+
+\end_inset 
+
+ The average service time is the area divided by time, 
+\begin_inset Formula $t$
+\end_inset 
+
+.
+ 
+\begin_inset Formula \begin{eqnarray}
+\frac{A(t)}{t} & = & \frac{M(t)}{t}\frac{A(t)}{M(t)}\\
+ & = & \frac{1}{2}\frac{M(t)}{t}\frac{\sum _{i=1}^{M(t)}X_{i}^{2}}{M(t)}
+\end{eqnarray}
+
+\end_inset 
+
+ As 
+\begin_inset Formula $t\rightarrow \infty $
+\end_inset 
+
+ we find 
+\begin_inset Formula $M(t)\rightarrow \infty $
+\end_inset 
+
+ and 
+\begin_inset Formula \[
+\bar{R}=\frac{1}{2}\lambda \left\langle X^{2}\right\rangle .\]
+
+\end_inset 
+
+ If we assume that time averages and ensemble averages are equal we may
+ substitute back into eqn (
+\begin_inset LatexCommand \ref{eqn:arrivals}
+
+\end_inset 
+
+) and obtain the Pollaczek-Khinchin formula 
+\begin_inset Formula \[
+\bar{W}=\frac{\lambda \left\langle X^{2}\right\rangle }{2(1-\rho )}\]
+
+\end_inset 
+
+
+\layout Standard
+
+This implies that the total waiting time is 
+\begin_inset Formula \[
+\bar{T}=\bar{X}+\frac{\lambda \left\langle X^{2}\right\rangle }{2(1-\rho )}\]
+
+\end_inset 
+
+ and through Little's formula we can obtain the expected queue length, 
+\begin_inset Formula $\bar{N}_{Q}$
+\end_inset 
+
+, and the expected number in the system, 
+\begin_inset Formula $\bar{N}$
+\end_inset 
+
+.
+ 
+\layout Example
+
+Recall that for an 
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $1$
+\end_inset 
+
+ system the service times are exponentially distributed,
+\layout Standard
+
+
+\begin_inset Formula \[
+P\left(X\right)=\mu \exp \left(-\mu X\right)\]
+
+\end_inset 
+
+this means that
+\begin_inset Formula \[
+\bar{X}=\frac{1}{\mu }\]
+
+\end_inset 
+
+ then since the variance of the system is 
+\begin_inset Formula $\frac{1}{\mu ^{2}}$
+\end_inset 
+
+
+\begin_inset Formula \[
+\left\langle X\right\rangle ^{2}=\frac{2}{\mu ^{2}}\]
+
+\end_inset 
+
+Substituting into the Pollaczek-Khinchin formula we obtain 
+\begin_inset Formula \begin{eqnarray*}
+\bar{W} & = & \frac{\rho }{\mu \left(1-\rho \right)}\\
+ & = & \frac{\rho }{\mu -\lambda }
+\end{eqnarray*}
+
+\end_inset 
+
+
+\layout Standard
+
+Deterministic service times --- each service takes the same amount of time
+\begin_inset Formula \[
+P\left(X\right)=\delta \left(X-\frac{1}{\mu }\right)\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $\delta \left(\cdot \right)$
+\end_inset 
+
+is the Dirac delta function.
+ For this system 
+\begin_inset Formula \[
+\left\langle X\right\rangle =\frac{1}{\mu }\]
+
+\end_inset 
+
+and 
+\begin_inset Formula \[
+\left\langle X^{2}\right\rangle =\frac{1}{\mu ^{2}}\]
+
+\end_inset 
+
+
+\emph on 
+i.e.
+
+\emph default 
+ the variance is zero as we would expect.
+ Substituting into the Pollaczek-Khinchin formula we obtain
+\begin_inset Formula \[
+\bar{W}=\frac{\rho }{2\mu \left(1-\rho \right)}\]
+
+\end_inset 
+
+
+\layout Standard
+
+In fact we may derive the full range of results for these distributions.
+ 
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="5" columns="4">
+<features firstHeadEmpty="true">
+<column alignment="center" valignment="top" rightline="true" width="0pt">
+<column alignment="center" valignment="top" rightline="true" width="0pt">
+<column alignment="center" valignment="top" rightline="true" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<row bottomline="true" endhead="true">
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ Expected value 
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ General 
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ Exponential 
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Deterministic
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\bar{W}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $\frac{\lambda }{2(1-\rho )}\left\langle X^{2}\right\rangle $
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $\frac{\rho }{\mu (1-\rho )}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $\frac{\rho }{2\mu (1-\rho )}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $\bar{T}=\bar{W}+\frac{1}{\mu }$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $\frac{\lambda }{2(1-\rho )}\left\langle X^{2}\right\rangle +\frac{1}{\mu }$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $\frac{1}{\mu (1-\rho )}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $\frac{2-\rho }{2\mu (1-\rho )}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $\bar{N_{Q}}=\lambda \bar{W}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $\frac{\lambda ^{2}}{2(1-\rho )}\left\langle X^{2}\right\rangle $
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\frac{\rho ^{2}}{(1-\rho )}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $\frac{\rho ^{2}}{2(1-\rho )}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $\bar{N}=\lambda \bar{W}+\rho =\lambda \bar{T}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $\frac{\lambda ^{2}}{2(1-\rho )}\left\langle X^{2}\right\rangle +\rho $
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $\frac{\rho }{1-\rho }$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $\frac{\rho (2-\rho )}{2(1-\rho )}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Example
+
+Uniform Service times --- A uniform probability distribution is defined
+ between 0 and 
+\begin_inset Formula $b$
+\end_inset 
+
+ for 
+\begin_inset Formula $X>0$
+\end_inset 
+
+ as
+\begin_inset Formula \[
+U\left(X|b\right)=\left\{ \begin{array}{cc}
+ \frac{1}{b} & 0<X\leq b\\
+ 0 & X>b\end{array}
+\right.\]
+
+\end_inset 
+
+show that the man of this uniform distribution is given by 
+\begin_inset Formula $\frac{b}{2}$
+\end_inset 
+
+ and its variance by 
+\begin_inset Formula $\frac{b^{2}}{12}$
+\end_inset 
+
+ and find the expected waiting time for an 
+\begin_inset Formula $M/U/1$
+\end_inset 
+
+ queue?
+\layout Example
+
+For the mean we have
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X\right\rangle  & = & \int _{0}^{\infty }Xp\left(X\right)dX\\
+ & = & \int _{0}^{\infty }XU\left(X|b\right)dX\\
+ & = & \int _{0}^{b}\frac{X}{b}dX\\
+ & = & \left[\frac{X^{2}}{2b}\right]_{0}^{b}\\
+ & = & \frac{b^{2}}{2b}-0\\
+ & = & \frac{b}{2}
+\end{eqnarray*}
+
+\end_inset 
+
+For the variance we also require 
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X^{2}\right\rangle  & = & \int _{0}^{\infty }X^{2}p\left(X\right)dX\\
+ & = & \int _{0}^{b}\frac{X^{2}}{b}dX\\
+ & = & \left[\frac{X^{3}}{3b}\right]_{0}^{b}\\
+ & = & \frac{b^{3}}{3b}-0\\
+ & = & \frac{b^{2}}{3}
+\end{eqnarray*}
+
+\end_inset 
+
+The variance is 
+\begin_inset Formula $\left\langle X^{2}\right\rangle -\left\langle X\right\rangle ^{2}=\frac{b^{2}}{3}-\left(\frac{b}{2}\right)=\frac{b^{2}}{12}$
+\end_inset 
+
+.
+\begin_deeper 
+\layout Description
+
+Waiting\SpecialChar ~
+Time\SpecialChar ~
+For\SpecialChar ~
+Queue For simplicity we consider 
+\begin_inset Formula $\mu =\frac{1}{\left\langle X\right\rangle }.$
+\end_inset 
+
+ So 
+\begin_inset Formula $\mu =\frac{2}{b}$
+\end_inset 
+
+ and thus 
+\begin_inset Formula $b=\frac{2}{\mu }$
+\end_inset 
+
+.
+ So we can write the second moment in terms of 
+\begin_inset Formula $\mu $
+\end_inset 
+
+.
+ 
+\begin_inset Formula $\left\langle X^{2}\right\rangle =\frac{b^{2}}{3}$
+\end_inset 
+
+, substituting in 
+\begin_inset Formula $b=\frac{2}{\mu }$
+\end_inset 
+
+ we have 
+\begin_inset Formula $\left\langle X^{2}\right\rangle =\frac{4}{3\mu ^{2}}$
+\end_inset 
+
+.
+ Substituting in to the P-K formula we recover
+\begin_inset Formula \[
+\bar{W}=\frac{2\rho }{3\mu \left(1-\rho \right)}.\]
+
+\end_inset 
+
+
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Example
+
+Automatic Repeat Request system --- ARQ System.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Include \input{./diagrams/ARQ.eepic}
+
+\end_inset 
+
+
+\layout Caption
+
+The ARQ System.
+\end_inset 
+
+Assume each packet takes 1 millisecond to be transmitted.
+\layout Standard
+
+The system waits 
+\begin_inset Formula $n-1$
+\end_inset 
+
+ milliseconds for an acknowledgement.
+ If there is no acknowledgement the system retransmits.
+\layout Standard
+
+The probability of an error in a packet is taken to be 
+\begin_inset Formula $p$
+\end_inset 
+
+.
+ Errors are taken to be independent.
+ Assume that packets arrive as a Poisson process with rate 
+\begin_inset Formula $\lambda $
+\end_inset 
+
+.
+  Time interval between transmission and re-transmission is 
+\begin_inset Formula $1+kn$
+\end_inset 
+
+ time units with probability 
+\begin_inset Formula $\left(1-p\right)p^{k}$
+\end_inset 
+
+
+\layout Standard
+
+The probability of the service time is
+\begin_inset Formula \[
+P\left(X=1+kn\right)=\left(1-p\right)p^{k}\]
+
+\end_inset 
+
+ The expected service time is therefore
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X\right\rangle  & = & \sum _{k=0}^{\infty }\left(1+kn\right)\left(1-p\right)p^{k}\\
+ & = & \left(1-p\right)\left(\sum _{k=0}^{\infty }p^{k}+n\sum _{k=0}^{\infty }kp^{k}\right)\\
+ & = & 1+\frac{np}{1-p}
+\end{eqnarray*}
+
+\end_inset 
+
+ since 
+\begin_inset Formula $\sum _{k=0}^{\infty }p^{k}=\frac{1}{1-p}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\sum _{k=0}^{\infty }kp^{k}=\frac{p}{\left(1-p\right)^{2}}$
+\end_inset 
+
+.
+ Thus we can write that
+\begin_inset Formula \[
+\rho =\frac{\lambda \left(1-p\right)}{1-p+np}\]
+
+\end_inset 
+
+and thus 
+\begin_inset Formula \[
+1-\rho =\frac{1-\lambda -p\left(n-1-\lambda \right)}{1-p+np}\]
+
+\end_inset 
+
+The second moment of the service time is
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X^{2}\right\rangle  & = & \sum _{k=0}^{\infty }\left(1+kn\right)^{2}\left(1-p\right)p^{k}\\
+ & = & \left(1-p\right)\left(\sum _{k=0}^{\infty }p^{k}+2n\sum _{k=0}^{\infty }kp^{k}+n^{2}\sum _{k=0}^{\infty }k^{2}p^{k}\right)\\
+ & = & 1+\frac{2np}{1-p}+\frac{n^{2}\left(p+p^{2}\right)}{\left(1-p\right)^{2}}
+\end{eqnarray*}
+
+\end_inset 
+
+since 
+\begin_inset Formula \[
+\sum _{k=0}^{\infty }k^{2}p^{k}=\frac{p+p^{2}}{\left(1-p\right)^{3}}\]
+
+\end_inset 
+
+ Substitiuting into the P-K formula gives a very ugly formula!
+\the_end

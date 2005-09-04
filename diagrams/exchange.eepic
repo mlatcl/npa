@@ -1,0 +1,19 @@
+\setlength{\unitlength}{0.00053333in}
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+{\renewcommand{\dashlinestretch}{30}
+\begin{picture}(6794,1597)(0,-10)
+\put(608,975){\ellipse{1200}{1200}}
+\put(4808,975){\ellipse{1200}{1200}}
+\path(1208,975)(4208,975)
+\put(608,975){\makebox(0,0){A}}
+\put(4808,975){\makebox(0,0){B}}
+\put(2708,675){\makebox(0,0){$m$ trunk lines}}
+\put(5333,0){\makebox(0,0){10,000 subscribers}}
+\end{picture}
+}

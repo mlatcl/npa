@@ -1,0 +1,326 @@
+#LyX 1.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 220
+\textclass article
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Standard
+
+% COM6130 Analysis and Design of Networks 
+\layout Section
+
+
+\begin_inset Formula $M/G/1$
+\end_inset 
+
+ Queues with Vacations 
+\layout Standard
+
+Consider a server which, when it is free, attends to some other business,
+ for example it could transmit control and record keeping traffic.
+ 
+\layout Standard
+
+These periods are sometimes known as vacations --- American for holidays.
+ 
+\layout Itemize
+
+If a new arrival arrives during a vacation it must wait until the vacation
+ is over before being dealt with.
+\layout Itemize
+
+If a vacation ends and the server is idle it immediately goes on a new vacation.
+ 
+\layout Itemize
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Include \input{./diagrams/vacationMG1.eepic}
+
+\end_inset 
+
+
+\layout Caption
+
+Schematic of 
+\begin_inset Formula $M/G/1$
+\end_inset 
+
+ queue
+\end_inset 
+
+
+\layout Standard
+
+We denote the length of these successive vacations to be 
+\begin_inset Formula $V_{1}$
+\end_inset 
+
+, 
+\begin_inset Formula $V_{2}$
+\end_inset 
+
+, 
+\begin_inset Formula $\dots $
+\end_inset 
+
+.
+ 
+\layout Standard
+
+We assume that 
+\begin_inset Formula $V_{1},$
+\end_inset 
+
+
+\begin_inset Formula $V_{2}$
+\end_inset 
+
+, 
+\begin_inset Formula $\dots $
+\end_inset 
+
+ are i.i.d.
+ random variables which are also independent of the customer times and the
+ service times.
+ 
+\layout Standard
+
+For a Poisson arrival system with general service times we will look to
+ compute the average waiting time for a system of this type.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Include \input{./diagrams/vacationResidual.eepic}
+
+\end_inset 
+
+
+\layout Caption
+
+Computation of residual service time for system with vacations.
+\end_inset 
+
+
+\layout Standard
+
+For this system 
+\begin_inset Formula \[
+\frac{1}{t}\int _{0}^{t}r\left(\tau \right)d\tau =\frac{1}{t}\sum _{i=1}^{M\left(t\right)}\frac{1}{2}X_{i}^{2}+\frac{1}{t}\sum _{i=1}^{L\left(t\right)}\frac{1}{2}V_{i}^{2}\]
+
+\end_inset 
+
+
+\backslash 
+begin{eqnarray} 
+\backslash 
+frac{1}{t} 
+\backslash 
+int_0^t r(
+\backslash 
+tau) d
+\backslash 
+tau &=& 
+\backslash 
+frac{1}{t} 
+\backslash 
+sum_{i=1}^{M(t)} 
+\backslash 
+half X_i^2 + 
+\backslash 
+frac{1}{t} 
+\backslash 
+sum_{i=1}^{L(t)} 
+\backslash 
+half V_i^2 
+\backslash 
+
+\backslash 
+ &=& 
+\backslash 
+frac{M(t)}{t} 
+\backslash 
+frac{
+\backslash 
+sum_{i=1}^{M(t)} 
+\backslash 
+half X_i^2}{M(t)} + 
+\backslash 
+frac{L(t)}{t} 
+\backslash 
+frac{
+\backslash 
+sum_{i=1}^{L(t)} 
+\backslash 
+half V_i^2}{L(t)} 
+\backslash 
+label{eqn:vacationResidual} 
+\backslash 
+end{eqnarray} 
+\layout Standard
+
+On average the proportion of time available for utilisations is $(1-
+\backslash 
+rho)$.
+ If the average length of a vacation at time $t$ is $
+\backslash 
+bar{V}_t$ then the number of vacations that will have arrived is $L(t) =
+ 
+\backslash 
+frac{t(1-
+\backslash 
+rho)}{
+\backslash 
+bar{V}_t}$.
+ Therefore if we take the limit of (
+\backslash 
+ref{eqn:vacationResidual}) as $t 
+\backslash 
+rightarrow 
+\backslash 
+infty$ we find % 
+\backslash 
+begin{equation} 
+\backslash 
+bar{R} = 
+\backslash 
+half 
+\backslash 
+lambda 
+\backslash 
+expectation{X^2} + 
+\backslash 
+frac{(1 - 
+\backslash 
+rho) 
+\backslash 
+expectation{V^2}}{2 
+\backslash 
+bar{V}} 
+\backslash 
+end{equation} 
+\layout Standard
+
+So given that the assumptions that we used to develop the formula % 
+\backslash 
+begin{equation} 
+\backslash 
+bar{W} = 
+\backslash 
+frac{
+\backslash 
+bar{R}}{1 - 
+\backslash 
+rho} 
+\backslash 
+end{equation} % are still valid we may write % 
+\backslash 
+begin{equation} 
+\backslash 
+bar{W} = 
+\backslash 
+frac{
+\backslash 
+lambda 
+\backslash 
+expectation{X^2}}{2(1 - 
+\backslash 
+rho)} + 
+\backslash 
+frac{
+\backslash 
+expectation{V^2}}{2
+\backslash 
+bar{V}} 
+\backslash 
+end{equation} 
+\layout Standard
+
+
+\backslash 
+section*{$M$/$G$/$1$ Gated Reservation System} 
+\layout Standard
+
+Consider a system where a packet must be reserved in a vactation period
+ $V_{l(i)}$ before it sent.
+ 
+\backslash 
+begin{figure} 
+\backslash 
+input{./diagrams/residualServiceGatedOverview.eepic} 
+\backslash 
+caption{Computation of residual service time for gated system.
+ Packet $i$, $i-1$ and $i-2$ are reserved in the time interval $V_{l(i)}$.}
+ 
+\backslash 
+end{figure} 
+\layout Standard
+
+For this system we find % 
+\backslash 
+begin{equation} 
+\backslash 
+bar{W} = 
+\backslash 
+bar{R} + 
+\backslash 
+bar{N}
+\backslash 
+bar{X} + 
+\backslash 
+bar{V} 
+\backslash 
+end{equation} 
+\layout Standard
+
+
+\backslash 
+section*{Multi-user $M$/$G$/$1$ Queues} 
+\layout Standard
+
+
+\backslash 
+section*{Polling Networks} 
+\backslash 
+section*{Token Ring Throughput} 
+\backslash 
+section*{Pure ALOHA Throughput} 
+\layout Standard
+
+
+\backslash 
+end{document}
+\the_end

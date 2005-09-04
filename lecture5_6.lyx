@@ -1,0 +1,824 @@
+#LyX 1.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 218
+\textclass amsart
+\begin_preamble
+\usepackage{epic,eepic}
+
+%\input{neilutils}
+\bibliographystyle{plain}
+\end_preamble
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize a4paper
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+COM6130 --- Lecture 5&6
+\newline 
+Markov Processes and Little's Formula
+\layout Author
+
+Neil Lawrence
+\layout Date
+
+October 15, 2002
+\layout Section*
+
+Mean and Variance of the Exponential Distribution
+\layout Standard
+
+Recall the exponential distribution 
+\begin_inset Formula \[
+p(x)=\lambda e^{-\lambda x}\]
+
+\end_inset 
+
+ The mean of an exponential can be found to be, 
+\begin_inset Formula \[
+\left\langle x\right\rangle _{p(x)}=\frac{1}{\lambda }\]
+
+\end_inset 
+
+ and the variance is 
+\begin_inset Formula \[
+\left\langle x^{2}\right\rangle _{p(x)}-\left\langle x\right\rangle ^{2}_{p(x)}=\frac{1}{\lambda ^{2}}.\]
+
+\end_inset 
+
+ These are easily confirmed --- try doing them in your free time! 
+\layout Section*
+
+Discrete Markov Processes
+\layout Standard
+
+Consider a discrete representation of time 
+\begin_inset Formula \( t=0,1,2... \)
+\end_inset 
+
+.
+ A state variable 
+\begin_inset Formula \( N \)
+\end_inset 
+
+ changes with time, 
+\begin_inset Formula \( N(0),N(1),N(2)... \)
+\end_inset 
+
+.
+ If this state variable exhibits the Markov property its value at time 
+\begin_inset Formula \( t \)
+\end_inset 
+
+ is dependent only on its value at time 
+\begin_inset Formula \( t-1 \)
+\end_inset 
+
+.
+ 
+\layout Example*
+
+Monopoly Board 
+\layout Example*
+
+There are forty squares.
+ 
+\layout Example*
+
+Let us take the state, 
+\begin_inset Formula \( N(t) \)
+\end_inset 
+
+ to be the number of the square you are on 
+\begin_inset Formula \( +40 \)
+\end_inset 
+
+ for every time you have readed GO.
+ For example if 
+\begin_inset Formula \( N(t)=80 \)
+\end_inset 
+
+ You have circled the board twice and are on GO or if 
+\begin_inset Formula \( N(t)=45 \)
+\end_inset 
+
+ you have been around once and are at King's Cross.
+ 
+\layout Example*
+
+
+\begin_inset Formula \( t \)
+\end_inset 
+
+ is now associated with the number of player `turns'.
+ 
+\layout Example*
+
+In Monopoly you move your counter through rolling two six sided dice.
+ Your state after turn 
+\begin_inset Formula \( t \)
+\end_inset 
+
+, 
+\begin_inset Formula \( N(t) \)
+\end_inset 
+
+ depends only on your die role, 
+\begin_inset Formula \( d(t) \)
+\end_inset 
+
+, and your state before turn 
+\begin_inset Formula \( t \)
+\end_inset 
+
+, 
+\begin_inset Formula \( N(t-1) \)
+\end_inset 
+
+.
+ 
+\begin_inset Formula \[
+N(t)=N(t-1)+d(t)\]
+
+\end_inset 
+
+ Thus monopoly exhibits the Markov property.
+ 
+\layout Subsection*
+
+State Diagrams
+\layout Subsubsection*
+
+Coin Monopoly
+\layout Standard
+
+Consider a coin version of Monopoly, now instead of 
+\begin_inset Formula \( d(t) \)
+\end_inset 
+
+ being the sum of two die roles, we take 
+\begin_inset Formula \( d(t)=0 \)
+\end_inset 
+
+ if a coin is tails and 
+\begin_inset Formula \( d(t)=1 \)
+\end_inset 
+
+ if it is heads.
+ We can represent the manner in which the states change through a state
+ diagram.
+ 
+\layout Standard
+
+\begin_float fig 
+\layout Standard
+
+
+\begin_inset Include \input{./diagrams/stateDiagram.eepic}
+
+\end_inset 
+
+
+\layout Caption
+
+State diagram for coin monopoly.
+ Each circle reprents a different possible state value.
+ The state changes (or doesn't change) with each time step according the
+ probabilities associated with the arrows.
+ 
+\end_float 
+\layout Subsection*
+
+Poisson Process as a Markov Process
+\layout Standard
+
+Currently, with each turn, we consider time, 
+\begin_inset Formula \( t \)
+\end_inset 
+
+, to change by 
+\begin_inset Formula \( \Delta t=1 \)
+\end_inset 
+
+ with each turn.
+ Consider a situation where 
+\begin_inset Formula \( P(h) \)
+\end_inset 
+
+ is taken to be 
+\begin_inset Formula \( \lambda \, \, \Delta t \)
+\end_inset 
+
+ (which must be less than 1), giving 
+\begin_inset Formula \( P(t)=1-\lambda \, \, \Delta t \)
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Now after 
+\begin_inset Formula \( n \)
+\end_inset 
+
+ turns, what is the probability that the state 
+\begin_inset Formula \( N=k \)
+\end_inset 
+
+.
+ This is given by a binomial distribution: 
+\layout Subsubsection*
+
+Binomial for 
+\begin_inset Formula \( n \)
+\end_inset 
+
+ trials
+\layout Standard
+
+
+\begin_inset Formula \( n \)
+\end_inset 
+
+ = number of trials (turns in our case) with a constant probability of success,
+ 
+\begin_inset Formula \( P(h) \)
+\end_inset 
+
+.
+ 
+\begin_inset Formula \( k \)
+\end_inset 
+
+ = number of successes (number of heads in our case).
+ 
+\layout Standard
+
+
+\begin_inset Formula \[
+P(k)=\left( \begin{array}{c}
+n\\
+k
+\end{array}\right) P(h)^{k}(1-P(h))^{n-k}\]
+
+\end_inset 
+
+
+\layout Standard
+
+Here 
+\begin_inset Formula \( \left( \begin{array}{c}
+n\\
+k
+\end{array}\right) =\frac{n!}{k!(n-k)!} \)
+\end_inset 
+
+ is the binomial coefficient.
+ 
+\layout Standard
+
+Now 
+\begin_inset Formula \( n=\frac{t}{\Delta t} \)
+\end_inset 
+
+ which means that 
+\begin_inset Formula \( P(h)=\lambda \Delta t=\frac{\lambda t}{n} \)
+\end_inset 
+
+ giving 
+\begin_inset Formula \begin{eqnarray}
+P(k|\lambda ,t) & = & \frac{n!}{k!(n-k)!}\left( \frac{\lambda t}{n}\right) ^{k}\left( 1-\frac{\lambda t}{n}\right) ^{n-k}\\
+ & = & \frac{n\left( n-1\right) \dots \left( n-\left( k-1\right) \right) }{n^{k}\left( 1-\frac{\lambda t}{n}\right) ^{k}}\frac{(\lambda t)^{k}}{k!}\left( 1-\frac{\lambda t}{n}\right) ^{n}
+\end{eqnarray}
+
+\end_inset 
+
+ If we now take the limit as 
+\begin_inset Formula \( n\rightarrow \infty  \)
+\end_inset 
+
+ (equivalent to 
+\begin_inset Formula \( \Delta t\rightarrow 0 \)
+\end_inset 
+
+), this expression becomes 
+\begin_inset Formula \begin{equation}
+\label{eqn:poisson}
+P(k|\lambda ,t)=\frac{(\lambda t)^{k}}{k!}e^{-\lambda t}.
+\end{equation}
+
+\end_inset 
+
+This is because the first factor is equal to 1 as in this limit it becomes
+ 
+\begin_inset Formula \[
+\frac{n^{k}}{n^{k}}\]
+
+\end_inset 
+
+and the definition of an exponential function is
+\begin_inset Formula \[
+\exp \left( z\right) =\lim _{n\rightarrow \infty }\left( 1+\frac{z}{m}\right) ^{m}.\]
+
+\end_inset 
+
+ Eqn 
+\begin_inset LatexCommand \ref{eqn:poisson}
+
+\end_inset 
+
+ is recognised as a Poisson process.
+ In other words, we have proved that a Poisson process is a particular type
+ of Markov process.
+ 
+\layout Standard
+
+Coin Monopoly played at infinite speed is a Poisson process! 
+\layout Section*
+
+Birth Death Processes
+\layout Standard
+
+A modification to our previous state diagram brings us to a birth-death
+ process.
+ Imagine now that instead of tossing a coin, three possible events may occur.
+ The state may go up by one (a birth), down by one (a death) or stay the
+ same.
+ 
+\layout Standard
+
+We represent this with a state diagram as follows.
+ 
+\layout Standard
+
+\begin_float fig 
+\layout Standard
+
+
+\begin_inset Include \input{./diagrams/birthDeathProcess.eepic}
+
+\end_inset 
+
+
+\layout Caption
+
+State diagram for a birth-death process.
+\end_float 
+\layout Standard
+
+Such processes are ideal for modelling may types of queues.
+ 
+\layout Section*
+
+M/M/1 Queue
+\layout Standard
+
+The M/M/1 queue represents a birth-death process where the birth rate and
+ death rate.
+ 
+\layout Section*
+
+Kendall's Notation
+\layout Standard
+
+Arrival Distribution/Service Distribution/number of servers.
+ 
+\layout Standard
+
+
+\begin_inset Formula \( M \)
+\end_inset 
+
+ - Markov/Memoryless, 
+\begin_inset Formula \( G \)
+\end_inset 
+
+ - General and 
+\begin_inset Formula \( D \)
+\end_inset 
+
+ - deterministic.
+\layout Section*
+
+Steady State Behaviour
+\layout Standard
+
+Often we are interested in the steady state behaviour of a system, rather
+ than the transient dynamics.
+ We might ask the question what is the average network delay when the system
+ has reached steady state? What do we mean by steady state? 
+\layout Enumerate
+
+A stable condition that does not change over time or in which change in
+ one direction is continually balanced by change in another.
+\begin_float footnote 
+\layout Standard
+
+
+\family typewriter 
+http://www.dictionary.com
+\family default 
+.
+\end_float 
+\layout Enumerate
+
+A steady state is a dynamic equilibrium.
+ 
+\layout Standard
+
+A Markov process, under certain conditions, will reach a steady state distributi
+on over 
+\begin_inset Formula \( k \)
+\end_inset 
+
+.
+ Recall that a probabilistic process 
+\begin_inset Formula \( p\left( k|t\right)  \)
+\end_inset 
+
+ is a `noisy function' of time.
+ Some probabilistic processes will converge to a probability distribution
+ when we look at them in the limit as time 
+\begin_inset Formula \( \rightarrow \infty  \)
+\end_inset 
+
+.
+ Not all will though, for example a Poisson 
+\emph on 
+won't
+\emph default 
+.
+\begin_inset Formula \[
+\lim _{t\rightarrow \infty }p\left( k|t\right) =p\left( k\right) \]
+
+\end_inset 
+
+the average value of 
+\begin_inset Formula \( k \)
+\end_inset 
+
+ at steady state is then given by
+\begin_inset Formula \[
+\left\langle k\right\rangle _{p\left( k\right) }=\sum ^{\infty }_{k=0}p\left( k\right) k\]
+
+\end_inset 
+
+in what follows we will assume that this steady state average is equivalent
+ to the time average in the limit as 
+\begin_inset Formula \( t\rightarrow \infty  \)
+\end_inset 
+
+, where if the state of the system is given as a function of time as 
+\begin_inset Formula \( N\left( t\right)  \)
+\end_inset 
+
+ the average number in the system as a funciton of time is given by 
+\begin_inset Formula \[
+\bar{N}\left( t\right) =\frac{1}{t}\int _{0}^{t}N\left( \tau \right) d\tau \]
+
+\end_inset 
+
+and the time average after in the limit as 
+\begin_inset Formula \( t\rightarrow \infty  \)
+\end_inset 
+
+ is given by 
+\begin_inset Formula \[
+\bar{N}=\lim _{t\rightarrow \infty }\bar{N}\left( t\right) .\]
+
+\end_inset 
+
+which we assume is equivalent to 
+\begin_inset Formula \( \left\langle k\right\rangle _{p\left( k\right) }\equiv \bar{N} \)
+\end_inset 
+
+.
+ See pg 156-157 in Bertsekas and Gallager for more details.
+ 
+\layout Section*
+
+Little's Formula
+\layout Standard
+
+Applies for 
+\begin_inset Formula \( G \)
+\end_inset 
+
+/
+\begin_inset Formula \( G \)
+\end_inset 
+
+/1 queues.
+ 
+\layout Standard
+
+Little's formula gives the relationship between the steady-state average
+ size of a queue, 
+\begin_inset Formula \( \bar{N} \)
+\end_inset 
+
+, the steady-state arrival rate, 
+\begin_inset Formula \( \lambda  \)
+\end_inset 
+
+, and the steady-state customer delay, 
+\begin_inset Formula \( \bar{T} \)
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Under steady state conditions, Little's formula states 
+\begin_inset Formula \[
+\bar{N}=\lambda \bar{T}\]
+
+\end_inset 
+
+
+\layout Example
+
+Nightclub Queue.
+ You are driving past a nightclub, wondering how long you will have to wait
+ to go in.
+ You notice on Thursday nights the queue typically contains 20 people and
+ that people arrive at a rate of 40 per hour.
+ 
+\layout Example
+
+According to Little's formula, how long would you expect to have to wait
+ to get in? 
+\layout Example
+
+The waiting time is given by Little's formula.
+ 
+\begin_inset Formula \( \bar{N}=20 \)
+\end_inset 
+
+, 
+\begin_inset Formula \( \lambda =40 \)
+\end_inset 
+
+ and 
+\begin_inset Formula \( \bar{T}=\frac{\bar{N}}{\lambda }=\frac{20}{40}=\frac{1}{2}\textrm{hour} \)
+\end_inset 
+
+.
+ 
+\layout Subsection*
+
+Graphical Proof
+\layout Standard
+
+\begin_float fig 
+\layout Standard
+
+
+\latex latex 
+
+\backslash 
+centering{
+\latex default 
+
+\begin_inset Include \input{./diagrams/littlesFormula.eepic}
+
+\end_inset 
+
+
+\latex latex 
+}
+\layout Caption
+
+Graphical `proof' of Little's formula.
+\end_float 
+\layout Standard
+
+The area between the lines in the top figure can be expressed as both 
+\begin_inset Formula \( \int _{0}^{t}N(\tau )d\tau  \)
+\end_inset 
+
+ and 
+\begin_inset Formula \( \sum _{i=1}^{\alpha \left( t\right) }T_{i} \)
+\end_inset 
+
+.
+ Dividing both expressions by 
+\begin_inset Formula \( t \)
+\end_inset 
+
+, equating them, and taking the limit as 
+\begin_inset Formula \( t\rightarrow \infty  \)
+\end_inset 
+
+ gives Little's formula.
+ 
+\begin_inset Formula \[
+\frac{1}{t}\int _{0}^{t}N(\tau )d\tau =\frac{1}{t}\sum _{i=1}^{\alpha (t)}T_{i}=\frac{\alpha (t)}{t}\frac{\sum _{i=1}^{\alpha (t)}T_{i}}{\alpha (t)}\]
+
+\end_inset 
+
+ leading to 
+\begin_inset Formula \[
+\bar{N}_{t}=\lambda _{t}\bar{T}_{t}\]
+
+\end_inset 
+
+ We wish to consider the steady state behaviour.
+ The system may not have steady state behaviour.
+ If the steady state exists, we can seek it in the limit as 
+\begin_inset Formula \( t\rightarrow \infty  \)
+\end_inset 
+
+, giving 
+\begin_inset Formula \[
+\bar{N}=\lambda \bar{T}\]
+
+\end_inset 
+
+
+\layout Standard
+
+This formula applies regardless of the arrival and service time distributions,
+ it only relies on the system being in steady state.
+ 
+\layout Standard
+
+Little's formula can be used at the system level, as we have seen, or at
+ a lower level.
+ 
+\layout Subsection*
+
+Little's Formula for Queueing Time and Transmission Time 
+\layout Standard
+
+The total delay for packet switching systems can be divided into queueing
+ time, 
+\begin_inset Formula \( W \)
+\end_inset 
+
+, and service time or transmission time, 
+\begin_inset Formula \( X \)
+\end_inset 
+
+.
+ 
+\begin_inset Formula \( T=X+W. \)
+\end_inset 
+
+ Similarly the averge delay may be divided.
+ 
+\begin_inset Formula \[
+\bar{T}=\bar{X}+\bar{W}\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+Both the queue itself and the transmission may be analysed independently
+ using Little's formula.
+ 
+\layout Subsubsection*
+
+The Queue
+\layout Standard
+
+Given 
+\begin_inset Formula \( \lambda  \)
+\end_inset 
+
+, an arrival rate, 
+\begin_inset Formula \( \bar{N}_{Q} \)
+\end_inset 
+
+, the average number of packets waiting in the queue, and 
+\begin_inset Formula \( \bar{W} \)
+\end_inset 
+
+, the average packet waiting time, Little's formula gives 
+\begin_inset Formula \[
+\bar{N}_{Q}=\lambda \bar{W}.\]
+
+\end_inset 
+
+
+\layout Subsubsection*
+
+The Transmission
+\layout Standard
+
+For 
+\begin_inset Formula \( \bar{X} \)
+\end_inset 
+
+, the average transmission time, we can obtain the average number of packets
+ under transmission, 
+\begin_inset Formula \[
+\rho =\lambda \bar{X},\]
+
+\end_inset 
+
+ which is also known as the utilisation factor.
+ It represents the fraction of time that the transmission line is in use.
+ For a 
+\begin_inset Formula \( G/G/1 \)
+\end_inset 
+
+ queue it must be less than one, 
+\emph on 
+i.e.
+
+\emph default 
+ arrival rate must be less than 
+\begin_inset Formula \( \frac{1}{\bar{X}} \)
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Note: time under transmission is often considered proportional to packet
+ length.
+ For packet length of 
+\begin_inset Formula \( L \)
+\end_inset 
+
+ bits and bandwidth of 
+\begin_inset Formula \( C \)
+\end_inset 
+
+ bits per second transmission time is 
+\begin_inset Formula \( X=\frac{L}{C} \)
+\end_inset 
+
+.
+ 
+\layout Example*
+
+You are at a queue in a bar, and notice that the bar tender spends 10% of
+ her time cleaning between serving customers.
+ If the typical number of people waiting to be served is 
+\begin_inset Formula \( 3 \)
+\end_inset 
+
+, what is the ratio of time spent waiting to being served? 
+\layout Example*
+
+Information says 
+\begin_inset Formula \( \rho =0.9 \)
+\end_inset 
+
+ and 
+\begin_inset Formula \( \bar{N}_{Q}=3 \)
+\end_inset 
+
+.
+ 
+\begin_inset Formula \[
+\lambda =\frac{0.9}{\bar{X}}.\]
+
+\end_inset 
+
+
+\layout Example*
+
+
+\begin_inset Formula \[
+3=\lambda \bar{W}.\]
+
+\end_inset 
+
+
+\layout Example*
+
+Therefore 
+\begin_inset Formula \( \frac{\bar{W}}{\bar{X}}=3\frac{1}{3} \)
+\end_inset 
+
+.
+ 
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[neilbib]{lawrence_books}
+
+\end_inset 
+
+
+\the_end

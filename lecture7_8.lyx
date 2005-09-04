@@ -1,0 +1,673 @@
+#LyX 1.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 220
+\textclass amsart
+\begin_preamble
+\usepackage{epic,eepic}
+\end_preamble
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize a4paper
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+Network Performance Analysys --- Lecture 7&8
+\newline 
+
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $M$
+\end_inset 
+
+/1 Queues
+\layout Author
+
+Neil Lawrence
+\layout Date
+
+October 22, 2002
+\layout Section*
+
+
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $M$
+\end_inset 
+
+/1 Queue
+\layout Subsection*
+
+Global Balance
+\layout Standard
+
+We seek a stationary distribution by looking for global balance equations.
+ Global balance equations state that at equilibrium the frequency of transitions
+ out of state 
+\begin_inset Formula $k$
+\end_inset 
+
+ equals the frequency of transitions into 
+\begin_inset Formula $k$
+\end_inset 
+
+.
+ (pg 260-262 Bertsekas and Gallager).
+ 
+\layout Subsubsection*
+
+Discrete Time Markov Chain
+\layout Standard
+
+In its most general form a discrete time Markov process can be defined by
+ a transition probability matrix
+\begin_inset Formula \[
+\mathbf{P}=\left[\begin{array}{ccccc}
+ P_{11} & \cdots  & P_{i1} & \cdots  & P_{N1}\\
+ \vdots  & \ddots  &  &  & \vdots \\
+ P_{1j} &  & P_{ij} &  & P_{Nj}\\
+ \vdots  &  &  & \ddots  & \vdots \\
+ P_{1N} & \cdots  & P_{iN} & \cdots  & P_{NN}\end{array}
+\right]\]
+
+\end_inset 
+
+if the steady state probability of being in state 
+\begin_inset Formula $j$
+\end_inset 
+
+ is 
+\begin_inset Formula $P(j)$
+\end_inset 
+
+ then the global balance equations state
+\begin_inset Formula \[
+P\left(j\right)\sum _{i=0}^{\infty }P_{ji}=\sum _{i=0}^{\infty }P\left(i\right)P_{ij}\]
+
+\end_inset 
+
+which in English says the probability of leaving state 
+\begin_inset Formula $j$
+\end_inset 
+
+ is equal to the probability of arriving in state 
+\begin_inset Formula $j$
+\end_inset 
+
+.
+\layout Subsubsection*
+
+Continuous Time Markov Chain
+\layout Standard
+
+In continuous time Markov chains we are interested in rates of transfer
+ rather than probabilities if the rates of transfer between states are given
+ by a matrix whose elements 
+\begin_inset Formula $q_{ij}$
+\end_inset 
+
+ give the rate of transfer between state 
+\begin_inset Formula $i$
+\end_inset 
+
+ and state 
+\begin_inset Formula $j$
+\end_inset 
+
+, then the global balance equations give
+\begin_inset Formula \[
+P\left(j\right)\sum _{i=0}^{\infty }q_{ji}=\sum _{i=0}^{\infty }P\left(i\right)q_{ij}.\]
+
+\end_inset 
+
+
+\layout Subsection*
+
+Detailed Balance
+\layout Standard
+
+For the birth death processes we are considering transitions only occur
+ between state 
+\begin_inset Formula $k$
+\end_inset 
+
+ and 
+\begin_inset Formula $k+1$
+\end_inset 
+
+ or 
+\begin_inset Formula $k-1$
+\end_inset 
+
+.
+ This leads us to a special case of the global balance equations known as
+ the detailed balance equations which look at the flow between two states.
+ For the discrete case
+\begin_inset Formula \[
+P\left(k-1\right)P_{k-1,k}=P\left(k\right)P_{k,k-1}\]
+
+\end_inset 
+
+and for the continuous case 
+\begin_inset Formula \[
+P\left(k-1\right)q_{k-1,k}=P\left(k\right)q_{k,k-1}\]
+
+\end_inset 
+
+however in our notation the rate from 
+\begin_inset Formula $k$
+\end_inset 
+
+ to state 
+\begin_inset Formula $k-1$
+\end_inset 
+
+is given by 
+\begin_inset Formula $\mu _{k}$
+\end_inset 
+
+ and the rate from 
+\begin_inset Formula $k-1$
+\end_inset 
+
+ to 
+\begin_inset Formula $k$
+\end_inset 
+
+ is given by 
+\begin_inset Formula $\lambda _{k-1}$
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Include \input{./diagrams/boundaryFlow.eepic}
+
+\end_inset 
+
+
+\layout Caption
+
+Flow rates at a Boundary.
+\end_inset 
+
+
+\layout Standard
+
+Thus at steady state, flow from 
+\begin_inset Formula $k-1$
+\end_inset 
+
+ to 
+\begin_inset Formula $k$
+\end_inset 
+
+ = 
+\begin_inset Formula $\lambda _{k-1}P\left(k-1\right)$
+\end_inset 
+
+.
+ Flow from 
+\begin_inset Formula $k$
+\end_inset 
+
+ to 
+\begin_inset Formula $k-1$
+\end_inset 
+
+ is 
+\begin_inset Formula $\mu _{k}P\left(k-1\right)$
+\end_inset 
+
+.
+ For flow to be balanced we have 
+\begin_inset Formula \[
+\lambda _{k-1}P\left(k-1\right)=\mu _{k}P\left(k\right)\]
+
+\end_inset 
+
+ leading to 
+\begin_inset Formula \[
+P(k)=\frac{\lambda _{k-1}}{\mu _{k}}P\left(k-1\right)\]
+
+\end_inset 
+
+ 
+\layout Subsection*
+
+
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $1$
+\end_inset 
+
+
+\layout Standard
+
+For the M/M/1 we assume that arrivals occur as a Poisson process, and service
+ times are exponentialy distributed.
+ This implies a birth death process with 
+\begin_inset Formula $\lambda _{k}=\lambda _{k-1}=\lambda $
+\end_inset 
+
+, 
+\begin_inset Formula $\mu _{k}=\mu _{k-1}=\mu $
+\end_inset 
+
+ giving 
+\begin_inset Formula \[
+P(k)=\frac{\lambda }{\mu }P\left(k-1\right)\]
+
+\end_inset 
+
+ Thus 
+\begin_inset Formula \begin{eqnarray*}
+P(k) & = & \left(\frac{\lambda }{\mu }\right)^{k}\\
+P(0) & = & \rho ^{k}P(0),
+\end{eqnarray*}
+
+\end_inset 
+
+ where we have defined 
+\begin_inset Formula $\rho =\frac{\lambda }{\mu }$
+\end_inset 
+
+, known as the utilisation factor.
+ 
+\layout Subsection*
+
+Normalisation
+\layout Standard
+
+We can find 
+\begin_inset Formula $P(0)$
+\end_inset 
+
+ by using the normalisation condition 
+\begin_inset Formula $\sum _{k=0}^{\infty }P(k)=1$
+\end_inset 
+
+, therefore 
+\begin_inset Formula \[
+1=P(0)\sum _{k=0}^{\infty }\rho ^{k}\]
+
+\end_inset 
+
+ Giving 
+\begin_inset Formula \[
+P(0)=\frac{1}{\sum _{k=0}^{\infty }\rho ^{k}}\]
+
+\end_inset 
+
+ The series in the denominator converges if 
+\begin_inset Formula $\rho <1$
+\end_inset 
+
+ (when the birth rate is less than the death rate), 
+\begin_inset Formula \[
+\sum _{k=0}^{\infty }\rho ^{k}=\frac{1}{1-\rho },\]
+
+\end_inset 
+
+ meaning that 
+\begin_inset Formula \[
+P(0)=\left(1-\rho \right)\]
+
+\end_inset 
+
+ and allowing us to write down the 
+\emph on 
+steady state
+\emph default 
+ probabilities.
+ 
+\begin_inset Formula \[
+P(k)=\rho ^{k}\left(1-\rho \right)\]
+
+\end_inset 
+
+
+\layout Subsection*
+
+Design Issues
+\layout Standard
+
+For the design of networks we are interested in the average queue length
+ (a design issue) and the average delay (a quality of service issue).
+ 
+\layout Standard
+
+We can use the steady state probabilities, in combination with Little's
+ formula, to compute these quantities.
+ 
+\layout Standard
+
+Start by working out average number of customers in system (not the same
+ as average queue length).
+ 
+\layout LyX-Code
+
+
+\begin_inset Formula \begin{eqnarray*}
+\bar{N} & = & \left\langle k\right\rangle _{P\left(k\right)}\\
+ & = & \sum _{k=0}^{\infty }kP\left(k\right)\\
+ & = & \left(1-\rho \right)\sum _{k=0}^{\infty }k\rho ^{k}\\
+ & = & \rho \left(1-\rho \right)\sum _{k=0}^{\infty }k\rho ^{k-1}\\
+ & = & \rho \left(1-\rho \right)\frac{\partial \sum _{k=0}^{\infty }\rho ^{k}}{\partial \rho }\\
+ & = & \rho \left(1-\rho \right)\frac{\partial }{\partial \rho }\left[\frac{\rho }{1-\rho }\right]\\
+ & = & \rho \left(1-\rho \right)\frac{1}{\left(1-\rho \right)^{2}}\\
+ & = & \frac{\rho }{1-\rho }\\
+ & = & \frac{\lambda }{\mu -\lambda }
+\end{eqnarray*}
+
+\end_inset 
+
+
+\layout Subsection*
+
+M/M/1 Queue - contd
+\layout Standard
+
+For the design of networks we are interested in the 
+\layout Description
+
+average\SpecialChar ~
+queue\SpecialChar ~
+length a design issue 
+\layout Description
+
+average\SpecialChar ~
+delay a quality of service issue 
+\layout Standard
+
+Last time Demo, steady state probabilities, average queue length.
+ 
+\layout Standard
+
+Other info --- the variance of the number in the system can be found as
+ 
+\begin_inset Formula \begin{equation}
+\textrm{var}[k]=\left\langle k^{2}\right\rangle -\left\langle k\right\rangle ^{2}=\frac{\rho }{(1-\rho )^{2}}\end{equation}
+
+\end_inset 
+
+ Confirm in your own time.
+ 
+\layout Section
+
+Review of DemoDemo
+\layout Standard
+
+Show demo for high 
+\begin_inset Formula $\rho $
+\end_inset 
+
+ (
+\begin_inset Formula $\lambda =1.8$
+\end_inset 
+
+, 
+\begin_inset Formula $\mu =2$
+\end_inset 
+
+) and low 
+\begin_inset Formula $\rho $
+\end_inset 
+
+ (
+\begin_inset Formula $\lambda =1$
+\end_inset 
+
+, 
+\begin_inset Formula $\mu =2$
+\end_inset 
+
+) exhibiting high 
+\begin_inset Formula $N$
+\end_inset 
+
+ and 
+\begin_inset Formula $T$
+\end_inset 
+
+ and low 
+\begin_inset Formula $N$
+\end_inset 
+
+ and 
+\begin_inset Formula $T$
+\end_inset 
+
+.
+ Talk about how the probabilities converge to the steady-state values, mention
+ issues of heavy tails etc..
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide true
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Graphics FormatVersion 1
+	filename diagrams/rho_half_100_arrivals.eps
+	display color
+	size_type 1
+	width 2.3622in
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+ 
+\hfill 
+
+\begin_inset Graphics FormatVersion 1
+	filename ./diagrams/rho_half_1000_arrivals.eps
+	display color
+	size_type 1
+	width 2.3622in
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\layout Caption
+
+Left figure: steady state probabilities after the first 100 seconds for
+ 
+\begin_inset Formula $\rho =0.5$
+\end_inset 
+
+.
+ Right figue: steady state probabilities after the first 1000 seconds for
+ 
+\begin_inset Formula $\rho =0.5$
+\end_inset 
+
+.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide true
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Graphics FormatVersion 1
+	filename ./diagrams/rho_point95_100_arrivals.eps
+	display color
+	size_type 1
+	width 2.3622in
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+ 
+\hfill 
+
+\begin_inset Graphics FormatVersion 1
+	filename ./diagrams/rho_point95_1000_arrivals.eps
+	display color
+	size_type 1
+	width 2.3622in
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\layout Caption
+
+Left figure: steady state probabilities after the first 100 seconds for
+ 
+\begin_inset Formula $\rho =0.95$
+\end_inset 
+
+.
+ Right figue: steady state probabilities after the first 1000 seconds for
+ 
+\begin_inset Formula $\rho =0.95$
+\end_inset 
+
+.
+\end_inset 
+
+
+\layout Standard
+
+If 
+\begin_inset Formula $n_{k}$
+\end_inset 
+
+ is the number of counts for each state after 
+\begin_inset Formula $n$
+\end_inset 
+
+ time steps the approximation to the probability of each time step is 
+\begin_inset Formula $\frac{n_{k}}{n}$
+\end_inset 
+
+ where 
+\begin_inset Formula $\sum _{k=0}^{K}n_{k}=n$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Slide of steady state probabilities for 
+\begin_inset Formula $\rho $
+\end_inset 
+
+ close to 1.
+ 
+\layout Section
+
+Average Delay
+\layout Standard
+
+Little's formula tells us that 
+\begin_inset Formula $\bar{N}=\lambda \bar{T}$
+\end_inset 
+
+, where 
+\begin_inset Formula $\bar{T}$
+\end_inset 
+
+ is the average delay.
+ This gives us the average delay as 
+\begin_inset Formula \[
+T=\frac{1}{\mu -\lambda }\]
+
+\end_inset 
+
+ This is not the time spent in the queue however, this is the time spent
+ in the system which includes 
+\emph on 
+propagation delay
+\emph default 
+.
+ 
+\layout Subsection*
+
+Little's formula for Queue
+\layout Standard
+
+We can apply Little's formula again to find the number in the queue.
+ 
+\layout Standard
+
+The rate for this version is the same, but we are now interested in the
+ average number in the queue, 
+\begin_inset Formula $\bar{N}_{Q}$
+\end_inset 
+
+, the average waiting time, 
+\begin_inset Formula $\bar{W}$
+\end_inset 
+
+, is given by 
+\begin_inset Formula \[
+\bar{W}=\bar{T}-\frac{1}{\mu }=\frac{1}{\mu -\lambda }-\frac{1}{\mu }\]
+
+\end_inset 
+
+ The rate of arrivals will be the same, so the average number in the queue
+ will be 
+\begin_inset Formula \[
+\bar{N}_{Q}=\lambda \bar{W}=\frac{\rho ^{2}}{1-\rho }\]
+
+\end_inset 
+
+
+\layout Subsection*
+
+\layout LyX-Code
+
+\the_end

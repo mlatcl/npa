@@ -1,0 +1,26 @@
+\setlength{\unitlength}{0.0005in}
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+{\renewcommand{\dashlinestretch}{30}
+\begin{picture}(5882,3822)(-1000,-10)
+\put(2070,1812){\ellipse{900}{900}}
+\put(2070,1812){\makebox(0,0){+}}
+\path(-1000,3612)(270,3612)(1755,2127)
+\path(1648.934,2190.640)(1755.000,2127.000)(1691.360,2233.066)
+\path(-1000,12)(270,12)(1755,1497)
+\path(1691.360,1390.934)(1755.000,1497.000)(1648.934,1433.360)
+\path(-1000,1812)(1620,1812)
+\path(1500.000,1782.000)(1620.000,1812.000)(1500.000,1842.000)
+\path(2520,1812)(5370,1812)
+\path(5250.000,1782.000)(5370.000,1812.000)(5250.000,1842.000)
+\put(-400,3802){\makebox(0,0){$P(k|t, \lambda_1)$}}
+\put(-400,2002){\makebox(0,0){$P(k|t, \lambda_2)$}}
+\put(-400,202){\makebox(0,0){$P(k|t, \lambda_3)$}}
+\put(4000,2002){\makebox(0,0){$P(k|t, \lambda_1 + \lambda_2 + \lambda_3)$}}
+\end{picture}
+}

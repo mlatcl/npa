@@ -1,0 +1,2923 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass notes
+\begin_preamble
+
+\end_preamble
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\float_placement ht
+\paperfontsize default
+\spacing single 
+\papersize a4paper
+\paperpackage widemarginsa4
+\use_geometry 0
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+
+\layout Title
+
+Network Performance Analysis
+\layout Author
+
+Neil Lawrence
+\layout Date
+
+Autumn Term 2004-2005
+\layout Section*
+
+Lectures and Tutorials
+\layout Description
+
+Lectures Mondays 15:10 - 17:00 pm (St Georges LT1) 
+\layout Description
+
+Tutorials Tuesdays 16:10 pm - 17:00 pm (St Georges LT22).
+ First one Week 3 - Tonatiuh Pena Centeno is your teaching assistant.
+ 
+\layout Description
+
+Evaluation Exam.
+ 
+\layout Description
+
+Reading\SpecialChar ~
+Week The reading weeks will be week 11 & 12.
+\layout Section*
+
+Reading List
+\layout Standard
+
+The course is based primarily on 
+\begin_inset LatexCommand \cite{Bertsekas:data92}
+
+\end_inset 
+
+.
+ The relevant parts of the book are as follows.
+ 
+\layout Description
+
+Chapter\SpecialChar ~
+1 For background reading and review.
+ 
+\layout Description
+
+Chapter\SpecialChar ~
+3 Section 3.1 -- 3.5 For queueing models.
+ 
+\layout Description
+
+Chapter\SpecialChar ~
+4 In less detail: Section 4.1 -- 4.4, Section 4.5.2, 4.5.3.
+ 
+\layout Standard
+
+For additional background reading you may wish to consult some of the books
+ listed below, 
+\begin_inset LatexCommand \cite{Tanenbaum:computer96}
+
+\end_inset 
+
+ is the standard text for Introductory courses, but has little coverage
+ on queueing theory.
+ 
+\begin_inset LatexCommand \cite{Chan:performance00}
+
+\end_inset 
+
+ is an alternative text for details on queues.
+\layout Standard
+
+There is additional material on-line at the course web-site: 
+\begin_inset LatexCommand \url{http://www.dcs.shef.ac.uk/~neil/campus_only/com6131/}
+
+\end_inset 
+
+.
+\layout Chapter
+
+Introduction and Background
+\layout Section
+
+Introduction
+\layout Standard
+
+Welcome to Network Performance Analysis, 20 lectures and lab sessions on
+ queueing theory and network simulation.
+ In the first lectures we will try and place the theory that is to follow
+ in some context.
+ 
+\layout Standard
+
+Queueing theory dates back to the beginning of the 20th Century and the
+ pioneering work of 
+\series bold 
+Agner Krarup Erlang
+\series default 
+ (1878-1929) a Danish Telecoms Engineer who published the first paper on
+ queueing theory 
+\begin_inset LatexCommand \cite{Erlang:theory09}
+
+\end_inset 
+
+.
+ 
+\layout Standard
+
+In these first two lectures we will introduce the background for the material
+ which follows: the development of worldwide communication networks.
+ For further reading please check 
+\begin_inset LatexCommand \url{http://www.wikipedia.org}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \url{http://www.computerhistory.org}
+
+\end_inset 
+
+.
+\layout Section
+
+Early Milestones
+\layout Standard
+
+Perhaps the first major development in telecommunications was 
+\emph on 
+the telegraph
+\emph default 
+.
+ 
+\series bold 
+Samuel F.
+ B.
+ Morse
+\series default 
+ developed ideas for the electrical telegraph which exploited the relationship
+ between magnetism and electricity.
+ His first working system sent a short message from Baltimore to Washington
+ D.C.
+ (two cities that are conveniently close together!).
+ It was sent on May 24th, 1844: `What hath God wrought?'.
+ Ten years later 23,000 miles of wire across the United States.
+ 
+\layout Standard
+
+At the time, a key limitation of the telegraph was that it only provided
+ one channel per wire for communication.
+ Work in using a single wire for multiple channels (multiplexing) indirectly
+ led to the invention of 
+\emph on 
+the telephone 
+\emph default 
+which was patented by 
+\series bold 
+Alexander Graham Bell
+\series default 
+ (1847-1922) in March 7th, 1876.
+\layout Standard
+
+The development of a 
+\emph on 
+wireless telegraphy
+\emph default 
+ system by the Italian born engineer 
+\series bold 
+Guglielmo Marconi
+\series default 
+ (1874-1937), patented in July 1897, led to the foundation of the Wireless
+ Telegraph & Signal Company.
+ By December 1901 short wave transmission across the Atlantic between England
+ and Canada (over 2,100 miles).
+ 
+\layout Section
+
+Automated Telephone Networks
+\layout Standard
+
+Initially, telephone call routing was achieved manually.
+ Operators at the exchange used patch boards to make physical connections
+ between the callers.
+ The invention, by 
+\series bold 
+Almon Strowger
+\series default 
+ (1839-1902), of the 
+\emph on 
+automatic telephone exchange
+\emph default 
+ (through the Strowger switch) in 1891 brought about the need for a theoretical
+ study of the operation of telephone exchanges.
+ 
+\layout Standard
+
+The network of interconnected phone lines is now known as a 
+\emph on 
+circuit switching network
+\emph default 
+.
+ It is a network of lines which can be switched between two subscribers
+ to form a connection.
+ 
+\layout Standard
+
+Erlang's contribution was to provide theoretical studies of these networks
+ which allowed telephone exchanges to be designed to meet demand.
+\layout Section
+
+Information Theory
+\layout Standard
+
+As 'phone networks developed the need for underlying theory grew.
+ Networks transmit `information' but to discuss concepts such as channel
+ capacity with out a formal definition for information is meaningless.
+ 
+\series bold 
+Claude E.
+ Shannon
+\series default 
+ (1916-2001) wrote a seminal paper 
+\emph on 
+A Mathematical Theory of Communication
+\emph default 
+ 
+\begin_inset LatexCommand \cite{Shannon:info48}
+
+\end_inset 
+
+ which founded the field of information theory and revolutionized the way
+ we look at telecommunication.
+ This work enabled us to discuss concepts such as the capacity of a channel
+ with a well founded underlying mathematical theory.
+ We will not cover the ideas from this course here, but some students will
+ learn more about this in the module COM6862: 
+\emph on 
+Applications of Coding, Information and Learning Theories
+\emph default 
+.
+\layout Section
+
+Computer Networks
+\layout Standard
+
+Circuit switched networks were designed for telephone communication between
+ two correspondents.
+ These were the first worldwide communication networks.
+ However, by the early 1960s the need for a new type of communication network
+ was arising.
+ In circuit switching networks, a permanently open line connects the corresponde
+nts.
+ A fixed bandwidth is available to them for communication.
+ If they do not use this bandwidth it cannot be made available to other
+ network users.
+ In 
+\emph on 
+packet switching networks
+\emph default 
+ or store and forward switching networks the bandwidth is not reserved in
+ this way: it is distributed across the network user base.
+ The information a user sends (whether it be voice like in a phone conversation
+ and VoIP
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+Voice over IP, the protocol for having phone conversations over the internet.
+\end_inset 
+
+ or a file using FTP
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+FTP is the file transfer protocol, a much older protocol which dates back
+ to the formation of the ARPANET.
+\end_inset 
+
+) is split into packets which are routed across the network to the desired
+ destination.
+ If a required communication line is in use the packet is stored in a queue
+ until the line becomes available (thus the name store and forward switching).
+ The ideas behind packet switching networks were developed independently
+ by 
+\series bold 
+Paul Baran
+\series default 
+ (1926-) at the RAND corporation in the U.S.
+ and 
+\series bold 
+Donald Davies
+\series default 
+ (1924-2000) of the National Physical Laboratory in the U.K..
+ 
+\series bold 
+Leonard Kleinrock's
+\series default 
+ (1934-) 1962 thesis (later published as a book 
+\begin_inset LatexCommand \cite{Kleinrock:communication64}
+
+\end_inset 
+
+) provided a mathematical theory that underpinned these networks.
+\layout Standard
+
+
+\begin_inset Note
+collapsed false
+
+\layout Standard
+
+Student exercise: summarise differences between packet switched and circuit
+ switched networks.
+\end_inset 
+
+
+\layout Subsection
+
+ARPANET
+\layout Standard
+
+The Advanced Research Projects Agency (ARPA) funded a network that actually
+ implemented these ideas.
+ In 1969 the ARPA network connected four nodes at the University of California,
+ Los Angeles (UCSB); the Stanford Research Institute; the University of
+ California, Santa Barbara (UCSB) and the University of Utah.
+ By 1975 (see Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:arpaNet1975}
+
+\end_inset 
+
+) the network had expanded to cover most of the major universities (61 nodes)
+ in the U.S.
+ as well as a node at University College London in the U.K..
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/1975_net_map.gif
+	scale 75
+	keepAspectRatio
+
+\end_inset 
+
+
+\layout Caption
+
+The ARPANET in 1975, image courtesy of the Computer History Museum, 
+\begin_inset LatexCommand \url{http://www.computerhistory.org}
+
+\end_inset 
+
+.
+ Some abbreviations: UCB - University of California at Berkeley; UCSD -
+ University of California at San Diego; UCLA - University of California
+ at Los Angeles; PDP-XX - the PDP machines were early mini-computers made
+ by DEC with a price tag of around $20,000.
+ The machines starting with 360 and 370 are IBM mainframe machines.
+ Note the transatlantic link to London and the link over the Pacific to
+ Hawaii.
+ There are 61 nodes in total on this network.
+\begin_inset LatexCommand \label{cap:arpaNet1975}
+
+\end_inset 
+
+
+\end_inset 
+
+ARPANET was the first network for computer communications, it was restricted
+ to non-commercial use and funded by ARPA and NSF until 1990.
+ With the increase in communication, protocols became far more important.
+ Just as spellings of European languages became standardised after the introduct
+ion of the the printing press communication protocols also became more prevalent.
+ Telnet and file transfer protocols (FTP) were developed in 1971, but perhaps
+ the most important protocol developed at that time was the transmission
+ control protocol (TCP) developed in the mid-seventies by 
+\series bold 
+Vinton G.
+ Cerf
+\series default 
+ (1943-) and 
+\series bold 
+Robert E.
+ Kahn
+\series default 
+ (1938-) 
+\begin_inset LatexCommand \cite{Cerf:packet74}
+
+\end_inset 
+
+.
+ These protocols allow interconnection between networks thereby enabling
+ the formation of the internet.
+\layout Subsection
+
+The Internet 
+\layout Standard
+
+By 1977 Cerf and Kahn were able to send messages across networks including
+ the `Packet Radio net', SATNET and the ARPANET.
+ At a similar time Robert Metcalfe (1946-) was developing Ethernet at Xerox
+ PARC.
+ Ethernet was inspired by the ALOHA networks at the University of Hawaii.
+ Each machine in the ALOHA network communicated across the same frequency
+ radio channel.
+ This meant that if several communications where sent at the same time `collisio
+ns' could occur resulting in garbled messages.
+ A procedure for detecting and retransmitting the message was required.
+ For Ethernet networks a cable is the medium of transmission, rather than
+ a radio frequency.
+ Ethernet was supported by an alliance of companies: DEC, Intel and Xerox.
+ This led to Ethernet networks superseding other competing approaches such
+ as token ring, FDDI and ARCNET.
+ The cheap availability of Ethernet and computers in general contributed
+ to an explosion in the number of networks associated with the internet.
+\layout Standard
+
+By 1990 when ARPANET was formally shutdown it had grown to 300,000 hosts
+ and connected countries across the globe, it evolved into the NFSNet which
+ became the backbone of the internet.
+ In 1991 the internet was opened to commercial traffic, the commercialisation
+ of the internet in combination with the invention of the hyper-text markup
+ language (HTML) and universal resource locaters (URL) by 
+\series bold 
+Tim Berners-Lee
+\series default 
+ (1955-) formed the foundations of the modern internet.
+\layout Chapter
+
+Network Performance Analysis
+\layout Standard
+
+In this course we will introduce you to the tools for design and analysis
+ of telecommunications networks.
+ The core tools of this analysis are probability based: there is an assumption
+ that the traffic in the system is stochastic.
+ 
+\layout Standard
+
+The techniques we will cover are applicable beyond the design and analysis
+ of telecommunication networks.
+ Queues form in a variety of Information Technology scenarios: compute servers
+ dealing with submitted jobs and databases handling queries.
+ They also occur in our every day lives: cashpoints, supermarkets, registration,
+ telephone call centres 
+\emph on 
+etc
+\emph default 
+..
+ The principles we will cover apply in each of these situations.
+ 
+\layout Subsection
+
+Server Design
+\layout Standard
+
+As a simple example let's consider a database (perhaps MySQL).
+ We are constructing it from existing parts.
+ We have two CPU/motherboard systems and two separate disk systems, their
+ expected characteristics are shown in Table\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:SQLserver}
+
+\end_inset 
+
+.
+ Which should we match with which? Are we better off building one faster
+ system and one slower system? Or should we build two systems that have
+ a similar performance?
+\layout Standard
+
+
+\begin_inset Float table
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+vspace{6cm}
+\newline 
+
+\end_inset 
+
+
+\layout Caption
+
+Average times for a fictional database server for three different cases.
+\begin_inset LatexCommand \label{cap:SQLserver}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Subsection
+
+Practical Considerations
+\layout Standard
+
+For the moment, let's focus on, for example, network design.
+ Broadly speaking we need to focus on two interrelated areas in our analysis:
+\layout Enumerate
+
+
+\series bold 
+Design Issues
+\series default 
+: when building or buying a router how much memory should we allow for?
+ How much bandwidth do we need between routers? How much processing power
+ should the router have so that it may exploit that bandwidth effectively?
+\layout Enumerate
+
+
+\series bold 
+Quality Issues
+\series default 
+: what will be the average delay for end users given our network design?
+ What is the worst case delay? How likely is the system to drop packets?
+\layout Standard
+
+These are important because resources are finite, there are limitations
+ on the available bandwidth, processor speeds and memory.
+ 
+\layout Section
+
+Terminology
+\layout Standard
+
+Before we cover these issues in more detail, let's introduce some standard
+ terminology.
+ Typically a series of communications between two users/computers is known
+ as a 
+\emph on 
+session
+\emph default 
+.
+ The interactions themselves consist of 
+\emph on 
+messages
+\emph default 
+ each of which may be split into 
+\emph on 
+packets
+\emph default 
+.
+ 
+\layout Standard
+
+One example of a session would be a lecture.
+ The session consists of a mainly one-way communication between me, the
+ server, and you multiple clients.
+ In this case most of the information transfer is one-way with me sending
+ a series of messages, each involving a different subject: my identity,
+ the history of communication, this course's subject matter 
+\emph on 
+etc
+\emph default 
+.
+ and you acknowledging by your lively reactions.
+ Each message consists of a series of packets, in this case perhaps the
+ sentences that I speak.
+ The communication medium is the air between us.
+ 
+\layout Subsection
+
+Session Characteristics
+\layout Standard
+
+Depending on the nature of the information communicated between the client
+ and the server the characteristics of the session can vary dramatically.
+ An FTP session may involve a few packets from the client to request a file
+ followed by many packets from the server to send the file.
+ A VoIP session will involve large numbers of packets between two users
+ and no obvious client/server relationship.
+ An hypertext transfer protocol (HTTP) session may involve long periods
+ of inactivity as the client reads the pages they have downloaded.
+\layout Standard
+
+Each of the following six criteria/characteristics of a session may need
+ to be considered in the design of the protocol and the network.
+\layout Enumerate
+
+
+\series bold 
+Message arrival rate
+\series default 
+.
+ We can seek to model the arrivals as: 
+\emph on 
+Poisson arrivals
+\emph default 
+, 
+\emph on 
+deterministic arrivals
+\emph default 
+, 
+\emph on 
+uniform arrivals
+\emph default 
+ or as coming from a more general class of distributions.
+\layout Enumerate
+
+
+\series bold 
+Session holding time
+\series default 
+: The length of a session.
+\layout Enumerate
+
+
+\series bold 
+Expected message length
+\series default 
+ and 
+\series bold 
+length distribution
+\series default 
+, message lengths can be modeled as 
+\emph on 
+exponential distributions
+\emph default 
+,
+\emph on 
+ uniform length
+\emph default 
+.
+\layout Enumerate
+
+
+\series bold 
+Allowable delay
+\series default 
+ - acceptable expected delays vary.
+ The acceptable delay is low for VoIP and quite high for FTP.
+ 
+\layout Enumerate
+
+
+\series bold 
+Reliability
+\series default 
+ - FTP 
+\emph on 
+must
+\emph default 
+ be error free but VoIP can have some bit errors or packet loss without
+ major consequences.
+\layout Enumerate
+
+
+\series bold 
+Message and packet ordering
+\series default 
+ - Some sessions will require that the packets arrive in the order they
+ are sent: for example database requests.
+\layout Standard
+
+In this course we will be particularly interested in the first five of these
+ characteristics.
+ 
+\layout Section
+
+Network Types
+\layout Standard
+
+In our review of the history of communication networks, we have already
+ met two distinct kinds of network.
+ 
+\layout Description
+
+Circuit\SpecialChar ~
+Switching: used for telephone routing.
+ Guarantees an open `channel' between two peers.
+ 
+\layout Description
+
+Packet\SpecialChar ~
+Switching or Store and Forward Switching: used for data.
+ May operate via 
+\begin_deeper 
+\layout Description
+
+Dynamic\SpecialChar ~
+Routing Each packet of the message moves through the network independentl
+y.
+ 
+\layout Description
+
+Virtual\SpecialChar ~
+Circuit\SpecialChar ~
+Routing A fixed path through the network is provided for the
+ entire message.
+ 
+\end_deeper 
+\layout Subsection
+
+Characteristics of the Systems
+\layout Standard
+
+The character of the two approaches are quite different.
+\layout Subsubsection
+
+Circuit\SpecialChar ~
+Switching
+\layout Standard
+
+Circuit switching can be wasteful in terms of bandwidth.
+ The communicating nodes may not be using all the available bandwidth reserved
+ for them all of the time.
+ However, once connection is established, a guaranteed channel is provided
+ with a known communication delay associated with it.
+ 
+\layout Standard
+
+In a circuit switching network, the sum of rates for all sessions using
+ a link cannot exceed the total capacity of the link.
+ New sessions must be rejected when the link capacity is reached.
+ The approach is used for telephone networks where the session rate, 
+\begin_inset Formula $r_{s}$
+\end_inset 
+
+, is the same for each session.
+ Switching would be more complex for data networks and the nature of transmissio
+n would also mean that the links are inefficiently used.
+ 
+\layout Subsubsection
+
+Packet Switching
+\layout Standard
+
+Packet switching makes efficient use of bandwidth because, whilst communication
+ between two nodes may be idle for a period of time, packets from another
+ communication may be sent along the same line.
+ However because it is unknown 
+\emph on 
+a priori
+\emph default 
+ how much bandwidth will be available it is difficult to guarantee a maximum
+ delay.
+ 
+\layout Subsubsection
+
+Illustrative Example
+\layout Standard
+
+Alice and Bob both have telephone lines.
+ Alice decides to call Bob using the phone line.
+ Here the make use of a circuit switching network provided by their telephone
+ supplier (Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:circuitSwitch}
+
+\end_inset 
+
+).
+ The session dominates both phone lines preventing use by other `clients'.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+vspace{6cm}
+\newline 
+
+\end_inset 
+
+
+\layout Caption
+
+A simple circuit switching network connecting Alice and Bob.
+\begin_inset LatexCommand \label{cap:circuitSwitch}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+Alternatively Alice and Bob use MSN messenger to communicate (either via
+ voice or typing), and Bob's friend Carol shares his fixed land line connection
+ to access David's web server (Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:packetSwitch}
+
+\end_inset 
+
+).
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+vspace{6cm}
+\newline 
+
+\end_inset 
+
+
+\layout Caption
+
+A simple packet switching network connecting Alice, Bob, Carol and David.
+\begin_inset LatexCommand \label{cap:packetSwitch}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+Now the fixed land line is managed by some form of router in the local area
+ network in Bob's house.
+ The advantage is that Bob and Carol may both use the land line for communicatio
+n the disadvantage is that if the land line becomes congested 
+\emph on 
+e.g.
+
+\emph default 
+ as a result of Carol downloading a large file from David's web server,
+ Bob will notice a variable delay (delays also occur with circuit switching
+ but they are known as transmission delays and should be of fixed length)
+ in his communication with Alice due to queueing occurring at his Internet
+ Service Provider and in his LAN's router.
+ This can be particularly irritating for voice conversation, as anyone who
+ has used MSN messenger for voice communication will attest.
+ 
+\layout Section
+
+The Layered Model
+\layout Standard
+
+We now review the layered model for TCP/IP networks, you are referred to
+ Tanenbaum (4th Edition pg.
+ 41) for more details.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+vspace{6cm}
+\newline 
+
+\end_inset 
+
+
+\layout Caption
+
+A schematic of the Layered model for TCP/IP networks.
+\end_inset 
+
+
+\layout Standard
+
+The traditional OSI Reference model contains seven layers which reflect
+ in a network how communication occurs at different layers using different
+ protocols.
+ By way of reviewing the TCP model we introduce a layered representation
+ of the TCP/IP model which underlies the internet.
+ As we mentioned above TCP/IP was introduced in 1974 as a standard which
+ interconnects between networks.
+ This is achieved through the Internet Protocol.
+ The TCP/IP reference model is much more compact and will serve as a useful
+ reminder.
+\layout Description
+
+Application\SpecialChar ~
+Layer This layer represents the interface to the user and consists
+ of applications which are commonly used by users.
+ As well as the examples in the diagram packetised voice communications,
+ electronic news, HTTP and its secure variants etc.
+\layout Description
+
+The\SpecialChar ~
+Transport\SpecialChar ~
+Layer The layer above the internet layer is known as the transport
+ layer and contains two protocols.
+ The Transmission Control Protocol (TCP) allows applications to communicate
+ in a lossless manner, 
+\emph on 
+i.e.
+ 
+\emph default 
+any packets which are dropped are retransmitted.
+ It also implements flow control in an effort to prevent network congestion
+ and reorders arrivals at the destination.
+ The User Datagram Protocol (UDP) is an unreliable protocol for applications
+ which wish to provide their own sequencing and flow control (e.g.
+ voice transmission or video).
+\layout Description
+
+The\SpecialChar ~
+Internet\SpecialChar ~
+Layer The key to the success of TCP/IP is the Internet Protocol.
+ Its objective is to allow the interfacing of different networks by allowing
+ hosts to place packets on any network and enabling them to travel to any
+ other network.
+ 
+\layout Section
+
+Communication Media
+\layout Standard
+
+Circuit switching networks may share a communication line but this is done
+ through multiplexing where a fixed proportion of the communication channel
+ is dedicated to the session.
+ The multiplexing may be time division multiplexing or frequency division
+ multiplexing.
+ The former splits the communication channel into time slots and allocates
+ each to a different session, the latter uses different portions of the
+ frequency bandwidth for each channel.
+ Both are not 100% efficient (time multiplexing requires a small amount
+ of time for switching to occur, and frequency division multiplexing requires
+ a small `buffer' band of frequencies between each session.
+ Packet switching networks dedicate communication bandwidth to each channel
+ as required.
+ In a simple first in first out system, packets arrive and, if the queue
+ is empty, they are transmitted.
+ Otherwise they are stored and await their turn for transmission.
+ Thus there are two delays: a queueing delay and a transmission delay.
+ The queueing delay is variable, whilst the transmission delay will be fixed
+ and given by the packet length multiplied by the transmission rate of the
+ channel.
+\layout Standard
+
+Radio transmission is a communication medium which dates back to Marconi.
+ Transmission may occur across several bandwidths.
+ Traditionally radio broadcast occurs through frequency division multiplexing.
+ Radio communication involves taking turns to communicate over the channel
+ (half-duplex).
+ The most basic wireless packet networks (
+\emph on 
+e.g.
+ 
+\emph default 
+ALOHA) used one channel to broadcast their packets over.
+ Delays may occur due to collisions.
+ A collision is when two systems both attempt to communicate on the same
+ channel at the same time.
+ Both packets are then lost and such losses need to be detected.
+\layout Standard
+
+Similar principles occur for 
+\emph on 
+e.g.
+
+\emph default 
+ thinwire Ethernet, in this case the communication medium is a coaxial cable.
+ 
+\layout Section
+
+The Road Ahead
+\layout Description
+
+Probability\SpecialChar ~
+Review Review of probability theory.
+ 
+\layout Description
+
+Simple\SpecialChar ~
+Queuing\SpecialChar ~
+models Simple models of queues based on probability theory.
+ Little's Law, M/M/1 queue, M/M/
+\begin_inset Formula $\infty$
+\end_inset 
+
+, M/M/m, M/M/m/m and M/G/1.
+ 
+\layout Description
+
+Simulation Simulation of queueing systems.
+\layout Chapter
+
+Probability Review
+\layout Standard
+
+We will now review the basic concepts of probability theory, probability
+ theory will provide the underlying structure upon which we will base our
+ models.
+ We will make use of a simple graphical definition to describe what we mean
+ by probability.
+ For the purposes of this discussion, we are interested in trials which
+ result in two random variables, 
+\begin_inset Formula $X$
+\end_inset 
+
+ and 
+\begin_inset Formula $Y$
+\end_inset 
+
+, each of which has an `outcome' denoted by 
+\begin_inset Formula $x$
+\end_inset 
+
+ or 
+\begin_inset Formula $y$
+\end_inset 
+
+.
+ We summarise the notation and terminology for these distributions in Table\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:basicProbabilityDistributions}
+
+\end_inset 
+
+.
+\layout Standard
+\align center 
+
+\begin_inset Float table
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+vspace{6cm}
+\newline 
+
+\end_inset 
+
+
+\layout Caption
+
+The different basic probability distributions.
+\begin_inset LatexCommand \label{cap:basicProbabilityDistributions}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Section
+
+A Graphical Definition of Probability
+\layout Standard
+
+A solid understanding of the fundamentals of probability will be one of
+ the keys to understanding the material in course.
+ We will therefore quickly review what each of these distributions means
+ with a simple graphical demonstration.
+ In Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:aJointDistribution}
+
+\end_inset 
+
+ we summarise the outcomes of a series of 
+\begin_inset Formula $N$
+\end_inset 
+
+ trials in a two dimensional graph.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+vspace{8cm}
+\newline 
+
+\end_inset 
+
+
+\layout Caption
+
+Representation of joint and conditional probabilities.
+\begin_inset LatexCommand \label{cap:aJointDistribution}
+
+\end_inset 
+
+ In this figure the crosses are the outcomes of the trials.
+ They live in a discrete space of boxes given by the grid.
+ The two events, 
+\begin_inset Formula $X$
+\end_inset 
+
+ and 
+\begin_inset Formula $Y$
+\end_inset 
+
+ are shown across the two axes of the plot.There six possible outcomes for
+ event 
+\begin_inset Formula $X$
+\end_inset 
+
+, 
+\begin_inset Formula $X=1\dots6$
+\end_inset 
+
+, and five possible outcomes for event 
+\begin_inset Formula $Y$
+\end_inset 
+
+, 
+\begin_inset Formula $Y=1\dots5$
+\end_inset 
+
+.
+ The small 
+\begin_inset Formula $n$
+\end_inset 
+
+s in the top left hand corner of each thick lined box denote how many crosses
+ fall inside that box.
+\end_inset 
+
+
+\layout Standard
+
+For Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:aJointDistribution}
+
+\end_inset 
+
+ the outcome of a trial is plotted on a two dimensional graph.
+ We have drawn three further boxes on the graph (solid, dotted and dashed
+ lines), each box is defined by the outcomes it covers.
+ We have denoted the number of events in each box with a small 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+ Probabilities are defined in the limit as we take the number of trials
+ 
+\begin_inset Formula $N$
+\end_inset 
+
+ to infinity.
+\layout Standard
+
+
+\begin_inset Float table
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+vspace{7cm}
+\newline 
+
+\end_inset 
+
+
+\layout Caption
+
+Definition of probability distributions from Table\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:basicProbabilityDistributions}
+
+\end_inset 
+
+ in terms of the system depicted in Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:aJointDistribution}
+
+\end_inset 
+
+.
+\end_inset 
+
+
+\layout Subsection
+
+Notational Details
+\layout Standard
+
+Strictly speaking, when we write probability distributions we should write
+ them out in full (
+\emph on 
+e.g.
+
+\emph default 
+ for the joint distribution, 
+\begin_inset Formula $P\left(X=x,Y=y\right)$
+\end_inset 
+
+).
+ However, in practice, we often use a shorthand notation: 
+\begin_inset Formula $P\left(x,y\right)$
+\end_inset 
+
+.
+ This is convenient, but it can lead to confusion.
+ It looks very much like we might write a multivariate function, 
+\emph on 
+e.g.
+ 
+\emph default 
+
+\begin_inset Formula $f\left(x,y\right)=\frac{x}{y}$
+\end_inset 
+
+.
+ For a multivariate function though, 
+\begin_inset Formula $f\left(x,y\right)\neq f\left(y,x\right)$
+\end_inset 
+
+ in general.
+ However, for our probability shorthand 
+\begin_inset Formula $P\left(x,y\right)=P\left(y,x\right)$
+\end_inset 
+
+ because 
+\begin_inset Formula $P\left(X=x,Y=y\right)=P\left(Y=y,X=x\right)$
+\end_inset 
+
+.
+\layout Standard
+
+We have denoted the probability distribution with a capital 
+\begin_inset Formula $P$
+\end_inset 
+
+.
+ In 
+\emph on 
+these notes
+\emph default 
+ we will use capital 
+\begin_inset Formula $P$
+\end_inset 
+
+s consistently to denote discrete distributions.
+ Later when we come on to continuous probability density functions, we will
+ turn to small letters.
+\layout Subsection
+
+Probability Rules
+\layout Standard
+
+From the simple definitions we've given above we can derive some straightforward
+ rules associated with manipulating probability distributions.
+ 
+\layout Subsubsection
+
+Normalisation
+\layout Standard
+
+The first point to note is that probability distributions are normalised,
+ the sum over the distribution across each of its possible value is 1.
+ This is clear from the fact that 
+\begin_inset Formula $\sum_{x}n_{X=x}=N$
+\end_inset 
+
+, which gives 
+\begin_inset Formula \[
+\sum_{x}P\left(x\right)=\lim_{N\rightarrow\infty}\frac{\sum_{x}n_{X=x}}{N}=\lim_{N\rightarrow\infty}\frac{N}{N}=1.\]
+
+\end_inset 
+
+A similar result can be derived for the marginal and conditional distributions.
+\layout Subsubsection
+
+The Sum Rule 
+\layout Standard
+
+The sum rule describes how we can obtain a marginal distribution from the
+ joint distribution.
+ It leads to the terminology marginal distribution because one of the variables
+ in the joint distribution is marginalised, 
+\emph on 
+i.e.
+
+\emph default 
+ it is removed from the distribution (you can think of it being written
+ in the margin).
+ The marginal probability 
+\begin_inset Formula $P\left(y\right)$
+\end_inset 
+
+ is given by 
+\begin_inset Formula $\lim_{N\rightarrow\infty}\frac{n_{Y=y}}{N}$
+\end_inset 
+
+ and the joint distribution 
+\begin_inset Formula $P\left(x,y\right)$
+\end_inset 
+
+ is given by 
+\begin_inset Formula $\lim_{N\rightarrow\infty}\frac{n_{X=x,Y=y}}{N}$
+\end_inset 
+
+.
+ Now we note (using Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:aJointDistribution}
+
+\end_inset 
+
+) that 
+\begin_inset Formula $n_{Y=y}=\sum_{x}n_{X=x,Y=y}$
+\end_inset 
+
+, where the sum is over all possible values of 
+\begin_inset Formula $X$
+\end_inset 
+
+.
+ We therefore find that
+\begin_inset Formula \[
+\lim_{N\rightarrow\infty}\frac{n_{Y=y}}{N}=\lim_{N\rightarrow\infty}\sum_{x}\frac{n_{X=x,Y=y}}{N},\]
+
+\end_inset 
+
+or in other words
+\begin_inset Formula \[
+P\left(y\right)=\sum_{x}P\left(x,y\right).\]
+
+\end_inset 
+
+This is known as the sum rule of probability.
+ 
+\layout Subsubsection
+
+The Product Rule
+\layout Standard
+
+The product rule describes how we obtain a joint distribution from a conditional
+ distribution and a marginal.
+ Recall that the conditional distribution 
+\begin_inset Formula $P\left(x|y\right)$
+\end_inset 
+
+ is given by 
+\begin_inset Formula $\lim_{N\rightarrow\infty}\frac{n_{X=x,Y=y}}{n_{Y=y}}$
+\end_inset 
+
+.
+ This can be related to the joint distribution over 
+\begin_inset Formula $x$
+\end_inset 
+
+ and 
+\begin_inset Formula $y$
+\end_inset 
+
+ and the marginal distribution over 
+\begin_inset Formula $x$
+\end_inset 
+
+ using the fact that 
+\begin_inset Formula $P\left(x,y\right)$
+\end_inset 
+
+ is given by 
+\begin_inset Formula \[
+\lim_{N\rightarrow\infty}\frac{n_{X=x,Y=y}}{N}=\lim_{N\rightarrow\infty}\frac{n_{X=x,Y=y}}{n_{Y=y}}\frac{n_{Y=y}}{N}\]
+
+\end_inset 
+
+or in other words
+\begin_inset Formula \[
+P\left(x,y\right)=P\left(x|y\right)P\left(y\right).\]
+
+\end_inset 
+
+This is known as the product rule of probability.
+\layout Subsubsection
+
+Bayes' Rule
+\layout Standard
+
+Less relevant to our work on queueing theory, but worth pointing out since
+ we've come so far is Bayes' Rule or Bayes' Theorem.
+ Since the joint distribution is commutative in its arguments we have, from
+ the product rule,
+\begin_inset Formula \[
+P\left(x,y\right)=P\left(y,x\right)=P\left(y|x\right)P\left(x\right),\]
+
+\end_inset 
+
+ it naturally follows that we can write
+\begin_inset Formula \[
+P\left(x|y\right)P\left(y\right)=P\left(y|x\right)P\left(x\right)\]
+
+\end_inset 
+
+which leads to Bayes' Rule, which relates the two conditional probabilities
+ associated with the variables:
+\begin_inset Formula \[
+P\left(x|y\right)=\frac{P\left(y|x\right)P\left(x\right)}{P\left(y\right)}.\]
+
+\end_inset 
+
+
+\layout Section
+
+Expectations
+\layout Standard
+
+A probabilistic model of a system may summarise our beliefs about the system,
+ but to develop further understandings of the model often want to summarise
+ the model by its expectations.
+\layout Standard
+
+The expected value of a function, 
+\begin_inset Formula $f\left(x\right)$
+\end_inset 
+
+, under a probability distribution 
+\begin_inset Formula $P\left(x\right)$
+\end_inset 
+
+ is 
+\begin_inset Formula \[
+\left\langle f\left(x\right)\right\rangle _{P\left(x\right)}=\sum_{x}P\left(x\right)f\left(x\right).\]
+
+\end_inset 
+
+Here we have introduced a particular notation for the expectation, you will
+ also see expectations written in the form 
+\begin_inset Formula $E\left\{ f\left(x\right)\right\} $
+\end_inset 
+
+.
+ 
+\layout Subsection
+
+Example
+\layout Standard
+
+Suppose that 
+\begin_inset Formula $X$
+\end_inset 
+
+ can be 
+\begin_inset Formula $0,\,1,$
+\end_inset 
+
+ or 
+\begin_inset Formula $2$
+\end_inset 
+
+ and 
+\begin_inset Formula $f\left(x\right)=x^{2}$
+\end_inset 
+
+.
+ We define the distribution over 
+\begin_inset Formula $x$
+\end_inset 
+
+ in Table\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:simpleXDistribution}
+
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float table
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+vspace{6cm}
+\newline 
+
+\end_inset 
+
+
+\layout Caption
+
+Distribution over 
+\begin_inset Formula $x$
+\end_inset 
+
+ and associated values of 
+\begin_inset Formula $f\left(x\right)$
+\end_inset 
+
+.
+\begin_inset LatexCommand \label{cap:simpleXDistribution}
+
+\end_inset 
+
+
+\end_inset 
+
+ From the definition of an expectation we gave we can compute 
+\begin_inset Formula \[
+\left\langle f\left(x\right)\right\rangle =\left\langle x^{2}\right\rangle =0\times0.2+1\times0.5+4\times0.3=1.7,\]
+
+\end_inset 
+
+where we have dropped the subscript 
+\begin_inset Formula $P\left(x\right)$
+\end_inset 
+
+, as we consider it clear from the context what the expectation is considered
+ to be over.
+ We can also see that the expectation of 
+\begin_inset Formula $x$
+\end_inset 
+
+ under this distribution is
+\begin_inset Formula \[
+\left\langle f\left(x\right)\right\rangle =\left\langle x\right\rangle =0\times0.2+1\times0.5+2\times0.3=1.1.\]
+
+\end_inset 
+
+The expectation of 
+\begin_inset Formula $x$
+\end_inset 
+
+ under a distribution is known as the first moment of the distribution or
+ its 
+\emph on 
+mean
+\emph default 
+.
+ The mean can be thought of as the `centre of probability mass' of the distribut
+ion.
+ The expectation of 
+\begin_inset Formula $x^{2}$
+\end_inset 
+
+ is known as the second moment, it is normally used in combination with
+ the mean to obtain the variance.
+ 
+\layout Subsubsection
+
+Variance
+\layout Standard
+
+The variance of the distribution is given by the difference between the
+ second moment and the square of the mean.
+ It is often denoted by 
+\begin_inset Formula $\sigma^{2}$
+\end_inset 
+
+.
+\begin_inset Formula \[
+\sigma^{2}=\left\langle x^{2}\right\rangle -\left\langle x\right\rangle ^{2}.\]
+
+\end_inset 
+
+It is always positive and it expresses the degree of variation around the
+ mean value.
+ Its square root is known as the standard deviation
+\begin_inset Formula \[
+\sigma=\sqrt{\left\langle x^{2}\right\rangle -\left\langle x\right\rangle ^{2}},\]
+
+\end_inset 
+
+for our example above the variance is given by
+\begin_inset Formula \[
+1.7-\left(1.1\right)^{2}=0.49,\]
+
+\end_inset 
+
+the standard deviation is therefore
+\begin_inset Formula \[
+\sqrt{1.7-\left(1.1\right)^{2}}=0.7.\]
+
+\end_inset 
+
+
+\layout Section
+
+Distributions as Functions
+\layout Standard
+
+In the above example we defined a probability distribution by a simple table,
+ making sure that the values summed to 1.
+ A more compact way to represent a distribution is in terms of a function.
+ As an example of this we will consider the Poisson distribution.
+ 
+\layout Subsection
+
+The Poisson Distribution
+\layout Standard
+
+The Poisson distribution is defined over the space of all non-negative integers.
+ Since this set is countably infinite in size it is impossible to write
+ all the numbers down that would define the distribution.
+ The Poisson distribution is therefore defined as
+\begin_inset Formula \begin{equation}
+P\left(n|\lambda\right)=\frac{\lambda^{n}}{n!}\exp\left(-\lambda\right).\label{eq:poissonDist}\end{equation}
+
+\end_inset 
+
+where 
+\begin_inset Formula $n$
+\end_inset 
+
+ is any integer from 
+\begin_inset Formula $0$
+\end_inset 
+
+ to 
+\begin_inset Formula $\infty$
+\end_inset 
+
+, and 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ is a parameter of the distribution.
+ In these notes we place 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ on the right of the conditioning bar to indicate that it is a parameter.
+ Note that in 
+\begin_inset LatexCommand \cite{Bertsekas:data92}
+
+\end_inset 
+
+ a slightly different notation is used.
+ To work out the probability of a particular value, 
+\begin_inset Formula $n$
+\end_inset 
+
+, for the a Poisson distribution with a particular parameter, 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+, we simply substitute the parameter and the value 
+\begin_inset Formula $n$
+\end_inset 
+
+ into (
+\begin_inset LatexCommand \ref{eq:poissonDist}
+
+\end_inset 
+
+).
+ For example, with 
+\begin_inset Formula $\lambda=2$
+\end_inset 
+
+ we can start filling a table (Table 
+\begin_inset LatexCommand \ref{cap:poissonTable}
+
+\end_inset 
+
+).
+\begin_inset Float table
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+vspace{6cm}
+\newline 
+
+\end_inset 
+
+
+\layout Caption
+
+Some values for the Poisson distribution.
+\begin_inset LatexCommand \label{cap:poissonTable}
+
+\end_inset 
+
+
+\end_inset 
+
+ 
+\layout Chapter
+
+Random Processes
+\layout Description
+
+A\SpecialChar ~
+random\SpecialChar ~
+process may be defined as a 
+\emph on 
+random time function
+\emph default 
+ which, for a particular value of time, is a random quantity 
+\begin_inset LatexCommand \cite{Chan:performance00}
+
+\end_inset 
+
+.
+ 
+\layout Section
+
+Poisson Process
+\layout Standard
+
+The Poisson process gives probabilities of a number of arrivals, 
+\begin_inset Formula $k$
+\end_inset 
+
+, as a function of time, 
+\begin_inset Formula $t$
+\end_inset 
+
+, given a `rate', 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+
+\begin_inset Formula \[
+P(k|t,\lambda)=\frac{(\lambda t)^{k}}{k!}e^{-\lambda t}.\]
+
+\end_inset 
+
+
+\layout Standard
+
+It is a counting process.
+ First published by Sim\i \'{e}
+on Denis Poisson in 1837.
+ 
+\layout Subsection
+
+Properties
+\layout Subsubsection
+
+Mean and Variance
+\layout Standard
+
+The 
+\emph on 
+mean
+\emph default 
+ and 
+\emph on 
+variance
+\emph default 
+ of the process.
+ 
+\layout Standard
+
+The mean of the Poisson process.
+ 
+\begin_inset Formula \[
+\left\langle k\right\rangle _{P(k|t,\lambda)}=\sum_{k=0}^{\infty}k\frac{(\lambda t)^{k}}{k!}e^{-\lambda t}\]
+
+\end_inset 
+
+ Pull out 
+\begin_inset Formula $\lambda te^{-\lambda t}$
+\end_inset 
+
+ and cancel 
+\begin_inset Formula $\frac{k}{k(k-1)!}$
+\end_inset 
+
+, remove first term (
+\begin_inset Formula $k=0$
+\end_inset 
+
+) which is zero.
+ 
+\begin_inset Formula \[
+=e^{-\lambda t}\lambda t\sum_{k=1}^{\infty}\frac{(\lambda t)^{(k-1)}}{(k-1)!}\]
+
+\end_inset 
+
+ substitute 
+\begin_inset Formula $m=k-1$
+\end_inset 
+
+.
+ 
+\begin_inset Formula \[
+=e^{-\lambda t}\lambda t\sum_{m=0}^{\infty}\frac{(\lambda t)^{m}}{m!}\]
+
+\end_inset 
+
+ Because 
+\begin_inset Formula $\sum_{m=0}^{\infty}\frac{(\lambda t)^{m}}{m!}=e^{\lambda t}$
+\end_inset 
+
+ we may write 
+\begin_inset Formula \[
+=\lambda t\]
+
+\end_inset 
+
+
+\layout Standard
+
+The variance of a Poisson is also 
+\begin_inset Formula $\lambda t$
+\end_inset 
+
+ --- see Tutorial 1.
+ 
+\layout Subsubsection
+
+Superposition of Poissons
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename ./diagrams/sumPoisson.eps
+
+\end_inset 
+
+
+\layout Caption
+
+If independent Poisson processes form a single traffic flow the rate of
+ the overall process is the sum of the separate processes.
+\end_inset 
+
+
+\layout Subsubsection
+
+Decomposition of Poisson Flow
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+centering 
+\end_inset 
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename ./diagrams/decomposePoisson.eps
+
+\end_inset 
+
+
+\layout Caption
+
+If a single Poisson process with rate 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ is switched to different channels, with each arrival being switched to
+ channel 
+\begin_inset Formula $c$
+\end_inset 
+
+ with probability 
+\begin_inset Formula $P(c)=\lambda_{c}/\lambda$
+\end_inset 
+
+, each channel will be a Poisson process with rate 
+\begin_inset Formula $\lambda_{c}$
+\end_inset 
+
+.
+\end_inset 
+
+
+\layout Subsubsection
+
+Interarrival Time Distribution
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+centering 
+\end_inset 
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename ./diagrams/interArrivals.eps
+
+\end_inset 
+
+
+\layout Caption
+
+Given a set of Poisson arrivals at times 
+\begin_inset Formula $T_{1}\dots T_{n}$
+\end_inset 
+
+, the interarrival times are defined as 
+\begin_inset Formula $X_{i}=T_{i}-T_{i-1},i=1\dots n$
+\end_inset 
+
+.
+ What can we say about the distribution of these times (which are also random
+ variables)?
+\end_inset 
+
+
+\layout Standard
+
+The distribution dictating these arrival times will be a p.d.f.
+ as these times are continuous variables.
+ 
+\layout Standard
+
+The following events are equivalent: 
+\begin_inset Formula \[
+(X_{i}>t)\equiv(T_{i}-T_{i-1}>t)\equiv(T_{i}>T_{i-1}+t)\]
+
+\end_inset 
+
+ The event 
+\begin_inset Formula $(T_{i}>T_{i-1}+t|T_{i-1}=t_{i-1})$
+\end_inset 
+
+ occurs if and only if the value of 
+\begin_inset Formula $N(t)$
+\end_inset 
+
+ does not change during the interval 
+\begin_inset Formula $(t_{i-1},t_{i-1}+t)$
+\end_inset 
+
+.
+ So the following events are equivalent 
+\begin_inset Formula \[
+X_{i}>t|T_{i-1}=t_{i-1}\equiv N(t_{i-1}+t)-N(t_{i-1})=0\]
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Formula \begin{eqnarray}
+P(X_{i}>t|T_{i-1}=t_{i-1}) & = & P(N(t_{i-1}+t)-N(t_{i-1}=0))\nonumber \\
+ & = & P(N(t)=0))\end{eqnarray}
+
+\end_inset 
+
+
+\layout Standard
+
+From Poisson process 
+\begin_inset Formula $P(N(t)=0)=e^{-\lambda t}$
+\end_inset 
+
+.
+ Which means that the c.d.f.
+ is 
+\begin_inset Formula $P(X_{i}\leq t)=1-e^{-\lambda t}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+To obtain the pdf we differentiate giving 
+\begin_inset Formula $p(X_{i})=\lambda e^{-\lambda X_{i}}$
+\end_inset 
+
+.
+ 
+\layout Section
+
+Mean and Variance of the Exponential Distribution
+\layout Standard
+
+Recall the exponential distribution 
+\begin_inset Formula \[
+p(x)=\lambda e^{-\lambda x}\]
+
+\end_inset 
+
+ The mean of an exponential can be found to be, 
+\begin_inset Formula \[
+\left\langle x\right\rangle _{p(x)}=\frac{1}{\lambda}\]
+
+\end_inset 
+
+ and the variance is 
+\begin_inset Formula \[
+\left\langle x^{2}\right\rangle _{p(x)}-\left\langle x\right\rangle _{p(x)}^{2}=\frac{1}{\lambda^{2}}.\]
+
+\end_inset 
+
+ These are easily confirmed --- try doing them in your free time! 
+\layout Chapter
+
+Discrete Markov Processes
+\layout Standard
+
+Perhaps mention discrete time vs discrete state??
+\layout Standard
+
+Consider a discrete representation of time 
+\begin_inset Formula $t=0,1,2...$
+\end_inset 
+
+.
+ A state variable 
+\begin_inset Formula $N$
+\end_inset 
+
+ changes with time, 
+\begin_inset Formula $N(0),N(1),N(2)...$
+\end_inset 
+
+.
+ If this state variable exhibits the Markov property its value at time 
+\begin_inset Formula $t$
+\end_inset 
+
+ is dependent only on its value at time 
+\begin_inset Formula $t-1$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Monopoly Board 
+\layout Standard
+
+There are forty squares.
+ 
+\layout Standard
+
+Let us take the state, 
+\begin_inset Formula $N(t)$
+\end_inset 
+
+ to be the number of the square you are on 
+\begin_inset Formula $+40$
+\end_inset 
+
+ for every time you have reached GO.
+ For example if 
+\begin_inset Formula $N(t)=80$
+\end_inset 
+
+ You have circled the board twice and are on GO or if 
+\begin_inset Formula $N(t)=45$
+\end_inset 
+
+ you have been around once and are at King's Cross.
+ 
+\layout Standard
+
+
+\begin_inset Formula $t$
+\end_inset 
+
+ is now associated with the number of player `turns'.
+ 
+\layout Standard
+
+In Monopoly you move your counter through rolling two six sided dice.
+ Your state after turn 
+\begin_inset Formula $t$
+\end_inset 
+
+, 
+\begin_inset Formula $N(t)$
+\end_inset 
+
+ depends only on your die role, 
+\begin_inset Formula $d(t)$
+\end_inset 
+
+, and your state before turn 
+\begin_inset Formula $t$
+\end_inset 
+
+, 
+\begin_inset Formula $N(t-1)$
+\end_inset 
+
+.
+ 
+\begin_inset Formula \[
+N(t)=N(t-1)+d(t)\]
+
+\end_inset 
+
+ Thus monopoly exhibits the Markov property.
+ 
+\layout Subsection
+
+State Diagrams
+\layout Subsubsection
+
+Coin Monopoly
+\layout Standard
+
+Consider a coin version of Monopoly, now instead of 
+\begin_inset Formula $d(t)$
+\end_inset 
+
+ being the sum of two die roles, we take 
+\begin_inset Formula $d(t)=0$
+\end_inset 
+
+ if a coin is tails and 
+\begin_inset Formula $d(t)=1$
+\end_inset 
+
+ if it is heads.
+ We can represent the manner in which the states change through a state
+ diagram.
+ 
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/monopoly.eps
+	width 100text%
+
+\end_inset 
+
+
+\layout Caption
+
+Image of a monopoly board.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename ./diagrams/stateDiagram.eps
+
+\end_inset 
+
+
+\layout Caption
+
+State diagram for coin monopoly.
+ Each circle represents a different possible state value.
+ The state changes (or doesn't change) with each time step according the
+ probabilities associated with the arrows.
+ 
+\end_inset 
+
+
+\layout Subsection
+
+Poisson Process as a Markov Process
+\layout Standard
+
+Currently, with each turn, we consider time, 
+\begin_inset Formula $t$
+\end_inset 
+
+, to change by 
+\begin_inset Formula $\Delta t=1$
+\end_inset 
+
+ with each turn.
+ Consider a situation where 
+\begin_inset Formula $P(h)$
+\end_inset 
+
+ is taken to be 
+\begin_inset Formula $\lambda\,\,\Delta t$
+\end_inset 
+
+ (which must be less than 1), giving 
+\begin_inset Formula $P(t)=1-\lambda\,\,\Delta t$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Now after 
+\begin_inset Formula $n$
+\end_inset 
+
+ turns, what is the probability that the state 
+\begin_inset Formula $N=k$
+\end_inset 
+
+.
+ This is given by a binomial distribution: 
+\layout Subsubsection
+
+Binomial for 
+\begin_inset Formula $n$
+\end_inset 
+
+ trials
+\layout Standard
+
+
+\begin_inset Formula $n$
+\end_inset 
+
+ = number of trials (turns in our case) with a constant probability of success,
+ 
+\begin_inset Formula $P(h)$
+\end_inset 
+
+.
+ 
+\begin_inset Formula $k$
+\end_inset 
+
+ = number of successes (number of heads in our case).
+ 
+\layout Standard
+
+
+\begin_inset Formula \[
+P(k)=\left(\begin{array}{c}
+n\\
+k\end{array}\right)P(h)^{k}(1-P(h))^{n-k}\]
+
+\end_inset 
+
+
+\layout Standard
+
+Here 
+\begin_inset Formula $\left(\begin{array}{c}
+n\\
+k\end{array}\right)=\frac{n!}{k!(n-k)!}$
+\end_inset 
+
+ is the binomial coefficient.
+ 
+\layout Standard
+
+Now 
+\begin_inset Formula $n=\frac{t}{\Delta t}$
+\end_inset 
+
+ which means that 
+\begin_inset Formula $P(h)=\lambda\Delta t=\frac{\lambda t}{n}$
+\end_inset 
+
+ giving 
+\begin_inset Formula \begin{eqnarray}
+P(k|\lambda,t) & = & \frac{n!}{k!(n-k)!}\left(\frac{\lambda t}{n}\right)^{k}\left(1-\frac{\lambda t}{n}\right)^{n-k}\\
+ & = & \frac{n\left(n-1\right)\dots\left(n-\left(k-1\right)\right)}{n^{k}\left(1-\frac{\lambda t}{n}\right)^{k}}\frac{(\lambda t)^{k}}{k!}\left(1-\frac{\lambda t}{n}\right)^{n}\end{eqnarray}
+
+\end_inset 
+
+ If we now take the limit as 
+\begin_inset Formula $n\rightarrow\infty$
+\end_inset 
+
+ (equivalent to 
+\begin_inset Formula $\Delta t\rightarrow0$
+\end_inset 
+
+), this expression becomes 
+\begin_inset Formula \begin{equation}
+P(k|\lambda,t)=\frac{(\lambda t)^{k}}{k!}e^{-\lambda t}.\label{eqn:poisson}\end{equation}
+
+\end_inset 
+
+This is because the first factor is equal to 1 as in this limit it becomes
+ 
+\begin_inset Formula \[
+\frac{n^{k}}{n^{k}}\]
+
+\end_inset 
+
+and the definition of an exponential function is
+\begin_inset Formula \[
+\exp\left(z\right)=\lim_{n\rightarrow\infty}\left(1+\frac{z}{m}\right)^{m}.\]
+
+\end_inset 
+
+ Eqn 
+\begin_inset LatexCommand \ref{eqn:poisson}
+
+\end_inset 
+
+ is recognised as a Poisson process.
+ In other words, we have proved that a Poisson process is a particular type
+ of Markov process.
+ 
+\layout Standard
+
+Coin Monopoly played at infinite speed is a Poisson process! 
+\layout Section
+
+Birth Death Processes
+\layout Standard
+
+A modification to our previous state diagram brings us to a birth-death
+ process.
+ Imagine now that instead of tossing a coin, three possible events may occur.
+ The state may go up by one (a birth), down by one (a death) or stay the
+ same.
+ 
+\layout Standard
+
+We represent this with a state diagram as follows.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename ./diagrams/birthDeathProcess.eps
+
+\end_inset 
+
+
+\layout Caption
+
+State diagram for a birth-death process.
+\end_inset 
+
+
+\layout Standard
+
+Such processes are ideal for modelling may types of queues.
+ 
+\layout Section
+
+M/M/1 Queue
+\layout Standard
+
+The M/M/1 queue represents a birth-death process where the birth rate and
+ death rate.
+ 
+\layout Section
+
+Kendall's Notation
+\layout Standard
+
+Arrival Distribution/Service Distribution/number of servers.
+ 
+\layout Standard
+
+
+\begin_inset Formula $M$
+\end_inset 
+
+ - Markov/Memoryless, 
+\begin_inset Formula $G$
+\end_inset 
+
+ - General and 
+\begin_inset Formula $D$
+\end_inset 
+
+ - deterministic.
+\layout Section
+
+Steady State Behaviour
+\layout Standard
+
+Often we are interested in the steady state behaviour of a system, rather
+ than the transient dynamics.
+ We might ask the question what is the average network delay when the system
+ has reached steady state? What do we mean by steady state? 
+\layout Enumerate
+
+A stable condition that does not change over time or in which change in
+ one direction is continually balanced by change in another.
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+
+\family typewriter 
+http://www.dictionary.com
+\family default 
+.
+\end_inset 
+
+
+\layout Enumerate
+
+A steady state is a dynamic equilibrium.
+ 
+\layout Standard
+
+A Markov process, under certain conditions, will reach a steady state distributi
+on over 
+\begin_inset Formula $k$
+\end_inset 
+
+.
+ Recall that a probabilistic process 
+\begin_inset Formula $p\left(k|t\right)$
+\end_inset 
+
+ is a `noisy function' of time.
+ Some probabilistic processes will converge to a probability distribution
+ when we look at them in the limit as time 
+\begin_inset Formula $\rightarrow\infty$
+\end_inset 
+
+.
+ Not all will though, for example a Poisson 
+\emph on 
+won't
+\emph default 
+.
+\begin_inset Formula \[
+\lim_{t\rightarrow\infty}p\left(k|t\right)=p\left(k\right)\]
+
+\end_inset 
+
+the average value of 
+\begin_inset Formula $k$
+\end_inset 
+
+ at steady state is then given by
+\begin_inset Formula \[
+\left\langle k\right\rangle _{p\left(k\right)}=\sum_{k=0}^{\infty}p\left(k\right)k\]
+
+\end_inset 
+
+in what follows we will assume that this steady state average is equivalent
+ to the time average in the limit as 
+\begin_inset Formula $t\rightarrow\infty$
+\end_inset 
+
+, where if the state of the system is given as a function of time as 
+\begin_inset Formula $N\left(t\right)$
+\end_inset 
+
+ the average number in the system as a function of time is given by 
+\begin_inset Formula \[
+\bar{N}\left(t\right)=\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau\]
+
+\end_inset 
+
+and the time average after in the limit as 
+\begin_inset Formula $t\rightarrow\infty$
+\end_inset 
+
+ is given by 
+\begin_inset Formula \[
+\bar{N}=\lim_{t\rightarrow\infty}\bar{N}\left(t\right).\]
+
+\end_inset 
+
+which we assume is equivalent to 
+\begin_inset Formula $\left\langle k\right\rangle _{p\left(k\right)}\equiv\bar{N}$
+\end_inset 
+
+.
+ See pg 156-157 in Bertsekas and Gallager for more details.
+ 
+\layout Chapter
+
+Little's Formula
+\layout Standard
+
+Applies for 
+\begin_inset Formula $G$
+\end_inset 
+
+/
+\begin_inset Formula $G$
+\end_inset 
+
+/1 queues.
+ 
+\layout Standard
+
+Little's formula gives the relationship between the steady-state average
+ size of a queue, 
+\begin_inset Formula $\bar{N}$
+\end_inset 
+
+, the steady-state arrival rate, 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+, and the steady-state customer delay, 
+\begin_inset Formula $\bar{T}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Under steady state conditions, Little's formula states 
+\begin_inset Formula \[
+\bar{N}=\lambda\bar{T}\]
+
+\end_inset 
+
+
+\layout Standard
+
+Nightclub Queue.
+ You are driving past a nightclub, wondering how long you will have to wait
+ to go in.
+ You notice on Thursday nights the queue typically contains 20 people and
+ that people arrive at a rate of 40 per hour.
+ 
+\layout Standard
+
+According to Little's formula, how long would you expect to have to wait
+ to get in? 
+\layout Standard
+
+The waiting time is given by Little's formula.
+ 
+\begin_inset Formula $\bar{N}=20$
+\end_inset 
+
+, 
+\begin_inset Formula $\lambda=40$
+\end_inset 
+
+ and 
+\begin_inset Formula $\bar{T}=\frac{\bar{N}}{\lambda}=\frac{20}{40}=\frac{1}{2}\textrm{hour}$
+\end_inset 
+
+.
+ 
+\layout Subsection
+
+Graphical Proof
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename ./diagrams/littlesFormula.eps
+
+\end_inset 
+
+
+\layout Caption
+
+Graphical `proof' of Little's formula.
+\end_inset 
+
+
+\layout Standard
+
+The area between the lines in the top figure can be expressed as both 
+\begin_inset Formula $\int_{0}^{t}N(\tau)d\tau$
+\end_inset 
+
+ and 
+\begin_inset Formula $\sum_{i=1}^{\alpha\left(t\right)}T_{i}$
+\end_inset 
+
+.
+ Dividing both expressions by 
+\begin_inset Formula $t$
+\end_inset 
+
+, equating them, and taking the limit as 
+\begin_inset Formula $t\rightarrow\infty$
+\end_inset 
+
+ gives Little's formula.
+ 
+\begin_inset Formula \[
+\frac{1}{t}\int_{0}^{t}N(\tau)d\tau=\frac{1}{t}\sum_{i=1}^{\alpha(t)}T_{i}=\frac{\alpha(t)}{t}\frac{\sum_{i=1}^{\alpha(t)}T_{i}}{\alpha(t)}\]
+
+\end_inset 
+
+ leading to 
+\begin_inset Formula \[
+\bar{N}_{t}=\lambda_{t}\bar{T}_{t}\]
+
+\end_inset 
+
+ We wish to consider the steady state behaviour.
+ The system may not have steady state behaviour.
+ If the steady state exists, we can seek it in the limit as 
+\begin_inset Formula $t\rightarrow\infty$
+\end_inset 
+
+, giving 
+\begin_inset Formula \[
+\bar{N}=\lambda\bar{T}\]
+
+\end_inset 
+
+
+\layout Standard
+
+This formula applies regardless of the arrival and service time distributions,
+ it only relies on the system being in steady state.
+ 
+\layout Standard
+
+Little's formula can be used at the system level, as we have seen, or at
+ a lower level.
+ 
+\layout Subsection
+
+Little's Formula for Queueing Time and Transmission Time 
+\layout Standard
+
+The total delay for packet switching systems can be divided into queueing
+ time, 
+\begin_inset Formula $W$
+\end_inset 
+
+, and service time or transmission time, 
+\begin_inset Formula $X$
+\end_inset 
+
+.
+ 
+\begin_inset Formula $T=X+W.$
+\end_inset 
+
+ Similarly the average delay may be divided.
+ 
+\begin_inset Formula \[
+\bar{T}=\bar{X}+\bar{W}\]
+
+\end_inset 
+
+ 
+\layout Standard
+
+Both the queue itself and the transmission may be analysed independently
+ using Little's formula.
+ 
+\layout Subsubsection
+
+The Queue
+\layout Standard
+
+Given 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+, an arrival rate, 
+\begin_inset Formula $\bar{N}_{Q}$
+\end_inset 
+
+, the average number of packets waiting in the queue, and 
+\begin_inset Formula $\bar{W}$
+\end_inset 
+
+, the average packet waiting time, Little's formula gives 
+\begin_inset Formula \[
+\bar{N}_{Q}=\lambda\bar{W}.\]
+
+\end_inset 
+
+
+\layout Subsubsection
+
+The Transmission
+\layout Standard
+
+For 
+\begin_inset Formula $\bar{X}$
+\end_inset 
+
+, the average transmission time, we can obtain the average number of packets
+ under transmission, 
+\begin_inset Formula \[
+\rho=\lambda\bar{X},\]
+
+\end_inset 
+
+ which is also known as the utilisation factor.
+ It represents the fraction of time that the transmission line is in use.
+ For a 
+\begin_inset Formula $G/G/1$
+\end_inset 
+
+ queue it must be less than one, 
+\emph on 
+i.e.
+
+\emph default 
+ arrival rate must be less than 
+\begin_inset Formula $\frac{1}{\bar{X}}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Note: time under transmission is often considered proportional to packet
+ length.
+ For packet length of 
+\begin_inset Formula $L$
+\end_inset 
+
+ bits and bandwidth of 
+\begin_inset Formula $C$
+\end_inset 
+
+ bits per second transmission time is 
+\begin_inset Formula $X=\frac{L}{C}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+You are at a queue in a bar, and notice that the bar tender spends 10% of
+ her time cleaning between serving customers.
+ If the typical number of people waiting to be served is 
+\begin_inset Formula $3$
+\end_inset 
+
+, what is the ratio of time spent waiting to being served? 
+\layout Standard
+
+Information says 
+\begin_inset Formula $\rho=0.9$
+\end_inset 
+
+ and 
+\begin_inset Formula $\bar{N}_{Q}=3$
+\end_inset 
+
+.
+ 
+\begin_inset Formula \[
+\lambda=\frac{0.9}{\bar{X}}.\]
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Formula \[
+3=\lambda\bar{W}.\]
+
+\end_inset 
+
+
+\layout Standard
+
+Therefore 
+\begin_inset Formula $\frac{\bar{W}}{\bar{X}}=3\frac{1}{3}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[abbrv]{lawrence,other,zbooks}
+
+\end_inset 
+
+
+\the_end

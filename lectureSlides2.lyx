@@ -1,0 +1,2832 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass foils
+\begin_preamble
+\newcommand{\answer}[2]{#1}
+\end_preamble
+\options 20pt,dvips
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\float_placement ht
+\paperfontsize default
+\spacing single 
+\papersize Custom
+\paperpackage a4
+\use_geometry 1
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\bullet 0
+	2
+	20
+	-1
+\end_bullet
+\bullet 1
+	5
+	4
+	-1
+\end_bullet
+
+\layout Left Header
+
+Neil Lawrence
+\layout Right Header
+
+Network Performance Analysis
+\layout My Logo
+
+
+\begin_inset Graphics
+	filename /share/mlhome/neil/tex/inputs/sheffieldlogo.eps
+	lyxscale 40
+	scale 40
+
+\end_inset 
+
+
+\layout Right Footer
+
+
+\begin_inset Graphics
+	filename /home/neil/tex/inputs/dcslogo.eps
+	lyxscale 120
+	scale 140
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+quad 
+\end_inset 
+
+
+\family sans 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+thepage{}
+\end_inset 
+
+
+\layout Title
+
+Network Performance Analysis
+\newline 
+Lecture 2
+\layout Author
+
+Neil Lawrence
+\layout Date
+
+Autumn Term 2004-2005
+\layout ShortFoilhead
+
+Expectations
+\begin_inset LatexCommand \label{sec:expectations}
+
+\end_inset 
+
+
+\layout Itemize
+
+A probabilistic model summarises our beliefs.
+\layout Itemize
+
+Sometimes need to summarise the model by its expectations.
+\layout Itemize
+
+Expected value of 
+\begin_inset Formula $f\left(x\right)$
+\end_inset 
+
+ under 
+\begin_inset Formula $P\left(x\right)$
+\end_inset 
+
+ is 
+\begin_inset Formula \[
+\left\langle f\left(x\right)\right\rangle _{P\left(x\right)}=\sum_{x}P\left(x\right)f\left(x\right).\]
+
+\end_inset 
+
+Here we have introduced a particular notation for the expectation, you will
+ also see expectations written in the form 
+\begin_inset Formula $E\left\{ f\left(x\right)\right\} $
+\end_inset 
+
+.
+ 
+\layout ShortFoilhead
+
+Expectations under a Simple Distribution
+\layout Itemize
+
+Define a distribution over 
+\begin_inset Formula $x$
+\end_inset 
+
+ in Table\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:simpleXDistribution}
+
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float table
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="4">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $x$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $P\left(x\right)$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.5
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.3
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $f\left(x\right)=x^{2}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\newline 
+
+\end_inset 
+
+
+\layout Caption
+
+Distribution over 
+\begin_inset Formula $x$
+\end_inset 
+
+ and associated values of 
+\begin_inset Formula $f\left(x\right)$
+\end_inset 
+
+.
+\begin_inset LatexCommand \label{cap:simpleXDistribution}
+
+\end_inset 
+
+
+\end_inset 
+
+ 
+\layout Itemize
+
+We can compute 
+\begin_inset Formula \[
+\left\langle f\left(x\right)\right\rangle =\left\langle x^{2}\right\rangle =0\times0.2+1\times0.5+4\times0.3=1.7,\]
+
+\end_inset 
+
+have dropped the subscript 
+\begin_inset Formula $P\left(x\right)$
+\end_inset 
+
+
+\layout Itemize
+
+We can also see that the expectation of 
+\begin_inset Formula $x$
+\end_inset 
+
+ is
+\begin_inset Formula \[
+\left\langle x\right\rangle =0\times0.2+1\times0.5+2\times0.3=1.1.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+The expectation of 
+\begin_inset Formula $x$
+\end_inset 
+
+ is known as the first moment of the distribution or its 
+\emph on 
+mean
+\emph default 
+.
+ 
+\layout Itemize
+
+The expectation of 
+\begin_inset Formula $x^{2}$
+\end_inset 
+
+ is known as the second moment --- normally used to obtain the variance.
+ 
+\layout Itemize
+
+Variance: given by the difference between the second moment and the square
+ of the mean.
+ It is often denoted by 
+\begin_inset Formula $\sigma^{2}$
+\end_inset 
+
+.
+\begin_inset Formula \[
+\sigma^{2}=\left\langle x^{2}\right\rangle -\left\langle x\right\rangle ^{2}.\]
+
+\end_inset 
+
+For our example above the variance is given by
+\begin_inset Formula \[
+1.7-\left(1.1\right)^{2}=0.49,\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Its square root is known as the standard deviation
+\begin_inset Formula \[
+\sigma=\sqrt{\left\langle x^{2}\right\rangle -\left\langle x\right\rangle ^{2}},\]
+
+\end_inset 
+
+in example 
+\begin_inset Formula \[
+\sqrt{1.7-\left(1.1\right)^{2}}=0.7.\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+
+\begin_inset LatexCommand \label{sec:distributionAsFunction}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Distributions as Functions
+\layout Itemize
+
+Probability distribution with a simple table can be limiting.
+\layout Itemize
+
+The Poisson Distribution --- a distribution a a function
+\layout Itemize
+
+First published by 
+\series bold 
+Sim\i \'{e}
+on Denis Poisson
+\series default 
+ (1781-1840) in 1837.
+ 
+\layout Itemize
+
+Defined over the space of all non-negative integers.
+ 
+\layout Itemize
+
+This set is countably infinite: impossible to summarise in a table!
+\layout Itemize
+
+The Poisson distribution is therefore defined as
+\begin_inset Formula \begin{equation}
+P\left(k|\mu\right)=\frac{\mu^{k}}{k!}\exp\left(-\mu\right).\label{eq:poissonDist}\end{equation}
+
+\end_inset 
+
+where 
+\begin_inset Formula $k$
+\end_inset 
+
+ is any integer from 
+\begin_inset Formula $0$
+\end_inset 
+
+ to 
+\begin_inset Formula $\infty$
+\end_inset 
+
+, and 
+\begin_inset Formula $\mu$
+\end_inset 
+
+ is a parameter of the distribution.
+ 
+\layout Itemize
+
+To work out the probability of 
+\begin_inset Formula $k$
+\end_inset 
+
+ in a Poisson 
+\begin_inset Formula $\mu=2$
+\end_inset 
+
+ we can start filling a table.
+\begin_inset Float table
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="5">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<column alignment="center" valignment="top" rightline="true" width="0">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $k$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\dots$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $P\left(x\right)$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.135
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.271
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+0.271
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\dots$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\newline 
+
+\end_inset 
+
+
+\layout Caption
+
+Some values for the Poisson distribution with 
+\begin_inset Formula $\mu=2$
+\end_inset 
+
+.
+\begin_inset LatexCommand \label{cap:poissonTable}
+
+\end_inset 
+
+
+\end_inset 
+
+ 
+\layout ShortFoilhead
+
+Mean and Variance
+\layout Standard
+
+Example: Mean and Variance of Poisson Distribution
+\layout Standard
+
+As we mentioned in Section\SpecialChar ~
+
+\begin_inset LatexCommand \ref{sec:expectations}
+
+\end_inset 
+
+, the expectations under a distribution are important for summarising the
+ distributions characteristics.
+ Expectations of distributions that take the form of a function can also
+ be computed.
+ Typically we expect the resulting expectation to be a function of the distribut
+ions parameters.
+\layout Itemize
+
+Mean of the Poisson process
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Formula \[
+\left\langle k\right\rangle _{P\left(k|\mu\right)}=\sum_{k=0}^{\infty}k\frac{\mu^{k}}{k!}e^{-\mu}\]
+
+\end_inset 
+
+ To make progress with this we first pull out 
+\begin_inset Formula $\mu e^{-\mu}$
+\end_inset 
+
+ and the first 
+\begin_inset Formula $k$
+\end_inset 
+
+ in the factorial, 
+\begin_inset Formula $\frac{k}{k!}=\frac{k}{k(k-1)!}=\frac{1}{(k-1)!}$
+\end_inset 
+
+.
+ We can also remove the first term from the sum because it is multiplied
+ by 
+\begin_inset Formula $k$
+\end_inset 
+
+ which is zero for the first term.
+\layout Standard
+
+This leads to
+\begin_inset Formula \[
+\left\langle k\right\rangle =e^{-\mu}\mu\sum_{k=1}^{\infty}\frac{\mu^{(k-1)}}{(k-1)!}\]
+
+\end_inset 
+
+ Now we make the following substitution: 
+\begin_inset Formula $m=k-1$
+\end_inset 
+
+.
+ 
+\begin_inset Formula \begin{equation}
+\left\langle k\right\rangle =e^{-\mu}\mu\sum_{m=0}^{\infty}\frac{\mu^{m}}{m!}\label{eq:poissonMean2}\end{equation}
+
+\end_inset 
+
+ Finally we note that the geometric series 
+\begin_inset Formula $\sum_{m=0}^{\infty}\frac{\mu^{m}}{m!}=e^{\mu}$
+\end_inset 
+
+.
+ Substituting this result back into (
+\begin_inset LatexCommand \ref{eq:poissonMean2}
+
+\end_inset 
+
+) we find 
+\begin_inset Formula \begin{equation}
+\left\langle k\right\rangle =\mu\label{eq:poissonMean3}\end{equation}
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{12}
+\newline 
+
+\end_inset 
+
+
+\layout Standard
+
+The variance of a Poisson is also 
+\begin_inset Formula $\mu$
+\end_inset 
+
+ --- see Tutorial 1.
+ 
+\layout ShortFoilhead
+
+Continuous Variables
+\layout Itemize
+
+So far discrete values of 
+\begin_inset Formula $x$
+\end_inset 
+
+ or 
+\begin_inset Formula $y$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+For continuous models we introduce the 
+\emph on 
+probability density function
+\emph default 
+ (PDF).
+ 
+\layout Itemize
+
+Discrete case: defined probability distributions over a discrete number
+ of states.
+ 
+\layout Itemize
+
+How do we represent continuous as probability?
+\layout Itemize
+
+Computer science student's height:
+\begin_deeper 
+\layout Itemize
+
+Develop a representation which could answer 
+\emph on 
+any 
+\emph default 
+question we chose to ask about a computer scientist's height.
+ 
+\end_deeper 
+\layout Itemize
+
+One example is the Gaussian: we can query the distribution by integrating
+ over regions of it.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/pdfOfHeight.eps
+	lyxscale 50
+	scale 50
+
+\end_inset 
+
+
+\layout Caption
+
+A Gaussian PDF representing heights of computer scientists.
+\begin_inset LatexCommand \label{cap:heightPDF}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Itemize
+
+Represent a PDF with a small 
+\begin_inset Formula $p\left(\cdot\right)$
+\end_inset 
+
+ to differentiate it from a probability distribution: 
+\begin_inset Formula $P\left(\cdot\right)$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+It is a positive function, integral over the region of interest is one
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+In what follows we shall use the word distribution to refer to both discrete
+ probabilities and continuous probability density functions.
+\end_inset 
+
+.
+\layout ShortFoilhead
+
+Manipulating PDFs
+\layout Itemize
+
+Same rules for PDFs as distributions 
+\emph on 
+e.g.
+\emph default 
+
+\begin_inset Formula \[
+p\left(y|x\right)=\frac{p\left(x|y\right)p\left(y\right)}{p\left(x\right)}\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $p\left(x,y\right)=p\left(x|y\right)p\left(y\right)$
+\end_inset 
+
+ and for continuous variables 
+\begin_inset Formula $p\left(x\right)=\int p\left(x,y\right)dy$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+Expectations under a PDF
+\begin_inset Formula \[
+\left\langle f\left(x\right)\right\rangle _{p\left(x\right)}=\int f\left(x\right)p\left(x\right)dx\]
+
+\end_inset 
+
+where the integral is over the region for which our PDF for 
+\begin_inset Formula $x$
+\end_inset 
+
+ is defined.
+\layout ShortFoilhead
+
+Cumulative Distribution Functions
+\begin_inset LatexCommand \label{sub:CDFs}
+
+\end_inset 
+
+
+\layout Itemize
+
+PDF doesn't represent probabilities directly
+\layout Itemize
+
+One very common question is: what is the probability that 
+\begin_inset Formula $x<y$
+\end_inset 
+
+? 
+\layout Itemize
+
+The cumulative distribution function (CDF) represents the answer for 
+\begin_inset Formula $-\infty<x<\infty$
+\end_inset 
+
+ the CDF is given by
+\begin_inset Formula \[
+P\left(x>y\right)=\int_{-\infty}^{y}p\left(x\right)dx,\]
+
+\end_inset 
+
+for 
+\begin_inset Formula $0\leq x<\infty$
+\end_inset 
+
+ then the CDF is given by
+\begin_inset Formula \[
+P\left(x>y\right)=\int_{0}^{y}p\left(x\right)dx.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+In Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:heightPDF}
+
+\end_inset 
+
+ example of the CDF for the students' heights example.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/cdfOfHeight.eps
+	lyxscale 50
+	scale 50
+
+\end_inset 
+
+
+\layout Caption
+
+The cumulative distribution function (CDF) for the heights of computer science
+ students.
+ The thick curve gives the CDF and the thinner curve the associated PDF.
+\end_inset 
+
+
+\layout Itemize
+
+The PDF can be recovered from the CDF through differentiation.
+\layout ShortFoilhead
+
+Sample Based Approximations
+\layout Itemize
+
+Recall that expectation of any given function, 
+\begin_inset Formula $f\left(k\right)$
+\end_inset 
+
+, under a distribution, 
+\begin_inset Formula $P\left(k\right)$
+\end_inset 
+
+, can be written as 
+\begin_inset Formula \[
+\left\langle f\left(k\right)\right\rangle _{P\left(k\right)}=\sum_{k}f\left(k\right)P\left(k\right)\]
+
+\end_inset 
+
+Recall our definition of probability from Table\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:aJointDistribution}
+
+\end_inset 
+
+.
+ 
+\begin_inset Formula \[
+P\left(k\right)=\lim_{S\rightarrow\infty}\frac{s_{k}}{S}\]
+
+\end_inset 
+
+where we have now used 
+\begin_inset Formula $S$
+\end_inset 
+
+ (instead of 
+\begin_inset Formula $N$
+\end_inset 
+
+) 
+\layout Itemize
+
+
+\emph on 
+Sample based approximations 
+\emph default 
+hope that 
+\begin_inset Formula $S$
+\end_inset 
+
+ is `large enough' such that it to say
+\begin_inset Formula \[
+\left\langle f\left(k\right)\right\rangle _{P\left(k\right)}\approx\sum_{k}f\left(k\right)\frac{s_{k}}{S}.\]
+
+\end_inset 
+
+This formula may be rewritten as:
+\begin_inset Formula \[
+\sum_{k}f\left(k\right)\frac{s_{k}}{S}=\frac{1}{S}\sum_{k}f\left(k\right)s_{k}.\]
+
+\end_inset 
+
+For 
+\begin_inset Formula $\mathbf{k}$
+\end_inset 
+
+ a vector of samples from 
+\begin_inset Formula $P\left(k\right)$
+\end_inset 
+
+with elements 
+\begin_inset Formula $k_{i}$
+\end_inset 
+
+ and length 
+\begin_inset Formula $S$
+\end_inset 
+
+ 
+\begin_inset Formula \[
+\frac{1}{S}\sum_{k}f\left(k\right)s_{k}=\frac{1}{S}\sum_{i=1}^{S}f\left(k_{i}\right)\]
+
+\end_inset 
+
+
+\layout Itemize
+
+This provides us with a sample based approximation 
+\begin_inset Formula \[
+\left\langle f\left(k\right)\right\rangle _{P\left(k\right)}\approx\frac{1}{S}\sum_{i=1}^{S}f\left(k_{i}\right).\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Special cases of this include the 
+\emph on 
+sample mean, 
+\emph default 
+often denoted by 
+\begin_inset Formula $\bar{k}$
+\end_inset 
+
+, and computed as
+\begin_inset Formula \[
+\bar{k}=\frac{1}{S}\sum_{i=1}^{S}k_{i},\]
+
+\end_inset 
+
+
+\layout Itemize
+
+This is an approximation to the true distribution mean
+\begin_inset Formula \[
+\left\langle k\right\rangle \approx\bar{k}.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+The same approximations can used for continuous PDFs, so we have
+\begin_inset Formula \begin{eqnarray*}
+\left\langle f\left(x\right)\right\rangle _{p\left(x\right)} & = & \int f\left(x\right)p\left(x\right)dx\\
+ & \approx & \frac{1}{S}\sum_{i=1}^{S}f\left(x_{i}\right),\end{eqnarray*}
+
+\end_inset 
+
+where 
+\begin_inset Formula $x_{i}$
+\end_inset 
+
+ are independently obtained samples from the distribution 
+\begin_inset Formula $p\left(x\right)$
+\end_inset 
+
+.
+\layout Itemize
+
+Approximation gets better for increasing 
+\begin_inset Formula $S$
+\end_inset 
+
+ and worse if the samples from 
+\begin_inset Formula $P\left(k\right)$
+\end_inset 
+
+ are 
+\emph on 
+not 
+\emph default 
+independent.
+\layout ShortFoilhead
+
+Note on Sample and Distribution Means
+\layout Standard
+
+In most texts the word mean is used interchangeably to describe sample based
+ means and the true mean of a distribution.
+ However, you should always bear in mind the important difference between
+ the two.
+ Later in the course we will also come across time based averages and assumption
+s will be made that the time based average is equal to the average under
+ a `steady state distribution'.
+\layout ShortFoilhead
+
+Stochastic Processes
+\layout Itemize
+
+Also known as probabilistic process, random process
+\layout Itemize
+
+Can be viewed as a `random function'.
+ 
+\begin_deeper 
+\layout Itemize
+
+Normal function maps a set of inputs to a point value.
+ 
+\layout Itemize
+
+A probabilistic process maps a set of inputs to a probability distribution.
+\end_deeper 
+\layout Itemize
+
+
+\emph on 
+Wiener process
+\emph default 
+ is the process behind Brownian motion.
+ 
+\layout Itemize
+
+Stock market data is often modelled as a stochastic process.
+\layout Itemize
+
+Definition: A random process
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+May be defined as a 
+\emph on 
+random function
+\emph default 
+ which, for a particular value, is a random quantity.
+ 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{6}
+\newline 
+
+\end_inset 
+
+
+\end_deeper 
+\layout ShortFoilhead
+
+Poisson Process
+\layout Itemize
+
+A simple process which is related to the Poisson distribution: the Poisson
+ process.
+\layout Itemize
+
+Probabilities of a number of arrivals, 
+\begin_inset Formula $k$
+\end_inset 
+
+, as a function of time, 
+\begin_inset Formula $t$
+\end_inset 
+
+, given a `rate', 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+
+\begin_inset Formula \begin{equation}
+P\left(k|t,\lambda\right)=\frac{(\lambda t)^{k}}{k!}e^{-\lambda t}.\label{eq:process}\end{equation}
+
+\end_inset 
+
+
+\layout Itemize
+
+The process is simply the distribution with 
+\begin_inset Formula $\mu$
+\end_inset 
+
+ substituted with 
+\begin_inset Formula $\lambda t$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ is now known as a rate, because product 
+\begin_inset Formula $\lambda t$
+\end_inset 
+
+ gives the expected number of arrivals at time 
+\begin_inset Formula $t$
+\end_inset 
+
+.
+\layout Itemize
+
+The mean of the Poisson process (the first moment of 
+\begin_inset Formula $k$
+\end_inset 
+
+) is given by
+\begin_inset Formula \[
+\left\langle k\right\rangle =\lambda t.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Poisson process is a form of counting process where the counts are expected
+ to increase linearly with time.
+ 
+\layout ShortFoilhead
+
+Properties
+\layout Itemize
+
+Superposition of Poissons
+\begin_deeper 
+\layout Standard
+
+If we combine 
+\begin_inset Formula $N$
+\end_inset 
+
+ independent processes with rates 
+\begin_inset Formula $\lambda_{1},\lambda_{2},\dots,\lambda_{N}$
+\end_inset 
+
+ together the resulting process is also a Poisson process with a combined
+ rate, 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+, equal to the sum of each of the input rates: 
+\begin_inset Formula $\lambda=\sum_{n=1}^{N}\lambda_{n}$
+\end_inset 
+
+.
+ This is shown pictorially in Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:poissonSuperposition}
+
+\end_inset 
+
+.
+\end_deeper 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename ./diagrams/sumPoisson.eps
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\newline 
+
+\end_inset 
+
+
+\layout Caption
+
+If independent Poisson processes form a single traffic flow overall process
+ is a Poisson with a rate that s the sum of the rates of the separate processes.
+\begin_inset LatexCommand \label{cap:poissonSuperposition}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+\SpecialChar ~
+
+\layout ShortFoilhead
+
+Example of Poisson Superposition
+\layout Itemize
+
+Question 
+\layout Standard
+
+There are three queues for registration of MSc students from different courses
+ at the University of Sheffield.
+ Students for the first course, Physics and Fine Art, arrive with a rate
+ of 4 students per minute.
+ Students for the second course, The Psychology of Sociology, arrive with
+ a rate of 2 students per minute and students for the third course, Computer
+ Science and Aromatherapy arrive with a rate of 5 students a minute.
+\layout Standard
+
+Assuming the student arrivals are independent and occur as a Poisson process
+ what is the probability that after 15 minutes there have been 
+\series bold 
+a)
+\series default 
+ 90 student arrivals? 
+\series bold 
+b) 
+\series default 
+180 arrivals?
+\layout Itemize
+
+Answer
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\layout Standard
+
+If the arrivals are independent and occur as a Poisson process, the rate
+ of arrivals for all student is the sum of the rates for each course.
+ 
+\begin_inset Formula $\lambda=4+2+5=11$
+\end_inset 
+
+.
+ Now we simply evaluate (
+\begin_inset LatexCommand \ref{eq:process}
+
+\end_inset 
+
+) with 
+\begin_inset Formula $t=15$
+\end_inset 
+
+, 
+\begin_inset Formula $\lambda=11$
+\end_inset 
+
+ and 
+\series bold 
+a) 
+\series default 
+
+\begin_inset Formula $k=90$
+\end_inset 
+
+ giving 
+\begin_inset Formula \[
+P\left(k=90|\lambda=11,t=15\right)=\frac{\left(11\times15\right)^{90}}{90!}\exp\left(-\left(11\times15\right)\right)=5.5\times10^{-11}.\]
+
+\end_inset 
+
+and 
+\series bold 
+b)
+\layout Standard
+
+
+\begin_inset Formula \[
+P\left(k=90|\lambda=11,t=15\right)=\frac{\left(11\times15\right)^{180}}{180!}\exp\left(-\left(11\times15\right)\right)=?.\]
+
+\end_inset 
+
+
+\layout Standard
+
+Now ask someone with a calculator to work this out.
+ Factorial 180 will definitely not work.
+ Explain that it needs to be computed as:
+\layout Standard
+
+
+\begin_inset Formula \[
+P\left(k=90|\lambda=11,t=15\right)=\exp\left(180\times\ln\left(11\times15\right)-\ln\left(180!\right)-\left(11\times15\right)\right)=0.015.\]
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{8}
+\newline 
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Properties Contd
+\layout Itemize
+
+Decomposition of Poisson Flow
+\begin_deeper 
+\layout Standard
+
+Assume we have one input channel where arrivals are occurring with a Poisson
+ process with rate 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+.
+ This channel then splits into 
+\begin_inset Formula $N$
+\end_inset 
+
+ separate output channels.
+ Each input arrival is then independently assigned to output channel 
+\begin_inset Formula $n$
+\end_inset 
+
+ with probability 
+\begin_inset Formula $P\left(n\right)$
+\end_inset 
+
+.
+ In this case the output channels then behave like Poisson processes with
+ rates given by 
+\begin_inset Formula $\lambda_{n}=P\left(n\right)\lambda$
+\end_inset 
+
+.
+ This is shown in Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:decompositionPoisson}
+
+\end_inset 
+
+.
+\end_deeper 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename ./diagrams/decomposePoisson.eps
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{8}
+\newline 
+
+\end_inset 
+
+
+\layout Caption
+
+If a single Poisson process with rate 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ is switched to different output channels, with each arrival being switched
+ to channel 
+\begin_inset Formula $n$
+\end_inset 
+
+ with probability 
+\begin_inset Formula $P\left(n\right)=\lambda_{n}/\lambda$
+\end_inset 
+
+, each output channel will be a Poisson process with rate 
+\begin_inset Formula $\lambda_{n}$
+\end_inset 
+
+.
+\begin_inset LatexCommand \label{cap:decompositionPoisson}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+\SpecialChar ~
+
+\layout ShortFoilhead
+
+Example of Poisson Decomposition
+\layout Itemize
+
+Question 
+\layout Standard
+
+There is one registration for all MSc courses.
+ Students arrive in the hall and are assigned to registration desks according
+ to the first letter of their surname.
+ Desk 1 (
+\begin_inset Formula $d=1)$
+\end_inset 
+
+takes students with names from A-G, desk 2 (
+\begin_inset Formula $d=2$
+\end_inset 
+
+) from H-M, desk 3 (
+\begin_inset Formula $d=3$
+\end_inset 
+
+) from N to S and desk 4 (
+\begin_inset Formula $d=4$
+\end_inset 
+
+) from R to Z.
+ 
+\layout Standard
+
+Surnames are distributed amoungst these four categories with the following
+ probability distribution:
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="5">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $d$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+1
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+2
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+3
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+4
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $P\left(d\right)$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $0.20$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $0.27$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $0.25$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $0.28$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Standard
+
+Assuming the students arrive independently of their surname as a Poisson
+ process at a rate of 10 students per minute what is the probability that
+ 
+\series bold 
+a) 
+\series default 
+after 5 minutes 5 students have arrived at desk 1? 
+\series bold 
+b)
+\series default 
+ after 10 minutes 20 students have arrived at desk 4?
+\layout Itemize
+
+Answer
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\layout Standard
+
+If the splitting is independent of the arrival, then the arrivals at each
+ desks will also occur as a Poisson process.
+ For 
+\series bold 
+a) 
+\series default 
+arrivals at
+\series bold 
+ 
+\series default 
+desk 1 will occur as a Poisson process with rate 
+\begin_inset Formula $\lambda_{1}=0.20\times10=2$
+\end_inset 
+
+.
+ The probability that 
+\begin_inset Formula $k=5$
+\end_inset 
+
+ students will have arrived at desk 1 after 
+\begin_inset Formula $t=5$
+\end_inset 
+
+ minutes is given by substituting these values into (
+\begin_inset LatexCommand \ref{eq:process}
+
+\end_inset 
+
+): 
+\begin_inset Formula \[
+P\left(k=5|\lambda_{1}=2,t=5\right)=\frac{\left(2\times5\right)^{5}}{5!}\exp\left(-\left(2\times5\right)\right)=0.038.\]
+
+\end_inset 
+
+For 
+\series bold 
+b) 
+\series default 
+arrivals at
+\series bold 
+ 
+\series default 
+desk 4 will occur as a Poisson process with rate 
+\begin_inset Formula $\lambda_{4}=0.28\times10=2.8$
+\end_inset 
+
+.
+ The probability that 
+\begin_inset Formula $k=20$
+\end_inset 
+
+ students will have arrived at desk 1 after 
+\begin_inset Formula $t=10$
+\end_inset 
+
+ minutes is again given by substituting these values into (
+\begin_inset LatexCommand \ref{eq:process}
+
+\end_inset 
+
+): 
+\begin_inset Formula \[
+P\left(k=20|\lambda_{4}=2.8,t=10\right)=\frac{\left(2.8\times10\right)^{20}}{20!}\exp\left(-\left(2.8\times10\right)\right)=0.025.\]
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{8}
+\newline 
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Properties III
+\layout Itemize
+
+Independence of Arrivals
+\begin_inset LatexCommand \label{sub:poissonIndependence}
+
+\end_inset 
+
+
+\begin_deeper 
+\layout Standard
+
+Consider a single Poisson process, if we look within this process at two
+ 
+\emph on 
+disjoint
+\emph default 
+ time intervals (
+\emph on 
+i.e.
+
+\emph default 
+ periods of time that don't overlap).
+ Assume we have 
+\begin_inset Formula $k_{1}$
+\end_inset 
+
+ arrivals in the first interval and 
+\begin_inset Formula $k_{2}$
+\end_inset 
+
+ arrivals in the second interval.
+ The distribution of arrivals in the two intervals are independent of each
+ other, 
+\begin_inset Formula $P\left(k_{1},k_{2}\right)=P\left(k_{1}\right)P\left(k_{2}\right)$
+\end_inset 
+
+.
+ 
+\end_deeper 
+\layout ShortFoilhead
+
+Properties IV
+\layout Itemize
+
+Similarity of Arrival Distributions for Identical Intervals
+\begin_inset LatexCommand \label{sub:poissonSimilarities}
+
+\end_inset 
+
+
+\begin_deeper 
+\layout Standard
+
+Consider a single Poisson process with rate 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+, let the number of arrivals between time 
+\begin_inset Formula $s$
+\end_inset 
+
+ and 
+\begin_inset Formula $s+t$
+\end_inset 
+
+ be given by 
+\begin_inset Formula $k_{1}$
+\end_inset 
+
+.
+ Now consider a second independent Poisson process with the same rate 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+, let the number of arrivals between time 
+\begin_inset Formula $r$
+\end_inset 
+
+ and 
+\begin_inset Formula $r+t$
+\end_inset 
+
+ be given by 
+\begin_inset Formula $k_{2}$
+\end_inset 
+
+.
+ The distribution of 
+\begin_inset Formula $k_{1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $k_{2}$
+\end_inset 
+
+ are then equal, 
+\begin_inset Formula \[
+P\left(k_{1}\right)=P\left(k_{2}\right).\]
+
+\end_inset 
+
+ 
+\end_deeper 
+\layout ShortFoilhead
+
+Interarrival Times and Poisson Processes
+\layout Itemize
+
+Interarrival time: time between arrivals.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename ./diagrams/interArrivals.eps
+
+\end_inset 
+
+
+\layout Caption
+
+For a Poisson process, this figure shows the times of the arrivals, 
+\begin_inset Formula $T_{n}$
+\end_inset 
+
+, and the interarrival times, 
+\begin_inset Formula $X_{n}$
+\end_inset 
+
+.
+\begin_inset LatexCommand \label{cap:poissonInterArrival}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Itemize
+
+Think of buses.
+\layout Itemize
+
+
+\begin_inset Formula $X_{i}$
+\end_inset 
+
+, are continuous values, what is their PDF?.
+\layout ShortFoilhead
+
+Interarrival Distribution
+\layout Itemize
+
+Derivation of Interarrival Time Distribution
+\layout Standard
+
+Firstly we define the number of arrivals at time 
+\begin_inset Formula $t$
+\end_inset 
+
+ to be given by the function 
+\begin_inset Formula $N\left(t\right)$
+\end_inset 
+
+.
+ Next we note that the cumulative density function (CDF) of the interarrival
+ time distribution will be given by 
+\begin_inset Formula $P\left(X_{i}\leq t\right)$
+\end_inset 
+
+ (see Section\SpecialChar ~
+
+\begin_inset LatexCommand \ref{sub:CDFs}
+
+\end_inset 
+
+ for a reminder on CDFs).
+ We can re-write this probability as
+\begin_inset Formula \[
+P\left(X_{i}\leq t\right)=1-P\left(X_{i}>t\right),\]
+
+\end_inset 
+
+so, rather than focussing on 
+\begin_inset Formula $P\left(X_{i}\leq t\right)$
+\end_inset 
+
+, we can consider the distribution 
+\begin_inset Formula $P\left(X_{i}>t\right)$
+\end_inset 
+
+.
+ Now we rewrite
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+The `
+\begin_inset Formula $\equiv$
+\end_inset 
+
+' sign should be read as `is equivalent to'.
+\end_inset 
+
+ the condition in this distribution as
+\begin_inset Formula \begin{eqnarray}
+\left(X_{i}>t\right) & \equiv & \left(T_{i}-T_{i-1}>t\right)\nonumber \\
+ & \equiv & \left(T_{i}>T_{i-1}+t\right),\label{eq:conditionInterarrival}\end{eqnarray}
+
+\end_inset 
+
+where we have simply used the definition of 
+\begin_inset Formula $X_{i}$
+\end_inset 
+
+ and rearranged the inequality.
+ Let's take the time that 
+\begin_inset Formula $T_{i-1}$
+\end_inset 
+
+ occurs to be 
+\begin_inset Formula $t_{i-1}$
+\end_inset 
+
+.
+ This lets us write the condition (
+\begin_inset LatexCommand \ref{eq:conditionInterarrival}
+
+\end_inset 
+
+) as 
+\begin_inset Formula $\left(T_{i}>T_{i-1}+t|T_{i-1}=t_{i-1}\right)$
+\end_inset 
+
+.
+ This will be true if and only if the function 
+\begin_inset Formula $N\left(t\right)$
+\end_inset 
+
+ does not change during the interval 
+\begin_inset Formula $\left(t_{i-1},t_{i-1}+t\right)$
+\end_inset 
+
+.
+ We can express this mathematically as 
+\begin_inset Formula \[
+\left(X_{i}>t|T_{i-1}=t_{i-1}\right)\equiv\left(N\left(t_{i-1}+t\right)-N\left(t_{i-1}\right)=0\right).\]
+
+\end_inset 
+
+The right hand side of this statement expresses the condition that no arrivals
+ occur between time 
+\begin_inset Formula $t_{i-1}=T_{i-1}$
+\end_inset 
+
+ and time 
+\begin_inset Formula $t$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+
+\begin_inset Formula \[
+P\left(X_{i}>t|T_{i-1}=t_{i-1}\right)=P\left(N\left(t_{i-1}+t\right)-N\left(t_{i-1}\right)=0\right)\]
+
+\end_inset 
+
+now, because of the similarity of the arrival distributions for intervals
+ of identical lengths (Section\SpecialChar ~
+
+\begin_inset LatexCommand \ref{sub:poissonSimilarities}
+
+\end_inset 
+
+) we can write
+\begin_inset Formula \[
+P\left(N\left(t_{i-1}+t\right)-N\left(t_{i-1}\right)\right)=P\left(N\left(t\right)\right)\]
+
+\end_inset 
+
+which means that
+\begin_inset Formula \[
+P\left(N\left(t_{i-1}+t\right)-N\left(t_{i-1}\right)=0\right)=P\left(N\left(t\right)=0\right)\]
+
+\end_inset 
+
+and substituting 
+\begin_inset Formula $N\left(t\right)=k=0$
+\end_inset 
+
+ into (
+\begin_inset LatexCommand \ref{eq:process}
+
+\end_inset 
+
+) we find that the probability of their being no arrivals at time 
+\begin_inset Formula $t$
+\end_inset 
+
+, 
+\begin_inset Formula $P\left(N\left(t\right)=0\right)$
+\end_inset 
+
+, is 
+\begin_inset Formula \[
+P\left(N\left(t\right)=0\right)=\exp\left(-\lambda t\right)\]
+
+\end_inset 
+
+so
+\begin_inset Formula \[
+P\left(X_{i}>t\right)=\exp\left(-\lambda t\right)\]
+
+\end_inset 
+
+and the CDF we are interested in is given by 
+\begin_inset Formula \begin{eqnarray*}
+P\left(X_{i}\leq t\right) & = & 1-P\left(X_{i}>t\right)\\
+ & = & 1-\exp\left(-\lambda t\right).\end{eqnarray*}
+
+\end_inset 
+
+Now to obtain the PDF we simply differentiate the CDF (Section\SpecialChar ~
+
+\begin_inset LatexCommand \ref{sub:CDFs}
+
+\end_inset 
+
+) giving
+\begin_inset Formula \[
+p\left(X_{i}\right)=\lambda e^{-\lambda X_{i}}\]
+
+\end_inset 
+
+which is the interarrival time distribution.
+ The form of the distribution is recognised as an 
+\emph on 
+exponential distribution
+\emph default 
+.
+ The parameter of the exponential, 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+, is the rate parameter from the Poisson process.
+\layout Standard
+
+In this section we have outlined the proof that the interarrival times for
+ a Poisson process are distributed exponentially.
+ Hereafter, we will use these formulations interchangeably, 
+\emph on 
+i.e.
+ 
+\emph default 
+when we state that the interarrival times for students registering at the
+ Goodwin Sports centre is given by an exponential distribution with parameter
+ 
+\begin_inset Formula $\lambda=2$
+\end_inset 
+
+ we are equivalently stating that these students are arriving according
+ to a Poisson process with rate parameter 
+\begin_inset Formula $\lambda=2$
+\end_inset 
+
+.
+\layout ShortFoilhead
+
+Properties of the Exponential Distribution
+\layout Itemize
+
+The Memoryless property
+\begin_inset Formula \[
+P\left(X>s+t|X>t\right)=P\left(X>s\right)\]
+
+\end_inset 
+
+
+\layout Itemize
+
+In English, the probability of the waiting time being greater than 
+\begin_inset Formula $s+t$
+\end_inset 
+
+ given that the waiting time is already greater than 
+\begin_inset Formula $t$
+\end_inset 
+
+ is the same as the probability of the waiting time being greater than 
+\begin_inset Formula $s$
+\end_inset 
+
+.
+\layout Itemize
+
+Mean and Variance
+\begin_inset Formula \[
+p(x)=\lambda e^{-\lambda x}\]
+
+\end_inset 
+
+ 
+\begin_deeper 
+\layout Standard
+
+The mean of an exponential can be found to be, 
+\begin_inset Formula \[
+\left\langle x\right\rangle _{p(x)}=\frac{1}{\lambda}\]
+
+\end_inset 
+
+ and the variance is 
+\begin_inset Formula \[
+\left\langle x^{2}\right\rangle _{p(x)}-\left\langle x\right\rangle _{p(x)}^{2}=\frac{1}{\lambda^{2}}.\]
+
+\end_inset 
+
+ These are easily confirmed --- they are part of Tutorial 1.
+ 
+\end_deeper 
+\layout ShortFoilhead
+
+Markov Chains and Markov Processes
+\begin_inset LatexCommand \label{cha:markovChainsAndProcesses}
+
+\end_inset 
+
+
+\layout Standard
+
+Poisson process in a special case of the more general class of processes
+ known as Markov processes.
+ We will start by considering Markov processes as they operate in 
+\emph on 
+discrete time
+\emph default 
+, otherwise known as 
+\emph on 
+Markov chains
+\emph default 
+.
+ Both Markov processes and Markov chains exhibit the 
+\emph on 
+Markov property 
+\emph default 
+which is an assumption about how future values drawn from the process depend
+ on past values.
+ We will first discuss the Markov property in the context of Markov chains,
+ then we will show how a discrete system can be converted to a continuous
+ system.
+\layout ShortFoilhead
+
+Markov Chains
+\layout Itemize
+
+Consider a discrete representation of time 
+\begin_inset Formula $t=0,1,2...$
+\end_inset 
+
+.
+ We associate a state variable, 
+\begin_inset Formula $N$
+\end_inset 
+
+, with this time such that we have values for 
+\begin_inset Formula $N$
+\end_inset 
+
+ at 
+\begin_inset Formula $N(0),\, N(1),\, N(2),\,...$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+Turns in a board game.
+\layout Itemize
+
+Markov Property
+\begin_deeper 
+\layout Itemize
+
+value at time 
+\begin_inset Formula $t$
+\end_inset 
+
+ is dependent only on its value at time 
+\begin_inset Formula $t-1$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+The future is conditional independent of the past (the conditioning being
+ on the present).
+\layout Itemize
+
+State of the system in the future is 
+\emph on 
+not 
+\emph default 
+dependent on what happened in the past if we know the state at the present
+ time.
+\end_deeper 
+\layout ShortFoilhead
+
+Monopoly
+\layout Itemize
+
+A real-life example of a Markov chain
+\layout Itemize
+
+Forty squares on a Monopoly board.
+ 
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/smallMonopoly.jpg
+
+\end_inset 
+
+
+\layout Caption
+
+Image of a monopoly board.
+\end_inset 
+
+
+\layout Itemize
+
+Player's state, 
+\begin_inset Formula $N(t)$
+\end_inset 
+
+, square number +40
+\begin_inset Formula $\times$
+\end_inset 
+
+number of `GO's
+\begin_deeper 
+\layout Standard
+
+Normally move through two six sided dice and adding them together.
+ Denote the result of this die roll 
+\begin_inset Formula $d(t)$
+\end_inset 
+
+.
+ 
+\end_deeper 
+\layout Itemize
+
+State at time 
+\begin_inset Formula $t$
+\end_inset 
+
+ is
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset Formula \[
+N(t)=N(t-1)+d(t).\]
+
+\end_inset 
+
+ Monopoly exhibits the Markov property, future states are independent of
+ your previous states given your current state.
+\end_deeper 
+\layout ShortFoilhead
+
+State Diagrams
+\layout Standard
+
+A Markov chain can be represented by a state diagram just as finite state
+ machines are often represented in this manner.
+ One important difference is that Markov chains are not necessarily finite,
+ they can have infinity states! A further difference is that the transitions
+ for Markov chains are associated with probabilities (or in the case of
+ Markov processes rates).
+\layout ShortFoilhead
+
+Poisson Process as a Markov Process
+\layout Standard
+
+We've introduced the game of Monopoly as a Markov chain.
+ In this next session we shall relate Markov chains, where time is treated
+ as a discrete variable, to Markov processes, where time is a continuous
+ variable.
+ We will show how the Poisson process is a special case of a Markov process
+ where a constrained set of transitions are allowed.
+ To do this we will first introduce a new version of Monopoly that we call
+ `Coin Monopoly'.
+ 
+\layout ShortFoilhead
+
+Coin Monopoly
+\layout Itemize
+
+Player tosses the coin when it is their turn.
+ 
+\layout Itemize
+
+We take 
+\begin_inset Formula $d(t)=0$
+\end_inset 
+
+ if a coin is tails and 
+\begin_inset Formula $d(t)=1$
+\end_inset 
+
+ if it is heads.
+ This is depicted as a state diagram in Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:coinMonopolyStateDiagram}
+
+\end_inset 
+
+.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename ./diagrams/stateDiagram.eps
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+State diagram for coin monopoly.
+ Each node (circle) represents a different possible state value.
+ The state changes (or doesn't change) with each time step according the
+ probabilities associated with the arrows.
+ 
+\begin_inset LatexCommand \label{cap:coinMonopolyStateDiagram}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Itemize
+
+Takes a long time to play ...
+ let's speed it up.
+\layout ShortFoilhead
+
+Fast Coin Monopoly
+\layout Itemize
+
+Time, 
+\begin_inset Formula $t$
+\end_inset 
+
+, originally changes by 
+\begin_inset Formula $\Delta t=1$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+Special coin with 
+\begin_inset Formula $P\left(h\right)=\lambda\,\Delta t$
+\end_inset 
+
+ (which must be less than 1), giving 
+\begin_inset Formula $P\left(t\right)=1-\lambda\,\,\Delta t$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+Use the 
+\emph on 
+binomial distribution
+\emph default 
+ to compute how many heads.
+\layout ShortFoilhead
+
+Binomial Distribution for 
+\begin_inset Formula $n$
+\end_inset 
+
+ Trials
+\layout Itemize
+
+A probability distribution for a number of successes given a number of trials.
+\layout Itemize
+
+For 
+\begin_inset Formula $n$
+\end_inset 
+
+ trials (equivalent to 
+\begin_inset Formula $n$
+\end_inset 
+
+ coin tosses or 
+\begin_inset Formula $n$
+\end_inset 
+
+ turns for Coin Monopoly) the probability of 
+\begin_inset Formula $k$
+\end_inset 
+
+ successes (equivalent to 
+\begin_inset Formula $k$
+\end_inset 
+
+ moves forward) is given by 
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+P\left(k\right)=\left(\begin{array}{c}
+n\\
+k\end{array}\right)P\left(h\right)^{k}(1-P\left(h\right))^{n-k}\label{eq:binomialDistirbution}\end{equation}
+
+\end_inset 
+
+where 
+\begin_inset Formula $\left(\begin{array}{c}
+n\\
+k\end{array}\right)=\frac{n!}{k!(n-k)!}$
+\end_inset 
+
+ is known as the binomial coefficient.
+ 
+\layout Standard
+
+Since each of our turns takes 
+\begin_inset Formula $\Delta t$
+\end_inset 
+
+ time, we know that after 
+\begin_inset Formula $t$
+\end_inset 
+
+ time we will have completed 
+\begin_inset Formula \begin{equation}
+n=\frac{t}{\Delta t}\label{eq:nInTermsOfDeltaT}\end{equation}
+
+\end_inset 
+
+ turns.
+ Since we defined 
+\begin_inset Formula $P\left(h\right)=\lambda\Delta t$
+\end_inset 
+
+ we can therefore write
+\begin_inset Formula \[
+P\left(h\right)=\frac{\lambda t}{n}.\]
+
+\end_inset 
+
+We now substitute this expression for the probability of heads into the
+ binomial distribution (
+\begin_inset LatexCommand \ref{eq:binomialDistirbution}
+
+\end_inset 
+
+) giving 
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Formula \begin{eqnarray*}
+P\left(k|\lambda,t\right) & = & \frac{n!}{k!(n-k)!}\left(\frac{\lambda t}{n}\right)^{k}\left(1-\frac{\lambda t}{n}\right)^{n-k}\\
+ & = & \frac{n\left(n-1\right)\dots\left(n-\left(k-1\right)\right)}{n^{k}\left(1-\frac{\lambda t}{n}\right)^{k}}\frac{(\lambda t)^{k}}{k!}\left(1-\frac{\lambda t}{n}\right)^{n}.\end{eqnarray*}
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Take Limits
+\layout Standard
+
+The next step is to take the limit as 
+\begin_inset Formula $n\rightarrow\infty$
+\end_inset 
+
+.
+ From (
+\begin_inset LatexCommand \ref{eq:nInTermsOfDeltaT}
+
+\end_inset 
+
+) we can see that this is equivalent to taking 
+\begin_inset Formula $\Delta t\rightarrow0$
+\end_inset 
+
+.
+ In this limit we can take advantage of the following 
+\begin_inset Formula \[
+\lim_{n\rightarrow\infty}\frac{n\left(n-1\right)\dots\left(n-\left(k-1\right)\right)}{n^{k}\left(1-\frac{\lambda t}{n}\right)^{k}}=1.\]
+
+\end_inset 
+
+You should recognise this from the fact that the dominant term in the numerator
+ is 
+\begin_inset Formula $n^{k}$
+\end_inset 
+
+ and the dominant term in the denominator is 
+\begin_inset Formula $n^{k}$
+\end_inset 
+
+.
+ Secondly we use the fact that 
+\begin_inset Formula \[
+\lim_{m\rightarrow\infty}\left(1+\frac{z}{m}\right)^{m}=\exp\left(z\right).\]
+
+\end_inset 
+
+Inserting these two limits into the equation gives: 
+\begin_inset Formula \begin{equation}
+P\left(k|\lambda,t\right)=\frac{(\lambda t)^{k}}{k!}e^{-\lambda t}.\label{eqn:poisson}\end{equation}
+
+\end_inset 
+
+which is recognised as a Poisson process.
+ In other words, we have proved that a Poisson process is a particular type
+ of Markov chain, in fact, because we have taken the limit as 
+\begin_inset Formula $\Delta t\rightarrow0$
+\end_inset 
+
+, this system is now continuous time, it is therefore known as a Markov
+ process.
+ 
+\end_deeper 
+\layout ShortFoilhead
+
+Markov Process State Diagrams
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename diagrams/stateDiagramProcess.eps
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+State diagram for the Markov process given by Coin Monopoly in the limit
+ as 
+\begin_inset Formula $\Delta t\rightarrow0$
+\end_inset 
+
+.
+ This is the state diagram for a Poisson process.
+ Notice in comparison to Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:coinMonopolyStateDiagram}
+
+\end_inset 
+
+, the probabilities have been replaced by rates and there are no self-transition
+ arrows.
+\begin_inset LatexCommand \label{cap:coinMonopolyProcess}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Summary
+\layout Standard
+
+You've now seen that a Poisson process can be derived starting from a simple
+ Markov chain.
+ This gives some deeper insight to a Poisson process.
+ In the coin monopoly model there is a fixed (constant) probability of moving
+ forward in every turn and whether a move forward occurs in each turn is
+ completely independent of what happened in previous turns.
+ The Poisson process is the continuous analogue of this stem.
+ There is a constant probability of an arrival occurring at any time which
+ is independent of what has gone before.
+ This gives you an intuitive explanation of the two properties of the Poisson
+ process --- similarity and independence.
+\the_end

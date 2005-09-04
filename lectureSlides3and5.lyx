@@ -1,0 +1,4707 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass foils
+\begin_preamble
+
+\newcommand{\answer}[2]{#1}
+\end_preamble
+\options 20pt,dvips
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\float_placement ht
+\paperfontsize default
+\spacing single 
+\papersize Custom
+\paperpackage a4
+\use_geometry 1
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\bullet 0
+	2
+	20
+	-1
+\end_bullet
+\bullet 1
+	5
+	4
+	-1
+\end_bullet
+
+\layout Left Header
+
+Neil Lawrence
+\layout Right Header
+
+Network Performance Analysis
+\layout My Logo
+
+
+\begin_inset Graphics
+	filename /share/mlhome/neil/tex/inputs/sheffieldlogo.eps
+	lyxscale 40
+	scale 40
+
+\end_inset 
+
+
+\layout Right Footer
+
+
+\begin_inset Graphics
+	filename /home/neil/tex/inputs/dcslogo.eps
+	lyxscale 120
+	scale 140
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+quad 
+\end_inset 
+
+
+\family sans 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+thepage{}
+\end_inset 
+
+
+\layout Title
+
+Network Performance Analysis --- Lecture 3
+\layout Author
+
+Neil Lawrence
+\layout Date
+
+Autumn Term 2004-2005
+\layout ShortFoilhead
+
+Next Two Weeks
+\layout Itemize
+
+Today: Birth Death Processes and 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ Queues
+\layout Itemize
+
+Tomorrow: Review of Tutorial 1
+\layout Itemize
+
+Next week: Lab class, go to Lewin Lab, 
+\emph on 
+don't come here
+\emph default 
+.
+\layout ShortFoilhead
+
+Birth Death Processes and 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ Queues
+\layout Itemize
+
+Last Lecture
+\begin_deeper 
+\layout Itemize
+
+Introduced Markov chains.
+ 
+\layout Itemize
+
+Reviewed a simple Markov chain --- `Coin Monopoly'.
+ 
+\layout Itemize
+
+Limit of Markov chain is a Markov process.
+\end_deeper 
+\layout Itemize
+
+This lecture
+\begin_deeper 
+\layout Itemize
+
+Introduce the concept of a steady state distribution.
+ 
+\layout Itemize
+
+Derive steady state distribution of 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue.
+\layout Itemize
+
+Run a simple simulation of the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue.
+\end_deeper 
+\layout ShortFoilhead
+
+Steady State
+\begin_inset LatexCommand \label{sec:steadyState}
+
+\end_inset 
+
+
+\layout Itemize
+
+Steady state behaviour vs the transient dynamics.
+ 
+\layout Itemize
+
+What do we mean by steady state? 
+\begin_deeper 
+\layout Enumerate
+
+A stable condition that does not change over time or in which change in
+ one direction is continually balanced by change in another.
+\begin_inset Foot
+collapsed false
+
+\layout Standard
+
+
+\family typewriter 
+http://www.dictionary.com
+\family default 
+.
+\end_inset 
+
+
+\layout Enumerate
+
+A steady state is a dynamic equilibrium.
+ 
+\end_deeper 
+\layout Itemize
+
+A Markov process 
+\emph on 
+can
+\emph default 
+ reach a steady state distribtuion.
+ 
+\layout Itemize
+
+A probabilistic process 
+\begin_inset Formula $p\left(k|t\right)$
+\end_inset 
+
+ is a `noisy function' of time.
+ 
+\begin_deeper 
+\layout Itemize
+
+If process converges to a distribution as time 
+\begin_inset Formula $\rightarrow\infty$
+\end_inset 
+
+ then it has a steady state.
+\begin_inset Formula \[
+\lim_{t\rightarrow\infty}p\left(k|t\right)=p\left(k\right)\]
+
+\end_inset 
+
+the average value of 
+\begin_inset Formula $k$
+\end_inset 
+
+ at steady state is then given by
+\begin_inset Formula \[
+\left\langle k\right\rangle _{p\left(k\right)}=\sum_{k=0}^{\infty}p\left(k\right)k.\]
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+
+A Poisson doesn't have a steady state distribution.
+\layout ShortFoilhead
+
+Coin Monopoly Revisited
+\layout Itemize
+
+`Coin Monopoly' Markov chain has no 
+\emph on 
+steady state 
+\emph default 
+distribution
+\begin_deeper 
+\layout Itemize
+
+,Over time the value of 
+\begin_inset Formula $k$
+\end_inset 
+
+ will always increase.
+ 
+\end_deeper 
+\layout Itemize
+
+In this lecture introduce a (slightly) more complex Markov process: the
+ 
+\emph on 
+birth-death processes
+\emph default 
+.
+ 
+\layout Itemize
+
+A birth-death process can have a steady state distribution.
+ 
+\layout Itemize
+
+We use detailed balance to discover this distribution.
+\layout ShortFoilhead
+
+Birth Death Process
+\layout Itemize
+
+A model for births and deaths in a population.
+ 
+\layout Itemize
+
+Recall the Markov chain underlying `Coin Monopoly'.
+ 
+\begin_deeper 
+\layout Itemize
+
+Modify this diagram: allow backwards moves.
+ 
+\layout Itemize
+
+Prevent state from going negative.
+ 
+\layout Itemize
+
+This system is known as a birth-death process.
+ 
+\end_deeper 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename ./diagrams/birthDeathChain.eps
+	width 100text%
+
+\end_inset 
+
+
+\layout Caption
+
+State diagram for a birth-death chain.
+\begin_inset LatexCommand \label{cap:birthDeathChainState}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename ./diagrams/birthDeathProcess.eps
+	width 100text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+State diagram for a birth-death process.
+\begin_inset LatexCommand \label{cap:birthDeathChainProcess}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Kendall's Notation
+\begin_inset LatexCommand \label{sec:kendall}
+
+\end_inset 
+
+
+\layout Itemize
+
+Simple way of summarising the characteristics of a queue.
+\layout Standard
+\align center 
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "4cm"
+collapsed false
+
+\layout Standard
+\align center 
+Arrival characteristics
+\end_inset 
+
+
+\size largest 
+/
+\size default 
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "4cm"
+collapsed false
+
+\layout Standard
+\align center 
+Departure characteristics
+\end_inset 
+
+
+\size largest 
+/
+\size default 
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "4cm"
+collapsed false
+
+\layout Standard
+\align center 
+number of servers 
+\end_inset 
+
+
+\size largest 
+/
+\size default 
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "4cm"
+collapsed false
+
+\layout Standard
+\align center 
+max number of customers
+\end_inset 
+
+
+\layout Standard
+
+The arrival and departure characteristics are summarised by
+\layout Itemize
+
+
+\begin_inset Formula $M$
+\end_inset 
+
+ --- Markov --- Poisson distributed arrivals, exponentially distributed
+ service times.
+\layout Itemize
+
+
+\begin_inset Formula $D$
+\end_inset 
+
+ --- Deterministically distributed times.
+\layout Itemize
+
+
+\begin_inset Formula $G$
+\end_inset 
+
+ --- General distribution for inter-arrival/service times.
+\layout ShortFoilhead
+
+Global Balance
+\layout Itemize
+
+Seek a stationary distribution through global balance equations.
+ 
+\layout Itemize
+
+At equilibrium the frequency of transitions out of state 
+\begin_inset Formula $k$
+\end_inset 
+
+ equals the frequency of transitions into 
+\begin_inset Formula $k$
+\end_inset 
+
+ 
+\begin_inset LatexCommand \citep[pg 260-262]{Bertsekas:data92}
+
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+Markov chain can be defined by a transition probability matrix.
+\begin_deeper 
+\layout Itemize
+
+Gives the probability of transition from any state to any other.
+ 
+\begin_inset Formula \[
+\mathbf{P}=\left[\begin{array}{ccccc}
+P_{11} & \cdots & P_{i1} & \cdots & P_{N1}\\
+\vdots & \ddots &  &  & \vdots\\
+P_{1j} &  & P_{ij} &  & P_{Nj}\\
+\vdots &  &  & \ddots & \vdots\\
+P_{1N} & \cdots & P_{iN} & \cdots & P_{NN}\end{array}\right].\]
+
+\end_inset 
+
+where probability of transition from state 
+\begin_inset Formula $i$
+\end_inset 
+
+ to state 
+\begin_inset Formula $j$
+\end_inset 
+
+ is given by 
+\begin_inset Formula $P_{ij}$
+\end_inset 
+
+.
+\end_deeper 
+\layout ShortFoilhead
+
+Global Balance II
+\layout Itemize
+
+If 
+\begin_inset Formula $P\left(j\right)$
+\end_inset 
+
+ is steady state probability for state 
+\begin_inset Formula $j$
+\end_inset 
+
+, global balance says
+\begin_inset Formula \[
+P\left(j\right)\sum_{i=0}^{\infty}P_{ji}=\sum_{i=0}^{\infty}P\left(i\right)P_{ij}\]
+
+\end_inset 
+
+``the probability of leaving state 
+\begin_inset Formula $j$
+\end_inset 
+
+ should be equal to the probability of arriving in state 
+\begin_inset Formula $j$
+\end_inset 
+
+.''
+\layout Itemize
+
+Markov Process: rates of transfer.
+ 
+\layout Itemize
+
+Rates of transfer between states are given by a matrix with elements 
+\begin_inset Formula $q_{ij}$
+\end_inset 
+
+ for transfer between 
+\begin_inset Formula $i$
+\end_inset 
+
+ and 
+\begin_inset Formula $j$
+\end_inset 
+
+.
+ Global balance equations give
+\begin_inset Formula \[
+P\left(j\right)\sum_{i=0}^{\infty}q_{ji}=\sum_{i=0}^{\infty}P\left(i\right)q_{ij}.\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Detailed Balance
+\layout Itemize
+
+For the birth death processes transitions only between state 
+\begin_inset Formula $k$
+\end_inset 
+
+ and 
+\begin_inset Formula $k+1$
+\end_inset 
+
+ or 
+\begin_inset Formula $k-1$
+\end_inset 
+
+.
+ 
+\begin_deeper 
+\layout Itemize
+
+
+\begin_inset Formula $P_{ij}=0$
+\end_inset 
+
+ if 
+\begin_inset Formula $i>j+1$
+\end_inset 
+
+ and 
+\begin_inset Formula $i<j-1$
+\end_inset 
+
+.
+ 
+\end_deeper 
+\layout Itemize
+
+Special case of the global balance: detailed balance equations.
+ Looks at the flow between two states.
+ 
+\layout Itemize
+
+For the discrete case
+\begin_inset Formula \[
+P\left(k-1\right)P_{k-1,k}=P\left(k\right)P_{k,k-1}\]
+
+\end_inset 
+
+
+\layout Itemize
+
+For the continuous case 
+\begin_inset Formula \[
+P\left(k-1\right)q_{k-1,k}=P\left(k\right)q_{k,k-1}.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+With our notation rate from 
+\begin_inset Formula $q_{k-1,k}=\lambda_{k-1}$
+\end_inset 
+
+ and 
+\begin_inset Formula $q_{k,k-1}=\mu_{k}$
+\end_inset 
+
+ giving
+\layout Standard
+
+
+\begin_inset Formula \[
+P\left(k-1\right)\lambda_{k-1}=P\left(k\right)\mu_{k}.\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Boundary Flow
+\layout Itemize
+
+Consider the flow rates at a 
+\emph on 
+boundary 
+\emph default 
+between two states, 
+\begin_inset Formula $k-1$
+\end_inset 
+
+ and 
+\begin_inset Formula $k$
+\end_inset 
+
+.
+ 
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename ./diagrams/boundaryFlow.eps
+	width 60text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+Flow rates at a Boundary for a birth-death process.
+\begin_inset LatexCommand \label{cap:flowAtBoundary}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+
+At steady state
+\begin_deeper 
+\layout Itemize
+
+flow from 
+\begin_inset Formula $k-1$
+\end_inset 
+
+ to 
+\begin_inset Formula $k$
+\end_inset 
+
+ is 
+\begin_inset Formula $\lambda_{k-1}P\left(k-1\right)$
+\end_inset 
+
+, 
+\layout Itemize
+
+flow from 
+\begin_inset Formula $k$
+\end_inset 
+
+ to 
+\begin_inset Formula $k-1$
+\end_inset 
+
+ is 
+\begin_inset Formula $\mu_{k}P\left(k\right)$
+\end_inset 
+
+.
+ 
+\end_deeper 
+\layout Itemize
+
+For flow to be balanced we have 
+\begin_inset Formula \[
+\lambda_{k-1}P\left(k-1\right)=\mu_{k}P\left(k\right).\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+For different systems birth rate and death rate will differ.
+ First we consider 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue.
+\layout ShortFoilhead
+
+Kendall's Notation --- 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+
+\layout Standard
+\align center 
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "4cm"
+collapsed false
+
+\layout Standard
+\align center 
+Arrival characteristics
+\end_inset 
+
+
+\size largest 
+/
+\size default 
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "4cm"
+collapsed false
+
+\layout Standard
+\align center 
+Departure characteristics
+\end_inset 
+
+
+\size largest 
+/
+\size default 
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "4cm"
+collapsed false
+
+\layout Standard
+\align center 
+number of servers 
+\end_inset 
+
+
+\size largest 
+/
+\size default 
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "4cm"
+collapsed false
+
+\layout Standard
+\align center 
+max number of customers
+\end_inset 
+
+
+\layout Standard
+\align center 
+
+\size larger 
+
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+
+\layout Itemize
+
+
+\size large 
+\color red
+
+\begin_inset Formula $M$
+\end_inset 
+
+ --- Markov --- Poisson distributed arrivals, exponentially distributed
+ service times.
+\layout Itemize
+
+
+\color cyan
+
+\begin_inset Formula $D$
+\end_inset 
+
+ --- Deterministically distributed times.
+\layout Itemize
+
+
+\color cyan
+
+\begin_inset Formula $G$
+\end_inset 
+
+ --- General distribution for inter-arrival/service times.
+\layout ShortFoilhead
+
+
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ Queue
+\begin_inset LatexCommand \label{sec:MM1Stationary}
+
+\end_inset 
+
+
+\layout Itemize
+
+
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ arrivals occur as a Poisson process, service times are exponentially distribute
+d.
+ 
+\layout Itemize
+
+A birth-death process
+\begin_deeper 
+\layout Itemize
+
+constant birth rate 
+\begin_inset Formula $\lambda_{k}=\lambda$
+\end_inset 
+
+ (from the Poisson process) 
+\layout Itemize
+
+constant death rate (from the exponentially distributed service times) 
+\begin_inset Formula $\mu_{k}=\mu$
+\end_inset 
+
+.
+ 
+\end_deeper 
+\layout Itemize
+
+State diagram is 
+\layout Standard
+
+
+\size tiny 
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename diagrams/stateMM1.eps
+	width 100text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+State diagram for 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue.
+ 
+\end_inset 
+
+
+\layout Itemize
+
+Derive stationary distribution is derived using detailed balance.
+ 
+\layout ShortFoilhead
+
+
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ Stationary Distribution
+\layout Itemize
+
+The state diagram highlights several points.
+ 
+\begin_deeper 
+\layout Enumerate
+
+There are no transitions to a state below 0.
+\layout Enumerate
+
+There is no maximum value for the state shown, this implies that 
+\begin_inset Formula $k$
+\end_inset 
+
+ is unbounded.
+\layout Enumerate
+
+The birth rates and death rates for each state are indicated.
+ 
+\layout Enumerate
+
+Transitions are only possible between neighbouring states.
+\end_deeper 
+\layout Itemize
+
+Flow at boundary: analyse between 
+\begin_inset Formula $k$
+\end_inset 
+
+ and 
+\begin_inset Formula $k-1$
+\end_inset 
+
+.
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename ./diagrams/boundaryFlowMM1.eps
+	width 60text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+Flow rates at a boundary.
+\begin_inset LatexCommand \label{cap:flowAtBoundary}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+
+At steady state, 
+\begin_inset Formula \[
+\lambda P\left(k-1\right)=\mu P\left(k\right).\]
+
+\end_inset 
+
+ 
+\layout ShortFoilhead
+
+
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ --- Stationary Distribution II
+\layout Itemize
+
+At steady state, 
+\begin_inset Formula \[
+\lambda P\left(k-1\right)=\mu P\left(k\right).\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+Leading to 
+\begin_inset Formula \[
+P\left(k\right)=\frac{\lambda}{\mu}P\left(k-1\right).\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+Thus (
+\series bold 
+error in notes here
+\series default 
+)
+\begin_inset Formula \begin{eqnarray*}
+P\left(k\right) & = & \left(\frac{\lambda}{\mu}\right)^{k}P\left(0\right)\\
+ & = & \rho^{k}P\left(0\right),\end{eqnarray*}
+
+\end_inset 
+
+ 
+\begin_deeper 
+\layout Standard
+
+where we have defined 
+\begin_inset Formula $\rho=\frac{\lambda}{\mu}$
+\end_inset 
+
+, which, for the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue, is called the 
+\emph on 
+utilisation factor
+\emph default 
+.
+ 
+\end_deeper 
+\layout ShortFoilhead
+
+Normalisation
+\begin_inset LatexCommand \label{sub:normalisationMM1}
+
+\end_inset 
+
+
+\layout Itemize
+
+To find 
+\begin_inset Formula $P\left(0\right)$
+\end_inset 
+
+ we use the normalisation condition.
+\begin_inset Formula \[
+\sum_{k=0}^{\infty}P\left(k\right)=1\]
+
+\end_inset 
+
+ and because 
+\begin_inset Formula $P\left(k\right)=\rho^{k}P\left(0\right)$
+\end_inset 
+
+,
+\begin_inset Formula \[
+1=P\left(0\right)\sum_{k=0}^{\infty}\rho^{k}\]
+
+\end_inset 
+
+ giving 
+\begin_inset Formula \begin{equation}
+P\left(0\right)=\frac{1}{\sum_{k=0}^{\infty}\rho^{k}}.\label{eq:MM1Series}\end{equation}
+
+\end_inset 
+
+ 
+\layout Itemize
+
+The infinite series in the denominator converges if 
+\begin_inset Formula $\rho<1$
+\end_inset 
+
+ (when 
+\begin_inset Formula $\lambda<\mu$
+\end_inset 
+
+), 
+\begin_inset Formula \[
+\sum_{k=0}^{\infty}\rho^{k}=\frac{1}{1-\rho}\,\,\,\textrm{for\,\,\,$\rho<1$},\]
+
+\end_inset 
+
+ so 
+\begin_inset Formula $P\left(0\right)=\left(1-\rho\right)$
+\end_inset 
+
+ and the full distribution for the 
+\emph on 
+steady state
+\emph default 
+ probabilities is 
+\begin_inset Formula \[
+P\left(k\right)=\rho^{k}\left(1-\rho\right).\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Faster Arrivals than Service
+\layout Standard
+
+Notice that if the arrival rate (birth rate) is greater than the service
+ rate (death rate) then 
+\begin_inset Formula $\rho>1$
+\end_inset 
+
+ and the series in (
+\begin_inset LatexCommand \ref{eq:MM1Series}
+
+\end_inset 
+
+) doesn't converge.
+ This is indicative of the fact that if the birth rate is greater than the
+ death rate there is no steady state distribution.
+ The queue continues to grow in size.
+\layout ShortFoilhead
+
+Average Number in System
+\layout Itemize
+
+Network design: interested in the average queue length.
+ 
+\layout Itemize
+
+We use the steady state probabilities to compute this quantity.
+ 
+\layout Itemize
+
+The average number of customers in the system 
+\emph on 
+is not
+\emph default 
+ the same as the average queue length 
+\begin_deeper 
+\layout Itemize
+
+a customer being served (
+\emph on 
+e.g.
+ 
+\emph default 
+a packet under transmission) is not in the queue.
+\end_deeper 
+\layout Itemize
+
+Average number of customers in the system is the expected state of the system.
+\layout ShortFoilhead
+
+Average Number in System II
+\layout Standard
+
+
+\begin_inset Formula \begin{eqnarray*}
+\left\langle k\right\rangle _{P\left(k\right)} & = & \sum_{k=0}^{\infty}kP\left(k\right)\\
+\\\\\\\\\\\\\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Average Number in System II
+\layout Standard
+
+
+\begin_inset Formula \begin{eqnarray*}
+\left\langle k\right\rangle _{P\left(k\right)} & = & \sum_{k=0}^{\infty}kP\left(k\right)\\
+ & = & \left(1-\rho\right)\sum_{k=0}^{\infty}k\rho^{k}\\
+\\\\\\\\\\\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Average Number in System II
+\layout Standard
+
+
+\begin_inset Formula \begin{eqnarray*}
+\left\langle k\right\rangle _{P\left(k\right)} & = & \sum_{k=0}^{\infty}kP\left(k\right)\\
+ & = & \left(1-\rho\right)\sum_{k=0}^{\infty}k\rho^{k}\\
+ & = & \rho\left(1-\rho\right)\sum_{k=0}^{\infty}k\rho^{k-1}\\
+\\\\\\\\\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Average Number in System II
+\layout Standard
+
+
+\begin_inset Formula \begin{eqnarray*}
+\left\langle k\right\rangle _{P\left(k\right)} & = & \sum_{k=0}^{\infty}kP\left(k\right)\\
+ & = & \left(1-\rho\right)\sum_{k=0}^{\infty}k\rho^{k}\\
+ & = & \rho\left(1-\rho\right)\sum_{k=0}^{\infty}k\rho^{k-1}\\
+ & = & \rho\left(1-\rho\right)\frac{\partial\sum_{k=0}^{\infty}\rho^{k}}{\partial\rho}\\
+\\\\\\\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Average Number in System II
+\layout Standard
+
+
+\begin_inset Formula \begin{eqnarray*}
+\left\langle k\right\rangle _{P\left(k\right)} & = & \sum_{k=0}^{\infty}kP\left(k\right)\\
+ & = & \left(1-\rho\right)\sum_{k=0}^{\infty}k\rho^{k}\\
+ & = & \rho\left(1-\rho\right)\sum_{k=0}^{\infty}k\rho^{k-1}\\
+ & = & \rho\left(1-\rho\right)\frac{\partial\sum_{k=0}^{\infty}\rho^{k}}{\partial\rho}\\
+ & = & \rho\left(1-\rho\right)\frac{\partial}{\partial\rho}\left[\frac{1}{1-\rho}\right]\\
+\\\\\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Average Number in System II
+\layout Standard
+
+
+\begin_inset Formula \begin{eqnarray*}
+\left\langle k\right\rangle _{P\left(k\right)} & = & \sum_{k=0}^{\infty}kP\left(k\right)\\
+ & = & \left(1-\rho\right)\sum_{k=0}^{\infty}k\rho^{k}\\
+ & = & \rho\left(1-\rho\right)\sum_{k=0}^{\infty}k\rho^{k-1}\\
+ & = & \rho\left(1-\rho\right)\frac{\partial\sum_{k=0}^{\infty}\rho^{k}}{\partial\rho}\\
+ & = & \rho\left(1-\rho\right)\frac{\partial}{\partial\rho}\left[\frac{1}{1-\rho}\right]\\
+ & = & \rho\left(1-\rho\right)\frac{1}{\left(1-\rho\right)^{2}}\\
+\\\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Average Number in System II
+\layout Standard
+
+
+\begin_inset Formula \begin{eqnarray*}
+\left\langle k\right\rangle _{P\left(k\right)} & = & \sum_{k=0}^{\infty}kP\left(k\right)\\
+ & = & \left(1-\rho\right)\sum_{k=0}^{\infty}k\rho^{k}\\
+ & = & \rho\left(1-\rho\right)\sum_{k=0}^{\infty}k\rho^{k-1}\\
+ & = & \rho\left(1-\rho\right)\frac{\partial\sum_{k=0}^{\infty}\rho^{k}}{\partial\rho}\\
+ & = & \rho\left(1-\rho\right)\frac{\partial}{\partial\rho}\left[\frac{1}{1-\rho}\right]\\
+ & = & \rho\left(1-\rho\right)\frac{1}{\left(1-\rho\right)^{2}}\\
+ & = & \frac{\rho}{1-\rho}\\
+\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Average Number in System II
+\layout Standard
+
+
+\begin_inset Formula \begin{eqnarray*}
+\left\langle k\right\rangle _{P\left(k\right)} & = & \sum_{k=0}^{\infty}kP\left(k\right)\\
+ & = & \left(1-\rho\right)\sum_{k=0}^{\infty}k\rho^{k}\\
+ & = & \rho\left(1-\rho\right)\sum_{k=0}^{\infty}k\rho^{k-1}\\
+ & = & \rho\left(1-\rho\right)\frac{\partial\sum_{k=0}^{\infty}\rho^{k}}{\partial\rho}\\
+ & = & \rho\left(1-\rho\right)\frac{\partial}{\partial\rho}\left[\frac{1}{1-\rho}\right]\\
+ & = & \rho\left(1-\rho\right)\frac{1}{\left(1-\rho\right)^{2}}\\
+ & = & \frac{\rho}{1-\rho}\\
+ & = & \frac{\lambda}{\mu-\lambda}\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Variance
+\layout Standard
+
+As an exercise on the tutorial sheet, you will show that the variance of
+ the number in the system is given by
+\layout Standard
+
+
+\begin_inset Formula \[
+\textrm{var}\left[k\right]=\left\langle k^{2}\right\rangle -\left\langle k\right\rangle ^{2}=\frac{\rho}{\left(1-\rho\right)^{2}}.\]
+
+\end_inset 
+
+ 
+\layout ShortFoilhead
+
+Discrete Simulation of 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+
+\layout Itemize
+
+Next week: first lab class.
+\layout Itemize
+
+Discrete simulation of an 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue: easy to run because it takes the form of a Markov chain.
+ 
+\layout Itemize
+
+State diagram for this system.
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/discreteMM1State.eps
+	width 100text%
+
+\end_inset 
+
+
+\layout Caption
+
+State diagram for the discrete version of the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue.
+\end_inset 
+
+
+\end_deeper 
+\layout ShortFoilhead
+
+Hints for the Simulation
+\layout Itemize
+
+Use a loop over discrete time steps.
+ 
+\layout Itemize
+
+At each time step there are three possible events: 
+\begin_deeper 
+\layout Itemize
+
+the state of the system increases by one; 
+\layout Itemize
+
+the state of the system decreases by one and 
+\layout Itemize
+
+the state of the system stays the same.
+ 
+\end_deeper 
+\layout Itemize
+
+Modelling the queue is therefore a simple matter of testing which of these
+ outcomes is true.
+ 
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/probOutcome.eps
+	width 80text%
+
+\end_inset 
+
+
+\layout Caption
+
+Testing for one of three outcomes.
+ Generate a random number and see where it lands.
+\end_inset 
+
+
+\end_deeper 
+\layout ShortFoilhead
+
+Approximating a Continuous 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ Queue
+\layout Itemize
+
+We know from last week that a Poisson process can be derived by considering
+ the limit of a simple Markov chain.
+ 
+\layout Itemize
+
+A continuous 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue is the limit of the discrete model we are using for simulation
+\layout Itemize
+
+In your lab class you can make ths approximation by taking 
+\begin_inset Formula $\Delta t$
+\end_inset 
+
+ to be much smaller than 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ or 
+\begin_inset Formula $\mu$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+Then you may set 
+\begin_inset Formula $P\left(b\right)=\lambda\Delta t$
+\end_inset 
+
+ and 
+\begin_inset Formula $P\left(d\right)=\mu\Delta t$
+\end_inset 
+
+.
+ 
+\layout ShortFoilhead
+
+Demonstration
+\layout Itemize
+
+Lab class: run a simulation of the discrete queue.
+\layout Itemize
+
+Answer questions on the analysis of that queue.
+ 
+\layout Itemize
+
+Now we demonstrate a simulation in the lecture.
+ 
+\layout Itemize
+
+We also give you histograms that are similar to those you should be producing
+ in the lab class.
+\layout ShortFoilhead
+
+Histograms
+\layout Standard
+
+
+\begin_inset Float figure
+wide true
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Graphics
+	filename diagrams/rho_half_100_arrivals.eps
+	lyxscale 60
+	display color
+	width 45text%
+
+\end_inset 
+
+ 
+\hfill 
+
+\begin_inset Graphics
+	filename diagrams/rho_half_1000_arrivals.eps
+	lyxscale 60
+	display color
+	width 45text%
+
+\end_inset 
+
+
+\layout Caption
+
+Left figure: steady state probabilities after the first 100 seconds for
+ 
+\begin_inset Formula $\rho=0.5$
+\end_inset 
+
+.
+ Right figure: steady state probabilities after the first 1000 seconds for
+ 
+\begin_inset Formula $\rho=0.5$
+\end_inset 
+
+.
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide true
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Graphics
+	filename diagrams/rho_point95_100_arrivals.eps
+	lyxscale 60
+	display color
+	width 45text%
+
+\end_inset 
+
+ 
+\hfill 
+
+\begin_inset Graphics
+	filename diagrams/rho_point95_1000_arrivals.eps
+	lyxscale 60
+	display color
+	width 45text%
+
+\end_inset 
+
+
+\layout Caption
+
+Left figure: steady state probabilities after the first 100 seconds for
+ 
+\begin_inset Formula $\rho=0.95$
+\end_inset 
+
+.
+ Right figure: steady state probabilities after the first 1000 seconds for
+ 
+\begin_inset Formula $\rho=0.95$
+\end_inset 
+
+.
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Little's Formula
+\layout Itemize
+
+Important quality of service issue is the average delay.
+\layout Itemize
+
+We would also like to be able to compute 
+\begin_deeper 
+\layout Itemize
+
+the average number in the queue and 
+\layout Itemize
+
+the average time spent queueing.
+\end_deeper 
+\layout Itemize
+
+We introduce Little's formula, a very general formula.
+\layout Itemize
+
+Can be applied to 
+\begin_inset Formula $G/G/1$
+\end_inset 
+
+ queues.
+ 
+\layout Itemize
+
+Gives the relationship between 
+\begin_deeper 
+\layout Itemize
+
+Steady-state average size of a queue, 
+\begin_inset Formula $\bar{N}$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+The steady-state arrival rate, 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+.
+\layout Itemize
+
+The steady-state customer delay, 
+\begin_inset Formula $\bar{T}$
+\end_inset 
+
+.
+ 
+\end_deeper 
+\layout ShortFoilhead
+
+Time and Steady State Averages
+\layout Itemize
+
+We have already introduced the distribution means and sample based means.
+ 
+\layout Itemize
+
+Time based averages are a further type of average.
+ 
+\layout Itemize
+
+The time average is the average value of a particular function over time.
+\begin_inset Formula \[
+\bar{f}_{t}=\frac{1}{t}\int_{0}^{t}f\left(\tau\right)d\tau.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+The derivation of Little's formula relies on an assumption.
+ 
+\begin_deeper 
+\layout Itemize
+
+Assume that averages under the steady state distribution are equivalent
+ to the time average in the limit as 
+\begin_inset Formula $t\rightarrow\infty$
+\end_inset 
+
+, 
+\layout Itemize
+
+Average number in the system as a function of time is given by 
+\begin_inset Formula \[
+\bar{N}_{t}=\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau\]
+
+\end_inset 
+
+and the time average after in the limit as 
+\begin_inset Formula $t\rightarrow\infty$
+\end_inset 
+
+ is given by 
+\begin_inset Formula \[
+\bar{N}=\lim_{t\rightarrow\infty}\bar{N}\left(t\right).\]
+
+\end_inset 
+
+which we assume is equivalent to 
+\begin_inset Formula $\left\langle k\right\rangle _{p\left(k\right)}\equiv\bar{N}$
+\end_inset 
+
+.
+ See pg 156-157 in 
+\begin_inset LatexCommand \cite{Bertsekas:data92}
+
+\end_inset 
+
+.
+ 
+\end_deeper 
+\layout ShortFoilhead
+
+The Formula
+\layout Itemize
+
+Applies under steady state conditions.
+\layout Itemize
+
+Under the steady state assumptions it states,
+\begin_inset Formula \[
+\bar{N}=\lambda\bar{T}.\]
+
+\end_inset 
+
+
+\layout Standard
+
+
+\series bold 
+Example
+\series default 
+: Nightclub queue.
+\layout Standard
+
+You are driving past a nightclub, wondering how long you will have to wait
+ to go in.
+ You notice on Thursday nights that the queue typically contains 20 people
+ and that people arrive at a rate of 40 per hour.
+ 
+\layout Standard
+
+According to Little's formula, how long would you expect to have to wait
+ to get in? 
+\layout Standard
+
+
+\series bold 
+Answer
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+The waiting time is given by Little's formula: 
+\layout Standard
+
+
+\begin_inset Formula $\bar{N}=20$
+\end_inset 
+
+, 
+\begin_inset Formula $\lambda=40$
+\end_inset 
+
+ and 
+\begin_inset Formula $\bar{T}=\frac{\bar{N}}{\lambda}=\frac{20}{40}=\frac{1}{2}\textrm{hour}$
+\end_inset 
+
+.
+ 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Intuition
+\layout Standard
+
+If we see there are twenty people in a queue and they enter a building at
+ a rate of 40 per hour, we might expect to have to wait half-an-hour in
+ the queue.
+ Formally though, we will build upon the intuition with a simple graphical
+ `proof' of the formula based upon that given in 
+\begin_inset LatexCommand \cite{Bertsekas:data92}
+
+\end_inset 
+
+.
+\layout ShortFoilhead
+
+Graphical Proof I
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename ./diagrams/littlesFormula.eps
+	width 80text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{10}
+\end_inset 
+
+
+\layout Caption
+
+Graphical `proof' of Little's formula.
+\begin_inset LatexCommand \label{cap:littlesGraphical}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Graphical Proof II
+\layout Itemize
+
+Sketch two curves vs time: the number of arrivals (
+\begin_inset Formula $\alpha\left(\tau\right)$
+\end_inset 
+
+) and the number of departures (
+\begin_inset Formula $\beta\left(\tau\right)$
+\end_inset 
+
+) .
+\layout Itemize
+
+Also plot 
+\begin_inset Formula $N\left(t\right)$
+\end_inset 
+
+ the number in the queue as function of time.
+\layout Itemize
+
+By looking at Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:littlesGraphical}
+
+\end_inset 
+
+ we note that the area between the lines in the top figure can be expressed
+ as both 
+\begin_inset Formula $\int_{0}^{t}N(\tau)d\tau$
+\end_inset 
+
+ and 
+\begin_inset Formula $\sum_{i=1}^{\alpha\left(t\right)}T_{i}$
+\end_inset 
+
+.
+ We may therefore equate these expressions,
+\begin_inset Formula \[
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i}.\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Little's Formula Derivation
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+introduce 
+\begin_inset Formula $\alpha\left(t\right)$
+\end_inset 
+
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Little's Formula Derivation
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+introduce 
+\begin_inset Formula $\alpha\left(t\right)$
+\end_inset 
+
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\int_{0}^{t}N\left(\tau\right)d\tau=\alpha\left(t\right)\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+and divide both sides by 
+\begin_inset Formula $t$
+\end_inset 
+
+,
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Little's Formula Derivation
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+introduce 
+\begin_inset Formula $\alpha\left(t\right)$
+\end_inset 
+
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\int_{0}^{t}N\left(\tau\right)d\tau=\alpha\left(t\right)\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+and divide both sides by 
+\begin_inset Formula $t$
+\end_inset 
+
+,
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau=\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}.\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+The equation now has the form of three averages.
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Little's Formula Derivation
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+introduce 
+\begin_inset Formula $\alpha\left(t\right)$
+\end_inset 
+
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\int_{0}^{t}N\left(\tau\right)d\tau=\alpha\left(t\right)\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+and divide both sides by 
+\begin_inset Formula $t$
+\end_inset 
+
+,
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau=\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}.\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+The equation now has the form of three averages.
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\bar{N}_{t}=\frac{1}{t}\int_{0}^{t}N\left(\tau\right).\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+an average, over time, of the queue length
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Little's Formula Derivation
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+introduce 
+\begin_inset Formula $\alpha\left(t\right)$
+\end_inset 
+
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\int_{0}^{t}N\left(\tau\right)d\tau=\alpha\left(t\right)\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+and divide both sides by 
+\begin_inset Formula $t$
+\end_inset 
+
+,
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau=\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}.\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+The equation now has the form of three averages.
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\bar{N}_{t}=\frac{1}{t}\int_{0}^{t}N\left(\tau\right).\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+an average, over time, of the queue length
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\bar{\lambda}_{t}=\frac{\alpha\left(t\right)}{t},\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+the average of the arrivals over time
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Little's Formula Derivation
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+introduce 
+\begin_inset Formula $\alpha\left(t\right)$
+\end_inset 
+
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\int_{0}^{t}N\left(\tau\right)d\tau=\alpha\left(t\right)\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+and divide both sides by 
+\begin_inset Formula $t$
+\end_inset 
+
+,
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau=\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}.\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+The equation now has the form of three averages.
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\bar{N}_{t}=\frac{1}{t}\int_{0}^{t}N\left(\tau\right).\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+an average, over time, of the queue length
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\bar{\lambda}_{t}=\frac{\alpha\left(t\right)}{t},\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+the average of the arrivals over time
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\bar{T}_{t}=\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+the average waiting time
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Little's Formula Derivation
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+introduce 
+\begin_inset Formula $\alpha\left(t\right)$
+\end_inset 
+
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\int_{0}^{t}N\left(\tau\right)d\tau=\alpha\left(t\right)\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+and divide both sides by 
+\begin_inset Formula $t$
+\end_inset 
+
+,
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau=\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}.\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+The equation now has the form of three averages.
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\bar{N}_{t}=\frac{1}{t}\int_{0}^{t}N\left(\tau\right).\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+an average, over time, of the queue length
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\bar{\lambda}_{t}=\frac{\alpha\left(t\right)}{t},\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+the average of the arrivals over time
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\bar{T}_{t}=\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+the average waiting time
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "100col%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "60text%"
+collapsed false
+
+\layout Standard
+
+
+\begin_inset Formula \[
+\bar{N}_{t}=\bar{\lambda}_{t}\bar{T}_{t}.\]
+
+\end_inset 
+
+
+\end_inset 
+
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+\SpecialChar ~
+
+\begin_inset Minipage
+position 1
+inner_position 0
+height "0pt"
+width "25text%"
+collapsed false
+
+\layout Standard
+\align center 
+taking the limit as 
+\begin_inset Formula $t\rightarrow\infty$
+\end_inset 
+
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Little's Formula
+\layout Standard
+
+Gives Little's formula.
+\layout Standard
+
+
+\begin_inset Formula \[
+\bar{N}=\lambda\bar{T}\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Applies regardless of the arrival and service time distributions.
+\layout Itemize
+
+Relies on the system being in 
+\emph on 
+steady state
+\emph default 
+.
+ 
+\layout Itemize
+
+Can be used at the level of the system.
+\layout Itemize
+
+Or the level of the queue.
+\layout Itemize
+
+Or the level of service.
+\layout ShortFoilhead
+
+Average Delay in 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+
+\layout Itemize
+
+The mean of the steady state distribution for an 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue is
+\begin_inset Formula \[
+\bar{N}=\frac{\lambda}{\mu-\lambda}=\frac{\rho}{1-\rho}.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Can use Little's formula to tell us the average delay.
+\layout Itemize
+
+From 
+\begin_inset Formula $\bar{N}=\lambda\bar{T}$
+\end_inset 
+
+ we rearrange to recover 
+\begin_inset Formula \[
+\bar{T}=\frac{1}{\mu-\lambda}\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+This is not the time spent in the queue! 
+\layout Itemize
+
+This is the time spent in the system: it includes
+\emph on 
+ service time.
+\begin_deeper 
+\layout Itemize
+
+arises from 
+\emph on 
+propagation delay.
+\layout Itemize
+
+length of phone call 
+\emph on 
+etc
+\emph default 
+.
+\end_deeper 
+\layout ShortFoilhead
+
+Little's Formula for Queueing Time and Transmission Time 
+\layout Itemize
+
+The total delay can be divided into 
+\begin_deeper 
+\layout Itemize
+
+queueing time, 
+\begin_inset Formula $W$
+\end_inset 
+
+, 
+\layout Itemize
+
+and service time 
+\begin_inset Formula $X$
+\end_inset 
+
+.
+ 
+\begin_inset Formula \[
+T=X+W.\]
+
+\end_inset 
+
+ 
+\end_deeper 
+\layout Itemize
+
+Similarly the average delay may be decomposed as
+\begin_inset Formula \[
+\bar{T}=\bar{X}+\bar{W}.\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+The queue and transmission may the be analysed independently using Little's
+ formula.
+\layout ShortFoilhead
+
+The Transmission
+\layout Itemize
+
+Assume that customers/packets do not leave the queue.
+ 
+\layout Itemize
+
+Rate of arrivals at the queue must equal the rate of arrivals at transmission.
+ 
+\layout Itemize
+
+We define the the average number under transmission as 
+\begin_inset Formula $\rho$
+\end_inset 
+
+ 
+\begin_inset Formula \[
+\rho=\lambda\bar{X},\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $\bar{X}$
+\end_inset 
+
+ is the average time spend under transmission for each packet.
+ 
+\layout Itemize
+
+For the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue the average transmission time is given by 
+\begin_inset Formula $\bar{X}=\frac{1}{\mu}$
+\end_inset 
+
+, 
+\layout Itemize
+
+So for the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue we have
+\begin_inset Formula \[
+\rho=\frac{\lambda}{\mu},\]
+
+\end_inset 
+
+ a formula which we have already used in the last chapter.
+ 
+\layout ShortFoilhead
+
+Utilisation Factor
+\layout Itemize
+
+
+\begin_inset Formula $\rho$
+\end_inset 
+
+ is the utilisation factor.
+ 
+\layout Itemize
+
+Represents the fraction of time that the transmission line (or server) is
+ in use.
+\layout Itemize
+
+It is a measure of efficiency.
+ 
+\layout Itemize
+
+It is also the steady state probability that the transmission line is in
+ use.
+ 
+\layout Itemize
+
+For a lossless system this probability is given by 
+\begin_inset Formula $1-P\left(0\right)$
+\end_inset 
+
+.
+ 
+\layout ShortFoilhead
+
+Utilisation Example
+\layout Standard
+
+
+\series bold 
+Question
+\layout Standard
+
+You are at a queue in a bar, and notice that the bar tender spends 10% of
+ her time cleaning between serving customers.
+ If the typical number of people waiting to be served is 
+\begin_inset Formula $3$
+\end_inset 
+
+, what is the ratio of time spent waiting to being served? 
+\layout Standard
+
+
+\series bold 
+Answer
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+Information says 
+\begin_inset Formula $\rho=0.9$
+\end_inset 
+
+ and 
+\begin_inset Formula $\bar{N}_{Q}=3$
+\end_inset 
+
+.
+ 
+\begin_inset Formula \[
+\lambda=\frac{0.9}{\bar{X}}.\]
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Formula \[
+3=\lambda\bar{W}.\]
+
+\end_inset 
+
+
+\layout Standard
+
+Therefore 
+\begin_inset Formula $\frac{\bar{W}}{\bar{X}}=3\frac{1}{3}$
+\end_inset 
+
+.
+ 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout ShortFoilhead
+
+The Queue
+\layout Itemize
+
+For arrival rate 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+, and 
+\begin_inset Formula $\bar{N}_{Q}$
+\end_inset 
+
+, the average number in queue, and 
+\begin_inset Formula $\bar{W}$
+\end_inset 
+
+, the average queueing (waiting) time.
+\begin_inset Formula \[
+\bar{N}_{Q}=\lambda\bar{W}\]
+
+\end_inset 
+
+
+\layout Itemize
+
+For the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue 
+\begin_inset Formula \[
+\bar{T}=\bar{X}+\bar{W}=\frac{1}{\mu}+\bar{W}\]
+
+\end_inset 
+
+ so the average time spent waiting in the queue is given by
+\begin_inset Formula \[
+\bar{W}=\bar{T}-\frac{1}{\mu}=\frac{\rho}{\mu-\lambda}.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Average number in the queue is then
+\begin_inset Formula \[
+\bar{N}_{Q}=\frac{\rho^{2}}{1-\rho}.\]
+
+\end_inset 
+
+ 
+\layout ShortFoilhead
+
+Other Markov Queues
+\layout Itemize
+
+The 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue is perhaps the simplest Markov queue.
+\layout Itemize
+
+We will introduce two related Markov queues and compute their stationary
+ distributions.
+ 
+\layout Itemize
+
+A simple modification to the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue: a 
+\emph on 
+finite length 
+\emph default 
+modification 
+\begin_inset Formula $M/M/1/m$
+\end_inset 
+
+ 
+\layout Itemize
+
+The 
+\emph on 
+infinite server 
+\emph default 
+queue
+\emph on 
+, 
+\emph default 
+
+\begin_inset Formula $M/M/\infty$
+\end_inset 
+
+.
+ 
+\layout ShortFoilhead
+
+Finite Length 
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $1$
+\end_inset 
+
+/
+\begin_inset Formula $m$
+\end_inset 
+
+
+\layout Itemize
+
+We have assumed that 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue can have an infinite length.
+\layout Itemize
+
+In practice a restricted buffer size --- perhaps queue length is also restricted.
+\layout Itemize
+
+We assume the queue can contain at maximum 
+\begin_inset Formula $m$
+\end_inset 
+
+ customers.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename diagrams/stateMM1m.eps
+	width 100text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+State diagram for the 
+\begin_inset Formula $M/M/1/m$
+\end_inset 
+
+ queue.
+ Note that there are no transitions to states above the 
+\begin_inset Formula $m$
+\end_inset 
+
+th state.
+\begin_inset LatexCommand \label{cap:stateDiagramMM1m}
+
+\end_inset 
+
+
+\end_inset 
+
+ 
+\layout ShortFoilhead
+
+Balance Equation
+\layout Itemize
+
+We can now derive the stationary distribution for this queue.
+\layout Itemize
+
+Balance equation for the 
+\begin_inset Formula $M/M/1/m$
+\end_inset 
+
+ is identical to that for the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+First step is to draw the flow rates at the boundary.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename ./diagrams/boundaryFlowMM1.eps
+	width 60text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+Flow rates at a boundary for the 
+\begin_inset Formula $M/M/1/m$
+\end_inset 
+
+ queue.
+\begin_inset LatexCommand \label{cap:flowAtBoundaryMM1m}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Itemize
+
+At steady state, the expected flow from 
+\begin_inset Formula $k-1$
+\end_inset 
+
+ to 
+\begin_inset Formula $k$
+\end_inset 
+
+ is given by 
+\begin_inset Formula $\lambda P\left(k-1\right)$
+\end_inset 
+
+.
+ Flow from 
+\begin_inset Formula $k$
+\end_inset 
+
+ to 
+\begin_inset Formula $k-1$
+\end_inset 
+
+ is given 
+\begin_inset Formula $\mu P\left(k-1\right)$
+\end_inset 
+
+.
+ For flow to be balanced we have 
+\begin_inset Formula \[
+\lambda P\left(k-1\right)=\mu P\left(k\right)\]
+
+\end_inset 
+
+ leading to 
+\begin_inset Formula \[
+P\left(k\right)=\frac{\lambda}{\mu}P\left(k-1\right).\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Substituting into the detailed balance equation we get
+\begin_inset Formula \[
+P\left(k\right)=\frac{\lambda}{\mu}P\left(k-1\right)\]
+
+\end_inset 
+
+ Thus 
+\begin_inset Formula \begin{eqnarray*}
+P\left(k\right) & = & \left(\frac{\lambda}{\mu}\right)^{k}\\
+P\left(0\right) & = & \rho^{k}P\left(0\right).\end{eqnarray*}
+
+\end_inset 
+
+ 
+\layout ShortFoilhead
+
+Normalisation
+\layout Itemize
+
+In the case of the finite length queue the normalisation is computed with
+ a sum over only 
+\begin_inset Formula $m$
+\end_inset 
+
+ states, rather than 
+\begin_inset Formula $\infty$
+\end_inset 
+
+ states.
+ This leads to a different value for 
+\begin_inset Formula $P\left(0\right)$
+\end_inset 
+
+.
+ We compute 
+\begin_inset Formula $P\left(0\right)$
+\end_inset 
+
+ by writing the sum across all the 
+\begin_inset Formula $m+1$
+\end_inset 
+
+ states of the distribution, 
+\begin_inset Formula \[
+\sum_{k=0}^{m}P\left(0\right)\rho^{k}=1.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+This leads us to 
+\begin_inset Formula \[
+P\left(0\right)=\sum_{k=0}^{m}\frac{1}{\rho^{k}}\]
+
+\end_inset 
+
+which is recognised as the 
+\emph on 
+finite 
+\emph default 
+sum of a geometric series,
+\begin_inset Formula \[
+\sum_{k=0}^{m}\frac{1}{\rho^{k}}=\frac{1-\rho}{1-\rho^{m+1}}\]
+
+\end_inset 
+
+so we have
+\begin_inset Formula \[
+P\left(0\right)=\frac{1-\rho}{1-\rho^{m+1}}\]
+
+\end_inset 
+
+which leads to 
+\begin_inset Formula \[
+P\left(k\right)=\frac{\rho^{k}\left(1-\rho\right)}{1-\rho^{m+1}}.\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Blocking Probabilities
+\layout Standard
+
+
+\series bold 
+Question
+\layout Standard
+
+Given a finite length 
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $1$
+\end_inset 
+
+/
+\begin_inset Formula $m$
+\end_inset 
+
+ queue, what is the probability that an arrival is blocked from joining
+ the queue (and therefore lost).
+ 
+\layout Standard
+
+
+\series bold 
+Answer
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+This is answered by determining the probability of the queue being full,
+ which means 
+\begin_inset Formula \[
+P\left(m\right)=\frac{\rho^{m}\left(1-\rho\right)}{1-\rho^{m+1}}\]
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Infinite Serving Capacity --- 
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $\infty$
+\end_inset 
+
+
+\layout Itemize
+
+The 
+\begin_inset Formula $M/M/1/m$
+\end_inset 
+
+ queue covers the case where the queue length is bounded.
+\layout Itemize
+
+We can also derive when the number of servers is 
+\emph on 
+unbounded
+\emph default 
+.
+\layout Itemize
+
+In the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue we assume that there is only one server.
+ 
+\layout Itemize
+
+It can be useful to consider an unlimited number of servers:
+\begin_deeper 
+\layout Itemize
+
+One server for every customer in the system.
+ 
+\end_deeper 
+\layout Itemize
+
+The state diagram for this system can be drawn.
+ 
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename diagrams/stateMMinf.eps
+	width 100text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+State diagram for the 
+\begin_inset Formula $M/M/\infty$
+\end_inset 
+
+ queue.
+ 
+\begin_inset LatexCommand \label{cap:stateDiagramMMinf}
+
+\end_inset 
+
+
+\end_inset 
+
+ 
+\layout ShortFoilhead
+
+Detailed Balance 
+\layout Itemize
+
+Make use of the standard detailed balance equations for this queue.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename ./diagrams/boundaryFlowMMinf.eps
+	width 60text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+Flow rates at a boundary for 
+\begin_inset Formula $M/M/\infty$
+\end_inset 
+
+ queue.
+\begin_inset LatexCommand \label{cap:flowAtBoundaryMMinf}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Itemize
+
+From the flow rates at the boundary we have in general
+\layout Itemize
+
+
+\begin_inset Formula \[
+\lambda_{k-1}P\left(k-1\right)=\mu_{k}P\left(k\right)\]
+
+\end_inset 
+
+
+\begin_deeper 
+\layout Itemize
+
+There is infinite service capacity in the queue the service rate at state
+ 
+\begin_inset Formula $k$
+\end_inset 
+
+ is simply 
+\begin_inset Formula $\mu_{k}=k\mu$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+The rate of arrivals stays constant, 
+\begin_inset Formula $\lambda_{k}=\lambda$
+\end_inset 
+
+, so for this queue detailed balance gives.
+\begin_inset Formula \[
+\lambda P\left(k-1\right)=k\mu P\left(k\right)\]
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+
+Reorganising in terms of 
+\begin_inset Formula $P\left(k\right)$
+\end_inset 
+
+ then gives
+\begin_inset Formula \[
+P\left(k\right)=\frac{\lambda}{k\mu}P\left(k-1\right)\]
+
+\end_inset 
+
+and therefore
+\begin_inset Formula \[
+P\left(k\right)=P\left(0\right)\left(\frac{\lambda}{\mu}\right)^{k}\frac{1}{k!}.\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Normalisation Condition
+\layout Itemize
+
+Using the normalisation condition for this queue, 
+\begin_inset Formula \[
+\sum_{k=0}^{\infty}P\left(k\right)=1,\]
+
+\end_inset 
+
+we obtain 
+\begin_inset Formula $P\left(0\right)$
+\end_inset 
+
+ as 
+\begin_inset Formula \begin{equation}
+P\left(0\right)=\left[\sum_{k=0}^{\infty}\left(\frac{\lambda}{\mu}\right)^{k}\frac{1}{k!}\right]^{-1}.\label{eq:MMinftyP0}\end{equation}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+The Offered Load
+\begin_inset LatexCommand \label{sub:offeredLoad}
+
+\end_inset 
+
+
+\layout Itemize
+
+It is convenient to define the offered load, 
+\begin_inset Formula \[
+a=\frac{\lambda}{\mu}\]
+
+\end_inset 
+
+as arrival rate divided by service rate.
+ 
+\layout Itemize
+
+This is a dimensionless constant, but has international standard units of
+ Erlangs (after A.\SpecialChar ~
+K.\SpecialChar ~
+Erlang).
+ 
+\layout Itemize
+
+Substituting this definition back into (
+\begin_inset LatexCommand \ref{eq:MMinftyP0}
+
+\end_inset 
+
+) we have, 
+\begin_inset Formula \[
+P\left(0\right)=\left[\sum_{k=0}^{\infty}\frac{a^{k}}{k!}\right]^{-1}.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Recalling that 
+\begin_inset Formula \[
+\sum_{n=0}^{\infty}\frac{x^{n}}{n!}=\exp\left(x\right)\]
+
+\end_inset 
+
+ we have
+\begin_inset Formula \[
+P\left(0\right)=\exp\left(-a\right)\]
+
+\end_inset 
+
+and the steady state distribution is then
+\begin_inset Formula \[
+P\left(k\right)=\frac{a^{k}}{k!}\exp\left(-a\right)\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Which is recognised as a Poisson distribution with parameter 
+\begin_inset Formula $a$
+\end_inset 
+
+.
+ 
+\layout ShortFoilhead
+
+Utilization Factor
+\layout Itemize
+
+Notice that the utilization factor for this queue, 
+\begin_inset Formula $\rho$
+\end_inset 
+
+, is 
+\emph on 
+not
+\emph default 
+ equal to 
+\begin_inset Formula $\frac{\lambda}{\mu}$
+\end_inset 
+
+ which is refered to as the offered load.
+ 
+\layout Itemize
+
+For the 
+\begin_inset Formula $M/M/\infty$
+\end_inset 
+
+ queue the offered load can be much larger than 1 but we know that the utilizati
+on factor is never greater than 
+\begin_inset Formula $1$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+The utilization factor for this queue can be seen to be 
+\begin_inset Formula \[
+1-P\left(0\right)=1-\exp\left(-a\right).\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Taxi Example
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[plain]{lawrence,other,zbooks}
+
+\end_inset 
+
+
+\the_end

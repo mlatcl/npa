@@ -1,0 +1,40 @@
+\setlength{\unitlength}{0.0005in}
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+{\renewcommand{\dashlinestretch}{30}
+\begin{picture}(8400,2369)(-1200,-10)
+\put(4287,1177){\ellipse{540}{540}}
+\put(4287,2077){\ellipse{540}{540}}
+\put(4287,277){\ellipse{540}{540}}
+\path(1362,1177)(4062,1177)
+\path(3942.000,1147.000)(4062.000,1177.000)(3942.000,1207.000)
+\path(1362,1177)(2262,277)(4062,277)
+\path(3942.000,247.000)(4062.000,277.000)(3942.000,307.000)
+\path(1362,1177)(2262,2077)(4062,2077)
+\path(3942.000,2047.000)(4062.000,2077.000)(3942.000,2107.000)
+\path(4557,2077)(5912,2077)
+\path(5792.000,2047.000)(5912.000,2077.000)(5792.000,2107.000)
+\path(4602,1177)(5912,1177)
+\path(5792.000,1147.000)(5912.000,1177.000)(5792.000,1207.000)
+\path(4602,277)(5912,277)
+\path(5792.000,247.000)(5912.000,277.000)(5792.000,307.000)
+\path(12,1177)(1362,1177)
+\path(1242.000,1147.000)(1362.000,1177.000)(1242.000,1207.000)
+\put(600,1412){\makebox(0,0){$P(k| t, \lambda)$}}
+\put(3100,2312){\makebox(0,0){$P(1) = \lambda_1/\lambda$}}
+\put(3100,1412){\makebox(0,0){$P(2) = \lambda_2/\lambda$}}
+\put(3100,512){\makebox(0,0){$P(3) = \lambda_3/\lambda$}}
+\put(5200,2312){\makebox(0,0){$P(k| t, \lambda_1)$}}
+\put(5200,1412){\makebox(0,0){$P(k| t, \lambda_2)$}}
+\put(5200,512){\makebox(0,0){$P(k| t, \lambda_3)$}}
+\put(6700,1400){\makebox(0,0){Poisson}}
+\put(6700,1100){\makebox(0,0){outputs}}
+\put(-700,1400){\makebox(0,0){Poisson}}
+\put(-700,1100){\makebox(0,0){input}}
+\end{picture}
+}

@@ -1,0 +1,1321 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass foils
+\options 20pt,dvips
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Left Header
+
+Neil Lawrence
+\layout Right Header
+
+Network Performance Analysis
+\layout My Logo
+
+
+\begin_inset Graphics
+	filename /share/mlhome/neil/tex/inputs/sheffieldlogo.eps
+	lyxscale 40
+	scale 40
+
+\end_inset 
+
+
+\layout Right Footer
+
+
+\begin_inset Graphics
+	filename /home/neil/tex/inputs/dcslogo.eps
+	lyxscale 120
+	scale 140
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+quad 
+\end_inset 
+
+
+\family sans 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+thepage{}
+\end_inset 
+
+
+\layout Title
+
+A Nice Title
+\layout Author
+
+Neil Lawrence
+\layout Date
+
+Monday 4th October 2004
+\layout ShortFoilhead
+
+Colors
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+FoilTeX
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+ 
+\end_inset 
+
+(version 2) is fully integrated with LaTeX2e
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+ 
+\end_inset 
+
+so that the supported 
+\family typewriter 
+color
+\family default 
+ package (part of the 
+\family typewriter 
+graphics
+\family default 
+ package) is the preferred way to use colors.
+\layout Standard
+
+For examples, see the 
+\family typewriter 
+graphics
+\family default 
+ package documentation.
+\layout Standard
+
+You can still use the old 
+\family typewriter 
+colordvi
+\family default 
+ package that comes with Rokicki's 
+\family typewriter 
+dvips
+\family default 
+, but some things won't work exactly as expected (except in compatibility
+ mode).
+\layout ShortFoilhead
+
+Itemize
+\layout Itemize
+
+This is the first level of an itemize.
+ 
+\begin_deeper 
+\layout Itemize
+
+Here we jump to second level 
+\begin_deeper 
+\layout Itemize
+
+Even third level (and there is a fourth level as well).
+ 
+\layout Itemize
+
+The second item at third level.
+ 
+\end_deeper 
+\layout Itemize
+
+The second item at second level.
+ 
+\layout Itemize
+
+A third item at second level.
+ 
+\end_deeper 
+\layout Itemize
+
+The second item at first level.
+ 
+\layout Itemize
+
+A third item at first level.
+ 
+\layout Standard
+
+Note that we have turned off the logo on this page.
+ It returns on the next page.
+\layout Foilhead
+
+\SpecialChar ~
+
+\layout Standard
+
+This should be a 
+\emph on 
+new foil
+\emph default 
+ with no header, followed by a quote: 
+\layout Quote
+
+\SpecialChar \ldots{}
+it's a good idea to make your input file as easy to read as possible.
+ 
+\layout Standard
+
+and some enumerating: 
+\layout Enumerate
+
+this is enumerated 
+\layout Enumerate
+
+this is also enumerated 
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+framebox{
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+parbox{5.5in}{
+\end_inset 
+
+Above, we used 
+\family typewriter 
+emph{new foil}
+\family default 
+ instead of the old 
+\family typewriter 
+{em new foil/}
+\family default 
+!
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}
+\end_inset 
+
+
+\layout Standard
+
+On the following page we decided to stop the headers from appearing and
+ move the date to the footline.
+\layout ShortFoilhead
+
+Fonts
+\layout Itemize
+
+This shows 
+\shape italic 
+italics
+\shape default 
+, 
+\shape slanted 
+slanted
+\shape default 
+, 
+\series bold 
+boldface
+\series default 
+, 
+\family typewriter 
+typewriter
+\family default 
+, 
+\family roman 
+roman
+\family default 
+, and 
+\shape smallcaps 
+small caps
+\shape default 
+.
+ 
+\layout Itemize
+
+Unslanted 
+\emph on 
+emphasize
+\emph default 
+ and 
+\shape slanted 
+slanted 
+\emph on 
+emphasize
+\shape default 
+\emph default 
+.
+ 
+\layout Itemize
+
+
+\family typewriter 
+textrm
+\family default 
+ means 
+\family roman 
+roman and 
+\family typewriter 
+textsf
+\family roman 
+ means 
+\family sans 
+sans serif
+\family default 
+.
+ 
+\layout Itemize
+
+size changing from 
+\size tiny 
+tiny
+\size default 
+, 
+\size scriptsize 
+scriptsize
+\size default 
+, 
+\size footnotesize 
+footnotesize
+\size default 
+, 
+\size small 
+small
+\size default 
+, normalsize,
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+,{}
+\end_inset 
+
+
+\size large 
+large
+\size default 
+,
+\size large 
+Large
+\size default 
+,
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+,{}
+\end_inset 
+
+
+\size large 
+LARGE
+\size default 
+, 
+\size huge 
+huge
+\size default 
+, and 
+\size huge 
+Huge
+\size default 
+.
+ 
+\layout Itemize
+
+12pt is the smallest preloaded.
+ 
+\layout Itemize
+
+43pt is the largest preloaded in compatibility mode.
+ 
+\layout Itemize
+
+51pt is the largest preloaded in normal mode.
+ 
+\layout ShortFoilhead
+
+Special Characters and Accents
+\layout Itemize
+
+Here is a list of accents: 
+\begin_deeper 
+\layout Itemize
+
+\i \`{o}
+, \i \'{o}
+, \i \^{o}
+, \i \"{o}
+, \i \~{o}
+, \i \={o}
+, \i \.{o}
+, \i \u{o}
+, \i \v{o}
+, \i \H{o}
+, \i \t{oo}
+, \i \c{o}
+, \i \d{o}
+, \i \b{o}
+.
+ 
+\end_deeper 
+\layout Itemize
+
+First in paragraph mode (with 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+verb|
+\backslash 
+copyright|
+\end_inset 
+
+): 
+\begin_deeper 
+\layout Itemize
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+dag
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+ddag
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+S
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+P
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+pounds
+\end_inset 
+
+, 0123456789, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+copyright
+\newline 
+  
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+
+Then in math mode: (numerals are different!) 
+\begin_deeper 
+\layout Itemize
+
+
+\begin_inset Formula $\dag$
+\end_inset 
+
+, 
+\begin_inset Formula $\ddag$
+\end_inset 
+
+, 
+\begin_inset Formula $\S$
+\end_inset 
+
+, 
+\begin_inset Formula $\P$
+\end_inset 
+
+, 
+\begin_inset Formula $\pounds$
+\end_inset 
+
+, 
+\begin_inset Formula $0123456789$
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+
+Here are more non-english language symbols: 
+\begin_deeper 
+\layout Itemize
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+oe
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+OE
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+ae
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+AE
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+aa
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+AA
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+o
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+O
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+l
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+L
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+ss
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+?`
+\end_inset 
+
+, 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+!`
+\end_inset 
+
+ 
+\end_deeper 
+\layout Itemize
+
+
+\family roman 
+TeX
+\family default 
+'s special symbols: #, $, %, &, _, {, }.
+ 
+\layout ShortFoilhead
+
+Bold Mathematics
+\layout Standard
+
+The 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+verb|boldequation|
+\end_inset 
+
+ environment, with numbering yields 
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+begin{boldequation} 
+\backslash 
+label{eq:bold}
+\newline 
+   2
+\backslash 
+sqrt{x} 
+\backslash 
+Pi^y 
+\backslash 
+sim
+\backslash 
+pi
+\backslash 
+times x
+\newline 
+
+\backslash 
+end{boldequation}
+\end_inset 
+
+ and without numbering yields 
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+begin{boldequation*}
+\newline 
+   2
+\backslash 
+sqrt{x} 
+\backslash 
+Pi^y 
+\backslash 
+sim
+\backslash 
+pi
+\backslash 
+times x
+\newline 
+
+\backslash 
+end{boldequation*}
+\end_inset 
+
+ We can reference bold equations like (
+\begin_inset LatexCommand \ref{eq:bold}
+
+\end_inset 
+
+).
+\layout Standard
+
+There is also 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+verb|
+\backslash 
+mathbf|
+\end_inset 
+
+ and 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+verb|
+\backslash 
+bm|
+\end_inset 
+
+ in the middle of a formula, with 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+hfil
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+break 
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+verb|
+\backslash 
+mathbf{a +} a + 
+\backslash 
+bm{a+x
+\backslash 
+pi-
+\backslash 
+rho} -
+\backslash 
+rho|
+\end_inset 
+
+ 
+\begin_inset Formula \[
+\mathbf{a+}a+\bm{a+x\pi-\rho}-\rho\]
+
+\end_inset 
+
+ Note the difference between the two bold 
+\begin_inset Quotes eld
+\end_inset 
+
+a
+\begin_inset Quotes erd
+\end_inset 
+
+ in result.
+\layout ShortFoilhead
+
+Theorem and Proof Environments
+\layout Theorem
+
+[TUG'92] There are some TeX
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+ 
+\end_inset 
+
+tools that are easier to use than others.
+ This theorem is numbered and has an optional acknowledgement.
+ 
+\layout Corollary*
+
+This obvious corollary is not numbered because it uses the *-form.
+ 
+\layout Proof
+
+The details of the proof are left to the reader.
+ Note that the environment names are case sensitive.
+ 
+\layout Standard
+
+We put a header back on the next foil to see that it is correctly rotated.
+\layout ShortRotatefoilhead
+
+Rotated Foils
+\layout Standard
+
+This entire page will (should?)\SpecialChar ~
+be rotated if we declared the 
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+verb|
+\backslash 
+documentclass|
+\end_inset 
+
+ option 
+\family typewriter 
+dvips
+\family default 
+ or other supported driver option.
+ (For 
+\family typewriter 
+pdflatex
+\family default 
+, this works without giving any options!) In the other cases, this is not
+ supported and the user is warned.
+\layout Standard
+
+The next foil will return to normal.
+ Only foils that begin with 
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+verb|
+\backslash 
+rotatefoilhead|
+\end_inset 
+
+ will be rotated.
+ If LaTeX
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+ 
+\end_inset 
+
+needs to split a rotated foil into two foils, 
+\emph on 
+both
+\emph default 
+ will be rotated.
+\layout ShortFoilhead
+
+Tables and Figures
+\layout Standard
+
+Here is a short table:
+\layout Standard
+
+
+\begin_inset Float table
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features>
+<column alignment="left" valignment="top" leftline="true" rightline="true" width="0pt">
+<column alignment="center" valignment="top" rightline="true" width="0pt">
+<column alignment="right" valignment="top" rightline="true" width="0pt">
+<row topline="true" bottomline="true">
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+First stuff 
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ Second stuff 
+\end_inset 
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ Third Stuff 
+\end_inset 
+</cell>
+</row>
+<row bottomline="true">
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+foo 
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ bar 
+\end_inset 
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ bug 
+\end_inset 
+</cell>
+</row>
+<row bottomline="true">
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+foofoo 
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ barbar 
+\end_inset 
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ bugbug  
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Caption
+
+
+\begin_inset LatexCommand \label{tab:one}
+
+\end_inset 
+
+This is the first table.
+\end_inset 
+
+
+\layout Standard
+
+The above table is Table\SpecialChar ~
+
+\begin_inset LatexCommand \ref{tab:one}
+
+\end_inset 
+
+.
+ It is a 
+\begin_inset Quotes eld
+\end_inset 
+
+nonfloat
+\begin_inset Quotes erd
+\end_inset 
+
+, since it doesn't float at all, but appears right where it was placed in
+ the document.
+\layout ShortFoilhead
+
+
+\family typewriter 
+picture
+\family default 
+ Environments
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+setlength{
+\backslash 
+unitlength}{.08in}
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+ 
+\backslash 
+begin{picture}(50,50)(0,0)
+\newline 
+ 
+\backslash 
+put(10,35){
+\backslash 
+framebox{(}10,10){gnat}}
+\newline 
+
+\backslash 
+put(30,20){
+\backslash 
+circle{20}}
+\newline 
+
+\backslash 
+put(30,20){
+\backslash 
+vector(0,1){2}}
+\newline 
+
+\backslash 
+put(45,35){
+\backslash 
+circle*{5}}
+\newline 
+
+\backslash 
+put(30,20){
+\backslash 
+oval(20,30)}
+\newline 
+
+\backslash 
+end{picture}
+\end_inset 
+
+
+\layout Caption
+
+Isn't this a pretty picture?
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+verb|
+\backslash 
+thicklines|
+\end_inset 
+
+ would be nice here but the picture doesn't look as good that way (why?).
+ We should use the 
+\family typewriter 
+graphics
+\family default 
+ package to load our graphics pictures here.
+ Note that this Figure doesn't float!
+\layout ShortFoilhead
+
+Marginal Notes, Footnotes and Citations
+\layout Standard
+
+A marginal note
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+This is a footnote.
+\end_inset 
+
+ is made with the 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+verb|
+\backslash 
+marginpar|
+\end_inset 
+
+ command, having the text as its argument.
+ The note
+\begin_inset Marginal
+collapsed true
+
+\layout Standard
+
+This is a mar\SpecialChar \-
+gin\SpecialChar \-
+al note
+\end_inset 
+
+ is placed in the margin, its first line even with the line of the text
+ containing the command
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+This is a second footnote.
+\end_inset 
+
+.
+\layout Standard
+
+This is shows 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+fbox{
+\end_inset 
+
+frameboxes
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}
+\end_inset 
+
+ at work.
+ We can even cite references like 
+\begin_inset LatexCommand \cite{rocky}
+
+\end_inset 
+
+ and 
+\begin_inset LatexCommand \cite{bullwinkle}
+
+\end_inset 
+
+.
+\layout Bibliography
+\bibitem {rocky}
+
+Rocky and Bullwinkle, Open problems, in 
+\shape slanted 
+Mr.
+ Know-it-all's Rock Encyclopedia
+\shape default 
+.
+\layout Bibliography
+\bibitem {bullwinkle}
+
+Bullwinkle, Getting things out of hats, 
+\shape slanted 
+Annals
+\shape default 
+ 
+\series bold 
+1
+\series default 
+ (1990BC), 1--2.
+\layout ShortFoilhead
+
+Other Features
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+raggedright
+\end_inset 
+
+
+\layout Itemize
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+verb|
+\backslash 
+raggedright|
+\end_inset 
+
+ can be used in the preamble to get this effect throughout as we did on
+ this page.
+ 
+\layout Itemize
+
+Access to the AMS Fonts symbols and Euler fonts can easily be obtained with
+ the 
+\family typewriter 
+amsmath
+\family default 
+ packages.
+ You might not get fonts at the largest sizes however.
+ 
+\layout Itemize
+
+
+\shape smallcaps 
+PostScript
+\shape default 
+ fonts can used just by adding any of the package files from the PSNFSS
+ package.
+ 
+\the_end

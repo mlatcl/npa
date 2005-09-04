@@ -1,0 +1,484 @@
+#LyX 1.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 220
+\textclass amsart
+\begin_preamble
+\usepackage{epic,eepic,epsfig}
+\newcommand{\figureTextSize}{\small}
+\end_preamble
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+Lectures 11 & 12 --- 
+\begin_inset Formula $M/M/m$
+\end_inset 
+
+ contd, 
+\begin_inset Formula $M/M/m/m$
+\end_inset 
+
+ and 
+\begin_inset Formula $M/G/1$
+\end_inset 
+
+
+\layout Author
+
+Neil Lawrence
+\layout Example*
+
+Consider the telephone trunking problem.
+ A telephone exchange A is to server 10,000 subscribers in a nearby exchange
+ as shown in Figure 
+\begin_inset LatexCommand \ref{fig:exchange}
+
+\end_inset 
+
+.
+ Suppose that during the busy hour, the subscribers generate a Poisson traffic
+ with a rate of 10 calls per minute, which requires trunk lines to exchange
+ B for an average holding time of 3 minutes per call.
+ Determine the number of trunk lines needed for a grade of service (probability
+ of waiting) of 0.01.
+\layout Example*
+
+Average call rate is 
+\begin_inset Formula $\lambda =10$
+\end_inset 
+
+ calls/minute.
+ Average holding time is 
+\begin_inset Formula $\tau =3$
+\end_inset 
+
+ minutes.
+ Offered load 
+\begin_inset Formula $a=\lambda \tau $
+\end_inset 
+
+ is 30 Erlangs.
+\layout Example*
+
+From the Erlang C curves it looks to be about 44.
+\layout Example*
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Include \input{./diagrams/exchange.eepic}
+
+\end_inset 
+
+
+\layout Caption
+
+The telephone exchange.
+\begin_inset LatexCommand \label{fig:exchange}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Example
+
+A customer service centre has an average holding time, 
+\begin_inset Formula $\tau $
+\end_inset 
+
+, for calls of 8 minutes.
+ In the busy hour, calls arrive at the centre at a rate of one very two
+ minutes.
+ Inter-arrival times and service times are exponentially distributed, how
+ many personel are required to keep the probability of waiting at 0.1.
+\layout Example
+
+From the plot 8.
+\layout Subsection*
+
+Average number in System.
+\layout Standard
+
+The average number of calls in the Erlang Delay System
+\layout Standard
+
+
+\begin_inset Formula \[
+\bar{N}=\frac{\rho }{1-\rho }C(m,a)+m\rho \]
+
+\end_inset 
+
+ These terms represent the average queue length and the average number of
+ busy lines.
+ 
+\begin_inset Formula \[
+\bar{N}_{Q}=\frac{\rho }{1-\rho }C(m,a)\]
+
+\end_inset 
+
+ So the average waiting time is simply 
+\begin_inset Formula \[
+\bar{W}=\frac{\bar{N}_{Q}}{\lambda }=\frac{C(m,a)}{m\mu (1-\rho )}\]
+
+\end_inset 
+
+
+\layout Example*
+
+So what is the average waiting time for the telephone service centre example?
+ 
+\layout Standard
+
+
+\begin_inset Formula $m=8$
+\end_inset 
+
+, 
+\begin_inset Formula $\mu =\frac{1}{8}$
+\end_inset 
+
+, 
+\begin_inset Formula $\rho =\frac{\lambda }{m\mu }=\frac{1}{2}$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+delay is 
+\begin_inset Formula $\frac{0.1}{8\frac{1}{8}(1-\frac{1}{2})}=0.2$
+\end_inset 
+
+ minutes, or 12 seconds.
+ 
+\layout Section*
+
+Erlang Loss 
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $m$
+\end_inset 
+
+/
+\begin_inset Formula $m$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics FormatVersion 1
+	filename ./diagrams/erlangLoss.eps
+	display default
+	size_type 2
+	scale 70
+	rotateOrigin leftBaseline
+	lyxsize_type 0
+
+\end_inset 
+
+
+\layout Caption
+
+Flow chart of the Erlang Loss System.
+\end_inset 
+
+
+\layout Standard
+
+The Erlang loss system may be analysed as a birth-death process with birth
+ rate 
+\begin_inset Formula \[
+\lambda _{k}=\left\{ \begin{array}{cc}
+ \lambda  & k=0,1,\dots ,m-1\\
+ 0 & k\geq m\end{array}
+\right.\]
+
+\end_inset 
+
+ and death rate 
+\begin_inset Formula \[
+\mu _{k}=\left\{ \begin{array}{cc}
+ k\mu  & k=0,1,\dots ,m\\
+ 0 & k>m\end{array}
+\right.\]
+
+\end_inset 
+
+ [
+\emph on 
+Note: for the lower line, it doesn't matter what 
+\begin_inset Formula $\mu _{k}$
+\end_inset 
+
+ is.
+\emph default 
+] 
+\layout Standard
+
+
+\size tiny 
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Include \input{./diagrams/erlangLoss.eepic}
+
+\end_inset 
+
+
+\layout Caption
+
+Markov chain for the Erlang loss system, 
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $m$
+\end_inset 
+
+/
+\begin_inset Formula $m$
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Standard
+
+The offered load, 
+\begin_inset Formula $a=\frac{\lambda }{\mu }$
+\end_inset 
+
+, is again dimensionless with units of Erlangs.
+ 
+\layout Subsection*
+
+Steady State Probabilities
+\layout Standard
+
+Using the detailed balance equations we find 
+\begin_inset Formula \begin{eqnarray*}
+P(k) & = & \frac{\lambda _{k}}{\mu _{k}}P(k-1)\\
+ & = & \frac{\lambda }{k\mu }P(k-1)\\
+ & = & \frac{a}{k}P(k-1)
+\end{eqnarray*}
+
+\end_inset 
+
+ Which means that 
+\begin_inset Formula \begin{eqnarray*}
+P(k) & = & \prod _{n=1}^{k}\frac{a}{n}P(0)\\
+ & = & \frac{a^{k}}{k!}P(0)
+\end{eqnarray*}
+
+\end_inset 
+
+ The normalisation condition gives us 
+\begin_inset Formula \[
+P(0)\sum _{k=0}^{m}\frac{a^{k}}{k!}=1\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+P(0)=\frac{1}{\sum _{k=0}^{m}\frac{a^{k}}{k!}}\]
+
+\end_inset 
+
+ which leads to the truncated Poisson distribution 
+\begin_inset Formula \[
+P(k)=\frac{\frac{a^{k}}{k!}}{\sum _{n=0}^{m}\frac{a^{n}}{n!}}\]
+
+\end_inset 
+
+ Note if 
+\begin_inset Formula $m\rightarrow \infty $
+\end_inset 
+
+ we recover the 
+\begin_inset Formula $M/M/\infty $
+\end_inset 
+
+ queue as we would expect.
+\layout Subsection*
+
+Performance Measures for Erlang B
+\layout Standard
+
+For the blocking probability and the Erlang B curves we are interested in
+ the probability that when we arrive the queue is full 
+\begin_inset Formula \[
+B(m,a)=P(m)=\frac{\frac{a^{m}}{m!}}{\sum _{n=0}^{m}\frac{a^{n}}{n!}}\]
+
+\end_inset 
+
+ 
+\size small 
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Include \input{./diagrams/erlangBCurves0to20.eepic}
+
+\end_inset 
+
+
+\layout Caption
+
+Erlang B curves.
+\end_inset 
+
+
+\layout Standard
+
+
+\size small 
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Include \input{./diagrams/erlangBCurves0to100.eepic}
+
+\end_inset 
+
+
+\layout Caption
+
+Erlang B curves.
+\end_inset 
+
+
+\layout Subsection*
+
+Carried Load
+\layout Standard
+
+Since traffic is lost in 
+\begin_inset Formula $M/M/m/m$
+\end_inset 
+
+ the carried load, 
+\begin_inset Formula $a^{\prime }$
+\end_inset 
+
+, is smaller than the offered load.
+ It may be found as 
+\begin_inset Formula \[
+a^{\prime }=a(1-P(m))=a(1-B(m,a))\]
+
+\end_inset 
+
+ The carried load per line is the trunk occupancy, 
+\begin_inset Formula \[
+\rho =\frac{a^{\prime }}{m},\]
+
+\end_inset 
+
+ or the utilization factor --- it is a measure of efficiency of the line.
+ Note the contrast with the lossless systems where 
+\begin_inset Formula \[
+\rho =\frac{a}{m}\]
+
+\end_inset 
+
+because 
+\begin_inset Formula $a^{\prime }=a$
+\end_inset 
+
+.
+ 
+\layout Example*
+
+Load tripling.
+\layout Example*
+
+For a blocking probability of 0.01, what is the number of trunks needed for
+ 6 Erlangs of offered load? Answer 12
+\layout Example*
+
+For a blocking probability of 0.01, what is the number of trunks needed for
+ 18 Erlangs? Answer 28
+\layout Example*
+
+So load increase of 200 % only lead to a trunk increase of 133 %.
+ Why? Let's look at the utilization factors.
+ 
+\layout Example*
+
+
+\begin_inset Formula \begin{eqnarray*}
+\rho _{1} & = & \frac{6}{12}\left(1-0.01\right)=0.495\\
+\rho _{2} & = & \frac{18}{28}\left(1-0.007\right)=0.6384
+\end{eqnarray*}
+
+\end_inset 
+
+ The exact utilisation factors The 30 trunk system is thus more efficient.
+\layout Example*
+
+This explains why it is cheaper to call the U.S.A.
+ than Italy.
+\layout Example
+
+Could do with an extra example here.
+\layout Section*
+
+\the_end

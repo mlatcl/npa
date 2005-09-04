@@ -1,0 +1,3726 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass foils
+\begin_preamble
+
+\newcommand{\answer}[2]{#1}
+\end_preamble
+\options 20pt,dvips
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\float_placement ht
+\paperfontsize default
+\spacing single 
+\papersize Custom
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\bullet 0
+	2
+	20
+	-1
+\end_bullet
+\bullet 1
+	5
+	4
+	-1
+\end_bullet
+
+\layout Left Header
+
+Neil Lawrence
+\layout Right Header
+
+Network Performance Analysis
+\layout My Logo
+
+
+\begin_inset Graphics
+	filename /share/mlhome/neil/tex/inputs/sheffieldlogo.eps
+	lyxscale 40
+	scale 40
+
+\end_inset 
+
+
+\layout Right Footer
+
+
+\begin_inset Graphics
+	filename /home/neil/tex/inputs/dcslogo.eps
+	lyxscale 120
+	scale 140
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+quad 
+\end_inset 
+
+
+\family sans 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+thepage{}
+\end_inset 
+
+
+\layout Title
+
+Network Performance Analysis
+\layout Author
+
+Neil Lawrence
+\layout Date
+
+Autumn Term 2004-2005
+\layout ShortFoilhead
+
+Erlang Delay 
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $m$
+\end_inset 
+
+ 
+\layout Itemize
+
+In the last chapter we considered the situation were there are as many servers
+ as there are customers.
+ 
+\layout Itemize
+
+More realistic real world situations involve limited numbers of servers.
+ 
+\layout Itemize
+
+For example, call centres.
+ 
+\layout Itemize
+
+The system is known as the 
+\emph on 
+Erlang delay
+\emph default 
+ system.
+ In Kendall's notation it is written 
+\begin_inset Formula $M/M/m$
+\end_inset 
+
+.
+\layout Itemize
+
+The `average holding time', 
+\begin_inset Formula $\tau=\frac{1}{\mu}\equiv\bar{X}$
+\end_inset 
+
+, which, for a network involving telephones is the time a call is open.
+\layout Standard
+
+
+\size small 
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename diagrams/erlangDelayDiagram.eps
+	width 80text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+Queueing model of the Erlang delay system.
+\begin_inset LatexCommand \label{cap:erlangDelaySchematic}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+State Diagram
+\layout Standard
+
+
+\size tiny 
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/erlangDelay.eps
+	width 100text%
+
+\end_inset 
+
+
+\layout Caption
+
+State diagram of an Erlang delay system.
+\end_inset 
+
+
+\layout Itemize
+
+The `death rate' 
+\begin_inset Formula $\mu_{k}$
+\end_inset 
+
+ has different definitions in different parts of the state space.
+ 
+\layout Itemize
+
+We need to consider detailed balance for each part in turn.
+\layout Itemize
+
+The Erlang delay system may be analysed as a birth-death process with birth
+ rate 
+\begin_inset Formula \[
+\lambda_{k}=\lambda\]
+
+\end_inset 
+
+ and death rate 
+\begin_inset Formula \[
+\mu_{k}=\left\{ \begin{array}{cc}
+k\mu & k=0,1,\dots,m-1\\
+m\mu & k>m\end{array}\right.\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+
+\begin_inset Formula $k\leq m$
+\end_inset 
+
+
+\layout Itemize
+
+When the system's state, 
+\begin_inset Formula $k$
+\end_inset 
+
+, is less than or equal to the number of servers we have boundary flow as
+ in Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:flowAtBoundaryMMma}
+
+\end_inset 
+
+,
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename ./diagrams/boundaryFlowMMinf.eps
+	width 60text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+Flow rates at a boundary.
+\begin_inset LatexCommand \label{cap:flowAtBoundaryMMma}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Itemize
+
+This leads to the balance equation 
+\begin_inset Formula \[
+\lambda P\left(k-1\right)=k\mu P\left(k\right).\]
+
+\end_inset 
+
+
+\layout Itemize
+
+For 
+\begin_inset Formula $k=0\dots m$
+\end_inset 
+
+ we may write
+\begin_inset Formula \begin{equation}
+P\left(k\right)=\frac{\lambda}{k\mu}P\left(k-1\right).\label{eq:PkForPartA}\end{equation}
+
+\end_inset 
+
+
+\layout Itemize
+
+We define 
+\begin_inset Formula \[
+\rho=\frac{\lambda}{m\mu}\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Giving 
+\begin_inset Formula \[
+\frac{\lambda}{k\mu}=\frac{m\rho}{k}\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Substitute back into (
+\begin_inset LatexCommand \ref{eq:PkForPartA}
+
+\end_inset 
+
+) 
+\begin_inset Formula \[
+P\left(k\right)=\frac{m\rho}{k}P\left(k-1\right)\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Giving
+\begin_inset Formula \begin{eqnarray}
+P\left(k\right)=\frac{\left(m\rho\right)^{k}}{k!}P\left(0\right) & \textrm{for} & k\leq m\label{eq:probabilities}\end{eqnarray}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+
+\begin_inset Formula $k>m$
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename ./diagrams/boundaryFlowMMm.eps
+	width 60text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+Flow rates at a boundary.
+\begin_inset LatexCommand \label{cap:flowAtBoundaryMMmb}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Itemize
+
+Which leads to 
+\begin_inset Formula \[
+\lambda P(k-1)=m\mu P\left(k\right)\]
+
+\end_inset 
+
+
+\layout Itemize
+
+For 
+\begin_inset Formula $k=m+1\dots\infty$
+\end_inset 
+
+ we may write
+\begin_inset Formula \[
+P\left(k\right)=\frac{\lambda}{m\mu}P\left(k-1\right)\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Using 
+\begin_inset Formula $\rho=\frac{\lambda}{m\mu}$
+\end_inset 
+
+ we then have
+\begin_inset Formula \[
+P\left(k\right)=\rho P\left(k-1\right)\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+P\left(k\right)=\rho^{k-m}P\left(m\right).\]
+
+\end_inset 
+
+
+\layout Itemize
+
+We use (
+\begin_inset LatexCommand \ref{eq:probabilities}
+
+\end_inset 
+
+) from previous slide and substitute 
+\begin_inset Formula $k$
+\end_inset 
+
+ with 
+\begin_inset Formula $m$
+\end_inset 
+
+ to find 
+\begin_inset Formula $P\left(m\right)$
+\end_inset 
+
+ 
+\begin_inset Formula \[
+P\left(m\right)=\frac{\left(m\rho\right)^{m}}{m!}P\left(0\right)\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Therefore 
+\begin_inset Formula \begin{eqnarray*}
+P\left(k\right)=\frac{m^{m}\rho^{k}}{m!}P\left(0\right) & \textrm{for} & k>m\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Stationary Distribution
+\layout Itemize
+
+The overall stationary distribution is then
+\begin_inset Formula \[
+P\left(k\right)=\left\{ \begin{array}{cc}
+P\left(0\right)\frac{(m\rho)^{k}}{k!}, & k\leq m\\
+P\left(0\right)\frac{m^{m}\rho^{k}}{m!} & k>m\end{array}\right.\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Normalisation Condition
+\layout Itemize
+
+We can compute 
+\begin_inset Formula $P\left(0\right)$
+\end_inset 
+
+ through normalisation
+\begin_inset Formula \[
+\sum_{k=0}^{\infty}P\left(k\right)=1\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+P\left(0\right)\left[\sum_{k=0}^{m-1}\frac{\left(m\rho\right)^{k}}{k!}+\sum_{k=m}^{\infty}\frac{m^{m}\rho^{k}}{m!}\right]=1\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+P\left(0\right)=\left[\sum_{k=0}^{m-1}\frac{\left(m\rho\right)^{k}}{k!}+\sum_{k=m}^{\infty}\frac{m^{m}\rho^{k}}{m!}\right]^{-1}\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Second term inside the bracket,
+\begin_inset Formula \[
+\sum_{k=m}^{\infty}\frac{m^{m}}{m!}\rho^{k}=\frac{m^{m}\rho^{m}}{m!}\sum_{k=m}^{\infty}\rho^{k-m}\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Substitute in 
+\begin_inset Formula $k^{\prime}=k-m$
+\end_inset 
+
+ 
+\begin_inset Formula \[
+\frac{m^{m}\rho^{m}}{m!}\sum_{k^{\prime}=0}^{\infty}\rho^{k^{\prime}}=\frac{m^{m}\rho^{m}}{m!}\frac{1}{1-\rho}\]
+
+\end_inset 
+
+because 
+\begin_inset Formula \[
+\sum_{k=0}^{\infty}\rho^{k}=\frac{1}{1-\rho}\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+If 
+\begin_inset Formula $\rho<1$
+\end_inset 
+
+.
+ Thus we have
+\begin_inset Formula \[
+P\left(0\right)=\left[\sum_{k=0}^{m-1}\frac{\left(m\rho\right)^{k}}{k!}+\frac{\left(m\rho\right)^{m}}{m!\left(1-\rho\right)}\right]^{-1}.\]
+
+\end_inset 
+
+Note that this relies on 
+\begin_inset Formula $\rho<1$
+\end_inset 
+
+, if 
+\begin_inset Formula $\lambda\geq m\mu$
+\end_inset 
+
+ the system has no stationary distribution.
+\layout ShortFoilhead
+
+Probability of Waiting
+\layout Itemize
+
+For the 
+\begin_inset Formula $M/M/m$
+\end_inset 
+
+ queue a key quantity of interest is the probability of of a customer queueing,
+ 
+\begin_inset Formula $P_{Q}$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+What is the probability, when the system is at steady state, that a customer
+ will arrive and find all the 
+\begin_inset Formula $m$
+\end_inset 
+
+ servers busy? 
+\begin_inset Formula \begin{eqnarray*}
+P\left(k\geq m\right) & = & \sum_{k=m}^{\infty}P\left(k\right)\end{eqnarray*}
+
+\end_inset 
+
+
+\begin_inset Formula \[
+P\left(k\geq m\right)=P\left(0\right)\sum_{k=m}^{\infty}\frac{m^{m}\rho^{k}}{m!}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+P\left(k\geq m\right)=P\left(0\right)\frac{\left(\rho m\right)^{m}}{m!}\sum_{k=m}^{\infty}\rho^{k-m},\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Substituting 
+\begin_inset Formula $\dot{k}=k-m$
+\end_inset 
+
+ in the sum gives
+\begin_inset Formula \[
+P\left(k\geq m\right)=P\left(0\right)\frac{\left(\rho m\right)^{m}}{m!}\sum_{\dot{k}=1}^{\infty}\rho^{\dot{k}},\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Making the usual substitution this can be re-written
+\begin_inset Formula \begin{equation}
+C\left(m,a\right)=P\left(k\geq m\right)=P\left(0\right)\frac{\left(\rho m\right)^{m}}{m!\left(1-\rho\right)}.\label{eq:ErlangCone}\end{equation}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Erlang C Formula
+\layout Itemize
+
+This is known as the 
+\emph on 
+Erlang C formula
+\emph default 
+, or Erlang's second formula after A.K.
+ Erlang.
+ By making use of our definition of 
+\begin_inset Formula $a$
+\end_inset 
+
+ we can rewrite the offered load as
+\begin_inset Formula \[
+a=\frac{\lambda}{\mu}=m\rho\]
+
+\end_inset 
+
+ and substituting into (
+\begin_inset LatexCommand \ref{eq:ErlangCone}
+
+\end_inset 
+
+) we have 
+\begin_inset Formula \[
+C(m,a)=\frac{P\left(0\right)a^{m}}{m!\left(1-\frac{a}{m}\right)}.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+The result of this formula can be computed on a computer, however for the
+ purposes of exams and exercises we will use the old fashioned method of
+ curves.
+\layout ShortFoilhead
+
+Erlang C Curves
+\layout Itemize
+
+We have provided you with two sets of curves in your notes.
+ 
+\layout Itemize
+
+In an exam, if they are need curves will be provided with the exam paper.
+ 
+\layout Itemize
+
+Make sure you mark the curves and hand them in with your paper.
+\layout ShortFoilhead
+
+Telephone Trunking
+\layout Enumerate
+
+Consider the telephone trunking problem.
+ A telephone exchange A is to server 10,000 subscribers in a nearby exchange
+ as shown in Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{fig:exchange}
+
+\end_inset 
+
+.
+ 
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/exchange.eps
+	width 70text%
+
+\end_inset 
+
+
+\layout Caption
+
+The telephone exchange.
+\begin_inset LatexCommand \label{fig:exchange}
+
+\end_inset 
+
+
+\end_inset 
+
+Suppose that during the busy hour, the subscribers generate a Poisson traffic
+ with a rate of 10 calls per minute, which requires trunk lines to exchange
+ B for an average holding time of 3 minutes per call.
+ Determine the number of trunk lines needed for a grade of service (probability
+ of waiting) of 0.01.
+\layout Enumerate
+
+A customer service centre has an average holding time, 
+\begin_inset Formula $\tau$
+\end_inset 
+
+, for calls of 8 minutes.
+ In the busy hour, calls arrive at the centre at a rate of one very two
+ minutes.
+ Inter-arrival times and service times are exponentially distributed, how
+ many personnel are required to keep the probability of waiting at 0.1.
+\layout Itemize
+
+
+\series bold 
+Answer
+\layout Standard
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\layout Enumerate
+
+Average call rate is 
+\begin_inset Formula $\lambda=10$
+\end_inset 
+
+ calls/minute.
+ Average holding time is 
+\begin_inset Formula $\tau=3$
+\end_inset 
+
+ minutes.
+ Offered load 
+\begin_inset Formula $a=\lambda\tau$
+\end_inset 
+
+ is 30 Erlangs.
+ From the Erlang C curves it looks to be about 44.
+\layout Enumerate
+
+Average call rage is 
+\begin_inset Formula $\lambda=0.5$
+\end_inset 
+
+ calls/minute.
+ Average holding time is 
+\begin_inset Formula $\tau=8$
+\end_inset 
+
+ minutes.
+ Offered load is 
+\begin_inset Formula $a=\lambda\tau$
+\end_inset 
+
+ is 4 Erlangs.
+ From the Erlang C curves it looks to be about 8.
+\layout Standard
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{8}
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Average number in System.
+\layout Itemize
+
+We can also compute the average number of calls in the Erlang Delay system,
+ 
+\layout Itemize
+
+
+\begin_inset Formula \[
+\bar{N}=\frac{\rho}{1-\rho}C(m,a)+m\rho\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+These two terms represent the average queue length and the average number
+ of busy lines.
+ The average queue length is given by 
+\begin_inset Formula \[
+\bar{N}_{Q}=\frac{\rho}{1-\rho}C(m,a)\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+Using Little's formula the average waiting time is simply 
+\begin_inset Formula \[
+\bar{W}=\frac{\bar{N}_{Q}}{\lambda}=\frac{C(m,a)}{m\mu(1-\rho)}.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Note that this is the average queueing time for all customers (whether they
+ queued or not).
+ 
+\layout ShortFoilhead
+
+Queueing Time for those who Queue
+\layout Itemize
+
+Use the fact that the average queueing time for those who don't queue is
+ zero.
+\layout Itemize
+
+The average queueing time can be decomposed as
+\begin_inset Formula \[
+\bar{W}=C(m,a)\bar{W}_{Q}+\left(1-C(m,a)\right)\bar{W}_{~Q}\]
+
+\end_inset 
+
+
+\begin_deeper 
+\layout Itemize
+
+
+\begin_inset Formula $\bar{W}_{Q}$
+\end_inset 
+
+ is the average queueing time for those who do queue 
+\layout Itemize
+
+
+\begin_inset Formula $\bar{W}_{~Q}$
+\end_inset 
+
+ is the average queueing time for those who don't queue.
+ 
+\end_deeper 
+\layout Itemize
+
+Since 
+\begin_inset Formula $\bar{W}_{~Q}=0$
+\end_inset 
+
+ the second term in this sum is zero we can rewrite in terms of 
+\begin_inset Formula $\bar{W}_{Q}$
+\end_inset 
+
+ as 
+\begin_inset Formula \[
+\bar{W_{Q}}=\frac{\bar{W}}{C(m,a)}=\frac{1}{m\mu(1-\rho)}=\frac{1}{\mu(m-a)}\]
+
+\end_inset 
+
+so the average queueing time for those who do queue is independent of the
+ probability of queueing.
+ 
+\layout ShortFoilhead
+
+Example --- Waiting time in Service Centre
+\layout Itemize
+
+
+\series bold 
+Question
+\layout Standard
+
+So what is the average waiting time for the telephone service centre example?
+ What is the queueing time for those who have to queue? 
+\layout Itemize
+
+
+\series bold 
+Answer
+\layout Standard
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+The number of servers was 
+\begin_inset Formula $m=8$
+\end_inset 
+
+ and service rate was 
+\begin_inset Formula $\mu=\frac{1}{8}$
+\end_inset 
+
+.
+ The utilization factor was 
+\begin_inset Formula $\rho=\frac{\lambda}{m\mu}=\frac{1}{2}$
+\end_inset 
+
+.
+\layout Standard
+
+The delay is 
+\begin_inset Formula \[
+\bar{W}=\frac{C(m,a)}{m\mu(1-\rho)}.\]
+
+\end_inset 
+
+
+\begin_inset Formula $\frac{0.1}{8\frac{1}{8}\left(1-\frac{1}{2}\right)}=0.2$
+\end_inset 
+
+ minutes, or 12 seconds.
+ 
+\layout Standard
+
+The queueing time for those who have to queue is 
+\begin_inset Formula $\frac{\bar{W}}{C(m,a)}$
+\end_inset 
+
+.
+ For our example 
+\begin_inset Formula $\frac{\bar{W}}{0.1}=\frac{0.2}{0.1}=2$
+\end_inset 
+
+ minutes.
+ 
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{5}
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Erlang Loss 
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $m$
+\end_inset 
+
+/
+\begin_inset Formula $m$
+\end_inset 
+
+
+\layout Itemize
+
+The Erlang delay system contained 
+\begin_inset Formula $m$
+\end_inset 
+
+ servers.
+ 
+\layout Itemize
+
+It was assumed that, if all servers were occupied, the customer would be
+ placed on hold until a server became available.
+ 
+\layout Itemize
+
+In the 
+\begin_inset Formula $M/M/m/m$
+\end_inset 
+
+ system there is a maximum number of customers.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/erlangLossFlowChart.eps
+	width 80text%
+
+\end_inset 
+
+
+\layout Caption
+
+Flow chart of the Erlang Loss System.
+\begin_inset LatexCommand \label{cap:erlangLossFlowChart}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+State Diagram
+\layout Standard
+
+
+\size tiny 
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename ./diagrams/erlangLoss.eps
+	width 100text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{5}
+\end_inset 
+
+
+\layout Caption
+
+State Diagram for the Erlang loss system, 
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $m$
+\end_inset 
+
+/
+\begin_inset Formula $m$
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Itemize
+
+The offered load, 
+\begin_inset Formula $a=\frac{\lambda}{\mu}$
+\end_inset 
+
+, is again dimensionless with units of Erlangs.
+ 
+\layout Itemize
+
+The Erlang loss system may be analysed as a birth-death process with birth
+ rate 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Formula \[
+\lambda_{k}=\left\{ \begin{array}{cc}
+\lambda & k=0,1,\dots,m-1\\
+0 & k\geq m\end{array}\right.\]
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{4}
+\end_inset 
+
+ 
+\layout Itemize
+
+And death rate 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Formula \[
+\mu_{k}=\left\{ \begin{array}{cc}
+k\mu & k=0,1,\dots,m\\
+0 & k>m\end{array}\right.\]
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{4}
+\end_inset 
+
+ 
+\layout ShortFoilhead
+
+Detailed Balance Equations
+\layout Itemize
+
+When the system's state, 
+\begin_inset Formula $k\leq m$
+\end_inset 
+
+, we have boundary flow as below
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename ./diagrams/boundaryFlowMMinf.eps
+	width 60text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+Flow rates at a boundary.
+\begin_inset LatexCommand \label{cap:flowAtBoundaryMMmm}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Itemize
+
+This leads to the following balance equation 
+\begin_inset Formula \[
+\lambda P\left(k-1\right)=k\mu P\left(k\right).\]
+
+\end_inset 
+
+
+\layout Itemize
+
+So for 
+\begin_inset Formula $k=0\dots m$
+\end_inset 
+
+ we may write
+\begin_inset Formula \begin{equation}
+P\left(k\right)=\frac{\lambda}{k\mu}P\left(k-1\right).\label{eq:PkForkLessThanM}\end{equation}
+
+\end_inset 
+
+
+\layout Itemize
+
+The system state cannot go above 
+\begin_inset Formula $m$
+\end_inset 
+
+ so we have no need to consider the region where 
+\begin_inset Formula $k>m$
+\end_inset 
+
+.
+ Substituting in the offered load we have,
+\begin_inset Formula \begin{eqnarray*}
+P\left(k\right) & = & \frac{a}{k}P(k-1),\end{eqnarray*}
+
+\end_inset 
+
+ which means that 
+\begin_inset Formula \begin{eqnarray*}
+P\left(k\right) & = & \prod_{n=1}^{k}\frac{a}{n}P\left(0\right)\\
+ & = & \frac{a^{k}}{k!}P\left(0\right).\end{eqnarray*}
+
+\end_inset 
+
+ 
+\layout ShortFoilhead
+
+Normalisation Condition
+\layout Itemize
+
+The normalisation condition gives us 
+\begin_inset Formula \[
+P\left(0\right)\sum_{k=0}^{m}\frac{a^{k}}{k!}=1\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+P\left(0\right)=\frac{1}{\sum_{k=0}^{m}\frac{a^{k}}{k!}},\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+Which leads to the truncated Poisson distribution 
+\begin_inset Formula \[
+P\left(k\right)=\frac{\frac{a^{k}}{k!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+
+\emph on 
+Note if 
+\emph default 
+
+\begin_inset Formula $m\rightarrow\infty$
+\end_inset 
+
+
+\emph on 
+ we recover the
+\emph default 
+ 
+\begin_inset Formula $M/M/\infty$
+\end_inset 
+
+
+\emph on 
+ queue as we would expect.
+\layout ShortFoilhead
+
+Probability of Blocking
+\layout Itemize
+
+For the 
+\begin_inset Formula $M/M/m$
+\end_inset 
+
+ queue we were interested in the probability that a customer would have
+ to wait in the queue for service.
+ 
+\layout Itemize
+
+In the 
+\begin_inset Formula $M/M/m/m$
+\end_inset 
+
+ system there is no queue because the maximum state of the system is the
+ same as the number of servers.
+ 
+\layout Itemize
+
+The probability of waiting is therefore zero.
+ 
+\layout Itemize
+
+The probability of blocking is of interest: the probability that when we
+ arrive the system is full and we are denied service.
+ 
+\layout Itemize
+
+As we discussed for the 
+\begin_inset Formula $M/M/1/m$
+\end_inset 
+
+ queue the blocking probability is given by 
+\begin_inset Formula $P\left(m\right)$
+\end_inset 
+
+
+\begin_inset Formula \[
+B(m,a)=P\left(m\right)=\frac{\frac{a^{m}}{m!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}.\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+Use Erlang B curves to compute.
+ 
+\layout ShortFoilhead
+
+Carried Load and Utilization Factors
+\layout Itemize
+
+Since traffic is lost in 
+\begin_inset Formula $M/M/m/m$
+\end_inset 
+
+ the carried load, 
+\begin_inset Formula $a^{\prime}$
+\end_inset 
+
+, is smaller than the offered load.
+ 
+\layout Itemize
+
+The carried load is given by the offered load multiplied by the probability
+ that the packet is not blocked.
+ 
+\begin_inset Formula \[
+a^{\prime}=a(1-P\left(m\right))=a(1-B(m,a))\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+The carried load per line is the trunk occupancy (the utilization facctor),
+ 
+\begin_inset Formula \[
+\rho=\frac{a^{\prime}}{m}.\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+Note the contrast with the lossless systems where 
+\begin_inset Formula \[
+\rho=\frac{a}{m}\]
+
+\end_inset 
+
+because the carried load is equal to the offered load 
+\begin_inset Formula $a^{\prime}=a$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+This also applies for the other system with loss we have seen, the 
+\begin_inset Formula $M/M/1/m$
+\end_inset 
+
+ queue.
+\layout Itemize
+
+The rate of service in the system is no longer given by the arrival rate,
+ 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+, we need to consider those packets that are lost.
+ 
+\begin_inset Formula \[
+\dot{\lambda}=\lambda(1-P\left(m\right))\]
+
+\end_inset 
+
+
+\layout Itemize
+
+This has effects when studying the queue using Little's formula.
+\layout ShortFoilhead
+
+Load Tripling
+\layout Itemize
+
+
+\series bold 
+Question
+\layout Enumerate
+
+For a blocking probability of 0.01, what is the number of trunks needed for
+ 6 Erlangs of offered load?
+\layout Enumerate
+
+For a blocking probability of 0.01, what is the number of trunks needed for
+ 18 Erlangs?
+\layout Enumerate
+
+Comment on the increase in load compared to the increase in the number of
+ trunks.
+ 
+\layout ShortFoilhead
+
+Answer
+\layout Standard
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\layout Enumerate
+
+12
+\layout Enumerate
+
+28
+\layout Enumerate
+
+A load increase of 200 % only lead to a trunk increase of 133 %.
+ To understand this further we look at the utilization factors.
+ For the first system the utilisation factor is 
+\begin_inset Formula \[
+\rho_{1}=\frac{6}{12}\left(1-0.01\right)=0.495\]
+
+\end_inset 
+
+whereas for the second system the utilisation factor is
+\begin_inset Formula \[
+\rho_{2}=\frac{18}{28}\left(1-0.007\right)=0.6384\]
+
+\end_inset 
+
+The 30 trunk system is thus more efficient.
+ This explains why it is cheaper to call the U.S.A.
+ than Italy.
+\layout Standard
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{8}
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Example 
+\begin_inset Formula $M/M/m/n$
+\end_inset 
+
+
+\layout Standard
+
+This example is from the Exam paper in 2002-3.
+\layout Itemize
+
+Question
+\layout Enumerate
+
+A call centre employs thirty operators selling tickets for a major sporting
+ event.
+ The call centre has sixty lines in total.
+ When all operators are active new calls are placed in a queue for the first
+ available operator.
+ The call centre is to be modelled as an 
+\begin_inset Formula $M/M/m/n$
+\end_inset 
+
+ queue, 
+\emph on 
+i.e.
+
+\emph default 
+ a queue in which there are 
+\begin_inset Formula $m$
+\end_inset 
+
+ servers and a maximum state of 
+\begin_inset Formula $n$
+\end_inset 
+
+.
+\begin_deeper 
+\layout Enumerate
+
+Draw a state diagram representing the queueing system.
+\layout Enumerate
+
+Write down the detailed balance equations for the two cases where the queue
+ state 
+\begin_inset Formula $k<m$
+\end_inset 
+
+ and when 
+\begin_inset Formula $m\leq k<n$
+\end_inset 
+
+.
+\layout Enumerate
+
+For each of the two cases outlined in the previous part write down the steady
+ state distribution as a function of 
+\begin_inset Formula $P\left(0\right)$
+\end_inset 
+
+, the probability of the system being empty.
+ 
+\layout Enumerate
+
+Use the fact that the steady state distribution must be normalised to show
+ that 
+\begin_inset Formula \[
+P\left(0\right)=\left[\sum_{k=0}^{m}\frac{a^{k}}{k!}+\sum_{k=m+1}^{n}\frac{a^{k}}{m!m^{k-m}}\right]^{-1}\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $a=\frac{\lambda}{\mu}$
+\end_inset 
+
+, 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ is the arrival rate and 
+\begin_inset Formula $\mu$
+\end_inset 
+
+ is the rate of the service time distribution.
+\end_deeper 
+\layout Itemize
+
+Answer
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\layout Standard
+
+On the overhead project ...
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{12}
+\end_inset 
+
+
+\layout ShortFoilhead
+
+
+\begin_inset Formula $M$
+\end_inset 
+
+/
+\begin_inset Formula $G$
+\end_inset 
+
+/
+\begin_inset Formula $1$
+\end_inset 
+
+ Queue
+\layout Itemize
+
+Service times are 
+\emph on 
+generally 
+\emph default 
+distributed: cannot use the birth death process to analyse the system.
+ 
+\layout Itemize
+
+We introduce a different type of analysis based on the mean residual service
+ time.
+ 
+\layout Itemize
+
+We will derive the Pollaczek-Khinchin formula.
+\layout Itemize
+
+This gives the expected queueing time for any distribution of service times
+ with 
+\emph on 
+finite variance
+\emph default 
+.
+\layout ShortFoilhead
+
+Pollaczek-Khinchin formula
+\layout Standard
+
+The Pollaczek-Khinchin formula is given as
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Formula \[
+\bar{W}=\frac{\lambda\left\langle X^{2}\right\rangle }{2(1-\rho)}\]
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{3}
+\end_inset 
+
+where 
+\layout Itemize
+
+
+\begin_inset Formula $\bar{W}$
+\end_inset 
+
+ is expected waiting time,
+\layout Itemize
+
+
+\begin_inset Formula $\left\langle X^{2}\right\rangle =\left\langle X^{2}\right\rangle _{p(X)}$
+\end_inset 
+
+ is the second moment under the service time distribution, 
+\layout Itemize
+
+utilisation factor is given as 
+\begin_inset Formula $\rho=\lambda\bar{X}$
+\end_inset 
+
+ and 
+\layout Itemize
+
+
+\begin_inset Formula $\bar{X}=\left\langle X\right\rangle _{p(X)}$
+\end_inset 
+
+ is the mean under the service time distribution.
+ 
+\layout ShortFoilhead
+
+Proof of Pollaczek-Khinchin Formula
+\layout Itemize
+
+Proof of the Pollaczek-Khinchin formula.
+ 
+\layout Itemize
+
+In our proof we will make three assumptions
+\begin_deeper 
+\layout Enumerate
+
+The queue is FIFO queue, 
+\emph on 
+i.e.
+ 
+\emph default 
+customers are served in the order they arrive.
+ This assumption may be relaxed but it will simplify our proof.
+\layout Enumerate
+
+The arrival times are statistically independent of the service times.
+ 
+\layout Enumerate
+
+The arrival time distribution has a variance which is finite.
+\end_deeper 
+\layout Itemize
+
+To formulate the proof we introduce a concept known as the mean residual
+ service time.
+\layout ShortFoilhead
+
+The Residual Service Time
+\begin_inset LatexCommand \label{sub:theResidualServiceTime}
+
+\end_inset 
+
+
+\layout Itemize
+
+The residual service time is 
+\begin_deeper 
+\layout Quote
+
+...
+ the amount of service time that remains for the customer under service
+ from the perspective of a customer who has just arrived in the queue.
+ 
+\end_deeper 
+\layout Itemize
+
+The first part of the proof occurs from the perspective of the arriving
+ customer.
+ 
+\layout Itemize
+
+The arriving customer is considered to be the 
+\begin_inset Formula $i$
+\end_inset 
+
+th customer.
+ 
+\layout ShortFoilhead
+
+Simple Definitions and Schematic
+\layout Itemize
+
+We introduce some simple definitions of terms.
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features>
+<column alignment="right" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<row endhead="true">
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $W_{i}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+=
+\end_inset 
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ Waiting time in queue of 
+\begin_inset Formula $i$
+\end_inset 
+
+th customer.
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $R_{i}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+=
+\end_inset 
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ `Residual service time' seen by the 
+\begin_inset Formula $i$
+\end_inset 
+
+th customer.
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $X_{i}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+=
+\end_inset 
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ Service time of the 
+\begin_inset Formula $i$
+\end_inset 
+
+th customer.
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ 
+\begin_inset Formula $k_{i}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+=
+\end_inset 
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+ Number of customers in the system when the 
+\begin_inset Formula $i$
+\end_inset 
+
+th customer arrives.
+ 
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Standard
+
+This enables us to draw a simple schematic of the system as it is perceived
+ by the 
+\begin_inset Formula $i$
+\end_inset 
+
+th arrival.
+ This is shown in Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:schemeaticRST}
+
+\end_inset 
+
+.
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename diagrams/residualServiceOverview.eps
+	width 100text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+Schematic representation of residual service time.
+\begin_inset LatexCommand \label{cap:schemeaticRST}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Wait for 
+\emph on 
+i
+\emph default 
+th Customer
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Graphics
+	filename diagrams/residualServiceOverview.eps
+	width 100text%
+
+\end_inset 
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{6}
+\end_inset 
+
+
+\layout Caption
+
+Schematic representation of residual service time.
+\begin_inset LatexCommand \label{cap:schemeaticRST}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Itemize
+
+From the figure the wait for the 
+\begin_inset Formula $i$
+\end_inset 
+
+th customer will be given by
+\begin_inset Formula \[
+W_{i}=R_{i}+\sum_{j=i-(k_{i}-1)}^{i-1}X_{j}\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+Summing over both sides (
+\emph on 
+i.e.
+ 
+\emph default 
+for all the arriving customers up to the 
+\begin_inset Formula $I$
+\end_inset 
+
+th) 
+\begin_inset Formula \[
+\sum_{i=1}^{I}W_{i}=\sum_{i=1}^{I}R_{i}+\sum_{i=1}^{I}\sum_{j=i-(k_{i}-1)}^{i-1}X_{j}\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Dividing through by 
+\begin_inset Formula $I$
+\end_inset 
+
+ gives us 
+\begin_inset Formula \[
+\sum_{i=1}^{I}\frac{W_{i}}{I}=\sum_{i=1}^{I}\frac{R_{i}}{I}+\sum_{i=1}^{I}\sum_{j=i-(k_{i}-1)}^{i-1}\frac{X_{j}}{I}\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+In the limit as 
+\begin_inset Formula $I\rightarrow\infty$
+\end_inset 
+
+ this becomes 
+\begin_inset Formula \[
+\lim_{I\rightarrow\infty}\sum_{i=1}^{I}\frac{W_{i}}{I}=\lim_{I\rightarrow\infty}\sum_{i=1}^{I}\frac{R_{i}}{I}+\lim_{I\rightarrow\infty}\sum_{i=1}^{I}\frac{(k_{i}-1)X_{i}}{I}\]
+
+\end_inset 
+
+
+\layout Itemize
+
+The terms of which are recognised as 
+\emph on 
+time averages
+\emph default 
+.
+ 
+\layout ShortFoilhead
+
+Time Average Equivalence
+\layout Itemize
+
+If we assume 
+\emph on 
+time averages
+\emph default 
+ are equivalent to 
+\emph on 
+steady state averages
+\emph default 
+ this gives 
+\begin_inset Formula \[
+\left\langle W\right\rangle =\left\langle R\right\rangle +\left\langle \left(k-1\right)X\right\rangle .\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+The length of the queue as seen by the 
+\begin_inset Formula $i$
+\end_inset 
+
+th arrival is independent of the 
+\begin_inset Formula $i$
+\end_inset 
+
+th arrival's length (our second assumption)
+\begin_deeper 
+\layout Itemize
+
+this means 
+\begin_inset Formula $\left\langle (k-1)X\right\rangle =\left\langle k-1\right\rangle \left\langle X\right\rangle $
+\end_inset 
+
+ and since 
+\begin_inset Formula $(k-1)$
+\end_inset 
+
+ is the length of the queue we may write 
+\begin_inset Formula \[
+\bar{W}=\bar{R}+\bar{N}_{Q}\bar{X}\]
+
+\end_inset 
+
+ 
+\end_deeper 
+\layout Itemize
+
+Using Little's theorem for the queue we have
+\begin_inset Formula \[
+\bar{N}_{Q}=\lambda\bar{W}\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+Substituting back in we have
+\begin_inset Formula \[
+\bar{W}=\bar{R}+\lambda\bar{X}\bar{W}.\]
+
+\end_inset 
+
+ 
+\layout ShortFoilhead
+
+Wait in Terms of Residual Service Time
+\layout Itemize
+
+From the previous slide:
+\begin_inset Formula \[
+\bar{W}=\bar{R}+\lambda\bar{X}\bar{W}.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+And the fact that 
+\begin_inset Formula $\rho=\lambda\bar{X}$
+\end_inset 
+
+ (which stems from Little's formula for the service) gives us 
+\begin_inset Formula \[
+\bar{W}=\bar{R}+\rho\bar{W}\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+Leading to 
+\begin_inset Formula \begin{equation}
+\bar{W}=\frac{\bar{R}}{1-\rho}\label{eqn:arrivals}\end{equation}
+
+\end_inset 
+
+ 
+\layout Itemize
+
+We now have the average queueing time in terms of the mean residual service
+ time.
+ To complete the Pollaczek-Khinchin formula we simply need to calculate
+ 
+\begin_inset Formula $\bar{R}$
+\end_inset 
+
+.
+ 
+\layout ShortFoilhead
+
+Mean Residual Service Time from Departures Perspective
+\layout Itemize
+
+We again turn to a graphical proof to obtain the value of the mean residual
+ service time.
+ 
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/residualTime.eps
+	width 100text%
+
+\end_inset 
+
+
+\layout Caption
+
+Graphical computation of mean residual time.
+ 
+\begin_inset Formula $M\left(t\right)$
+\end_inset 
+
+ is the number of service completions in the interval 
+\begin_inset Formula $[0,\, t]$
+\end_inset 
+
+.
+\begin_inset LatexCommand \label{cap:meanResidualGraphical}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Residual Service Time
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/residualTime.eps
+	width 100text%
+
+\end_inset 
+
+
+\layout Itemize
+
+The time average of the mean residual service time can then be calculated
+ in terms of the area under the curve, 
+\begin_inset Formula $A(t)$
+\end_inset 
+
+.
+\layout Itemize
+
+This is given by the area under each of the triangles, 
+\begin_inset Formula \[
+A(t)=\frac{1}{2}\sum_{i=1}^{M(t)}X_{i}^{2}.\]
+
+\end_inset 
+
+ 
+\layout ShortFoilhead
+
+Residual Service Time
+\layout Itemize
+
+The average service time is the area divided by time, 
+\begin_inset Formula $t$
+\end_inset 
+
+, 
+\begin_inset Formula \[
+A(t)=\frac{1}{2}\sum_{i=1}^{M(t)}X_{i}^{2}.\]
+
+\end_inset 
+
+ 
+\begin_inset Formula \begin{eqnarray*}
+\frac{A(t)}{t} & = & \frac{M(t)}{t}\frac{A(t)}{M(t)}\\
+ & = & \frac{1}{2}\frac{M(t)}{t}\frac{\sum_{i=1}^{M(t)}X_{i}^{2}}{M(t)}.\end{eqnarray*}
+
+\end_inset 
+
+ 
+\begin_deeper 
+\layout Itemize
+
+we have introduced the number of arrivals after time 
+\begin_inset Formula $t$
+\end_inset 
+
+, as 
+\begin_inset Formula $M\left(t\right)$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+As 
+\begin_inset Formula $t\rightarrow\infty$
+\end_inset 
+
+, 
+\emph on 
+if the variance is finite
+\emph default 
+, we find that 
+\begin_inset Formula $M(t)\rightarrow\infty$
+\end_inset 
+
+ and we obtain
+\begin_inset Formula \[
+\bar{R}=\frac{1}{2}\lambda\left\langle X^{2}\right\rangle .\]
+
+\end_inset 
+
+ 
+\end_deeper 
+\layout ShortFoilhead
+
+Pollaczek-Khinchin Formula
+\layout Itemize
+
+Again assuming that time averages and ensemble averages are equal we substitute
+ back into (
+\begin_inset LatexCommand \ref{eqn:arrivals}
+
+\end_inset 
+
+) to obtain the Pollaczek-Khinchin formula 
+\begin_inset Formula \[
+\bar{W}=\frac{\lambda\left\langle X^{2}\right\rangle }{2(1-\rho)}.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+This implies that the total waiting time in the system is 
+\begin_inset Formula \[
+\bar{T}=\bar{X}+\frac{\lambda\left\langle X^{2}\right\rangle }{2(1-\rho)}\]
+
+\end_inset 
+
+ and through Little's formula we can obtain the expected queue length, 
+\begin_inset Formula $\bar{N}_{Q}$
+\end_inset 
+
+, and the expected number in the system, 
+\begin_inset Formula $\bar{N}$
+\end_inset 
+
+.
+ 
+\layout ShortFoilhead
+
+Sanity Check --- Markov Service times
+\layout Itemize
+
+The exponentially distributed service times, 
+\begin_inset Formula \[
+P\left(X\right)=\mu\exp\left(-\mu X\right),\]
+
+\end_inset 
+
+have a mean of 
+\begin_inset Formula \[
+\bar{X}=\frac{1}{\mu}\]
+
+\end_inset 
+
+ and a variance of 
+\begin_inset Formula $\frac{1}{\mu^{2}}$
+\end_inset 
+
+ leading to a second moment
+\begin_inset Formula \[
+\left\langle X^{2}\right\rangle =\frac{2}{\mu^{2}}\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Substituting into the Pollaczek-Khinchin formula we obtain 
+\begin_inset Formula \begin{eqnarray*}
+\bar{W} & = & \frac{\rho}{\mu\left(1-\rho\right)}\\
+ & = & \frac{\rho}{\mu-\lambda}\end{eqnarray*}
+
+\end_inset 
+
+which is identical to those we derived for the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue.
+\layout ShortFoilhead
+
+Deterministic Service --- 
+\begin_inset Formula $M/D/1$
+\end_inset 
+
+
+\layout Itemize
+
+Some systems have deterministic service times.
+ For example, transmission of fixed length packets over a channel with a
+ fixed bandwidth.
+ 
+\layout Itemize
+
+We represent a `deterministic distribution' as
+\begin_inset Formula \[
+P\left(X\right)=\delta\left(X-\frac{1}{\mu}\right)\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $\delta\left(\cdot\right)$
+\end_inset 
+
+is the Dirac delta function.
+ 
+\layout Itemize
+
+For this system 
+\begin_inset Formula \[
+\left\langle X\right\rangle =\frac{1}{\mu}\]
+
+\end_inset 
+
+and 
+\begin_inset Formula \[
+\left\langle X^{2}\right\rangle =\frac{1}{\mu^{2}}\]
+
+\end_inset 
+
+
+\emph on 
+i.e.
+
+\emph default 
+ the variance is zero.
+ 
+\layout ShortFoilhead
+
+P-K Formula for Deterministic Systems
+\layout Itemize
+
+For this system 
+\begin_inset Formula \[
+\left\langle X\right\rangle =\frac{1}{\mu}\]
+
+\end_inset 
+
+and 
+\begin_inset Formula \[
+\left\langle X^{2}\right\rangle =\frac{1}{\mu^{2}}\]
+
+\end_inset 
+
+
+\emph on 
+i.e.
+
+\emph default 
+ the variance is zero.
+ 
+\layout Itemize
+
+Substituting into the Pollaczek-Khinchin formula we obtain 
+\begin_inset Formula \[
+\bar{W}=\frac{\rho}{2\mu\left(1-\rho\right)}.\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Table of Delays and Average Numbers in System
+\layout Itemize
+
+In fact we may derive the full range of results for these distributions.
+ 
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="5" columns="4">
+<features>
+<column alignment="center" valignment="top" rightline="true" width="0pt">
+<column alignment="center" valignment="top" rightline="true" width="0pt">
+<column alignment="center" valignment="top" rightline="true" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<row bottomline="true" endhead="true">
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ Expected value 
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ General 
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ Exponential 
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+Deterministic
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+
+\begin_inset Formula $\bar{W}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ 
+\begin_inset Formula $\frac{\lambda}{2(1-\rho)}\left\langle X^{2}\right\rangle $
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ 
+\begin_inset Formula $\frac{\rho}{\mu(1-\rho)}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ 
+\begin_inset Formula $\frac{\rho}{2\mu(1-\rho)}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ 
+\begin_inset Formula $\bar{T}=\bar{W}+\frac{1}{\mu}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ 
+\begin_inset Formula $\frac{\lambda}{2(1-\rho)}\left\langle X^{2}\right\rangle +\frac{1}{\mu}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ 
+\begin_inset Formula $\frac{1}{\mu(1-\rho)}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ 
+\begin_inset Formula $\frac{2-\rho}{2\mu(1-\rho)}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ 
+\begin_inset Formula $\bar{N_{Q}}=\lambda\bar{W}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ 
+\begin_inset Formula $\frac{\lambda^{2}}{2(1-\rho)}\left\langle X^{2}\right\rangle $
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+
+\begin_inset Formula $\frac{\rho^{2}}{(1-\rho)}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ 
+\begin_inset Formula $\frac{\rho^{2}}{2(1-\rho)}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ 
+\begin_inset Formula $\bar{N}=\lambda\bar{W}+\rho=$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ 
+\begin_inset Formula $\frac{\lambda^{2}}{2(1-\rho)}\left\langle X^{2}\right\rangle +\rho$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ 
+\begin_inset Formula $\frac{\rho}{1-\rho}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\size small 
+ 
+\begin_inset Formula $\frac{\rho(2-\rho)}{2(1-\rho)}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Example --- Uniform Service Times
+\layout Itemize
+
+Uniform Service Times --- 
+\begin_inset Formula $M/U/1$
+\end_inset 
+
+.
+\layout Itemize
+
+Consider a uniform probability distribution is defined between 0 and 
+\begin_inset Formula $b$
+\end_inset 
+
+ for 
+\begin_inset Formula $X>0$
+\end_inset 
+
+ as
+\begin_inset Formula \[
+U\left(X|b\right)=\left\{ \begin{array}{cc}
+\frac{1}{b} & 0<X\leq b\\
+0 & X>b\end{array}\right.\]
+
+\end_inset 
+
+show that the man of this uniform distribution is given by 
+\begin_inset Formula $\frac{b}{2}$
+\end_inset 
+
+ and its variance by 
+\begin_inset Formula $\frac{b^{2}}{12}$
+\end_inset 
+
+ and find the expected waiting time for an 
+\begin_inset Formula $M/U/1$
+\end_inset 
+
+ queue?
+\layout ShortFoilhead
+
+Answer
+\layout Itemize
+
+For the mean we have
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X\right\rangle  & = & \int_{0}^{\infty}Xp\left(X\right)dX\\
+\\\\\\\\\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Answer
+\layout Itemize
+
+For the mean we have
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X\right\rangle  & = & \int_{0}^{\infty}Xp\left(X\right)dX\\
+ & = & \int_{0}^{\infty}XU\left(X|b\right)dX\\
+\\\\\\\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Answer
+\layout Itemize
+
+For the mean we have
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X\right\rangle  & = & \int_{0}^{\infty}Xp\left(X\right)dX\\
+ & = & \int_{0}^{\infty}XU\left(X|b\right)dX\\
+ & = & \int_{0}^{b}\frac{X}{b}dX\\
+\\\\\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Answer
+\layout Itemize
+
+For the mean we have
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X\right\rangle  & = & \int_{0}^{\infty}Xp\left(X\right)dX\\
+ & = & \int_{0}^{\infty}XU\left(X|b\right)dX\\
+ & = & \int_{0}^{b}\frac{X}{b}dX\\
+ & = & \left[\frac{X^{2}}{2b}\right]_{0}^{b}\\
+\\\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Answer
+\layout Itemize
+
+For the mean we have
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X\right\rangle  & = & \int_{0}^{\infty}Xp\left(X\right)dX\\
+ & = & \int_{0}^{\infty}XU\left(X|b\right)dX\\
+ & = & \int_{0}^{b}\frac{X}{b}dX\\
+ & = & \left[\frac{X^{2}}{2b}\right]_{0}^{b}\\
+ & = & \frac{b^{2}}{2b}-0\\
+\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Answer
+\layout Itemize
+
+For the mean we have
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X\right\rangle  & = & \int_{0}^{\infty}Xp\left(X\right)dX\\
+ & = & \int_{0}^{\infty}XU\left(X|b\right)dX\\
+ & = & \int_{0}^{b}\frac{X}{b}dX\\
+ & = & \left[\frac{X^{2}}{2b}\right]_{0}^{b}\\
+ & = & \frac{b^{2}}{2b}-0\\
+ & = & \frac{b}{2}\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Answer
+\layout Itemize
+
+For the mean we have
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X\right\rangle  & = & \int_{0}^{\infty}Xp\left(X\right)dX\\
+ & = & \int_{0}^{\infty}XU\left(X|b\right)dX\\
+ & = & \int_{0}^{b}\frac{X}{b}dX\\
+ & = & \left[\frac{X^{2}}{2b}\right]_{0}^{b}\\
+ & = & \frac{b^{2}}{2b}-0\\
+ & = & \frac{b}{2}\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Variance
+\layout Itemize
+
+For the variance we also require 
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X^{2}\right\rangle  & = & \int_{0}^{\infty}X^{2}p\left(X\right)dX\\
+\\\\\\\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Variance
+\layout Itemize
+
+For the variance we also require 
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X^{2}\right\rangle  & = & \int_{0}^{\infty}X^{2}p\left(X\right)dX\\
+ & = & \int_{0}^{b}\frac{X^{2}}{b}dX\\
+\\\\\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Variance
+\layout Itemize
+
+For the variance we also require 
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X^{2}\right\rangle  & = & \int_{0}^{\infty}X^{2}p\left(X\right)dX\\
+ & = & \int_{0}^{b}\frac{X^{2}}{b}dX\\
+ & = & \left[\frac{X^{3}}{3b}\right]_{0}^{b}\\
+\\\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Variance
+\layout Itemize
+
+For the variance we also require 
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X^{2}\right\rangle  & = & \int_{0}^{\infty}X^{2}p\left(X\right)dX\\
+ & = & \int_{0}^{b}\frac{X^{2}}{b}dX\\
+ & = & \left[\frac{X^{3}}{3b}\right]_{0}^{b}\\
+ & = & \frac{b^{3}}{3b}-0\\
+\end{eqnarray*}
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Variance
+\layout Itemize
+
+For the variance we also require 
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X^{2}\right\rangle  & = & \int_{0}^{\infty}X^{2}p\left(X\right)dX\\
+ & = & \int_{0}^{b}\frac{X^{2}}{b}dX\\
+ & = & \left[\frac{X^{3}}{3b}\right]_{0}^{b}\\
+ & = & \frac{b^{3}}{3b}-0\\
+ & = & \frac{b^{2}}{3}\end{eqnarray*}
+
+\end_inset 
+
+\SpecialChar ~
+
+\layout ShortFoilhead
+
+Variance
+\layout Standard
+
+For the variance we also require 
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X^{2}\right\rangle  & = & \int_{0}^{\infty}X^{2}p\left(X\right)dX\\
+ & = & \int_{0}^{b}\frac{X^{2}}{b}dX\\
+ & = & \left[\frac{X^{3}}{3b}\right]_{0}^{b}\\
+ & = & \frac{b^{3}}{3b}-0\\
+ & = & \frac{b^{2}}{3}\end{eqnarray*}
+
+\end_inset 
+
+The variance is 
+\begin_inset Formula $\left\langle X^{2}\right\rangle -\left\langle X\right\rangle ^{2}=\frac{b^{2}}{3}-\left(\frac{b}{2}\right)=\frac{b^{2}}{12}$
+\end_inset 
+
+.
+\layout ShortFoilhead
+
+Putting it Together
+\layout Itemize
+
+For simplicity we consider 
+\begin_inset Formula $\mu=\frac{1}{\left\langle X\right\rangle }.$
+\end_inset 
+
+ So 
+\begin_inset Formula $\mu=\frac{2}{b}$
+\end_inset 
+
+ and thus 
+\begin_inset Formula $b=\frac{2}{\mu}$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+So we can write the second moment in terms of 
+\begin_inset Formula $\mu$
+\end_inset 
+
+.
+ 
+\begin_inset Formula $\left\langle X^{2}\right\rangle =\frac{b^{2}}{3}$
+\end_inset 
+
+.
+\layout Itemize
+
+Substituting in 
+\begin_inset Formula $b=\frac{2}{\mu}$
+\end_inset 
+
+ we have 
+\begin_inset Formula $\left\langle X^{2}\right\rangle =\frac{4}{3\mu^{2}}$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+Substituting in to the Pollaczek-Khinchin formula we recover
+\begin_inset Formula \[
+\bar{W}=\frac{2\rho}{3\mu\left(1-\rho\right)}.\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+Automatic Repeat Request (ARQ) System.
+ 
+\layout Itemize
+
+The 
+\begin_inset Formula $M/G/1$
+\end_inset 
+
+ queue system can be used for modelling various systems of interest.
+ 
+\layout Itemize
+
+In an ARQ system packets are transmitted and the system waits for an acknowledge
+ment.
+ 
+\layout Itemize
+
+If no acknowledgement is received the system retransmits.
+ 
+\layout Itemize
+
+In this section we review Example\SpecialChar ~
+3.15 from Bertsekas and Gallager.
+ 
+\layout Itemize
+
+A schematic of the system is given in Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:ARQschemeatic}
+
+\end_inset 
+
+.
+\layout ShortFoilhead
+
+ARQ Schematic
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/ARQ.eps
+	width 80text%
+
+\end_inset 
+
+
+\layout Caption
+
+The ARQ System.
+\begin_inset LatexCommand \label{cap:ARQschemeatic}
+
+\end_inset 
+
+
+\end_inset 
+
+
+\layout Itemize
+
+For the purposes of this analysis, we will assume 
+\begin_deeper 
+\layout Enumerate
+
+That each packet takes 1 millisecond to be transmitted.
+\layout Enumerate
+
+The system waits a maximum of 
+\begin_inset Formula $n-1$
+\end_inset 
+
+ milliseconds for an acknowledgement.
+ If there is no acknowledgement the system retransmits.
+\layout Enumerate
+
+The acknowledgement occurs if the packet is received without errors.
+ Otherwise acknowledgement doesn't occur.
+ 
+\layout Enumerate
+
+The probability of an error in a packet is taken to be 
+\begin_inset Formula $p$
+\end_inset 
+
+ and we take errors to occur independently.
+ 
+\layout Enumerate
+
+Assume that packets arrive as a Poisson process with rate 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+.
+ 
+\end_deeper 
+\layout ShortFoilhead
+
+ARQ Contd
+\layout Itemize
+
+In practice, the fourth assumption is probably unrealistic (independence
+ of errors).
+ 
+\layout Itemize
+
+If an error occurs due to problems in the transmission channel, it is likely
+ that several packets in a row will not be received, so the errors do not
+ occur independently.
+ 
+\layout Itemize
+
+The time interval between transmission and re-transmission will be 
+\begin_inset Formula $1+kn$
+\end_inset 
+
+ milliseconds with probability 
+\begin_inset Formula $\left(1-p\right)p^{k}$
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+This time interval is associated with 
+\begin_inset Formula $k$
+\end_inset 
+
+ retransmissions and one successful transmission.
+ 
+\layout Itemize
+
+The probability of this being the service time is given by
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Formula \[
+P\left(X=1+kn\right)=\left(1-p\right)p^{k}\]
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{3}
+\end_inset 
+
+which is recognised as a geometric distribution.
+\layout ShortFoilhead
+
+Average Service Time
+\layout Itemize
+
+Using this distribution we can compute the expected service time which is
+ given by
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X\right\rangle  & = & \sum_{k=0}^{\infty}\left(1+kn\right)\left(1-p\right)p^{k}\\
+ & = & \left(1-p\right)\left(\sum_{k=0}^{\infty}p^{k}+n\sum_{k=0}^{\infty}kp^{k}\right)\\
+ & = & 1+n\frac{p}{1-p}\end{eqnarray*}
+
+\end_inset 
+
+ since 
+\begin_inset Formula $\sum_{k=0}^{\infty}p^{k}=\frac{1}{1-p}$
+\end_inset 
+
+ and 
+\begin_inset Formula $\sum_{k=0}^{\infty}kp^{k}=\frac{p}{\left(1-p\right)^{2}}$
+\end_inset 
+
+ .
+ 
+\layout ShortFoilhead
+
+ARQ Utilization Factor
+\layout Itemize
+
+We can therefore write the utilization factor, 
+\begin_inset Formula $\rho=\lambda\left\langle X\right\rangle $
+\end_inset 
+
+, as
+\begin_inset Formula \[
+\rho=\lambda+\lambda n\frac{p}{1-p}.\]
+
+\end_inset 
+
+
+\layout Itemize
+
+This has to be less than 1.
+\layout Itemize
+
+Recall that the utilisation factor is 
+\begin_inset Formula \[
+\rho=1-P\left(0\right).\]
+
+\end_inset 
+
+
+\layout Itemize
+
+This implies that 
+\begin_inset Formula \[
+P\left(0\right)=1-\lambda-\lambda n\frac{p}{1-p}\]
+
+\end_inset 
+
+
+\begin_inset Note
+collapsed false
+
+\layout Standard
+
+Expand on this section --- what use is the utilization factor in this system?
+\end_inset 
+
+
+\layout ShortFoilhead
+
+ARQ Second Moment
+\layout Itemize
+
+The second moment of the service time is
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X^{2}\right\rangle  & = & \sum_{k=0}^{\infty}\left(1+kn\right)^{2}\left(1-p\right)p^{k}\\
+ & = & \left(1-p\right)\left(\sum_{k=0}^{\infty}p^{k}+2n\sum_{k=0}^{\infty}kp^{k}+n^{2}\sum_{k=0}^{\infty}k^{2}p^{k}\right)\\
+ & = & 1+\frac{2np}{1-p}+\frac{n^{2}\left(p+p^{2}\right)}{\left(1-p\right)^{2}}\end{eqnarray*}
+
+\end_inset 
+
+since 
+\begin_inset Formula \[
+\sum_{k=0}^{\infty}k^{2}p^{k}=\frac{p+p^{2}}{\left(1-p\right)^{3}}\]
+
+\end_inset 
+
+ 
+\layout Itemize
+
+These moments can be used with the Pollaczek-Khinchin formula to obtain
+ statistics for the queue.
+\layout ShortFoilhead
+
+
+\begin_inset Formula $M/G/1$
+\end_inset 
+
+ Queues with Vacations 
+\layout Itemize
+
+Consider a server which, when it is free, attends to some other business.
+ For example it could transmit control and record keeping traffic.
+ These periods are sometimes known as vacations (which is an American word
+ that means holidays).
+ The vacation periods are characterised by
+\begin_deeper 
+\layout Enumerate
+
+If a new arrival arrives during a vacation it must wait until the vacation
+ is over before being dealt with.
+\layout Enumerate
+
+If a vacation ends and the server is idle it immediately goes on a new vacation.
+ 
+\end_deeper 
+\layout ShortFoilhead
+
+
+\begin_inset Formula $M/G/1$
+\end_inset 
+
+ with Vacations
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/vacationMG1.eps
+	width 80text%
+
+\end_inset 
+
+
+\layout Caption
+
+Schematic of 
+\begin_inset Formula $M/G/1$
+\end_inset 
+
+ queue
+\end_inset 
+
+
+\layout Itemize
+
+We denote the length of these successive vacations to be 
+\begin_inset Formula $V_{1}$
+\end_inset 
+
+, 
+\begin_inset Formula $V_{2}$
+\end_inset 
+
+, 
+\begin_inset Formula $\dots$
+\end_inset 
+
+.
+ We assume that 
+\begin_inset Formula $V_{1},$
+\end_inset 
+
+
+\begin_inset Formula $V_{2}$
+\end_inset 
+
+, 
+\begin_inset Formula $\dots$
+\end_inset 
+
+ are i.i.d.
+ random variables which are also independent of the customer times and the
+ service times.
+ We can then attempt to compute the mean residual service time for this
+ queue for a 
+\emph on 
+Poisson (Markov) arrival
+\emph default 
+ system with 
+\emph on 
+general service times
+\emph default 
+ and 
+\emph on 
+generally distributed vacation times
+\emph default 
+.
+\layout ShortFoilhead
+
+Residual Service Time
+\layout Standard
+
+
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/vacationResidual.eps
+	width 80text%
+
+\end_inset 
+
+
+\layout Caption
+
+Computation of residual service time for system with vacations.
+\end_inset 
+
+
+\layout Itemize
+
+For this system 
+\begin_inset Formula \begin{eqnarray*}
+\frac{1}{t}\int_{0}^{t}r\left(\tau\right)d\tau & = & \frac{1}{t}\sum_{i=1}^{M\left(t\right)}\frac{1}{2}X_{i}^{2}+\frac{1}{t}\sum_{i=1}^{L\left(t\right)}\frac{1}{2}V_{i}^{2}\\
+ & = & \frac{M\left(t\right)}{t}\frac{1}{2}\frac{\sum_{i=1}^{M\left(t\right)}X_{i}^{2}}{M\left(t\right)}+\frac{L\left(t\right)}{t}\frac{1}{2}\frac{\sum_{i=1}^{L\left(t\right)}V_{i}^{2}}{L\left(t\right)}\end{eqnarray*}
+
+\end_inset 
+
+arrival process, 
+\begin_inset Formula $M\left(t\right)$
+\end_inset 
+
+, vacation process, 
+\begin_inset Formula $L\left(t\right)$
+\end_inset 
+
+.
+ 
+\layout ShortFoilhead
+
+Average of Vacation Distribution
+\layout Itemize
+
+This means we have to deal with the average number of vacations.
+ On average the proportion of time available for vacations is 
+\begin_inset Formula $\left(1-\rho\right)$
+\end_inset 
+
+, 
+\emph on 
+i.e.
+ 
+\emph default 
+that time where the transmission line is not in use.
+ 
+\layout Itemize
+
+If the average length of a vacation at time 
+\begin_inset Formula $t$
+\end_inset 
+
+ is 
+\begin_inset Formula $\bar{V}_{t}$
+\end_inset 
+
+ then the number of vacations that will have arrived at that time is 
+\begin_inset Formula \[
+L\left(t\right)=\frac{t\left(1-\rho\right)}{\bar{V}_{t}}.\]
+
+\end_inset 
+
+Recalling 
+\begin_inset Formula \[
+\frac{1}{t}\int_{0}^{t}r\left(\tau\right)d\tau=\frac{M\left(t\right)}{t}\frac{1}{2}\frac{\sum_{i=1}^{M\left(t\right)}X_{i}^{2}}{M\left(t\right)}+\frac{L\left(t\right)}{t}\frac{1}{2}\frac{\sum_{i=1}^{L\left(t\right)}V_{i}^{2}}{L\left(t\right)}\]
+
+\end_inset 
+
+
+\layout Itemize
+
+Taking the limit of as 
+\begin_inset Formula $t\rightarrow\infty$
+\end_inset 
+
+ we can write 
+\begin_inset Formula \[
+\bar{R}=\frac{1}{2}\lambda\left\langle X^{2}\right\rangle +\frac{\left(1-\rho\right)\left\langle V^{2}\right\rangle }{2\bar{V}}.\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+P-K Formula
+\layout Itemize
+
+So given that the assumptions that we used to develop the formula 
+\begin_inset Formula \[
+\bar{W}=\frac{\bar{R}}{1-\rho}\]
+
+\end_inset 
+
+are still valid, we may write
+\begin_inset Formula \[
+\bar{W}=\frac{\lambda\left\langle X^{2}\right\rangle }{2\left(1-\rho\right)}+\frac{\left\langle V^{2}\right\rangle }{2\bar{V}}.\]
+
+\end_inset 
+
+
+\layout ShortFoilhead
+
+
+\begin_inset Formula $M/G/1$
+\end_inset 
+
+ with Vacations --- Simple example
+\layout Standard
+
+A bar has Poisson arrivals and one member of staff serving.
+ When there are no customers at the bar, the staff member leaves the bar
+ to check on the kitchen.
+ Assuming these checks are exponentially distributed in length, with mean
+ 
+\begin_inset Formula $\bar{V}$
+\end_inset 
+
+ and that customer service times are exponentially distributed with mean
+ 
+\begin_inset Formula $\bar{X}$
+\end_inset 
+
+ what is the average waiting time in the queue?
+\layout Standard
+
+Exponential standard deviation = 
+\begin_inset Formula $\frac{1}{\mu}$
+\end_inset 
+
+, mean
+\begin_inset Formula $=\frac{1}{\mu}$
+\end_inset 
+
+.
+ So if mean is 
+\begin_inset Formula $\bar{V}$
+\end_inset 
+
+, standard deviation is 
+\begin_inset Formula $\bar{V}$
+\end_inset 
+
+ and variance is 
+\begin_inset Formula $\bar{V}^{2}$
+\end_inset 
+
+.
+ Thus second moment is 
+\begin_inset Formula $\left\langle V^{2}\right\rangle =2\bar{V}^{2}$
+\end_inset 
+
+.
+ Similarly for second moment of service time 
+\begin_inset Formula $\left\langle X^{2}\right\rangle =2\bar{X}^{2}$
+\end_inset 
+
+.
+ Defining 
+\begin_inset Formula $\rho=\lambda\bar{X}$
+\end_inset 
+
+ we have 
+\begin_inset Formula \[
+\bar{W}=\frac{\lambda\bar{X}}{\left(1-\rho\right)}+\bar{V}=\frac{\rho}{\left(1-\rho\right)}+\bar{V}.\]
+
+\end_inset 
+
+Deterministic vacations would have lead to 
+\begin_inset Formula \[
+\bar{W}=\frac{\lambda\bar{X}}{\left(1-\rho\right)}+\frac{\bar{V}}{2}=\frac{\rho}{\left(1-\rho\right)}+\frac{\bar{V}}{2}.\]
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[abbrv]{lawrence,other,zbooks}
+
+\end_inset 
+
+
+\the_end

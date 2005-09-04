@@ -1,0 +1,348 @@
+#LyX 1.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 218
+\textclass amsart
+\begin_preamble
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{babel}
+
+\makeatletter
+
+
+\usepackage{epic,eepic}
+\end_preamble
+\options english,english
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize a4paper
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+COM6130 --- Lecture 4
+\newline 
+ Poisson Processes
+\layout Author
+
+Neil Lawrence
+\layout Date
+
+October 11, 2001
+\layout Section*
+
+Random Processes
+\layout Description
+
+A\SpecialChar ~
+random\SpecialChar ~
+process may be defined as a 
+\emph on 
+random time function
+\emph default 
+ which, for a particular value of time, is a random quantity 
+\begin_inset LatexCommand \cite{Chan:performance00}
+
+\end_inset 
+
+.
+ 
+\layout Section*
+
+Poisson Process
+\layout Standard
+
+The Poisson process gives probabilities of a number of arrivals, 
+\begin_inset Formula \( k \)
+\end_inset 
+
+, as a function of time, 
+\begin_inset Formula \( t \)
+\end_inset 
+
+, given a `rate', 
+\begin_inset Formula \( \lambda  \)
+\end_inset 
+
+.
+ 
+\layout Standard
+
+
+\begin_inset Formula \[
+P(k|t,\lambda )=\frac{(\lambda t)^{k}}{k!}e^{-\lambda t}.\]
+
+\end_inset 
+
+
+\layout Standard
+
+It is a counting process.
+ First published by Sim\i \'{e}
+on Denis Poisson in 1837.
+ 
+\layout Subsection*
+
+Properties
+\layout Subsubsection*
+
+Mean and Variance
+\layout Standard
+
+The 
+\emph on 
+mean
+\emph default 
+ and 
+\emph on 
+variance
+\emph default 
+ of the process.
+ 
+\layout Example
+
+The mean of the Poisson process.
+ 
+\begin_inset Formula \[
+\left\langle k\right\rangle _{P(k|t,\lambda )}=\sum _{k=0}^{\infty }k\frac{(\lambda t)^{k}}{k!}e^{-\lambda t}\]
+
+\end_inset 
+
+ Pull out 
+\begin_inset Formula \( \lambda te^{-\lambda t} \)
+\end_inset 
+
+ and cancel 
+\begin_inset Formula \( \frac{k}{k(k-1)!} \)
+\end_inset 
+
+, remove first term (
+\begin_inset Formula \( k=0 \)
+\end_inset 
+
+) which is zero.
+ 
+\begin_inset Formula \[
+=e^{-\lambda t}\lambda t\sum _{k=1}^{\infty }\frac{(\lambda t)^{(k-1)}}{(k-1)!}\]
+
+\end_inset 
+
+ substitute 
+\begin_inset Formula \( m=k-1 \)
+\end_inset 
+
+.
+ 
+\begin_inset Formula \[
+=e^{-\lambda t}\lambda t\sum _{m=0}^{\infty }\frac{(\lambda t)^{m}}{m!}\]
+
+\end_inset 
+
+ Because 
+\begin_inset Formula \( \sum _{m=0}^{\infty }\frac{(\lambda t)^{m}}{m!}=e^{\lambda t} \)
+\end_inset 
+
+ we may write 
+\begin_inset Formula \[
+=\lambda t\]
+
+\end_inset 
+
+
+\layout Standard
+
+The variance of a Poisson is also 
+\begin_inset Formula \( \lambda t \)
+\end_inset 
+
+ --- see Tutorial 1.
+ 
+\layout Subsubsection*
+
+Superposition of Poissons
+\layout Standard
+
+\begin_float fig 
+\layout Standard
+
+
+\begin_inset Include \input{./diagrams/sumPoisson.eepic}
+
+\end_inset 
+
+
+\layout Caption
+
+If independent Poisson processes form a single traffic flow the rate of
+ the overall process is the sum of the seperate processes.
+\end_float 
+\layout Subsubsection*
+
+Decomposition of Poisson Flow
+\layout Standard
+
+
+\latex latex 
+
+\backslash 
+centering 
+\begin_float fig 
+\layout Standard
+
+
+\begin_inset Include \input{./diagrams/decomposePoisson.eepic}
+
+\end_inset 
+
+
+\layout Caption
+
+If a single Poisson process with rate 
+\begin_inset Formula \( \lambda  \)
+\end_inset 
+
+ is switched to different channels, with each arrival being switched to
+ channel 
+\begin_inset Formula \( c \)
+\end_inset 
+
+ with probability 
+\begin_inset Formula \( P(c)=\lambda _{c}/\lambda  \)
+\end_inset 
+
+, each channel will be a Poisson process with rate 
+\begin_inset Formula \( \lambda _{c} \)
+\end_inset 
+
+.
+\end_float 
+\layout Subsubsection*
+
+Interarrival Time Distribution
+\layout Standard
+
+
+\latex latex 
+
+\backslash 
+centering 
+\begin_float fig 
+\layout Standard
+
+
+\begin_inset Include \input{./diagrams/interarrivals.eepic}
+
+\end_inset 
+
+
+\layout Caption
+
+Given a set of Poisson arrivals at times 
+\begin_inset Formula \( T_{1}\dots T_{n} \)
+\end_inset 
+
+, the interarrival times are defined as 
+\begin_inset Formula \( X_{i}=T_{i}-T_{i-1},i=1\dots n \)
+\end_inset 
+
+.
+ What can we say about the distribution of these times (which are also random
+ variables)?
+\end_float 
+\layout Standard
+
+The distribution dictating these arrival times will be a p.d.f.
+ as these times are continuous variables.
+ 
+\layout Standard
+
+The following events are equivalent: 
+\begin_inset Formula \[
+(X_{i}>t)\equiv (T_{i}-T_{i-1}>t)\equiv (T_{i}>T_{i-1}+t)\]
+
+\end_inset 
+
+ The event 
+\begin_inset Formula \( (T_{i}>T_{i-1}+t|T_{i-1}=t_{i-1}) \)
+\end_inset 
+
+ occurs if and only if the value of 
+\begin_inset Formula \( N(t) \)
+\end_inset 
+
+ does not change during the interval 
+\begin_inset Formula \( (t_{i-1},t_{i-1}+t) \)
+\end_inset 
+
+.
+ So the following events are equivalent 
+\begin_inset Formula \[
+X_{i}>t|T_{i-1}=t_{i-1}\equiv N(t_{i-1}+t)-N(t_{i-1})=0\]
+
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset Formula \begin{eqnarray}
+P(X_{i}>t|T_{i-1}=t_{i-1}) & = & P(N(t_{i-1}+t)-N(t_{i-1}=0))\nonumber \\
+ & = & P(N(t)=0))
+\end{eqnarray}
+
+\end_inset 
+
+
+\layout Standard
+
+From Poisson process 
+\begin_inset Formula \( P(N(t)=0)=e^{-\lambda t} \)
+\end_inset 
+
+.
+ Which means that the c.d.f.
+ is 
+\begin_inset Formula \( P(X_{i}\leq t)=1-e^{-\lambda t} \)
+\end_inset 
+
+.
+ 
+\layout Standard
+
+To obtain the pdf we diffirentiate giving 
+\begin_inset Formula \( p(X_{i})=\lambda e^{-\lambda X_{i}} \)
+\end_inset 
+
+.
+ 
+\layout Section*
+
+The Exponential Distribution
+\layout Standard
+
+mean variance ...
+ 
+\layout Standard
+
+
+\begin_inset LatexCommand \BibTeX[plain]{lawrence_books}
+
+\end_inset 
+
+
+\the_end
