@@ -49,7 +49,7 @@ Network Performance Analysis
 
 
 \begin_inset Graphics
-	filename /share/mlhome/neil/tex/inputs/sheffieldlogo.eps
+	filename /home/neil/tex/inputs/sheffieldlogo.eps
 	lyxscale 40
 	scale 40
 
@@ -92,14 +92,12 @@ thepage{}
 \layout Title
 
 Network Performance Analysis
-\newline 
-Lecture 2
 \layout Author
 
 Neil Lawrence
 \layout Date
 
-Autumn Term 2004-2005
+Autumn Term 2005-2006
 \layout ShortFoilhead
 
 Expectations
@@ -162,16 +160,6 @@ collapsed false
 
 \layout Standard
 \align center 
-
-\begin_inset ERT
-status Open
-
-\layout Standard
-
-\backslash 
-answer{
-\end_inset 
-
 
 \begin_inset  Tabular
 <lyxtabular version="3" rows="3" columns="4">
@@ -295,16 +283,6 @@ answer{
 </cell>
 </row>
 </lyxtabular>
-
-\end_inset 
-
-
-\begin_inset ERT
-status Open
-
-\layout Standard
-}{6}
-\newline 
 
 \end_inset 
 
@@ -487,16 +465,6 @@ collapsed false
 \layout Standard
 \align center 
 
-\begin_inset ERT
-status Open
-
-\layout Standard
-
-\backslash 
-answer{
-\end_inset 
-
-
 \begin_inset  Tabular
 <lyxtabular version="3" rows="2" columns="5">
 <features>
@@ -610,16 +578,6 @@ answer{
 \end_inset 
 
 
-\begin_inset ERT
-status Open
-
-\layout Standard
-}{6}
-\newline 
-
-\end_inset 
-
-
 \layout Caption
 
 Some values for the Poisson distribution with 
@@ -638,9 +596,10 @@ Some values for the Poisson distribution with
 \layout ShortFoilhead
 
 Mean and Variance
-\layout Standard
+\layout Itemize
 
-Example: Mean and Variance of Poisson Distribution
+Example 1, Chapter 3: Mean and Variance of Poisson Distribution
+\begin_deeper 
 \layout Standard
 
 As we mentioned in Section\SpecialChar ~
@@ -655,20 +614,16 @@ As we mentioned in Section\SpecialChar ~
  be computed.
  Typically we expect the resulting expectation to be a function of the distribut
 ions parameters.
+\layout Standard
+
+
+\begin_inset Note
+collapsed true
+
 \layout Itemize
 
 Mean of the Poisson process
 \layout Standard
-
-
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-
-\backslash 
-answer{
-\end_inset 
 
 
 \begin_inset Formula \[
@@ -731,20 +686,11 @@ This leads to
 \end_inset 
 
 
-\layout Standard
-
-
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-}{12}
-\newline 
-
 \end_inset 
 
 
-\layout Standard
+\end_deeper 
+\layout Itemize
 
 The variance of a Poisson is also 
 \begin_inset Formula $\mu$
@@ -1174,32 +1120,12 @@ Definition: A random process
 \begin_deeper 
 \layout Standard
 
-
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-
-\backslash 
-answer{
-\end_inset 
-
 May be defined as a 
 \emph on 
 random function
 \emph default 
  which, for a particular value, is a random quantity.
  
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-}{6}
-\newline 
-
-\end_inset 
-
-
 \end_deeper 
 \layout ShortFoilhead
 
@@ -1323,28 +1249,8 @@ collapsed false
 \layout Standard
 \align center 
 
-\begin_inset ERT
-status Open
-
-\layout Standard
-
-\backslash 
-answer{
-\end_inset 
-
-
 \begin_inset Graphics
 	filename ./diagrams/sumPoisson.eps
-
-\end_inset 
-
-
-\begin_inset ERT
-status Open
-
-\layout Standard
-}{6}
-\newline 
 
 \end_inset 
 
@@ -1370,7 +1276,8 @@ If independent Poisson processes form a single traffic flow overall process
 Example of Poisson Superposition
 \layout Itemize
 
-Question 
+Example 1, Chapter 4
+\begin_deeper 
 \layout Standard
 
 There are three queues for registration of MSc students from different courses
@@ -1392,7 +1299,13 @@ a)
 b) 
 \series default 
 180 arrivals?
-\layout Itemize
+\layout Standard
+
+
+\begin_inset Note
+collapsed true
+
+\layout Standard
 
 Answer
 \layout Standard
@@ -1480,6 +1393,10 @@ status Collapsed
 \end_inset 
 
 
+\end_inset 
+
+
+\end_deeper 
 \layout ShortFoilhead
 
 Properties Contd
@@ -1533,28 +1450,8 @@ collapsed false
 \layout Standard
 \align center 
 
-\begin_inset ERT
-status Open
-
-\layout Standard
-
-\backslash 
-answer{
-\end_inset 
-
-
 \begin_inset Graphics
 	filename ./diagrams/decomposePoisson.eps
-
-\end_inset 
-
-
-\begin_inset ERT
-status Open
-
-\layout Standard
-}{8}
-\newline 
 
 \end_inset 
 
@@ -1596,7 +1493,8 @@ If a single Poisson process with rate
 Example of Poisson Decomposition
 \layout Itemize
 
-Question 
+Example 2, Chapter 4
+\begin_deeper 
 \layout Standard
 
 There is one registration for all MSc courses.
@@ -1761,22 +1659,12 @@ after 5 minutes 5 students have arrived at desk 1?
 b)
 \series default 
  after 10 minutes 20 students have arrived at desk 4?
-\layout Itemize
+\begin_inset Note
+collapsed true
+
+\layout Enumerate
 
 Answer
-\layout Standard
-
-
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-
-\backslash 
-answer{
-\end_inset 
-
-
 \layout Standard
 
 If the splitting is independent of the arrival, then the arrivals at each
@@ -1846,16 +1734,10 @@ P\left(k=20|\lambda_{4}=2.8,t=10\right)=\frac{\left(2.8\times10\right)^{20}}{20!
 \end_inset 
 
 
-\begin_inset ERT
-status Collapsed
-
-\layout Standard
-}{8}
-\newline 
-
 \end_inset 
 
 
+\end_deeper 
 \layout ShortFoilhead
 
 Properties III
@@ -1968,6 +1850,24 @@ Interarrival Times and Poisson Processes
 \layout Itemize
 
 Interarrival time: time between arrivals.
+\layout Itemize
+
+Think of buses.
+\layout Itemize
+
+
+\begin_inset Formula $X_{i}$
+\end_inset 
+
+, are continuous values, what is their PDF?.
+\layout ShortFoilhead
+
+Interarrival Distribution
+\layout Itemize
+
+Example 3, Chapter 4.
+ Derivation of Interarrival Time Distribution
+\begin_deeper 
 \layout Standard
 
 
@@ -2003,22 +1903,40 @@ For a Poisson process, this figure shows the times of the arrivals,
 \end_inset 
 
 
-\layout Itemize
+\layout Standard
 
-Think of buses.
-\layout Itemize
+In the figure above we show different arrival times 
+\begin_inset Formula $T_{1},\dots,T_{n}$
+\end_inset 
 
+ for the process.
+ You can think of these as the arrival times of the buses.
+ We are interested in computing the distribution of the variables 
+\begin_inset Formula $X_{i}=T_{i}-T_{i-1}$
+\end_inset 
 
+: the times between bus arrivals.
+ In this example you will derive this PDF for the interarrival times
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+The interarrival times, 
 \begin_inset Formula $X_{i}$
 \end_inset 
 
-, are continuous values, what is their PDF?.
-\layout ShortFoilhead
+, are continuous values, so they will be governed by a probability density
+ function rather than a discrete probability distribution.
+\end_inset 
 
-Interarrival Distribution
-\layout Itemize
+.
+\layout Standard
 
-Derivation of Interarrival Time Distribution
+
+\begin_inset Note
+collapsed true
+
 \layout Standard
 
 Firstly we define the number of arrivals at time 
@@ -2234,6 +2152,10 @@ when we state that the interarrival times for students registering at the
 \end_inset 
 
 .
+\end_inset 
+
+
+\end_deeper 
 \layout ShortFoilhead
 
 Properties of the Exponential Distribution
@@ -2591,6 +2513,63 @@ Binomial Distribution for
  Trials
 \layout Itemize
 
+Example 1, Chapter 5.
+ It is possible to compute a probability distribution for a number of successes
+ given a number of trials.
+ This distribution is known as the binomial.
+ For 
+\begin_inset Formula $n$
+\end_inset 
+
+ trials (equivalent to 
+\begin_inset Formula $n$
+\end_inset 
+
+ coin tosses or 
+\begin_inset Formula $n$
+\end_inset 
+
+ turns for Coin Monopoly) the probability of 
+\begin_inset Formula $k$
+\end_inset 
+
+ successes (equivalent to 
+\begin_inset Formula $k$
+\end_inset 
+
+ moves forward) is given by 
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset Formula \begin{equation}
+P\left(k\right)=\left(\begin{array}{c}
+n\\
+k\end{array}\right)P\left(h\right)^{k}(1-P\left(h\right))^{n-k}\label{eq:binomialDistirbution}\end{equation}
+
+\end_inset 
+
+where 
+\begin_inset Formula $\left(\begin{array}{c}
+n\\
+k\end{array}\right)=\frac{n!}{k!(n-k)!}$
+\end_inset 
+
+ is known as the binomial coefficient.
+ 
+\layout Standard
+
+By considering the limiting case as the probability of a success (or heads)
+ goes to zero but the number of trials goes to 
+\begin_inset Formula $\infty$
+\end_inset 
+
+ show that a Poisson process can be recovered.
+\begin_inset Note
+collapsed false
+
+\layout Itemize
+
 A probability distribution for a number of successes given a number of trials.
 \layout Itemize
 
@@ -2750,6 +2729,9 @@ which is recognised as a Poisson process.
 , this system is now continuous time, it is therefore known as a Markov
  process.
  
+\end_inset 
+
+
 \end_deeper 
 \layout ShortFoilhead
 
@@ -2764,27 +2746,9 @@ collapsed false
 \layout Standard
 \align center 
 
-\begin_inset ERT
-status Open
-
-\layout Standard
-
-\backslash 
-answer{
-\end_inset 
-
-
 \begin_inset Graphics
 	filename diagrams/stateDiagramProcess.eps
 
-\end_inset 
-
-
-\begin_inset ERT
-status Open
-
-\layout Standard
-}{6}
 \end_inset 
 
 

@@ -37,18 +37,18 @@
 \layout Title
 
 Network Performance Analysis --- Lab Sheet 1
-\newline 
-
-\begin_inset Formula $M/M/1$
-\end_inset 
-
- Simulation
 \layout Author
 
 Neil Lawrence
 \layout Date
 
-October 18th, 2004
+October 22, 2002
+\layout Section*
+
+Lab
+\layout Standard
+
+All lab classes in this course are 
 \layout Standard
 
 In this Lab you will build a discrete time simulation of a queue in MATLAB.
@@ -57,22 +57,30 @@ In this Lab you will build a discrete time simulation of a queue in MATLAB.
  
 \layout Enumerate
 
-Create a discrete simulation of an 
-\begin_inset Formula $M/M/1$
-\end_inset 
-
- queue in MATLAB.
- The state diagram for the discrete approximation to the 
-\begin_inset Formula $M/M/1$
-\end_inset 
-
- queue is given below.
+Your simulation will consist of a discrete Markov model based on a birth
+ death process.
+ 
 \begin_deeper 
+\layout LyX-Code
+
+% pseudo code
+\newline 
+deltat = 0.01; 
+\newline 
+
+\layout Standard
+
+Use discrete time-steps of 
+\begin_inset Formula $\Delta t=0.01$
+\end_inset 
+
+.
 \layout Standard
 \align center 
 
 \begin_inset Graphics
-	filename diagrams/discreteMM1State.eps
+	filename ./diagrams/mmOneBirthDeathProcess.eps
+	lyxscale 80
 	width 80text%
 
 \end_inset 
@@ -80,30 +88,36 @@ Create a discrete simulation of an
 
 \layout Standard
 
-In your simulation use discrete time-steps of 
-\begin_inset Formula $\Delta t=0.01$
-\end_inset 
-
- and set the probability of a `birth' to 
-\begin_inset Formula $P\left(b\right)=\lambda\Delta t$
-\end_inset 
-
- and the probability of a `death' to 
-\begin_inset Formula $P\left(d\right)=\mu\Delta t$
-\end_inset 
-
-.
-\layout Standard
-
-First run the simulation with 
+Code a simulation of the queue with a birth rate of 
 \begin_inset Formula $\lambda=1$
 \end_inset 
 
- and 
+ for all states 
+\begin_inset Formula $k=0,\dots,\infty$
+\end_inset 
+
+, and a death rate of 
 \begin_inset Formula $\mu=2$
 \end_inset 
 
- , 
+ for the states
+\begin_inset Foot
+collapsed true
+
+\layout Standard
+
+
+\begin_inset Formula $\mu_{0}=0$
+\end_inset 
+
+ to prevent negative numbers in the queue.
+\end_inset 
+
+ 
+\begin_inset Formula $k=1,\dots,\infty$
+\end_inset 
+
+, 
 \emph on 
 i.e.
 
@@ -141,15 +155,10 @@ i.e.
  This stored set of states can be viewed as a set of samples from the probabilis
 tic model that your queue represents.
  
+\end_deeper 
 \layout Standard
 
-[
-\emph on 
-While you wait for simulations to run you might like to start looking at
- the questions below
-\emph default 
-].
-\end_deeper 
+[Hint: Set up a loop
 \layout Enumerate
 
 Produce a normalized histogram of the samples.
@@ -180,34 +189,29 @@ Compute the mean of the samples (the sample mean).
 
 \layout Enumerate
 
-Run your model again with 
-\begin_inset Formula $\lambda=1.9$
+Use the detailed balance equations to derive the steady-state probabilities
+ for each state in your queueing system.
+ Comment on the similarities between the equations and those of the 
+\begin_inset Formula $M$
 \end_inset 
 
-, keeping 
-\begin_inset Formula $\mu=2$
+/
+\begin_inset Formula $M$
 \end_inset 
 
-.
- Repeat steps 
-\begin_inset LatexCommand \ref{histogram}
+/
+\begin_inset Formula $1$
+\end_inset 
+
+ queue.
+\begin_inset LatexCommand \label{probabilities}
 
 \end_inset 
 
- to 
-\begin_inset LatexCommand \ref{sampleMean}
 
-\end_inset 
-
- for these new values.
- Are the sample based estimates more or less accurate for this system? Comment
- on why they are more or less accurate.
- 
 \layout Enumerate
 
-Use the detailed balance equations to derive the steady-state probabilities
- for each state in your model and use these steady-state probabilities to
- derive the distribution's mean.
+Use these steady-state probabilities to derive the distribution's mean.
  
 \begin_inset LatexCommand \label{trueMean}
 
@@ -217,7 +221,7 @@ Use the detailed balance equations to derive the steady-state probabilities
 \layout Enumerate
 
 Compare the computed probabilities from 
-\begin_inset LatexCommand \ref{trueMean}
+\begin_inset LatexCommand \ref{probabilities}
 
 \end_inset 
 
@@ -248,8 +252,33 @@ Compare the computed probabilities from
 
 \layout Enumerate
 
-In this coursework assignment you have developed a simulation of a simple
- Markov birth death process.
+Run your model again with 
+\begin_inset Formula $\lambda=1.9$
+\end_inset 
+
+, keeping 
+\begin_inset Formula $\mu=2$
+\end_inset 
+
+.
+ Repeat steps 
+\begin_inset LatexCommand \ref{histogram}
+
+\end_inset 
+
+ to 
+\begin_inset LatexCommand \ref{comparison}
+
+\end_inset 
+
+ for these new values.
+ Are the sample based estimates more or less accurate for this system? Comment
+ on why they are more or less accurate.
+ 
+\layout Enumerate
+
+In this lab sheet you have developed a simulation of a simple Markov birth
+ death process.
  You have examined the statistics of your simulation and compared them to
  analytically computed values.
  
@@ -268,16 +297,11 @@ Real networks are more complex than the simple network we describe here.
 Useful matlab commands.
 \layout LyX-Code
 
-% you can use hist for obtaining bin frequencies
-\layout LyX-Code
-
-n = hist(state, max(state)+1)
+hist
 \newline 
-bar(n/sum(n))
+bar
 \newline 
 rand
-\newline 
-sum
 \layout LyX-Code
 
 \layout LyX-Code
