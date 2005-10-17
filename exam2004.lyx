@@ -1,0 +1,2122 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass exam
+\begin_preamble
+\newcommand{\answer}[2]{}
+\newcommand{\masters}[2]{#2}
+\end_preamble
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize 11
+\spacing single 
+\papersize a4paper
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Pressmark
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+masters{
+\end_inset 
+
+COM6131
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{
+\end_inset 
+
+COM3270
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}
+\end_inset 
+
+
+\layout Examtitle
+
+NETWORK PERFORMANCE ANALYSIS
+\layout examdate
+
+AUTUMN SEMESTER 2004--2005
+\layout Examtime
+
+2 HOURS
+\layout Exam
+
+\SpecialChar ~
+
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+turnover
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+masters{
+\backslash 
+center{
+\backslash 
+Large
+\backslash 
+textbf{Section A}
+\backslash 
+normalsize}}{}
+\end_inset 
+
+
+\layout Question
+
+This question concerns queueing models based around birth-death processes,
+ 
+\emph on 
+i.e.
+ 
+\emph default 
+Markov arrivals and Markov departures.
+\begin_deeper 
+\layout Qupart
+
+Explain what you understand by the term utilization factor.
+ What are the advantages and disadvantages of utilisation factors that are
+ close to one? 
+\begin_deeper 
+\layout Mypercent
+
+25
+\end_deeper 
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\layout Standard
+
+The utilization factor is a measure of the 
+\emph on 
+efficiency of the system
+\emph default 
+.
+ It is the 
+\emph on 
+percentage of time
+\emph default 
+ that the servers are in use.
+ A high utilization factor means that a 
+\emph on 
+high proportion of the available resources are being used
+\emph default 
+ which is an
+\emph on 
+ 
+\emph default 
+advantage.
+ The
+\emph on 
+ 
+\emph default 
+disadvantage
+\emph on 
+ i
+\emph default 
+s that for utilization factors which are close to one the queue occupancy
+ is likely to be very high and 
+\emph on 
+queueing delays
+\emph default 
+ will be large resulting in poor quality of service.
+ 
+\series bold 
+\emph on 
+Five for each italicised statement.
+
+\series default 
+\emph default 
+ 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\layout Qupart
+
+Give the utilization factors for the following queues: 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+, 
+\begin_inset Formula $M/M/1/m$
+\end_inset 
+
+, 
+\begin_inset Formula $M/M/m$
+\end_inset 
+
+ and 
+\begin_inset Formula $M/M/\infty$
+\end_inset 
+
+.
+ 
+\begin_deeper 
+\layout Mypercent
+
+20
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Queue
+\end_inset 
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Conditions
+\end_inset 
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\rho=\frac{\lambda}{\mu}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="1">
+<features>
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Where 
+\begin_inset Formula $\mu$
+\end_inset 
+
+is the service rate 
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+and 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ is the arrival rate.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $M/M/1/m$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\rho=\left(1-P\left(m\right)\right)\frac{\lambda}{\mu}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="1">
+<features>
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Where 
+\begin_inset Formula $\mu$
+\end_inset 
+
+is the service rate, 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ is the arrival rate
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+and 
+\begin_inset Formula $P\left(m\right)$
+\end_inset 
+
+ is the blocking probability.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+ 
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $M/M/m/m$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\rho=\frac{\lambda}{m\mu}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="1">
+<features>
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Where 
+\begin_inset Formula $\mu$
+\end_inset 
+
+is the service rate, 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ is the arrival rate and
+\end_inset 
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $m$
+\end_inset 
+
+ is the number of servers.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+ 
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $M/M/\infty$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\rho=1-\exp\left(-\frac{\lambda}{\mu}\right)$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="1">
+<features>
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Where 
+\begin_inset Formula $\mu$
+\end_inset 
+
+is the service rate and 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ is the arrival rate.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+This can also be written with 
+\begin_inset Formula $a=\frac{\lambda}{\mu}$
+\end_inset 
+
+.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+ 
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Standard
+
+
+\series bold 
+\emph on 
+Five for each queue
+\series default 
+\emph default 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Qupart
+
+What do you understand by the term `blocking probability'? Give the blocking
+ probability for the 
+\begin_inset Formula $M/M/m/m$
+\end_inset 
+
+ and 
+\begin_inset Formula $M/M/1/m$
+\end_inset 
+
+ queues.
+\begin_deeper 
+\layout Mypercent
+
+20
+\end_deeper 
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+In queues with finite size (such as 
+\begin_inset Formula $M/M/1/m$
+\end_inset 
+
+) customers that arrive when the queue is full are blocked.
+ The probability of this happening in steady state is known as the blocking
+ probability.
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Queue
+\end_inset 
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Blocking probability
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $M/M/1/m$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $P\left(m\right)=\frac{\rho^{m}\left(1-\rho\right)}{1-\rho^{m+1}}$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Where 
+\begin_inset Formula $\rho=\frac{\lambda}{\mu}$
+\end_inset 
+
+ is the utilisation factor.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $M/M/m/m$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $B(m,a)=P\left(m\right)=\frac{\frac{a^{m}}{m!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}$
+\end_inset 
+
+ 
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Where 
+\begin_inset Formula $a=\frac{\lambda}{\mu}$
+\end_inset 
+
+ is the offered load.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Standard
+
+
+\series bold 
+\emph on 
+Ten for statement, five for each blocking probability.
+\series default 
+\emph default 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\layout Qupart
+
+Describe what you understand by the 
+\emph on 
+steady state distribution
+\emph default 
+ of a queueing system.
+\begin_deeper 
+\layout Mypercent
+
+15
+\end_deeper 
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+The steady state distribution of a queue is the distribution 
+\emph on 
+stationary distribution
+\emph default 
+ that the Markov chain converges to.
+ It occurs when a 
+\emph on 
+dynamic equilibrium
+\emph default 
+ is obtained in the queueing system.
+ A dynamic equilibrium is when change in one direction is balanced (on average)
+ by change in the opposite direction.
+ The steady state distribution is
+\emph on 
+ used for making predictions 
+\emph default 
+about the expected states of the queue.
+\layout Standard
+
+
+\series bold 
+\emph on 
+Five for each italicised statement.
+\series default 
+\emph default 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\layout Qupart
+
+For the 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+, 
+\begin_inset Formula $M/M/m$
+\end_inset 
+
+, 
+\begin_inset Formula $M/M/m/m$
+\end_inset 
+
+ and the 
+\begin_inset Formula $M/M/\infty$
+\end_inset 
+
+ queues give the conditions under which the steady state distribution will
+ exist.
+\begin_deeper 
+\layout Mypercent
+
+20
+\end_deeper 
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+The steady state condition exists for each of these queues when the following
+ conditions are satisfied:
+\layout Standard
+\align center 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Queue
+\end_inset 
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Conditions
+\end_inset 
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\lambda<\mu$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+The arrival rate is lower than the service rate.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $M/M/m$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $\lambda<m\mu$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+The arrival rate is lower than 
+\begin_inset Formula $m$
+\end_inset 
+
+ times the service rate.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $M/M/1/m$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+No conditions
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+The steady state distribution always exists.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\begin_inset Formula $M/M/\infty$
+\end_inset 
+
+
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+No conditions
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+The steady state distribution always exists.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Standard
+
+
+\series bold 
+\emph on 
+Five marks for each queue.
+\series default 
+\emph default 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\end_deeper 
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+continued
+\end_inset 
+
+
+\layout Standard
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+masters{
+\backslash 
+center{
+\backslash 
+Large
+\backslash 
+textbf{Section B}
+\backslash 
+normalsize}}{}
+\end_inset 
+
+
+\layout Question
+
+The diagram below gives the state diagram for a discrete time 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue.
+\begin_deeper 
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/discreteMM1State.eps
+	width 100text%
+
+\end_inset 
+
+
+\layout Standard
+
+In the system you may take the probability of a birth to be 
+\begin_inset Formula $P\left(b\right)=\lambda\delta t$
+\end_inset 
+
+ and the probability of a death to be 
+\begin_inset Formula $P\left(d\right)=\mu\delta t$
+\end_inset 
+
+, where 
+\begin_inset Formula $\delta t$
+\end_inset 
+
+ is the change in time for each time step and 
+\begin_inset Formula $\left(\mu+\lambda\right)\delta t<1$
+\end_inset 
+
+.
+\layout Qupart
+
+Derive the steady state distribution for this queue in terms of its utilization
+ factor.
+\begin_inset LatexCommand \label{qup:steadyState}
+
+\end_inset 
+
+
+\begin_deeper 
+\layout Mypercent
+
+30
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+As a birth-death process the stationary distribution of the queue may be
+ found using detailed balance.
+ We therefore look at the flow across a boundary between two states.
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/boundaryFlowDiscreteMM1.eps
+
+\end_inset 
+
+
+\layout Standard
+
+For this flow to balance we must have, at steady state,
+\begin_inset Formula \[
+P\left(k\right)P\left(d\right)=P\left(k-1\right)P\left(b\right)\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+P\left(k\right)\mu\delta t=P\left(k-1\right)\lambda\delta t\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+P\left(k\right)\mu=P\left(k-1\right)\lambda\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+P\left(k\right)=\frac{\lambda}{\mu}P\left(k-1\right)\]
+
+\end_inset 
+
+Taking the utilisation factor 
+\begin_inset Formula $\rho=\frac{\lambda}{\mu}$
+\end_inset 
+
+ we have 
+\begin_inset Formula \[
+P\left(k\right)=\rho P\left(k-1\right)\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+P\left(k\right)=\rho^{k}P\left(0\right)\]
+
+\end_inset 
+
+Using the normalisation condition to find 
+\begin_inset Formula $P\left(0\right)$
+\end_inset 
+
+ 
+\begin_inset Formula \[
+\sum_{k=0}^{\infty}P\left(k\right)=1\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+P\left(0\right)\sum_{k=0}^{\infty}\rho^{k}=1\]
+
+\end_inset 
+
+The infinite series converges for 
+\begin_inset Formula $\rho<1$
+\end_inset 
+
+ (equivalent to 
+\begin_inset Formula $\mu>\lambda$
+\end_inset 
+
+) giving
+\begin_inset Formula \[
+\sum_{k=0}^{\infty}=\frac{1}{1-\rho}\]
+
+\end_inset 
+
+ substituting back in we have
+\begin_inset Formula \[
+P\left(0\right)=1-\rho\]
+
+\end_inset 
+
+and finally
+\begin_inset Formula \[
+P\left(k\right)=\rho^{k}\left(1-\rho\right)\]
+
+\end_inset 
+
+which is recognised as a geometric distribution.
+\layout Standard
+
+
+\series bold 
+\emph on 
+5 for the boundary flow diagram 10 for the correct value in terms of 
+\begin_inset Formula $P\left(0\right)$
+\end_inset 
+
+, 10 for the correct derivation of 
+\begin_inset Formula $P\left(0\right)$
+\end_inset 
+
+ and 5 for the right answer.
+\series default 
+\emph default 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\layout Qupart
+
+Derive the mean of this distribution.
+\begin_deeper 
+\layout Mypercent
+
+20
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+The mean has the form 
+\begin_inset Formula \[
+\left\langle k\right\rangle =\sum_{k=0}^{\infty}k\rho^{k}\left(1-\rho\right)\]
+
+\end_inset 
+
+Extracting one 
+\begin_inset Formula $\rho\left(1-\rho\right)$
+\end_inset 
+
+ we have 
+\begin_inset Formula \[
+\left\langle k\right\rangle =\rho\left(1-\rho\right)\sum_{k=0}^{\infty}k\rho^{k-1}\]
+
+\end_inset 
+
+which is recognised as
+\begin_inset Formula \[
+\left\langle k\right\rangle =\rho\left(1-\rho\right)\frac{d}{d\rho}\sum_{k=0}^{\infty}\rho^{k}\]
+
+\end_inset 
+
+which can be written
+\begin_inset Formula \[
+\left\langle k\right\rangle =\rho\left(1-\rho\right)\frac{d\left(1-\rho\right)^{-1}}{d\rho}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+\left\langle k\right\rangle =\rho\left(1-\rho\right)\frac{1}{\left(1-\rho\right)^{2}}\]
+
+\end_inset 
+
+
+\begin_inset Formula \[
+\left\langle k\right\rangle =\frac{\rho}{1-\rho}.\]
+
+\end_inset 
+
+
+\series bold 
+\emph on 
+5 for the correct formula for the mean, 10 for the differentiation trick
+ and 5 for the correct answer.
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\layout Qupart
+
+Write down an algorithm for computer simulation of this queue.
+ You may use MATLAB notation or pseudocode to express your algorithm.
+\begin_deeper 
+\layout Mypercent
+
+30
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\layout LyX-Code
+
+lambda = 1;  % birth rate
+\layout LyX-Code
+
+mu = 2;   % death rate
+\layout LyX-Code
+
+deltat = 0.01; % time step
+\layout LyX-Code
+
+k = 0;  % Initial state of queue
+\layout LyX-Code
+
+T = 100000; % a number of time steps
+\layout LyX-Code
+
+for i = 1:T
+\newline 
+  p = rand(1); % a uniform random number between 0 and 1
+\layout LyX-Code
+
+  if p < lambda*deltat
+\layout LyX-Code
+
+    k = k + 1;
+\layout LyX-Code
+
+  elseif p < (lambda+mu)*deltat & k > 0
+\layout LyX-Code
+
+    k = k - 1;
+\layout LyX-Code
+
+  end
+\layout LyX-Code
+
+end
+\newline 
+
+\layout Standard
+
+
+\series bold 
+\emph on 
+10 marks for overall structure of code, 5 for random number generation 5
+ for first if statement and 10 for second if statement (5 for each condition).
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\layout Qupart
+
+When designing networks we are normally interested in the steady state behaviour
+ of the system.
+ For simple queues such as the discrete time 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ we can compute this analytically.
+ If we cannot compute it analytically we have to resort to simulation.
+ What problems could occur with the simulation you described in part c)
+ which might mean you do not accurately estimate the steady state distribution?
+ You may wish to base your answer around the three different averages: distribut
+ion, sample based and time.
+\begin_deeper 
+\layout Mypercent
+
+20
+\end_deeper 
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+Typically in queueing problems we are interested in expectations under steady
+ state distribution.
+ Ideally we want to compute the steady state distribution's average, which
+ we can do for the discrete 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue.
+ However for more complex queueing systems we may not be able to compute
+ this average in which case we try and approximated it with a sample based
+ average.
+ Typically these approximations involve sampling from a Markov chain.
+ Averaging these values directly leads to a time based average, for a sample
+ based average we need to samples to be 
+\emph on 
+independent
+\emph default 
+.
+ To estimate the sample based average accurately we do not take every sample
+ from the Markov chain, but we wait between samples.
+\layout Standard
+
+Finally if the effective state space is large (the state space that the
+ queue is likely to visit) then we may have to wait a long time for enough
+ samples to get an accurate idea of the steady state distribution, it is
+ also difficult to tell how long we need to wait.
+\layout Standard
+
+
+\series bold 
+\emph on 
+10 for averages correctly described.
+ 5 for understanding sample based average vs time dependent and 5 for saying
+ we may not run simulation long enough.
+\series default 
+\emph default 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Standard
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+turnover
+\end_inset 
+
+
+\layout Question
+
+
+\series bold 
+Delay analysis of an ARQ System.
+
+\series default 
+ In an automatic repeat request (ARQ) system packets are transmitted in
+ frames that are 1 millisecond long.
+ An acknowledgement is sent if a packet is received without error.
+ The system waits for a maximum of 
+\begin_inset Formula $n-1$
+\end_inset 
+
+ milliseconds to receive the acknowledgement.
+ Once the acknowledgement is received the next packet in the queue is transmitte
+d.
+ A schematic of this system is shown below.
+\begin_deeper 
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename diagrams/ARQ.eps
+	width 80text%
+
+\end_inset 
+
+
+\layout Standard
+
+For the purposes of the analysis below you can take probability of an error
+ in a packet to be 
+\begin_inset Formula $p$
+\end_inset 
+
+ and you may assume that errors occur statistically independently.
+ Finally you may assume that arrivals occur as a Poisson process with a
+ rate 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+.
+\layout Qupart
+
+Explain why the probability distribution for the time interval between the
+ start of the transmission of a given packet and the end of the previous
+ transmission (the service time distribution) is given by
+\begin_inset Formula \[
+P\left(X=1+kn\right)=\left(1-p\right)p^{k}\]
+
+\end_inset 
+
+
+\begin_deeper 
+\layout Mypercent
+
+15
+\end_deeper 
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+The distribution represents the probability that there are 
+\begin_inset Formula $k$
+\end_inset 
+
+ errors followed 
+\begin_inset Formula $p^{k}$
+\end_inset 
+
+ followed by a successful transmission 
+\begin_inset Formula $\left(1-p\right)$
+\end_inset 
+
+.
+ The length of time that this takes will be 
+\begin_inset Formula $n$
+\end_inset 
+
+ for each failure (1 for transmission and 
+\begin_inset Formula $n-1$
+\end_inset 
+
+ waiting for the acknowledgement ) plus the length of transmission for a
+ single packet.
+ 
+\series bold 
+\emph on 
+five for k retransmission probability 5 for successful transmission probability
+ and 5 for associated length of time.
+
+\series default 
+\emph default 
+ 
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\layout Qupart
+
+What is the mean of this distribution?
+\begin_deeper 
+\layout Mypercent
+
+25
+\end_deeper 
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X\right\rangle  & = & \sum_{k=0}^{\infty}\left(1+kn\right)\left(1-p\right)p^{k}\\
+ & = & \left(1-p\right)\left(\sum_{k=0}^{\infty}p^{k}+n\sum_{k=0}^{\infty}kp^{k}\right)\\
+ & = & 1+\frac{np}{1-p}\end{eqnarray*}
+
+\end_inset 
+
+ 
+\series bold 
+\emph on 
+May also need to compute the sum of 
+\series default 
+\emph default 
+kp^k.
+ 
+\series bold 
+\emph on 
+10 for mean formula, 5 for first line, 10 for result.
+\series default 
+\emph default 
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\layout Qupart
+
+What is the utilization factor for this queue?
+\begin_deeper 
+\layout Mypercent
+
+10
+\end_deeper 
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+The utilization is simply the arrival rate multiplied by the average service
+ time.
+\begin_inset Formula \[
+\rho=\frac{\lambda\left(1-p\right)}{1-p+np}\]
+
+\end_inset 
+
+and thus 
+\begin_inset Formula \[
+1-\rho=\frac{1-\lambda-p\left(n-1-\lambda\right)}{1-p+np}\]
+
+\end_inset 
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\layout Qupart
+
+What is the second moment of the service time distribution?
+\begin_deeper 
+\layout Mypercent
+
+30
+\end_deeper 
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+
+\begin_inset Formula \begin{eqnarray*}
+\left\langle X^{2}\right\rangle  & = & \sum_{k=0}^{\infty}\left(1+kn\right)^{2}\left(1-p\right)p^{k}\\
+ & = & \left(1-p\right)\left(\sum_{k=0}^{\infty}p^{k}+2n\sum_{k=0}^{\infty}kp^{k}+n^{2}\sum_{k=0}^{\infty}k^{2}p^{k}\right)\\
+ & = & 1+\frac{2np}{1-p}+\frac{n^{2}\left(p+p^{2}\right)}{\left(1-p\right)^{2}}\end{eqnarray*}
+
+\end_inset 
+
+
+\series bold 
+\emph on 
+10 for each line.
+\series default 
+\emph default 
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\layout Qupart
+
+Comment on the validity of the independence assumption you have made for
+ the packet errors.
+\layout Mypercent
+
+20
+\layout Standard
+
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+In practice, this assumption is probably unrealistic.
+ If an error occurs due to problems in the transmission channel (such as
+ interference) it is likely that several packets in a row will not be received,
+ so the errors do not occur independently.
+ Also the assumption of a fixed probability of packet error may be incorrect,
+ 
+\emph on 
+e.g.
+ 
+\emph default 
+it may vary with load.
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\layout Standard
+
+
+\series bold 
+\emph on 
+You may find the following formula useful in your derivations: 
+\series default 
+\emph default 
+
+\begin_inset Formula $\sum_{k=0}^{\infty}k^{2}p^{k}=\frac{p+p^{2}}{\left(1-p\right)^{3}}$
+\end_inset 
+
+.
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\layout Standard
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+continued
+\end_inset 
+
+
+\layout Question
+
+When simulating networks of queues we have to resort to approximations.
+ In this question we will review some of the issues that arise when performing
+ these approximations.
+\begin_deeper 
+\layout Qupart
+
+A small system is modelled as two queues.
+ Packets arrive at the first queue as a Poisson stream with exponentially
+ distributed packet lengths.
+ After leaving the first queue the packets enter a second queue.
+ The service time for each packet at both queues is proportional to each
+ packet's length.
+ Explain how the second queue's size, as perceived by an arriving packet,
+ will be related to the arriving packet's length.
+ How will this affect the waiting time for the arriving packet at the second
+ queue? 
+\begin_deeper 
+\layout Mypercent
+
+25
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+The longer packets will arrive at the second queue to find a shorter queue
+ than the shorter packets.
+ Or in other words queue length at the second queue are anti correlated
+ with packet lengths.
+ This is because, while the longer packet was being served at the first
+ queue there is time for the second queue to empty out.
+ This is analogous to a slow moving truck driver who will generally see
+ an open road in front of him.
+\layout Standard
+
+
+\series bold 
+\emph on 
+10 marks for correctly saying that the queue will be shorter for longer
+ packets (or vice versa).
+ 10 Marks for saying the longer packet will wait less time at the second
+ queue.
+ 5 marks for analogy (given in course text and notes).
+
+\series default 
+\emph default 
+ 
+\begin_inset ERT
+status Open
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\layout Qupart
+
+Explain what you understand by Kleinrock's independence assumption.
+ Given this assumption, what is the delay for a transmission line with a
+ traffic rate of 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ and an average transmission time of 
+\begin_inset Formula $\bar{X}$
+\end_inset 
+
+?
+\begin_deeper 
+\layout Mypercent
+
+25
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+Kleinrock's independence assumption is an assumption that a packets service
+ time at a node in a network of queues is statistically independent of its
+ service time at any other node in the queueing model.
+
+\series bold 
+\emph on 
+ 
+\series default 
+\emph default 
+In the approximation you assume each communication link is an 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+
+\series bold 
+\emph on 
+ 
+\series default 
+\emph default 
+queue.
+ This means the delay is given by
+\begin_inset Formula \[
+\bar{T}=\frac{1}{\mu_{ij}-\lambda_{ij}}=\frac{\bar{X}}{1-\rho}\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $\rho=\lambda\bar{X}$
+\end_inset 
+
+, the utilization factor.
+
+\series bold 
+\emph on 
+ 10 marks for the first sentence or equivalent meaning.
+
+\series default 
+\emph default 
+ 
+\series bold 
+\emph on 
+15 marks for the approximation of the communication links as an 
+\begin_inset Formula $M/M/1$
+\end_inset 
+
+ queue
+\series default 
+\emph default 
+ 
+\emph on 
+and correct formula
+\emph default 
+.
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\layout Qupart
+
+Give conditions under which Kleinrock's independence assumption will yield
+ a reasonable approximation for a network of queues.
+\begin_deeper 
+\layout Mypercent
+
+25
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+Kleinrock suggested that when different traffic streams are merged to form
+ a single stream the approximation becomes reasonable.
+ Particularly if that traffic is a large volume from outside the network
+ and is Poisson distributed.
+ The approximation also is better for single path routing algorithms.
+ (Example 3.17 in Bertsekas and Gallagher) 
+\series bold 
+\emph on 
+10 marks for merging of streams.
+ 10 marks for if the additional traffic is Poisson and from outside the
+ network.
+ 5 marks for the single path routing algorithms.
+
+\series default 
+\emph default 
+ Note that in practice students also suggested Medium/Medium-Heavy traffic
+ loads, Poisson arrivals and exponential service times and densely connected
+ networks, I gave a maximum of 12 marks for answers which mentioned these
+ issues but failed to mention any of the above.
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\layout Qupart
+
+What does Jackson's theorem state and what are its assumptions? What is
+ the average number of packets in a system according to Jackson's theorem?
+\begin_deeper 
+\layout Mypercent
+
+25
+\end_deeper 
+\layout Standard
+
+\SpecialChar ~
+
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+
+\backslash 
+answer{
+\end_inset 
+
+Jackson's theorem states that if packet interarrival times after passing
+ through the first queue are not correlated with their lengths (Kleinrock's
+ independence assumption) and if randomisation is used to divert traffic
+ along the different routes then the average number of packets in the system
+ can be derived as if each queue where 
+\begin_inset Formula $M/M/$
+\end_inset 
+
+1.
+ This gives the number of packets in the system as
+\begin_inset Formula \[
+\bar{N}=\sum_{ij}\frac{\lambda_{ij}}{\lambda_{ij}-\mu_{ij}}\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $\lambda_{ij}$
+\end_inset 
+
+ is the traffic flow rate between node 
+\begin_inset Formula $i$
+\end_inset 
+
+ and 
+\begin_inset Formula $j$
+\end_inset 
+
+ and 
+\begin_inset Formula $\mu_{ij}$
+\end_inset 
+
+ is the average service time between node 
+\begin_inset Formula $i$
+\end_inset 
+
+ and node 
+\begin_inset Formula $j$
+\end_inset 
+
+.
+ 
+\series bold 
+\emph on 
+10 marks for randomisation and 5 for Kleinrock.
+ 10 marks for formula.
+\begin_inset ERT
+status Collapsed
+
+\layout Standard
+}{0}
+\end_inset 
+
+
+\end_deeper 
+\layout Standard
+
+
+\begin_inset ERT
+status Open
+
+\layout Standard
+
+\backslash 
+questionsend
+\layout Standard
+
+\end_inset 
+
+
+\the_end
