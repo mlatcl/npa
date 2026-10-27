@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="dcterms.date" content="2006-09-25">
+  <title>Probability Review</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@3.9.2/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      /* scrollable slides: start content at top, left-align text */
+      .reveal section.scrollable {
+          overflow-y: auto !important;
+          height: 100% !important;
+          top: 0 !important;
+          text-align: left;
+      }
+      .reveal section.scrollable > h2:first-child,
+      .reveal section.scrollable > h2.scrollable:first-child {
+          margin-top: 0.2em;
+      }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@3.9.2/css/theme/white.css" id="theme">
+  <link rel="stylesheet" href="mlatcl.css"/>
+  <link rel="stylesheet" href="slide-fonts.css"/>
+  <link rel="stylesheet" href="slide-fontsize-xs.css"/>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'https://unpkg.com/reveal.js@3.9.2/css/print/pdf.css' : 'https://unpkg.com/reveal.js@3.9.2/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="https://unpkg.com/reveal.js@3.9.2/lib/js/html5shiv.js"></script>
+  <![endif]-->
+   <!-- Mermaid -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_SVG" type="text/javascript"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    TeX: {
+         extensions: ["color.js"]
+      }
+    });
+  </script>
+  <script src="https://inverseprobability.com/assets/js/figure-animate.js"></script>
+  <script>
+  /* Map range slider values (min..max, often 0-based in LaMD content) to the
+     1-based frame index expected by figure-animate.js showDivs(). */
+  function lamdFrameIndex(group) {
+    var range = document.getElementById("range-" + group);
+    var val = parseInt(range.value, 10);
+    var min = parseInt(range.min, 10);
+    return val - min + 1;
+  }
+  function lamdSetDivs(group) {
+    if (typeof showDivs !== "function") return;
+    slideIndex = lamdFrameIndex(group);
+    showDivs(slideIndex, group);
+  }
+  function lamdPlusDivs(n, group) {
+    if (typeof showDivs !== "function") return;
+    var range = document.getElementById("range-" + group);
+    var min = parseInt(range.min, 10);
+    var max = parseInt(range.max, 10);
+    var val = parseInt(range.value, 10) + n;
+    if (val < min) val = max;
+    if (val > max) val = min;
+    range.value = val;
+    range.setAttribute("aria-valuenow", val);
+    slideIndex = val - min + 1;
+    showDivs(slideIndex, group);
+  }
+  </script>
+  <script>
+  /* Theme chrome (logos) sits on Reveal's full-viewport .slide-background,
+     which does not receive the deck transform. Sync --slide-scale so CSS can
+     size that chrome with the slides (see ai-cam.css / mlatcl.css / trent.css). */
+  (function () {
+    var bound = false;
+    function syncSlideScale() {
+      if (typeof Reveal === "undefined" || typeof Reveal.getScale !== "function") return false;
+      try {
+        var s = Reveal.getScale();
+        if (!s || !isFinite(s)) return false;
+        document.documentElement.style.setProperty("--slide-scale", String(s));
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+    function bind() {
+      if (bound) return typeof Reveal !== "undefined";
+      if (typeof Reveal === "undefined" || typeof Reveal.addEventListener !== "function") return false;
+      Reveal.addEventListener("ready", syncSlideScale);
+      window.addEventListener("resize", function () {
+        setTimeout(syncSlideScale, 0);
+        setTimeout(syncSlideScale, 50);
+      });
+      bound = true;
+      return true;
+    }
+    var n = 0;
+    var t = setInterval(function () {
+      bind();
+      /* Keep polling until getScale() works — Reveal exists before initialize. */
+      if (syncSlideScale() || ++n > 200) clearInterval(t);
+    }, 50);
+  })();
+  </script>
+      
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Probability Review</h1>
+  <p class="date" style="text-align:center"><time>2006-09-25</time></p>
+</section>
+
+<section class="slide level2">
+
+<!-- CIP-0012 Track A: no-op outside HTML (overridden in talk-macros-html.gpp). -->
+<!-- Class-test timer: no-op outside slides HTML (overridden in talk-macros-slides-html.gpp). -->
+<!-- CIP-0016: mdpp expands \diagramcredit before gpp; leftover calls are empty. -->
+<!-- Do not edit this file locally. -->
+<!---->
+<!-- CIP-0012 Track A: content script load. Once-guard with alphanumeric
+     names stays in the surrounding ifndef wrapper (GPP ifndef limitation). -->
+<!-- Do not edit this file locally. -->
+<!-- The last names to be defined. Should be defined entirely in terms of macros from above-->
+</section>
+<section id="probability-review" class="slide level2">
+<h2>Probability Review</h2>
+</section>
+<section id="joint-marginal-conditional" class="slide level2">
+<h2>Joint, Marginal, Conditional</h2>
+<div>
+<ul>
+<li class="fragment">Joint <span class="math inline">\(P(x,y)\)</span>:
+both</li>
+<li class="fragment">Marginal <span class="math inline">\(P(x)\)</span>:
+regardless of <span class="math inline">\(y\)</span></li>
+<li class="fragment">Conditional <span class="math inline">\(P(x\mid
+y)\)</span>: <span class="math inline">\(x\)</span> given <span
+class="math inline">\(y\)</span></li>
+</ul>
+</div>
+</section>
+<section id="product-rule-and-sum-rule" class="slide level2">
+<h2>Product Rule and Sum Rule</h2>
+<div>
+<ul>
+<li class="fragment">Product: <span class="math inline">\(P(x,y)=P(x\mid
+y)P(y)\)</span></li>
+<li class="fragment">Sum: <span class="math inline">\(P(y)=\sum_x
+P(x,y)\)</span></li>
+<li class="fragment">Both are normalising bookkeeping, not modelling
+assumptions</li>
+</ul>
+</div>
+</section>
+<section id="bayes-rule" class="slide level2">
+<h2>Bayes’ Rule</h2>
+<p><span class="math display">\[
+P(y\mid x)=\frac{P(x\mid y)P(y)}{P(x)}
+\]</span></p>
+<div>
+<ul>
+<li class="fragment">Follows from the product rule and symmetry of the
+joint</li>
+<li class="fragment">Inverts the conditioning — updates a prior given a
+likelihood</li>
+<li class="fragment"><span class="math inline">\(P(x)=\sum_y P(x\mid
+y)P(y)\)</span> when <span class="math inline">\(y\)</span> is
+discrete</li>
+</ul>
+</div>
+</section>
+<section id="bayes-theorem-example" class="slide level2">
+<h2>Bayes’ Theorem Example</h2>
+<ul>
+<li>There are two barrels in front of you. Barrel One contains 20 apples
+and 4 oranges. Barrel Two other contains 4 apples and 8 oranges. You
+choose a barrel randomly and select a fruit. It is an apple. What is the
+probability that the barrel was Barrel One?</li>
+</ul>
+<div class="figure">
+<div id="bayes-two-barrels-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/npa/slides/diagrams/ml/bayes-two-barrels.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+Two barrels: Barrel One holds 20 apples and 4 oranges; Barrel Two holds
+4 apples and 8 oranges. A barrel is chosen uniformly at random and a
+single fruit is drawn.
+</aside>
+</section>
+<section id="bayes-rule-example-answer-i" class="slide level2">
+<h2>Bayes’ Rule Example: Answer I</h2>
+<ul>
+<li>We are given: <span class="math display">\[\begin{aligned}
+  P(\text{F}=\text{A}|\text{B}=1) = &amp; 20/24 \\
+  P(\text{F}=\text{A}|\text{B}=2) = &amp; 4/12 \\
+  P(\text{B}=1) = &amp; 0.5 \\
+  P(\text{B}=2) = &amp; 0.5
+\end{aligned}\]</span></li>
+</ul>
+</section>
+<section id="bayes-rule-example-answer-ii" class="slide level2">
+<h2>Bayes’ Rule Example: Answer II</h2>
+<ul>
+<li>We use the sum rule to compute: <span
+class="math display">\[\begin{aligned}
+  P(\text{F}=\text{A}) = &amp;
+P(\text{F}=\text{A}|\text{B}=1)P(\text{B}=1) \\&amp; +
+P(\text{F}=\text{A}|\text{B}=2)P(\text{B}=2) \\
+        = &amp; 20/24\times 0.5 + 4/12 \times 0.5 = 7/12
+\end{aligned}\]</span></li>
+<li>And Bayes’ rule tells us that: <span
+class="math display">\[\begin{aligned}
+  P(\text{B}=1|\text{F}=\text{A}) = &amp; \frac{P(\text{F} =
+\text{A}|\text{B}=1)P(\text{B}=1)}{P(\text{F}=\text{A})}\\
+       = &amp; \frac{20/24 \times 0.5}{7/12} = 5/7
+\end{aligned}\]</span></li>
+</ul>
+</section>
+<section id="independence" class="slide level2">
+<h2>Independence</h2>
+<ul>
+<li>Independent: <span class="math inline">\(P(x\mid y)=P(x)\)</span>,
+hence <span class="math inline">\(P(x,y)=P(x)P(y)\)</span></li>
+<li>This factorisation is why Poisson superposition and product-form
+networks work</li>
+</ul>
+</section>
+<section id="poisson-distribution" class="slide level2">
+<h2>Poisson Distribution</h2>
+<ul>
+<li>Poisson distribution is used for ‘count data’. For non-negative
+integers, <span class="math inline">\(y\)</span>, <span
+class="math display">\[P(y) =
+\frac{\lambda^y}{y!}\exp(-\lambda)\]</span></li>
+<li>Here <span class="math inline">\(\lambda\)</span> is a <em>rate</em>
+parameter that can be thought of as the number of arrivals per unit
+time.</li>
+<li>Poisson distributions can be used for disease count data. E.g.
+number of incidence of malaria in a district.</li>
+</ul>
+</section>
+<section id="poisson-distribution-1" class="slide level2">
+<h2>Poisson Distribution</h2>
+<div class="figure">
+<div id="the-poisson-distribution-figure" class="figure-frame">
+<object class="svgplot " data="https://mlatcl.github.io/npa/slides/diagrams/ml/poisson.svg" width="80%" style=" ">
+</object>
+</div>
+</div>
+<aside class="notes">
+The Poisson distribution.
+</aside>
+<!-- SECTION Expectations -->
+</section>
+<section id="expectations" class="slide level2">
+<h2>Expectations</h2>
+<ul>
+<li>Expectation: <span class="math inline">\(\langle
+f(x)\rangle_{P(x)}=\sum_x P(x)f(x)\)</span></li>
+<li>Also written <span class="math inline">\(E\{f(x)\}\)</span></li>
+<li>Mean = first moment; variance from first and second moments</li>
+</ul>
+</section>
+<section id="a-small-discrete-example" class="slide level2">
+<h2>A Small Discrete Example</h2>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x\)</span></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(P(x)\)</span></td>
+<td>0.2</td>
+<td>0.5</td>
+<td>0.3</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(f(x)=x^2\)</span></td>
+<td>0</td>
+<td>1</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="variance" class="slide level2">
+<h2>Variance</h2>
+<!-- SECTION Continuous Variables -->
+</section>
+<section id="continuous-variables" class="slide level2">
+<h2>Continuous Variables</h2>
+<ul>
+<li>Discrete: capital <span class="math inline">\(P\)</span></li>
+<li>Continuous: density <span class="math inline">\(p(\cdot)\)</span>,
+probabilities by integration</li>
+<li><span class="math inline">\(P(\text{exactly }
+2\,\mathrm{m})=0\)</span> is a consequence of querying a set of width
+zero</li>
+</ul>
+<div class="figure">
+<div id="height-pdf-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/pdfOfHeight.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+A Gaussian PDF representing heights of computer scientists.
+</aside>
+</section>
+<section id="manipulating-densities" class="slide level2">
+<h2>Manipulating Densities</h2>
+</section>
+<section id="cumulative-distribution-functions" class="slide level2">
+<h2>Cumulative Distribution Functions</h2>
+<div class="figure">
+<div id="height-cdf-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/cdfOfHeight.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+CDF (thick) and PDF (thin) for the heights of computer science students.
+</aside>
+<!-- SECTION Sample-Based Approximations -->
+</section>
+<section id="sample-based-approximations" class="slide level2">
+<h2>Sample-Based Approximations</h2>
+<ul>
+<li><span class="math inline">\(P(k)\approx s_k/S\)</span> for large
+<span class="math inline">\(S\)</span></li>
+<li><span class="math inline">\(\langle f\rangle \approx S^{-1}\sum_i
+f(k_i)\)</span></li>
+<li>Sample mean versus distribution mean: keep them distinct</li>
+<li>Later: time averages versus steady-state averages</li>
+</ul>
+</section>
+<section id="mean-of-a-poisson" class="slide level2">
+<h2>Mean of a Poisson</h2>
+<ul>
+<li>Poisson mean: <span class="math inline">\(\langle
+k\rangle=\mu\)</span></li>
+<li>Variance: Tutorial 1</li>
+</ul>
+</section>
+<section id="thanks" class="slide level2 scrollable">
+<h2 class="scrollable">Thanks!</h2>
+<ul>
+<li>company: <a href="https://trent.ai">Trent AI</a></li>
+<li>book: <a
+href="https://www.penguin.co.uk/books/455130/the-atomic-human-by-lawrence-neil-d/9780241625248">The
+Atomic Human</a></li>
+<li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
+<li><a href="https://the-atomic-human.ai">The Atomic Human</a></li>
+<li>newspaper: <a
+href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile
+Page</a></li>
+<li>blog: <a
+href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
+</ul>
+</section>
+<section id="further-reading" class="slide level2 scrollable">
+<h2 class="scrollable">Further Reading</h2>
+<ul>
+<li><p>Probability distributions: Section 1.2 of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+<li><p>Review of probability as needed for Chapter 3 of <span
+class="citation" data-cites="Bertsekas:data92">Bertsekas and Gallager
+(1992)</span></p></li>
+<li><p>Section 1.2, probability distributions of <span class="citation"
+data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+</ul>
+</section>
+<section id="references" class="slide level2 unnumbered scrollable">
+<h2 class="unnumbered scrollable">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="list">
+<div id="ref-Bertsekas:data92" class="csl-entry" role="listitem">
+Bertsekas, D.P., Gallager, R.G., 1992. Data networks, Second. ed.
+Prentice-Hall, Upper Saddle River, NJ.
+</div>
+<div id="ref-Bishop:book06" class="csl-entry" role="listitem">
+Bishop, C.M., 2006. Pattern recognition and machine learning. springer.
+</div>
+</div>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@3.9.2/lib/js/head.min.js"></script>
+  <script src="https://unpkg.com/reveal.js@3.9.2/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: true,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+        // Transition style
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://unpkg.com/reveal.js@3.9.2/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'https://unpkg.com/reveal.js@3.9.2/plugin/zoom-js/zoom.js', async: true },
+          { src: 'https://unpkg.com/reveal.js@3.9.2/plugin/math/math.js', async: true },
+          { src: 'https://unpkg.com/reveal.js@3.9.2/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+  <!-- Mermaid: after Reveal.initialize (CIP-0012 template hygiene) -->
+  <script>
+    if (typeof Reveal !== 'undefined' && Reveal.addEventListener) {
+      Reveal.addEventListener('ready', function () {
+        if (typeof mermaid === 'undefined') return;
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: 'base',
+          themeVariables: {
+            primaryColor: '#4a90e2',
+            primaryTextColor: '#fff',
+            primaryBorderColor: '#357abd',
+            lineColor: '#67b246',
+            fontSize: '30px',
+            fontFamily: 'arial',
+            edgeLabelBackground: 'transparent',
+            tertiaryColor: 'transparent'
+          }
+        });
+      });
+    }
+  </script>
+    </body>
+</html>
