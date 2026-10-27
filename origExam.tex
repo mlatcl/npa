@@ -1,0 +1,188 @@
+\documentclass[12pt,fleqn]{article}
+\usepackage{pslatex}
+\usepackage{myexam}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{epic}
+\usepackage{eepic}
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+
+\pressmark{COM6131/3270}
+\examtitle{NETWORK PERFORMANCE ANALYSIS}
+\examdate{AUTUMN/SPRING SEMESTER 2002--2003}
+\examtime{2 HOURS}
+\input{neilutils}
+\begin{document}
+
+\vspace{10mm}
+\begin{exam}
+
+\bigskip
+
+
+\begin{question}
+% One about the coursework
+\begin{qupart}
+\mypercent{20}
+\end{qupart}
+
+\begin{qupart}
+\mypercent{10}
+\end{qupart}
+
+\begin{qupart}
+\end{qupart}
+
+\begin{qupart}
+\end{qupart}
+
+\end{question}
+
+\begin{question}
+% One about the difference between an M/M/m and 
+A telecoms company has rented a line of fixed bandwidth. They are considering transfering packetised data along this line for $m$ clients. 
+
+\begin{qupart}
+The company's clients 
+\mypercent{20}
+\end{qupart}
+
+\begin{qupart}
+\mypercent{10}
+\end{qupart}
+
+\begin{qupart}
+\end{qupart}
+
+\begin{qupart}
+\end{qupart}
+
+\end{question}
+
+
+\turnover
+\begin{question}
+% One about a call service centre vs people taking calls at home.
+\bigskip
+{\bf Tear off the Erlang B curves at the back of this question paper and hand them in with your answer to this question.} Northern Telecom has just completed the purchase of several local telecommunications companies, each with their own regional support teams. 
+%
+\begin{qupart}
+There are five regional support teams. The number of staff in each team and the call rate for each team's centre is given in the table below. In the following question you can assume that calls arrive as a Poisson process and that the service times are exponentially distributed. 
+\vspace{1cm}
+\begin{center}
+\begin{tabular}{l|c|c|c|c|c}
+Region & A & B & C & D & E \\
+\hline
+Number of call handlers ($m$) & 10 & 15 & 12 & 9 & 7 \\
+Average call rate (customers/hour) & 30 & 40 & 28 & 26 & 10  
+\end{tabular}
+\end{center}
+\vspace{1cm}
+Given that the average holding time, $\tau$, for support queries is 3 minutes, use the Erlang C tables at the back of the paper to give, for each region, the probability of queueing, $C(m, a)$.  
+\mypercent{25}
+% Five for each answer
+\end{qupart}
+%
+\begin{qupart}
+The formula for the average queue length in an $M$/$M$/$m$ system is 
+\begin{equation}
+\bar{N}_Q = \frac{\rho}{1-\rho}C(m,a).
+\end{equation}
+Use Little's formula to compute the formula for the average queueing time.
+Use this formula to compute the expected queueing time for each call centre?
+\mypercent{25}
+% Ten for the formula, three for each answer
+\end{qupart}
+%
+\begin{qupart}
+Given that the average queueing time for customers who \emph{don't} queue is zero. What is the average queueing time for customers who \emph{do} queue?
+\mypercent{15}
+\end{qupart}
+
+\begin{qupart}
+The company wishes to cut costs by merging the call centres to one location. Assuming that the total traffic level, the average holding time and the total staff numbers stay the same what will be the average delay for the new centre?  
+\mypercent{20}
+\end{qupart}
+
+\begin{qupart}
+The company actually cuts their staffing level to 40 call handlers in the new centre. For the five different regions will this lead to a lower or a higher probability of queueing?
+\mypercent{15}
+% five for the new waiting time and two for each right answer.
+\end{qupart}
+
+\end{question}
+
+
+\continued
+\begin{question}
+A call centre employs thirty operators selling tickets for a major sporting event. The call centre has sixty lines in total. When all operators are active new calls are placed in a queue for the first available operator.
+
+The call centre is to be modelled as an $M$/$M$/$m$/$n$ queue, \emph{i.e.} a queue in which there are $m$ servers and a maximum state of $n$.
+  
+\begin{qupart}
+Draw a state diagram representing the queueing system.
+\mypercent[30]
+\end{qupart}
+%
+\begin{qupart}
+Write down the detailed balance equations for the three cases where the queue state $k<m$, when $m \geq k < n$ and when $k\geq n$. 
+\mypercent[30] 
+\end{qupart}
+
+\begin{qupart}
+For each of the three cases outlined in the previous part write down the steady state distribution as a function of $P(0)$, the probability of the system being empty. 
+\end{qupart}
+\begin{qupart}
+Use the fact that the steady state distribution must be normalised to show that 
+\begin{equation}
+P(0)=\left[\right]
+\end{equation}
+\end{qupart}
+\end{question}
+\continued
+
+
+\begin{question}
+\begin{qupart}
+\end{qupart}
+
+\begin{qupart}
+\end{qupart}
+
+\begin{qupart}
+\end{qupart}
+
+\begin{qupart}
+\end{qupart}
+
+ 
+\end{question}
+
+\continued
+\topmargin -1.8cm
+\raggedleft{{\bf Registration Number \rule{4cm}{.5pt}}}
+%\oddsidemargin -2.8cm %originally 1.8
+%\evensidemargin -1.8cm %originally 1.8
+%\addtolength{\textwidth}{7cm}
+%
+\newcommand{\figureTextSize}{\tiny}
+\begin{figure}[h]
+\small
+\centerline{\input{./diagrams/erlangBexamCurves2.eepic}}
+\centerline{\input{./diagrams/erlangCexamCurves2.eepic}}
+\caption{Erlang B (top) and Erlang C (bottom) curves.}
+\end{figure}
+
+\questionsend
+\end{exam}
+
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
+
+
+

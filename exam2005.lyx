@@ -1,0 +1,2342 @@
+#LyX 1.4.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 245
+\begin_document
+\begin_header
+\textclass exam
+\begin_preamble
+\newcommand{\answer}[2]{#1}
+\newcommand{\masters}[2]{#2}
+\end_preamble
+\options masters,answers
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize 12
+\spacing single
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes true
+\end_header
+
+\begin_body
+
+\begin_layout Pressmark
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+masters{
+\end_layout
+
+\end_inset
+
+COM6131
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{
+\end_layout
+
+\end_inset
+
+COM3270
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Examtitle
+NETWORK PERFORMANCE ANALYSIS
+\end_layout
+
+\begin_layout examdate
+AUTUMN SEMESTER 2005--2006
+\end_layout
+
+\begin_layout Examtime
+2 HOURS
+\end_layout
+
+\begin_layout Dataprovided
+Erlang C Curves
+\end_layout
+
+\begin_layout Exam
+\InsetSpace ~
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+turnover
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+masters{
+\backslash
+center{
+\backslash
+Large
+\backslash
+textbf{Section A}
+\backslash
+normalsize}}{}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Question
+In an 
+\begin_inset Formula $M/G/1$
+\end_inset
+
+ queue inter-arrival times are exponentially distributed and service times
+ are `generally' distributed.
+ The average wait in the queue may be derived in terms of the residual service
+ time as follows
+\begin_inset Formula \[
+\bar{W}=\frac{\bar{R}}{1-\rho},\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\bar{R}$
+\end_inset
+
+ is the average residual service time and 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is the queue utilization factor.
+\end_layout
+
+\begin_deeper
+\begin_layout Qupart
+Describe, using diagrams where necessary, the concept of residual service
+ time.
+ State the assumptions used when deriving the formula above.
+\begin_inset LatexCommand \label{qup:1a}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+30
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+The residual service time is the remaining service time as perceived by
+ an arriving customer.
+ The 
+\begin_inset Formula $i$
+\end_inset
+
+th customer arrives and waits 
+\begin_inset Formula $R_{i}$
+\end_inset
+
+ time units for the current customer under service to finish being served.
+ This is the residual service time.
+ The diagram below explains this concept:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename diagrams/residualServiceOverview.eps
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the diagram the 
+\begin_inset Formula $i$
+\end_inset
+
+th arriving packet perceives a queueing time of 
+\begin_inset Formula $W_{i}$
+\end_inset
+
+ and a residual service time of 
+\begin_inset Formula $R_{i}$
+\end_inset
+
+.
+ The average residual service time is the average 
+\begin_inset Formula $R_{i}$
+\end_inset
+
+ for all packets.
+ 
+\end_layout
+
+\begin_layout Standard
+The assumptions used in deriving the formula are
+\end_layout
+
+\begin_layout Itemize
+We assume that time averages are equivalent to steady state averages.
+\end_layout
+
+\begin_layout Itemize
+We assume that service times have a finite variance.
+\end_layout
+
+\begin_layout Itemize
+We assume that the arrival times are statistically independent of the service
+ times.
+\end_layout
+
+\begin_layout Itemize
+Assume the queue is FIFO.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\emph on
+5 marks for each assumption, 10 marks for the description of residual service
+ time+diagram
+\series default
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Qupart
+Use a graphical argument to derive a formula for the residual service time.
+ Combine this equation with the formula in part a) for the average waiting
+ time to show that
+\begin_inset Formula \[
+\bar{W}=\frac{\lambda\left\langle X^{2}\right\rangle }{2\left(1-\rho\right)},\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is the arrival rate and 
+\begin_inset Formula $\left\langle X^{2}\right\rangle $
+\end_inset
+
+ is the second moment of the service time distribution.
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+40
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+We again turn to a graphical proof to obtain the value of the mean residual
+ service time.
+ A plot can be drawn of the residual service time over time.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename diagrams/residualTime.eps
+	width 70text%
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $M\left(t\right)$
+\end_inset
+
+ is the number of service completions in the interval 
+\begin_inset Formula $[0,\, t]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The time average of the mean residual service time can then be calculated
+ in terms of the area under the curve, 
+\begin_inset Formula $A\left(t\right)$
+\end_inset
+
+, which is given by the area under each of the triangles,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+A(t)=\frac{1}{2}\sum_{i=1}^{M(t)}X_{i}^{2}.\]
+
+\end_inset
+
+ The average service time is the area divided by time, 
+\begin_inset Formula $t$
+\end_inset
+
+, 
+\begin_inset Formula \begin{eqnarray*}
+\frac{A(t)}{t} & = & \frac{M(t)}{t}\frac{A(t)}{M(t)}\\
+ & = & \frac{1}{2}\frac{M(t)}{t}\frac{\sum_{i=1}^{M(t)}X_{i}^{2}}{M(t)}.\end{eqnarray*}
+
+\end_inset
+
+where we have used the number of arrivals after time 
+\begin_inset Formula $t$
+\end_inset
+
+, as 
+\begin_inset Formula $M\left(t\right)$
+\end_inset
+
+.
+ As 
+\begin_inset Formula $t\rightarrow\infty$
+\end_inset
+
+, 
+\emph on
+if the variance of the service time distribution is finite
+\emph default
+, we find that
+\begin_inset Formula \[
+\bar{R}=\frac{1}{2}\lambda\left\langle X^{2}\right\rangle .\]
+
+\end_inset
+
+ Again, assuming that time averages and ensemble averages are equal, we
+ substitute back into the equation provided in the previous part to obtain
+ the Pollaczek-Khinchin formula 
+\begin_inset Formula \[
+\bar{W}=\frac{\lambda\left\langle X^{2}\right\rangle }{2(1-\rho)}.\]
+
+\end_inset
+
+
+\series bold
+\emph on
+15 for the diagram, 10 for the area formula, 10 for the introduction of
+ 
+\begin_inset Formula $t$
+\end_inset
+
+ and 
+\begin_inset Formula $M\left(t\right)$
+\end_inset
+
+ and 5 for the right answer.
+
+\series default
+\emph default
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Qupart
+The equation you have derived is recognized as the Pollaczek-Khinchin formula.
+ Use it to derive the average waiting time in an 
+\begin_inset Formula $M/M/1$
+\end_inset
+
+ queue.
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+15
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+In an 
+\begin_inset Formula $M/M/1$
+\end_inset
+
+ queue there is an exponential service time,
+\begin_inset Formula \[
+p\left(X\right)=\mu\exp\left(-\mu x\right).\]
+
+\end_inset
+
+The mean of this service time is 
+\begin_inset Formula $\left\langle X\right\rangle =\frac{1}{\mu}$
+\end_inset
+
+ and the variance is 
+\begin_inset Formula $\textrm{var}\left(X\right)=\frac{1}{\mu^{2}}$
+\end_inset
+
+.
+ Therefore the second moment is therefore
+\begin_inset Formula \[
+\left\langle X^{2}\right\rangle =\left\langle X\right\rangle ^{2}+\textrm{var}\left(X\right)=\frac{2}{\mu^{2}}.\]
+
+\end_inset
+
+Substituting into the Pollaczek-Khinchin formula we have
+\begin_inset Formula \[
+\bar{W}=\frac{\lambda}{\mu^{2}\left(1-\rho\right)}=\frac{\rho}{\mu\left(1-\rho\right)}\]
+
+\end_inset
+
+
+\series bold
+\emph on
+5 marks for the distribution, 5 for the second moment and 5 marks for the
+ result
+\series default
+\emph default
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Qupart
+Which service time distribution leads to the lowest delay for a given mean?
+ What characteristic of this distribution ensures it has the lowest associated
+ delay?
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+15
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+The service time distribution that leads to the lowest delay for a given
+ mean 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+ is the deterministic service time, 
+\emph on
+i.e.
+ 
+\emph default
+an 
+\begin_inset Formula $M/D/1$
+\end_inset
+
+ queue.
+ This is because it is the distribution with the lowest variance (the variance
+ is zero) and therefore the second moment, 
+\begin_inset Formula $\left\langle X^{2}\right\rangle =\bar{X}^{2}+\textrm{var}\left(X\right)$
+\end_inset
+
+ is as low as it can be for this distribution (the variance cannot be negative)
+ which in turn means the average delay is as low as it can be.
+ There is no other distribution with a variance of zero.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\emph on
+5 marks for the right answer, and 10 marks for the fact that it is the lowest
+ variance
+\series default
+\emph default
+.
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\InsetSpace ~
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+continued
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+masters{
+\backslash
+center{
+\backslash
+Large
+\backslash
+textbf{Section B}
+\backslash
+normalsize}}{}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Question
+This question focuses on the Erlang loss system
+\end_layout
+
+\begin_deeper
+\begin_layout Qupart
+Consider the Erlang B formula,
+\begin_inset Formula \[
+B(m,a)=\frac{\frac{a^{m}}{m!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}.\]
+
+\end_inset
+
+What is the significance of the result of this formula? What do 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $m$
+\end_inset
+
+ stand for?
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+20
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+The formula gives the blocking probability for the Erlang loss system.
+ 
+\begin_inset Formula $a=\frac{\lambda}{\mu}$
+\end_inset
+
+ is the `offered load', a dimensionless constant measured in Erlangs that
+ gives the system load and 
+\begin_inset Formula $m$
+\end_inset
+
+ is the number of servers and the capacity of the system.
+
+\series bold
+\emph on
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\emph on
+5 for a and m, 10 for the significance 
+\series default
+\emph default
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Qupart
+What problems might you have when trying to compute the result of this formula
+ on either a calculator or a computer? How would you seek to solve these
+ problems?
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+25
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\series bold
+\emph on
+ 
+\end_layout
+
+\begin_layout Subsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+For large values of 
+\begin_inset Formula $m$
+\end_inset
+
+ there will be overflow problems for computing 
+\begin_inset Formula $a^{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $m!$
+\end_inset
+
+ This problem can be solved by computing the result in log space and then
+ exponentiating.
+ To do this you use the log gamma function for computing the factorial term
+ (if they mention the use of curves to solve the problems half marks for
+ the solution part).
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\emph on
+15 for identifying the problem and 10 for identifiying the solution.
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Qupart
+The steady state distribution for the Erlang loss system is given by
+\begin_inset Formula \[
+P\left(k\right)=\frac{\frac{a^{k}}{k!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}.\]
+
+\end_inset
+
+If the number of servers is very large (
+\begin_inset Formula $m>>a)$
+\end_inset
+
+ what will the average number of customers in the system be?
+\end_layout
+
+\begin_layout Qupart
+
+\emph on
+Hint: consider what happens in the system as 
+\emph default
+
+\begin_inset Formula $m\rightarrow\infty.$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+25
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+As the question states we should consider the limit as 
+\begin_inset Formula $m\rightarrow\infty$
+\end_inset
+
+.
+ The steady state distribution for Erlang Loss is a truncated Poisson.
+ In the limit 
+\begin_inset Formula $m\rightarrow\infty$
+\end_inset
+
+ (which is an 
+\begin_inset Formula $M/M/\infty$
+\end_inset
+
+ queue), the truncated Poisson becomes a Poisson distribution, 
+\begin_inset Formula \[
+\sum_{n=0}^{\infty}\frac{a^{n}}{n!}=\exp\left(a\right),\]
+
+\end_inset
+
+so we have
+\begin_inset Formula \[
+P\left(k\right)=\frac{a^{k}}{k!}\exp\left(-a\right)\]
+
+\end_inset
+
+and the mean of this distribution is 
+\begin_inset Formula $\frac{1}{a}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\emph on
+15 for determining that the system's steady state approximates a Poisson
+ for 
+\begin_inset Formula $m>>a$
+\end_inset
+
+ (either by stating its originally a truncated Poisson, or by producing
+ the result for the infinte sum becoming an exponential.) 10 for knowing
+ (or proving!) that the mean of a Poisson is 
+\begin_inset Formula $\frac{1}{a}$
+\end_inset
+
+
+\series default
+\emph default
+.
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Qupart
+The Erlang B formula is associated with the Erlang loss queueing system.
+ Under what conditions does the steady state distribution exist for this
+ queueing system? What is the form of this steady state distribution when
+ 
+\begin_inset Formula $a$
+\end_inset
+
+ becomes much larger than 
+\begin_inset Formula $m$
+\end_inset
+
+ and what is the resulting effect on the carried load?
+\end_layout
+
+\begin_layout Mypercent
+30
+\end_layout
+
+\begin_layout Standard
+\InsetSpace ~
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Answer 
+\end_layout
+
+\begin_layout Standard
+The steady state 
+\emph on
+always exists
+\emph default
+.
+ In some systems steady state doesn't exist when the offered load, 
+\begin_inset Formula $a$
+\end_inset
+
+, is higher than the number of servers, 
+\begin_inset Formula $m$
+\end_inset
+
+, however in the Erlang loss system the steady state will converge towards
+ 
+\begin_inset Formula $P\left(k\right)=1$
+\end_inset
+
+ for 
+\begin_inset Formula $k=m$
+\end_inset
+
+ and 
+\begin_inset Formula $P\left(k\right)=0$
+\end_inset
+
+ otherwise.
+ In this case most packets are rejected and the carried load becomes very
+ low.
+ The steady state exists because the system is lossy.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\emph on
+5 marks for noting it always exists, 10 for giving the form of the steady
+ state and 5 for stating the carried load will be small.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\emph on
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\series default
+\emph default
+\InsetSpace ~
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+turnover
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Question
+
+\series bold
+Annotate and hand in the Erlang C curves with your answer to this question.
+\end_layout
+
+\begin_layout Question
+United Telecom has just completed the purchase of several local telecommunicatio
+ns companies, each with their own regional support teams.
+ There are three regional support teams.
+ The number of staff in each team and the call rate for each team's centre
+ is given in the following table.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="4">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" width="0pt">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0pt">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Region
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+X
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Y
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Z
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+\begin_inset Formula $m$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+15
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+8
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+customers/hour
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+70
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+25
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Question
+In the questions that follow you should assume that the call centres can
+ be accurately modelled as Erlang delay systems.
+\end_layout
+
+\begin_deeper
+\begin_layout Qupart
+Given that the average holding time, 
+\begin_inset Formula $\tau$
+\end_inset
+
+, for support queries is 6 minutes, use the Erlang C curves provided to
+ give, for each region, the probability of queueing, 
+\begin_inset Formula $C\left(m,a\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+30
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+The offered load for this region is 
+\begin_inset Formula $a=\lambda\tau$
+\end_inset
+
+, we have a holding time of 6 minutes = 6/60 hours.
+\end_layout
+
+\begin_layout Itemize
+Region X: 
+\begin_inset Formula $a_{X}=\frac{50\times6}{60}=\frac{30}{6}=5$
+\end_inset
+
+ and 
+\begin_inset Formula $m=12$
+\end_inset
+
+, from Erlang C curves
+\begin_inset Formula $C\left(12,5\right)=0.006$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Region Y: 
+\begin_inset Formula $a_{Y}=\frac{70\times6}{60}=\frac{42}{6}=7$
+\end_inset
+
+ and 
+\begin_inset Formula $m=15$
+\end_inset
+
+, from Erlang C curves 
+\begin_inset Formula $C\left(15,7\right)=0.006$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Region Z: 
+\begin_inset Formula $a_{Z}=\frac{25\times6}{60}=\frac{15}{6}=2\frac{1}{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $m=8$
+\end_inset
+
+, from Erlang C curves 
+\begin_inset Formula $C\left(8,2.5\right)=0.005$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Answers should also be marked on Erlang C curves.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\emph on
+10
+\series default
+ 
+\series bold
+for each probability of queueing.
+ 
+\series default
+\emph default
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Qupart
+The formula for the average queue length in the Erlang delay system is
+\begin_inset Formula \[
+\bar{N}_{Q}=\frac{\rho}{1-\rho}C\left(m,a\right)\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\rho$
+\end_inset
+
+ is the queue utilization factor.
+ Use Little's formula to derive 
+\begin_inset Formula $\bar{W}$
+\end_inset
+
+, the average queueing time, and use it compute the expected queueing time
+ for each call centre.
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+20
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Little's formula for the queue is 
+\begin_inset Formula $\bar{N}_{Q}=\lambda\bar{W}$
+\end_inset
+
+.
+ So this means that 
+\begin_inset Formula \[
+\bar{W}=\frac{1}{\mu\left(1-\rho\right)}C\left(m,a\right)=\frac{1}{\mu\left(1-\frac{a}{m}\right)}C\left(m,a\right)\]
+
+\end_inset
+
+The queueing time for each centre is therefore
+\end_layout
+
+\begin_layout Itemize
+Region X: 
+\begin_inset Formula $\bar{W}=\frac{1}{\frac{60}{6}\left(1-\frac{5}{12}\right)}C\left(12,5\right)=\frac{6}{35}\times0.006=8.57\times10^{-4}\textrm{hours}$
+\end_inset
+
+ or about 3.7 seconds.
+ 
+\end_layout
+
+\begin_layout Itemize
+Region Y: 
+\begin_inset Formula $\bar{W}=\frac{1}{\frac{60}{6}\left(1-\frac{7}{15}\right)}C\left(15,7\right)=\frac{3}{16}\times0.006=9.375\times10^{-4}$
+\end_inset
+
+ hours or 4.05 seconds.
+\end_layout
+
+\begin_layout Itemize
+Region Z: 
+\begin_inset Formula $\bar{W}=\frac{1}{\frac{60}{6}\left(1-\frac{2.5}{8}\right)}C\left(8,2.5\right)=\frac{8}{55}\times0.005=6.060\times10^{-4}$
+\end_inset
+
+ hours or 2.618 seconds.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\emph on
+5 for derivation of the formula and 5 for each answer.
+\series default
+\emph default
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Qupart
+Show that the average queueing time for customers that queue is given by
+\begin_inset Formula \[
+\bar{W}_{Q}=\frac{1}{\mu\left(1-\rho\right)}\]
+
+\end_inset
+
+and compute the average queue time for customers for each of the call centres
+ described above.
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+25
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+The total queueing time is given by 
+\begin_inset Formula \[
+\bar{W}=C\left(m,a\right)\bar{W}_{Q}+\left(1-C\left(m,a\right)\right)\bar{W}_{\sim Q}\]
+
+\end_inset
+
+where 
+\begin_inset Formula \begin{eqnarray*}
+\bar{W}_{Q} & = & \textrm{queueing time for customers that queue}.\\
+\bar{W}_{\sim Q} & = & \textrm{queueing time for customers that don't queue.}\end{eqnarray*}
+
+\end_inset
+
+Since 
+\begin_inset Formula $\bar{W}_{\sim Q}=0$
+\end_inset
+
+ we can reorganise the formula as
+\begin_inset Formula \[
+\bar{W}_{Q}=\frac{\bar{W}}{C\left(m,a\right)}.\]
+
+\end_inset
+
+The queueing time for those that queue at each centre is therefore
+\end_layout
+
+\begin_layout Itemize
+Region X: 
+\begin_inset Formula $\bar{W}=\frac{1}{\frac{60}{6}\left(1-\frac{5}{12}\right)}=\frac{6}{35}$
+\end_inset
+
+ hour or 10.28 minutes.
+\end_layout
+
+\begin_layout Itemize
+Region Y: 
+\begin_inset Formula $\bar{W}=\frac{1}{\frac{60}{6}\left(1-\frac{7}{15}\right)}=\frac{15}{80}$
+\end_inset
+
+ hour or 11.25 minutes.
+\end_layout
+
+\begin_layout Itemize
+Region Z: 
+\begin_inset Formula $\bar{W}=\frac{1}{\frac{60}{6}\left(1-\frac{2.5}{8}\right)}\frac{8}{55}$
+\end_inset
+
+ hour or 8.73 minutes
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\emph on
+10 for the derivation of the formula and 5 for each answer.
+\series default
+\emph default
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Qupart
+The company wishes to cut costs by merging the call centres to one location.
+ Assuming that the total traffic level and the average holding time remain
+ the same, how many staff will be needed to keep the probability of waiting
+ at 0.006 or below?
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+5
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+From the Erlang C curves, 26.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\emph on
+5 for the answer (should be indicated on the Erlang C curves as well).
+\series default
+\emph default
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Qupart
+Explain the difference in the number of staff required in the centralized
+ call centre in comparison to the three original call centres.
+ In your answer you should focus on the utilization factors in the two systems.
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+20
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+The centralized system requires 9 fewer staff than the original three separate
+ systems for approximately the same performance.
+ The reason for this improved performance is the improved efficiency of
+ the system.
+ In the original system the average efficiency can be found from the utilization
+ factors.
+\end_layout
+
+\begin_layout Itemize
+Region X: 
+\begin_inset Formula $\rho_{X}=\frac{\lambda}{m}\tau=\frac{50\times6}{12\times60}=\frac{5}{12}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Region Y: 
+\begin_inset Formula $\rho_{Y}=\frac{\lambda}{m}\tau=\frac{70\times6}{15\times60}=\frac{7}{15}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Region Z: 
+\begin_inset Formula $\rho_{Z}=\frac{\lambda}{m}\tau=\frac{25\times6}{8\times60}=\frac{5}{16}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+so the average efficiency is 
+\begin_inset Formula $\frac{1}{3}\left(\frac{5}{12}+\frac{7}{15}+\frac{5}{16}\right)=0.399$
+\end_inset
+
+
+\newline
+For the centralised system 
+\begin_inset Formula $m=26,$
+\end_inset
+
+ 
+\begin_inset Formula $\lambda=50+70+25=145$
+\end_inset
+
+ (by superposition of Poissons), and 
+\begin_inset Formula $\tau=0.1$
+\end_inset
+
+.
+ So efficiency is
+\begin_inset Formula \[
+\rho=\frac{\lambda\tau}{m}=\frac{145\times0.1}{26}=0.557.\]
+
+\end_inset
+
+The second system is therfore more efficient which explains the reduction
+ in numbers of staff required.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\emph on
+10 for the basic answer (i.e.
+ the improved efficiency of the system) and 10 for the actual figures.
+\series default
+\emph default
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\InsetSpace ~
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+continued
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Question
+You are presented with the following portion of Tcl code designed for the
+ network simulator NS2.
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+set node1 [$ns node]
+\newline
+set node2 [$ns node]
+\newline
+set node3 [$ns node]
+\newline
+
+\newline
+$node1 set multiPath
+_ 1
+\newline
+
+\newline
+set link1 [$ns duplex-link $node1 $node2 2Kb 0ms DropTail]
+\newline
+set link2 [$ns
+ duplex-link $node2 $node3 2Kb 0ms DropTail]
+\newline
+set link3 [$ns duplex-link $node1
+ $node3 2Kb 0ms DropTail]
+\newline
+
+\newline
+set src [new Agent/UDP]
+\newline
+$ns attach-agent $node1
+ $src
+\newline
+set sink [new Agent/Null]
+\newline
+$ns attach-agent $node3 $sink
+\newline
+
+\end_layout
+
+\begin_layout Qupart
+Assuming that only the specified nodes exist, draw the network topology
+ showing the associated routes.
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+25
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset LatexCommand \url{set link}
+
+\end_inset
+
+ statements give the structure of the network and the 
+\begin_inset LatexCommand \url{set src}
+
+\end_inset
+
+ and 
+\begin_inset LatexCommand \url{set sink}
+
+\end_inset
+
+ statements along with the 
+\begin_inset LatexCommand \url{set multiPath}
+
+\end_inset
+
+ statment ensure that packets travel from 
+\begin_inset LatexCommand \url{node1}
+
+\end_inset
+
+ to 
+\begin_inset LatexCommand \url{node3}
+
+\end_inset
+
+ along all possible routes.
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename diagrams/ns2Network06.eps
+	width 40text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the diagram above we have omitted the arrows that show this, they should
+ either be shown or indicated in accompanying text.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\emph on
+10 marks for the correct structure and 15 marks for the correct routing
+ information.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Qupart
+Packet arrivals occur as a Poisson distribution at 
+\begin_inset LatexCommand \url{node1}
+
+\end_inset
+
+ with a rate of 2 per second.
+ Packet lengths are distributed as an exponential distribution with a mean
+ of 0.5 Kb.
+ Assuming that packets are sent randomly along all possible routes with
+ equal probability, use Kleinrock's independence assumption to estimate
+ the steady state average number of packets at each link and the average
+ delay for each route.
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+25
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+Packets arrive as a Poisson with a rate 
+\begin_inset Formula $\lambda=2$
+\end_inset
+
+.
+ They are sent randomly along the two routes with equal probaility.
+ This means, via the decomposition property of Poisson processes, that the
+ rate for each route is 
+\begin_inset Formula $\lambda=2\times0.5=1$
+\end_inset
+
+.
+ The service time distribution is dicated by the length of the packet and
+ the bandwidth of the route.
+ The bandwidth (given in the code above) is 2Kb/s.
+ Packet lengths are 0.5 Kb, so the service time distribution for all links
+ will have 
+\begin_inset Formula $\mu=\frac{2}{0.4}=4$
+\end_inset
+
+ packets/s.
+ Kleinrock's independence assumption tells us to treat each queue independently.
+ The first route consists of two queues.
+ 
+\end_layout
+
+\begin_layout Standard
+The delay is given by the formula for the 
+\begin_inset Formula $M/M/1$
+\end_inset
+
+ queue which is 
+\begin_inset Formula \[
+\bar{T}=\frac{1}{\mu-\lambda}=\frac{1}{4-1}=\frac{1}{3}s.\]
+
+\end_inset
+
+There are two queues in the first route so the total delay is 
+\begin_inset Formula $\frac{2}{3}s$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The calculation is the same for the second route, but there there is only
+ one queue (so in fact you don't need Kleinrock's assumption --- see later
+ question part) and the delay in the second route is 
+\begin_inset Formula $\frac{1}{3}s$
+\end_inset
+
+.
+ 
+\series bold
+\emph on
+5 for decomposition of Poissons 10 for the correct formula and 5 for the
+ correct answer for each route.
+\series default
+\emph default
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Qupart
+One of the routes in the network contains two queues.
+ Explain how the second queue's size, as perceived by an arriving packet,
+ will be related to the arriving packet's length.
+ How will this waiting time be affected for longer packets arriving at the
+ second queue? 
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+20
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+The longer packets will arrive at the second queue to find a shorter queue
+ than the shorter packets.
+ Or in other words queue length at the second queue are anti correlated
+ with packet lengths.
+ This is because, while the longer packet was being served at the first
+ queue there is time for the second queue to empty out.
+ This is analogous to a slow moving truck driver who will generally see
+ an open road in front of him.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\emph on
+10 marks for correctly saying that the queue will be shorter for longer
+ packets (or vice versa).
+ 10 Marks for saying the longer packet will wait less time at the second
+ queue.
+
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\InsetSpace ~
+
+\end_layout
+
+\begin_layout Qupart
+For each route in the network consider the implications of Kleinrock's independe
+nce assumption.
+ For which route would you expect the assumption to lead to more accurate
+ results? Describe the reasoning behind your answer.
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+20
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+The second route which goes directly from node 1 to node 3 would be much
+ more accurate.
+ This is because the assumptions behind Kleinrock are valid for this route.
+ The packet lengths are uncorrelated with the arrival times.
+ For the first route (via node 2) the packet lengths become correlated through
+ passing through the queue at node 2.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\emph on
+10 marks for the answer and 10 marks for the reasoning (that independence
+ holds for the second route.)
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\InsetSpace ~
+
+\end_layout
+
+\begin_layout Qupart
+Typically, in a large network, analytical modelling of the system will not
+ be possible.
+ In practice we often turn to simulation for modelling of such systems.
+ Why might the sample-based approximations to the system's characteristics
+ we obtain from these simulations be misleading?
+\end_layout
+
+\begin_deeper
+\begin_layout Mypercent
+10
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+answer{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Answer
+\end_layout
+
+\begin_layout Standard
+If the simulation is not run long enough it may not reach it's steady state.
+ It may even be hard to determine whether the system has a steady state.
+ If samples from the system are taken too close together in time then they
+ are not truly independent and sample based estimates will be incorrect.
+ 
+\series bold
+\emph on
+5 marks for steady state and 5 marks for independence.
+ Will also award 5 marks to answers that state you need to obtain a lot
+ of samples to get accurate results, but to get 10 you need to have both
+ the first points as well.
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}{0}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+questionsend
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+
+
+\backslash
+myfooter{}
+\backslash
+newpage
+\backslash
+myheader
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Standard
+
+
+\backslash
+topmargin -1.8cm {
+\backslash
+bf
+\backslash
+masters{COM6131}{COM3270}
+\backslash
+hfill{
+\backslash
+bf NETWORK PERFORMANCE ANALYSIS}
+\backslash
+
+\backslash
+
+\backslash
+
+\backslash
+
+\backslash
+hspace{0.5cm}
+\backslash
+raggedleft{{
+\backslash
+bf Registration Number 
+\backslash
+rule{4cm}{.5pt}}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename diagrams/erlangDelayCurves06.eps
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+vspace{1cm}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename diagrams/erlangDelayCurves06_2.eps
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

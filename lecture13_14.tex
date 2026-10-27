@@ -1,0 +1,344 @@
+%% LyX 1.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\providecommand{\LyX}{L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ \theoremstyle{plain}    
+ \newtheorem{thm}{Theorem}[section]
+ \numberwithin{equation}{section} %% Comment out for sequentially-numbered
+ \numberwithin{figure}{section} %% Comment out for sequentially-numbered
+ \theoremstyle{definition}
+  \newtheorem{example}[thm]{Example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{epic,eepic,epsfig}
+
+\usepackage{babel}
+\makeatother
+\begin{document}
+
+\title{Lectures 13 \& 14}
+
+\maketitle
+
+\section{$M$/$G$/$1$ Queue}
+
+
+\subsection*{Pollaczek-Khinchin formula}
+
+If service times are general we cannot use birth death processes to
+analyse the system. 
+
+Instead we derive the Pollaczek-Khinchin formula. This formula gives
+an expression for the expected waiting time in the queue for any distribution
+of service times. \[
+\bar{W}=\frac{\lambda \left\langle X^{2}\right\rangle }{2(1-\rho )}\]
+ where $\bar{W}$ is expected waiting time, $\left\langle X^{2}\right\rangle =\left\langle X^{2}\right\rangle _{p(X)}$,
+$\rho =\lambda \bar{X}$ and $\bar{X}=\left\langle X\right\rangle _{p(X)}$. 
+
+
+\subsection*{Proof of Pollaczek-Khinchin Formula}
+
+We assume that we have a FIFO queue, \emph{i.e.} customers are served
+in the order they arrive. We also assume that arrival times are independent
+of service times. We will utilise a new concept known as Mean Residual
+Service Time. 
+
+
+\subsubsection*{The Residual Service Time}
+
+Some definitions: 
+
+\begin{tabular}{rcl}
+ $W_{i}$&
+=&
+ Waiting time in queue of $i$th customer.\\
+ $R_{i}$&
+=&
+ `Residual service time' seen by the $i$th customer.\\
+ $X_{i}$&
+=&
+ Service time of the $i$th customer.\\
+ $k_{i}$&
+=&
+ Number of customers in the system when the $i$th customer arrives. \\
+\end{tabular}
+
+%
+\begin{figure}
+\begin{center}\input{diagrams/residualServiceOverview.eepic}\end{center}
+
+
+\caption{Graphical representation of residual service time.}
+\end{figure}
+
+
+From these definitions we may immediately write down \[
+W_{i}=R_{i}+\sum _{j=i-(k_{i}-1)}^{i-1}X_{j}\]
+ summing both sides across $i$ we obtain \[
+\sum _{i=1}^{I}W_{i}=\sum _{i=1}^{I}R_{i}+\sum _{i=1}^{I}\sum _{j=i-(k_{i}-1)}^{i-1}X_{j}\]
+ dividing through by $I$ gives us \[
+\sum _{i=1}^{I}\frac{W_{i}}{I}=\sum _{i=1}^{I}\frac{R_{i}}{I}+\sum _{i=1}^{I}\sum _{j=i-(k_{i}-1)}^{i-1}\frac{X_{j}}{I}\]
+ in the limit as $I\rightarrow \infty $ this becomes \[
+\lim _{I\rightarrow \infty }\sum _{i=1}^{I}\frac{W_{i}}{I}=\lim _{I\rightarrow \infty }\sum _{i=1}^{I}\frac{R_{i}}{I}+\lim _{I\rightarrow \infty }\sum _{i=1}^{I}\frac{(k_{i}-1)X_{i}}{I}\]
+assuming time averages are equivalent to steady state averages this
+gives \[
+\left\langle W\right\rangle =\left\langle R\right\rangle +\left\langle \left(k-1\right)X\right\rangle \]
+ Now since the length of the queue as seen by the $i$th arrival is
+independent of the $i$th arrival's length this means $\left\langle (k-1)X\right\rangle =\left\langle k-1\right\rangle \left\langle X\right\rangle $
+and since $(k-1)$ is the length of the queue we may write \[
+\bar{W}=\bar{R}+\bar{N}_{Q}\bar{X}\]
+ Using Little's theorem \[
+\bar{N}_{Q}=\lambda \bar{W}\]
+ we can obtain \[
+\bar{W}=\bar{R}+\lambda \bar{X}\bar{W}\]
+ and the fact that $\rho =\lambda \bar{X}$ gives us \[
+\bar{W}=\bar{R}+\rho \bar{W}\]
+ Leading to \begin{equation}
+\bar{W}=\frac{\bar{R}}{1-\rho }\label{eqn:arrivals}\end{equation}
+ It remains to calculate $\bar{R}$. 
+
+
+\subsubsection*{Residual Service Time from Departures Perspective}
+
+Plot of the residual service time over time. Here $M\left(t\right)$
+is the number of service completions in the interval $[0,\, t]$.
+
+%
+\begin{figure}
+\begin{center}\input{./diagrams/residualTime.eepic}\end{center}
+
+
+\caption{Graphical computation of mean residual time.}
+\end{figure}
+
+
+The time average of the mean residual service time can be calculated
+in terms of the area under the curve, $A(t)$ which in turn is the
+area under each of the triangles which may be written \[
+A(t)=\frac{1}{2}\sum _{i=1}^{M(t)}X_{i}^{2}\]
+ The average service time is the area divided by time, $t$. \begin{eqnarray}
+\frac{A(t)}{t} & = & \frac{M(t)}{t}\frac{A(t)}{M(t)}\\
+ & = & \frac{1}{2}\frac{M(t)}{t}\frac{\sum _{i=1}^{M(t)}X_{i}^{2}}{M(t)}
+\end{eqnarray}
+ As $t\rightarrow \infty $ we find $M(t)\rightarrow \infty $ and
+\[
+\bar{R}=\frac{1}{2}\lambda \left\langle X^{2}\right\rangle .\]
+ If we assume that time averages and ensemble averages are equal we
+may substitute back into eqn (\ref{eqn:arrivals}) and obtain the
+Pollaczek-Khinchin formula \[
+\bar{W}=\frac{\lambda \left\langle X^{2}\right\rangle }{2(1-\rho )}\]
+
+
+This implies that the total waiting time is \[
+\bar{T}=\bar{X}+\frac{\lambda \left\langle X^{2}\right\rangle }{2(1-\rho )}\]
+ and through Little's formula we can obtain the expected queue length,
+$\bar{N}_{Q}$, and the expected number in the system, $\bar{N}$. 
+
+\begin{example}
+Recall that for an $M$/$M$/$1$ system the service times are exponentially
+distributed,
+\end{example}
+\[
+P\left(X\right)=\mu \exp \left(-\mu X\right)\]
+this means that\[
+\bar{X}=\frac{1}{\mu }\]
+ then since the variance of the system is $\frac{1}{\mu ^{2}}$\[
+\left\langle X\right\rangle ^{2}=\frac{2}{\mu ^{2}}\]
+Substituting into the Pollaczek-Khinchin formula we obtain \begin{eqnarray*}
+\bar{W} & = & \frac{\rho }{\mu \left(1-\rho \right)}\\
+ & = & \frac{\rho }{\mu -\lambda }
+\end{eqnarray*}
+
+
+Deterministic service times --- each service takes the same amount
+of time\[
+P\left(X\right)=\delta \left(X-\frac{1}{\mu }\right)\]
+where $\delta \left(\cdot \right)$is the Dirac delta function. For
+this system \[
+\left\langle X\right\rangle =\frac{1}{\mu }\]
+and \[
+\left\langle X^{2}\right\rangle =\frac{1}{\mu ^{2}}\]
+\emph{i.e.} the variance is zero as we would expect. Substituting
+into the Pollaczek-Khinchin formula we obtain\[
+\bar{W}=\frac{\rho }{2\mu \left(1-\rho \right)}\]
+
+
+In fact we may derive the full range of results for these distributions. 
+
+\begin{center}\begin{tabular}{c|c|c|c}
+ Expected value &
+ General &
+ Exponential &
+Deterministic\\
+\hline
+$\bar{W}$&
+ $\frac{\lambda }{2(1-\rho )}\left\langle X^{2}\right\rangle $&
+ $\frac{\rho }{\mu (1-\rho )}$&
+ $\frac{\rho }{2\mu (1-\rho )}$\\
+ $\bar{T}=\bar{W}+\frac{1}{\mu }$&
+ $\frac{\lambda }{2(1-\rho )}\left\langle X^{2}\right\rangle +\frac{1}{\mu }$&
+ $\frac{1}{\mu (1-\rho )}$&
+ $\frac{2-\rho }{2\mu (1-\rho )}$\\
+ $\bar{N_{Q}}=\lambda \bar{W}$&
+ $\frac{\lambda ^{2}}{2(1-\rho )}\left\langle X^{2}\right\rangle $&
+$\frac{\rho ^{2}}{(1-\rho )}$&
+ $\frac{\rho ^{2}}{2(1-\rho )}$\\
+ $\bar{N}=\lambda \bar{W}+\rho =\lambda \bar{T}$&
+ $\frac{\lambda ^{2}}{2(1-\rho )}\left\langle X^{2}\right\rangle +\rho $&
+ $\frac{\rho }{1-\rho }$&
+ $\frac{\rho (2-\rho )}{2(1-\rho )}$\\
+\end{tabular}\end{center}
+
+\begin{example}
+Uniform Service times --- A uniform probability distribution is defined
+between 0 and $b$ for $X>0$ as\[
+U\left(X|b\right)=\left\{ \begin{array}{cc}
+ \frac{1}{b} & 0<X\leq b\\
+ 0 & X>b\end{array}
+\right.\]
+show that the man of this uniform distribution is given by $\frac{b}{2}$
+and its variance by $\frac{b^{2}}{12}$ and find the expected waiting
+time for an $M/U/1$ queue?
+
+For the mean we have\begin{eqnarray*}
+\left\langle X\right\rangle  & = & \int _{0}^{\infty }Xp\left(X\right)dX\\
+ & = & \int _{0}^{\infty }XU\left(X|b\right)dX\\
+ & = & \int _{0}^{b}\frac{X}{b}dX\\
+ & = & \left[\frac{X^{2}}{2b}\right]_{0}^{b}\\
+ & = & \frac{b^{2}}{2b}-0\\
+ & = & \frac{b}{2}
+\end{eqnarray*}
+For the variance we also require \begin{eqnarray*}
+\left\langle X^{2}\right\rangle  & = & \int _{0}^{\infty }X^{2}p\left(X\right)dX\\
+ & = & \int _{0}^{b}\frac{X^{2}}{b}dX\\
+ & = & \left[\frac{X^{3}}{3b}\right]_{0}^{b}\\
+ & = & \frac{b^{3}}{3b}-0\\
+ & = & \frac{b^{2}}{3}
+\end{eqnarray*}
+The variance is $\left\langle X^{2}\right\rangle -\left\langle X\right\rangle ^{2}=\frac{b^{2}}{3}-\left(\frac{b}{2}\right)=\frac{b^{2}}{12}$.
+\begin{description}
+\item [Waiting~Time~For~Queue]For simplicity we consider $\mu =\frac{1}{\left\langle X\right\rangle }.$
+So $\mu =\frac{2}{b}$ and thus $b=\frac{2}{\mu }$. So we can write
+the second moment in terms of $\mu $. $\left\langle X^{2}\right\rangle =\frac{b^{2}}{3}$,
+substituting in $b=\frac{2}{\mu }$ we have $\left\langle X^{2}\right\rangle =\frac{4}{3\mu ^{2}}$.
+Substituting in to the P-K formula we recover\[
+\bar{W}=\frac{2\rho }{3\mu \left(1-\rho \right)}.\]
+
+\end{description}
+\end{example}
+~
+
+\begin{example}
+Automatic Repeat Request system --- ARQ System. 
+\end{example}
+%
+\begin{figure}
+\begin{center}\input{./diagrams/ARQ.eepic}\end{center}
+
+
+\caption{The ARQ System.}
+\end{figure}
+Assume each packet takes 1 millisecond to be transmitted.
+
+The system waits $n-1$ milliseconds for an acknowledgement. If there
+is no acknowledgement the system retransmits.
+
+The probability of an error in a packet is taken to be $p$. Errors
+are taken to be independent. Assume that packets arrive as a Poisson
+process with rate $\lambda $.  Time interval between transmission
+and re-transmission is $1+kn$ time units with probability $\left(1-p\right)p^{k}$
+
+The probability of the service time is\[
+P\left(X=1+kn\right)=\left(1-p\right)p^{k}\]
+ The expected service time is therefore\begin{eqnarray*}
+\left\langle X\right\rangle  & = & \sum _{k=0}^{\infty }\left(1+kn\right)\left(1-p\right)p^{k}\\
+ & = & \left(1-p\right)\left(\sum _{k=0}^{\infty }p^{k}+n\sum _{k=0}^{\infty }kp^{k}\right)\\
+ & = & 1+\frac{np}{1-p}
+\end{eqnarray*}
+ since $\sum _{k=0}^{\infty }p^{k}=\frac{1}{1-p}$ and $\sum _{k=0}^{\infty }kp^{k}=\frac{p}{\left(1-p\right)^{2}}$.
+Thus we can write that\[
+\rho =\frac{\lambda \left(1-p\right)}{1-p+np}\]
+and thus \[
+1-\rho =\frac{1-\lambda -p\left(n-1-\lambda \right)}{1-p+np}\]
+The second moment of the service time is\begin{eqnarray*}
+\left\langle X^{2}\right\rangle  & = & \sum _{k=0}^{\infty }\left(1+kn\right)^{2}\left(1-p\right)p^{k}\\
+ & = & \left(1-p\right)\left(\sum _{k=0}^{\infty }p^{k}+2n\sum _{k=0}^{\infty }kp^{k}+n^{2}\sum _{k=0}^{\infty }k^{2}p^{k}\right)\\
+ & = & 1+\frac{2np}{1-p}+\frac{n^{2}\left(p+p^{2}\right)}{\left(1-p\right)^{2}}
+\end{eqnarray*}
+since \[
+\sum _{k=0}^{\infty }k^{2}p^{k}=\frac{p+p^{2}}{\left(1-p\right)^{3}}\]
+ Substitiuting into the P-K formula gives a very ugly formula!
+
+
+\section{$M/G/1$ Queues with Vacations }
+
+Consider a server which, when it is free, attends to some other business,
+for example it could transmit control and record keeping traffic. 
+
+These periods are sometimes known as vacations --- American for holidays. 
+
+\begin{itemize}
+\item If a new arrival arrives during a vacation it must wait until the
+vacation is over before being dealt with.
+\item If a vacation ends and the server is idle it immediately goes on a
+new vacation. 
+\end{itemize}
+~
+
+%
+\begin{figure}
+\begin{center}\input{./diagrams/vacationMG1.eepic}\end{center}
+
+
+\caption{Schematic of $M/G/1$ queue}
+\end{figure}
+
+
+We denote the length of these successive vacations to be $V_{1}$,
+$V_{2}$, $\dots $. 
+
+We assume that $V_{1},$$V_{2}$, $\dots $ are i.i.d. random variables
+which are also independent of the customer times and the service times. 
+
+For a Poisson arrival system with general service times we will look
+to compute the average waiting time for a system of this type. 
+
+%
+\begin{figure}
+\begin{center}\input{./diagrams/vacationResidual.eepic}\end{center}
+
+
+\caption{Computation of residual service time for system with vacations.}
+\end{figure}
+
+
+For this system \begin{eqnarray}
+\frac{1}{t}\int _{0}^{t}r\left(\tau \right)d\tau  & = & \frac{1}{t}\sum _{i=1}^{M\left(t\right)}\frac{1}{2}X_{i}^{2}+\frac{1}{t}\sum _{i=1}^{L\left(t\right)}\frac{1}{2}V_{i}^{2}\nonumber \\
+ & = & \frac{M\left(t\right)}{t}\frac{1}{2}\frac{\sum _{i=1}^{M\left(t\right)}X_{i}^{2}}{M\left(t\right)}+\frac{L\left(t\right)}{t}\frac{1}{2}\frac{\sum _{i=1}^{L\left(t\right)}V_{i}^{2}}{L\left(t\right)}\label{eq:vacationResidual}
+\end{eqnarray}
+
+
+On average the proportion of time available for utilisations is $\left(1-\rho \right)$.
+If the average length of a vacation at time $t$ is $\bar{V}_{t}$
+then the number of vacations that will have arrived is $L\left(t\right)=\frac{t\left(1-\rho \right)}{\bar{V}_{t}}$.
+Therefore if we take the limit of (\ref{eq:vacationResidual}) as
+$t\rightarrow \infty $ we find \[
+\bar{R}=\frac{1}{2}\lambda \left\langle X^{2}\right\rangle +\frac{\left(1-\rho \right)\left\langle V^{2}\right\rangle }{2\bar{V}}\]
+
+
+So given that the assumptions that we used to develop the formula 
+
+\[
+\bar{W}=\frac{\bar{R}}{1-\rho }\]
+are still valid, we may write\[
+\bar{W}=\frac{\lambda \left\langle X^{2}\right\rangle }{2\left(1-\rho \right)}+\frac{\left\langle V^{2}\right\rangle }{2\bar{V}}\]
+
+\end{document}

@@ -1,0 +1,1147 @@
+\documentstyle[11pt,fleqn]{article}
+\textheight=220mm
+\textwidth=160mm
+\voffset=-16mm
+\hoffset=-16mm
+\parskip=4pt plus2pt minus2pt
+\begin{document}
+
+\begin{enumerate}
+
+\item  Given the M/M/2/2 system transitions:
+
+\begin{figure}[hbt]\centering
+\setlength{\unitlength}{0.16mm}
+\begin{picture}(720,120)(0, 60)
+
+\thicklines
+
+\put(120,  120){\oval(60, 60)} 
+\put(120,  120){\makebox(0, 0){\sf 0}}
+\put(150,  140){\vector(1, 0){60}} 
+\put(180,  150){\makebox(0, 0){$\lambda$}}
+
+
+\put(240,  120){\oval(60, 60)} 
+\put(240,  120){\makebox(0, 0){\sf 1}}
+\put(270,  140){\vector(1, 0){60}} 
+\put(300,  150){\makebox(0, 0){$\lambda$}}
+\put(210,  100){\vector(-1, 0){60}} 
+\put(180,   80){\makebox(0, 0){$\mu$}}
+
+\put(360,  120){\oval(60, 60)} 
+\put(360,  120){\makebox(0, 0){\sf 2}}
+\put(330,  100){\vector(-1, 0){60}} 
+\put(300,   80){\makebox(0, 0){2*$\mu$}}
+
+\end{picture}
+\label{M/M/1/K}
+\end{figure}
+
+\begin{enumerate}
+
+\item show that P$_0$, the probability of no customers in the system =
+1/(1 + 2$\rho$ + 2$\rho^2$), where {\bf $\rho$ = $\lambda$/2$\mu$},
+and derive formulae for P$_1$ and P$_2$.   
+
+\item show that N, the average number of customers in the
+system, is given by N =  2$\rho$$\frac{1+2\rho}{1 + 2\rho + 2\rho^2}$
+
+\item derive a formula for T, the average customer through time 
+
+\end{enumerate}
+
+\newpage
+
+
+\item Given system of 4 M/M/1 nodes with:
+
+\begin{enumerate}
+
+\item Service rates:
+
+Node 1 completes 10 jobs/second;
+Node 2 completes 10 jobs/second;
+Node 3 completes 20 jobs/second;
+Node 4 completes 20 jobs/second.
+
+\item Inputs: 
+$\lambda_1$ = 1; $\lambda_2$ = 2; 
+$\lambda_3$ = 3; $\lambda_4$ = 4 --- all measured in jobs/second.
+
+\item Recirculation:
+
+>From node 1: jobs go back to node 1 with probability 0.4
+and to node 2 with probability 0.2.
+
+>From node 2: jobs go back to node 2 with probability 0.2
+and to node 3 with probability 0.2.
+
+>From node 3: jobs go back to node 3 with probability 0.1
+and to node 4 with probability 0.2.
+
+>From node 4: jobs go to 1 with probability 0.5.
+
+\end{enumerate}
+
+\noindent
+{\bf For each node compute}
+
+(i) the effective arrival rate\\
+(ii) the utilisation\\
+(iii) the average number in that node and
+the average value queueing at that node.\\
+(iv) the average time spent at that node and
+the average time spent queueing at that node.\\
+(v) the rate at which jobs leave the system at that node.\\
+
+\noindent
+{\bf For the whole system, compute}
+
+(i) the arrival rate into the system as a whole\\
+(ii) the expected number of jobs in the system\\
+(iii) the expected time spent by a job in the system\\
+(iv) the bottleneck device in the system\\
+
+Run the model doubling the input rates.
+Do the utilisations double? Do the through times double?
+Which is the bottleneck device?
+When does the system saturate
+(i.e. contain a device with 100\% utilisation)?
+
+
+\newpage
+
+\item Consider an open Jackson network comprising
+three M/M/1 systems, N$_1$, N$_2$, N$_3$, with mean service rates 
+
+\begin{center}
+$\mu_1$ = 4 \hspace*{0.5in} $\mu_2$ = 4 \hspace*{0.5in} $\mu_3$ = 6
+\end{center}
+
+and mean customer arrival rates of
+
+\begin{center}
+$\lambda_1$ = 0.75 \hspace*{0.5in} 
+$\lambda_2$ = 0.50 \hspace*{0.5in} 
+$\lambda_3$ = 0.75
+\end{center}
+
+both measured in customers per minute.
+
+On completion of service at N$_1$,
+50\% of the jobs queue again at N$_1$,
+25\% of the jobs queue at N$_2$, and
+25\% of the jobs queue at N$_3$.
+
+On completion of service at N$_2$,
+25\% of the jobs queue at N$_1$ and
+75\% of the jobs queue at N$_3$.
+
+On completion of service at N$_3$,
+50\% of the jobs queue again at N$_3$
+and 50\% of the jobs leave the system.
+
+\begin{enumerate}
+
+\item Show that the effective flow rates at the three nodes are:
+
+\begin{center}
+$\Lambda_1$ = 2 \hspace*{0.5in} 
+$\Lambda_2$ = 1 \hspace*{0.5in} 
+$\Lambda_3$ = 4
+\end{center}
+
+measured in customers per minute.
+
+\item Hence find individual node utilisations 
+
+\item ... the expected number of customers at each node, and 
+the expected number of customers in the system as a whole,
+
+
+\item ... and average time spent by a customer in the system.  
+
+\end{enumerate}
+
+\newpage
+
+\item Consider the 4-node queueing described below.
+Jobs arrive externally at nodes 1 and 2 with equal rates
+$\lambda$/2. The routeing is as follows:
+
+\begin{itemize}
+\item from node 1, jobs go to node 3 with probability 0.3 
+and to node 4 with probability 0.7
+
+\item from node 2, jobs go to node 3 with probability 0.7 
+and to node 4 with probability 0.3
+
+\item from node 3, jobs go back to node 1 with probability 0.8 
+and leave the network with probability 0.2 
+
+\item from node 4, jobs go back to node 2 with probability 0.8 
+and leave the network with probability 0.2 
+
+\end{itemize}
+
+\begin{enumerate}
+
+\item Draw a picture of the network showing the four nodes
+and the flows amongst them
+
+\item Write down the flow rate equations for each node
+
+\item Show that
+
+\begin{center}
+$\Lambda_1$ + $\Lambda_2$ =  $\Lambda_3$ + $\Lambda_4$ = 5$\times$$\lambda$
+\end{center}
+
+where $\Lambda_1$, $\Lambda_2$, $\Lambda_3$, and $\Lambda_4$ 
+are the actual flow rates at the 4 nodes respectively
+
+
+\item ... and hence that $\Lambda_1$ = $\Lambda_2$ =  $\Lambda_3$ = $\Lambda_4$
+
+
+\item If the average service times are all equal, give 
+and justify an upper bound for the $\Lambda_k$.
+
+\end{enumerate}
+
+\newpage
+
+\item {\bf Buzen's algorithm for the closed central server model.}
+
+Modify the first example in your notes by 
+adding in a fourth device equivalent to device 3 
+which shares its workload (i.e. P3  and P4 are both 0.1).
+
+Modify this example again by 
+adding in fourth/fifth/sixth devices
+each equivalent to device 3 and which share its workload 
+(i.e. P3, P4, P5, P6 are all 0.05).
+
+\end{enumerate}
+
+Any comments on the results?
+
+\newpage
+
+First two reminders of how to work out some well-known 
+and elementary formulae used in queueing theory.
+
+\subsection{1/1-x}
+
+To find the sum of 1 + x + x$^2$ + x$^3$ + ....
+Its not obvious so let's call it S. Then, by definition,
+
+\begin{tabular}{r cc cc cc cc ccc}
+S & = & 1 & + & x & + & x$^2$ & + & x$^3$ & + & x$^4$ & .... \\
+\end{tabular}
+
+\noindent
+We notice that each term on the right is greater by x than the one
+before.
+Hmmh. This suggests we look at  S.x (S multiplied by x), 
+more conveniently written the other way round as x.S.
+
+\begin{tabular}{r cc cc cc cc ccc}
+x.S & = & x & + & x$^2$ & + & x$^3$ & + & x$^4$ &  .... \\
+\end{tabular}
+
+\noindent
+The right hand sides of S and x.S are almost the same
+(its helpful to ``get the columns right'').
+
+
+\begin{tabular}{r cc cc cc cc ccc}
+S   & = & 1 & + & x & + & x$^2$ & + & x$^3$ & + & x$^4$ & .... \\
+x.S & = &   &   & x & + & x$^2$ & + & x$^3$ & + & x$^4$ &  .... \\
+\end{tabular}
+
+
+\noindent
+What if we subtract? 
+
+\begin{tabular}{r cc cc cc cc ccc c}
+S   & = & 1 & + & x & + & x$^2$ & + & x$^3$ & + & x$^4$ & .... \\
+x.S & = &   &   & x & + & x$^2$ & + & x$^3$ & + & x$^4$ &  .... \\
+\hline
+S-x.S & = & 1 & \\
+\hline
+\end{tabular}
+
+\noindent
+Hence  S-x.S = 1, or S = 1/(1-x). So that we have shown that
+
+\begin{table}[hbt]\centering
+\begin{tabular}{||r cc cc cc cc ccc||}
+\hline
+&&&&&&&&&&&\\
+\hspace*{0.25in}
+1/(1-x)
+  & = & 
+1 & + & x & + & x$^2$ & + & x$^3$ & + & x$^4$ & .... 
+\hspace*{0.25in}\\
+&&&&&&&&&&&\\
+\hline
+\end{tabular}
+\end{table}
+
+
+\newpage
+
+
+
+\subsection{1/(1-x)$^2$}
+
+We also need to recognise the expansion of $\frac{1}{(1-x)^2}$.
+We start off with the obvious fact that $\frac{1}{(1-x)^2}$
+= $\frac{1}{(1-x)}$ $\times$ $\frac{1}{(1-x)}$, or S $\times$ S,
+or as we have just shown 
+
+\begin{center}
+(1 + x + x$^2$ + x$^3$ + ....) $\times$ (1 + x + x$^2$ + x$^3$ + ....)
+\end{center}
+
+\noindent
+the best way to proceed is to break the problem up into smaller steps
+
+
+\begin{tabular}{r cc cc cc cc cc cc cc}
+\multicolumn{10}{l}{$\frac{1}{(1-x)^2}$} \\
+=  & 1 & $\times$ &(& 1 & + & x & + & x$^2$ & + & x$^3$ & + & x$^4$ &
+  .... &)\\
++  & x & $\times$ &(& 1 & + & x & + & x$^2$ & + & x$^3$ & + & x$^4$ &
+  .... &)\\
++  & x$^2$ & $\times$ &(& 1 & + & x & + & x$^2$ & + & x$^3$ & + &
+  x$^4$ & .... &)\\
++  & x$^3$ & $\times$ &(& 1 & + & x & + & x$^2$ & + & x$^3$ & + & x$^4$ & .... &)\\
++  & x$^4$ & $\times$ &(& 1 & + & x & + & x$^2$ & + & x$^3$ & + &
+  x$^4$ & .... &)\\
++ & \multicolumn{10}{l}{.........................................}\\
+\end{tabular}
+
+\noindent
+Carrying through the multiplications line by line and taking care to
+align so that we have columns of the same power, we get 
+
+\begin{tabular}{r cc cc cc cc cc cc cc}
+\multicolumn{10}{l}{$\frac{1}{(1-x)^2}$} \\
+=  & 1 & + & x & + & x$^2$ & + & x$^3$ & + & x$^4$ &  .... &\\
+   &   & + & x & + & x$^2$ & + & x$^3$ & + & x$^4$ &  .... &\\
+   &   &   &   & + & x$^2$ & + & x$^3$ & + & x$^4$ &  .... &\\
+   &   &   &   &   &       & + & x$^3$ & + & x$^4$ &  .... &\\
+   &   &   &   &   &       &   &       & + & x$^4$ &  .... &\\
+\multicolumn{10}{l}{.........................................}\\
+\hline
+= &  1 & + & 2.x & + & 3.x$^2$ & + & 4.x$^3$ & + & 5.x$^4$ &  .... &\\
+\hline
+\end{tabular}
+
+\noindent
+So that we have shown that
+
+\begin{table}[hbt]\centering
+\begin{tabular}{||r cc cc cc cc ccc||}
+\hline
+&&&&&&&&&&&\\
+\hspace*{0.25in}
+1/(1-x)$^2$
+  & = & 
+       1 & + & 2.x & + & 3.x$^2$ & + & 4.x$^3$ & + & 5.x$^4$ & .... 
+\hspace*{0.25in}\\
+&&&&&&&&&&&\\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+\section*{The exponential nature of random arrivals}
+
+Throughout our look at systems of queues we are assuming that
+our arrival and service patterns do not depend upon
+the state of the system (i.e. they remain the same whether the system
+is heavily loaded or lightly loaded).
+
+We start off with the reasonable assumption that the number of
+arrivals in a time slot (period of observation) 
+depends upon the length of the time slot.
+ 
+\begin{tabular}{l c l}
+\rule{1in}{0.05in} & & expect n arrivals \\
+\rule{2in}{0.05in} & & expect 2n arrivals \\
+\rule{3in}{0.05in} & & expect 2n arrivals \\
+\multicolumn{3}{c}{.............}\\
+\end{tabular}
+
+\noindent
+If the arrival rate is $\lambda$ then we expect 
+to average $\lambda$.t arrivals in a time slot of width t.
+
+Now let's look at the probability of NO arrivals in a time slot 
+of width t. We call this probability P(t).
+So by definition the probability of no arrivals in a time slot 
+of width t+$\delta$t is P(t+$\delta$t).
+
+Now we get no arrivals in a time slot of width 
+t+$\delta$t by having no arrival in the slot of width t
+(and the probability of this happening is P(t))
+and having no arrival in the next period of length $\delta$t.
+And since the probability of an arrival in a period of length $\delta$t
+is $\lambda$.$\delta$t (our starting assumption), 
+then the probability of no arrival
+in the period $\delta$t is (1- $\lambda$.$\delta$t).
+So that 
+
+\begin{center}
+P(t+$\delta$t) = P(t) $\times$ (1 - $\lambda$.$\delta$t)
+\end{center}
+
+But the Taylor expansion of P(t+$\delta$t) is
+
+\begin{center}
+P(t+$\delta$t)  =  P(t)  +  $\delta$t.P'(t) + O($\delta$t$^2$) ....
+\end{center}
+
+Combining these last two formulae we get
+
+\begin{center}
+P(t)  +  $\delta$t.P'(t) .... =  P(t) - $\lambda$.$\delta$t.P(t)
+\end{center}
+
+
+As $\delta$t gets vanishingly small, we may neglect second order terms,
+so 
+
+\begin{center}
+$\delta$t.P'(t) = - $\lambda$.$\delta$t.P(t)
+\end{center}
+
+i.e. P'(t) = - $\lambda$.P(t), the solution to which is 
+
+
+\begin{table}[hbt]\centering
+\begin{tabular}{|| cc c||}
+\hline
+&&\\
+\hspace*{0.25in} P(t)   & = &  e$^{-\lambda t}$ \hspace*{0.25in}\\
+&&\\
+\hline
+\end{tabular}
+\end{table}
+
+Remember that P(t) is is the probability of no arrivals in 
+a time period of length t, so the the probability of 
+some arrivals in this time period is (1 - e$^{-\lambda t}$).
+
+\newpage
+\begin{enumerate}
+
+\item Given the M/M/1/2 system transitions:
+
+\begin{figure}[hbt]\centering
+\setlength{\unitlength}{0.16mm}
+\begin{picture}(720,120)(0, 60)
+
+\thicklines
+
+\put(120,  120){\oval(60, 60)} 
+\put(120,  120){\makebox(0, 0){\sf 0}}
+\put(150,  140){\vector(1, 0){60}} 
+\put(180,  150){\makebox(0, 0){$\lambda$}}
+
+
+\put(240,  120){\oval(60, 60)} 
+\put(240,  120){\makebox(0, 0){\sf 1}}
+\put(270,  140){\vector(1, 0){60}} 
+\put(300,  150){\makebox(0, 0){$\lambda$}}
+\put(210,  100){\vector(-1, 0){60}} 
+\put(180,   80){\makebox(0, 0){$\mu$}}
+
+\put(360,  120){\oval(60, 60)} 
+\put(360,  120){\makebox(0, 0){\sf 2}}
+\put(330,  100){\vector(-1, 0){60}} 
+\put(300,   80){\makebox(0, 0){$\mu$}}
+
+\end{picture}
+\label{M/M/1/2}
+\end{figure}
+
+\begin{enumerate}
+
+\item show that P$_0$, the probability of no customers in the system =
+1/(1 + $\rho$ + $\rho^2$), and derive formulae for P$_1$ and P$_2$. 
+
+This system has only 3 states: S$_0$, S$_1$, and S$_2$.
+
+P$_0$ + P$_1$ + P$_2$ = 1
+
+The flow balance equations are 
+
+\begin{tabular}{l c l ccc l c l}
+$\lambda$.P$_1$ & = & $\mu$.P$_0$ 
+   && or && P$_1$ & = & $\rho$.P$_0$\\
+$\lambda$.P$_2$ & = & $\mu$.P$_1$ 
+   && or && P$_2$ & = & $\rho^2$.P$_0$\\
+\end{tabular}
+
+Thus 
+
+\begin{tabular}{l c l ccc l c l}
+1  & = & P$_0$  & + & P$_1$ & + & P$_2$ \\
+    & = & P$_0$  & + & $\rho$.P$_0$ & + & $\rho^2$.P$_0$ \\
+    & = & \multicolumn{7}{l}{P$_0$(1 + $\rho$ + $\rho^2$)}\\[0.1in]
+P$_0$ & = & \multicolumn{7}{l}{1/(1 + $\rho$ + $\rho^2$)}\\
+P$_1$ & = & \multicolumn{7}{l}{$\rho$/(1 + $\rho$ + $\rho^2$)}\\
+P$_2$ & = & \multicolumn{7}{l}{$\rho^2$/(1 + $\rho$ + $\rho^2$)}\\
+\end{tabular}
+
+Examples: if $\rho$ = 0.1, 0.5, and 0.9 then
+(P$_0$, P$_1$, P$_2$) triples are (1/1.11, 0.1/1.11, 0.01/1.11),
+(1/1.75,0.5/1.75,0.25/1.75),
+and (1/2.71,0.9/2.71,0.81/2.71) respectively.
+The chances of the system being full and an arrival rejected 
+are 0.01/1.11, 0.25/1.75, and 0.81/2.71 respectively
+(approx 1\%, 10\%, and 30\%).
+
+
+\item show that N, the average number of customers in the
+system, is given by N =  
+
+\begin{tabular}{l c l ccc l c l}
+N  & = & 0.P$_0$  & + & 1.P$_1$ & + & 2.P$_2$ \\
+    & = & \multicolumn{7}{l}{$\rho$.P$_0$ + 2.$\rho^2$.P$_0$} \\
+    & = & \multicolumn{7}{l}{$\rho$.(1+2.$\rho$).P$_0$}  \\
+    & = & \multicolumn{7}{l}{$\rho$.(1+2.$\rho$)/(1 + $\rho$ + $\rho^2$)}\\[0.1in]
+\end{tabular}
+
+N$_q$ = 0.P$_0$ + 0.P$_1$ + 1.P$_2$ = P$_2$ = $\rho^2$/(1 + $\rho$ + $\rho^2$)
+
+
+\item derive a formula for T, the average customer through time 
+
+By Little's Law, T = N/$\lambda$', where the true arrival rate is
+$\lambda$' = $\lambda$.(1-P$_2$) 
+(with probability P$_2$ an arrival is discarded) 
+= $\lambda$.(1 + $\rho$)/(1 + $\rho$  + $\rho^2$).
+
+This is nice as the complicated terms cancel and we are left with:
+
+T = E[s].(1+2.$\rho$)/(1+$\rho$)
+
+
+\end{enumerate}
+
+\newpage
+
+\item Given the M/M/2/2 system transitions:
+
+\begin{figure}[hbt]\centering
+\setlength{\unitlength}{0.16mm}
+\begin{picture}(720,120)(0, 60)
+
+\thicklines
+
+\put(120,  120){\oval(60, 60)} 
+\put(120,  120){\makebox(0, 0){\sf 0}}
+\put(150,  140){\vector(1, 0){60}} 
+\put(180,  150){\makebox(0, 0){$\lambda$}}
+
+
+\put(240,  120){\oval(60, 60)} 
+\put(240,  120){\makebox(0, 0){\sf 1}}
+\put(270,  140){\vector(1, 0){60}} 
+\put(300,  150){\makebox(0, 0){$\lambda$}}
+\put(210,  100){\vector(-1, 0){60}} 
+\put(180,   80){\makebox(0, 0){$\mu$}}
+
+\put(360,  120){\oval(60, 60)} 
+\put(360,  120){\makebox(0, 0){\sf 2}}
+\put(330,  100){\vector(-1, 0){60}} 
+\put(300,   80){\makebox(0, 0){2*$\mu$}}
+
+\end{picture}
+\label{M/M/1/K}
+\end{figure}
+
+\begin{enumerate}
+
+\item show that P$_0$, the probability of no customers in the system =
+1/(1 + 2$\rho$ + 2$\rho^2$), where {\bf $\rho$ = $\lambda$/2$\mu$},
+and derive formulae for P$_1$ and P$_2$.
+
+\item show that N, the average number of customers in the
+system, is given by N =  2$\rho$$\frac{1+2\rho}{1 + 2\rho + 2\rho^2}$
+
+
+\item derive a formula for T, the average customer through time 
+
+\end{enumerate}
+
+
+\newpage
+
+\item Consider four variants on the same theme. 
+
+\begin{enumerate}
+
+\item M/M/1 system (one queue, one server with
+          mean service rate of 1 job/minute)
+
+\item an M/M/1/2 system (at most 2 jobs in the system,
+so the maximum queue length is 1,
+one server with mean service rate of 1 job/minute)
+
+\item M/M/2 system (one queue, two servers each with a
+          mean service rate of 0.5 jobs/minute)
+
+\item M/M/2/2 system (one queue of maximum capacity 1, 
+    two servers each with a mean service rate of 0.5 jobs/minute)
+
+\end{enumerate}
+
+For arrival rates $\lambda$ of 0.1, 0.5, and 0.9 jobs per minute,
+tabulate $\rho$, N, and T (the utilisation, 
+expected number in the system, and
+expected through times).
+Any conclusions you can draw?
+
+Reminder:
+
+\begin{tabular}{lc lc lc l}
+{\bf MM1} & & $\rho$ = ${\lambda}$/${\mu}$ &&
+          N  = $\rho$/(1-$\rho$)&&
+          T =  E[s]/(1-$\rho$)\\[0.1in]
+
+{\bf MM1/2} & & $\rho$ = ${\lambda}$/${\mu}$ &&
+          N  = $\rho$(1+2$\rho$)/(1+$\rho$+$\rho^2$)&&
+          T =  E[s](1+2$\rho$)/(1+$\rho$)\\[0.1in]
+
+{\bf MM2} & & $\rho$ = ${\lambda}$/2${\mu}$ &&
+          N  = 2$\rho$/(1-$\rho^2$)&&
+          T =  E[s]/(1-$\rho^2$)\\[0.1in]
+
+{\bf MM2/2} && $\rho$ = $\lambda$/2$\mu$&&
+N     =  2$\rho$(1+2$\rho$)/(1+2$\rho$+2$\rho^2$) &&
+T     =  E[s] \\[0.1in]
+\end{tabular}
+
+\newpage
+
+
+\item Consider an open Jackson network comprising
+three M/M/1 systems, N$_1$, N$_2$, N$_3$, with mean service rates 
+
+\begin{center}
+$\mu_1$ = 4 \hspace*{0.5in} $\mu_2$ = 4 \hspace*{0.5in} $\mu_3$ = 6
+\end{center}
+
+and mean customer arrival rates of
+
+\begin{center}
+$\lambda_1$ = 0.75 \hspace*{0.5in} 
+$\lambda_2$ = 0.50 \hspace*{0.5in} 
+$\lambda_3$ = 0.75
+\end{center}
+
+both measured in customers per minute.
+
+On completion of service at N$_1$,
+50\% of the jobs queue again at N$_1$,
+25\% of the jobs queue at N$_2$, and
+25\% of the jobs queue at N$_3$.
+
+On completion of service at N$_2$,
+25\% of the jobs queue at N$_1$ and
+75\% of the jobs queue at N$_3$.
+
+On completion of service at N$_3$,
+50\% of the jobs queue again at N$_3$
+and 50\% of the jobs leave the system.
+
+\begin{enumerate}
+
+\item Show that the effective flow rates at the three nodes are:
+\hfill {\bf [2 marks]}\\
+
+\begin{center}
+$\Lambda_1$ = 2 \hspace*{0.5in} 
+$\Lambda_2$ = 1 \hspace*{0.5in} 
+$\Lambda_3$ = 4
+\end{center}
+
+measured in customers per minute.
+
+\item Hence find individual node utilisations   \hfill {\bf [2 marks]}\\
+
+\item ... the expected number of customers at each node, and 
+the expected number of customers in the system as a whole,
+\hfill {\bf [2 marks]}\\
+
+
+\item ... and average time spent by a customer in the system.  
+\hfill {\bf [2 marks]}\\
+
+\end{enumerate}
+
+\newpage
+
+\item Consider four variants of the same theme. \hfill {\bf [6 marks]}\\
+
+\begin{enumerate}
+
+\item M/M/1 system (one queue, one server with
+          mean service rate of 1 job/minute)
+
+\item an M/M/1/2 system (at most 2 jobs in the system,
+so the maximum queue length is 1,
+one server with mean service rate of 1 job/minute)
+
+\item M/M/2 system (one queue, two servers each with a
+          mean service rate of 0.5 jobs/minute)
+
+\item M/M/2/2 system (one queue of maximum capacity 1, 
+    two servers each with a mean service rate of 0.5 jobs/minute)
+
+\end{enumerate}
+
+For arrival rates $\lambda$ of 0.1, 0.5, and 0.9 jobs per minute,
+tabulate $\rho$, N, and T (the utilisation, 
+expected number in the system, and
+expected through times).
+Any conclusions you can draw?
+
+
+The formulae are given in your main notes for MM1 and MMc;
+as a prelim for this coursework for MM1/2 and you just did MM2/2.
+Here they are:
+
+\begin{center}
+\begin{tabular}{lc lc lc l}
+{\bf MM1} & & $\rho$ = ${\lambda}$/${\mu}$ &&
+          N  = $\rho$/(1-$\rho$)&&
+          T =  E[s]/(1-$\rho$)\\[0.1in]
+
+{\bf MM1/2} & & $\rho$ = ${\lambda}$/${\mu}$ &&
+          N  = $\rho$(1+2$\rho$)/(1+$\rho$+$\rho^2$)&&
+          T =  E[s](1+2$\rho$)/(1+$\rho$)\\[0.1in]
+
+{\bf MM2} & & $\rho$ = ${\lambda}$/2${\mu}$ &&
+          N  = 2$\rho$/(1-$\rho^2$)&&
+          T =  E[s]/(1-$\rho^2$)\\[0.1in]
+
+{\bf MM2/2} && $\rho$ = $\lambda$/2$\mu$&&
+N     =  2$\rho$(1+2$\rho$)/(1+2$\rho$+2$\rho^2$) &&
+T     =  E[s] \\[0.1in]
+\end{tabular}
+\end{center}
+
+{\bf Don't forget that $\rho$ = $\lambda$/2$\mu$ (or $\lambda$E[s]/2)
+for both MM2 and MM2/2}. 
+
+Here are the results:
+
+
+\small
+\begin{verbatim}
+MM1
+
+lam    mu     rho    Es       N           T
+0.1    1.0    0.1    1.0    0.1111      1.1111
+0.5    1.0    0.5    1.0    1.0000      2.0000
+0.9    1.0    0.9    1.0    9.0000     10.0000
+
+MM1/2
+
+lam    mu     rho    Es       N           T
+0.1    1.0    0.1    1.0    0.1081      1.0909
+0.5    1.0    0.5    1.0    0.5714      1.3333
+0.9    1.0    0.9    1.0    0.9299      1.4737
+
+MM2
+
+lam    mu     rho    Es       N           T
+0.1    0.5    0.1    2.0    0.2020      2.0202
+0.5    0.5    0.5    2.0    1.3333      2.6667
+0.9    0.5    0.9    2.0    9.4737     10.5263
+
+
+MM22
+
+lam    mu     rho    Es       N           T
+0.1    0.5    0.1    2.0    0.1967       2.0
+0.5    0.5    0.5    2.0    0.8000       2.0
+0.9    0.5    0.9    2.0    1.1403       2.0
+\end{verbatim}
+\normalsize
+
+Conclusions: 
+
+MM1 is better than MM2 with half speed servers (aside:
+there will always be a need for fast cpu's).
+This carries over to MM1/2 better than MM2/2 with half speed servers.
+MMc (infinite buffer) is a poor approximation to MMc/n (finite buffer).
+
+Here is my code (in SML with l for $\lambda$, m for $\mu$, and r for $\rho$):
+
+\small
+\begin{verbatim}
+fun mm1 l m = let val r = l/m
+                  val Es = 1/m
+                  val N = r/(1-r)
+                  val T = Es/(1-r)
+              in
+                  (l, m, r, Es, N, T)
+              end;
+
+fun mm12 l m = let val r = l/m
+                  val Es = 1/m
+                  val N = r*(1+2*r)/(1+r+r*r)
+                  val T = Es*(1+2*r)/(1+r)
+              in
+                  (l, m, r, Es, N, T)
+              end;
+
+fun mm2 l m = let val r = l/(2*m)
+                  val Es = 1/m
+                  val N = 2*r/(1-r*r)
+                  val T = Es/(1-r*r)
+              in
+                  (l, m, r, Es, N, T)
+              end;
+
+fun mm22 l m = let val r = l/(2*m)
+                  val Es = 1/m
+                  val N = 2*r*(1+2*r)/(1+2*r+2*r*r)
+                  val T = Es
+               in
+                   (l, m, r, Es, N, T)
+               end;
+\end{verbatim}
+\normalsize
+
+Typical calls: mm1 0.1 1.0; mm12 0.1 1.0; mm2 0.1 0.5; mm22 0.1 0.5;
+
+
+\newpage
+
+
+\item Consider an open Jackson network comprising
+three M/M/1 systems, N$_1$, N$_2$, N$_3$, with mean service rates 
+
+\begin{center}
+$\mu_1$ = 4 \hspace*{0.5in} $\mu_2$ = 4 \hspace*{0.5in} $\mu_3$ = 6
+\end{center}
+
+and mean customer arrival rates of
+
+\begin{center}
+$\lambda_1$ = 0.75 \hspace*{0.5in} 
+$\lambda_2$ = 0.50 \hspace*{0.5in} 
+$\lambda_3$ = 0.75
+\end{center}
+
+both measured in customers per minute.
+
+On completion of service at N$_1$,
+50\% of the jobs queue again at N$_1$,
+25\% of the jobs queue at N$_2$, and
+25\% of the jobs queue at N$_3$.
+
+On completion of service at N$_2$,
+25\% of the jobs queue at N$_1$ and
+75\% of the jobs queue at N$_3$.
+
+On completion of service at N$_3$,
+50\% of the jobs queue again at N$_3$
+and 50\% of the jobs leave the system.
+
+\begin{enumerate}
+
+\item Show that the effective flow rates at the three nodes are:
+\hfill {\bf [2 marks]}\\
+
+\begin{center}
+$\Lambda_1$ = 2 \hspace*{0.5in} 
+$\Lambda_2$ = 1 \hspace*{0.5in} 
+$\Lambda_3$ = 4
+\end{center}
+
+measured in customers per minute.
+
+{\sf 
+The flow equations are :
+
+\begin{tabular}{l c r c r c rc rc}
+F1 & = & 0.75 & + & 0.50F1 & +  & 0.25F2 &  & \\
+F2 & = & 0.50 & + & 0.25F1 &    &         &  & \\
+F3 & = & 0.75 &   & 0.25F1 & +  & 0.75F2 & + & 0.50F3 \\
+\end{tabular}
+
+>From the equations for F1 and F2;
+
+F1  =  0.75  +  0.50F1  +   0.25F2 and F2 = 0.50 + 0.25 F1.\\
+Multiplying through by 4:\\
+4F1  =  3 +  2F1  +   F2 and 4F2 = 2 + F1.\\
+>From which 2F1 = 3 + F2 and   4F2 = 2 + F1.\\
+>From which F1 = 2 and F2 = 1.\\
+Substituting into the last equation for F3, F3 = 4.\\
+
+Check: total flow in is 0.75 + 0.5 + 0.75 = 2 jobs/min.
+Flow in = flow out = 0.5F3 = 2. Yes.
+
+}
+
+
+\item Hence find individual node utilisations   \hfill {\bf [2 marks]}\\
+
+Utilisations are 
+
+$rho_1$ = 0.5; $rho_2$ = 0.25; $rho_3$ = 0.66; 
+
+\item ... the expected number of customers at each node, and 
+the expected number of customers in the system as a whole,
+\hfill {\bf [2 marks]}\\
+N = $\rho$/(1-$\rho$):
+
+
+$N_1$ = 1.00; $rho_2$ = 0.33; $rho_3$ = 2.00; 
+
+N in system = 3.33
+
+
+\item ... and average time spent by a customer in the system.  
+
+
+By Little's Law, T = N/($\lambda_1$ + $\lambda_2$ + $\lambda_3$) =
+3.33/2 = 1.67 minutes.
+
+
+\hfill {\bf [2 marks]}\\
+
+\end{enumerate}
+\end{enumerate}
+
+
+\begin{enumerate}
+
+\item  Let S$_k$ signify the state of an {\em M/M/1} system when
+there are {\em k} customers in the system,
+and P$_k$ the probability of the system being in that state.
+Clearly, P$_0$ + P$_1$ + P$_2$ + ... = 1.
+Using the equations of job flow balance,
+or otherwise, show that P$_k$ = $\rho^k$P$_0$,
+and hence that P$_0$ = 1-$\rho$, where $\rho$ is the utilisation.
+
+Hence or otherwise show that in an M/M/1 system,
+the expected number of customers N is  $\rho$/(1-$\rho$) and 
+the expected value of the customer through-time T is
+E[s]/(1-$\rho$), where E[s] is the expected service time.
+
+
+\item  Consider a (Jackson) network consisting of three 
+interconnected M/M/1 systems.
+
+All external jobs entering the system do so at node 1.
+Their arrival rate is 10 jobs/minute.
+
+\begin{itemize}
+\item from node 1, jobs go to node 2 with probability 0.4 
+and to node 3 with probability 0.4,
+and leave the network with probability 0.2 
+
+The mean service rate at node 1, $\mu_1$, is 100 jobs/minute
+
+\item from node 2, jobs go to node 1 with probability 1.0.
+The mean service rate at node 2, $\mu_2$, is 80 jobs/minute
+
+
+\item from node 3, jobs go to node 1 with probability 1.0
+The mean service rate at node 3, $\mu_2$, is 25 jobs/minute
+\end{itemize}
+
+
+\begin{enumerate}
+\item Draw a picture of the network showing the three nodes.
+
+\item Write down the flow rate equations for each node,
+and show that 
+\begin{center}
+$\Lambda_1$ = 50 jobs/minute; $\Lambda_2$ =  $\Lambda_3$ = 20 jobs/minute
+\end{center}
+
+where $\Lambda_1$, $\Lambda_2$, and $\Lambda_3$
+are the actual flow rates at the 4 nodes respectively
+
+\item What are the utilisations of the three nodes?
+
+\item Which node is the bottleneck in this system?
+At what flow rate of external jobs would the system saturate?
+
+\end{enumerate}
+
+
+
+\item Queueing
+
+\begin{enumerate}
+
+\item M/M/1
+
+Job flow balance gives us that
+P$_1$ = $\rho$.P$_0$;  P$_2$ = $\rho$.P$_1$;  P$_3$ = $\rho$.P$_2$;
+...\\
+Hence P$_k$ = $\rho^k$P$_0$.
+And P$_0$ = 1/(1-$\rho$)
+
+
+ N = 0.P$_0$ + 1.P$_1$ + 2.P$_2$ + ...
+= $\rho$.(1 + 2.$\rho$  + 3.$\rho^2$ + ...).P$_0$
+= $\rho$.P$_0$/(1-$\rho$)$^2$
+= $\rho$/(1-$\rho$)
+
+T follows from Little's Law.
+
+\item Jackson
+\begin{enumerate}
+\item Draw a picture of the network showing the three nodes.
+
+\item  $\Lambda_1$ = 10 + $\Lambda_2$ + $\Lambda_3$
+
+$\Lambda_2$ = 0.4.$\Lambda_1$ 
+
+$\Lambda_3$ = 0.4.$\Lambda_1$ 
+
+Hence $\Lambda_1$ = 10 + 0.4.$\Lambda_1$ + 0.4.$\Lambda_1$
+
+Or 0.2.$\Lambda_1$ = 10
+
+Hence $\Lambda_1$ = 50 jobs/minute; 
+$\Lambda_2$ =  $\Lambda_3$ = 20 jobs/minute
+
+\item What are the utilisations of the three nodes?
+
+$\rho_1$ = 50/100 = 0.50; $\rho_2$ = 20/80 = 0.25; $\rho_3$ = 20/25 = 0.80
+
+\item The bottleneck device is Node$_3$ at 80\%.
+The utilisations rise with the external flow-in until 
+the bottleneck device has 100\% utilisation.
+That's Node$_3$ when the external flow rates has risen from 10
+jobs/min to 10*100/80 = 12.5 jobs/minute.
+
+\end{enumerate}
+\end{enumerate}
+
+
+{\bf Queueing practice}
+
+
+\begin{enumerate}
+
+\item Given the M/M/2/2 system transitions:
+
+\begin{figure}[hbt]\centering
+\setlength{\unitlength}{0.16mm}
+\begin{picture}(720,120)(0, 60)
+
+\thicklines
+
+\put(120,  120){\oval(60, 60)} 
+\put(120,  120){\makebox(0, 0){\sf 0}}
+\put(150,  140){\vector(1, 0){60}} 
+\put(180,  150){\makebox(0, 0){$\lambda$}}
+
+
+\put(240,  120){\oval(60, 60)} 
+\put(240,  120){\makebox(0, 0){\sf 1}}
+\put(270,  140){\vector(1, 0){60}} 
+\put(300,  150){\makebox(0, 0){$\lambda$}}
+\put(210,  100){\vector(-1, 0){60}} 
+\put(180,   80){\makebox(0, 0){$\mu$}}
+
+\put(360,  120){\oval(60, 60)} 
+\put(360,  120){\makebox(0, 0){\sf 2}}
+\put(330,  100){\vector(-1, 0){60}} 
+\put(300,   80){\makebox(0, 0){2*$\mu$}}
+
+\end{picture}
+\label{M/M/1/K}
+\end{figure}
+
+\begin{enumerate}
+
+\item show that P$_0$, the probability of no customers in the system =
+1/(1 + 2$\rho$ + 2$\rho^2$), where {\bf $\rho$ = $\lambda$/2$\mu$},
+and derive formulae for P$_1$ and P$_2$. 
+
+\item show that N, the average number of customers in the
+system, is given by N =  2$\rho$$\frac{1+2\rho}{1 + 2\rho + 2\rho^2}$
+
+
+\item derive a formula for T, the average customer through time 
+
+
+\end{enumerate}
+
+\item Consider an open Jackson network comprising
+three M/M/1 systems, N$_1$, N$_2$, N$_3$, with mean service rates 
+
+\begin{center}
+$\mu_1$ = 4 \hspace*{0.5in} $\mu_2$ = 4 \hspace*{0.5in} $\mu_3$ = 6
+\end{center}
+
+and mean customer arrival rates of
+
+\begin{center}
+$\lambda_1$ = 0.75 \hspace*{0.5in} 
+$\lambda_2$ = 0.50 \hspace*{0.5in} 
+$\lambda_3$ = 0.75
+\end{center}
+
+both measured in customers per minute.
+
+On completion of service at N$_1$,
+50\% of the jobs queue again at N$_1$,
+25\% of the jobs queue at N$_2$, and
+25\% of the jobs queue at N$_3$.
+
+On completion of service at N$_2$,
+25\% of the jobs queue at N$_1$ and
+75\% of the jobs queue at N$_3$.
+
+On completion of service at N$_3$,
+50\% of the jobs queue again at N$_3$
+and 50\% of the jobs leave the system.
+
+\begin{enumerate}
+
+\item Show that the effective flow rates at the three nodes are:
+\hfill {\bf [3 marks]}\\
+
+\begin{center}
+$\Lambda_1$ = 2 \hspace*{0.5in} 
+$\Lambda_2$ = 1 \hspace*{0.5in} 
+$\Lambda_3$ = 4
+\end{center}
+
+measured in customers per minute.
+
+\item Hence find individual node utilisations   
+
+\item ... the expected number of customers at each node, and 
+the expected number of customers in the system as a whole,
+
+
+
+\item ... and average time spent by a customer in the system.  
+
+
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+
+\end{document}
+

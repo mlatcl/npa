@@ -1,0 +1,294 @@
+%% LyX 1.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[11pt,a4paper,english]{article}
+\usepackage[latin1]{inputenc}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Bold symbol macro for standard LaTeX users
+\newcommand{\boldsymbol}[1]{\mbox{\boldmath $#1$}}
+
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ \usepackage{pslatex}
+ \usepackage{myexam}
+ \usepackage{graphicx}
+ \usepackage{amsmath}
+ \usepackage{epic}
+ \usepackage{eepic}
+ \input{neilutils}
+ \newenvironment{lyxcode}
+   {\begin{list}{}{
+     \setlength{\rightmargin}{\leftmargin}
+     \setlength{\listparindent}{0pt}% needed for AMS classes
+     \raggedright
+     \setlength{\itemsep}{0pt}
+     \setlength{\parsep}{0pt}
+     \normalfont\ttfamily}%
+    \item[]}
+   {\end{list}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\newcommand{\answer}[2]{}
+\newcommand{\masters}[2]{#2}
+
+\usepackage{babel}
+\makeatother
+\begin{document}
+
+\pressmark{\masters{COM6131}{COM3270}}
+
+
+\examtitle{NETWORK PERFORMANCE ANALYSIS}
+
+
+\examdate{AUTUMN SEMESTER 2002--2003}
+
+
+\examtime{2 HOURS}
+
+\begin{exam}
+~
+\begin{question}
+In an $M/G/1$ queue inter-arrival times are exponentially distributed
+and service times are `generally' distributed. 
+\begin{qupart}
+Use the concept of residual service time to show that, assuming customers
+are served in the order that they arrive, the average waiting time
+is given by\[
+\bar{W}=\frac{\bar{R}}{1-\rho},\]
+where $\bar{R}$ is the average residual service time and $\rho$
+is the queue utilization factor. Use diagrams, where necessary, to
+explain your reasoning and state your assumptions clearly.
+
+\mypercent{50}
+
+\end{qupart}
+~
+
+\begin{qupart}
+Use a graphical argument to derive a formula for the residual service
+time, then combine this equation with the formula for the average
+waiting time above to show that\[
+\bar{W}=\frac{\lambda\left\langle X^{2}\right\rangle }{2\left(1-\rho\right)},\]
+where $\lambda$ is the arrival rate and $\left\langle X^{2}\right\rangle $
+is the expectation of the squared service time.
+
+\mypercent{40}
+
+\end{qupart}
+~
+
+\begin{qupart}
+The equation you have derived is easily recognized as the Pollaczek-Khinchin
+formula. Use it to derive the average waiting time in an $M/D/1$
+queue.
+
+\mypercent{10}
+
+\end{qupart}
+\end{question}
+~\turnover
+
+\begin{question}
+You are presented with the following portion of Tcl code designed
+for the network simulator NS2.
+\begin{lyxcode}
+set~node1~{[}\$ns~node{]}~\\
+set~node2~{[}\$ns~node{]}~\\
+set~node3~{[}\$ns~node{]}~\\
+set~node4~{[}\$ns~node{]}~\\
+~\\
+\$node1~set~multiPath\_~1~\\
+~\\
+set~link1~{[}\$ns~duplex-link~\$node1~\$node2~1Kb~0ms~DropTail{]}~\\
+set~link2~{[}\$ns~duplex-link~\$node1~\$node3~1Kb~0ms~DropTail{]}~\\
+set~link3~{[}\$ns~duplex-link~\$node2~\$node4~1Kb~0ms~DropTail{]}~\\
+set~link4~{[}\$ns~duplex-link~\$node3~\$node4~1Kb~0ms~DropTail{]}~\\
+~\\
+set~src~{[}new~Agent/UDP{]}~\\
+\$ns~attach-agent~\$node1~\$src~\\
+set~sink~{[}new~Agent/Null{]}~\\
+\$ns~attach-agent~\$node4~\$sink~\\
+
+\end{lyxcode}
+\begin{qupart}
+Assuming that only the specified nodes exist, draw the network topology
+showing the associated routes.
+
+\mypercent{25}
+
+\end{qupart}
+~
+
+\begin{qupart}
+State the assumptions behind the Kleinrock Independence approximation.
+Discuss to what extent they are valid for this network topology.
+
+\mypercent{35}
+
+\end{qupart}
+~
+
+\begin{qupart}
+Packet arrivals occur as a Poisson distribution at \url{node1} with
+a rate of 2 per second. Packet lengths are distributed as an exponential
+distribution with a mean of 0.5 Kb. Assuming that packets are sent
+randomly along all possible routes with equal probability, use Kleinrock's
+independence assumption to estimate the steady state average number
+of packets that are at each link.
+
+\mypercent{25}
+
+\end{qupart}
+~
+
+\begin{qupart}
+What is the expected delay for each route through the network?
+\end{qupart}
+
+\mypercent{15}
+
+\end{question}
+~\continued
+
+\begin{question}
+\textbf{Hand in the Erlang C curves provided with your answer to this
+question.}
+
+Northern Telecom has just completed the purchase of several local
+telecommunications companies, each with their own regional support
+teams. There are three regional support teams. The number of staff
+in each team and the call rate for each team's centre is given in
+the following table. You can assume that calls arrive as a Poisson
+process and that the service times are exponentially distributed.
+
+\begin{center}\begin{tabular}{|c|c|c|c|}
+\hline 
+Region&
+A&
+B&
+C\tabularnewline
+\hline
+\hline 
+$m$&
+10&
+13&
+10\tabularnewline
+\hline
+\hline 
+customers/hour&
+120&
+160&
+100\tabularnewline
+\hline
+\end{tabular}\end{center}
+
+\begin{qupart}
+Given that the average holding time, $\tau$, for support queries
+is 3 minutes, use the Erlang C curves at the back of the paper to
+give, for each region, the probability of queueing, $C\left(m,a\right)$. 
+
+\mypercent{30}
+
+\end{qupart}
+~
+
+\begin{qupart}
+The formula for the average queue length in an $M/M/m$ system is\[
+\bar{N}_{Q}=\frac{\rho}{1-\rho}C\left(m,a\right)\]
+Use Little's formula to compute the formula for the average queueing
+time, and hence compute the expected queueing time for each call centre.
+
+\mypercent{30}
+
+\end{qupart}
+~
+
+\begin{qupart}
+Given that the average queueing time for customers who \emph{don't}
+queue is zero. What is the average queueing time for customers who
+\emph{do} queue?
+
+\mypercent{20}
+
+\end{qupart}
+~
+
+\begin{qupart}
+The company wishes to cut costs by merging the call centres to one
+location. Assuming that the total traffic level, the average holding
+time and the total staff numbers stay the same what will be the average
+queueing time for the new centre? 
+
+\mypercent{20}
+
+\end{qupart}
+\end{question}
+~
+
+\turnover
+
+\begin{question}
+A call centre employs thirty operators selling tickets for a major
+sporting event. The call centre has sixty lines in total. When all
+operators are active new calls are placed in a queue for the first
+available operator. The call centre is to be modelled as an $M/M/m/n$
+queue, \emph{i.e.} a queue in which there are $m$ servers and a maximum
+state of $n$.
+\begin{qupart}
+Draw a state diagram representing the queueing system.
+
+\mypercent{30}
+
+\end{qupart}
+~
+
+\begin{qupart}
+Write down the detailed balance equations for the two cases where
+the queue state $k<m$ and when $m\leq k<n$.
+
+\mypercent{20}
+
+\end{qupart}
+~
+
+\begin{qupart}
+For each of the two cases outlined in the previous part write down
+the steady state distribution as a function of $P\left(0\right)$,
+the probability of the system being empty. 
+
+\mypercent{30}
+
+\end{qupart}
+~
+
+\begin{qupart}
+Use the fact that the steady state distribution must be normalized
+to show that \[
+P\left(0\right)=\left[\sum_{k=0}^{m}\frac{a^{k}}{k!}+\sum_{k=m+1}^{n}\frac{a^{k}}{m!m^{k-m}}\right]^{-1}\]
+where $a=\frac{\lambda}{\mu}$, $\lambda$ is the arrival rate and
+$\mu$ is the rate of the service time distribution.
+
+\mypercent{20}
+
+\end{qupart}
+\end{question}
+~
+
+\questionsend
+
+\myfooter{}\newpage\myheader
+
+\topmargin -1.8cm \raggedleft{{\bf Registration Number \rule{4cm}{.5pt}}}\newcommand{\figureTextSize}{\tiny}
+
+\begin{center}\input{diagrams/erlangCCurves0to20.eepic}\end{center}\end{exam}
+
+\end{document}

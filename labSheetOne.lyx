@@ -1,5 +1,7 @@
-#LyX 1.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 221
+#LyX 1.4.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 245
+\begin_document
+\begin_header
 \textclass article
 \begin_preamble
 \usepackage{neilbib,epic,eepic}
@@ -16,230 +18,254 @@
 \graphics default
 \float_placement h
 \paperfontsize default
-\spacing single 
+\spacing single
 \papersize a4paper
-\paperpackage a4
-\use_geometry 0
-\use_amsmath 0
-\use_natbib 0
-\use_numerical_citations 0
+\use_geometry false
+\use_amsmath 1
+\cite_engine basic
+\use_bibtopic false
 \paperorientation portrait
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
 \defskip medskip
 \quotes_language english
-\quotes_times 2
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
+\tracking_changes false
+\output_changes true
+\end_header
 
-\layout Title
+\begin_body
 
+\begin_layout Title
 Network Performance Analysis --- Lab Sheet 1
-\layout Author
+\end_layout
 
+\begin_layout Author
 Neil Lawrence
-\layout Date
+\end_layout
 
-October 22, 2002
-\layout Section*
+\begin_layout Date
 
+\end_layout
+
+\begin_layout Section*
 Lab
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 All lab classes in this course are 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 In this Lab you will build a discrete time simulation of a queue in MATLAB.
  You will investigate the statistics associated with this simulation and
  compare them with analytically computed values.
  
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 Your simulation will consist of a discrete Markov model based on a birth
  death process.
  
-\begin_deeper 
-\layout LyX-Code
+\end_layout
 
+\begin_deeper
+\begin_layout LyX-Code
 % pseudo code
-\newline 
+\newline
 deltat = 0.01; 
-\newline 
+\newline
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Use discrete time-steps of 
 \begin_inset Formula $\Delta t=0.01$
-\end_inset 
+\end_inset
 
 .
-\layout Standard
-\align center 
+\end_layout
 
+\begin_layout Standard
+\align center
 \begin_inset Graphics
-	filename ./diagrams/mmOneBirthDeathProcess.eps
+	filename diagrams/mmOneBirthDeathProcess.eps
 	lyxscale 80
 	width 80text%
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 Code a simulation of the queue with a birth rate of 
 \begin_inset Formula $\lambda=1$
-\end_inset 
+\end_inset
 
  for all states 
 \begin_inset Formula $k=0,\dots,\infty$
-\end_inset 
+\end_inset
 
 , and a death rate of 
 \begin_inset Formula $\mu=2$
-\end_inset 
+\end_inset
 
  for the states
 \begin_inset Foot
-collapsed true
+status collapsed
 
-\layout Standard
-
-
+\begin_layout Standard
 \begin_inset Formula $\mu_{0}=0$
-\end_inset 
+\end_inset
 
  to prevent negative numbers in the queue.
-\end_inset 
+\end_layout
+
+\end_inset
 
  
 \begin_inset Formula $k=1,\dots,\infty$
-\end_inset 
+\end_inset
 
 , 
-\emph on 
+\emph on
 i.e.
 
-\emph default 
+\emph default
  at each time step, the probability of changing state by 
 \begin_inset Formula $+1$
-\end_inset 
+\end_inset
 
  is equal to 
 \begin_inset Formula $\lambda\Delta t$
-\end_inset 
+\end_inset
 
 , the probability of changing state by 
 \begin_inset Formula $-1$
-\end_inset 
+\end_inset
 
  is equal to 
 \begin_inset Formula $\mu\Delta t$
-\end_inset 
+\end_inset
 
  and the probability of no change of state is 
 \begin_inset Formula $1-(\lambda+\mu)\Delta t$
-\end_inset 
+\end_inset
 
 .
  Run your queueing model for 
 \begin_inset Formula $1000$
-\end_inset 
+\end_inset
 
  seconds (equivalent to 
 \begin_inset Formula $100,000$
-\end_inset 
+\end_inset
 
  iterations or time steps), store the state of the queue at each time step.
  This stored set of states can be viewed as a set of samples from the probabilis
 tic model that your queue represents.
  
-\end_deeper 
-\layout Standard
+\end_layout
 
-[Hint: Set up a loop
-\layout Enumerate
+\begin_layout Standard
+[
+\emph on
+While you wait for simulations to run you might like to start looking at
+ the questions below
+\emph default
+].
+\end_layout
 
+\end_deeper
+\begin_layout Enumerate
 Produce a normalized histogram of the samples.
  
 \begin_inset LatexCommand \label{histogram}
 
-\end_inset 
+\end_inset
 
 
-\begin_deeper 
-\layout Standard
+\end_layout
 
+\begin_deeper
+\begin_layout Standard
 [
-\emph on 
+\emph on
 Hint: A normalized histogram is one where the area of the bars adds up to
  one instead of the number of counts.
-\emph default 
+\emph default
 ] 
-\end_deeper 
-\layout Enumerate
+\end_layout
 
+\end_deeper
+\begin_layout Enumerate
 Compute the mean of the samples (the sample mean).
  
 \begin_inset LatexCommand \label{sampleMean}
 
-\end_inset 
+\end_inset
 
 
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 Use the detailed balance equations to derive the steady-state probabilities
  for each state in your queueing system.
  Comment on the similarities between the equations and those of the 
 \begin_inset Formula $M$
-\end_inset 
+\end_inset
 
 /
 \begin_inset Formula $M$
-\end_inset 
+\end_inset
 
 /
 \begin_inset Formula $1$
-\end_inset 
+\end_inset
 
  queue.
 \begin_inset LatexCommand \label{probabilities}
 
-\end_inset 
+\end_inset
 
 
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 Use these steady-state probabilities to derive the distribution's mean.
  
 \begin_inset LatexCommand \label{trueMean}
 
-\end_inset 
+\end_inset
 
 
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 Compare the computed probabilities from 
 \begin_inset LatexCommand \ref{probabilities}
 
-\end_inset 
+\end_inset
 
  to the normalized frequency counts from the histogram found in 
 \begin_inset LatexCommand \ref{histogram}
 
-\end_inset 
+\end_inset
 
  by plotting them together.
  Compare the mean of your samples from 
 \begin_inset LatexCommand \ref{sampleMean}
 
-\end_inset 
+\end_inset
 
  to the analytical mean computed in 
 \begin_inset LatexCommand \ref{trueMean}
 
-\end_inset 
+\end_inset
 
 .
  Comment on differences between the analytically computed values and those
@@ -247,65 +273,79 @@ Compare the computed probabilities from
  
 \begin_inset LatexCommand \label{comparison}
 
-\end_inset 
+\end_inset
 
 
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 Run your model again with 
 \begin_inset Formula $\lambda=1.9$
-\end_inset 
+\end_inset
 
 , keeping 
 \begin_inset Formula $\mu=2$
-\end_inset 
+\end_inset
 
 .
  Repeat steps 
 \begin_inset LatexCommand \ref{histogram}
 
-\end_inset 
+\end_inset
 
  to 
-\begin_inset LatexCommand \ref{comparison}
+\begin_inset LatexCommand \ref{sampleMean}
 
-\end_inset 
+\end_inset
 
  for these new values.
  Are the sample based estimates more or less accurate for this system? Comment
  on why they are more or less accurate.
  
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 In this lab sheet you have developed a simulation of a simple Markov birth
  death process.
  You have examined the statistics of your simulation and compared them to
  analytically computed values.
  
-\begin_deeper 
-\layout Standard
+\end_layout
 
+\begin_deeper
+\begin_layout Standard
 Real networks are more complex than the simple network we describe here.
  Many cannot be studied analytically and therefore their statistics must
  be determined through simulation.
  Summarize what you have learned from the simple example above about the
  possible dangers of such simulations.
  
-\end_deeper 
-\layout Standard
+\end_layout
 
+\end_deeper
+\begin_layout Standard
 Useful matlab commands.
-\layout LyX-Code
+\end_layout
 
+\begin_layout LyX-Code
 hist
-\newline 
+\newline
 bar
-\newline 
+\newline
 rand
-\layout LyX-Code
+\end_layout
 
-\layout LyX-Code
+\begin_layout LyX-Code
 
-\layout LyX-Code
+\end_layout
 
-\the_end
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\end_body
+\end_document

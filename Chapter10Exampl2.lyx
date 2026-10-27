@@ -1,0 +1,305 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language english
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\papersize Default
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Subsection*
+
+Answer
+\layout Subsubsection*
+
+Case 1) 
+\begin_inset Formula $k\leq m$
+\end_inset 
+
+
+\layout Standard
+
+When the system's state, 
+\begin_inset Formula $k$
+\end_inset 
+
+, is less than or equal to the number of servers we have boundary flow as
+ in Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:flowAtBoundaryMMma}
+
+\end_inset 
+
+,
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename ./diagrams/boundaryFlowMMinf.eps
+	width 40text%
+
+\end_inset 
+
+
+\layout Caption
+
+Flow rates at a boundary.
+\begin_inset LatexCommand \label{cap:flowAtBoundaryMMma}
+
+\end_inset 
+
+
+\end_inset 
+
+which leads to the following balance equation 
+\begin_inset Formula \[
+\lambda P\left(k-1\right)=k\mu P\left(k\right).\]
+
+\end_inset 
+
+As a result, for 
+\begin_inset Formula $k=0\dots m$
+\end_inset 
+
+ we may write
+\begin_inset Formula \begin{equation}
+P\left(k\right)=\frac{\lambda}{k\mu}P\left(k-1\right).\label{eq:PkForPartAExercise}\end{equation}
+
+\end_inset 
+
+
+\layout Subsubsection*
+
+Case 2) 
+\begin_inset Formula $m<k\leq n$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The detailed balance for this case is
+\begin_inset Formula \[
+P\left(k\right)=\frac{\lambda}{m\mu}P\left(k-1\right)\]
+
+\end_inset 
+
+
+\layout Standard
+
+When the system's state is greater than 
+\begin_inset Formula $m$
+\end_inset 
+
+, 
+\begin_inset Formula $k>m$
+\end_inset 
+
+ the flow at the boundary is as in Figure\SpecialChar ~
+
+\begin_inset LatexCommand \ref{cap:flowAtBoundaryMMmb}
+
+\end_inset 
+
+, the detailed balance equation is then
+\begin_inset Float figure
+wide false
+collapsed false
+
+\layout Standard
+\align center 
+
+\begin_inset Graphics
+	filename ./diagrams/boundaryFlowMMm.eps
+	width 40text%
+
+\end_inset 
+
+
+\layout Caption
+
+Flow rates at a boundary.
+\begin_inset LatexCommand \label{cap:flowAtBoundaryMMmb}
+
+\end_inset 
+
+
+\end_inset 
+
+which leads to 
+\begin_inset Formula \[
+\lambda P(k-1)=m\mu P\left(k\right)\]
+
+\end_inset 
+
+
+\layout Enumerate
+
+For each of the two cases outlined in the previous part write down the steady
+ state distribution as a function of 
+\begin_inset Formula $P\left(0\right)$
+\end_inset 
+
+, the probability of the system being empty.
+ 
+\begin_deeper 
+\layout Subsection*
+
+Answer 
+\layout Subsubsection*
+
+Case 1) 
+\begin_inset Formula $k\leq m$
+\end_inset 
+
+
+\layout Standard
+
+From Detailed Balance we may write
+\begin_inset Formula \[
+P\left(k\right)=\frac{\lambda}{k\mu}P\left(k-1\right).\]
+
+\end_inset 
+
+And defining 
+\begin_inset Formula \[
+a=\frac{\lambda}{\mu}\]
+
+\end_inset 
+
+which in turn gives 
+\begin_inset Formula \[
+\frac{\lambda}{k\mu}=\frac{a}{k}\]
+
+\end_inset 
+
+which we substitute back into the detailed balance obtaining
+\begin_inset Formula \[
+P\left(k\right)=\frac{a}{k}P\left(k-1\right)\]
+
+\end_inset 
+
+and as before
+\begin_inset Formula \begin{eqnarray}
+P\left(k\right)=\frac{a^{k}}{k!}P\left(0\right) & \textrm{for} & k\leq m\label{eq:probabilitiesExercise}\end{eqnarray}
+
+\end_inset 
+
+
+\layout Subsubsection*
+
+Case 2) 
+\begin_inset Formula $m<k\leq n$
+\end_inset 
+
+.
+ 
+\layout Standard
+
+The detailed balance for this case is
+\begin_inset Formula \[
+P\left(k\right)=\frac{\lambda}{m\mu}P\left(k-1\right)\]
+
+\end_inset 
+
+substituting for 
+\begin_inset Formula $a$
+\end_inset 
+
+ gives
+\begin_inset Formula \[
+P\left(k\right)=\frac{a}{m}P\left(k-1\right)\]
+
+\end_inset 
+
+
+\layout Standard
+
+leading to 
+\begin_inset Formula \[
+P\left(k\right)=\left(\frac{a}{m}\right)^{k-m}P\left(m\right).\]
+
+\end_inset 
+
+Finally we use (
+\begin_inset LatexCommand \ref{eq:probabilitiesExercise}
+
+\end_inset 
+
+) and substitute 
+\begin_inset Formula $k$
+\end_inset 
+
+ with 
+\begin_inset Formula $m$
+\end_inset 
+
+ to find 
+\begin_inset Formula $P\left(m\right)$
+\end_inset 
+
+ which leads to
+\begin_inset Formula \[
+P\left(m\right)=\frac{a^{m}}{m!}P\left(0\right)\]
+
+\end_inset 
+
+therefore 
+\begin_inset Formula \begin{eqnarray*}
+P\left(k\right)=\frac{a^{k}}{m^{k-m}m!}P\left(0\right) & \textrm{for} & k>m\end{eqnarray*}
+
+\end_inset 
+
+thus we can write
+\begin_inset Formula \[
+P\left(k\right)=\left\{ \begin{array}{cc}
+P\left(0\right)\frac{a^{k}}{k!}, & k\leq m\\
+P\left(0\right)\frac{a^{k}}{m^{k-m}m!} & k>m\end{array}\right.\]
+
+\end_inset 
+
+
+\end_deeper 
+\layout Enumerate
+
+Use the fact that the steady state distribution must be normalised to show
+ that 
+\begin_inset Formula \[
+P\left(0\right)=\left[\sum_{k=0}^{m}\frac{a^{k}}{k!}+\sum_{k=m+1}^{n}\frac{a^{k}}{m!m^{k-m}}\right]^{-1}\]
+
+\end_inset 
+
+where 
+\begin_inset Formula $a=\frac{\lambda}{\mu}$
+\end_inset 
+
+, 
+\begin_inset Formula $\lambda$
+\end_inset 
+
+ is the arrival rate and 
+\begin_inset Formula $\mu$
+\end_inset 
+
+ is the rate of the service time distribution.
+\the_end

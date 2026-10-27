@@ -1,0 +1,57 @@
+
+\documentclass[a4paper]{article}
+\usepackage{neilbib}
+\input{neilutils}
+\bibliographystyle{neilbib}
+\title{COM6130 --- Tutorial 1\\Probability Theory and Poisson Distributions}
+\author{Neil Lawrence}
+
+\date{October 4, 2001}
+\begin{document}
+
+\maketitle
+%
+\begin{enumerate}
+
+\item Leaves fall from a tree to the ground as a Poisson process at a rate of one every minute.
+
+\begin{enumerate}
+\item You arrive at 4:00 pm. During the next ten minutes, what is the probability that you see twelve leaves fall?
+
+\item What is the probability that you see $n$ leaves fall where $n$ goes from 0 to 20? Use MATLAB! Plot the results on a graph.
+
+\item Where does the curve peak? Compare the peak with the expected value, $\lambda t$.
+\end{enumerate}
+
+\item $X$ takes on four different values with differing probabilities, as shown in the following table.
+\begin{center}
+\begin{tabular}{c|cccc}
+$X$ & 1 & 2 & 3 & 4 \\
+\hline
+$P(X)$& 0.05 & 0.2 & 0.3 & 0.45
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+\item What is the mean of $X$? 
+\item What is the standard deviation of $X$?
+\item What is the expectation of $\ln X$?
+\end{enumerate}
+
+\item Show that
+\begin{equation}
+\expectation{n^2} = \lambda t e^{-\lambda t} \sum_{n=1}^\infty \frac{n (\lambda t)^{(n-1)}}{(n-1)!},
+\end{equation}
+where $\expectation{n^2}$ represents the expectation of $n^2$ under a Poisson distribution.
+
+Then by making the substitution $m = n - 1$ show that
+\begin{equation}
+\expectation{n^2} = (\lambda t)^2 + \lambda t.  
+\end{equation}
+
+What, therefore, is the variance of a Poisson distribution?
+
+\emph{Hint: There are similarities with the proof of the mean under a Poisson distribution we went through in the lecture.}
+\end{enumerate}
+
+\end{document}

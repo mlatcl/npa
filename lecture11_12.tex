@@ -1,0 +1,443 @@
+%% LyX 1.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[oneside,english]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\providecommand{\LyX}{L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ \theoremstyle{plain}    
+ \newtheorem{thm}{Theorem}[section]
+ \numberwithin{equation}{section} %% Comment out for sequentially-numbered
+ \numberwithin{figure}{section} %% Comment out for sequentially-numbered
+ \theoremstyle{definition}
+  \newtheorem{example}[thm]{Example}
+ \theoremstyle{definition}
+  \newtheorem*{example*}{Example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{epic,eepic,epsfig}
+\usepackage{babel}
+\makeatother
+\begin{document}
+
+\title{Lectures 11 \& 12 --- $M/M/m$ contd, $M/M/m/m$ and $M/G/1$}
+
+
+\author{Neil Lawrence}
+
+\maketitle
+\begin{example*}
+Consider the telephone trunking problem. A telephone exchange A is
+to server 10,000 subscribers in a nearby exchange as shown in Figure
+\ref{fig:exchange}. Suppose that during the busy hour, the subscribers
+generate a Poisson traffic with a rate of 10 calls per minute, which
+requires trunk lines to exchange B for an average holding time of
+3 minutes per call. Determine the number of trunk lines needed for
+a grade of service (probability of waiting) of 0.01.
+
+Average call rate is $\lambda =10$ calls/minute. Average holding
+time is $\tau =3$ minutes. Offered load $a=\lambda \tau $ is 30
+Erlangs.
+
+From the Erlang C curves it looks to be about 44.
+
+%
+\begin{figure}
+\begin{center}\input{./diagrams/exchange.eepic}\end{center}
+
+
+\caption{The telephone exchange.\label{fig:exchange}}
+\end{figure}
+
+\end{example*}
+\begin{example}
+A customer service centre has an average holding time for calls of
+8 minutes. In the busy hour, calls arrive at the centre at a rate
+of one very two minutes. Inter-arrival times and service times are
+exponentially distributed, how many personel are required to keep
+the probability of waiting at 0.1.
+
+From the plot 8.
+\end{example}
+
+\subsection*{Average number in System.}
+
+The average number of calls in the Erlang Delay System
+
+\[
+\bar{N}=\frac{\rho }{1-\rho }C(m,a)+m\rho \]
+ These terms represent the average queue length and the average number
+of busy lines. \[
+\bar{N}_{Q}=\frac{\rho }{1-\rho }C(m,a)\]
+ So the average waiting time is simply \[
+\bar{W}=\frac{\bar{N}_{Q}}{\lambda }=\frac{C(m,a)}{m\mu (1-\rho )}\]
+
+
+\begin{example*}
+So what is the average waiting time for the telephone service centre
+example? 
+\end{example*}
+$m=8$, $\mu =\frac{1}{8}$, $\rho =\frac{\lambda }{m\mu }=\frac{1}{2}$. 
+
+delay is $\frac{0.1}{8\frac{1}{8}(1-\frac{1}{2})}=0.2$ minutes, or
+12 seconds. 
+
+
+\section*{Erlang Loss $M$/$M$/$m$/$m$}
+
+%
+\begin{figure}
+\begin{center}\includegraphics[  scale=0.7,bb = 0 0 200 100, draft, type=eps]{./diagrams/erlangLoss.eps not found!}\end{center}
+
+
+\caption{Flow chart of the Erlang Loss System.}
+\end{figure}
+
+
+The Erlang loss system may be analysed as a birth-death process with
+birth rate \[
+\lambda _{k}=\left\{ \begin{array}{cc}
+ \lambda  & k=0,1,\dots ,m-1\\
+ 0 & k\geq m\end{array}
+\right.\]
+ and death rate \[
+\mu _{k}=\left\{ \begin{array}{cc}
+ k\mu  & k=0,1,\dots ,m\\
+ 0 & k>m\end{array}
+\right.\]
+ {[}\emph{Note: for the lower line, it doesn't matter what $\mu _{k}$
+is.}{]} 
+
+{\tiny }%
+\begin{figure}
+\begin{center}\input{./diagrams/erlangLoss.eepic}\end{center}
+
+
+\caption{Markov chain for the Erlang loss system, $M$/$M$/$m$/$m$}
+\end{figure}
+{\tiny \par}
+
+The offered load, $a=\frac{\lambda }{\mu }$, is again dimensionless
+with units of Erlangs. 
+
+
+\subsection*{Steady State Probabilities}
+
+Using the detailed balance equations we find \begin{eqnarray*}
+P(k) & = & \frac{\lambda _{k}}{\mu _{k}}P(k-1)\\
+ & = & \frac{\lambda }{k\mu }P(k-1)\\
+ & = & \frac{a}{k}P(k-1)
+\end{eqnarray*}
+ Which means that \begin{eqnarray*}
+P(k) & = & \prod _{n=1}^{k}\frac{a}{n}P(0)\\
+ & = & \frac{a^{k}}{k!}P(0)
+\end{eqnarray*}
+ The normalisation condition gives us \[
+P(0)\sum _{k=0}^{m}\frac{a^{k}}{k!}=1\]
+\[
+P(0)=\frac{1}{\sum _{k=0}^{m}\frac{a^{k}}{k!}}\]
+ which leads to the truncated Poisson distribution \[
+P(k)=\frac{\frac{a^{k}}{k!}}{\sum _{n=0}^{m}\frac{a^{n}}{n!}}\]
+ 
+
+
+\subsection*{Performance Measures for Erlang B}
+
+For the blocking probability and the Erlang B curves we are interested
+in the probability that when we arrive the queue is full \[
+B(m,a)=P(m)=\frac{\frac{a^{m}}{m!}}{\sum _{n=0}^{m}\frac{a^{n}}{n!}}\]
+ {\small }%
+\begin{figure}
+\begin{center}\input{./diagrams/erlangBCurves0to20.eepic}\end{center}
+
+
+\caption{Erlang B curves.}
+\end{figure}
+{\small \par}
+
+{\small }%
+\begin{figure}
+\begin{center}\input{./diagrams/erlangBCurves0to100.eepic}\end{center}
+
+
+\caption{Erlang B curves.}
+\end{figure}
+{\small \par}
+
+
+\subsection*{Carried Load}
+
+The carried load may be found as \[
+a^{\prime }=a(1-P(m))=a(1-B(m,a))\]
+ The carried load per line is the trunk occupancy, \[
+\rho =\frac{a^{\prime }}{m},\]
+ or the utilization factor --- it is a measure of efficiency. 
+
+\begin{example*}
+Load tripling.
+
+For a blocking probability of 0.01, what is the number of trunks needed
+for 6 erlangs of offered load? Answer 12
+
+For a blocking probability of 0.01, what is the number of trunks needed
+for 18 erlangs? Answer 30
+
+So load increase of 200 \textbackslash{}\% only lead to a trunk increase
+of 150 \textbackslash{}\%. Why? Let's look at the (approximate) utilization
+factors. 
+
+\begin{eqnarray*}
+\rho _{1} & = & \frac{6}{12}\left(1-0.01\right)=0.495\\
+\rho _{2} & = & \frac{18}{30}\left(1-0.01\right)=0.594
+\end{eqnarray*}
+ The 30 trunk system is thus more efficient.
+
+This explains why it is cheaper to call the U.S.A. than Italy.
+
+$M$/$G$/$1$ Queue
+\end{example*}
+
+\subsection*{Pollaczek-Khinchin formula}
+
+If service times are general we cannot use birth death processes to
+analyse the system. 
+
+Instead we derive the Pollaczek-Khinchin formula. This formula gives
+an expression for the expected waiting time in the queue. \begin{equation}
+\bar{W}=\frac{\lambda \left\langle X^{2}\right\rangle }{2(1-\rho )}\end{equation}
+ where $\bar{W}$ is expected waiting time, $\left\langle X^{2}\right\rangle =\left\langle X^{2}\right\rangle _{p(X)}$,
+$\rho =\lambda \bar{X}$ and $\bar{X}=\left\langle X\right\rangle _{p(X)}$. 
+
+
+\section*{Proof of Pollaczek-Khinchin Formula}
+
+We will utilise a new concept known as Mean Residual Service Time. 
+
+
+\subsection*{The Residual Service Time}
+
+Some definitions: 
+
+\begin{tabular}{rcl}
+ $W_{i}$&
+=&
+ Waiting time in queue of $i$th customer.\\
+ $R_{i}$&
+=&
+ `Residual service time' seen by the $i$th customer.\\
+ $X_{i}$&
+=&
+ Service time of the $i$th customer.\\
+ $k_{i}$&
+=&
+ Number of customers in the system when the $i$th customer arrives. \\
+\end{tabular}
+
+%
+\begin{figure}
+\begin{center}\input{diagrams/residualServiceOverview.eepic}\end{center}
+
+
+\caption{Graphical representation of residual service time.}
+\end{figure}
+
+
+From these definitions we may immediately write down \[
+W_{i}=R_{i}+\sum _{j=i-(k_{i}-1)}^{i-1}X_{j}\]
+ summing both sides across $i$ we obtain \[
+\sum _{i=1}^{I}W_{i}=\sum _{i=1}^{I}R_{i}+\sum _{i=1}^{I}\sum _{j=i-(k_{i}-1)}^{i-1}X_{j}\]
+ dividing through by $I$ gives us \[
+\sum _{i=1}^{I}\frac{W_{i}}{I}=\sum _{i=1}^{I}\frac{R_{i}}{I}+\sum _{i=1}^{I}\sum _{j=i-(k_{i}-1)}^{i-1}\frac{X_{j}}{I}\]
+ in the limit as $I\rightarrow \infty $ this becomes \[
+\lim _{I\rightarrow \infty }\sum _{i=1}^{I}\frac{W_{i}}{I}=\lim _{I\rightarrow \infty }\sum _{i=1}^{I}\frac{R_{i}}{I}+\lim _{I\rightarrow \infty }\sum _{i=1}^{I}\frac{(k_{i}-1)X_{i}}{I}\]
+ giving \[
+\left\langle W\right\rangle =\left\langle R\right\rangle +\left\langle \left(k-1\right)X\right\rangle \]
+ Now since the length of the queue as seen by the $i$th arrival is
+independent of the $i$th arrival's length this means $\expectation {(k-1)X}=\left\langle k-1\right\rangle \left\langle X\right\rangle $
+and since $(k-1)$ is the length of the queue we may write \[
+\bar{W}=\bar{R}+\bar{N}_{Q}\bar{X}\]
+ Using Little's theorem \[
+\bar{N}_{Q}=\lambda \bar{W}\]
+ we can obtain \[
+\bar{W}=\bar{R}+\lambda \bar{X}\bar{W}\]
+ and the fact that $\rho =\lambda \bar{X}$ gives us \[
+\bar{W}=\bar{R}+\rho \bar{W}\]
+ Leading to \begin{equation}
+\bar{W}=\frac{\bar{R}}{1-\rho }\label{eqn:arrivals}\end{equation}
+ It remains to calculate $\bar{R}$. 
+
+
+\subsection*{Residual Service Time from Departures Perspective}
+
+Plot of the residual service time over time. 
+
+%
+\begin{figure}
+
+\caption{Graphical computation of mean residual time. \centerline{\input{residualTime.eepic.tex}}}
+\end{figure}
+
+
+The time average of the mean residual service time can be calculated
+in terms of the area under the curve, $A(t)$ which in turn is the
+area under each of the triangles which may be written \[
+A(t)=\frac{1}{2}\sum _{i=1}^{M(t)}X_{i}^{2}\]
+ The average service time is the area divided by time, $t$. \begin{eqnarray}
+\frac{A(t)}{t} & = & \frac{M(t)}{t}\frac{A(t)}{M(t)}\\
+ & = & \frac{1}{2}\frac{M(t)}{t}\frac{\sum _{i=1}^{M(t)}X_{i}^{2}}{M(t)}
+\end{eqnarray}
+ As $t\rightarrow \infty $ we find $M(t)\rightarrow \infty $ and
+\[
+\bar{R}=\frac{1}{2}\lambda \left\langle X^{2}\right\rangle .\]
+ If we assume that time averages and ensemble averages are equal we
+may substitute back into \refeqn{eqn:arrivals} and obtain the Pollaczek-Khinchin
+formula \[
+\bar{W}=\frac{\lambda \left\langle X^{2}\right\rangle }{2(1-\rho )}\]
+
+
+This implies that the total waiting time is \[
+\bar{T}=\bar{X}+\frac{\lambda \left\langle X^{2}\right\rangle }{2(1-\rho )}\]
+ and through Little's formula we can obtain the expected queue length,
+$\bar{N}_{Q}$, and the expected number in the system, $\bar{N}$. 
+
+
+\subsection*{Residual Service Time from Departures Perspective}
+
+Plot of the residual service time over time. 
+
+%
+\begin{figure}
+\begin{center}\input{./diagrams/residualTime.eepic}\end{center}
+
+
+\caption{Graphical computation of mean residual time.}
+\end{figure}
+
+
+The time average of the mean residual service time can be calculated
+in terms of the area under the curve, $A(t)$ which in turn is the
+area under each of the triangles which may be written \[
+A(t)=\frac{1}{2}\sum _{i=1}^{M(t)}X_{i}^{2}\]
+ The average service time is the area divided by time, $t$. \begin{eqnarray}
+\frac{A(t)}{t} & = & \frac{M(t)}{t}\frac{A(t)}{M(t)}\\
+ & = & \frac{1}{2}\frac{M(t)}{t}\frac{\sum _{i=1}^{M(t)}X_{i}^{2}}{M(t)}
+\end{eqnarray}
+ As $t\rightarrow \infty $ we find $M(t)\rightarrow \infty $ and
+\[
+\bar{R}=\frac{1}{2}\lambda \left\langle X^{2}\right\rangle .\]
+ If we assume that time averages and ensemble averages are equal we
+may substitute back into eqn (\ref{eqn:arrivals}) and obtain the
+Pollaczek-Khinchin formula \[
+\bar{W}=\frac{\lambda \left\langle X^{2}\right\rangle }{2(1-\rho )}\]
+
+
+This implies that the total waiting time is \[
+\bar{T}=\bar{X}+\frac{\lambda \left\langle X^{2}\right\rangle }{2(1-\rho )}\]
+ and through Little's formula we can obtain the expected queue length,
+$\bar{N}_{Q}$, and the expected number in the system, $\bar{N}$. 
+
+\begin{example}
+Recall that for an $M$/$M$/$1$system the service times are exponentially
+distributed,
+
+\[
+P\left(X\right)=\mu \exp \left(-\mu X\right)\]
+this means that\[
+\bar{X}=\frac{1}{\mu }\]
+ then since the variance of the system is $\frac{1}{\mu ^{2}}$\[
+\left\langle X\right\rangle ^{2}=\frac{2}{\mu ^{2}}\]
+Substituting into the Pollaczek-Khinchin formula we obtain\\
+\[
+\bar{W}=\frac{\rho }{\mu \left(1-\rho \right)}\]
+
+\end{example}
+\begin{example*}
+Deterministic service times --- each service takes the same amount
+of time\[
+P\left(X\right)=\delta \left(X-\frac{1}{\mu }\right)\]
+where $\delta \left(\cdot \right)$is the Dirac delta function. For
+this system \[
+\left\langle X\right\rangle =\frac{1}{\mu }\]
+and \[
+\left\langle X^{2}\right\rangle =\frac{1}{\mu ^{2}}\]
+\emph{i.e.} the variance is zero as we would expect. Substituting
+into the Pollaczek-Khinchin formula we obtain\[
+\bar{W}=\frac{\rho }{2\mu \left(1-\rho \right)}\]
+
+\end{example*}
+In fact we may derive the full range of results for these distributions. 
+
+\begin{tabular}{c|c|c|c}
+ Expected value &
+ General &
+ Exponential &
+ Constant\\
+\hline
+$\bar{W}$&
+ $\frac{\lambda }{2(1-\rho )}\expectation {X^{2}}$&
+ $\frac{\rho }{\mu (1-\rho )}$&
+ $\frac{\rho }{2\mu (1-\rho )}$\\
+ $\bar{T}=\bar{W}+\frac{1}{\mu }$&
+ $\frac{\lambda }{2(1-\rho )}\expectation {X^{2}}+\frac{1}{\mu }$&
+ $\frac{1}{\mu (1-\rho )}$&
+ $\frac{2-\rho }{2\mu (1-\rho )}$\\
+ $\bar{N_{Q}}=\lambda \bar{W}$&
+ $\frac{\lambda ^{2}}{2(1-\rho )}\expectation {X^{2}}$&
+$\frac{\rho ^{2}}{(1-\rho )}$&
+ $\frac{\rho ^{2}}{2(1-\rho )}$\\
+ $\bar{N}=\lambda \bar{W}+\rho =\lambda \bar{T}$&
+ $\frac{\lambda ^{2}}{2(1-\rho )}\expectation {X^{2}}+\rho $&
+ $\frac{\rho }{1-\rho }$&
+ $\frac{\rho (2-\rho )}{2(1-\rho )}$\\
+\end{tabular}
+
+\begin{example}
+Automatic Repeat Request system --- ARQ System. 
+
+Assume eacdh packet takes 1 millisecond to be transmitted.
+
+The system waits $n-1$ milliseconds for an acknowledgement. If there
+is no acknowledgement the system retransmits.
+
+The probability of an error in a packet is taken to be $p$. Errors
+are taken to be independent.\\
+ Assume that packets arrive as a Poisson process with rate $\lambda $.
+\\
+ Time interval between transmission and re-transmission is $1+kn$
+time units with probability $\left(1-p\right)p^{k}$
+
+The probability of the service time is\[
+P\left(X=1+kn\right)=\left(1-p\right)p^{k}\]
+ The expected service time is therefore\begin{eqnarray*}
+\left\langle X\right\rangle  & = & \sum _{k=0}^{\infty }\left(1+kn\right)\left(1-p\right)p^{k}\\
+ & = & \left(1-p\right)\left(\sum _{k=0}^{\infty }p^{k}+n\sum _{k=0}^{\infty }kp^{k}\right)\\
+ & = & 1+\frac{np}{1-p}
+\end{eqnarray*}
+ since $\sum _{k=0}^{\infty }p^{k}=\frac{1}{1-p}$ and $\sum _{k=0}^{\infty }kp^{k}=\frac{p}{\left(1-p\right)^{2}}$.
+Thus we can write that\[
+\rho =\frac{\lambda \left(1-p\right)}{1-p+np}\]
+and thus \[
+1-\rho =\frac{1-\lambda -p\left(n-1-\lambda \right)}{1-p+np}\]
+The second moment of the service time is\begin{eqnarray*}
+\left\langle X^{2}\right\rangle  & = & \sum _{k=0}^{\infty }\left(1+kn\right)^{2}\left(1-p\right)p^{k}\\
+ & = & \left(1-p\right)\left(\sum _{k=0}^{\infty }p^{k}+2n\sum _{k=0}^{\infty }kp^{k}+n^{2}\sum _{k=0}^{\infty }k^{2}p^{k}\right)\\
+ & = & 1+\frac{2np}{1-p}+\frac{n^{2}\left(p+p^{2}\right)}{\left(1-p\right)^{2}}
+\end{eqnarray*}
+since \[
+\sum _{k=0}^{\infty }k^{2}p^{k}=\frac{p+p^{2}}{\left(1-p\right)^{3}}\]
+ Substitiuting into the P-K formula gives a very ugly formula!%
+\begin{figure}
+\begin{center}\input{./diagrams/ARQ.eepic}\end{center}
+
+
+\caption{The ARQ System.}
+\end{figure}
+\end{example}
+
+\end{document}

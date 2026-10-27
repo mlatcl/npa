@@ -1,0 +1,30 @@
+\begin{thebibliography}{4}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{{\tt #1}}\fi
+
+\bibitem[Bertsekas and Gallager(1992)]{Bertsekas:data92}
+D.~P. Bertsekas and R.~G. Gallager.
+\newblock {\em Data Networks}.
+\newblock Prentice-Hall, Upper Saddle River, NJ, second edition, 1992.
+\newblock ISBN 0-13-200-916-1.
+
+\bibitem[Chan(2000)]{Chan:performance00}
+W.-C. Chan.
+\newblock {\em Performance Analysis of Telecommunications and Local Area
+  Networks}.
+\newblock Kluwer, Dordrecht, The Netherlands, 2000.
+\newblock ISBN 0-7923-7701-X.
+
+\bibitem[Erlang(1909)]{Erlang:theory09}
+A.~K. Erlang.
+\newblock The theory of probabilities and telephone conversations.
+\newblock {\em Nyt Tidsskrift for Matematik B}, 20, 1909.
+
+\bibitem[Tanenbaum(2003)]{Tanenbaum:computer96}
+A.~S. Tanenbaum.
+\newblock {\em Computer Networks}.
+\newblock Prentice-Hall, Upper Saddle River, NJ, fourth edition, 2003.
+\newblock ISBN 0-13-038488-7.
+
+\end{thebibliography}

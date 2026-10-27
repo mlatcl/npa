@@ -1,82 +1,92 @@
-#LyX 1.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 221
+#LyX 1.4.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 245
+\begin_document
+\begin_header
 \textclass article
 \language english
 \inputencoding auto
 \fontscheme default
 \graphics default
 \paperfontsize default
-\spacing single 
+\spacing single
 \papersize a4paper
-\paperpackage a4
-\use_geometry 0
-\use_amsmath 0
-\use_natbib 0
-\use_numerical_citations 0
+\use_geometry false
+\use_amsmath 1
+\cite_engine basic
+\use_bibtopic false
 \paperorientation portrait
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
 \defskip medskip
 \quotes_language english
-\quotes_times 2
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
+\tracking_changes false
+\output_changes true
+\end_header
 
-\layout Title
+\begin_body
 
-COM3270/6131 Tutorial 1
-\layout Author
+\begin_layout Title
+COM4290/6131 Tutorial 1
+\end_layout
 
+\begin_layout Author
 Neil D.
  Lawrence
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 Leaves fall from a tree to the ground as a Poisson process at a rate of
  one every minute.
  
-\begin_deeper 
-\layout Enumerate
+\end_layout
 
+\begin_deeper
+\begin_layout Enumerate
 You arrive at 4:00 pm.
  During the next ten minutes, what is the probability that you see twelve
  leaves fall? 
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 What is the probability that you see 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
  leaves fall where 
 \begin_inset Formula $n$
-\end_inset 
+\end_inset
 
  goes from 0 to 20? Use MATLAB! Plot the results on a graph.
  
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 Where does the curve peak? Compare the peak with the expected value, 
 \begin_inset Formula $\lambda t$
-\end_inset 
+\end_inset
 
 .
  
-\end_deeper 
-\layout Enumerate
+\end_layout
 
-
+\end_deeper
+\begin_layout Enumerate
 \begin_inset Formula $X$
-\end_inset 
+\end_inset
 
  takes on four different values with differing probabilities, as shown in
  the following table.
  
-\begin_deeper 
-\layout Standard
-\align center 
+\end_layout
 
-\begin_inset  Tabular
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="5">
 <features>
 <column alignment="center" valignment="top" rightline="true" width="0pt">
@@ -88,199 +98,216 @@ Where does the curve peak? Compare the peak with the expected value,
 <cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
  
 \begin_inset Formula $X$
-\end_inset 
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
  1 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
  2 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
  3 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
  4 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
-
+\begin_layout Standard
 \begin_inset Formula $P(X)$
-\end_inset 
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
  0.05 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
  0.2 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
  0.3 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
  0.45 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 </lyxtabular>
 
-\end_inset 
+\end_inset
 
 
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 What is the mean of 
 \begin_inset Formula $X$
-\end_inset 
+\end_inset
 
 ? 
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 What is the standard deviation of 
 \begin_inset Formula $X$
-\end_inset 
+\end_inset
 
 ? 
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 What is the expectation of 
 \begin_inset Formula $\ln X$
-\end_inset 
+\end_inset
 
 ? 
-\end_deeper 
-\layout Enumerate
+\end_layout
 
+\end_deeper
+\begin_layout Enumerate
 Show that 
 \begin_inset Formula \begin{equation}
 \left\langle n^{2}\right\rangle =\lambda te^{-\lambda t}\sum_{n=1}^{\infty}\frac{n(\lambda t)^{(n-1)}}{(n-1)!},\end{equation}
 
-\end_inset 
+\end_inset
 
  where 
 \begin_inset Formula $\left\langle n^{2}\right\rangle $
-\end_inset 
+\end_inset
 
  represents the expectation of 
 \begin_inset Formula $n^{2}$
-\end_inset 
+\end_inset
 
  under a Poisson distribution.
  
-\begin_deeper 
-\layout Standard
+\end_layout
 
+\begin_deeper
+\begin_layout Standard
 Then by making the substitution 
 \begin_inset Formula $m=n-1$
-\end_inset 
+\end_inset
 
  show that 
 \begin_inset Formula \begin{equation}
 \left\langle n^{2}\right\rangle =(\lambda t)^{2}+\lambda t.\end{equation}
 
-\end_inset 
+\end_inset
 
 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 What, therefore, is the variance of a Poisson distribution? 
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 
-\emph on 
+\emph on
 Hint: There are similarities with the proof of the mean under a Poisson
  distribution we went through in the lecture.
-\end_deeper 
-\layout Enumerate
+\end_layout
 
+\end_deeper
+\begin_layout Enumerate
 
-\series bold 
-
+\series bold
 \begin_inset LatexCommand \label{enu:gaussianQuestion}
 
-\end_inset 
+\end_inset
 
 This question will require you to use MATLAB.
 
-\series default 
+\series default
  Use the function 
-\family typewriter 
+\family typewriter
 randn
-\family default 
+\family default
  to take a set of 
 \begin_inset Formula $N$
-\end_inset 
+\end_inset
 
  samples, 
 \begin_inset Formula $\left\{ x_{n}\right\} _{n=1}^{N}$
-\end_inset 
+\end_inset
 
  from a Gaussian with mean 0 and variance 1.
  For values of 
 \begin_inset Formula $N$
-\end_inset 
+\end_inset
 
  given in the table below, compute the sample mean and the sample variance.
  
-\begin_deeper 
-\layout Standard
-\align center 
+\end_layout
 
-\begin_inset  Tabular
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="7">
 <features>
 <column alignment="center" valignment="top" leftline="true" width="0">
@@ -294,264 +321,311 @@ randn
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
-
+\begin_layout Standard
 \begin_inset Formula $N$
-\end_inset 
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 10
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 50
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 100
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 200
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 500
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 1000
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
-
+\begin_layout Standard
 \begin_inset Formula $\frac{1}{N}\sum_{n=1}^{N}x_{n}$
-\end_inset 
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true" bottomline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
-
+\begin_layout Standard
 \begin_inset Formula $\frac{1}{N}\sum_{n=1}^{N}x_{n}^{2}$
-\end_inset 
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 </lyxtabular>
 
-\end_inset 
+\end_inset
 
 
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 What is the true 
-\emph on 
+\emph on
 mean
-\emph default 
+\emph default
  of the distribution you've sampled from?
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 For each point, plot the squared difference between the 
-\emph on 
+\emph on
 sample mean
-\emph default 
+\emph default
  and the true 
-\emph on 
+\emph on
 distribution mean
-\emph default 
+\emph default
  against the values of 
 \begin_inset Formula $N$
-\end_inset 
+\end_inset
 
  given.
  What sort of trend do they give? Is that trend consistent? When, typically,
  are the sample based estimates of the mean worst?
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 What is the true 
-\emph on 
+\emph on
 second moment
-\emph default 
+\emph default
  of the distribution you've sampled form?
-\layout Enumerate
+\end_layout
 
+\begin_layout Enumerate
 For each point, plot the squared difference between the 
-\emph on 
+\emph on
 sample based estimate
-\emph default 
+\emph default
  of the second moment and the 
-\emph on 
+\emph on
 true
-\emph default 
+\emph default
  second moment of the distribution.
  Is the trend similar to that of the sample based mean? Are the estimates
  of the second moment typically better or worse? Why do you think this is
  the case?
-\layout Standard
+\end_layout
 
+\begin_layout Standard
 
-\emph on 
+\emph on
 Hint: You may want to summarise the quality of your results by repeating
  the experiment multiple times and looking at the mean and standard deviations.
  You might find the MATLAB functions 
-\family typewriter 
-\emph default 
+\family typewriter
+\emph default
 plot
-\family default 
-\emph on 
+\family default
+\emph on
  and errorbar useful when doing this.
-\end_deeper 
-\layout Enumerate
+\end_layout
 
+\end_deeper
+\begin_layout Enumerate
+Compute the mean and variance of the exponential distribution,
+\begin_inset Formula \[
+p\left(x\right)=\lambda\exp\left(-\lambda x\right),\textrm{\, where\,$0>x>\infty$}.\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
 Download the code for sampling from an exponential distribution from 
 \begin_inset LatexCommand \url{http://www.dcs.shef.ac.uk/~neil/campus_only/com6131/}
 
-\end_inset 
+\end_inset
 
 .
- Repeat the experiments in Quesion\SpecialChar ~
+ Repeat the experiments in Quesion\InsetSpace ~
 
 \begin_inset LatexCommand \ref{enu:gaussianQuestion}
 
-\end_inset 
+\end_inset
 
  using an exponential distribution with a rate parameter of 
 \begin_inset Formula $\lambda=3$
-\end_inset 
+\end_inset
 
 .
-\begin_deeper 
-\layout Standard
-\align center 
+\end_layout
 
-\begin_inset  Tabular
+\begin_deeper
+\begin_layout Standard
+\align center
+\begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="7">
 <features>
 <column alignment="center" valignment="top" leftline="true" width="0">
@@ -565,189 +639,212 @@ Download the code for sampling from an exponential distribution from
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
-
+\begin_layout Standard
 \begin_inset Formula $N$
-\end_inset 
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 10
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 50
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 100
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 200
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 500
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
+\begin_layout Standard
 1000
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
-
+\begin_layout Standard
 \begin_inset Formula $\frac{1}{N}\sum_{n=1}^{N}x_{n}$
-\end_inset 
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 <row topline="true" bottomline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
-
-
+\begin_layout Standard
 \begin_inset Formula $\frac{1}{N}\sum_{n=1}^{N}x_{n}^{2}$
-\end_inset 
+\end_inset
 
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
-\layout Standard
+\begin_layout Standard
 
-\end_inset 
+\end_layout
+
+\end_inset
 </cell>
 </row>
 </lyxtabular>
 
-\end_inset 
+\end_inset
 
 
-\end_deeper 
-\layout Enumerate
+\end_layout
 
-Compute the mean and variance of the exponential distribution,
-\begin_inset Formula \[
-p\left(x\right)=\lambda\exp\left(-\lambda x\right),\textrm{\, where\,$0>x>\infty$}.\]
-
-\end_inset 
-
-
-\the_end
+\end_body
+\end_document
