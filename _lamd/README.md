@@ -58,6 +58,16 @@ Historic EPS/PDF figures used by converted lectures are rasterized to
 can use the same route. Generated plots from central snippets write under
 `slides/diagrams/ml/` and `slides/diagrams/mlai/` at compile time.
 
+## Notebook smoke tests
+
+From the repository root, after `pip install -r requirements-smoke.txt`:
+
+```bash
+python scripts/smoke_notebooks.py
+```
+
+See the root `README.md` for the subset flags and the GitHub Actions workflow.
+
 Compile from `_lamd/`:
 
 ```bash

@@ -8,6 +8,20 @@ This repository preserves the lecturer sources, MATLAB and ns-2 labs, past paper
 
 Lecture notes and slides are being converted to [LaMD](https://github.com/lawrennd/lamd). Converted sources live in `_lamd/`; NPA-specific snippets stay in `snippets/_npa/` in this repository until they are promoted to the central snippets repo. See `_lamd/README.md` for the conversion map. MATLAB helpers are rewritten in `python/npa_plots.py`.
 
+## Notebook smoke tests
+
+Execute numbered lecture and lab notebooks under `_notebooks/` with CI-safe patches (Agg backend, mocked stdin, no widget hangs). The runner is the shared mlatcl harness (`scripts/smoke_notebooks.py`); course defaults live in `scripts/smoke.yml`.
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-smoke.txt
+python scripts/smoke_notebooks.py
+# subset: python scripts/smoke_notebooks.py --only 01 03
+```
+
+GitHub Actions runs the same harness on pull requests that touch notebooks, `python/`, or the smoke files, weekly on a schedule, and via **workflow_dispatch** (optional `--only` input). Results land in `_notebooks/test-results/` (gitignored) and as a workflow artifact.
+
 ## Layout
 
 | Path | What it is |

@@ -1,0 +1,11 @@
+# Course-specific notebook smoke defaults (scripts/smoke_notebooks.py).
+# skip: filename prefixes to omit. plot_dirs: extra dirs created under _notebooks.
+# timeout_by_prefix: optional per-prefix cell timeouts in seconds.
+skip: []
+plot_dirs:
+  - "./npa"
+  - "../slides/diagrams/ml"
+  - "../slides/diagrams/mlai"
+  - "../slides/diagrams/npa"
+timeout: 900
+timeout_by_prefix: {}
