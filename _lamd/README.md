@@ -31,7 +31,9 @@ and are **not** pulled into this course. Use the compact review instead.
 | `poisson-processes.md` | Ch 4 | converted |
 | `birth-death-mm1.md` | Ch 5–6 | converted |
 | `littles-formula.md` | Ch 7 | converted |
-| `markov-queues-erlang.md` | Ch 8–10 | not yet |
+| `other-markov-queues.md` | Ch 8 | converted |
+| `erlang-delay.md` | Ch 9 | converted |
+| `erlang-loss.md` | Ch 10 | converted |
 | `mg1.md` | Ch 11 | not yet |
 | `networks-of-queues.md` | Ch 12 | not yet |
 | `aloha.md` | Ch 13 | not yet |

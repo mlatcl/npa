@@ -4,3 +4,6 @@ probability-review
 poisson-processes
 birth-death-mm1
 littles-formula
+other-markov-queues
+erlang-delay
+erlang-loss
