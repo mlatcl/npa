@@ -10,7 +10,7 @@ layout: lecture
 room:
 venue:
 talktheme: white
-talkcss: mlatcl.css
+talkcss: sheffield-dcs.css
 talkfontsize: xs
 bibdir: $HOME/lawrennd/bibliography
 people: ../_people/people.yml
