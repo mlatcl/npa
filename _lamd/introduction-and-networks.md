@@ -1,5 +1,6 @@
 ---
 week: 1
+session: 1
 featured_image: slides/diagrams/npa/1975_net_map.png
 title: Introduction and Networks
 abstract: >
@@ -15,6 +16,8 @@ date: 2006-09-25
 \include{snippets/_npa/includes/database-bottleneck-example.md}
 
 \addreading{@Bertsekas:data92}{Chapter 1, background and review}
+\addreading{@Tanenbaum:computer96}{Introductory computer networks; little queueing}
+\addreading{@Chan:performance00}{Alternative text for details on queues}
 
 \thanks
 

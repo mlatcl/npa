@@ -1,5 +1,6 @@
 ---
 title: "Tutorial 2: $M/M/1$ Queue and Little's Formula"
+week: 5
 practical: 2
 layout: practical
 assignment: True

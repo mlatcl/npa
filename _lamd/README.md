@@ -24,21 +24,27 @@ and are **not** pulled into this course. Use the compact review instead.
 
 ## Lecture files
 
-| `_lamd/*.md` | Notes chapters | Status |
-| --- | --- | --- |
-| `introduction-and-networks.md` | Ch 1–2 | converted |
-| `probability-review.md` | Ch 3 | converted |
-| `poisson-processes.md` | Ch 4 | converted |
-| `birth-death-mm1.md` | Ch 5–6 | converted |
-| `littles-formula.md` | Ch 7 | converted |
-| `markov-queues-erlang.md` | Ch 8–10 | not yet |
-| `mg1.md` | Ch 11 | not yet |
-| `networks-of-queues.md` | Ch 12 | not yet |
-| `aloha.md` | Ch 13 | not yet |
-| Lab 1 M/M/1 simulation (practical) | `labSheetOne.lyx` | not yet; Python helper `simulate_mm1` exists |
-| Lab 2 ns-2 (practical) | `labSheetTwo.lyx` | deferred (Python stand-in last) |
-| Tutorials 1–3 | `tutorialOne/Two/Three.lyx` | converted as `tutorial-{1,2,3}-practical.md`; cite keys `npa-tutorial1`–`3` |
-| Past papers | `exam2004.lyx`, `exam2005.lyx`, `2002exam.lyx` | not yet |
+| `_lamd/*.md` | Notes chapters | Week–session (2006) | Status |
+| --- | --- | --- | --- |
+| `introduction-and-networks.md` | Ch 1–2 | 1–1 (Mon 25/9, lecture 1) | converted |
+| `probability-review.md` | Ch 3 | 1–2 (Mon 25/9, lecture 2) | converted |
+| `poisson-processes.md` | Ch 4 | 1–3 (Tue 26/9, lecture 3) | converted |
+| `birth-death-mm1.md` | Ch 5–6 | 2–1 (Mon 2/10, lectures 4–5) | converted |
+| `littles-formula.md` | Ch 7 | 2–2 (Tue 3/10, lecture 6) | converted |
+| `other-markov-queues.md` | Ch 8 | 4–1 (Mon 16/10, lecture 7) | converted |
+| `erlang-delay.md` | Ch 9 | 4–2 (Mon 16/10, lecture 8) | converted |
+| `erlang-loss.md` | Ch 10 | 5–1 (Mon 23/10, lectures 9–10) | converted |
+| `mg1.md` | Ch 11 | 6–1 (Mon 30/10, lectures 11–12) | converted |
+| `mg1-arq.md` | Ch 11 (ARQ) | 6–2 (Tue 31/10, lecture 13) | converted |
+| `networks-of-queues.md` | Ch 12 | 7–1 (Mon 6/11, lectures 14–15) | converted |
+| `aloha.md` | Ch 13 | 8–2 (Tue 14/11, lecture 16) | converted |
+| Lab 1 M/M/1 simulation (practical) | `labSheetOne.lyx` | week 3 | converted as `lab-1-practical.md`; Python `simulate_mm1` |
+| Lab 2 ns-2 (practical) | `labSheetTwo.lyx` | week 8 | converted as `lab-2-practical.md`; Tcl remains historic |
+| Tutorials 1–3 | `tutorialOne/Two/Three.lyx` | weeks 3, 5, 7 | converted as `tutorial-{1,2,3}-practical.md`; cite keys `npa-tutorial1`–`3` |
+| Past papers | `exam2004.lyx`, `exam2005.lyx`, `2002exam.lyx` | — | converted as question-only practicals; marking schemes stay in LyX |
+| Course information | `lectureNotes.lyx` front matter, `readingList.lyx` | — | converted as `course-info-practical.md` (2006--07 rooms, calendar, reading list) |
+
+Canonical `lectureNotes.lyx` (Ch 1--13 plus schedule) and the 2006 labs, tutorials, and three complete exam papers are converted. Remaining LyX files are archive only: older per-lecture notes and slides, `studentNotes.lyx` (2004--05 subset), `courseWork.lyx` (2002 Lab 1 as 30\% coursework; noted on Lab 1), `labsheet.lyx` (Linux boot plus Lab 1; noted on Lab 1), empty `erlangCHandout.lyx`, dummy `lyxexam.lyx` / `testLect.lyx`, incomplete `exam.lyx`, instructor-scheme `extraFile.lyx` and `Chapter10Exampl2.lyx`, and `lectureSlides.lyx` (slides now come from `maketalk`).
 
 ## MATLAB → Python
 

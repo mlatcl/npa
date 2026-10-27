@@ -12,5 +12,6 @@ lecture snippets via `_npa/includes/npa-python-setup.md`.
 | `demo/simulateQueue.m` | `npa_plots.simulate_mm1` |
 | occupancy histograms | `npa_plots.plot_mm1_occupancy` |
 
-The ns-2 labs (`labs/ns2/mm1.tcl`, `multipath.tcl`) stay as historical listings
-until a Python packet-level stand-in is added.
+Lab 1 uses `simulate_mm1`. Lab 2 still runs the historic ns-2 Tcl
+(`labs/ns2/mm1.tcl`, `multipath.tcl`); occupancy *analysis* is Python.
+A packet-level Python stand-in is not added yet.

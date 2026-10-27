@@ -1,5 +1,6 @@
 ---
 week: 1
+session: 2
 featured_image: slides/diagrams/npa/pdfOfHeight.png
 title: Probability Review
 abstract: >
