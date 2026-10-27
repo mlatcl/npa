@@ -1,0 +1,22 @@
+# Runtime + execution harness for lecture notebook smoke tests.
+# Install: pip install -r requirements-smoke.txt
+
+# Notebook execution
+nbclient>=0.10,<1
+nbformat>=5.10,<6
+ipykernel>=6.29
+ipywidgets>=8.1
+ipython>=8.0
+
+# Teaching stack (probability-review uses mlai.plot)
+git+https://github.com/lawrennd/mlai.git#egg=mlai
+git+https://github.com/lawrennd/ods.git#egg=pods
+git+https://github.com/lawrennd/notutils.git#egg=notutils
+
+# Used by lecture and lab notebooks (npa_plots lives in python/)
+matplotlib>=3.8
+numpy>=1.26
+scipy>=1.11
+pandas>=2.0
+Pillow>=10.0
+PyYAML>=6.0
