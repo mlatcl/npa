@@ -6,6 +6,8 @@ Module codes over that period were COM 6131 (MSc) with COM 3270 and later COM 42
 
 This repository preserves the lecturer sources, MATLAB and ns-2 labs, past papers, and the student-facing website as last used in 2005–2006.
 
+Lecture notes and slides are being converted to [LaMD](https://github.com/lawrennd/lamd). Converted sources live in `_lamd/`; NPA-specific snippets stay in `snippets/_npa/` in this repository until they are promoted to the central snippets repo. See `_lamd/README.md` for the conversion map. MATLAB helpers are rewritten in `python/npa_plots.py`.
+
 ## Layout
 
 | Path | What it is |

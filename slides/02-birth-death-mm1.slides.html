@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="dcterms.date" content="2006-10-02">
+  <title>Birth-Death Processes and the M/M/1 Queue</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@3.9.2/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      /* scrollable slides: start content at top, left-align text */
+      .reveal section.scrollable {
+          overflow-y: auto !important;
+          height: 100% !important;
+          top: 0 !important;
+          text-align: left;
+      }
+      .reveal section.scrollable > h2:first-child,
+      .reveal section.scrollable > h2.scrollable:first-child {
+          margin-top: 0.2em;
+      }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@3.9.2/css/theme/white.css" id="theme">
+  <link rel="stylesheet" href="mlatcl.css"/>
+  <link rel="stylesheet" href="slide-fonts.css"/>
+  <link rel="stylesheet" href="slide-fontsize-xs.css"/>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'https://unpkg.com/reveal.js@3.9.2/css/print/pdf.css' : 'https://unpkg.com/reveal.js@3.9.2/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="https://unpkg.com/reveal.js@3.9.2/lib/js/html5shiv.js"></script>
+  <![endif]-->
+   <!-- Mermaid -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_SVG" type="text/javascript"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    TeX: {
+         extensions: ["color.js"]
+      }
+    });
+  </script>
+  <script src="https://inverseprobability.com/assets/js/figure-animate.js"></script>
+  <script>
+  /* Map range slider values (min..max, often 0-based in LaMD content) to the
+     1-based frame index expected by figure-animate.js showDivs(). */
+  function lamdFrameIndex(group) {
+    var range = document.getElementById("range-" + group);
+    var val = parseInt(range.value, 10);
+    var min = parseInt(range.min, 10);
+    return val - min + 1;
+  }
+  function lamdSetDivs(group) {
+    if (typeof showDivs !== "function") return;
+    slideIndex = lamdFrameIndex(group);
+    showDivs(slideIndex, group);
+  }
+  function lamdPlusDivs(n, group) {
+    if (typeof showDivs !== "function") return;
+    var range = document.getElementById("range-" + group);
+    var min = parseInt(range.min, 10);
+    var max = parseInt(range.max, 10);
+    var val = parseInt(range.value, 10) + n;
+    if (val < min) val = max;
+    if (val > max) val = min;
+    range.value = val;
+    range.setAttribute("aria-valuenow", val);
+    slideIndex = val - min + 1;
+    showDivs(slideIndex, group);
+  }
+  </script>
+  <script>
+  /* Theme chrome (logos) sits on Reveal's full-viewport .slide-background,
+     which does not receive the deck transform. Sync --slide-scale so CSS can
+     size that chrome with the slides (see ai-cam.css / mlatcl.css / trent.css). */
+  (function () {
+    var bound = false;
+    function syncSlideScale() {
+      if (typeof Reveal === "undefined" || typeof Reveal.getScale !== "function") return false;
+      try {
+        var s = Reveal.getScale();
+        if (!s || !isFinite(s)) return false;
+        document.documentElement.style.setProperty("--slide-scale", String(s));
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+    function bind() {
+      if (bound) return typeof Reveal !== "undefined";
+      if (typeof Reveal === "undefined" || typeof Reveal.addEventListener !== "function") return false;
+      Reveal.addEventListener("ready", syncSlideScale);
+      window.addEventListener("resize", function () {
+        setTimeout(syncSlideScale, 0);
+        setTimeout(syncSlideScale, 50);
+      });
+      bound = true;
+      return true;
+    }
+    var n = 0;
+    var t = setInterval(function () {
+      bind();
+      /* Keep polling until getScale() works — Reveal exists before initialize. */
+      if (syncSlideScale() || ++n > 200) clearInterval(t);
+    }, 50);
+  })();
+  </script>
+      
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Birth-Death Processes and the M/M/1 Queue</h1>
+  <p class="date" style="text-align:center"><time>2006-10-02</time></p>
+</section>
+
+<section class="slide level2">
+
+<!-- CIP-0012 Track A: no-op outside HTML (overridden in talk-macros-html.gpp). -->
+<!-- Class-test timer: no-op outside slides HTML (overridden in talk-macros-slides-html.gpp). -->
+<!-- CIP-0016: mdpp expands \diagramcredit before gpp; leftover calls are empty. -->
+<!-- Do not edit this file locally. -->
+<!---->
+<!-- CIP-0012 Track A: content script load. Once-guard with alphanumeric
+     names stays in the surrounding ifndef wrapper (GPP ifndef limitation). -->
+<!-- Do not edit this file locally. -->
+<!-- The last names to be defined. Should be defined entirely in terms of macros from above-->
+<!-- SECTION Markov Chains -->
+</section>
+<section id="markov-chains" class="slide level2">
+<h2>Markov Chains</h2>
+<ul>
+<li>Markov chain: discrete time</li>
+<li>Markov process: continuous time</li>
+<li>Markov property: future <span class="math inline">\(\perp\)</span>
+past <span class="math inline">\(\mid\)</span> present</li>
+</ul>
+</section>
+<section id="the-markov-property" class="slide level2">
+<h2>The Markov Property</h2>
+</section>
+<section id="monopoly" class="slide level2">
+<h2>Monopoly</h2>
+<div class="figure">
+<div id="small-monopoly-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/smallMonopoly.png" width="45%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+A Monopoly board. The token’s square after a turn depends only on the
+square before the turn and the dice.
+</aside>
+<ul>
+<li>Forty squares; <span class="math inline">\(N(t)\)</span> counts
+circuits as well as the square</li>
+<li><span class="math inline">\(N(t)=N(t-1)+d(t)\)</span></li>
+<li>Markov: the next square does not depend on the path that led
+here</li>
+</ul>
+</section>
+<section id="state-diagrams" class="slide level2">
+<h2>State Diagrams</h2>
+<ul>
+<li>State diagrams: nodes are values of <span
+class="math inline">\(N\)</span></li>
+<li>Transitions carry probabilities or rates</li>
+<li>The state space may be infinite</li>
+</ul>
+<!-- SECTION The Poisson Process as a Markov Process -->
+</section>
+<section id="the-poisson-process-as-a-markov-process"
+class="slide level2">
+<h2>The Poisson Process as a Markov Process</h2>
+</section>
+<section id="coin-monopoly" class="slide level2">
+<h2>Coin Monopoly</h2>
+<div class="figure">
+<div id="coin-monopoly-chain-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/stateDiagram.png" width="70%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+State diagram for Coin Monopoly. Each node is a square index. With each
+turn the token stays or moves one step, with the probabilities on the
+arrows.
+</aside>
+<ul>
+<li>Coin Monopoly: <span
+class="math inline">\(d(t)\in\{0,1\}\)</span></li>
+<li><span class="math inline">\(P(h)=\lambda\Delta t\)</span>, turn
+length <span class="math inline">\(\Delta t\)</span></li>
+<li>After <span class="math inline">\(n\)</span> turns the occupancy is
+binomial</li>
+</ul>
+</section>
+<section id="binomial-trials-to-a-poisson-process" class="slide level2">
+<h2>Binomial Trials to a Poisson Process</h2>
+<ul>
+<li><span class="math inline">\(n=t/\Delta t\)</span>, <span
+class="math inline">\(P(h)=\lambda t/n\)</span></li>
+<li><span class="math inline">\(n\to\infty\)</span> recovers <span
+class="math inline">\(P(k\mid\lambda,t)=(\lambda t)^k e^{-\lambda
+t}/k!\)</span></li>
+<li>Poisson process <span class="math inline">\(=\)</span> Markov
+process with only <span class="math inline">\(k\to k+1\)</span></li>
+</ul>
+</section>
+<section id="process-state-diagrams" class="slide level2">
+<h2>Process State Diagrams</h2>
+<div class="figure">
+<div id="poisson-as-markov-process-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/stateDiagramProcess.png" width="70%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Coin Monopoly in the limit <span class="math inline">\(\Delta t\to
+0\)</span>: a Poisson process. Rates replace probabilities, and there
+are no self-loops.
+</aside>
+<!-- SECTION Steady State -->
+</section>
+<section id="steady-state" class="slide level2">
+<h2>Steady State</h2>
+<ul>
+<li>Steady state: no net change, or balanced flows</li>
+<li>We ask for delay and occupancy <em>after</em> the transient</li>
+</ul>
+<!-- SECTION Birth-Death Processes -->
+</section>
+<section id="birth-death-processes" class="slide level2">
+<h2>Birth-Death Processes</h2>
+<div class="figure">
+<div id="birth-death-chain-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/birthDeathChain.png" width="70%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+State diagram for a discrete-time birth-death chain.
+</aside>
+<div class="figure">
+<div id="birth-death-process-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/birthDeathProcess.png" width="70%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+State diagram for a continuous-time birth-death process. Births increase
+<span class="math inline">\(k\)</span>; deaths decrease it.
+</aside>
+<ul>
+<li>Birth: <span class="math inline">\(k\to k+1\)</span>; death: <span
+class="math inline">\(k\to k-1\)</span></li>
+<li><span class="math inline">\(k\)</span> cannot go negative</li>
+<li>Many queues are birth-death processes</li>
+</ul>
+<!-- SECTION Kendall's Notation -->
+</section>
+<section id="kendalls-notation" class="slide level2">
+<h2>Kendall’s Notation</h2>
+<ul>
+<li><span class="math inline">\(A/S/m/K\)</span>: arrivals / service /
+servers / capacity</li>
+<li><span class="math inline">\(M\)</span>: Poisson or exponential</li>
+<li><span class="math inline">\(D\)</span>: deterministic; <span
+class="math inline">\(G\)</span>: general</li>
+</ul>
+<!-- SECTION Global Balance -->
+</section>
+<section id="global-balance" class="slide level2">
+<h2>Global Balance</h2>
+</section>
+<section id="discrete-time" class="slide level2">
+<h2>Discrete Time</h2>
+</section>
+<section id="continuous-time" class="slide level2">
+<h2>Continuous Time</h2>
+<ul>
+<li>Global balance: flow out of <span class="math inline">\(k\)</span>
+equals flow into <span class="math inline">\(k\)</span></li>
+<li>Chain: <span class="math inline">\(P(j)\sum_i P_{ji}=\sum_i
+P(i)P_{ij}\)</span></li>
+<li>Process: rates <span class="math inline">\(q_{ij}\)</span> in place
+of <span class="math inline">\(P_{ij}\)</span></li>
+</ul>
+<!-- SECTION Detailed Balance -->
+</section>
+<section id="detailed-balance" class="slide level2">
+<h2>Detailed Balance</h2>
+<div class="figure">
+<div id="birth-death-boundary-flow-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/boundaryFlow.png" width="55%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Flow across the boundary between <span
+class="math inline">\(k-1\)</span> and <span
+class="math inline">\(k\)</span>. At equilibrium <span
+class="math inline">\(\lambda_{k-1}P(k-1)=\mu_k P(k)\)</span>.
+</aside>
+<ul>
+<li>Neighbours only <span class="math inline">\(\Rightarrow\)</span>
+detailed balance</li>
+<li><span class="math inline">\(\lambda_{k-1}P(k-1)=\mu_k
+P(k)\)</span></li>
+<li><span
+class="math inline">\(P(k)=(\lambda_{k-1}/\mu_k)P(k-1)\)</span></li>
+</ul>
+<!-- SECTION The $M/M/1$ Queue -->
+</section>
+<section id="the-mm1-queue" class="slide level2">
+<h2>The <span class="math inline">\(M/M/1\)</span> Queue</h2>
+<div class="figure">
+<div id="mm1-state-diagram-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/stateMM1.png" width="70%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+State diagram for the <span class="math inline">\(M/M/1\)</span> queue:
+unbounded <span class="math inline">\(k\)</span>, no transition below
+<span class="math inline">\(0\)</span>, constant rates.
+</aside>
+<div class="figure">
+<div id="mm1-boundary-flow-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/boundaryFlowMM1.png" width="55%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Boundary flow for <span class="math inline">\(M/M/1\)</span>: <span
+class="math inline">\(\lambda P(k-1)=\mu P(k)\)</span>.
+</aside>
+<ul>
+<li><span class="math inline">\(M/M/1\)</span>: <span
+class="math inline">\(\lambda_k=\lambda\)</span>, <span
+class="math inline">\(\mu_k=\mu\)</span></li>
+<li><span class="math inline">\(\rho=\lambda/\mu\)</span>, <span
+class="math inline">\(P(k)=\rho^k(1-\rho)\)</span> for <span
+class="math inline">\(\rho&lt;1\)</span></li>
+<li><span class="math inline">\(\rho\ge 1\)</span>: no stationary
+distribution</li>
+</ul>
+</section>
+<section id="mean-occupancy" class="slide level2">
+<h2>Mean Occupancy</h2>
+<ul>
+<li><span class="math inline">\(\langle
+k\rangle=\rho/(1-\rho)=\lambda/(\mu-\lambda)\)</span></li>
+<li>Includes the customer in service</li>
+<li><span class="math inline">\(\mathrm{Var}(k)=\rho/(1-\rho)^2\)</span>
+(Tutorial 2)</li>
+</ul>
+<!-- SECTION Discrete Simulation of $M/M/1$ -->
+</section>
+<section id="discrete-simulation-of-mm1" class="slide level2">
+<h2>Discrete Simulation of <span
+class="math inline">\(M/M/1\)</span></h2>
+<div class="figure">
+<div id="discrete-mm1-state-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/discreteMM1State.png" width="70%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Discrete-time <span class="math inline">\(M/M/1\)</span>: from occupancy
+<span class="math inline">\(k\)</span> the next occupancy is <span
+class="math inline">\(k+1\)</span>, <span
+class="math inline">\(k-1\)</span>, or <span
+class="math inline">\(k\)</span>.
+</aside>
+<div class="figure">
+<div id="discrete-mm1-outcomes-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/probOutcome.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Draw <span class="math inline">\(U\sim\mathrm{Uniform}(0,1)\)</span>.
+Birth if <span class="math inline">\(U&lt;P(b)\)</span>; death if <span
+class="math inline">\(P(b)\le U&lt;P(b)+P(d)\)</span> and <span
+class="math inline">\(k&gt;0\)</span>; otherwise stay.
+</aside>
+<ul>
+<li>Three outcomes per step: <span class="math inline">\(+1\)</span>,
+<span class="math inline">\(-1\)</span>, or stay</li>
+<li><span class="math inline">\(P(b)=\lambda\Delta t\)</span>, <span
+class="math inline">\(P(d)=\mu\Delta t\)</span></li>
+<li>Small <span class="math inline">\(\Delta t\)</span> approximates the
+continuous queue</li>
+</ul>
+</section>
+<section id="thanks" class="slide level2 scrollable">
+<h2 class="scrollable">Thanks!</h2>
+<ul>
+<li>company: <a href="https://trent.ai">Trent AI</a></li>
+<li>book: <a
+href="https://www.penguin.co.uk/books/455130/the-atomic-human-by-lawrence-neil-d/9780241625248">The
+Atomic Human</a></li>
+<li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
+<li><a href="https://the-atomic-human.ai">The Atomic Human</a></li>
+<li>newspaper: <a
+href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile
+Page</a></li>
+<li>blog: <a
+href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
+</ul>
+</section>
+<section id="further-reading" class="slide level2 scrollable">
+<h2 class="scrollable">Further Reading</h2>
+<ul>
+<li>Markov chains and birth-death queues, including global and detailed
+balance of <span class="citation"
+data-cites="Bertsekas:data92">Bertsekas and Gallager (1992)</span></li>
+</ul>
+</section>
+<section id="exercises" class="slide level2 scrollable">
+<h2 class="scrollable">Exercises</h2>
+<ul>
+<li>Tutorial Sheet 2: occupancy variance of <span
+class="math inline">\(M/M/1\)</span> and related birth-death
+calculations of <span class="citation"
+data-cites="npa-tutorial2">Lawrence (2006)</span></li>
+</ul>
+</section>
+<section id="references" class="slide level2 unnumbered scrollable">
+<h2 class="unnumbered scrollable">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="list">
+<div id="ref-Bertsekas:data92" class="csl-entry" role="listitem">
+Bertsekas, D.P., Gallager, R.G., 1992. Data networks, Second. ed.
+Prentice-Hall, Upper Saddle River, NJ.
+</div>
+<div id="ref-npa-tutorial2" class="csl-entry" role="listitem">
+Lawrence, N.D., 2006. <a
+href="https://mlatcl.github.io/npa/"><span>M/M/1</span> queue, little’s
+formula</a>.
+</div>
+</div>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@3.9.2/lib/js/head.min.js"></script>
+  <script src="https://unpkg.com/reveal.js@3.9.2/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: true,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+        // Transition style
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://unpkg.com/reveal.js@3.9.2/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'https://unpkg.com/reveal.js@3.9.2/plugin/zoom-js/zoom.js', async: true },
+          { src: 'https://unpkg.com/reveal.js@3.9.2/plugin/math/math.js', async: true },
+          { src: 'https://unpkg.com/reveal.js@3.9.2/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+  <!-- Mermaid: after Reveal.initialize (CIP-0012 template hygiene) -->
+  <script>
+    if (typeof Reveal !== 'undefined' && Reveal.addEventListener) {
+      Reveal.addEventListener('ready', function () {
+        if (typeof mermaid === 'undefined') return;
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: 'base',
+          themeVariables: {
+            primaryColor: '#4a90e2',
+            primaryTextColor: '#fff',
+            primaryBorderColor: '#357abd',
+            lineColor: '#67b246',
+            fontSize: '30px',
+            fontFamily: 'arial',
+            edgeLabelBackground: 'transparent',
+            tertiaryColor: 'transparent'
+          }
+        });
+      });
+    }
+  </script>
+    </body>
+</html>

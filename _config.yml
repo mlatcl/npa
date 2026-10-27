@@ -1,0 +1,79 @@
+title: Network Performance Analysis
+author:
+  name: Neil D. Lawrence
+  email:
+  twitter: lawrennd
+description: >-
+  Archive of the University of Sheffield course Network Performance Analysis
+  (COM 6131 / COM 4290), converted to LaMD.
+url: "https://mlatcl.github.io"
+baseurl: "/npa"
+twitter_username:
+github_username: mlatcl
+colab: https://colab.research.google.com
+nbviewer: https://nbviewer.jupyter.org
+
+slidesdir: slides
+reveal:
+  width: 512
+  height: 384
+youtube:
+  width: 512
+  height: 384
+
+collections:
+  updates:
+    output: true
+  lectures:
+    permalink: /lectures/:title:output_ext
+    output: true
+    sort_by: week
+  practicals:
+    permalink: /practicals/:title:output_ext
+    output: true
+    sort_by: week
+
+ghub:
+  edit: true
+  repository: npa
+
+future: true
+
+plugins:
+- jekyll-feed
+- jekyll-seo-tag
+- jekyll-remote-theme
+- jekyll-paginate-v2
+sass:
+  sass_dir: _sass
+pagination:
+  enabled: true
+  per_page: 5
+  permalink: '/page/:num/'
+  title: ':title'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
+
+remote_theme: mlatcl/jekyll-theme
+twitter_svg: ./assets/images/social-tw.svg
+facebook_svg: ./assets/images/social-fb.svg
+instagram_svg: ./assets/images/social-in.svg
+image_root: ./assets/images/
+markdown: kramdown
+twitter_username: mlatcl
+github_username: mlatcl
+
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - python/
+  - matlab/
+  - labs/
+  - diagrams/
+  - published/
+  - html/
+  - graeme/

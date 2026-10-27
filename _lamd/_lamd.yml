@@ -1,0 +1,50 @@
+author:
+- family: Lawrence
+  given: Neil D.
+  gscholar: r3SJcvoAAAAJ
+  institute: University of Cambridge
+  twitter: lawrennd
+  orcid: 0000-0001-9258-1030
+  url: http://inverseprobability.com
+layout: lecture
+room:
+venue:
+talktheme: white
+talkcss: mlatcl.css
+talkfontsize: xs
+bibdir: $HOME/lawrennd/bibliography
+people: ../_people/people.yml
+postsdir: ../_lectures/
+slidesdir: ../slides/
+notesdir: ../_notes/
+notebooksdir: ../_notebooks/
+practicalsdir: ../_practicals/
+# Central snippets for overlapping material (probability, Poisson PMF).
+# NPA-specific snippets live in this repo under snippets/_npa/includes/
+# and are reached via maketalk's --include-path ./..  Do not copy them
+# into $HOME/lawrennd/snippets until a later promotion pass.
+snippetsdir: $HOME/lawrennd/snippets
+macrosdir: $HOME/lawrennd/lamd/lamd/macros
+writediagramsdir: ../slides/diagrams
+scriptsdir: ../python/
+diagramsdir: ../slides/diagrams
+diagramswebpath: slides/diagrams/
+slidesheader: slides-header.html
+notation: talk-notation.tex
+posts: True
+docx: False
+notespdf: False
+slidesipynb: False
+pptx: False
+pdf: False
+assignment: False
+ipynb: True
+reveal: True
+transition: "none"
+baseurl: "npa/"
+url: "https://mlatcl.github.io/"
+ghub:
+- organization: mlatcl
+  repository: npa
+  branch: gh-pages
+  directory: _lamd
