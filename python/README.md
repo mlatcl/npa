@@ -15,3 +15,6 @@ lecture snippets via `_npa/includes/npa-python-setup.md`.
 Lab 1 uses `simulate_mm1`. Lab 2 still runs the historic ns-2 Tcl
 (`labs/ns2/mm1.tcl`, `multipath.tcl`); occupancy *analysis* is Python.
 A packet-level Python stand-in is not added yet.
+
+Notebook smoke tests (`scripts/smoke_notebooks.py`) execute the compiled
+`_notebooks/*.ipynb` files, including the cells that import this module.

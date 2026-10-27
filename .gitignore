@@ -64,3 +64,6 @@ _site/
 # Generated plots from central snippets (rebuilt by maketalk)
 slides/diagrams/ml/
 slides/diagrams/mlai/
+
+# Notebook smoke artefacts
+_notebooks/test-results/
