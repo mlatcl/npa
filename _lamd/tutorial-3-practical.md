@@ -1,5 +1,6 @@
 ---
 title: "Tutorial 3: Erlang Delay and Loss, and $M/G/1$"
+week: 7
 practical: 3
 layout: practical
 assignment: True

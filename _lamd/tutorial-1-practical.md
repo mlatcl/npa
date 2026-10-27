@@ -1,5 +1,6 @@
 ---
 title: "Tutorial 1"
+week: 3
 practical: 1
 layout: practical
 assignment: True

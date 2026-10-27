@@ -1,5 +1,6 @@
 ---
 week: 4
+session: 1
 featured_image: slides/diagrams/npa/stateMMinf.png
 title: Other Markov Queues
 abstract: >

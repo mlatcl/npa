@@ -1,5 +1,6 @@
 ---
 week: 1
+session: 3
 featured_image: slides/diagrams/npa/sumPoisson.png
 title: Poisson Processes
 abstract: >

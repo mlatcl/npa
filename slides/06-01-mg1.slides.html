@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="dcterms.date" content="2006-10-30">
+  <title>The M/G/1 Queue</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@3.9.2/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      /* scrollable slides: start content at top, left-align text */
+      .reveal section.scrollable {
+          overflow-y: auto !important;
+          height: 100% !important;
+          top: 0 !important;
+          text-align: left;
+      }
+      .reveal section.scrollable > h2:first-child,
+      .reveal section.scrollable > h2.scrollable:first-child {
+          margin-top: 0.2em;
+      }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@3.9.2/css/theme/white.css" id="theme">
+  <link rel="stylesheet" href="sheffield-dcs.css"/>
+  <link rel="stylesheet" href="slide-fonts.css"/>
+  <link rel="stylesheet" href="slide-fontsize-xs.css"/>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'https://unpkg.com/reveal.js@3.9.2/css/print/pdf.css' : 'https://unpkg.com/reveal.js@3.9.2/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="https://unpkg.com/reveal.js@3.9.2/lib/js/html5shiv.js"></script>
+  <![endif]-->
+   <!-- Mermaid -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_SVG" type="text/javascript"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    TeX: {
+         extensions: ["color.js"]
+      }
+    });
+  </script>
+  <script src="https://inverseprobability.com/assets/js/figure-animate.js"></script>
+  <script>
+  /* Map range slider values (min..max, often 0-based in LaMD content) to the
+     1-based frame index expected by figure-animate.js showDivs(). */
+  function lamdFrameIndex(group) {
+    var range = document.getElementById("range-" + group);
+    var val = parseInt(range.value, 10);
+    var min = parseInt(range.min, 10);
+    return val - min + 1;
+  }
+  function lamdSetDivs(group) {
+    if (typeof showDivs !== "function") return;
+    slideIndex = lamdFrameIndex(group);
+    showDivs(slideIndex, group);
+  }
+  function lamdPlusDivs(n, group) {
+    if (typeof showDivs !== "function") return;
+    var range = document.getElementById("range-" + group);
+    var min = parseInt(range.min, 10);
+    var max = parseInt(range.max, 10);
+    var val = parseInt(range.value, 10) + n;
+    if (val < min) val = max;
+    if (val > max) val = min;
+    range.value = val;
+    range.setAttribute("aria-valuenow", val);
+    slideIndex = val - min + 1;
+    showDivs(slideIndex, group);
+  }
+  </script>
+  <script>
+  /* Theme chrome (logos) sits on Reveal's full-viewport .slide-background,
+     which does not receive the deck transform. Sync --slide-scale so CSS can
+     size that chrome with the slides (see ai-cam.css / mlatcl.css / trent.css). */
+  (function () {
+    var bound = false;
+    function syncSlideScale() {
+      if (typeof Reveal === "undefined" || typeof Reveal.getScale !== "function") return false;
+      try {
+        var s = Reveal.getScale();
+        if (!s || !isFinite(s)) return false;
+        document.documentElement.style.setProperty("--slide-scale", String(s));
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+    function bind() {
+      if (bound) return typeof Reveal !== "undefined";
+      if (typeof Reveal === "undefined" || typeof Reveal.addEventListener !== "function") return false;
+      Reveal.addEventListener("ready", syncSlideScale);
+      window.addEventListener("resize", function () {
+        setTimeout(syncSlideScale, 0);
+        setTimeout(syncSlideScale, 50);
+      });
+      bound = true;
+      return true;
+    }
+    var n = 0;
+    var t = setInterval(function () {
+      bind();
+      /* Keep polling until getScale() works — Reveal exists before initialize. */
+      if (syncSlideScale() || ++n > 200) clearInterval(t);
+    }, 50);
+  })();
+  </script>
+      
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">The M/G/1 Queue</h1>
+  <p class="date" style="text-align:center"><time>2006-10-30</time></p>
+</section>
+
+<section class="slide level2">
+
+<!-- CIP-0012 Track A: no-op outside HTML (overridden in talk-macros-html.gpp). -->
+<!-- Class-test timer: no-op outside slides HTML (overridden in talk-macros-slides-html.gpp). -->
+<!-- CIP-0016: mdpp expands \diagramcredit before gpp; leftover calls are empty. -->
+<!-- Do not edit this file locally. -->
+<!---->
+<!-- CIP-0012 Track A: content script load. Once-guard with alphanumeric
+     names stays in the surrounding ifndef wrapper (GPP ifndef limitation). -->
+<!-- Do not edit this file locally. -->
+<!-- The last names to be defined. Should be defined entirely in terms of macros from above-->
+<!-- SECTION $M/G/1$ and Pollaczek--Khinchin -->
+</section>
+<section id="mg1-and-pollaczekkhinchin" class="slide level2">
+<h2><span class="math inline">\(M/G/1\)</span> and
+Pollaczek–Khinchin</h2>
+<ul>
+<li>General service: no birth-death chain</li>
+<li>Residual service time <span
+class="math inline">\(\bar{R}\)</span></li>
+<li>Pollaczek–Khinchin: <span
+class="math inline">\(\bar{W}=\lambda\langle
+X^2\rangle/(2(1-\rho))\)</span></li>
+</ul>
+</section>
+<section id="assumptions" class="slide level2">
+<h2>Assumptions</h2>
+<ul>
+<li>FIFO; arrivals independent of service; finite <span
+class="math inline">\(\mathrm{Var}(X)\)</span></li>
+<li><span class="math inline">\(\bar{W}=\bar{R}/(1-\rho)\)</span></li>
+</ul>
+</section>
+<section id="residual-time-from-completions" class="slide level2">
+<h2>Residual Time from Completions</h2>
+<div class="figure">
+<div id="mg1-residual-graphical-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/residualTime.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Residual service time over a busy period: a sawtooth of triangles with
+sides <span class="math inline">\(X_i\)</span>. <span
+class="math inline">\(M(t)\)</span> is the number of completions in
+<span class="math inline">\([0,t]\)</span>.
+</aside>
+<ul>
+<li><span class="math inline">\(A(t)=\frac12\sum X_i^2\)</span></li>
+<li><span class="math inline">\(\bar{R}=\frac12\lambda\langle
+X^2\rangle\)</span></li>
+<li><span class="math inline">\(\bar{T}=\bar{X}+\bar{W}\)</span>; Little
+for <span class="math inline">\(\bar{N}_Q\)</span>, <span
+class="math inline">\(\bar{N}\)</span></li>
+</ul>
+</section>
+<section id="residual-time-from-an-arrival" class="slide level2">
+<h2>Residual Time from an Arrival</h2>
+<div class="figure">
+<div id="mg1-residual-arrival-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/residualServiceOverview.png" width="75%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+The <span class="math inline">\(i\)</span>th arrival sees residual <span
+class="math inline">\(R_i\)</span> on the customer in service and
+waiting times <span class="math inline">\(X\)</span> for each of the
+<span class="math inline">\(k_i-1\)</span> customers already queued.
+</aside>
+<ul>
+<li><span class="math inline">\(W_i=R_i+\)</span> work already
+present</li>
+<li>Independence + Little <span
+class="math inline">\(\Rightarrow\)</span> <span
+class="math inline">\(\bar{W}=\bar{R}/(1-\rho)\)</span></li>
+</ul>
+<!-- SECTION Special Cases -->
+</section>
+<section id="special-cases" class="slide level2">
+<h2>Special Cases</h2>
+<ul>
+<li><span class="math inline">\(M/M/1\)</span>: PK recovers <span
+class="math inline">\(\bar{W}=\rho/(\mu(1-\rho))\)</span></li>
+<li><span class="math inline">\(M/D/1\)</span>: half that wait; lowest
+delay at fixed mean</li>
+<li><span class="math inline">\(M/U/1\)</span> on <span
+class="math inline">\([0,b]\)</span>: <span
+class="math inline">\(\langle X^2\rangle=4/(3\mu^2)\)</span></li>
+</ul>
+<!-- SECTION $M/G/1$ with Vacations -->
+</section>
+<section id="mg1-with-vacations" class="slide level2">
+<h2><span class="math inline">\(M/G/1\)</span> with Vacations</h2>
+<div class="figure">
+<div id="mg1-vacation-schematic-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/vacationMG1.png" width="70%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+An <span class="math inline">\(M/G/1\)</span> server that takes a
+vacation whenever the queue is empty.
+</aside>
+<div class="figure">
+<div id="mg1-vacation-residual-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/vacationResidual.png" width="70%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+</div>
+<aside class="notes">
+Residual time now includes vacation triangles as well as service
+triangles.
+</aside>
+<ul>
+<li>Vacation whenever idle; i.i.d. <span
+class="math inline">\(V_i\)</span></li>
+<li><span class="math inline">\(\bar{W}=\lambda\langle
+X^2\rangle/(2(1-\rho))+\langle V^2\rangle/(2\bar{V})\)</span></li>
+<li>Exponential vacation adds <span
+class="math inline">\(\bar{V}\)</span>; deterministic adds <span
+class="math inline">\(\bar{V}/2\)</span></li>
+</ul>
+</section>
+<section id="thanks" class="slide level2 scrollable">
+<h2 class="scrollable">Thanks!</h2>
+<ul>
+<li>company: <a href="https://trent.ai">Trent AI</a></li>
+<li>book: <a
+href="https://www.penguin.co.uk/books/455130/the-atomic-human-by-lawrence-neil-d/9780241625248">The
+Atomic Human</a></li>
+<li>twitter: <a href="https://twitter.com/lawrennd">@lawrennd</a></li>
+<li><a href="https://the-atomic-human.ai">The Atomic Human</a></li>
+<li>newspaper: <a
+href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile
+Page</a></li>
+<li>blog: <a
+href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
+</ul>
+</section>
+<section id="further-reading" class="slide level2 scrollable">
+<h2 class="scrollable">Further Reading</h2>
+<ul>
+<li>The <span class="math inline">\(M/G/1\)</span> queue, residual life,
+and vacations of <span class="citation"
+data-cites="Bertsekas:data92">Bertsekas and Gallager (1992)</span></li>
+</ul>
+</section>
+<section id="exercises" class="slide level2 scrollable">
+<h2 class="scrollable">Exercises</h2>
+<ul>
+<li>Tutorial Sheet 3: triangular service time in Pollaczek–Khinchin of
+<span class="citation" data-cites="npa-tutorial3">Lawrence
+(2006)</span></li>
+</ul>
+</section>
+<section id="references" class="slide level2 unnumbered scrollable">
+<h2 class="unnumbered scrollable">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="list">
+<div id="ref-Bertsekas:data92" class="csl-entry" role="listitem">
+Bertsekas, D.P., Gallager, R.G., 1992. Data networks, Second. ed.
+Prentice-Hall, Upper Saddle River, NJ.
+</div>
+<div id="ref-npa-tutorial3" class="csl-entry" role="listitem">
+Lawrence, N.D., 2006. <a href="https://mlatcl.github.io/npa/">Erlang
+delay and loss and the <span>M/G/1</span> queue</a>.
+</div>
+</div>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@3.9.2/lib/js/head.min.js"></script>
+  <script src="https://unpkg.com/reveal.js@3.9.2/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: true,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+        // Transition style
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://unpkg.com/reveal.js@3.9.2/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'https://unpkg.com/reveal.js@3.9.2/plugin/zoom-js/zoom.js', async: true },
+          { src: 'https://unpkg.com/reveal.js@3.9.2/plugin/math/math.js', async: true },
+          { src: 'https://unpkg.com/reveal.js@3.9.2/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+  <!-- Mermaid: after Reveal.initialize (CIP-0012 template hygiene) -->
+  <script>
+    if (typeof Reveal !== 'undefined' && Reveal.addEventListener) {
+      Reveal.addEventListener('ready', function () {
+        if (typeof mermaid === 'undefined') return;
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: 'base',
+          themeVariables: {
+            primaryColor: '#4a90e2',
+            primaryTextColor: '#fff',
+            primaryBorderColor: '#357abd',
+            lineColor: '#67b246',
+            fontSize: '30px',
+            fontFamily: 'arial',
+            edgeLabelBackground: 'transparent',
+            tertiaryColor: 'transparent'
+          }
+        });
+      });
+    }
+  </script>
+    </body>
+</html>

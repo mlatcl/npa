@@ -1,5 +1,6 @@
 ---
 week: 4
+session: 2
 featured_image: slides/diagrams/npa/erlangDelay.png
 title: Erlang Delay
 abstract: >

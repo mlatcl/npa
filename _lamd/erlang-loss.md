@@ -1,5 +1,6 @@
 ---
 week: 5
+session: 1
 featured_image: slides/diagrams/npa/erlangLoss.png
 title: Erlang Loss
 abstract: >

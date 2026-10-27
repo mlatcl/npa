@@ -3,6 +3,8 @@ main_nav:
     link: /npa/
   - label: Lectures
     link: /npa/lectures/
+  - label: Worksheets
+    link: /npa/practicals/
   - label: ML@CL Group
     link: /
     submenu_item:
