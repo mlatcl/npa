@@ -1,0 +1,1 @@
+In the original paper there i an error with the rate. The rate of packet arrivals should be reciprocated (1/2 rather than 2).
