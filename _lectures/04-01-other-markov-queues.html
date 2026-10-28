@@ -30,7 +30,6 @@ categories:
 <!--
 
 -->
-<p>% generated — do not edit; scripts/convert/run.py</p>
 <h1 id="finite-length-mm1m">Finite Length <span class="math inline">\(M\)</span>/<span class="math inline">\(M\)</span>/<span class="math inline">\(1\)</span>/<span class="math inline">\(m\)</span></h1>
 <p>In our analysis of the <span class="math inline">\(M/M/1\)</span> queue so far we have assumed that the queue can have an infinite length, in practice a restricted buffer size may mean that the queue length is also restricted. Let’s assume the queue can contain at maximum <span class="math inline">\(m-1\)</span> customers (as shown in Figure  <span class="math inline">\(\ref{cap:stateDiagramMM1m}\)</span>). This means (because one customer can be under service) there is a maximum of <span class="math inline">\(m\)</span> customers in the system. In the Example  <span class="math inline">\(\ref{example:otherQueuesStationary}\)</span> at the end of this chapter we derive the stationary distribution for this queue. Then, in Example  <span class="math inline">\(\ref{example:otherQueuesBlocking}\)</span>, we introduce the concept of blocking probability. The <span class="math inline">\(M/M/1/m\)</span> queue has limited capacity, that means it is a queue with `loss’. The carried load is <em>not the same</em> as the offered load because customers are rejected when the queue is full. These customers are assumed not to return.</p>
 <h1 id="infinite-serving-capacity-mminfty">Infinite Serving Capacity — <span class="math inline">\(M\)</span>/<span class="math inline">\(M\)</span>/<span class="math inline">\(\infty\)</span></h1>
@@ -107,10 +106,11 @@ Figure: State diagram for the <span class="math inline">\(M/M/1/m\)</span> queue
 </div>
 </li>
 </ol>
-[0] The balance equation for the <span class="math inline">\(M/M/1/m\)</span> is identical to that for the <span class="math inline">\(M/M/1\)</span> (Section  <span class="math inline">\(\ref{sec:MM1Stationary}\)</span>). The first step is to draw the flow rates at the boundary (Figure  <span class="math inline">\(\ref{cap:flowAtBoundaryMM1m}\)</span>). At steady state, the expected flow from <span class="math inline">\(k-1\)</span> to <span class="math inline">\(k\)</span> is given by <span class="math inline">\(\lambda P\left(k-1\right)\)</span>. Flow from <span class="math inline">\(k\)</span> to <span class="math inline">\(k-1\)</span> is given <span class="math inline">\(\mu P\left(k-1\right)\)</span>. For flow to be balanced we have <span class="math display">\[
+<h2 id="answer">Answer</h2>
+The balance equation for the <span class="math inline">\(M/M/1/m\)</span> is identical to that for the <span class="math inline">\(M/M/1\)</span> (Section  <span class="math inline">\(\ref{sec:MM1Stationary}\)</span>). The first step is to draw the flow rates at the boundary (Figure  <span class="math inline">\(\ref{cap:flowAtBoundaryMM1m}\)</span>). At steady state, the expected flow from <span class="math inline">\(k-1\)</span> to <span class="math inline">\(k\)</span> is given by <span class="math inline">\(\lambda P\left(k-1\right)\)</span>. Flow from <span class="math inline">\(k\)</span> to <span class="math inline">\(k-1\)</span> is given <span class="math inline">\(\mu P\left(k-1\right)\)</span>. For flow to be balanced we have <span class="math display">\[
 \lambda P\left(k-1\right)=\mu P\left(k\right)\]</span> leading to <span class="math display">\[
 P\left(k\right)=\frac{\lambda}{\mu}P\left(k-1\right).\]</span>Substituting into the detailed balance equation we get<span class="math display">\[
-P\left(k\right)=\frac{\lambda}{\mu}P\left(k-1\right)\]</span> Thus P(k) &amp; = &amp; ()^{k}P(0)\ &amp; = &amp; ^{k}P(0). [ht]
+P\left(k\right)=\frac{\lambda}{\mu}P\left(k-1\right)\]</span> Thus
 <div class="figure">
 <div id="boundaryFlowMM1-figure" class="figure-frame">
 <div class="centered" style="">
@@ -126,75 +126,15 @@ P\left(k\right)=\frac{\lambda}{\mu}P\left(k-1\right)\]</span> Thus P(k) &amp; = 
 <p>Figure: boundaryFlowMM1</p>
 </div>
 </div>
-<pre><code>  &lt;div class=&quot;caption&quot; style=&quot;&quot;&gt;Figure: Flow rates at a boundary for the $M/M/1/m$ queue.&lt;/div&gt;
-  \label{cap:flowAtBoundaryMM1m}
-
-In the case of the finite length queue the normalisation is computed with a sum over only $m$ states, rather than $\infty$ states. This leads to a different value for $P\left(0\right)$. We compute $P\left(0\right)$ by writing the sum across all the $m+1$ states of the distribution, $$</code></pre>
-<p><em>{k=0}<sup>{m}P(0)</sup>{k}=1.<span class="math display">\[This leads us to \]</span> P(0)=</em>{k=0}^{m}<span class="math display">\[which is recognised as the *finite *sum of a geometric series,\]</span> _{k=0}^{m}=<span class="math display">\[so we have\]</span> P(0)=<span class="math display">\[which leads to \]</span> P(k)=.$$</p>
-<h3 id="answer">Answer</h3>
-<h3 id="normalisation">Normalisation</h3>
-<p>{1. <strong>Blocking Probabilities. </strong> Given a finite length <span class="math inline">\(M\)</span>/<span class="math inline">\(M\)</span>/<span class="math inline">\(1\)</span>/<span class="math inline">\(m\)</span> queue, what is the probability that an arrival is blocked from joining the queue (and therefore lost). [0] This is answered by determining the probability of the queue being full, which means <span class="math display">\[
-P\left(m\right)=\frac{\rho^{m}\left(1-\rho\right)}{1-\rho^{m+1}}\]</span>}{0}</p>
-<h4 id="answer-1">Answer</h4>
-<p>% generated — do not edit; scripts/convert/run.py</p>
-<!-- original A4 foil 115: Other Markov Queues -->
-<!-- original A4 foil 115: Other Markov Queues -->
-<!-- original A4 foil 116: Finite Length $M$/$M$/$1$/$m$ -->
-<div class="figure">
-<div id="cap:stateDiagramMM1m-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/stateMM1m.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="cap:stateDiagramMM1m-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:stateDiagramMM1m&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="cap:stateDiagramMM1m-caption" class="caption-frame">
-<p>Figure: State diagram for the <span class="math inline">\(M/M/1/m\)</span> queue. Note that there are no transitions to states above the <span class="math inline">\(m\)</span>th state.</p>
-</div>
-</div>
-<!-- original A4 foil 116: Finite Length $M$/$M$/$1$/$m$ -->
-<!-- original A4 foil 117: Examples -->
-<!-- original A4 foil 118: Infinite Serving Capacity --- $M$/$M$/$\infty$ -->
-<!-- original A4 foil 118: Infinite Serving Capacity --- $M$/$M$/$\infty$ -->
-<div class="figure">
-<div id="stateMMinf-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/stateMMinf.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="stateMMinf-magnify" class="magnify" onclick="magnifyFigure(&#39;stateMMinf&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="stateMMinf-caption" class="caption-frame">
-<p>Figure: stateMMinf</p>
-</div>
-</div>
-<!-- original A4 foil 119: Detailed Balance -->
-<div class="figure">
-<div id="cap:flowAtBoundaryMMinf-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/boundaryFlowMMinf.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="cap:flowAtBoundaryMMinf-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:flowAtBoundaryMMinf&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="cap:flowAtBoundaryMMinf-caption" class="caption-frame">
-<p>Figure: Flow rates at a boundary for <span class="math inline">\(M/M/\infty\)</span> queue.</p>
-</div>
-</div>
-<!-- original A4 foil 119: Detailed Balance -->
-<!-- original A4 foil 120: Normalisation Condition -->
-<!-- original A4 foil 121: The Offered Load\label{sub:offeredLoad} -->
-<!-- original A4 foil 121: The Offered Load\label{sub:offeredLoad} -->
-<!-- original A4 foil 122: Utilization Factor -->
+<pre><code>In the case of the finite length queue the normalisation is computed with a sum over only $m$ states, rather than $\infty$ states. This leads to a different value for $P\left(0\right)$. We compute $P\left(0\right)$ by writing the sum across all the $m+1$ states of the distribution, $$</code></pre>
+<p><em>{k=0}<sup>{m}P(0)</sup>{k}=1.<span class="math display">\[This leads us to \]</span> P(0)=</em>{k=0}^{m}<span class="math display">\[which is recognised as the *finite*sum of a geometric series,\]</span> _{k=0}^{m}=<span class="math display">\[so we have\]</span> P(0)=<span class="math display">\[which leads to \]</span> P(k)=.<span class="math display">\[
+### Normalisation
+1. **Blocking Probabilities.** Given a finite length $M$/$M$/$1$/$m$ queue, what is the probability that an arrival is blocked from joining the queue (and therefore lost).
+    This is answered by determining the probability of the queue being full, which means \]</span> P(m)=$$</p>
+<p><span class="math display">\[\begin{eqnarray*}
+P\left(k\right) &amp; = &amp; \left(\frac{\lambda}{\mu}\right)^{k}P\left(0\right)\\
+&amp; = &amp; \rho^{k}P\left(0\right).
+\end{eqnarray*}\]</span>}</p>
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -205,5 +145,14 @@ P\left(m\right)=\frac{\rho^{m}\left(1-\rho\right)}{1-\rho^{m+1}}\]</span>}{0}</p
 <li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
 <li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
-<h1 id="references">References</h1>
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li>Birth-death queues beyond <span class="math inline">\(M/M/1\)</span>: finite storage and infinite servers of <span class="citation" data-cites="Bertsekas:data92">Bertsekas and Gallager (1992)</span></li>
+</ul>
+<h1 class="unnumbered" id="references">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Bertsekas:data92" class="csl-entry" role="listitem">
+Bertsekas, D.P., Gallager, R.G., 1992. Data networks, Second. ed. Prentice-Hall, Upper Saddle River, NJ.
+</div>
+</div>
 

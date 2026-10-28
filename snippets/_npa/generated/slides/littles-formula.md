@@ -1,8 +1,5 @@
-% generated — do not edit; scripts/convert/run.py
 \ifndef{npaGenSlidesLittlesFormula}
 \define{npaGenSlidesLittlesFormula}
-
-<!-- original A4 foil 94: Little's Formula -->
 
 \newslide{Little's Formula}
 
@@ -12,8 +9,6 @@
 * the average time spent queueing.
 * We introduce Little's formula, a very general formula.}
 
-<!-- original A4 foil 94: Little's Formula -->
-
 \newslide{Little's Formula (continued)}
 
 \slides{* Can be applied to $G/G/1$ queues.
@@ -22,16 +17,12 @@
 * The steady-state arrival rate, $\lambda$.
 * The steady-state customer delay, $\bar{T}$.}
 
-<!-- original A4 foil 95: Time and Steady State Averages -->
-
 \newslide{Time and Steady State Averages}
 
 \slides{* We have already introduced the distribution means and sample based means.
 * Time based averages are a further type of average.
 * The time average is the average value of a particular function over time.$$
 \bar{f}_{t}=\frac{1}{t}\int_{0}^{t}f\left(\tau\right)d\tau.$$}
-
-<!-- original A4 foil 96: Time and Steady State Averages II -->
 
 \newslide{Time and Steady State Averages II}
 
@@ -41,15 +32,11 @@
 \bar{N}_{t}=\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau$$and the time average after in the limit as $t\rightarrow\infty$ is given by $$
 \bar{N}=\lim_{t\rightarrow\infty}\bar{N}\left(t\right).$$which we assume is equivalent to $\left\langle k\right\rangle _{p\left(k\right)}\equiv\bar{N}$. See pg 156-157 in [@Bertsekas:data92].}
 
-<!-- original A4 foil 97: The Formula -->
-
 \newslide{The Formula}
 
 \slides{* Applies under steady state conditions.
 * Under the steady state assumptions it states,$$
 \bar{N}=\lambda\bar{T}.$$}
-
-<!-- original A4 foil 97: The Formula -->
 
 \newslide{The Formula (continued)}
 
@@ -58,19 +45,13 @@ You are driving past a nightclub, wondering how long you will have to wait to go
 According to Little's formula, how long would you expect to have to wait to get in?
 **Answer**}
 
-<!-- original A4 foil 98: Intuition -->
-
 \newslide{Intuition}
 
 \slides{* If we see there are twenty people in a queue and they enter a building at a rate of 40 per hour, we might expect to have to wait half-an-hour in the queue. Formally though, we will build upon the intuition with a simple graphical `proof' of the formula based upon that given in [@Bertsekas:data92].}
 
-<!-- original A4 foil 99: Graphical Proof I -->
-
 \newslide{Graphical Proof I}
 
-\figure{\includepng{\diagramsDir/npa/littlesFormula}{80%}}{Graphical `proof' of Little's formula.}{cap:littlesGraphical}
-
-<!-- original A4 foil 99: Graphical Proof I -->
+\slides{\figure{\includepng{\diagramsDir/npa/littlesFormula}{80%}}{Graphical `proof' of Little's formula.}{cap:littlesGraphical}}
 
 \newslide{Graphical Proof I (continued)}
 
@@ -164,46 +145,26 @@ According to Little's formula, how long would you expect to have to wait to get 
 \bar{N}_{t}=\bar{\lambda}_{t}\bar{T}_{t}.$$
     taking the limit as $t\rightarrow\infty$}
 
-<!-- original A4 foil 100: Graphical Proof II -->
-
 \newslide{Graphical Proof II}
 
-<!-- original A4 foil 101: Little's Formula Derivation -->
+\newslide{Little's Formula Derivation}
 
 \newslide{Little's Formula Derivation}
 
-<!-- original A4 foil 102: Little's Formula Derivation -->
+\newslide{Little's Formula Derivation}
 
 \newslide{Little's Formula Derivation}
 
-<!-- original A4 foil 103: Little's Formula Derivation -->
+\newslide{Little's Formula Derivation}
 
 \newslide{Little's Formula Derivation}
 
-<!-- original A4 foil 104: Little's Formula Derivation -->
-
 \newslide{Little's Formula Derivation}
-
-<!-- original A4 foil 105: Little's Formula Derivation -->
-
-\newslide{Little's Formula Derivation}
-
-<!-- original A4 foil 106: Little's Formula Derivation -->
-
-\newslide{Little's Formula Derivation}
-
-<!-- original A4 foil 107: Little's Formula Derivation -->
-
-\newslide{Little's Formula Derivation}
-
-<!-- original A4 foil 108: Little's Formula -->
 
 \newslide{Little's Formula}
 
 \slides{* $$
 \bar{N}=\lambda\bar{T}$$}
-
-<!-- original A4 foil 108: Little's Formula -->
 
 \newslide{Little's Formula (continued)}
 
@@ -213,8 +174,6 @@ According to Little's formula, how long would you expect to have to wait to get 
 * Or the level of the queue.
 * Or the level of service.}
 
-<!-- original A4 foil 109: Average Delay in $M/M/1$ -->
-
 \newslide{Average Delay in $M/M/1$}
 
 \slides{* The mean of the steady state distribution for an $M/M/1$ queue is$$
@@ -223,23 +182,17 @@ According to Little's formula, how long would you expect to have to wait to get 
 * From $\bar{N}=\lambda\bar{T}$ we rearrange to recover $$
 \bar{T}=\frac{1}{\mu-\lambda}$$}
 
-<!-- original A4 foil 109: Average Delay in $M/M/1$ -->
-
 \newslide{Average Delay in $M/M/1$ (continued)}
 
 \slides{* This is not the time spent in the queue!
-* This is the time spent in the system: it includes* service time.*
+* This is the time spent in the system: it includes*service time.*
 * arises from *propagation delay.*
 * length of phone call *etc*.}
-
-<!-- original A4 foil 110: Little's Formula for Queueing Time and Transmission Time -->
 
 \newslide{Little's Formula for Queueing Time and Transmission Time}
 
 \slides{* The total delay can be divided into
 * queueing time, $W$,}
-
-<!-- original A4 foil 110: Little's Formula for Queueing Time and Transmission Time -->
 
 \newslide{Little's Formula for Queueing Time and Transmission Time (continued)}
 
@@ -249,14 +202,10 @@ T=X+W.$$
 \bar{T}=\bar{X}+\bar{W}.$$
 * The queue and transmission may the be analysed independently using Little's formula.}
 
-<!-- original A4 foil 111: The Transmission -->
-
 \newslide{The Transmission}
 
 \slides{* Assume that customers/packets do not leave the queue.
 * Rate of arrivals at the queue must equal the rate of arrivals at transmission.}
-
-<!-- original A4 foil 111: The Transmission -->
 
 \newslide{The Transmission (continued)}
 
@@ -266,14 +215,10 @@ T=X+W.$$
 * So for the $M/M/1$ queue we have$$
 \rho=\frac{\lambda}{\mu},$$ a formula which we have already used in the last chapter.}
 
-<!-- original A4 foil 112: Utilisation Factor -->
-
 \newslide{Utilisation Factor}
 
 \slides{* $\rho$ is the utilisation factor.
 * Represents the fraction of time that the transmission line (or server) is in use.}
-
-<!-- original A4 foil 112: Utilisation Factor -->
 
 \newslide{Utilisation Factor (continued)}
 
@@ -281,13 +226,9 @@ T=X+W.$$
 * It is also the steady state probability that the transmission line is in use.
 * For a lossless system this probability is given by $1-P\left(0\right)$.}
 
-<!-- original A4 foil 113: Utilisation Example -->
-
 \newslide{Utilisation Example}
 
 \slides{* Example 2, Chapter 7. Simple example of Little's formula. You are at a queue in a bar and notice that the bar tender spends 10% of her time cleaning between customers. If the typical number of people waiting to be served is 3 what is the ratio of time spent serving to time being served?}
-
-<!-- original A4 foil 113: Utilisation Example -->
 
 \newslide{Utilisation Example (continued)}
 
@@ -297,8 +238,6 @@ T=X+W.$$
     $$
 3=\lambda\bar{W}.$$
     Therefore $\frac{\bar{W}}{\bar{X}}=3\frac{1}{3}$. \}{6}}
-
-<!-- original A4 foil 114: The Queue -->
 
 \newslide{The Queue}
 

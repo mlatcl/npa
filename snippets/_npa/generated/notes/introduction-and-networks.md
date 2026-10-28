@@ -1,4 +1,3 @@
-% generated — do not edit; scripts/convert/run.py
 \ifndef{npaGenNotesIntroductionAndNetworks}
 \define{npaGenNotesIntroductionAndNetworks}
 
@@ -11,7 +10,7 @@ In these first two chapters we will introduce the background for the material wh
 \notes{\section{Early Milestones}}
 
 \notes{Perhaps the first major development in telecommunications was *the telegraph*. **Samuel F. B. Morse** developed ideas for the electrical telegraph which exploited the relationship between magnetism and electricity. His first working system sent a short message from Baltimore to Washington D.C. (two cities that are conveniently close together!). It was sent on May 24th, 1844: `What hath God wrought?'. Ten years later 23,000 miles of wire across the United States.
-At the time, a key limitation of the telegraph was that it only provided one channel per wire for communication. Work in using a single wire for multiple channels (multiplexing) indirectly led to the invention of *the telephone *which was patented by **Alexander Graham Bell** (1847-1922) in March 7th, 1876.
+At the time, a key limitation of the telegraph was that it only provided one channel per wire for communication. Work in using a single wire for multiple channels (multiplexing) indirectly led to the invention of *the telephone*which was patented by **Alexander Graham Bell** (1847-1922) in March 7th, 1876.
 The development of a *wireless telegraphy* system by the Italian born engineer **Guglielmo Marconi** (1874-1937), patented in July 1897, led to the foundation of the Wireless Telegraph & Signal Company. By December 1901 short wave transmission across the Atlantic between England and Canada (over 2,100 miles).}
 
 \notes{\section{Automated Telephone Networks}}
@@ -92,7 +91,7 @@ Each of the following six criteria/characteristics of a session may need to be c
 
 \notes{1. **Message arrival rate**. We can seek to model the arrivals as: *Poisson arrivals*, *deterministic arrivals*, *uniform arrivals* or as coming from a more general class of distributions.
 2. **Session holding time**: The length of a session.
-3. **Expected message length** and **length distribution**, message lengths can be modelled as *exponential distributions*,* uniform length*.
+3. **Expected message length** and **length distribution**, message lengths can be modelled as *exponential distributions*,*uniform length*.
 4. **Allowable delay** - acceptable expected delays vary. The acceptable delay is low for VoIP and quite high for FTP.
 5. **Reliability** - FTP *must* be error free but VoIP can have some bit errors or packet loss without major consequences.
 6. **Message and packet ordering** - Some sessions will require that the packets arrive in the order they are sent: for example database requests.}
@@ -129,7 +128,7 @@ In a circuit switching network, the sum of rates for all sessions using a link c
 
 \figure{\includepng{\diagramsDir/npa/aliceBobPacket}{70%}}{A simple packet switching network connecting Alice, Bob, Carol and David.}{cap:packetSwitch}
 
-\notes{Now the fixed land line is managed by some form of router in the local area network in Bob's house. The advantage is that Bob and Carol may both use the land line for communication the disadvantage is that if the land line becomes congested *e.g. * as a result of Carol downloading a large file from David's web server, Bob will notice a variable delay (delays also occur with circuit switching but they are known as transmission delays and should be of fixed length) in his communication with Alice due to queueing occurring at his Internet Service Provider and in his LAN's router. This can be particularly irritating for voice conversation, as anyone who has used MSN messenger for voice communication over a low bandwidth channel will attest.}
+\notes{Now the fixed land line is managed by some form of router in the local area network in Bob's house. The advantage is that Bob and Carol may both use the land line for communication the disadvantage is that if the land line becomes congested *e.g.* as a result of Carol downloading a large file from David's web server, Bob will notice a variable delay (delays also occur with circuit switching but they are known as transmission delays and should be of fixed length) in his communication with Alice due to queueing occurring at his Internet Service Provider and in his LAN's router. This can be particularly irritating for voice conversation, as anyone who has used MSN messenger for voice communication over a low bandwidth channel will attest.}
 
 \notes{\section{The Layered Model}}
 
@@ -140,15 +139,15 @@ In a circuit switching network, the sum of rates for all sessions using a link c
 \notes{The traditional OSI Reference model contains seven layers which reflect in a network how communication occurs at different layers using different protocols. By way of reviewing the TCP model we introduce a layered representation of the TCP/IP model which underlies the internet. As we mentioned above TCP/IP was introduced in 1974 as a standard which interconnects between networks. This is achieved through the Internet Protocol. The TCP/IP reference model is much more compact and will serve as a useful reminder.}
 
 \notes{* **Application\** Layer This layer represents the interface to the user and consists of applications which are commonly used by users. As well as the examples in the diagram packetised voice communications, electronic news, HTTP and its secure variants etc.
-* **The\** Transport\  Layer The layer above the internet layer is known as the transport layer and contains two protocols. The Transmission Control Protocol (TCP) allows applications to communicate in a lossless manner, *i.e. *any packets which are dropped are retransmitted. It also implements flow control in an effort to prevent network congestion and reorders arrivals at the destination. The User Datagram Protocol (UDP) is an unreliable protocol for applications which wish to provide their own sequencing and flow control (e.g. voice transmission or video).
+* **The\** Transport\  Layer The layer above the internet layer is known as the transport layer and contains two protocols. The Transmission Control Protocol (TCP) allows applications to communicate in a lossless manner, *i.e.*any packets which are dropped are retransmitted. It also implements flow control in an effort to prevent network congestion and reorders arrivals at the destination. The User Datagram Protocol (UDP) is an unreliable protocol for applications which wish to provide their own sequencing and flow control (e.g. voice transmission or video).
 * **The\** Internet\  Layer The key to the success of TCP/IP is the Internet Protocol. Its objective is to allow the interfacing of different networks by allowing hosts to place packets on any network and enabling them to travel to any other network.}
 
 \notes{\section{Communication Media}}
 
 \notes{Circuit switching networks may share a communication line but this is done through multiplexing where a fixed proportion of the communication channel is dedicated to the session. The multiplexing may be time division multiplexing or frequency division multiplexing. The former splits the communication channel into time slots and allocates each to a different session, the latter uses different portions of the frequency bandwidth for each channel. Both are not 100% efficient (time multiplexing requires a small amount of time for switching to occur, and frequency division multiplexing requires a small `buffer' band of frequencies between each session. Packet switching networks dedicate communication bandwidth to each channel as required. In a simple `first in, first out' (FIFO) system, packets arrive and, if the queue is empty, they are transmitted. Otherwise they are stored and await their turn for transmission. Thus there are two delays: a queueing delay and a transmission delay. The queueing delay is variable, whilst the transmission delay will be fixed and given by the packet length multiplied by the transmission rate of the channel.
 \footnote{Also known as `first come, first served' (FCFS).}
-Radio transmission is a communication medium which dates back to Marconi. Transmission may occur across several bandwidths. Traditionally radio broadcast occurs through frequency division multiplexing. Radio communication involves taking turns to communicate over the channel (half-duplex). The most basic wireless packet networks (*e.g. *ALOHA) used one channel to broadcast their packets over. Delays may occur due to collisions. A collision is when two systems both attempt to communicate on the same channel at the same time. Both packets are then lost and such losses need to be detected.
-Similar principles occur for *e.g. * thinwire Ethernet, in this case the communication medium is a coaxial cable.}
+Radio transmission is a communication medium which dates back to Marconi. Transmission may occur across several bandwidths. Traditionally radio broadcast occurs through frequency division multiplexing. Radio communication involves taking turns to communicate over the channel (half-duplex). The most basic wireless packet networks (*e.g.*ALOHA) used one channel to broadcast their packets over. Delays may occur due to collisions. A collision is when two systems both attempt to communicate on the same channel at the same time. Both packets are then lost and such losses need to be detected.
+Similar principles occur for *e.g.* thinwire Ethernet, in this case the communication medium is a coaxial cable.}
 
 \notes{\section{The Road Ahead}}
 
@@ -173,7 +172,5 @@ Similar principles occur for *e.g. * thinwire Ethernet, in this case the communi
 9. This avoids bottlenecks:
 10. Disk 1 would wait for CPU A to process about 50% of the time.
 11. CPU B would wait for disk 2 to access about 50% of the time.}
-
-\notes{#### Answer}
 
 \endif

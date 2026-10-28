@@ -1,4 +1,3 @@
-% generated — do not edit; scripts/convert/run.py
 \ifndef{npaGenNotesOtherMarkovQueues}
 \define{npaGenNotesOtherMarkovQueues}
 
@@ -48,37 +47,30 @@ P\left(k\right)=\frac{a^{k}}{k!}\exp\left(-a\right)$$which is recognised as a Po
     \figure{\includepng{\diagramsDir/npa/stateMM1m}{80%}}{stateMM1m}{stateMM1m}
     \caption{State diagram for the $M/M/1/m$ queue. Note that there are no transitions to states above the $m$th state.}
     \label{cap:stateDiagramMM1m}
-  
-  [0]
-    The balance equation for the $M/M/1/m$ is identical to that for the $M/M/1$ (Section\  \ref{sec:MM1Stationary}). The first step is to draw the flow rates at the boundary (Figure\  \ref{cap:flowAtBoundaryMM1m}).
+  }
+
+\notes{\subsection{Answer}}
+
+\notes{The balance equation for the $M/M/1/m$ is identical to that for the $M/M/1$ (Section\  \ref{sec:MM1Stationary}). The first step is to draw the flow rates at the boundary (Figure\  \ref{cap:flowAtBoundaryMM1m}).
     At steady state, the expected flow from $k-1$ to $k$ is given by $\lambda P\left(k-1\right)$. Flow from $k$ to $k-1$ is given $\mu P\left(k-1\right)$. For flow to be balanced we have $$
 \lambda P\left(k-1\right)=\mu P\left(k\right)$$ leading to $$
 P\left(k\right)=\frac{\lambda}{\mu}P\left(k-1\right).$$Substituting into the detailed balance equation we get$$
 P\left(k\right)=\frac{\lambda}{\mu}P\left(k-1\right)$$ Thus 
-P\left(k\right) & = & \left(\frac{\lambda}{\mu}\right)^{k}P\left(0\right)\\
- & = & \rho^{k}P\left(0\right).
-    [ht]
-      \centering
       \figure{\includepng{\diagramsDir/npa/boundaryFlowMM1}{40%}}{boundaryFlowMM1}{boundaryFlowMM1}
-      \caption{Flow rates at a boundary for the $M/M/1/m$ queue.}
-      \label{cap:flowAtBoundaryMM1m}
-    
     In the case of the finite length queue the normalisation is computed with a sum over only $m$ states, rather than $\infty$ states. This leads to a different value for $P\left(0\right)$. We compute $P\left(0\right)$ by writing the sum across all the $m+1$ states of the distribution, $$
 \sum_{k=0}^{m}P\left(0\right)\rho^{k}=1.$$This leads us to $$
-P\left(0\right)=\sum_{k=0}^{m}\frac{1}{\rho^{k}}$$which is recognised as the *finite *sum of a geometric series,$$
+P\left(0\right)=\sum_{k=0}^{m}\frac{1}{\rho^{k}}$$which is recognised as the *finite*sum of a geometric series,$$
 \sum_{k=0}^{m}\frac{1}{\rho^{k}}=\frac{1-\rho}{1-\rho^{m+1}}$$so we have$$
 P\left(0\right)=\frac{1-\rho}{1-\rho^{m+1}}$$which leads to $$
 P\left(k\right)=\frac{\rho^{k}\left(1-\rho\right)}{1-\rho^{m+1}}.$$}
-
-\notes{### Answer}
-
 \notes{### Normalisation}
-
-\notes{{1. **Blocking Probabilities. ** Given a finite length $M$/$M$/$1$/$m$ queue, what is the probability that an arrival is blocked from joining the queue (and therefore lost). \label{example:otherQueuesBlocking}
-  [0]
+\notes{1. **Blocking Probabilities.** Given a finite length $M$/$M$/$1$/$m$ queue, what is the probability that an arrival is blocked from joining the queue (and therefore lost). 
     This is answered by determining the probability of the queue being full, which means $$
-P\left(m\right)=\frac{\rho^{m}\left(1-\rho\right)}{1-\rho^{m+1}}$$\}{0}}
+P\left(m\right)=\frac{\rho^{m}\left(1-\rho\right)}{1-\rho^{m+1}}$$
 
-\notes{#### Answer}
+\begin{eqnarray*}
+P\left(k\right) & = & \left(\frac{\lambda}{\mu}\right)^{k}P\left(0\right)\\
+ & = & \rho^{k}P\left(0\right).
+\end{eqnarray*}}}
 
 \endif

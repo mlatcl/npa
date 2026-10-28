@@ -1,4 +1,3 @@
-% generated — do not edit; scripts/convert/run.py
 \ifndef{npaGenNotesNetworksOfQueues}
 \define{npaGenNotesNetworksOfQueues}
 
@@ -10,14 +9,14 @@ The first queue may be modelled as $M/M/1$, but the second queue cannot be. A pa
 \notes{\section{Time Reversibility --- Burke's Theorem}}
 
 \notes{In the analysis of the Markov chain systems we have seen so far ($M/M/1$, $M/M/1/m$, $M/M/\infty$, $M/M/m$ and $M/M/m/m$) we relied on detailed balance to find the steady state distribution. Detailed balance equations are a special case of global balance equations which arise when transitions only occur between neighbouring states in the Markov chain. Detailed balance can be applied to find the stationary distribution in any birth-death processes.
-In this section we will briefly mention an additional special property of birth-death processes (and other Markov systems for which detailed balance applies) known as *time reversibility. * The principle with time reversibility is as follows: for a birth-death process at steady state the arrival process is Poisson with rate $\lambda$. Time reversibility states that the departure process will also be Poisson with rate $\lambda$.
+In this section we will briefly mention an additional special property of birth-death processes (and other Markov systems for which detailed balance applies) known as *time reversibility.* The principle with time reversibility is as follows: for a birth-death process at steady state the arrival process is Poisson with rate $\lambda$. Time reversibility states that the departure process will also be Poisson with rate $\lambda$.
 We will now give some motivation for this statement, a proof is Given in Section 3.7 of [@Bertsekas:data92]. Consider the following `intuition' for the $M/M/1$ queue. The service rate for the system is given by $\mu$. However this is not the departure rate because a departure can only occur when the system has a state $k>0$. This condition is satisfied for a fraction of the time which is given by the utilization factor $\rho$. the departure rate is therefore given by $\mu\rho=\mu\frac{\lambda}{\mu}=\lambda$.}
 
 \notes{\section{Burke's Theorem}}
 
-\notes{Burke's theorem follows on from time reversibility. It states that if an $M/M/1$, an $M/M/m$ or an $M/M/\infty$ queue at its stationary distribution has a Poisson arrival process with a rate $\lambda$ then the departure process is also Poisson with rate $\lambda$. Furthermore the number of the customers in the system at time $t$ is *independent *of the sequence of the departure times prior to $t$.
+\notes{Burke's theorem follows on from time reversibility. It states that if an $M/M/1$, an $M/M/m$ or an $M/M/\infty$ queue at its stationary distribution has a Poisson arrival process with a rate $\lambda$ then the departure process is also Poisson with rate $\lambda$. Furthermore the number of the customers in the system at time $t$ is *independent*of the sequence of the departure times prior to $t$.
 \footnote{Queues with loss are slightly more complex because the arrival process does not have rate $\lambda$ due to blocked packets.}
-The second property is worthy of comment as it sounds counterintuitive. You might expect that if there were a rapid series of departures from the queue then the queue would be shorter than normal, but Burke's theorem tells us that this is not the case. From this we can infer that the state of a queue *before *a rapid series of departures is about to occur must be abnormally high. Otherwise it *would* be abnormally low after the departures, but Burke's theorem tells us that this is not the case.}
+The second property is worthy of comment as it sounds counterintuitive. You might expect that if there were a rapid series of departures from the queue then the queue would be shorter than normal, but Burke's theorem tells us that this is not the case. From this we can infer that the state of a queue *before*a rapid series of departures is about to occur must be abnormally high. Otherwise it *would* be abnormally low after the departures, but Burke's theorem tells us that this is not the case.}
 
 \notes{\section{Kleinrock's Independence Approximation}}
 
@@ -51,7 +50,7 @@ Consider a general network with labelled nodes and links between these nodes. Th
 
 \notes{## Examples}
 
-\notes{{1. Figure\  \ref{cap:fiveNodeNetwork} shows a small network with five nodes. In the network flow only occurs from lower numbered nodes to higher numbered nodes. The connections in the network have average service times in milliseconds as follows:
+\notes{1. Figure\  \ref{cap:fiveNodeNetwork} shows a small network with five nodes. In the network flow only occurs from lower numbered nodes to higher numbered nodes. The connections in the network have average service times in milliseconds as follows:
   {llllll}
     $\bar{X}$ & 1 & 2 & 3 & 4 & 5 \\
     1 & - & - & - & - & - \\
@@ -71,69 +70,73 @@ Consider a general network with labelled nodes and links between these nodes. Th
      & $x_{1}$ & $x_{2}$ & $x_{3}$ & $x_{4}$ & $x_{5}$ & $x_{6}$ & $x_{7}$ \\
     $\lambda$ & 5 & 10 & 7 & 12 & 4 & 8 & 4 \\
   
-  According to the Kleinrock independence assumption, what is the most congested link? What is the quickest route between node 1 & 5? In your answers you should consider propagation or processing delays at each node to be negligible.
-  [0]
-    From the diagram we can see which links traffic flows down. Let us take each link in turn. Using the superposition of Poisson flows we have
+  According to the Kleinrock independence assumption, what is the most congested link? What is the quickest route between node 1 & 5? In your answers you should consider propagation or processing delays at each node to be negligible.}
+
+\notes{\subsection{Answer}}
+
+\notes{From the diagram we can see which links traffic flows down. Let us take each link in turn. Using the superposition of Poisson flows we have
     \tiny
     {llllll}
+    \tiny    \normalsize
+    {llllll}
+    {llllll}
+    \normalsize
+    {llllll}
+    **The most congested links are from 1 to 2 and 3 to 5.**
+    To compute the answer to the second part we need the average delay at each link
+    \tiny\normalsize
+    {llllll}
+    This means that to go via node 2 takes $\frac{1}{5}+\frac{1}{10}=0.3$ via node 3 takes $\frac{1}{13}+\frac{1}{5}=0.277$ via node 4 it takes $\frac{1}{14}+\frac{1}{14}=\frac{1}{7}=0.1429$ according to Kleinrock's independence assumption.
+
+\begin{eqnarray*}
       $\lambda$ & 1 & 2 & 3 & 4 & 5 \\
       1 & - & - & - & - & - \\
       2 & $x_{1}+x_{2}=15$ & - & - & - & - \\
       3 & $x_{3}=7$ & - & - & - & - \\
       4 & $x_{4}+x_{5}=16$ & - & - & - & - \\
       5 & - & $x_{2}=10$ & $x_{3}+x_{6}=15$ & $x_{4}+x_{7}=16$ & - \\
-    
-    \tiny    \normalsize
-    {llllll}
       $\rho=\lambda\bar{X}$ & 1 & 2 & 3 & 4 & 5 \\
       1 & - & - & - & - & - \\
       2 & $15\times0.05=\frac{3}{4}$ & - & - & - & - \\
       3 & $7\times0.05=\frac{7}{20}$ & - & - & - & - \\
       4 & $16\times0.0333=\frac{8}{15}$ & - & - & - & - \\
       5 & - & $10\times0.05=\frac{1}{2}$ & $15\times0.05=\frac{3}{4}$ & $16\times0.033=\frac{8}{15}$ & - \\
-    
-    {llllll}
       $1-\rho$ & 1 & 2 & 3 & 4 & 5 \\
       1 & - & - & - & - & - \\
       2 & $\frac{1}{4}$ & - & - & - & - \\
       3 & $\frac{13}{20}$ & - & - & - & - \\
       4 & $\frac{7}{15}$ & - & - & - & - \\
       5 & - & $\frac{1}{2}$ & $\frac{1}{4}$ & $\frac{7}{15}$ & - \\
-    
-    \normalsize
-    {llllll}
       $N=\frac{\rho}{1-\rho}$ & 1 & 2 & 3 & 4 & 5 \\
       1 & - & - & - & - & - \\
       2 & $3$ & - & - & - & - \\
       3 & $\frac{7}{13}$ & - & - & - & - \\
       4 & $\frac{8}{7}$ & - & - & - & - \\
       5 & - & 1 & 3 & $\frac{8}{7}$ & - \\
-    
-    **The most congested links are from 1 to 2 and 3 to 5.**
-    To compute the answer to the second part we need the average delay at each link
-    \tiny\normalsize
-    {llllll}
       $\bar{T}=\frac{\bar{X}}{1-\rho}$ & 1 & 2 & 3 & 4 & 5 \\
       1 & - & - & - & - & - \\
       2 & $4\times0.05=\frac{1}{5}$ & - & - & - & - \\
       3 & $\frac{20}{13}\times0.05=\frac{1}{13}$ & - & - & - & - \\
       4 & $\frac{15}{7}\times0.033=\frac{1}{14}$ & - & - & - & - \\
       5 & - & $2\times0.05=\frac{1}{10}$ & $4\times0.05=\frac{1}{5}$ & $\frac{15}{7}\times0.033=\frac{1}{14}$ & - \\
-    
-    This means that to go via node 2 takes $\frac{1}{5}+\frac{1}{10}=0.3$ via node 3 takes $\frac{1}{13}+\frac{1}{5}=0.277$ via node 4 it takes $\frac{1}{14}+\frac{1}{14}=\frac{1}{7}=0.1429$ according to Kleinrock's independence assumption.\}{0}}
+\end{eqnarray*}}
 
-\notes{### Answer}
 
-\notes{{1. $M/M/1$ Queues in Tandem Revisited
-  Let's return to the $M/M/1$ queues in tandem. Burke's theorem tells us that the departure process from the first queue will be a Poisson with rate $\lambda.$ Now if we allow service times at the second queue to be independent of service times at the first queue we can break the dependence of the queue length at the second queue on the service time at the second queue. In this case the system can be modelled as two $M/M/1$ queues. What are the distributions for the states of the two systems?
-  [0]
-    If the service time distributions at the two queues are governed by exponential distributions with rate parameters $\mu_{1}$ and $\mu_{2}$ leading to utilization factors for each queue as $\rho_{1}=\frac{\lambda}{\mu_{1}}$ and $\rho_{2}=\frac{\lambda}{\mu_{2}}$. then the distributions for the states of the systems are given by$$
+
+
+\notes{1. $M/M/1$ Queues in Tandem Revisited
+  Let's return to the $M/M/1$ queues in tandem. Burke's theorem tells us that the departure process from the first queue will be a Poisson with rate $\lambda.$ Now if we allow service times at the second queue to be independent of service times at the first queue we can break the dependence of the queue length at the second queue on the service time at the second queue. In this case the system can be modelled as two $M/M/1$ queues. What are the distributions for the states of the two systems?}
+
+\notes{\subsection{Answer}}
+
+\notes{If the service time distributions at the two queues are governed by exponential distributions with rate parameters $\mu_{1}$ and $\mu_{2}$ leading to utilization factors for each queue as $\rho_{1}=\frac{\lambda}{\mu_{1}}$ and $\rho_{2}=\frac{\lambda}{\mu_{2}}$. then the distributions for the states of the systems are given by$$
 P\left(k_{1}\right)=\rho_{1}^{k_{1}}\left(1-\rho_{1}\right)$$$$
 P\left(k_{2}\right)=\rho_{2}^{k_{2}}\left(1-\rho_{2}\right).$$The joint distribution for both systems is then 
+\bar{T}=\bar{T}_{1}+\bar{T}_{2}=\frac{1}{\mu_{1}-\lambda}+\frac{1}{\mu_{2}-\lambda}.$$
+
+\begin{eqnarray*}
 P\left(k_{1},k_{2}\right) & = & P\left(k_{1}\right)P\left(k_{2}\right)\\
  & = & \rho_{1}^{k_{1}}\left(1-\rho_{1}\right)\rho_{2}^{k_{2}}\left(1-\rho_{2}\right)because the two queues can be considered independently. As a result the average delay in the system can be computed as the sum of the average delays in each queue,$$
-\bar{T}=\bar{T}_{1}+\bar{T}_{2}=\frac{1}{\mu_{1}-\lambda}+\frac{1}{\mu_{2}-\lambda}.$$\}{0}}
-
-\notes{### Answer}
+\end{eqnarray*}}
 
 \endif

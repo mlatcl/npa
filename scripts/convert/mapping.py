@@ -232,3 +232,81 @@ def lecture_for_foil(index: int) -> str | None:
         if start <= index <= end:
             return lecture_id
     return None
+
+
+# Restored from the pre-converter lecture files (Bertsekas pointers and lab/tutorial links).
+READINGS: dict[str, list[tuple[str, str]]] = {
+    "introduction-and-networks": [
+        ("@Bertsekas:data92", "Chapter 1, background and review"),
+        ("@Tanenbaum:computer96", "Introductory computer networks; little queueing"),
+        ("@Chan:performance00", "Alternative text for details on queues"),
+    ],
+    "probability-review": [
+        ("@Bertsekas:data92", "Review of probability as needed for Chapter 3"),
+        ("@Bishop:book06", "Section 1.2, probability distributions"),
+    ],
+    "poisson-processes": [
+        ("@Bertsekas:data92", "Sections on the Poisson process and the exponential distribution"),
+    ],
+    "birth-death-mm1": [
+        ("@Bertsekas:data92", "Markov chains and birth-death queues, including global and detailed balance"),
+    ],
+    "littles-formula": [
+        ("@Bertsekas:data92", "Little's theorem and the $M/M/1$ delay formulae"),
+    ],
+    "other-markov-queues": [
+        ("@Bertsekas:data92", "Birth-death queues beyond $M/M/1$: finite storage and infinite servers"),
+    ],
+    "erlang-delay": [
+        ("@Bertsekas:data92", "The $M/M/m$ delay system and Erlang C"),
+    ],
+    "erlang-loss": [
+        ("@Bertsekas:data92", "The $M/M/m/m$ loss system and Erlang B"),
+    ],
+    "mg1": [
+        ("@Bertsekas:data92", "The $M/G/1$ queue, residual life, and vacations"),
+    ],
+    "mg1-arq": [
+        ("@Bertsekas:data92", "Example 3.15, ARQ delay as $M/G/1$"),
+    ],
+    "networks-of-queues": [
+        ("@Bertsekas:data92", "Burke, Kleinrock independence, and Jackson's theorem"),
+    ],
+    "aloha": [
+        ("@Bertsekas:data92", "Multiaccess, ALOHA, and slotted ALOHA"),
+    ],
+}
+
+EXERCISES: dict[str, list[tuple[str, str]]] = {
+    "poisson-processes": [
+        ("@npa-tutorial1", "Tutorial Sheet 1: Poisson probabilities, exponential sampling, and the Poisson variance"),
+    ],
+    "birth-death-mm1": [
+        ("@npa-tutorial2", r"Tutorial Sheet 2: occupancy variance of $M/M/1$ and related birth-death calculations"),
+        ("@npa-lab1", r"Lab 1: discrete-time simulation of $M/M/1$ and comparison with the geometric occupancy"),
+    ],
+    "littles-formula": [
+        ("@npa-lab1", r"Lab 1: sample-mean occupancy versus $\bar{N}=\rho/(1-\rho)$, and when the time average is not yet the steady state"),
+    ],
+    "erlang-delay": [
+        ("@npa-tutorial3", "Tutorial Sheet 3: call-centre Erlang C"),
+    ],
+    "erlang-loss": [
+        ("@npa-tutorial3", "Tutorial Sheet 3: trunk-group Erlang B"),
+    ],
+    "mg1": [
+        ("@npa-tutorial3", "Tutorial Sheet 3: triangular service time in Pollaczek--Khinchin"),
+    ],
+    "networks-of-queues": [
+        ("@npa-lab2", "Lab 2: tandem and multipath occupancy versus Kleinrock"),
+    ],
+}
+
+# Thin Python demos appended after generated notes (ifndef-guarded; do not duplicate sections).
+PYTHON_INCLUDES: dict[str, list[str]] = {
+    "probability-review": ["snippets/_npa/includes/poisson-sample-python.md"],
+    "poisson-processes": ["snippets/_npa/includes/exponential-python-demo.md"],
+    "birth-death-mm1": ["snippets/_npa/includes/mm1-python-demo.md"],
+    "erlang-delay": ["snippets/_npa/includes/erlang-c-python-demo.md"],
+    "erlang-loss": ["snippets/_npa/includes/erlang-b-python-demo.md"],
+}

@@ -1,14 +1,9 @@
-% generated — do not edit; scripts/convert/run.py
 \ifndef{npaGenSlidesErlangLoss}
 \define{npaGenSlidesErlangLoss}
 
-<!-- original A4 foil 138: Erlang Loss $M$/$M$/$m$/$m$ -->
-
 \newslide{Erlang Loss $M$/$M$/$m$/$m$}
 
-\figure{\includepng{\diagramsDir/npa/erlangLossFlowChart}{80%}}{Flow chart of the Erlang Loss System.}{cap:erlangLossFlowChart}
-
-<!-- original A4 foil 138: Erlang Loss $M$/$M$/$m$/$m$ -->
+\slides{\figure{\includepng{\diagramsDir/npa/erlangLossFlowChart}{80%}}{Flow chart of the Erlang Loss System.}{cap:erlangLossFlowChart}}
 
 \newslide{Erlang Loss $M$/$M$/$m$/$m$ (continued)}
 
@@ -16,13 +11,9 @@
 * It was assumed that, if all servers were occupied, the customer would be placed on hold until a server became available.
 * In the $M/M/m/m$ system there is a maximum number of customers.}
 
-<!-- original A4 foil 139: State Diagram -->
-
 \newslide{State Diagram}
 
-\figure{\includepng{\diagramsDir/npa/erlangLoss}{100%}}{State Diagram for the Erlang loss system, $M$/$M$/$m$/$m$}{erlangLoss}
-
-<!-- original A4 foil 139: State Diagram -->
+\slides{\figure{\includepng{\diagramsDir/npa/erlangLoss}{100%}}{State Diagram for the Erlang loss system, $M$/$M$/$m$/$m$}{erlangLoss}}
 
 \newslide{State Diagram (continued)}
 
@@ -36,8 +27,6 @@
 k\mu & k=0,1,\dots,m\\
 0 & k>m\right.$$\}{4}}}}
 
-<!-- original A4 foil 140: Detailed Balance Equations -->
-
 \newslide{Detailed Balance Equations}
 
 \slides{* When the system's state, $k\leq m$, we have boundary flow as below
@@ -48,9 +37,7 @@ k\mu & k=0,1,\dots,m\\
 * This leads to the following balance equation $$
 \lambda P\left(k-1\right)=k\mu P\left(k\right).$$}
 
-\figure{\includepng{\diagramsDir/npa/boundaryFlowMMinf}{60%}}{boundaryFlowMMinf}{boundaryFlowMMinf}
-
-<!-- original A4 foil 140: Detailed Balance Equations -->
+\slides{\figure{\includepng{\diagramsDir/npa/boundaryFlowMMinf}{60%}}{boundaryFlowMMinf}{boundaryFlowMMinf}}
 
 \newslide{Detailed Balance Equations (continued)}
 
@@ -61,8 +48,6 @@ P\left(k\right) & = & \frac{a}{k}P(k-1), which means that
 P\left(k\right) & = & \prod_{n=1}^{k}\frac{a}{n}P\left(0\right)\\
  & = & \frac{a^{k}}{k!}P\left(0\right).}
 
-<!-- original A4 foil 141: Normalisation Condition -->
-
 \newslide{Normalisation Condition}
 
 \slides{* The normalisation condition gives us $$
@@ -70,17 +55,13 @@ P\left(0\right)\sum_{k=0}^{m}\frac{a^{k}}{k!}=1$$$$
 P\left(0\right)=\frac{1}{\sum_{k=0}^{m}\frac{a^{k}}{k!}},$$
 * Which leads to the truncated Poisson distribution $$
 P\left(k\right)=\frac{\frac{a^{k}}{k!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}$$
-* *Note if *$m\rightarrow\infty$* we recover the* $M/M/\infty$* queue as we would expect.*}
-
-<!-- original A4 foil 142: Probability of Blocking -->
+* *Note if*$m\rightarrow\infty$*we recover the* $M/M/\infty$*queue as we would expect.*}
 
 \newslide{Probability of Blocking}
 
 \slides{* For the $M/M/m$ queue we were interested in the probability that a customer would have to wait in the queue for service.
 * In the $M/M/m/m$ system there is no queue because the maximum state of the system is the same as the number of servers.
 * The probability of waiting is therefore zero.}
-
-<!-- original A4 foil 142: Probability of Blocking -->
 
 \newslide{Probability of Blocking (continued)}
 
@@ -89,8 +70,6 @@ P\left(k\right)=\frac{\frac{a^{k}}{k!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}$$
 B(m,a)=P\left(m\right)=\frac{\frac{a^{m}}{m!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}.$$
 * Use Erlang B curves to compute.}
 
-<!-- original A4 foil 143: Carried Load and Utilization Factors -->
-
 \newslide{Carried Load and Utilization Factors}
 
 \slides{* Since traffic is lost in $M/M/m/m$ the carried load, $a^{\prime}$, is smaller than the offered load.
@@ -98,8 +77,6 @@ B(m,a)=P\left(m\right)=\frac{\frac{a^{m}}{m!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}.$
 a^{\prime}=a(1-P\left(m\right))=a(1-B(m,a))$$
 * The carried load per line is the trunk occupancy (the utilization facctor), $$
 \rho=\frac{a^{\prime}}{m}.$$}
-
-<!-- original A4 foil 143: Carried Load and Utilization Factors -->
 
 \newslide{Carried Load and Utilization Factors (continued)}
 
@@ -110,21 +87,15 @@ a^{\prime}=a(1-P\left(m\right))=a(1-B(m,a))$$
 \dot{\lambda}=\lambda(1-P\left(m\right))$$
 * This has effects when studying the queue using Little's formula.}
 
-<!-- original A4 foil 144: Load Tripling -->
-
 \newslide{Load Tripling}
 
 \slides{* **Question**}
-
-<!-- original A4 foil 144: Load Tripling -->
 
 \newslide{Load Tripling (continued)}
 
 \slides{1. For a blocking probability of 0.01, what is the number of trunks needed for 6 Erlangs of offered load?
 2. For a blocking probability of 0.01, what is the number of trunks needed for 18 Erlangs?
 3. Comment on the increase in load compared to the increase in the number of trunks.}
-
-<!-- original A4 foil 145: Answer -->
 
 \newslide{Answer}
 
@@ -134,24 +105,18 @@ a^{\prime}=a(1-P\left(m\right))=a(1-B(m,a))$$
 \rho_{1}=\frac{6}{13}\left(1-0.005\right)=0.459$$whereas for the second system the utilisation factor is$$
 \rho_{2}=\frac{18}{28}\left(1-0.007\right)=0.6384$$The 30 trunk system is thus more efficient. This explains why it is cheaper to call the U.S.A. than Italy.}
 
-<!-- original A4 foil 145: Answer -->
-
 \newslide{Answer (continued)}
 
 \slides{* \end{answer}}
-
-<!-- original A4 foil 146: Example $M/M/m/n$ -->
 
 \newslide{Example $M/M/m/n$}
 
 \slides{* This example is from the Exam paper in 2002-3.}
 
-<!-- original A4 foil 146: Example $M/M/m/n$ -->
-
 \newslide{Example $M/M/m/n$ (continued)}
 
 \slides{* Question
-1. A call centre employs thirty operators selling tickets for a major sporting event. The call centre has sixty lines in total. When all operators are active new calls are placed in a queue for the first available operator. The call centre is to be modelled as an $M/M/m/n$ queue, *i.e. * a queue in which there are $m$ servers and a maximum state of $n$.
+1. A call centre employs thirty operators selling tickets for a major sporting event. The call centre has sixty lines in total. When all operators are active new calls are placed in a queue for the first available operator. The call centre is to be modelled as an $M/M/m/n$ queue, *i.e.* a queue in which there are $m$ servers and a maximum state of $n$.
 2. Draw a state diagram representing the queueing system.
 3. Write down the detailed balance equations for the two cases where the queue state $k<m$ and when $m\leq k<n$.
 4. For each of the two cases outlined in the previous part write down the steady state distribution as a function of $P\left(0\right)$, the probability of the system being empty.

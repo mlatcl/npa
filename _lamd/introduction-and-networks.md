@@ -11,6 +11,10 @@ featured_image: slides/diagrams/npa/1975_net_map.png
 \include{snippets/_npa/generated/notes/introduction-and-networks.md}
 \include{snippets/_npa/generated/slides/introduction-and-networks.md}
 
+\addreading{@Bertsekas:data92}{Chapter 1, background and review}
+\addreading{@Tanenbaum:computer96}{Introductory computer networks; little queueing}
+\addreading{@Chan:performance00}{Alternative text for details on queues}
+
 \thanks
 
 \reading

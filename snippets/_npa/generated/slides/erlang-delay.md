@@ -1,14 +1,9 @@
-% generated — do not edit; scripts/convert/run.py
 \ifndef{npaGenSlidesErlangDelay}
 \define{npaGenSlidesErlangDelay}
 
-<!-- original A4 foil 123: Erlang Delay $M$/$M$/$m$ -->
-
 \newslide{Erlang Delay $M$/$M$/$m$}
 
-\figure{\includepng{\diagramsDir/npa/erlangDelayDiagram}{80%}}{Queueing model of the Erlang delay system.}{cap:erlangDelaySchematic}
-
-<!-- original A4 foil 123: Erlang Delay $M$/$M$/$m$ -->
+\slides{\figure{\includepng{\diagramsDir/npa/erlangDelayDiagram}{80%}}{Queueing model of the Erlang delay system.}{cap:erlangDelaySchematic}}
 
 \newslide{Erlang Delay $M$/$M$/$m$ (continued)}
 
@@ -18,20 +13,14 @@
 * The system is known as the *Erlang delay* system. In Kendall's notation it is written $M/M/m$.
 * The `average holding time', $\tau=\frac{1}{\mu}\equiv\bar{X}$, which, for a network involving telephones is the time a call is open.}
 
-<!-- original A4 foil 124: State Diagram -->
-
 \newslide{State Diagram}
 
-\figure{\includepng{\diagramsDir/npa/erlangDelay}{100%}}{State diagram of an Erlang delay system.}{erlangDelay}
-
-<!-- original A4 foil 124: State Diagram -->
+\slides{\figure{\includepng{\diagramsDir/npa/erlangDelay}{100%}}{State diagram of an Erlang delay system.}{erlangDelay}}
 
 \newslide{State Diagram (continued)}
 
 \slides{* The `death rate' $\mu_{k}$ has different definitions in different parts of the state space.
 * We need to consider detailed balance for each part in turn.}
-
-<!-- original A4 foil 125: Detailed Balance -->
 
 \newslide{Detailed Balance}
 
@@ -41,16 +30,12 @@
 k\mu & k=0,1,\dots,m-1\\
 m\mu & k>m\right.$$}}
 
-<!-- original A4 foil 126: The Two Situations -->
-
 \newslide{The Two Situations}
 
 \slides{* This means we have to consider two situations in detailed balance
 * When the system's state, $k$, is less than or equal to the number of servers.
 * When the system's state, $k$, is greater than the number of servers.
     We will cover this as an example.}
-
-<!-- original A4 foil 127: Stationary Distribution -->
 
 \newslide{Stationary Distribution}
 
@@ -61,8 +46,6 @@ P\left(0\right)\frac{m^{m}\rho^{k}}{m!} & k>m\right.$$
     $$
 P\left(0\right)=\left[\sum_{k=0}^{m-1}\frac{\left(m\rho\right)^{k}}{k!}+\frac{\left(m\rho\right)^{m}}{m!\left(1-\rho\right)}\right]^{-1}.$$Note that this relies on $\rho<1$, if $\lambda\geq m\mu$ the system has no stationary distribution.}}
 
-<!-- original A4 foil 128: Probability of Waiting -->
-
 \newslide{Probability of Waiting}
 
 \slides{* For the $M/M/m$ queue a key quantity of interest is the probability of of a customer queueing, $P_{Q}$.
@@ -71,8 +54,6 @@ P\left(k\geq m\right) & = & \sum_{k=m}^{\infty}P\left(k\right)$$
 P\left(k\geq m\right)=P\left(0\right)\sum_{k=m}^{\infty}\frac{m^{m}\rho^{k}}{m!}$$$$
 P\left(k\geq m\right)=P\left(0\right)\frac{\left(\rho m\right)^{m}}{m!}\sum_{k=m}^{\infty}\rho^{k-m},$$}
 
-<!-- original A4 foil 129: Probability of Waiting contd -->
-
 \newslide{Probability of Waiting contd}
 
 \slides{* Substituting $\dot{k}=k-m$ in the sum gives$$
@@ -80,31 +61,23 @@ P\left(k\geq m\right)=P\left(0\right)\frac{\left(\rho m\right)^{m}}{m!}\sum_{\do
 * Making the usual substitution this can be re-written
 C\left(m,a\right)=P\left(k\geq m\right)=P\left(0\right)\frac{\left(\rho m\right)^{m}}{m!\left(1-\rho\right)}.\label{eq:ErlangCone}}
 
-<!-- original A4 foil 130: Erlang C Formula -->
-
 \newslide{Erlang C Formula}
 
 \slides{* This is known as the *Erlang C formula*, or Erlang's second formula after A.K. Erlang. By making use of our definition of $a$ we can rewrite the offered load as$$
 a=\frac{\lambda}{\mu}=m\rho$$ and substituting into (\ref{eq:ErlangCone}) we have $$
 C(m,a)=\frac{P\left(0\right)a^{m}}{m!\left(1-\frac{a}{m}\right)}.$$}
 
-<!-- original A4 foil 131: Computing the Erlang C Formula -->
-
 \newslide{Computing the Erlang C Formula}
 
 \slides{* Can be computed on a computer: but
 * some care must be taken when computing it.}
 
-<!-- original A4 foil 131: Computing the Erlang C Formula -->
-
 \newslide{Computing the Erlang C Formula (continued)}
 
 \slides{* when $m$ is large overflow problems will occur for $a^{m}$ and $m!$.
 * Compute the formula in log space,$$
-\ln C\left(m,a\right)=\ln P\left(0\right)+m\ln a-\ln m!-\ln\left(1-\frac{a}{m}\right).$$Still problems with $\ln P\left(0\right)$ term, but each of the other terms can be computed with appropriate functions in MATLAB.
+\ln C\left(m,a\right)=\ln P\left(0\right)+m\ln a-\ln m!-\ln\left(1-\frac{a}{m}\right).$$Still problems with $\ln P\left(0\right)$ term, but each of the other terms can be computed with appropriate functions in Python (`scipy.special.gammaln`).
 * When we need to compute the Erlang C curve, for the purposes of exams and exercises, we will use the old fashioned method of curves.}
-
-<!-- original A4 foil 132: Erlang C Curves -->
 
 \newslide{Erlang C Curves}
 
@@ -112,13 +85,9 @@ C(m,a)=\frac{P\left(0\right)a^{m}}{m!\left(1-\frac{a}{m}\right)}.$$}
 * In an exam, if they are need curves will be provided with the exam paper.
 * Make sure you mark the curves and hand them in with your paper.}
 
-<!-- original A4 foil 133: Examples -->
-
 \newslide{Examples}
 
 \slides{* Examples 2 and 3 at the end of the chapter cover the Erlang C curves.}
-
-<!-- original A4 foil 134: Average number in System. -->
 
 \newslide{Average number in System.}
 
@@ -128,15 +97,11 @@ C(m,a)=\frac{P\left(0\right)a^{m}}{m!\left(1-\frac{a}{m}\right)}.$$}
 * The average queue length is given by $$
 \bar{N}_{Q}=\frac{\rho}{1-\rho}C(m,a)$$}
 
-<!-- original A4 foil 135: Average Queueing Time -->
-
 \newslide{Average Queueing Time}
 
 \slides{* Using Little's formula the average waiting time is simply $$
 \bar{W}=\frac{\bar{N}_{Q}}{\lambda}=\frac{C(m,a)}{m\mu(1-\rho)}.$$
 * Note that this is the average queueing time for all customers (whether they queued or not).}
-
-<!-- original A4 foil 136: Queueing Time for those who Queue -->
 
 \newslide{Queueing Time for those who Queue}
 
@@ -144,16 +109,12 @@ C(m,a)=\frac{P\left(0\right)a^{m}}{m!\left(1-\frac{a}{m}\right)}.$$}
 * The average queueing time can be decomposed as$$
 \bar{W}=C(m,a)\bar{W}_{Q}+\left(1-C(m,a)\right)\bar{W}_{\sim Q}$$}
 
-<!-- original A4 foil 136: Queueing Time for those who Queue -->
-
 \newslide{Queueing Time for those who Queue (continued)}
 
 \slides{* $\bar{W}_{Q}$ is the average queueing time for those who do queue
 * $\bar{W}_{\sim Q}$ is the average queueing time for those who don't queue.
 * Since $\bar{W}_{\sim Q}=0$ the second term in this sum is zero we can rewrite in terms of $\bar{W}_{Q}$ as $$
 \bar{W_{Q}}=\frac{\bar{W}}{C(m,a)}=\frac{1}{m\mu(1-\rho)}=\frac{1}{\mu(m-a)}$$so the average queueing time for those who do queue is independent of the probability of queueing.}
-
-<!-- original A4 foil 137: Example -->
 
 \newslide{Example}
 

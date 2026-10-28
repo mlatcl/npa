@@ -30,7 +30,6 @@ categories:
 <!--
 
 -->
-<p>% generated — do not edit; scripts/convert/run.py</p>
 <h1 id="channel-multiplexing">Channel Multiplexing</h1>
 <p>Let’s assume we have <span class="math inline">\(m\)</span> statistically independent Poisson streams. Each has arrival rate <span class="math inline">\(\frac{\lambda}{m}\)</span>. The packets to be transmitted are assumed to have an exponentially distributed length which, for a given bandwidth leads to a service time distribution for the whole transmission line which is an exponential with a rate parameter <span class="math inline">\(\mu\)</span>.</p>
 <h2 id="statistical-multiplexing">Statistical Multiplexing</h2>
@@ -46,7 +45,7 @@ categories:
 <h1 id="random-access">Random Access</h1>
 <p>One way of performing statistical multiplexing when we have stations distributed across a single communication channel would be to have a centralised computer attempting to control which computer is able to access our transmission lines at what times. However, we may wish communication to occur without centralised control. In this case we may choose a random access solution. We will consider random access networks where there is one communication channel on which all the nodes communicate. Each station sends a packet immediately whenever it receives a packet to send. this means that packets can <em>collide</em> and may have to be resent. </p>
 <h2 id="pure-aloha-networks">Pure ALOHA Networks</h2>
-<p>The ALOHA network was developed at the University of Hawaii, it was a packet radio network which communicated between different stations on the Hawaiian islands. For the ALOHA network (and Ethernet, the modern LAN protocol that was inspired by ALOHA) all stations attempt to communicate on the same channel. When a station attempts to transmit, it detects if its transmission has interfered with an existing transmission: this is known as a collision. If a collision occurs the station becomes <em>backlogged </em>and attempts to transmit at a later time. If both stations attempted to retransmit after the <em>same </em>period of time they would simply collide again after retransmission. To avoid this problem the stations normally wait for a random period of time before retransmitting. For this network we assume that each station, after a given propagation delay, can tell whether the transmitted packets were correctly received. Furthermore, we assume that each packet requires 1 `time unit’ for transmission. This means that if a packet of interest is sent at time <span class="math inline">\(t\)</span>, then any other packet sent between time <span class="math inline">\(t-1\)</span> and time <span class="math inline">\(t+1\)</span> will collide with our packet.</p>
+<p>The ALOHA network was developed at the University of Hawaii, it was a packet radio network which communicated between different stations on the Hawaiian islands. For the ALOHA network (and Ethernet, the modern LAN protocol that was inspired by ALOHA) all stations attempt to communicate on the same channel. When a station attempts to transmit, it detects if its transmission has interfered with an existing transmission: this is known as a collision. If a collision occurs the station becomes <em>backlogged</em>and attempts to transmit at a later time. If both stations attempted to retransmit after the <em>same</em>period of time they would simply collide again after retransmission. To avoid this problem the stations normally wait for a random period of time before retransmitting. For this network we assume that each station, after a given propagation delay, can tell whether the transmitted packets were correctly received. Furthermore, we assume that each packet requires 1 `time unit’ for transmission. This means that if a packet of interest is sent at time <span class="math inline">\(t\)</span>, then any other packet sent between time <span class="math inline">\(t-1\)</span> and time <span class="math inline">\(t+1\)</span> will collide with our packet.</p>
 <div class="figure">
 <div id="pureALOHA-figure" class="figure-frame">
 <div class="centered" style="">
@@ -105,7 +104,7 @@ G^{\prime}\left(n\right)=G\left(n\right)\exp\left(-G\left(n\right)\right),\]</sp
 <p>Recall our assumption that a backlogged node waits for a time, <span class="math inline">\(T_{i}\)</span>, before attempting to retransmit, <span class="math display">\[
 p\left(T_{i}\right)=\mu\exp\left(-\mu T_{i}\right).\]</span> Given this assumption, can we compute the delay associated with this backlogged node? Since the node may experience several collisions, the wait associated with the backlog will involve a sum over the random variable <span class="math inline">\(T_{i}\)</span>. It turns out to be an <em>Erlang distribution</em>.</p>
 <h2 id="sums-of-exponential-variables-and-the-erlang-distribution">Sums of Exponential Variables and the Erlang Distribution</h2>
-<p>If a random variable, <span class="math inline">\(x\)</span>, is exponentially distributed with rate parameter <span class="math inline">\(b\)</span>. The sum of <span class="math inline">\(a\)</span> random variables, each of which is exponentially distributed with rate parameter <span class="math inline">\(b\)</span> is distributed as an <em>Erlang distribution. </em>Consider variables a set of <span class="math inline">\(a\)</span> variables<span class="math inline">\(\left(x_{1}\dots x_{a}\right)\)</span> which are each governed by the same exponential distribution, <span class="math display">\[
+<p>If a random variable, <span class="math inline">\(x\)</span>, is exponentially distributed with rate parameter <span class="math inline">\(b\)</span>. The sum of <span class="math inline">\(a\)</span> random variables, each of which is exponentially distributed with rate parameter <span class="math inline">\(b\)</span> is distributed as an <em>Erlang distribution.</em>Consider variables a set of <span class="math inline">\(a\)</span> variables<span class="math inline">\(\left(x_{1}\dots x_{a}\right)\)</span> which are each governed by the same exponential distribution, <span class="math display">\[
 p\left(x_{i}|b\right)=b\exp\left(-bx_{i}\right).\]</span>We define the sum of the values to be, <span class="math inline">\(z=\sum_{i=1}^{a}x_{i}\)</span>. The distribution governing <span class="math inline">\(z\)</span> is then an <em>Erlang distribution</em>, given by <span class="math display">\[
 p\left(z|a,b\right)=\frac{b^{a}}{\left(a-1\right)!}z^{a-1}\exp\left(-bz\right).\]</span>Note that this distribution is a generalisation of the exponential distribution because the exponential is the special case where <span class="math inline">\(a=1\)</span>. This clearly should be the case because if <span class="math inline">\(a=1\)</span> then the `sum’ of that variable will simply be the variable itself.</p>
 <h2 id="erlang-distribution-mean-and-variance">Erlang Distribution Mean and Variance</h2>
@@ -130,7 +129,7 @@ p\left(W|\mu\right) &amp; = &amp; q\mu\exp\left(-\mu W\right)\exp\left(\mu\left(
 \left(1-2n\mu\right)\exp\left(-2\left(\lambda+n\mu\right)\right)=0.\]</span>There are two solutions to this equation. The first is <span class="math inline">\(\exp\left(-2\left(\lambda+n\mu\right)\right)=0\)</span>, meaning that <span class="math inline">\(\lambda+n\mu\rightarrow\infty\)</span>. This solution is a minimiser . The other solution is given when <span class="math display">\[
 0=1-2n\mu\]</span>or<span class="math display">\[
 \mu=\frac{1}{2n},\]</span> this turns out to be a maximum of (<span class="math inline">\(\ref{eq:rateFunctionALOHA}\)</span>). A maximum is what we want because by maximising the `rate’ parameter <span class="math inline">\(\mu^{\prime}\)</span> we minimise the average delay associated with the backlog, which is given by <span class="math inline">\(\bar{W}=\frac{1}{\mu}\)</span>, so by setting <span class="math inline">\(\mu=\frac{1}{2n}\)</span> we find a minimum for the average delay which is given by <span class="math display">\[
-\bar{W}_{\textrm{min}}=2n\exp\left(2\lambda+1\right).\]</span> In practice it may be difficult to set the rate <span class="math inline">\(\mu\)</span> to something that is dependent on the number of backlogged nodes. this is because the number of backlogged nodes can only be known by nodes communicating their status over the network and we have not allowed for such a mechanism in our analysis. Note that the minimum average delay goes up linearly with the number of backlogged nodes and <em>exponentially </em>with the rate of arrivals for the system, <span class="math inline">\(\lambda\)</span>.</p>
+\bar{W}_{\textrm{min}}=2n\exp\left(2\lambda+1\right).\]</span> In practice it may be difficult to set the rate <span class="math inline">\(\mu\)</span> to something that is dependent on the number of backlogged nodes. this is because the number of backlogged nodes can only be known by nodes communicating their status over the network and we have not allowed for such a mechanism in our analysis. Note that the minimum average delay goes up linearly with the number of backlogged nodes and <em>exponentially</em>with the rate of arrivals for the system, <span class="math inline">\(\lambda\)</span>.</p>
 <h2 id="examples">Examples</h2>
 <ol type="1">
 <li>Throughput for pure ALOHA system. Find the maximum throughput for the pure ALOHA system by seeking the stationary point of the throughput curve. [0] To find stationary points we seek the gradient of the throughput.<span class="math display">\[
@@ -138,97 +137,6 @@ G^{\prime}=G\exp\left(-2G\right)\]</span>differentiating with respect to <span c
 \left(1-2G\right)\exp\left(-2G\right)=0\]</span>which implies that either <span class="math inline">\(\exp\left(-2G\right)=0\)</span>, this happens when <span class="math inline">\(G\rightarrow\infty\)</span> and <span class="math inline">\(G^{\prime}\rightarrow0\)</span>; or <span class="math inline">\(\left(1-2G\right)=0\)</span> which implies that <span class="math inline">\(G=\frac{1}{2}\)</span>. The first of these stationary points is a minimum, the second is a maximum. To find the value of the maximum we insert <span class="math inline">\(G=\frac{1}{2}\)</span> into our throughput equation giving<span class="math display">\[
 G^{\prime}=\frac{1}{2}\exp\left(-1\right)\approx0.184.\]</span></li>
 </ol>
-<h3 id="answer">Answer</h3>
-<p>% generated — do not edit; scripts/convert/run.py</p>
-<!-- original A4 foil 213: Multiaccess Systems -->
-<!-- original A4 foil 214: LANs -->
-<!-- original A4 foil 214: LANs -->
-<!-- original A4 foil 215: Channel Multiplexing -->
-<!-- original A4 foil 215: Channel Multiplexing -->
-<!-- original A4 foil 216: Statistical Multiplexing -->
-<!-- original A4 foil 217: Time or Frequency Division Multiplexing -->
-<!-- original A4 foil 217: Time or Frequency Division Multiplexing -->
-<!-- original A4 foil 218: Why does this happen? -->
-<!-- original A4 foil 219: Multiaccess Systems -->
-<!-- original A4 foil 219: Multiaccess Systems -->
-<!-- original A4 foil 220: Multiplexing for Multiaccess -->
-<!-- original A4 foil 220: Multiplexing for Multiaccess -->
-<!-- original A4 foil 221: Random Access -->
-<!-- original A4 foil 221: Random Access -->
-<!-- original A4 foil 222: Pure ALOHA Networks -->
-<!-- original A4 foil 222: Pure ALOHA Networks -->
-<!-- original A4 foil 223: ALOHA -->
-<div class="figure">
-<div id="pureALOHA-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/pureALOHA.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="pureALOHA-magnify" class="magnify" onclick="magnifyFigure(&#39;pureALOHA&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="pureALOHA-caption" class="caption-frame">
-<p>Figure: Pure ALOHA, packets collide with any other packet transmitted within one time unit of their transmission. The diagram shows a packet sent at <span class="math inline">\(t\)</span> and packets sent at <span class="math inline">\(t+1\)</span> and <span class="math inline">\(t-1\)</span>. Any packet sent after <span class="math inline">\(t-1\)</span> and before <span class="math inline">\(t+1\)</span> will collide with the packet sent at <span class="math inline">\(t\)</span>.</p>
-</div>
-</div>
-<!-- original A4 foil 223: ALOHA -->
-<!-- original A4 foil 224: Simple Analysis -->
-<!-- original A4 foil 225: Backlogged Stations -->
-<!-- original A4 foil 225: Backlogged Stations -->
-<!-- original A4 foil 226: Pure ALOHA -->
-<!-- original A4 foil 227: Throughput -->
-<div class="figure">
-<div id="cap:pureALOHAThroughput-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/pureALOHAThroughput.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="cap:pureALOHAThroughput-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:pureALOHAThroughput&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="cap:pureALOHAThroughput-caption" class="caption-frame">
-<p>Figure: Throughput for pure ALOHA as a function of <span class="math inline">\(G\)</span>.</p>
-</div>
-</div>
-<!-- original A4 foil 227: Throughput -->
-<!-- original A4 foil 228: Maximum Throughput -->
-<!-- original A4 foil 229: Stationary Points -->
-<!-- original A4 foil 229: Stationary Points -->
-<!-- original A4 foil 230: Maximum Throughput -->
-<!-- original A4 foil 231: Analysis of Backlog Delay -->
-<!-- original A4 foil 232: Sums of Exponential Variables and the Erlang Distribution\label{sub:erlang} -->
-<!-- original A4 foil 232: Sums of Exponential Variables and the Erlang Distribution\label{sub:erlang} -->
-<!-- original A4 foil 233: Notes on Erlang -->
-<!-- original A4 foil 234: Erlang Distribution Mean and Variance -->
-<!-- original A4 foil 235: Delay Associated with Backlogs -->
-<!-- original A4 foil 236: Distribution for $W$ -->
-<!-- original A4 foil 237: Optimum value of $\mu$ -->
-<!-- original A4 foil 238: Solutions for $\mu$ -->
-<!-- original A4 foil 239: Notes on Optimum -->
-<!-- original A4 foil 239: Notes on Optimum -->
-<!-- original A4 foil 240: Slotted ALOHA -->
-<!-- original A4 foil 241: Slotted ALOHA -->
-<div class="figure">
-<div id="cap:slottedALOHAThroughput-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/slottedALOHAThroughput.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="cap:slottedALOHAThroughput-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:slottedALOHAThroughput&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="cap:slottedALOHAThroughput-caption" class="caption-frame">
-<p>Figure: Throughput for slotted ALOHA as a function of <span class="math inline">\(G\)</span>.</p>
-</div>
-</div>
-<!-- original A4 foil 242: Smaller Vulnerable period -->
-<!-- original A4 foil 243: References -->
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -239,5 +147,14 @@ G^{\prime}=\frac{1}{2}\exp\left(-1\right)\approx0.184.\]</span></li>
 <li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
 <li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
-<h1 id="references">References</h1>
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li>Multiaccess, ALOHA, and slotted ALOHA of <span class="citation" data-cites="Bertsekas:data92">Bertsekas and Gallager (1992)</span></li>
+</ul>
+<h1 class="unnumbered" id="references">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Bertsekas:data92" class="csl-entry" role="listitem">
+Bertsekas, D.P., Gallager, R.G., 1992. Data networks, Second. ed. Prentice-Hall, Upper Saddle River, NJ.
+</div>
+</div>
 

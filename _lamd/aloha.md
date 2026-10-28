@@ -11,6 +11,8 @@ featured_image: slides/diagrams/npa/pureALOHA.png
 \include{snippets/_npa/generated/notes/aloha.md}
 \include{snippets/_npa/generated/slides/aloha.md}
 
+\addreading{@Bertsekas:data92}{Multiaccess, ALOHA, and slotted ALOHA}
+
 \thanks
 
 \reading

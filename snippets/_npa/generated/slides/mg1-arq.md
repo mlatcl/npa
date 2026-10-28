@@ -1,15 +1,10 @@
-% generated — do not edit; scripts/convert/run.py
 \ifndef{npaGenSlidesMg1Arq}
 \define{npaGenSlidesMg1Arq}
-
-<!-- original A4 foil 178: Automatic Repeat Request (ARQ) System. -->
 
 \newslide{Automatic Repeat Request (ARQ) System.}
 
 \slides{* The $M/G/1$ queue system can be used for modelling various systems of interest.
 * In an ARQ system packets are transmitted and the system waits for an acknowledgement.}
-
-<!-- original A4 foil 178: Automatic Repeat Request (ARQ) System. -->
 
 \newslide{Automatic Repeat Request (ARQ) System. (continued)}
 
@@ -17,13 +12,9 @@
 * In this section we review Example\  3.15 from Bertsekas and Gallager.
 * A schematic of the system is given in Figure\  \ref{cap:ARQschemeatic}.}
 
-<!-- original A4 foil 179: ARQ Schematic -->
-
 \newslide{ARQ Schematic}
 
-\figure{\includepng{\diagramsDir/npa/ARQ}{80%}}{The ARQ System.}{cap:ARQschemeatic}
-
-<!-- original A4 foil 179: ARQ Schematic -->
+\slides{\figure{\includepng{\diagramsDir/npa/ARQ}{80%}}{The ARQ System.}{cap:ARQschemeatic}}
 
 \newslide{ARQ Schematic (continued)}
 
@@ -34,14 +25,10 @@
 * The probability of an error in a packet is taken to be $p$ and we take errors to occur independently.
 * Assume that packets arrive as a Poisson process with rate $\lambda$.}
 
-<!-- original A4 foil 180: ARQ Contd -->
-
 \newslide{ARQ Contd}
 
 \slides{* In practice, the fourth assumption is probably unrealistic (independence of errors).
 * If an error occurs due to problems in the transmission channel, it is likely that several packets in a row will not be received, so the errors do not occur independently.}
-
-<!-- original A4 foil 180: ARQ Contd -->
 
 \newslide{ARQ Contd (continued)}
 
@@ -50,8 +37,6 @@
 * The probability of this being the service time is given by\answer{$$
 P\left(X=1+kn\right)=\left(1-p\right)p^{k}$$\}{3}which is recognised as a geometric distribution.}
 
-<!-- original A4 foil 181: Average Service Time -->
-
 \newslide{Average Service Time}
 
 \slides{* Using this distribution we can compute the expected service time which is given by
@@ -59,15 +44,11 @@ P\left(X=1+kn\right)=\left(1-p\right)p^{k}$$\}{3}which is recognised as a geomet
  & = & \left(1-p\right)\left(\sum_{k=0}^{\infty}p^{k}+n\sum_{k=0}^{\infty}kp^{k}\right)\\
  & = & 1+n\frac{p}{1-p} since $\sum_{k=0}^{\infty}p^{k}=\frac{1}{1-p}$ and $\sum_{k=0}^{\infty}kp^{k}=\frac{p}{\left(1-p\right)^{2}}$ .}
 
-<!-- original A4 foil 182: ARQ Utilization Factor -->
-
 \newslide{ARQ Utilization Factor}
 
 \slides{* We can therefore write the utilization factor, $\rho=\lambda\left\langle X\right\rangle $, as$$
 \rho=\lambda+\lambda n\frac{p}{1-p}.$$
 * This has to be less than 1.}
-
-<!-- original A4 foil 182: ARQ Utilization Factor -->
 
 \newslide{ARQ Utilization Factor (continued)}
 
@@ -76,8 +57,6 @@ P\left(X=1+kn\right)=\left(1-p\right)p^{k}$$\}{3}which is recognised as a geomet
 * This implies that $$
 P\left(0\right)=1-\lambda-\lambda n\frac{p}{1-p}$$
       Expand on this section --- what use is the utilization factor in this system?}
-
-<!-- original A4 foil 183: ARQ Second Moment -->
 
 \newslide{ARQ Second Moment}
 
@@ -88,15 +67,11 @@ P\left(0\right)=1-\lambda-\lambda n\frac{p}{1-p}$$
 \sum_{k=0}^{\infty}k^{2}p^{k}=\frac{p+p^{2}}{\left(1-p\right)^{3}}$$
 * These moments can be used with the Pollaczek-Khinchin formula to obtain statistics for the queue.}
 
-<!-- original A4 foil 184: $M/G/1$ Queues with Vacations -->
-
 \newslide{$M/G/1$ Queues with Vacations}
 
 \slides{* Consider a server which, when it is free, attends to some other business. For example it could transmit control and record keeping traffic. These periods are sometimes known as vacations (which is an American word that means holidays). The vacation periods are characterised by
 * If a new arrival arrives during a vacation it must wait until the vacation is over before being dealt with.
 * If a vacation ends and the server is idle it immediately goes on a new vacation.}
-
-<!-- original A4 foil 185: $M/G/1$ with Vacations -->
 
 \newslide{$M/G/1$ with Vacations}
 
@@ -106,15 +81,11 @@ P\left(0\right)=1-\lambda-\lambda n\frac{p}{1-p}$$
       \caption{Schematic of $M/G/1$ queue}
 * We denote the length of these successive vacations to be $V_{1}$, $V_{2}$, $\dots$. We assume that $V_{1},$$V_{2}$, $\dots$ are i.i.d. random variables which are also independent of the customer times and the service times. We can then attempt to compute the mean residual service time for this queue for a *Poisson (Markov) arrival* system with *general service times* and *generally distributed vacation times*.}
 
-\figure{\includepng{\diagramsDir/npa/vacationMG1}{80%}}{vacationMG1}{vacationMG1}
-
-<!-- original A4 foil 186: Residual Service Time -->
+\slides{\figure{\includepng{\diagramsDir/npa/vacationMG1}{80%}}{vacationMG1}{vacationMG1}}
 
 \newslide{Residual Service Time}
 
-\figure{\includepng{\diagramsDir/npa/vacationResidual}{80%}}{Computation of residual service time for system with vacations.}{vacationResidual}
-
-<!-- original A4 foil 186: Residual Service Time -->
+\slides{\figure{\includepng{\diagramsDir/npa/vacationResidual}{80%}}{Computation of residual service time for system with vacations.}{vacationResidual}}
 
 \newslide{Residual Service Time (continued)}
 
@@ -122,26 +93,20 @@ P\left(0\right)=1-\lambda-\lambda n\frac{p}{1-p}$$
 \frac{1}{t}\int_{0}^{t}r\left(\tau\right)d\tau & = & \frac{1}{t}\sum_{i=1}^{M\left(t\right)}\frac{1}{2}X_{i}^{2}+\frac{1}{t}\sum_{i=1}^{L\left(t\right)}\frac{1}{2}V_{i}^{2}\\
  & = & \frac{M\left(t\right)}{t}\frac{1}{2}\frac{\sum_{i=1}^{M\left(t\right)}X_{i}^{2}}{M\left(t\right)}+\frac{L\left(t\right)}{t}\frac{1}{2}\frac{\sum_{i=1}^{L\left(t\right)}V_{i}^{2}}{L\left(t\right)}arrival process, $M\left(t\right)$, vacation process, $L\left(t\right)$.}
 
-<!-- original A4 foil 187: Average of Vacation Distribution -->
-
 \newslide{Average of Vacation Distribution}
 
-\slides{* This means we have to deal with the average number of vacations. On average the proportion of time available for vacations is $\left(1-\rho\right)$, *i.e. *that time where the transmission line is not in use.
+\slides{* This means we have to deal with the average number of vacations. On average the proportion of time available for vacations is $\left(1-\rho\right)$, *i.e.*that time where the transmission line is not in use.
 * If the average length of a vacation at time $t$ is $\bar{V}_{t}$ then the number of vacations that will have arrived at that time is $$
 L\left(t\right)=\frac{t\left(1-\rho\right)}{\bar{V}_{t}}.$$Recalling $$
 \frac{1}{t}\int_{0}^{t}r\left(\tau\right)d\tau=\frac{M\left(t\right)}{t}\frac{1}{2}\frac{\sum_{i=1}^{M\left(t\right)}X_{i}^{2}}{M\left(t\right)}+\frac{L\left(t\right)}{t}\frac{1}{2}\frac{\sum_{i=1}^{L\left(t\right)}V_{i}^{2}}{L\left(t\right)}$$
 * Taking the limit of as $t\rightarrow\infty$ we can write $$
 \bar{R}=\frac{1}{2}\lambda\left\langle X^{2}\right\rangle +\frac{\left(1-\rho\right)\left\langle V^{2}\right\rangle }{2\bar{V}}.$$}
 
-<!-- original A4 foil 188: P-K Formula -->
-
 \newslide{P-K Formula}
 
 \slides{* So given that the assumptions that we used to develop the formula $$
 \bar{W}=\frac{\bar{R}}{1-\rho}$$are still valid, we may write$$
 \bar{W}=\frac{\lambda\left\langle X^{2}\right\rangle }{2\left(1-\rho\right)}+\frac{\left\langle V^{2}\right\rangle }{2\bar{V}}.$$}
-
-<!-- original A4 foil 189: $M/G/1$ with Vacations --- Simple example -->
 
 \newslide{$M/G/1$ with Vacations --- Simple example}
 

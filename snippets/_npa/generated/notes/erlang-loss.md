@@ -1,4 +1,3 @@
-% generated — do not edit; scripts/convert/run.py
 \ifndef{npaGenNotesErlangLoss}
 \define{npaGenNotesErlangLoss}
 
@@ -14,7 +13,7 @@
 0 & k\geq m\end{array}\right.$$ and death rate $$
 \mu_{k}=\left\{ \begin{array}{cc}
 k\mu & k=0,1,\dots,m\\
-0 & k>m\end{array}\right.$$ *Note: when *$k>m$*, it doesn't matter what *$\mu_{k}$* is as we never reach this state.*}}}
+0 & k>m\end{array}\right.$$ *Note: when*$k>m$*, it doesn't matter what*$\mu_{k}$*is as we never reach this state.*}}}
 
 \notes{\subsection{State Diagram}}
 
@@ -42,7 +41,7 @@ P\left(k\right) & = & \prod_{n=1}^{k}\frac{a}{n}P\left(0\right)\\
 \notes{The normalisation condition gives us $$
 P\left(0\right)\sum_{k=0}^{m}\frac{a^{k}}{k!}=1$$$$
 P\left(0\right)=\frac{1}{\sum_{k=0}^{m}\frac{a^{k}}{k!}},$$which leads to the *truncated Poisson distribution*:$$
-P\left(k\right)=\frac{\frac{a^{k}}{k!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}.$$ *Note if *$m\rightarrow\infty$* we recover the* $M/M/\infty$* queue as we would expect.*}
+P\left(k\right)=\frac{\frac{a^{k}}{k!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}.$$ *Note if*$m\rightarrow\infty$*we recover the* $M/M/\infty$*queue as we would expect.*}
 
 \notes{\section{Probability of Blocking}}
 
@@ -67,84 +66,94 @@ a^{\prime}=a(1-P\left(m\right))=a(1-B(m,a)).$$ The carried load per line is the 
 2. For a blocking probability of 0.01, what is the number of trunks needed for 6 Erlangs of offered load?
 3. For a blocking probability of 0.01, what is the number of trunks needed for 18 Erlangs?
 4. Comment on the increase in load compared to the increase in the number of trunks.
-  
-  [0]
-5. 13
+  }
+
+\notes{\subsection{Answer}}
+
+\notes{5. 13
 6. 28
 7. A load increase of 200 % only lead to a trunk increase of 133 %. To understand this further we look at the utilization factors. For the first system the utilisation factor is $$
 \rho_{1}=\frac{6}{13}\left(1-0.005\right)=0.459$$whereas for the second system the utilisation factor is$$
 \rho_{2}=\frac{18}{28}\left(1-0.007\right)=0.6384$$The 30 trunk system is thus more efficient. This explains why it is cheaper to call the U.S.A. than Italy.}
 
-\notes{### Answer}
 
-\notes{{{1. **Example **$M/M/m/n$. This example is from the Exam paper in 2002-3.
-  A call centre employs thirty operators selling tickets for a major sporting event. The call centre has sixty lines in total. When all operators are active new calls are placed in a queue for the first available operator. The call centre is to be modelled as an $M/M/m/n$ queue, *i.e. * a queue in which there are $m$ servers and a maximum state of $n$.
+\notes{1. **Example**$M/M/m/n$. This example is from the Exam paper in 2002-3.
+  A call centre employs thirty operators selling tickets for a major sporting event. The call centre has sixty lines in total. When all operators are active new calls are placed in a queue for the first available operator. The call centre is to be modelled as an $M/M/m/n$ queue, *i.e.* a queue in which there are $m$ servers and a maximum state of $n$.
 2. Draw a state diagram representing the queueing system.
-    [0]
-      [ht]
-        \centering
+
         \includegraphics{}
-        \caption{State diagram for $M/M/m/n$ queue.}
+        
 3. Write down the detailed balance equations for the two cases where the queue state $k<m$ and when $m\leq k<n$.
-    [0]
+
       When the system's state, $k$, is less than or equal to the number of servers we have boundary flow as in Figure\  \ref{cap:flowAtBoundaryMMma},which leads to the following balance equation $$
 \lambda P\left(k-1\right)=k\mu P\left(k\right).$$As a result, for $k=0\dots m$ we may write
-P\left(k\right)=\frac{\lambda}{k\mu}P\left(k-1\right).\label{eq:PkForPartAExercise}
-      [ht]
-        \centering
+P\left(k\right)=\frac{\lambda}{k\mu}P\left(k-1\right).
+
+        
         \figure{\includepng{\diagramsDir/npa/boundaryFlowMMinf}{40%}}{boundaryFlowMMinf}{boundaryFlowMMinf}
-        \caption{Flow rates at a boundary.}
-        \label{cap:flowAtBoundaryMMma}
+        
+        
       
       The detailed balance for this case is$$
 P\left(k\right)=\frac{\lambda}{m\mu}P\left(k-1\right)$$
       When the system's state is greater than $m$, $k>m$ the flow at the boundary is as in Figure\  \ref{cap:flowAtBoundaryMMmb}, the detailed balance equation is thenwhich leads to $$
-\lambda P(k-1)=m\mu P\left(k\right)$$\}{0}
+\lambda P(k-1)=m\mu P\left(k\right)$$}}}
+
+\notes{
       [ht]
         \centering
         \figure{\includepng{\diagramsDir/npa/boundaryFlowMMm}{40%}}{boundaryFlowMMm}{boundaryFlowMMm}
         \caption{Flow rates at a boundary.}
         \label{cap:flowAtBoundaryMMmb}
-4. For each of the two cases outlined in the previous part write down the steady state distribution as a function of $P\left(0\right)$, the probability of the system being empty.
-    [0]
-      From Detailed Balance we may write$$
+4. For each of the two cases outlined in the previous part write down the steady state distribution as a function of $P\left(0\right)$, the probability of the system being empty.}
+
+\notes{\subsection{Answer}}
+
+\notes{From Detailed Balance we may write$$
 P\left(k\right)=\frac{\lambda}{k\mu}P\left(k-1\right).$$And defining $$
 a=\frac{\lambda}{\mu}$$which in turn gives $$
 \frac{\lambda}{k\mu}=\frac{a}{k}$$which we substitute back into the detailed balance obtaining$$
 P\left(k\right)=\frac{a}{k}P\left(k-1\right)$$and as before
-P\left(k\right)=\frac{a^{k}}{k!}P\left(0\right) & \textrm{for} & k\leq m\label{eq:probabilitiesExercise}
       The detailed balance for this case is$$
 P\left(k\right)=\frac{\lambda}{m\mu}P\left(k-1\right)$$substituting for $a$ gives$$
 P\left(k\right)=\frac{a}{m}P\left(k-1\right)$$
       leading to $$
 P\left(k\right)=\left(\frac{a}{m}\right)^{k-m}P\left(m\right).$$Finally we use (\ref{eq:probabilitiesExercise}) and substitute $k$ with $m$ to find $P\left(m\right)$ which leads to$$
 P\left(m\right)=\frac{a^{m}}{m!}P\left(0\right)$$therefore 
-P\left(k\right)=\frac{a^{k}}{m^{k-m}m!}P\left(0\right) & \textrm{for} & k>mthus we can write$$
 P\left(k\right)=\left\{ {cc}
+
+\begin{eqnarray*}
+P\left(k\right)=\frac{a^{k}}{k!}P\left(0\right) & \textrm{for} & k\leq m
+P\left(k\right)=\frac{a^{k}}{m^{k-m}m!}P\left(0\right) & \textrm{for} & k>mthus we can write$$
 P\left(0\right)\frac{a^{k}}{k!}, & k\leq m\\
-P\left(0\right)\frac{a^{k}}{m^{k-m}m!} & k>m\right.$$\}{0}
+P\left(0\right)\frac{a^{k}}{m^{k-m}m!} & k>m\right.$$
+\end{eqnarray*}}}
+
+\notes{
 5. Use the fact that the steady state distribution must be normalised to show that $$
-P\left(0\right)=\left[\sum_{k=0}^{m}\frac{a^{k}}{k!}+\sum_{k=m+1}^{n}\frac{a^{k}}{m!m^{k-m}}\right]^{-1}$$where $a=\frac{\lambda}{\mu}$, $\lambda$ is the arrival rate and $\mu$ is the rate of the service time distribution.
-    [0]
-      Once again we can compute $P\left(0\right)$ through normalisation
+P\left(0\right)=\left[\sum_{k=0}^{m}\frac{a^{k}}{k!}+\sum_{k=m+1}^{n}\frac{a^{k}}{m!m^{k-m}}\right]^{-1}$$where $a=\frac{\lambda}{\mu}$, $\lambda$ is the arrival rate and $\mu$ is the rate of the service time distribution.}
+
+\notes{\subsection{Answer}}
+
+\notes{Once again we can compute $P\left(0\right)$ through normalisation
+
+\begin{eqnarray*}
 \sum_{k=0}^{\infty}P\left(k\right) & = & 1\\
 P\left(0\right)\left[\sum_{k=0}^{m}\frac{a^{k}}{k!}+\sum_{k=m+1}^{n}\frac{a^{k}}{m!m^{k-m}}\right] & = & 1\\
-P\left(0\right) & = & \left[\sum_{k=0}^{m}\frac{a^{k}}{k!}+\sum_{k=m+1}^{n}\frac{a^{k}}{m!m^{k-m}}\right]^{-1}.\}{0}}
+P\left(0\right) & = & \left[\sum_{k=0}^{m}\frac{a^{k}}{k!}+\sum_{k=m+1}^{n}\frac{a^{k}}{m!m^{k-m}}\right]^{-1}.
+\end{eqnarray*}}
 
-\notes{### Answer}
 
-\notes{### Answer}
 
-\notes{#### Case 1) $k\leq m$}
 
-\notes{#### Case 2) $m<k\leq n$.}
-
-\notes{### Answer}
 
 \notes{#### Case 1) $k\leq m$}
 
 \notes{#### Case 2) $m<k\leq n$.}
 
-\notes{### Answer}
+
+\notes{#### Case 1) $k\leq m$}
+
+\notes{#### Case 2) $m<k\leq n$.}
 
 \endif

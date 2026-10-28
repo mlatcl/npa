@@ -9,10 +9,18 @@ featured_image: slides/diagrams/npa/stateMM1.png
 ---
 
 \include{snippets/_npa/generated/notes/birth-death-mm1.md}
+\include{snippets/_npa/includes/mm1-python-demo.md}
 \include{snippets/_npa/generated/slides/birth-death-mm1.md}
+
+\addreading{@Bertsekas:data92}{Markov chains and birth-death queues, including global and detailed balance}
+
+\addexercise{@npa-tutorial2}{Tutorial Sheet 2: occupancy variance of $M/M/1$ and related birth-death calculations}
+\addexercise{@npa-lab1}{Lab 1: discrete-time simulation of $M/M/1$ and comparison with the geometric occupancy}
 
 \thanks
 
 \reading
+
+\exercises
 
 \references

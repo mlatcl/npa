@@ -1,4 +1,3 @@
-% generated — do not edit; scripts/convert/run.py
 \ifndef{npaGenNotesAloha}
 \define{npaGenNotesAloha}
 
@@ -35,7 +34,7 @@ We will consider random access networks where there is one communication channel
 
 \notes{\subsection{Pure ALOHA Networks}}
 
-\notes{The ALOHA network was developed at the University of Hawaii, it was a packet radio network which communicated between different stations on the Hawaiian islands. For the ALOHA network (and Ethernet, the modern LAN protocol that was inspired by ALOHA) all stations attempt to communicate on the same channel. When a station attempts to transmit, it detects if its transmission has interfered with an existing transmission: this is known as a collision. If a collision occurs the station becomes *backlogged *and attempts to transmit at a later time. If both stations attempted to retransmit after the *same *period of time they would simply collide again after retransmission. To avoid this problem the stations normally wait for a random period of time before retransmitting.
+\notes{The ALOHA network was developed at the University of Hawaii, it was a packet radio network which communicated between different stations on the Hawaiian islands. For the ALOHA network (and Ethernet, the modern LAN protocol that was inspired by ALOHA) all stations attempt to communicate on the same channel. When a station attempts to transmit, it detects if its transmission has interfered with an existing transmission: this is known as a collision. If a collision occurs the station becomes *backlogged*and attempts to transmit at a later time. If both stations attempted to retransmit after the *same*period of time they would simply collide again after retransmission. To avoid this problem the stations normally wait for a random period of time before retransmitting.
 For this network we assume that each station, after a given propagation delay, can tell whether the transmitted packets were correctly received. Furthermore, we assume that each packet requires 1 `time unit' for transmission. This means that if a packet of interest is sent at time $t$, then any other packet sent between time $t-1$ and time $t+1$ will collide with our packet.}
 
 \figure{\includepng{\diagramsDir/npa/pureALOHA}{100%}}{Pure ALOHA, packets collide with any other packet transmitted within one time unit of their transmission. The diagram shows a packet sent at $t$ and packets sent at $t+1$ and $t-1$. Any packet sent after $t-1$ and before $t+1$ will collide with the packet sent at $t$.}{pureALOHA}
@@ -70,7 +69,7 @@ Given this assumption, can we compute the delay associated with this backlogged 
 
 \notes{\subsection{Sums of Exponential Variables and the Erlang Distribution\label{sub:erlang}}}
 
-\notes{If a random variable, $x$, is exponentially distributed with rate parameter $b$. The sum of $a$ random variables, each of which is exponentially distributed with rate parameter $b$ is distributed as an *Erlang distribution. *Consider variables a set of $a$ variables$\left(x_{1}\dots x_{a}\right)$ which are each governed by the same exponential distribution, $$
+\notes{If a random variable, $x$, is exponentially distributed with rate parameter $b$. The sum of $a$ random variables, each of which is exponentially distributed with rate parameter $b$ is distributed as an *Erlang distribution.*Consider variables a set of $a$ variables$\left(x_{1}\dots x_{a}\right)$ which are each governed by the same exponential distribution, $$
 p\left(x_{i}|b\right)=b\exp\left(-bx_{i}\right).$$We define the sum of the values to be, $z=\sum_{i=1}^{a}x_{i}$. The distribution governing $z$ is then an *Erlang distribution*, given by $$
 p\left(z|a,b\right)=\frac{b^{a}}{\left(a-1\right)!}z^{a-1}\exp\left(-bz\right).$$Note that this distribution is a generalisation of the exponential distribution because the exponential is the special case where $a=1$. This clearly should be the case because if $a=1$ then the `sum' of that variable will simply be the variable itself.}
 
@@ -104,7 +103,7 @@ $$
 \left(1-2n\mu\right)\exp\left(-2\left(\lambda+n\mu\right)\right)=0.$$There are two solutions to this equation. The first is $\exp\left(-2\left(\lambda+n\mu\right)\right)=0$, meaning that $\lambda+n\mu\rightarrow\infty$. This solution is a minimiser . The other solution is given when $$
 0=1-2n\mu$$or$$
 \mu=\frac{1}{2n},$$ this turns out to be a maximum of (\ref{eq:rateFunctionALOHA}). A maximum is what we want because by maximising the `rate' parameter $\mu^{\prime}$ we minimise the average delay associated with the backlog, which is given by $\bar{W}=\frac{1}{\mu}$, so by setting $\mu=\frac{1}{2n}$ we find a minimum for the average delay which is given by $$
-\bar{W}_{\textrm{min}}=2n\exp\left(2\lambda+1\right).$$ In practice it may be difficult to set the rate $\mu$ to something that is dependent on the number of backlogged nodes. this is because the number of backlogged nodes can only be known by nodes communicating their status over the network and we have not allowed for such a mechanism in our analysis. Note that the minimum average delay goes up linearly with the number of backlogged nodes and *exponentially *with the rate of arrivals for the system, $\lambda$.}
+\bar{W}_{\textrm{min}}=2n\exp\left(2\lambda+1\right).$$ In practice it may be difficult to set the rate $\mu$ to something that is dependent on the number of backlogged nodes. this is because the number of backlogged nodes can only be known by nodes communicating their status over the network and we have not allowed for such a mechanism in our analysis. Note that the minimum average delay goes up linearly with the number of backlogged nodes and *exponentially*with the rate of arrivals for the system, $\lambda$.}
 
 \notes{## Examples}
 
@@ -117,7 +116,6 @@ G^{\prime}=G\exp\left(-2G\right)$$differentiating with respect to $G$ we obtain
 \left(1-2G\right)\exp\left(-2G\right)=0$$which implies that either $\exp\left(-2G\right)=0$, this happens when $G\rightarrow\infty$ and $G^{\prime}\rightarrow0$; or $\left(1-2G\right)=0$ which implies that $G=\frac{1}{2}$. The first of these stationary points is a minimum, the second is a maximum. To find the value of the maximum we insert $G=\frac{1}{2}$ into our throughput equation giving$$
 G^{\prime}=\frac{1}{2}\exp\left(-1\right)\approx0.184.$$}
 
-\notes{### Answer}
 
 \notes{\bibtex[abbrvnat]{lawrence,other,zbooks}}
 

@@ -30,7 +30,6 @@ categories:
 <!--
 
 -->
-<p>% generated — do not edit; scripts/convert/run.py</p>
 <h1 id="stationary-distribution">Stationary Distribution</h1>
 <p>In the context of the Erlang delay system it is usual to refer to the `average holding time’, <span class="math inline">\(\tau=\frac{1}{\mu}\equiv\bar{X}\)</span>, which, for a network involving telephones, would be the time a call is open. We give a schematic overview of an Erlang delay system in Figure  <span class="math inline">\(\ref{cap:erlangDelaySchematic}\)</span>. It shows the offered load, <span class="math inline">\(a=\frac{\lambda}{\mu}\)</span>, arriving in the system through a queue. The system is <em>lossless</em>, so the carried load (sometimes denoted <span class="math inline">\(a^{\prime}\)</span>) is also equal to <span class="math inline">\(a\)</span>.</p>
 <div class="figure">
@@ -82,7 +81,7 @@ P\left(k\geq m\right) &amp; = &amp; \sum_{k=m}^{\infty}P\left(k\right)\\
 C\left(m,a\right)=P\left(0\right)\frac{\left(\rho m\right)^{m}}{m!\left(1-\rho\right)}.\label{eq:ErlangCone}\end{equation}\]</span>This is known as the <em>Erlang C formula</em>, or Erlang’s second formula after A.K. Erlang a pioneer of queueing theory. By making use of our definition of <span class="math inline">\(a\)</span> (from Section  <span class="math inline">\(\ref{sub:offeredLoad}\)</span>), we can rewrite the offered load as<span class="math display">\[
 a=\frac{\lambda}{\mu}=m\rho\]</span> and substituting into (<span class="math inline">\(\ref{eq:ErlangCone}\)</span>) we have <span class="math display">\[
 C(m,a)=\frac{P\left(0\right)a^{m}}{m!\left(1-\frac{a}{m}\right)}.\]</span>The result of this formula can be computed on a computer: but some care must be taken when computing it. In particular when <span class="math inline">\(m\)</span> is large overflow problems will occur for <span class="math inline">\(a^{m}\)</span> and <span class="math inline">\(m!\)</span>. If we naively compute the ration <span class="math inline">\(\frac{a^{m}}{m!}\)</span> we will obtain an overflow error. Instead we can compute the formula in log space,<span class="math display">\[
-\ln C\left(m,a\right)=\ln P\left(0\right)+m\ln a-\ln m!-\ln\left(1-\frac{a}{m}\right).\]</span>Some care still needs to be taken with the <span class="math inline">\(\ln P\left(0\right)\)</span> term, but each of the other terms can be computed with appropriate functions in MATLAB. To compute a log factorial the log of the <em>gamma function </em>is used. When we need to compute the Erlang C curve, for the purposes of exams and exercises, we will use the old fashioned method of curves.</p>
+\ln C\left(m,a\right)=\ln P\left(0\right)+m\ln a-\ln m!-\ln\left(1-\frac{a}{m}\right).\]</span>Some care still needs to be taken with the <span class="math inline">\(\ln P\left(0\right)\)</span> term, but each of the other terms can be computed with appropriate functions in Python (<code>scipy.special.gammaln</code>). To compute a log factorial the log of the <em>gamma function</em>is used. When we need to compute the Erlang C curve, for the purposes of exams and exercises, we will use the old fashioned method of curves.</p>
 <h1 id="erlang-c-curves">Erlang C Curves</h1>
 <p>We have provided you with two sets of curves in Figure  <span class="math inline">\(\ref{cap:erlangCOne}\)</span> and <span class="math inline">\(\ref{cap:erlangCTwo}\)</span>. In an exam, if they are needed, curves will be provided with the exam paper. Make sure you mark the curves and hand them in with your paper. To illustrate the use of the curves we will consider a simple telephone trunking example and a customer service centre example, see Examples  <span class="math inline">\(\ref{example:telephoneTrunking}\)</span> and  <span class="math inline">\(\ref{example:customerService}\)</span> at the end of this chapter.</p>
 <div class="figure">
@@ -121,14 +120,17 @@ C(m,a)=\frac{P\left(0\right)a^{m}}{m!\left(1-\frac{a}{m}\right)}.\]</span>The re
 \bar{N}_{Q}=\frac{\rho}{1-\rho}C(m,a)\]</span> so using Little’s formula the average queueing time is simply <span class="math display">\[
 \bar{W}=\frac{\bar{N}_{Q}}{\lambda}=\frac{C(m,a)}{m\mu(1-\rho)}.\]</span>(see Example  <span class="math inline">\(\ref{example:erlangDelayWait}\)</span>) . Note that this is the average queueing time for all customers (whether they queued or not). It might be more informative to compute the average queueing time for those who actually queue. This can be easily done using the fact that the average queueing time for those who don’t queue is zero. The average queueing time can be decomposed as <span class="math display">\[
 \bar{W}=C\left(m,a\right)\bar{W}_{Q}+\left(1-C\left(m,a\right)\right)\bar{W}_{\sim Q},\]</span>where <span class="math inline">\(\bar{W}_{Q}\)</span> is the average queueing time for those who do queue and <span class="math inline">\(\bar{W}_{\sim Q}\)</span> is the average queueing time for those who don’t queue. Since <span class="math inline">\(\bar{W}_{\sim Q}=0\)</span> the second term in this sum is zero, so we can rewrite in terms of <span class="math inline">\(\bar{W}_{Q}\)</span> as <span class="math display">\[
-\bar{W}_{Q}=\frac{\bar{W}}{C\left(m,a\right)}=\frac{1}{m\mu\left(1-\rho\right)}=\frac{1}{\mu\left(m-a\right)}.\]</span>Note that the result shows that the average queueing time for those who do queue is <em>independent </em>of the probability of queueing.</p>
+\bar{W}_{Q}=\frac{\bar{W}}{C\left(m,a\right)}=\frac{1}{m\mu\left(1-\rho\right)}=\frac{1}{\mu\left(m-a\right)}.\]</span>Note that the result shows that the average queueing time for those who do queue is <em>independent</em>of the probability of queueing.</p>
 <h2 id="examples">Examples</h2>
 <ol type="1">
-<li><p><strong>Erlang Delay Stationary Distribution. </strong>Derive the stationary distribution for the Erlang delay system. [0] The `death rate’ <span class="math inline">\(\mu_{k}\)</span> has different definitions for different parts of the state space. To derive the detailed balance equation we need to consider detailed balance for each part in turn, When the system’s state, <span class="math inline">\(k\)</span>, is less than or equal to the number of servers we have boundary flow as in Figure  <span class="math inline">\(\ref{cap:flowAtBoundaryMMma}\)</span>,which leads to the following balance equation <span class="math display">\[
+<li><strong>Erlang Delay Stationary Distribution.</strong>Derive the stationary distribution for the Erlang delay system.</li>
+</ol>
+<h2 id="answer">Answer</h2>
+The `death rate’ <span class="math inline">\(\mu_{k}\)</span> has different definitions for different parts of the state space. To derive the detailed balance equation we need to consider detailed balance for each part in turn, When the system’s state, <span class="math inline">\(k\)</span>, is less than or equal to the number of servers we have boundary flow as in Figure  <span class="math inline">\(\ref{cap:flowAtBoundaryMMma}\)</span>,which leads to the following balance equation <span class="math display">\[
 \lambda P\left(k-1\right)=k\mu P\left(k\right).\]</span>As a result, for <span class="math inline">\(k=0\dots m\)</span> we may write P(k)=P(k-1).It will prove convenient to define <span class="math display">\[
 \rho=\frac{\lambda}{m\mu}\]</span>which in turn gives <span class="math display">\[
 \frac{\lambda}{k\mu}=\frac{m\rho}{k}\]</span>which we substitute back into (<span class="math inline">\(\ref{eq:PkForPartA}\)</span>) obtaining<span class="math display">\[
-P\left(k\right)=\frac{m\rho}{k}P\left(k-1\right)\]</span>and as before P(k)=P(0) &amp; &amp; km [ht] </p>
+P\left(k\right)=\frac{m\rho}{k}P\left(k-1\right)\]</span>and as before
 <div class="figure">
 <div id="boundaryFlowMMinf-figure" class="figure-frame">
 <div class="centered" style="">
@@ -144,49 +146,37 @@ P\left(k\right)=\frac{m\rho}{k}P\left(k-1\right)\]</span>and as before P(k)=P(0)
 <p>Figure: boundaryFlowMMinf</p>
 </div>
 </div>
-<div class="caption" style="">
-Figure: Flow rates at a boundary.
-</div>
-<p></p>
-<p>When the system’s state is greater than <span class="math inline">\(m\)</span>, <span class="math inline">\(k&gt;m\)</span> the flow at the boundary is as in Figure  <span class="math inline">\(\ref{cap:flowAtBoundaryMMmb}\)</span>, the detailed balance equation is thenwhich leads to <span class="math display">\[
-\lambda P(k-1)=m\mu P\left(k\right)\]</span>therefore for <span class="math inline">\(k=m+1\dots\infty\)</span> we may write<span class="math display">\[
-P\left(k\right)=\frac{\lambda}{m\mu}P\left(k-1\right)\]</span>using <span class="math inline">\(\rho=\frac{\lambda}{m\mu}\)</span> we then have<span class="math display">\[
-P\left(k\right)=\rho P\left(k-1\right)\]</span>leading to <span class="math display">\[
-P\left(k\right)=\rho^{k-m}P\left(m\right).\]</span>Finally we use (<span class="math inline">\(\ref{eq:probabilities}\)</span>) and substitute <span class="math inline">\(k\)</span> with <span class="math inline">\(m\)</span> to find <span class="math inline">\(P\left(m\right)\)</span> which leads to<span class="math display">\[
-P\left(m\right)=\frac{\left(m\rho\right)^{m}}{m!}P\left(0\right)\]</span>therefore P(k)=P(0) &amp; &amp; k&gt;mthus we can write<span class="math display">\[
+<pre><code>When the system&#39;s state is greater than $m$, $k&gt;m$ the flow at the boundary is as in Figure\  \ref{cap:flowAtBoundaryMMmb}, the detailed balance equation is thenwhich leads to $$</code></pre>
+<p>P(k-1)=mP(k)<span class="math display">\[therefore for $k=m+1\dots\infty$ we may write\]</span> P(k)=P(k-1)<span class="math display">\[using $\rho=\frac{\lambda}{m\mu}$ we then have\]</span> P(k)=P(k-1)<span class="math display">\[leading to \]</span> P(k)=^{k-m}P(m).<span class="math display">\[Finally we use (\ref{eq:probabilities}) and substitute $k$ with $m$ to find $P\left(m\right)$ which leads to\]</span> P(m)=P(0)<span class="math display">\[therefore
 P\left(k\right)=\left\{ {cc}
-P\left(0\right)\frac{(m\rho)^{k}}{k!}, &amp; k\leq m\\
-P\left(0\right)\frac{m^{m}\rho^{k}}{m!} &amp; k&gt;m\right.\]</span> [ht] </p>
-<div class="figure">
-<div id="boundaryFlowMMm-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/boundaryFlowMMm.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="boundaryFlowMMm-magnify" class="magnify" onclick="magnifyFigure(&#39;boundaryFlowMMm&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="boundaryFlowMMm-caption" class="caption-frame">
-<p>Figure: boundaryFlowMMm</p>
-</div>
-</div>
-<div class="caption" style="">
-Figure: Flow rates at a boundary.
-</div>
-<p></p>
-<p>Once again we can compute <span class="math inline">\(P\left(0\right)\)</span> through normalisation _{k=0}^{}P(k) &amp; = &amp; 1\ P(0)&amp; = &amp; 1\ P(0) &amp; = &amp; ^{-1}.Consider the second term inside the bracket,<span class="math display">\[
+      &lt;div class=&quot;figure&quot;&gt;
+&lt;div class=&quot;figure-frame&quot; id=&quot;boundaryFlowMMm-figure&quot;&gt;
+&lt;div class=&quot;centered &quot; style=&quot;&quot;&gt;&lt;img class=&quot;&quot; src=&quot;https://mlatcl.github.io/npa/slides/diagrams/npa/boundaryFlowMMm.png&quot; width=&quot;40%&quot; height=&quot;auto&quot; align=&quot;center&quot; style=&quot;background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;magnify&quot; id=&quot;boundaryFlowMMm-magnify&quot; onclick=&quot;magnifyFigure(&#39;boundaryFlowMMm&#39;)&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;img-button&quot; aria-label=&quot;Enlarge figure&quot;&gt;&lt;img src=&quot;{{ &#39;/assets/images/Magnify_Large.svg&#39; | relative_url }}&quot; style=&quot;width:1.5em; min-width:44px; min-height:44px; padding:0.5em&quot;&gt;&lt;/button&gt;&lt;/div&gt;
+&lt;div class=&quot;caption-frame&quot; id=&quot;boundaryFlowMMm-caption&quot;&gt;
+Figure: boundaryFlowMMm
+&lt;/div&gt;
+&lt;/div&gt;
+    Once again we can compute $P\left(0\right)$ through normalisation
 \sum_{k=m}^{\infty}\frac{m^{m}}{m!}\rho^{k}=\frac{m^{m}\rho^{m}}{m!}\sum_{k=m}^{\infty}\rho^{k-m}\]</span>substitute in <span class="math inline">\(k^{\prime}=k-m\)</span> and we obtain<span class="math display">\[
 \frac{m^{m}\rho^{m}}{m!}\sum_{k^{\prime}=0}^{\infty}\rho^{k^{\prime}}=\frac{m^{m}\rho^{m}}{m!}\frac{1}{1-\rho}\]</span>because, as we saw in Section  <span class="math inline">\(\ref{sec:MM1Stationary}\)</span> <span class="math display">\[
 \sum_{k=0}^{\infty}\rho^{k}=\frac{1}{1-\rho}\]</span> if <span class="math inline">\(\rho&lt;1\)</span>. Thus we have<span class="math display">\[
-P\left(0\right)=\left[\sum_{k=0}^{m-1}\frac{\left(m\rho\right)^{k}}{k!}+\frac{m^{m}\rho^{m}}{m!\left(1-\rho\right)}\right]^{-1}.\]</span>Note that this relies on <span class="math inline">\(\rho&lt;1\)</span>, if <span class="math inline">\(\lambda\geq m\mu\)</span> the system has no stationary distribution.}{0}</p></li>
-</ol>
-<h3 id="answer">Answer</h3>
+P\left(0\right)=\left[\sum_{k=0}^{m-1}\frac{\left(m\rho\right)^{k}}{k!}+\frac{m^{m}\rho^{m}}{m!\left(1-\rho\right)}\right]^{-1}.\]</span>Note that this relies on <span class="math inline">\(\rho&lt;1\)</span>, if <span class="math inline">\(\lambda\geq m\mu\)</span> the system has no stationary distribution.</p>
+<p><span class="math display">\[\begin{eqnarray*}
+P\left(k\right)=\frac{\left(m\rho\right)^{k}}{k!}P\left(0\right) &amp; \textrm{for} &amp; k\leq m
+P\left(k\right)=\frac{m^{m}\rho^{k}}{m!}P\left(0\right) &amp; \textrm{for} &amp; k&gt;mthus we can write$$
+P\left(0\right)\frac{(m\rho)^{k}}{k!}, &amp; k\leq m\\
+P\left(0\right)\frac{m^{m}\rho^{k}}{m!} &amp; k&gt;m\right.$$
+\sum_{k=0}^{\infty}P\left(k\right) &amp; = &amp; 1\\
+P\left(0\right)\left[\sum_{k=0}^{m-1}\frac{\left(m\rho\right)^{k}}{k!}+\sum_{k=m}^{\infty}\frac{m^{m}\rho^{k}}{m!}\right] &amp; = &amp; 1\\
+P\left(0\right) &amp; = &amp; \left[\sum_{k=0}^{m-1}\frac{\left(m\rho\right)^{k}}{k!}+\sum_{k=m}^{\infty}\frac{m^{m}\rho^{k}}{m!}\right]^{-1}.Consider the second term inside the bracket,$$
+\end{eqnarray*}\]</span>}</p>
 <h4 id="kleq-m"><span class="math inline">\(k\leq m\)</span></h4>
 <h4 id="km"><span class="math inline">\(k&gt;m\)</span></h4>
 <h3 id="normalisation-condition">Normalisation Condition</h3>
-{1. Consider the telephone trunking problem. A telephone exchange A is to server 10,000 subscribers in a nearby exchange as shown in Figure  <span class="math inline">\(\ref{fig:exchange}\)</span>. Suppose that during the busy hour, the subscribers generate a Poisson traffic with a rate of 10 calls per minute, which requires trunk lines to exchange B for an average holding time of 3 minutes per call. Determine the number of trunk lines needed for a grade of service (probability of waiting) of 0.01. [ht]
+<ol type="1">
+<li>Consider the telephone trunking problem. A telephone exchange A is to server 10,000 subscribers in a nearby exchange as shown in Figure  <span class="math inline">\(\ref{fig:exchange}\)</span>. Suppose that during the busy hour, the subscribers generate a Poisson traffic with a rate of 10 calls per minute, which requires trunk lines to exchange B for an average holding time of 3 minutes per call. Determine the number of trunk lines needed for a grade of service (probability of waiting) of 0.01. [ht]
 <div class="figure">
 <div id="exchange-figure" class="figure-frame">
 <div class="centered" style="">
@@ -202,67 +192,37 @@ P\left(0\right)=\left[\sum_{k=0}^{m-1}\frac{\left(m\rho\right)^{k}}{k!}+\frac{m^
 <p>Figure: exchange</p>
 </div>
 </div>
-<pre><code>&lt;div class=&quot;caption&quot; style=&quot;&quot;&gt;Figure: The telephone exchange.&lt;/div&gt;
-\label{fig:exchange}</code></pre>
-<p>[0] Average call rate is <span class="math inline">\(\lambda=10\)</span> calls/minute. Average holding time is <span class="math inline">\(\tau=3\)</span> minutes. Offered load <span class="math inline">\(a=\lambda\tau\)</span> is 30 Erlangs. From the Erlang C curves in Figure  <span class="math inline">\(\ref{cap:erlangCOne}\)</span> it looks to be about 44.}{0}</p>
-<h4 id="answer-1">Answer</h4>
-<ol type="1">
-<li>A customer service centre has an average holding time, <span class="math inline">\(\tau\)</span>, for calls of 8 minutes. In the busy hour, calls arrive at the centre at a rate of one very two minutes. Inter-arrival times and service times are exponentially distributed, how many personnel are required to keep the probability of waiting at 0.1. [0] Average call rate is <span class="math inline">\(\lambda=0.5\)</span> calls/minute. Average holding time is <span class="math inline">\(\tau=8\)</span> minutes. Offered load is <span class="math inline">\(a=\lambda\tau\)</span> is 4 Erlangs. From the Erlang C curves in Figure  <span class="math inline">\(\ref{cap:erlangCOne}\)</span> it looks to be about 8.</li>
+<div class="caption" style="">
+Figure: The telephone exchange.
+</div>
+</li>
 </ol>
-<h4 id="answer-2">Answer</h4>
-<p>{1. What is the average queueing time for Example  <span class="math inline">\(\ref{example:customerService}\)</span> above? What is the average queueing time for those customers who do queue? [0] The number of servers was <span class="math inline">\(m=8\)</span> and service rate was <span class="math inline">\(\mu=\frac{1}{8}\)</span>. The utilization factor was <span class="math inline">\(\rho=\frac{\lambda}{m\mu}=\frac{1}{2}\)</span>. The delay is <span class="math display">\[
-\bar{W}=\frac{C(m,a)}{m\mu(1-\rho)}.\]</span><span class="math inline">\(\frac{0.6}{8\frac{1}{8}\left(1-\frac{1}{2}\right)}=0.2\)</span> minutes, or 12 seconds. The queueing time for those who have to queue is <span class="math inline">\(\frac{\bar{W}}{C(m,a)}\)</span>. For our example <span class="math inline">\(\frac{\bar{W}}{0.1}=\frac{0.2}{0.1}=2\)</span> minutes.}{0}</p>
-<h4 id="answer-3">Answer</h4>
-<p>% generated — do not edit; scripts/convert/run.py</p>
-<!-- original A4 foil 123: Erlang Delay $M$/$M$/$m$ -->
-<div class="figure">
-<div id="cap:erlangDelaySchematic-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/erlangDelayDiagram.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="cap:erlangDelaySchematic-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:erlangDelaySchematic&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="cap:erlangDelaySchematic-caption" class="caption-frame">
-<p>Figure: Queueing model of the Erlang delay system.</p>
-</div>
-</div>
-<!-- original A4 foil 123: Erlang Delay $M$/$M$/$m$ -->
-<!-- original A4 foil 124: State Diagram -->
-<div class="figure">
-<div id="erlangDelay-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/erlangDelay.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="erlangDelay-magnify" class="magnify" onclick="magnifyFigure(&#39;erlangDelay&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="erlangDelay-caption" class="caption-frame">
-<p>Figure: State diagram of an Erlang delay system.</p>
-</div>
-</div>
-<!-- original A4 foil 124: State Diagram -->
-<!-- original A4 foil 125: Detailed Balance -->
-<!-- original A4 foil 126: The Two Situations -->
-<!-- original A4 foil 127: Stationary Distribution -->
-<!-- original A4 foil 128: Probability of Waiting -->
-<!-- original A4 foil 129: Probability of Waiting contd -->
-<!-- original A4 foil 130: Erlang C Formula -->
-<!-- original A4 foil 131: Computing the Erlang C Formula -->
-<!-- original A4 foil 131: Computing the Erlang C Formula -->
-<!-- original A4 foil 132: Erlang C Curves -->
-<!-- original A4 foil 133: Examples -->
-<!-- original A4 foil 134: Average number in System. -->
-<!-- original A4 foil 135: Average Queueing Time -->
-<!-- original A4 foil 136: Queueing Time for those who Queue -->
-<!-- original A4 foil 136: Queueing Time for those who Queue -->
-<!-- original A4 foil 137: Example -->
+<h2 id="answer-1">Answer</h2>
+<p>Average call rate is <span class="math inline">\(\lambda=10\)</span> calls/minute. Average holding time is <span class="math inline">\(\tau=3\)</span> minutes. Offered load <span class="math inline">\(a=\lambda\tau\)</span> is 30 Erlangs. From the Erlang C curves in Figure  <span class="math inline">\(\ref{cap:erlangCOne}\)</span> it looks to be about 44.</p>
+<ol type="1">
+<li>A customer service centre has an average holding time, <span class="math inline">\(\tau\)</span>, for calls of 8 minutes. In the busy hour, calls arrive at the centre at a rate of one very two minutes. Inter-arrival times and service times are exponentially distributed, how many personnel are required to keep the probability of waiting at 0.1.</li>
+</ol>
+<h2 id="answer-2">Answer</h2>
+<p>Average call rate is <span class="math inline">\(\lambda=0.5\)</span> calls/minute. Average holding time is <span class="math inline">\(\tau=8\)</span> minutes. Offered load is <span class="math inline">\(a=\lambda\tau\)</span> is 4 Erlangs. From the Erlang C curves in Figure  <span class="math inline">\(\ref{cap:erlangCOne}\)</span> it looks to be about 8.</p>
+<ol type="1">
+<li><p>What is the average queueing time for Example  <span class="math inline">\(\ref{example:customerService}\)</span> above? What is the average queueing time for those customers who do queue?</p>
+<p>The number of servers was <span class="math inline">\(m=8\)</span> and service rate was <span class="math inline">\(\mu=\frac{1}{8}\)</span>. The utilization factor was <span class="math inline">\(\rho=\frac{\lambda}{m\mu}=\frac{1}{2}\)</span>. The delay is <span class="math display">\[
+\bar{W}=\frac{C(m,a)}{m\mu(1-\rho)}.\]</span><span class="math inline">\(\frac{0.6}{8\frac{1}{8}\left(1-\frac{1}{2}\right)}=0.2\)</span> minutes, or 12 seconds. The queueing time for those who have to queue is <span class="math inline">\(\frac{\bar{W}}{C(m,a)}\)</span>. For our example <span class="math inline">\(\frac{\bar{W}}{0.1}=\frac{0.2}{0.1}=2\)</span> minutes.}</p></li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>_root <span class="op">=</span> os.path.abspath(os.path.join(os.getcwd(), <span class="st">&#39;..&#39;</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>_py <span class="op">=</span> os.path.join(_root, <span class="st">&#39;python&#39;</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> os.path.isdir(_py) <span class="kw">and</span> _py <span class="kw">not</span> <span class="kw">in</span> sys.path:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    sys.path.insert(<span class="dv">0</span>, _py)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> npa_plots</span></code></pre></div>
+<p>The MATLAB helpers <code>erlangC.m</code> / <code>plotErlang.m</code> are <code>npa_plots.erlang_c</code> and <code>npa_plots.plot_erlang_curves</code>. <span class="math inline">\(\ln m!\)</span> is <span class="math inline">\(\ln\Gamma(m+1)\)</span>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> npa_plots.plot_erlang_curves(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>), np.linspace(<span class="fl">0.05</span>, <span class="dv">20</span>, <span class="dv">400</span>), kind<span class="op">=</span><span class="st">&quot;C&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">&quot;Erlang C, offered traffic 0 to 20&quot;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -273,5 +233,21 @@ P\left(0\right)=\left[\sum_{k=0}^{m-1}\frac{\left(m\rho\right)^{k}}{k!}+\frac{m^
 <li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
 <li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
-<h1 id="references">References</h1>
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li>The <span class="math inline">\(M/M/m\)</span> delay system and Erlang C of <span class="citation" data-cites="Bertsekas:data92">Bertsekas and Gallager (1992)</span></li>
+</ul>
+<h2 id="exercises">Exercises</h2>
+<ul>
+<li>Tutorial Sheet 3: call-centre Erlang C of <span class="citation" data-cites="npa-tutorial3">Lawrence (2006)</span></li>
+</ul>
+<h1 class="unnumbered" id="references">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Bertsekas:data92" class="csl-entry" role="listitem">
+Bertsekas, D.P., Gallager, R.G., 1992. Data networks, Second. ed. Prentice-Hall, Upper Saddle River, NJ.
+</div>
+<div id="ref-npa-tutorial3" class="csl-entry" role="listitem">
+Lawrence, N.D., 2006. <a href="https://mlatcl.github.io/npa/">Erlang delay and loss and the <span>M/G/1</span> queue</a>.
+</div>
+</div>
 

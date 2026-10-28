@@ -1,4 +1,3 @@
-% generated — do not edit; scripts/convert/run.py
 \ifndef{npaGenNotesProbabilityReview}
 \define{npaGenNotesProbabilityReview}
 
@@ -12,7 +11,7 @@
 
 \notes{\subsection{Notational Details}}
 
-\notes{Strictly speaking, when we write probability distributions we should write them out in full (*e.g. * for the joint distribution, $P\left(X=x,Y=y\right)$). However, in practice, we often use a shorthand notation: $P\left(x,y\right)$. This is convenient, but it can lead to confusion. It looks very much like we might write a multivariate function, *e.g. *$f\left(x,y\right)=\frac{x}{y}$. For a multivariate function though, $f\left(x,y\right)\neq f\left(y,x\right)$ in general. However, for our probability shorthand $P\left(x,y\right)=P\left(y,x\right)$ because $P\left(X=x,Y=y\right)=P\left(Y=y,X=x\right)$.
+\notes{Strictly speaking, when we write probability distributions we should write them out in full (*e.g.* for the joint distribution, $P\left(X=x,Y=y\right)$). However, in practice, we often use a shorthand notation: $P\left(x,y\right)$. This is convenient, but it can lead to confusion. It looks very much like we might write a multivariate function, *e.g.*$f\left(x,y\right)=\frac{x}{y}$. For a multivariate function though, $f\left(x,y\right)\neq f\left(y,x\right)$ in general. However, for our probability shorthand $P\left(x,y\right)=P\left(y,x\right)$ because $P\left(X=x,Y=y\right)=P\left(Y=y,X=x\right)$.
 We have denoted the probability distribution with a capital $P$. In *these notes* we will use capital $P$s consistently to denote discrete distributions. Later, when we come on to continuous probability density functions, we will turn to small letters.}
 
 \notes{\section{Probability Rules}}
@@ -26,7 +25,7 @@ We have denoted the probability distribution with a capital $P$. In *these notes
 
 \notes{\subsection{The Sum Rule}}
 
-\notes{The sum rule describes how we can obtain a marginal distribution from the joint distribution. The distribution is called the marginal distribution because one of the variables in the joint distribution is* marginalised*, *i.e. * it is removed from the distribution (you can think of it being written in the margin). The marginal probability $P\left(y\right)$ is given by $\lim_{N\rightarrow\infty}\frac{n_{Y=y}}{N}$ and the joint distribution $P\left(x,y\right)$ is given by $\lim_{N\rightarrow\infty}\frac{n_{X=x,Y=y}}{N}$. Now we note (using Figure\  \ref{cap:aJointDistribution}) that $n_{Y=y}=\sum_{x}n_{X=x,Y=y}$, where the sum is over all possible values of $X$. We therefore find that$$
+\notes{The sum rule describes how we can obtain a marginal distribution from the joint distribution. The distribution is called the marginal distribution because one of the variables in the joint distribution is*marginalised*, *i.e.* it is removed from the distribution (you can think of it being written in the margin). The marginal probability $P\left(y\right)$ is given by $\lim_{N\rightarrow\infty}\frac{n_{Y=y}}{N}$ and the joint distribution $P\left(x,y\right)$ is given by $\lim_{N\rightarrow\infty}\frac{n_{X=x,Y=y}}{N}$. Now we note (using Figure\  \ref{cap:aJointDistribution}) that $n_{Y=y}=\sum_{x}n_{X=x,Y=y}$, where the sum is over all possible values of $X$. We therefore find that$$
 \lim_{N\rightarrow\infty}\frac{n_{Y=y}}{N}=\lim_{N\rightarrow\infty}\sum_{x}\frac{n_{X=x,Y=y}}{N},$$or in other words$$
 P\left(y\right)=\sum_{x}P\left(x,y\right).$$This is known as the sum rule of probability.}
 
@@ -83,7 +82,7 @@ As we mentioned in Section\  \ref{sec:expectations}, the expectations under a di
 
 \notes{\section{Continuous Variables}}
 
-\notes{So far we have discussed a value for discrete values of $x$ or $y$. We now turn to a continuous models. First though we introduce the probability distribution's sister, the *probability density function* (PDF). In the discrete case, we defined probability distributions over a discrete number of states. However, if we wish to model a continuous value, such as the height of a computer science student, how do we represent it as a probability distribution? One way would be to `discretise' the continuous value by splitting it into discrete regions. We effectively did this in the example in Figure\  \ref{cap:aJointDistribution}. So, for our height example, we could model the probability that your height was between $1.6\textrm{m}$ and $1.7\textrm{m}$, or alternatively we could ask what is the probability that you are over $1.8\textrm{m}$ given that you are a computer scientist? However, remodelling for each of these questions would be rather tedious. It would be more convenient if we could develop a representation which could answer *any *question we chose to ask about a computer scientist's height. This is what a probability density function represents. It does not represent probabilities directly, but from it they may be derived.}
+\notes{So far we have discussed a value for discrete values of $x$ or $y$. We now turn to a continuous models. First though we introduce the probability distribution's sister, the *probability density function* (PDF). In the discrete case, we defined probability distributions over a discrete number of states. However, if we wish to model a continuous value, such as the height of a computer science student, how do we represent it as a probability distribution? One way would be to `discretise' the continuous value by splitting it into discrete regions. We effectively did this in the example in Figure\  \ref{cap:aJointDistribution}. So, for our height example, we could model the probability that your height was between $1.6\textrm{m}$ and $1.7\textrm{m}$, or alternatively we could ask what is the probability that you are over $1.8\textrm{m}$ given that you are a computer scientist? However, remodelling for each of these questions would be rather tedious. It would be more convenient if we could develop a representation which could answer *any*question we chose to ask about a computer scientist's height. This is what a probability density function represents. It does not represent probabilities directly, but from it they may be derived.}
 
 \figure{\includepng{\diagramsDir/npa/pdfOfHeight}{60%}}{A Gaussian PDF representing heights of computer scientists.}{cap:heightPDF}
 
@@ -93,7 +92,7 @@ As we mentioned in Section\  \ref{sec:expectations}, the expectations under a di
 \notes{\subsection{Manipulating PDFs}}
 
 \notes{The same rules that apply to probability distributions may also be applied to PDFs. We won't derive this here, but take it as given that$$
-p\left(y|x\right)=\frac{p\left(x|y\right)p\left(y\right)}{p\left(x\right)}$$where $p\left(x,y\right)=p\left(x|y\right)p\left(y\right)$ and for continuous variables $p\left(x\right)=\int p\left(x,y\right)dy$. Here the integral is over the region for which our PDF for $y$ is defined (*e.g. *all real numbers or all positive real numbers). Additionally we may mix discrete and continuous variables. If, for example $y$ is discrete and $x$ is continuous, then we may write$$
+p\left(y|x\right)=\frac{p\left(x|y\right)p\left(y\right)}{p\left(x\right)}$$where $p\left(x,y\right)=p\left(x|y\right)p\left(y\right)$ and for continuous variables $p\left(x\right)=\int p\left(x,y\right)dy$. Here the integral is over the region for which our PDF for $y$ is defined (*e.g.*all real numbers or all positive real numbers). Additionally we may mix discrete and continuous variables. If, for example $y$ is discrete and $x$ is continuous, then we may write$$
 P\left(y|x\right)=\frac{p\left(x|y\right)P\left(y\right)}{p\left(x\right)}.$$Finally expectations under a PDF are also computed using the integral instead of the sum so $$
 \left\langle f\left(x\right)\right\rangle _{p\left(x\right)}=\int f\left(x\right)p\left(x\right)dx$$where the integral is over the region for which our PDF for $x$ is defined.}
 
@@ -112,17 +111,17 @@ In Figure\  \ref{cap:heightPDF} we give an example of a cumulative distribution 
 
 \notes{Recall from Section\  \ref{sec:expectations} that expectation of any given function, $f\left(k\right)$, under a distribution, $P\left(k\right)$, can be written as $$
 \left\langle f\left(k\right)\right\rangle _{P\left(k\right)}=\sum_{k}f\left(k\right)P\left(k\right)$$which is also written as $E\left\{ f\left(k\right)\right\} $. Recall our definition of probability from Table\  \ref{cap:aJointDistribution}. $$
-P\left(k\right)=\lim_{S\rightarrow\infty}\frac{s_{k}}{S}$$where we have now used $S$ (instead of $N$) as the total number of samples or trials from a system and $s_{k}$ is the number that have state $k$. When we make *sample based approximations *we hope that $S$ is `large enough' such that it is a good approximation to say$$
+P\left(k\right)=\lim_{S\rightarrow\infty}\frac{s_{k}}{S}$$where we have now used $S$ (instead of $N$) as the total number of samples or trials from a system and $s_{k}$ is the number that have state $k$. When we make *sample based approximations*we hope that $S$ is `large enough' such that it is a good approximation to say$$
 \left\langle f\left(k\right)\right\rangle _{P\left(k\right)}\approx\sum_{k}f\left(k\right)\frac{s_{k}}{S}.$$This formula may be rewritten as:$$
 \sum_{k}f\left(k\right)\frac{s_{k}}{S}=\frac{1}{S}\sum_{k}f\left(k\right)s_{k}.$$Now if $\mathbf{k}$ is a vector of samples from $P\left(k\right)$with elements $k_{i}$ and length $S$ then we can rewrite the above$$
 \frac{1}{S}\sum_{k}f\left(k\right)s_{k}=\frac{1}{S}\sum_{i=1}^{S}f\left(k_{i}\right)$$which provides us with a sample based approximation to the true expectation: $$
-\left\langle f\left(k\right)\right\rangle _{P\left(k\right)}\approx\frac{1}{S}\sum_{i=1}^{S}f\left(k_{i}\right).$$Some well know special cases of this include the *sample mean, *often denoted by $\bar{k}$, and computed as$$
+\left\langle f\left(k\right)\right\rangle _{P\left(k\right)}\approx\frac{1}{S}\sum_{i=1}^{S}f\left(k_{i}\right).$$Some well know special cases of this include the *sample mean,*often denoted by $\bar{k}$, and computed as$$
 \bar{k}=\frac{1}{S}\sum_{i=1}^{S}k_{i},$$this sample based mean is an approximation to the true distribution mean$$
 \left\langle k\right\rangle \approx\bar{k}.$$The same approximations can be used in the context of continuous PDFs, so we have\begin{eqnarray*}
 \left\langle f\left(x\right)\right\rangle _{p\left(x\right)} & = & \int f\left(x\right)p\left(x\right)dx\\
  & \approx & \frac{1}{S}\sum_{i=1}^{S}f\left(x_{i}\right),\end{eqnarray*}where $x_{i}$ are independently obtained samples from the distribution $p\left(x\right)$.
 \footnote{How large $S$ need be is dependent on both the function whose expectation we are estimating and the distribution under which we are taking the expectation.}
-The approximation gets better for increasing $S$ and worse if the samples from $P\left(k\right)$ are *not *independent.}
+The approximation gets better for increasing $S$ and worse if the samples from $P\left(k\right)$ are *not*independent.}
 
 \notes{\paragraph{Sample Means for Student Heights}}
 
@@ -139,7 +138,7 @@ The approximation gets better for increasing $S$ and worse if the samples from $
 
 \notes{## Examples}
 
-\notes{1. Compute the mean of the Poisson distribution, *i.e. *the expectation of $k$ under the distribution $P\left(k|\mu\right)=\frac{\mu^{k}}{k!}e^{-\mu}$.
+\notes{1. Compute the mean of the Poisson distribution, *i.e.*the expectation of $k$ under the distribution $P\left(k|\mu\right)=\frac{\mu^{k}}{k!}e^{-\mu}$.
   [0]
     The mean is given by $$
 \left\langle k\right\rangle _{P\left(k|\mu\right)}=\sum_{k=0}^{\infty}k\frac{\mu^{k}}{k!}e^{-\mu}$$ To make progress with this we first pull out $\mu e^{-\mu}$ and the first $k$ in the factorial, $\frac{k}{k!}=\frac{k}{k(k-1)!}=\frac{1}{(k-1)!}$. We can also remove the first term from the sum because it is multiplied by $k$ which is zero for the first term.
@@ -150,7 +149,5 @@ e^{\mu}=\sum_{m=0}^{\infty}\frac{\mu^{m}}{m!}$$ Substituting this result back in
 \left\langle k\right\rangle =\mu\label{eq:poissonMean3}
   
   *The variance of a Poisson is an exercise in Tutorial Sheet 1.*}
-
-\notes{#### Answer}
 
 \endif

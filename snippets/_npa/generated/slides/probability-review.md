@@ -1,8 +1,5 @@
-% generated — do not edit; scripts/convert/run.py
 \ifndef{npaGenSlidesProbabilityReview}
 \define{npaGenSlidesProbabilityReview}
-
-<!-- original A4 foil 17: Probability Review -->
 
 \newslide{Probability Review}
 
@@ -10,32 +7,22 @@
 * We are interested in trials which result in two random variables, $X$ and $Y$, each of which has an `outcome' denoted by $x$ or $y$.
 * We summarise the notation and terminology for these distributions in the following table.}
 
-<!-- original A4 foil 18: A Pictorial Definition of Probability -->
-
 \newslide{A Pictorial Definition of Probability}
 
-\figure{\includepng{\diagramsDir/npa/probDiagram}{80%}}{Representation of joint and conditional probabilities.}{cap:aJointDistribution}
-
-<!-- original A4 foil 18: A Pictorial Definition of Probability -->
+\slides{\figure{\includepng{\diagramsDir/npa/probDiagram}{80%}}{Representation of joint and conditional probabilities.}{cap:aJointDistribution}}
 
 \newslide{A Pictorial Definition of Probability (continued)}
 
 \slides{* Here is a review of what probabilities are in a two dimensional graph.}
 
-<!-- original A4 foil 19: Different Distributions -->
-
 \newslide{Different Distributions}
-
-<!-- original A4 foil 20: Notational Details -->
 
 \newslide{Notational Details}
 
 \slides{* Typically we should write out $P\left(X=x,Y=y\right)$.
 * In practice, we often use $P\left(x,y\right)$.
-* This looks very much like we might write a multivariate function, *e.g. *$f\left(x,y\right)=\frac{x}{y}$.
+* This looks very much like we might write a multivariate function, *e.g.*$f\left(x,y\right)=\frac{x}{y}$.
 * For a multivariate function though, $f\left(x,y\right)\neq f\left(y,x\right)$.}
-
-<!-- original A4 foil 20: Notational Details -->
 
 \newslide{Notational Details (continued)}
 
@@ -45,14 +32,10 @@
 * For continuous probability density functions, we will turn to small letters.
 * We now consider some `rules of probability'.}
 
-<!-- original A4 foil 21: Normalisation -->
-
 \newslide{Normalisation}
 
 \slides{* All distributions are normalised. This is clear from the fact that $\sum_{x}n_{X=x}=N$, which gives $$
 \sum_{x}P\left(x\right)=\lim_{N\rightarrow\infty}\frac{\sum_{x}n_{X=x}}{N}=\lim_{N\rightarrow\infty}\frac{N}{N}=1.$$A similar result can be derived for the marginal and conditional distributions.}
-
-<!-- original A4 foil 22: The Sum Rule -->
 
 \newslide{The Sum Rule}
 
@@ -62,16 +45,12 @@
 \lim_{N\rightarrow\infty}\frac{n_{Y=y}}{N}=\lim_{N\rightarrow\infty}\sum_{x}\frac{n_{X=x,Y=y}}{N},$$in other words$$
 P\left(y\right)=\sum_{x}P\left(x,y\right).$$This is known as the sum rule of probability.}
 
-<!-- original A4 foil 23: The Product Rule -->
-
 \newslide{The Product Rule}
 
 \slides{* $P\left(x|y\right)$ is given by $\lim_{N\rightarrow\infty}\frac{n_{X=x,Y=y}}{n_{Y=y}}$.
 * $P\left(x,y\right)$ is given by $$
 \lim_{N\rightarrow\infty}\frac{n_{X=x,Y=y}}{N}=\lim_{N\rightarrow\infty}\frac{n_{X=x,Y=y}}{n_{Y=y}}\frac{n_{Y=y}}{N}$$or in other words$$
 P\left(x,y\right)=P\left(x|y\right)P\left(y\right).$$This is known as the product rule of probability.}
-
-<!-- original A4 foil 24: Bayes' Rule -->
 
 \newslide{Bayes' Rule}
 
@@ -81,16 +60,12 @@ P\left(x,y\right)=P\left(y,x\right)=P\left(y|x\right)P\left(x\right),$$
 P\left(x|y\right)P\left(y\right)=P\left(y|x\right)P\left(x\right)$$which leads to Bayes' Rule, $$
 P\left(x|y\right)=\frac{P\left(y|x\right)P\left(x\right)}{P\left(y\right)}.$$}
 
-<!-- original A4 foil 25: Independence -->
-
 \newslide{Independence}
 
 \slides{* The variable $x$ is independent of $y$ if the distribution over $x$ is not affected by the value of $y$:$$
 P\left(x\right)=P\left(x|y\right),$$the conditional distribution of $x$ given $y$ is equal to the marginal distribution of $x$. This in turn implies that the joint distribution factorises,$$
 P\left(x,y\right)=P\left(x|y\right)P\left(y\right)=P\left(x\right)P\left(y\right),$$and furthermore that $$
 P\left(y|x\right)=P\left(y\right).$$The factorisation of the joint distribution when variables are independent turns out to be a very important property which makes a lot of analysis tractable.}
-
-<!-- original A4 foil 26: Expectations\label{sec:expectations} -->
 
 \newslide{Expectations\label{sec:expectations}}
 
@@ -99,8 +74,6 @@ P\left(y|x\right)=P\left(y\right).$$The factorisation of the joint distribution 
 * Expected value of $f\left(x\right)$ under $P\left(x\right)$ is $$
 \left\langle f\left(x\right)\right\rangle _{P\left(x\right)}=\sum_{x}P\left(x\right)f\left(x\right).$$Here we have introduced a particular notation for the expectation, you will also see expectations written in the form $E\left\{ f\left(x\right)\right\} $.}
 
-<!-- original A4 foil 27: Expectations under a Simple Distribution -->
-
 \newslide{Expectations under a Simple Distribution}
 
 \slides{* Define a distribution over $x$ in Table\  \ref{cap:simpleXDistribution}.
@@ -108,15 +81,11 @@ P\left(y|x\right)=P\left(y\right).$$The factorisation of the joint distribution 
 * We can compute $$
 \left\langle f\left(x\right)\right\rangle =\left\langle x^{2}\right\rangle =0\times0.2+1\times0.5+4\times0.3=1.7,$$have dropped the subscript $P\left(x\right)$}
 
-<!-- original A4 foil 27: Expectations under a Simple Distribution -->
-
 \newslide{Expectations under a Simple Distribution (continued)}
 
 \slides{* We can also see that the expectation of $x$ is$$
 \left\langle x\right\rangle =0\times0.2+1\times0.5+2\times0.3=1.1.$$
 * The expectation of $x$ is known as the first moment of the distribution or its *mean*.}
-
-<!-- original A4 foil 28: Variance of a Distribution -->
 
 \newslide{Variance of a Distribution}
 
@@ -128,15 +97,11 @@ P\left(y|x\right)=P\left(y\right).$$The factorisation of the joint distribution 
 \sigma=\sqrt{\left\langle x^{2}\right\rangle -\left\langle x\right\rangle ^{2}},$$$$
 \sqrt{1.7-\left(1.1\right)^{2}}=0.7.$$}
 
-<!-- original A4 foil 29: Distributions as Functions -->
-
 \newslide{Distributions as Functions}
 
 \slides{* Probability distribution with a simple table can be limiting.
 * The Poisson Distribution --- a distribution a a function
 * First published by \textbf{Sim\i \'{e} on Denis Poisson} (1781-1840) in 1837.}
-
-<!-- original A4 foil 29: Distributions as Functions -->
 
 \newslide{Distributions as Functions (continued)}
 
@@ -145,15 +110,11 @@ P\left(y|x\right)=P\left(y\right).$$The factorisation of the joint distribution 
 * The Poisson distribution is therefore defined as
 P\left(k|\mu\right)=\frac{\mu^{k}}{k!}\exp\left(-\mu\right).\label{eq:poissonDist}where $k$ is any integer from $0$ to $\infty$, and $\mu$ is a parameter of the distribution.}
 
-<!-- original A4 foil 30: A Poisson with $\mu=2$ -->
-
 \newslide{A Poisson with $\mu=2$}
 
 \slides{* To work out the probability of $k$ in a Poisson $\mu=2$ we can start filling a table.
 * The values in a table are computed from (\ref{eq:poissonDist})
   % empty table}
-
-<!-- original A4 foil 31: Mean and Variance -->
 
 \newslide{Mean and Variance}
 
@@ -168,29 +129,21 @@ P\left(k|\mu\right)=\frac{\mu^{k}}{k!}\exp\left(-\mu\right).\label{eq:poissonDis
 \left\langle k\right\rangle =\mu\label{eq:poissonMean3}
 * The variance of a Poisson is also $\mu$ --- see Tutorial 1.}
 
-<!-- original A4 foil 32: Continuous Variables -->
-
 \newslide{Continuous Variables}
 
 \slides{* So far discrete values of $x$ or $y$.
 * For continuous models we introduce the *probability density function* (PDF).
 * Discrete case: defined probability distributions over a discrete number of states.}
 
-<!-- original A4 foil 32: Continuous Variables -->
-
 \newslide{Continuous Variables (continued)}
 
 \slides{* How do we represent continuous as probability?
 * Computer science student's height:
-* Develop a representation which could answer *any *question we chose to ask about a computer scientist's height.}
-
-<!-- original A4 foil 33: Gaussian PDF -->
+* Develop a representation which could answer *any*question we chose to ask about a computer scientist's height.}
 
 \newslide{Gaussian PDF}
 
-\figure{\includepng{\diagramsDir/npa/pdfOfHeight}{80%}}{A Gaussian PDF representing heights of computer scientists.}{cap:heightPDF}
-
-<!-- original A4 foil 33: Gaussian PDF -->
+\slides{\figure{\includepng{\diagramsDir/npa/pdfOfHeight}{80%}}{A Gaussian PDF representing heights of computer scientists.}{cap:heightPDF}}
 
 \newslide{Gaussian PDF (continued)}
 
@@ -199,16 +152,12 @@ P\left(k|\mu\right)=\frac{\mu^{k}}{k!}\exp\left(-\mu\right).\label{eq:poissonDis
 * It is a positive function, integral over the region of interest is one.
   \footnote{In what follows we shall use the word distribution to refer to both discrete probabilities and continuous probability density functions.}}
 
-<!-- original A4 foil 34: Manipulating PDFs -->
-
 \newslide{Manipulating PDFs}
 
 \slides{* Same rules for PDFs as distributions *e.g.*$$
 p\left(y|x\right)=\frac{p\left(x|y\right)p\left(y\right)}{p\left(x\right)}$$where $p\left(x,y\right)=p\left(x|y\right)p\left(y\right)$ and for continuous variables $p\left(x\right)=\int p\left(x,y\right)dy$.
 * Expectations under a PDF$$
 \left\langle f\left(x\right)\right\rangle _{p\left(x\right)}=\int f\left(x\right)p\left(x\right)dx$$where the integral is over the region for which our PDF for $x$ is defined.}
-
-<!-- original A4 foil 35: Cumulative Distribution Functions\label{sub:CDFs} -->
 
 \newslide{Cumulative Distribution Functions\label{sub:CDFs}}
 
@@ -218,30 +167,22 @@ p\left(y|x\right)=\frac{p\left(x|y\right)p\left(y\right)}{p\left(x\right)}$$wher
 P\left(x>y\right)=\int_{-\infty}^{y}p\left(x\right)dx,$$for $0\leq x<\infty$ then the CDF is given by$$
 P\left(x>y\right)=\int_{0}^{y}p\left(x\right)dx.$$}
 
-<!-- original A4 foil 36: Gaussian PDF and CDF -->
-
 \newslide{Gaussian PDF and CDF}
 
-\figure{\includepng{\diagramsDir/npa/cdfOfHeight}{80%}}{The cumulative distribution function (CDF) for the heights of computer science students. The thick curve gives the CDF and the thinner curve the associated PDF.}{cdfOfHeight}
-
-<!-- original A4 foil 36: Gaussian PDF and CDF -->
+\slides{\figure{\includepng{\diagramsDir/npa/cdfOfHeight}{80%}}{The cumulative distribution function (CDF) for the heights of computer science students. The thick curve gives the CDF and the thinner curve the associated PDF.}{cdfOfHeight}}
 
 \newslide{Gaussian PDF and CDF (continued)}
 
 \slides{* In Figure\  \ref{cap:heightPDF} example of the CDF for the students' heights example.
 * The PDF can be recovered from the CDF through differentiation.}
 
-<!-- original A4 foil 37: Sample Based Approximations -->
-
 \newslide{Sample Based Approximations}
 
 \slides{* Recall that expectation of any given function, $f\left(k\right)$, under a distribution, $P\left(k\right)$, can be written as $$
 \left\langle f\left(k\right)\right\rangle _{P\left(k\right)}=\sum_{k}f\left(k\right)P\left(k\right)$$Recall our definition of probability from Table\  \ref{cap:aJointDistribution}. $$
 P\left(k\right)=\lim_{S\rightarrow\infty}\frac{s_{k}}{S}$$where we have now used $S$ (instead of $N$)
-* *Sample based approximations *hope that $S$ is `large enough' such that it to say$$
+* *Sample based approximations*hope that $S$ is `large enough' such that it to say$$
 \left\langle f\left(k\right)\right\rangle _{P\left(k\right)}\approx\sum_{k}f\left(k\right)\frac{s_{k}}{S}.$$}
-
-<!-- original A4 foil 38: Sample Based Approximations contd -->
 
 \newslide{Sample Based Approximations contd}
 
@@ -250,10 +191,8 @@ P\left(k\right)=\lim_{S\rightarrow\infty}\frac{s_{k}}{S}$$where we have now used
 \frac{1}{S}\sum_{k}f\left(k\right)s_{k}=\frac{1}{S}\sum_{i=1}^{S}f\left(k_{i}\right)$$
 * This provides us with a sample based approximation $$
 \left\langle f\left(k\right)\right\rangle _{P\left(k\right)}\approx\frac{1}{S}\sum_{i=1}^{S}f\left(k_{i}\right).$$
-* Special cases of this include the *sample mean, *often denoted by $\bar{k}$, and computed as$$
+* Special cases of this include the *sample mean,*often denoted by $\bar{k}$, and computed as$$
 \bar{k}=\frac{1}{S}\sum_{i=1}^{S}k_{i},$$}
-
-<!-- original A4 foil 39: Sample Mean vs True Mean -->
 
 \newslide{Sample Mean vs True Mean}
 
@@ -262,9 +201,7 @@ P\left(k\right)=\lim_{S\rightarrow\infty}\frac{s_{k}}{S}$$where we have now used
 * The same approximations can used for continuous PDFs, so we have
 \left\langle f\left(x\right)\right\rangle _{p\left(x\right)} & = & \int f\left(x\right)p\left(x\right)dx\\
  & \approx & \frac{1}{S}\sum_{i=1}^{S}f\left(x_{i}\right),where $x_{i}$ are independently obtained samples from the distribution $p\left(x\right)$.
-* Approximation gets better for increasing $S$ and worse if the samples from $P\left(k\right)$ are *not *independent.}
-
-<!-- original A4 foil 40: Note on Sample and Distribution Means -->
+* Approximation gets better for increasing $S$ and worse if the samples from $P\left(k\right)$ are *not*independent.}
 
 \newslide{Note on Sample and Distribution Means}
 

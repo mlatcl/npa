@@ -21,16 +21,22 @@ ROOT = HERE.parents[1]
 sys.path.insert(0, str(HERE))
 
 from emit_lamd import (  # noqa: E402
+    collect_foils,
+    foil_to_slides,
+    normalise_overlay,
+    split_foil_units,
     split_tex_units,
     units_to_notes,
-    units_to_slides,
     write_snippet,
 )
 from emit_tex import document_to_tex  # noqa: E402
 from fidelity import compare, lamd_stats, lyx_stats, tex_stats, write_report  # noqa: E402
 from lyx14 import parse_file  # noqa: E402
 from mapping import (  # noqa: E402
+    EXERCISES,
     LECTURES,
+    PYTHON_INCLUDES,
+    READINGS,
     lecture_for_chapter,
     lecture_for_foil,
 )
@@ -113,15 +119,30 @@ def lecture_markdown(lecture_id: str, meta: dict) -> str:
     body = [
         "",
         f"\\include{{snippets/_npa/generated/notes/{lecture_id}.md}}",
-        f"\\include{{snippets/_npa/generated/slides/{lecture_id}.md}}",
-        "",
-        "\\thanks",
-        "",
-        "\\reading",
-        "",
-        "\\references",
-        "",
     ]
+    for path in PYTHON_INCLUDES.get(lecture_id, []):
+        body.append(f"\\include{{{path}}}")
+    body.append(f"\\include{{snippets/_npa/generated/slides/{lecture_id}.md}}")
+    body.append("")
+    for key, note in READINGS.get(lecture_id, []):
+        body.append(f"\\addreading{{{key}}}{{{note}}}")
+    if READINGS.get(lecture_id):
+        body.append("")
+    for key, note in EXERCISES.get(lecture_id, []):
+        body.append(f"\\addexercise{{{key}}}{{{note}}}")
+    if EXERCISES.get(lecture_id):
+        body.append("")
+    body.extend(
+        [
+            "\\thanks",
+            "",
+            "\\reading",
+            "",
+        ]
+    )
+    if EXERCISES.get(lecture_id):
+        body.extend(["\\exercises", ""])
+    body.extend(["\\references", ""])
     return "\n".join(fm + body)
 
 
@@ -181,18 +202,25 @@ def rasterize_missing_diagrams(markdown: str) -> None:
 
 
 def convert_slides(lyx_path: Path) -> tuple[str, dict[str, str], dict]:
-
     doc = parse_file(lyx_path)
     tex = document_to_tex(doc)
     (BUILD / "slides.tex").write_text(tex, encoding="utf-8")
-    md = units_to_slides(split_tex_units(tex))
+    foils = collect_foils(split_tex_units(tex))
     slides_by: dict[str, list[str]] = {}
-    for part in re.split(r"(?=<!-- original A4 foil \d+:)", md):
-        m = re.search(r"<!-- original A4 foil (\d+):", part)
-        if not m:
-            continue
-        lecture_id = lecture_for_foil(int(m.group(1))) or "course-info-practical"
-        slides_by.setdefault(lecture_id, []).append(part.strip())
+    for i, foil in enumerate(foils):
+        overlay = False
+        if i > 0 and normalise_overlay(foils[i - 1].title) == normalise_overlay(foil.title):
+            overlay = True
+        if i + 1 < len(foils) and normalise_overlay(foils[i + 1].title) == normalise_overlay(
+            foil.title
+        ):
+            overlay = True
+        rendered = [
+            foil_to_slides(foil.title, chunk, continued=j > 0, orig_index=foil.index)
+            for j, chunk in enumerate(split_foil_units(foil, overlay=overlay))
+        ]
+        lecture_id = lecture_for_foil(foil.index) or "course-info-practical"
+        slides_by.setdefault(lecture_id, []).append("\n\n".join(p for p in rendered if p))
     joined = {k: "\n\n".join(v) for k, v in slides_by.items()}
     return tex, joined, lyx_stats(doc)
 

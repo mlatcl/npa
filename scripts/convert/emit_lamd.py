@@ -49,16 +49,9 @@ def strip_tex(text: str) -> str:
 
 def latex_inline_to_md(text: str) -> str:
     """Keep math; turn a few text macros into markdown."""
-
-    def emph(m):
-        return f"*{m.group(1)}*"
-
-    def bold(m):
-        return f"**{m.group(1)}**"
-
-    text = re.sub(r"\\emph\{([^{}]*)\}", emph, text)
-    text = re.sub(r"\\textbf\{([^{}]*)\}", bold, text)
-    text = re.sub(r"\\textit\{([^{}]*)\}", emph, text)
+    text = re.sub(r"\\emph\{([^{}]*)\}", lambda m: f"*{m.group(1).strip()}*", text)
+    text = re.sub(r"\\textbf\{([^{}]*)\}", lambda m: f"**{m.group(1).strip()}**", text)
+    text = re.sub(r"\\textit\{([^{}]*)\}", lambda m: f"*{m.group(1).strip()}*", text)
     text = re.sub(r"\\citeauthor\{([^}]+)\}", r"[@\1]", text)
     text = re.sub(r"\\citet\{([^}]+)\}", r"[@\1]", text)
     text = re.sub(r"\\citep(?:\[[^\]]*\])?\{([^}]+)\}", r"[@\1]", text)
@@ -315,10 +308,184 @@ def units_to_notes(units: list[TexBlock]) -> str:
         if unit.kind == "foil":
             continue
     text = "\n\n".join(p for p in parts if p)
-    return GRAPHICS_RE.sub(
+    text = GRAPHICS_RE.sub(
         lambda m: figure_lamd(m.group(2), m.group(1), "", ""),
         text,
     )
+    return polish_notes(text)
+
+
+def pythonise_matlab(text: str) -> str:
+    text = re.sub(
+        r"\(in MATLAB use rand\s*\)",
+        "(in Python, `numpy.random.random()`)",
+        text,
+    )
+    text = text.replace(
+        "functions in MATLAB",
+        "functions in Python (`scipy.special.gammaln`)",
+    )
+    return text
+
+
+def _parse_answer_macro(text: str, start: int) -> tuple[str, int]:
+    """Return (body, index after \\answer{body}{vspace}) starting at \\answer{."""
+    i = start + len("\\answer{")
+    depth = 1
+    body: list[str] = []
+    while i < len(text):
+        if depth == 1 and text.startswith("\\}{", i):
+            body_text = "".join(body)
+            rest = text[i + 3 :]
+            m = re.match(r"(\d+)\}", rest)
+            end = i + 3 + (m.end() if m else 0)
+            return body_text, end
+        ch = text[i]
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                rest = text[i + 1 :]
+                m = re.match(r"\{(\d+)\}", rest)
+                end = i + 1 + (m.end() if m else 0)
+                return "".join(body), end
+        body.append(ch)
+        i += 1
+    return "".join(body), len(text)
+
+
+def _close_open_notes(prefix: str) -> tuple[str, bool]:
+    token = "\\notes{"
+    last = prefix.rfind(token)
+    if last < 0:
+        return prefix, False
+    rest = prefix[last + len(token) - 1 :]
+    depth = 0
+    for ch in rest:
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+    if depth > 0:
+        return prefix + ("}" * depth), True
+    return prefix, False
+
+
+def _consume_braced(text: str, i: int) -> int:
+    depth = 0
+    for j in range(i, len(text)):
+        if text[j] == "{":
+            depth += 1
+        elif text[j] == "}":
+            depth -= 1
+            if depth == 0:
+                return j + 1
+    return len(text)
+
+
+def _split_figure(text: str) -> tuple[str, str, str]:
+    k = text.find("\\figure{")
+    if k < 0:
+        return text, "", ""
+    i = k + len("\\figure")
+    for _ in range(3):
+        while i < len(text) and text[i].isspace():
+            i += 1
+        if i < len(text) and text[i] == "{":
+            i = _consume_braced(text, i)
+    return text[:k], text[k:i], text[i:]
+
+
+def tidy_answer_body(body: str) -> str:
+    body = body.replace(r"\}", "}")
+    body = re.sub(r"^\s*\[ht\]\s*$", "", body, flags=re.M)
+    body = re.sub(r"\\centering", "", body)
+    body = re.sub(r"\\caption\{[^{}]*\}", "", body)
+    body = re.sub(r"\\label\{[^{}]*\}", "", body)
+    body = re.sub(r"^\s*\[0\]\s*$", "", body, flags=re.M)
+    if "&" in body and r"\begin{eqnarray" not in body:
+        lines = [ln for ln in body.splitlines() if ln.strip()]
+        aligned = [ln for ln in lines if "&" in ln]
+        if aligned:
+            wrapped = "\\begin{eqnarray*}\n" + "\n".join(aligned) + "\n\\end{eqnarray*}"
+            other = [ln for ln in lines if "&" not in ln]
+            body = "\n\n".join(["\n".join(other), wrapped] if other else [wrapped])
+    return body.strip()
+
+
+def expand_answers(text: str) -> str:
+    """Turn leftover LyX \\answer{...}{n} into Answer subsections."""
+    out: list[str] = []
+    i = 0
+    while True:
+        j = text.find("\\answer{", i)
+        if j < 0:
+            out.append(text[i:])
+            break
+        prefix, closed = _close_open_notes(text[i:j])
+        out.append(prefix)
+        body, end = _parse_answer_macro(text, j)
+        cleaned = tidy_answer_body(body)
+        chunks = [notes_wrap("\\subsection{Answer}")]
+        if r"\figure{" in cleaned:
+            before, fig_block, after = _split_figure(cleaned)
+            if before.strip():
+                chunks.append(notes_wrap(latex_inline_to_md(before)))
+            if fig_block:
+                chunks.append(fig_block.strip())
+            if after.strip():
+                chunks.append(notes_wrap(latex_inline_to_md(after)))
+        elif cleaned:
+            chunks.append(notes_wrap(latex_inline_to_md(cleaned)))
+        out.append("\n\n" + "\n\n".join(c for c in chunks if c) + "\n\n")
+        i = end
+        if closed:
+            while i < len(text) and text[i] in "}\n":
+                if text[i] == "}":
+                    i += 1
+                    break
+                i += 1
+    return "".join(out)
+
+
+def expand_bracket_answers(text: str) -> str:
+    """LyX \\answer{...}{0} that survived as a '[0]' vspace marker plus \\}{0}."""
+
+    def repl(m):
+        body = tidy_answer_body(m.group(1))
+        return (
+            "}\n\n"
+            + notes_wrap("\\subsection{Answer}")
+            + "\n\n"
+            + notes_wrap(latex_inline_to_md(body))
+            + "\n\n\\notes{"
+        )
+
+    return re.sub(
+        r"\n[ \t]*\[0\][ \t]*\n(.*?)\\\}[ \t]*\{0\}",
+        repl,
+        text,
+        flags=re.S,
+    )
+
+
+def polish_notes(text: str) -> str:
+    text = expand_answers(text)
+    text = expand_bracket_answers(text)
+    text = pythonise_matlab(text)
+    text = re.sub(r"\\notes\{#{2,4} Answer\}\n?", "", text)
+    text = re.sub(r"\\subsubsection\*?\{Answer\}\n?", "", text)
+    text = re.sub(r"\\notes\{\\subsubsection\{Answer\}\}\n?", "", text)
+    text = re.sub(r"^\s*\d+\}\}\s*$", "", text, flags=re.M)
+    text = re.sub(
+        r"\n\\notes\{\\subsection\{Answer\}\}\s*\n+\\notes\{\\subsection\{Answer\}\}",
+        lambda _m: "\n\\notes{\\subsection{Answer}}",
+        text,
+    )
+    text = re.sub(r"\\notes\{\{+", r"\\notes{", text)
+    text = re.sub(r"\\notes\{\s*\}", "", text)
+    return text
 
 
 @dataclass
@@ -439,25 +606,27 @@ def foil_to_slides(title: str, units: list[TexBlock], continued: bool, orig_inde
     for unit in units:
         raw = "\n".join(unit.lines)
         if unit.kind.startswith("env:figure"):
-            extras.append(figure_from_tex(raw))
+            extras.append(slides_wrap([figure_from_tex(raw)]))
             continue
         for gm in GRAPHICS_RE.finditer(raw):
-            extras.append(figure_lamd(gm.group(2), gm.group(1), "", stem_of(gm.group(2))))
+            extras.append(slides_wrap([figure_lamd(gm.group(2), gm.group(1), "", stem_of(gm.group(2)))]))
         raw = GRAPHICS_RE.sub("", raw)
         if unit.kind.startswith("env:itemize") or unit.kind.startswith("env:enumerate") or unit.kind.startswith("env:description"):
-            md = itemize_to_md(raw, unit.kind.split(":")[-1])
+            md = pythonise_matlab(itemize_to_md(raw, unit.kind.split(":")[-1]))
             bullets.extend(line for line in md.splitlines() if line.strip())
             continue
         if unit.kind.startswith("env:equation") or unit.kind.startswith("env:eqnarray"):
             extras.append("\\slides{" + "\n".join(unit.lines) + "}")
             continue
         if unit.kind == "para":
-            text = latex_inline_to_md(raw)
+            text = pythonise_matlab(latex_inline_to_md(raw))
             if text:
                 bullets.append(f"* {text}")
             continue
         if unit.kind.startswith("env:tabular"):
-            extras.append(tabular_to_md("\n".join(unit.lines)))
+            table = tabular_to_md("\n".join(unit.lines))
+            if table:
+                extras.append(slides_wrap([table]))
             continue
         if unit.kind.startswith("env:answer"):
             bullets.append("* **Answer.**")
@@ -467,7 +636,7 @@ def foil_to_slides(title: str, units: list[TexBlock], continued: bool, orig_inde
     if not bullets and not extras:
         if continued:
             return ""
-    parts = [f"<!-- original A4 foil {orig_index}: {title} -->", f"\\newslide{{{shown}}}"]
+    parts = [f"\\newslide{{{shown}}}"]
     if bullets:
         parts.append(slides_wrap(bullets))
     parts.extend(extras)
@@ -500,7 +669,6 @@ def normalise_overlay(title: str) -> str:
 def write_snippet(path: Path, guard: str, body: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
-        f"% generated — do not edit; scripts/convert/run.py\n"
         f"\\ifndef{{{guard}}}\n\\define{{{guard}}}\n\n"
         f"{body.rstrip()}\n\n\\endif\n",
         encoding="utf-8",

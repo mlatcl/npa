@@ -1,4 +1,3 @@
-% generated — do not edit; scripts/convert/run.py
 \ifndef{npaGenNotesBirthDeathMm1}
 \define{npaGenNotesBirthDeathMm1}
 
@@ -9,7 +8,7 @@ Consider a discrete representation of time $t=0,1,2...$. We associate a state va
 
 \notes{\subsection{Markov Property}}
 
-\notes{If this state variable exhibits the Markov property its value at time $t$ is dependent only on its value at time $t-1$. The common way of putting this property is that the future is conditional independent of the past. The conditioning being on the present. In other words, the state of the system in the future is *not *dependent on what happened in the past if we know the state at the present time.
+\notes{If this state variable exhibits the Markov property its value at time $t$ is dependent only on its value at time $t-1$. The common way of putting this property is that the future is conditional independent of the past. The conditioning being on the present. In other words, the state of the system in the future is *not*dependent on what happened in the past if we know the state at the present time.
 Let's consider a real-life example of a Markov chain, that of the board game of Monopoly.}
 
 \notes{\subsection{Monopoly Board}}
@@ -62,26 +61,30 @@ You've now seen that a Poisson process can be derived starting from a simple Mar
 
 \notes{## Examples}
 
-\notes{{1. It is possible to compute a probability distribution for a number of successes given a number of trials. This distribution is known as the binomial. For $n$ trials (equivalent to $n$ coin tosses or $n$ turns for Coin Monopoly) the probability of $k$ successes (equivalent to $k$ moves forward) is given by
+\notes{1. It is possible to compute a probability distribution for a number of successes given a number of trials. This distribution is known as the binomial. For $n$ trials (equivalent to $n$ coin tosses or $n$ turns for Coin Monopoly) the probability of $k$ successes (equivalent to $k$ moves forward) is given by
   
 P\left(k\right)=\left({c}
 n\\
 k\right)P\left(h\right)^{k}(1-P\left(h\right))^{n-k}\label{eq:binomialDistirbution}where $\left({c}
 n\\
 k\right)=\frac{n!}{k!(n-k)!}$ is known as the binomial coefficient.
-  By considering the limiting case as the probability of a success (or heads) goes to zero but the number of trials goes to $\infty$ show that a Poisson process can be recovered.
-  [0]
-    Since each of our turns takes $\Delta t$ time, we know that after $t$ time we will have completed 
-n=\frac{t}{\Delta t}\label{eq:nInTermsOfDeltaT} turns. Since we defined $P\left(h\right)=\lambda\Delta t$ we can therefore write$$
+  By considering the limiting case as the probability of a success (or heads) goes to zero but the number of trials goes to $\infty$ show that a Poisson process can be recovered.}
+
+\notes{\subsection{Answer}}
+
+\notes{Since each of our turns takes $\Delta t$ time, we know that after $t$ time we will have completed 
+n=\frac{t}{\Delta t} turns. Since we defined $P\left(h\right)=\lambda\Delta t$ we can therefore write$$
 P\left(h\right)=\frac{\lambda t}{n}.$$We now substitute this expression for the probability of heads into the binomial distribution (\ref{eq:binomialDistirbution}) giving 
-P\left(k|\lambda,t\right) & = & \frac{n!}{k!(n-k)!}\left(\frac{\lambda t}{n}\right)^{k}\left(1-\frac{\lambda t}{n}\right)^{n-k}\\
- & = & \frac{n\left(n-1\right)\dots\left(n-\left(k-1\right)\right)}{n^{k}\left(1-\frac{\lambda t}{n}\right)^{k}}\frac{(\lambda t)^{k}}{k!}\left(1-\frac{\lambda t}{n}\right)^{n}.The next step is to take the limit as $n\rightarrow\infty$. From (\ref{eq:nInTermsOfDeltaT}) we can see that this is equivalent to taking $\Delta t\rightarrow0$. In this limit we can take advantage of the following $$
 \lim_{n\rightarrow\infty}\frac{n\left(n-1\right)\dots\left(n-\left(k-1\right)\right)}{n^{k}\left(1-\frac{\lambda t}{n}\right)^{k}}=1.$$You should recognise this from the fact that the dominant term in the numerator is $n^{k}$ and the dominant term in the denominator is $n^{k}$. Secondly we use the fact that $$
 \lim_{m\rightarrow\infty}\left(1+\frac{z}{m}\right)^{m}=\exp\left(z\right).$$Inserting these two limits into the equation gives: 
-P\left(k|\lambda,t\right)=\frac{(\lambda t)^{k}}{k!}e^{-\lambda t}.\label{eqn:poisson}which is recognised as a Poisson process. In other words, we have proved that a Poisson process is a particular type of Markov chain, in fact, because we have taken the limit as $\Delta t\rightarrow0$, this system is now continuous time, it is therefore known as a Markov process. \}{0}
-  
+P\left(k|\lambda,t\right)=\frac{(\lambda t)^{k}}{k!}e^{-\lambda t}.which is recognised as a Poisson process. In other words, we have proved that a Poisson process is a particular type of Markov chain, in fact, because we have taken the limit as $\Delta t\rightarrow0$, this system is now continuous time, it is therefore known as a Markov process. 
 
-\subsubsection*{Answer}}
+\begin{eqnarray*}
+P\left(k|\lambda,t\right) & = & \frac{n!}{k!(n-k)!}\left(\frac{\lambda t}{n}\right)^{k}\left(1-\frac{\lambda t}{n}\right)^{n-k}\\
+ & = & \frac{n\left(n-1\right)\dots\left(n-\left(k-1\right)\right)}{n^{k}\left(1-\frac{\lambda t}{n}\right)^{k}}\frac{(\lambda t)^{k}}{k!}\left(1-\frac{\lambda t}{n}\right)^{n}.The next step is to take the limit as $n\rightarrow\infty$. From (\ref{eq:nInTermsOfDeltaT}) we can see that this is equivalent to taking $\Delta t\rightarrow0$. In this limit we can take advantage of the following $$
+\end{eqnarray*}}
+
+
 
 \notes{\section{Steady State\label{sec:steadyState}}}
 
@@ -98,9 +101,9 @@ The steady state distribution is taken to be$$
 
 \notes{\subsection{Coin Monopoly Revisited}}
 
-\notes{The Markov chain underlying `Coin Monopoly' (as presented in the previous chapter) has no associated *steady state *distribution, over time the value of $k$ will always increase. In this chapter we will introduce a slightly more complex Markov process called a birth-death processes. A birth-death process does have a steady state distribution. We will use a condition known as detailed balance to discover this distribution.}
+\notes{The Markov chain underlying `Coin Monopoly' (as presented in the previous chapter) has no associated *steady state*distribution, over time the value of $k$ will always increase. In this chapter we will introduce a slightly more complex Markov process called a birth-death processes. A birth-death process does have a steady state distribution. We will use a condition known as detailed balance to discover this distribution.}
 
-\notes{*Note.* In `Coin Monopoly' Anne moved forward at each time step by tossing a coin, if it came up heads she moved forward, otherwise she stayed on the same square. Anne's friend Bob suggests a variation of this game. At each of Anne's turns Bob tosses a second coin. If Bob's coin comes up heads then Anne has to move backwards one step. Anne likes this idea, but is concerned that she doesn't want to go back from the start so she suggests an additional, and final rule, that if she haven't been around the board yet and she is at GO (*i.e. * state $N\left(t\right)=0$) then Bob is not allowed to toss his coin.
+\notes{*Note.* In `Coin Monopoly' Anne moved forward at each time step by tossing a coin, if it came up heads she moved forward, otherwise she stayed on the same square. Anne's friend Bob suggests a variation of this game. At each of Anne's turns Bob tosses a second coin. If Bob's coin comes up heads then Anne has to move backwards one step. Anne likes this idea, but is concerned that she doesn't want to go back from the start so she suggests an additional, and final rule, that if she haven't been around the board yet and she is at GO (*i.e.* state $N\left(t\right)=0$) then Bob is not allowed to toss his coin.
   At each time step we now have to consider Let's represent the outcomes of this system If we assume, as before}
 
 \notes{\section{Birth Death Process}}
@@ -154,7 +157,7 @@ P\left(j\right)\sum_{i=0}^{\infty}q_{ji}=\sum_{i=0}^{\infty}P\left(i\right)q_{ij
 P\left(k-1\right)P_{k-1,k}=P\left(k\right)P_{k,k-1}$$and for the continuous case $$
 P\left(k-1\right)q_{k-1,k}=P\left(k\right)q_{k,k-1}.$$In our notation rate from $k$ to state $k-1$is given by $\mu_{k}$ and the rate from $k-1$ to $k$ is given by $\lambda_{k-1}$so we have
 $$
-P\left(k-1\right)\lambda_{k-1}=P\left(k\right)\mu_{k}.$$ To understand what this represents it is easier to consider the flow rates at a *boundary *between two states, $k-1$ and $k$. This is shown in Figure\  \ref{cap:flowAtBoundary}.
+P\left(k-1\right)\lambda_{k-1}=P\left(k\right)\mu_{k}.$$ To understand what this represents it is easier to consider the flow rates at a *boundary*between two states, $k-1$ and $k$. This is shown in Figure\  \ref{cap:flowAtBoundary}.
 At steady state, flow from $k-1$ to $k$ is given by $\lambda_{k-1}P\left(k-1\right)$. Flow from $k$ to $k-1$ is given $\mu_{k}P\left(k\right)$. For flow to be balanced we have $$
 \lambda_{k-1}P\left(k-1\right)=\mu_{k}P\left(k\right)$$ leading to $$
 P\left(k\right)=\frac{\lambda_{k-1}}{\mu_{k}}P\left(k-1\right).$$For different systems, the birth rate and death rate will differ. We will first study the $M/M/1$ queue which is a birth-death process where the birth rate and death rate are constant regardless of the state of the queue.}
@@ -184,7 +187,7 @@ P\left(k\right) & = & \left(\frac{\lambda}{\mu}\right)^{k}P\left(0\right)\\
 
 \notes{\subsection{Normalisation\label{sub:normalisationMM1}}}
 
-\notes{To find $P\left(0\right)$ we exploit our knowledge that, for the $M/M/1$ queue $0\leq k<\infty$. Given that the steady state distribution *must *be normalised, we can write $$
+\notes{To find $P\left(0\right)$ we exploit our knowledge that, for the $M/M/1$ queue $0\leq k<\infty$. Given that the steady state distribution *must*be normalised, we can write $$
 \sum_{k=0}^{\infty}P\left(k\right)=1$$ and therefore $$
 1=P\left(0\right)\sum_{k=0}^{\infty}\rho^{k}$$ giving \begin{equation}
 P\left(0\right)=\frac{1}{\sum_{k=0}^{\infty}\rho^{k}}.\label{eq:MM1Series}\end{equation} We are once again faced with an infinite series in the denominator of (\ref{eq:MM1Series}). This series converges if $\rho<1$ (when the birth rate is less than the death rate), $$
@@ -199,7 +202,7 @@ P\left(k\right)=\rho^{k}\left(1-\rho\right).$$}
 \notes{\subsection{Average Number in System}}
 
 \notes{For network design we might be interested in the average queue length. We can use the steady state probabilities to compute this quantity.
-The average number of customers in the system *is not* the same as the average queue length because a customer being served (*e.g. *a packet under transmission) is not in the queue.
+The average number of customers in the system *is not* the same as the average queue length because a customer being served (*e.g.*a packet under transmission) is not in the queue.
 The average number of customers in the system is given by the expected state of the system,$$
 \left\langle k\right\rangle _{P\left(k\right)}=\sum_{k=0}^{\infty}kP\left(k\right)$$in the examples section at the end of this chapter we show how this average can be computed as\begin{eqnarray*}
 \left\langle k\right\rangle _{P\left(k\right)} & = & \frac{\rho}{1-\rho}\\
@@ -216,7 +219,7 @@ $$
 
 \figure{\includepng{\diagramsDir/npa/discreteMM1State}{100%}}{State diagram for the discrete version of the $M/M/1$ queue.}{cap:discreteMM1}
 
-\figure{\includepng{\diagramsDir/npa/probOutcome}{80%}}{Testing for one of three outcomes. Generate a random number between 0 and 1 (in MATLAB use rand ), see where the result lies on the line above. If it is less than $P\left(b\right)$ then state of queue increases by 1, if it is greater than $P\left(b\right)$ but less than $P\left(b\right)+P\left(d\right)$ *and the queue is not empty* then state of queue decreases by one, otherwise queue state stays the same.}{probOutcome}
+\figure{\includepng{\diagramsDir/npa/probOutcome}{80%}}{Testing for one of three outcomes. Generate a random number between 0 and 1 (in Python, `numpy.random.random()`), see where the result lies on the line above. If it is less than $P\left(b\right)$ then state of queue increases by 1, if it is greater than $P\left(b\right)$ but less than $P\left(b\right)+P\left(d\right)$ *and the queue is not empty* then state of queue decreases by one, otherwise queue state stays the same.}{probOutcome}
 
 \notes{\subsection{Approximating a Continuous $M/M/1$ Queue}}
 

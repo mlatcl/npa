@@ -1,4 +1,3 @@
-% generated — do not edit; scripts/convert/run.py
 \ifndef{npaGenNotesMg1}
 \define{npaGenNotesMg1}
 
@@ -12,7 +11,7 @@ $$
 
 \notes{In the examples, we review the first part of a simple proof of the Pollaczek-Khinchin formula. In our proof we will make three assumptions:}
 
-\notes{1. The queue is FIFO queue, *i.e. *customers are served in the order they arrive. This assumption may be relaxed but it will simplify our proof.
+\notes{1. The queue is FIFO queue, *i.e.*customers are served in the order they arrive. This assumption may be relaxed but it will simplify our proof.
 2. The arrival times are statistically independent of the service times.
 3. The arrival time distribution has a variance which is finite.}
 

@@ -11,6 +11,8 @@ featured_image: slides/diagrams/npa/ARQ.png
 \include{snippets/_npa/generated/notes/mg1-arq.md}
 \include{snippets/_npa/generated/slides/mg1-arq.md}
 
+\addreading{@Bertsekas:data92}{Example 3.15, ARQ delay as $M/G/1$}
+
 \thanks
 
 \reading

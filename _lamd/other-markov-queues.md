@@ -11,6 +11,8 @@ featured_image: slides/diagrams/npa/stateMM1m.png
 \include{snippets/_npa/generated/notes/other-markov-queues.md}
 \include{snippets/_npa/generated/slides/other-markov-queues.md}
 
+\addreading{@Bertsekas:data92}{Birth-death queues beyond $M/M/1$: finite storage and infinite servers}
+
 \thanks
 
 \reading

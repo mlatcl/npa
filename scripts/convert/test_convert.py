@@ -28,6 +28,36 @@ def test_parse_slides_foils():
     assert len(foils) == 243, len(foils)
 
 
+def test_expand_answers_and_slides_stay_off_notes():
+    from emit_lamd import polish_notes, units_to_slides, split_tex_units
+
+    raw = r"""
+\notes{1. Nightclub. \answer{
+  Waiting time $\bar{T}=1/2$. \}{0}}
+"""
+    out = polish_notes(raw)
+    assert r"\answer{" not in out, out
+    assert r"\subsection{Answer}" in out
+    assert "Waiting time" in out
+    bracketed = r"""
+\notes{Question text.
+  [0]
+    Because $\rho=0.9$.
+\}{0}
+"""
+    out2 = polish_notes(bracketed)
+    assert r"\}{0}" not in out2, out2
+    assert "Because" in out2
+
+    from emit_tex import document_to_tex
+
+    doc = parse_file(ROOT / "lectureSlides.lyx")
+    md = units_to_slides(split_tex_units(document_to_tex(doc)))
+    assert "<!-- original A4 foil" not in md
+    if r"\figure{" in md:
+        assert r"\slides{\figure{" in md.replace("\n", "")
+
+
 def test_mapping():
     assert lecture_for_chapter("Little's Formula") == "littles-formula"
     assert lecture_for_chapter(r"$M$/$G$/$1$ Queue") == "mg1"
@@ -51,6 +81,8 @@ def test_collect_foils_from_tex():
 
 
 if __name__ == "__main__":
+    test_expand_answers_and_slides_stay_off_notes()
+    print("notes polish ok")
     test_mapping()
     print("mapping ok")
     test_parse_notes_chapters()

@@ -11,8 +11,14 @@ featured_image: slides/diagrams/npa/kleinrockNetwork.png
 \include{snippets/_npa/generated/notes/networks-of-queues.md}
 \include{snippets/_npa/generated/slides/networks-of-queues.md}
 
+\addreading{@Bertsekas:data92}{Burke, Kleinrock independence, and Jackson's theorem}
+
+\addexercise{@npa-lab2}{Lab 2: tandem and multipath occupancy versus Kleinrock}
+
 \thanks
 
 \reading
+
+\exercises
 
 \references

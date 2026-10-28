@@ -30,7 +30,6 @@ categories:
 <!--
 
 -->
-<p>% generated — do not edit; scripts/convert/run.py</p>
 <h1 id="a-pictorial-definition-of-probability">A Pictorial Definition of Probability</h1>
 <p>A solid understanding of the fundamentals of probability will be one of the keys to understanding the material in course. We will therefore quickly review what each of these distributions means with a simple pictorial demonstration. In Figure  <span class="math inline">\(\ref{cap:aJointDistribution}\)</span> we summarise the outcomes of a series of <span class="math inline">\(N\)</span> trials in a two dimensional graph.</p>
 <div class="figure">
@@ -50,14 +49,14 @@ categories:
 </div>
 <p>For Figure  <span class="math inline">\(\ref{cap:aJointDistribution}\)</span> the outcome of a trial is plotted on a two dimensional graph. We have drawn three further boxes on the graph (solid, dotted and dashed lines), each box is defined by the outcomes it covers. We have denoted the number of events in each box with a small <span class="math inline">\(n\)</span>. Probabilities are defined in the limit as we take the number of trials <span class="math inline">\(N\)</span> to infinity.</p>
 <h2 id="notational-details">Notational Details</h2>
-<p>Strictly speaking, when we write probability distributions we should write them out in full (<em>e.g. </em> for the joint distribution, <span class="math inline">\(P\left(X=x,Y=y\right)\)</span>). However, in practice, we often use a shorthand notation: <span class="math inline">\(P\left(x,y\right)\)</span>. This is convenient, but it can lead to confusion. It looks very much like we might write a multivariate function, <em>e.g. </em><span class="math inline">\(f\left(x,y\right)=\frac{x}{y}\)</span>. For a multivariate function though, <span class="math inline">\(f\left(x,y\right)\neq f\left(y,x\right)\)</span> in general. However, for our probability shorthand <span class="math inline">\(P\left(x,y\right)=P\left(y,x\right)\)</span> because <span class="math inline">\(P\left(X=x,Y=y\right)=P\left(Y=y,X=x\right)\)</span>. We have denoted the probability distribution with a capital <span class="math inline">\(P\)</span>. In <em>these notes</em> we will use capital <span class="math inline">\(P\)</span>s consistently to denote discrete distributions. Later, when we come on to continuous probability density functions, we will turn to small letters.</p>
+<p>Strictly speaking, when we write probability distributions we should write them out in full (<em>e.g.</em> for the joint distribution, <span class="math inline">\(P\left(X=x,Y=y\right)\)</span>). However, in practice, we often use a shorthand notation: <span class="math inline">\(P\left(x,y\right)\)</span>. This is convenient, but it can lead to confusion. It looks very much like we might write a multivariate function, <em>e.g.</em><span class="math inline">\(f\left(x,y\right)=\frac{x}{y}\)</span>. For a multivariate function though, <span class="math inline">\(f\left(x,y\right)\neq f\left(y,x\right)\)</span> in general. However, for our probability shorthand <span class="math inline">\(P\left(x,y\right)=P\left(y,x\right)\)</span> because <span class="math inline">\(P\left(X=x,Y=y\right)=P\left(Y=y,X=x\right)\)</span>. We have denoted the probability distribution with a capital <span class="math inline">\(P\)</span>. In <em>these notes</em> we will use capital <span class="math inline">\(P\)</span>s consistently to denote discrete distributions. Later, when we come on to continuous probability density functions, we will turn to small letters.</p>
 <h1 id="probability-rules">Probability Rules</h1>
 <p>From the simple definitions we’ve given above we can derive some straightforward rules associated with manipulating probability distributions.</p>
 <h2 id="normalisation">Normalisation</h2>
 <p>The first point to note is that probability distributions are normalised, the sum over the distribution across each of its possible value is 1. This is clear from the fact that <span class="math inline">\(\sum_{x}n_{X=x}=N\)</span>, which gives <span class="math display">\[
 \sum_{x}P\left(x\right)=\lim_{N\rightarrow\infty}\frac{\sum_{x}n_{X=x}}{N}=\lim_{N\rightarrow\infty}\frac{N}{N}=1.\]</span>A similar result can be derived for the marginal and conditional distributions.</p>
 <h2 id="the-sum-rule">The Sum Rule</h2>
-<p>The sum rule describes how we can obtain a marginal distribution from the joint distribution. The distribution is called the marginal distribution because one of the variables in the joint distribution is* marginalised<em>, </em>i.e. * it is removed from the distribution (you can think of it being written in the margin). The marginal probability <span class="math inline">\(P\left(y\right)\)</span> is given by <span class="math inline">\(\lim_{N\rightarrow\infty}\frac{n_{Y=y}}{N}\)</span> and the joint distribution <span class="math inline">\(P\left(x,y\right)\)</span> is given by <span class="math inline">\(\lim_{N\rightarrow\infty}\frac{n_{X=x,Y=y}}{N}\)</span>. Now we note (using Figure  <span class="math inline">\(\ref{cap:aJointDistribution}\)</span>) that <span class="math inline">\(n_{Y=y}=\sum_{x}n_{X=x,Y=y}\)</span>, where the sum is over all possible values of <span class="math inline">\(X\)</span>. We therefore find that<span class="math display">\[
+<p>The sum rule describes how we can obtain a marginal distribution from the joint distribution. The distribution is called the marginal distribution because one of the variables in the joint distribution is<em>marginalised</em>, <em>i.e.</em> it is removed from the distribution (you can think of it being written in the margin). The marginal probability <span class="math inline">\(P\left(y\right)\)</span> is given by <span class="math inline">\(\lim_{N\rightarrow\infty}\frac{n_{Y=y}}{N}\)</span> and the joint distribution <span class="math inline">\(P\left(x,y\right)\)</span> is given by <span class="math inline">\(\lim_{N\rightarrow\infty}\frac{n_{X=x,Y=y}}{N}\)</span>. Now we note (using Figure  <span class="math inline">\(\ref{cap:aJointDistribution}\)</span>) that <span class="math inline">\(n_{Y=y}=\sum_{x}n_{X=x,Y=y}\)</span>, where the sum is over all possible values of <span class="math inline">\(X\)</span>. We therefore find that<span class="math display">\[
 \lim_{N\rightarrow\infty}\frac{n_{Y=y}}{N}=\lim_{N\rightarrow\infty}\sum_{x}\frac{n_{X=x,Y=y}}{N},\]</span>or in other words<span class="math display">\[
 P\left(y\right)=\sum_{x}P\left(x,y\right).\]</span>This is known as the sum rule of probability.</p>
 <h2 id="the-product-rule">The Product Rule</h2>
@@ -93,7 +92,7 @@ P\left(y|x\right)=P\left(y\right).\]</span>The factorisation of the joint distri
 <p>The Poisson distribution was first published by (1781-1840) in 1837. It is defined over the space of all non-negative integers. Since this set is countably infinite in size it is impossible to write all the numbers down that would define the distribution. The Poisson distribution is therefore defined as<span class="math display">\[\begin{equation}
 P\left(k|\mu\right)=\frac{\mu^{k}}{k!}\exp\left(-\mu\right).\label{eq:poissonDist}\end{equation}\]</span>where <span class="math inline">\(k\)</span> is any integer from <span class="math inline">\(0\)</span> to <span class="math inline">\(\infty\)</span>, and <span class="math inline">\(\mu\)</span> is a parameter of the distribution. In these notes we place <span class="math inline">\(\mu\)</span> on the right of the conditioning bar to indicate that it is a parameter. Note that in <span class="citation" data-cites="Bertsekas:data92">(Bertsekas and Gallager, 1992)</span> a slightly different notation is used. To work out the probability of a particular value, <span class="math inline">\(k\)</span>, in a Poisson distribution with a particular parameter, <span class="math inline">\(\mu\)</span>, we simply substitute the parameter and the value <span class="math inline">\(n\)</span> into (<span class="math inline">\(\ref{eq:poissonDist}\)</span>). For example, with <span class="math inline">\(\mu=2\)</span> we can start filling a table (Table <span class="math inline">\(\ref{cap:poissonTable}\)</span>). As we mentioned in Section  <span class="math inline">\(\ref{sec:expectations}\)</span>, the expectations under a distribution are important for summarising the distributions characteristics. Expectations of distributions that take the form of a function can also be computed. Typically we expect the resulting expectation to be a function of the distributions parameters. In the Examples section at the end of this chapter we compute the mean of a Poisson distribution.</p>
 <h1 id="continuous-variables">Continuous Variables</h1>
-<p>So far we have discussed a value for discrete values of <span class="math inline">\(x\)</span> or <span class="math inline">\(y\)</span>. We now turn to a continuous models. First though we introduce the probability distribution’s sister, the <em>probability density function</em> (PDF). In the discrete case, we defined probability distributions over a discrete number of states. However, if we wish to model a continuous value, such as the height of a computer science student, how do we represent it as a probability distribution? One way would be to `discretise’ the continuous value by splitting it into discrete regions. We effectively did this in the example in Figure  <span class="math inline">\(\ref{cap:aJointDistribution}\)</span>. So, for our height example, we could model the probability that your height was between <span class="math inline">\(1.6\textrm{m}\)</span> and <span class="math inline">\(1.7\textrm{m}\)</span>, or alternatively we could ask what is the probability that you are over <span class="math inline">\(1.8\textrm{m}\)</span> given that you are a computer scientist? However, remodelling for each of these questions would be rather tedious. It would be more convenient if we could develop a representation which could answer <em>any </em>question we chose to ask about a computer scientist’s height. This is what a probability density function represents. It does not represent probabilities directly, but from it they may be derived.</p>
+<p>So far we have discussed a value for discrete values of <span class="math inline">\(x\)</span> or <span class="math inline">\(y\)</span>. We now turn to a continuous models. First though we introduce the probability distribution’s sister, the <em>probability density function</em> (PDF). In the discrete case, we defined probability distributions over a discrete number of states. However, if we wish to model a continuous value, such as the height of a computer science student, how do we represent it as a probability distribution? One way would be to `discretise’ the continuous value by splitting it into discrete regions. We effectively did this in the example in Figure  <span class="math inline">\(\ref{cap:aJointDistribution}\)</span>. So, for our height example, we could model the probability that your height was between <span class="math inline">\(1.6\textrm{m}\)</span> and <span class="math inline">\(1.7\textrm{m}\)</span>, or alternatively we could ask what is the probability that you are over <span class="math inline">\(1.8\textrm{m}\)</span> given that you are a computer scientist? However, remodelling for each of these questions would be rather tedious. It would be more convenient if we could develop a representation which could answer <em>any</em>question we chose to ask about a computer scientist’s height. This is what a probability density function represents. It does not represent probabilities directly, but from it they may be derived.</p>
 <div class="figure">
 <div id="cap:heightPDF-figure" class="figure-frame">
 <div class="centered" style="">
@@ -112,7 +111,7 @@ P\left(k|\mu\right)=\frac{\mu^{k}}{k!}\exp\left(-\mu\right).\label{eq:poissonDis
 <p>We represent a probability density function with a small <span class="math inline">\(p\left(\cdot\right)\)</span> to differentiate it from a probability distribution which we have denoted with a large <span class="math inline">\(P\left(\cdot\right)\)</span>. We define it to be a positive function whose integral over the region of interest is one. One example is the Gaussian, shown above to represent a model of a computer science student’s height. We can query the distribution by integrating over regions of it. If we wish to ask the question `What is the probability that a computer science student is over <span class="math inline">\(2\textrm{m}\)</span> tall?’ The answer, which we denote <span class="math inline">\(P\left(y&gt;2\right)\)</span> is given by integrating from 2 to <span class="math inline">\(\infty\)</span>. Since the total area under the curve is always one, and the function is always positive, the answer will always be less than 1 and greater than 0. This fulfils our definition of probabilities. The answer to the inverse question will be <span class="math inline">\(1-P\left(y&gt;2\right)\)</span>. Note that this implies that the probability of a student being exactly <span class="math inline">\(2\textrm{m}\)</span> tall is zero. This may seem odd, but is a consequence of querying the system in the limit as a region tends to zero. </p>
 <h2 id="manipulating-pdfs">Manipulating PDFs</h2>
 <p>The same rules that apply to probability distributions may also be applied to PDFs. We won’t derive this here, but take it as given that<span class="math display">\[
-p\left(y|x\right)=\frac{p\left(x|y\right)p\left(y\right)}{p\left(x\right)}\]</span>where <span class="math inline">\(p\left(x,y\right)=p\left(x|y\right)p\left(y\right)\)</span> and for continuous variables <span class="math inline">\(p\left(x\right)=\int p\left(x,y\right)dy\)</span>. Here the integral is over the region for which our PDF for <span class="math inline">\(y\)</span> is defined (<em>e.g. </em>all real numbers or all positive real numbers). Additionally we may mix discrete and continuous variables. If, for example <span class="math inline">\(y\)</span> is discrete and <span class="math inline">\(x\)</span> is continuous, then we may write<span class="math display">\[
+p\left(y|x\right)=\frac{p\left(x|y\right)p\left(y\right)}{p\left(x\right)}\]</span>where <span class="math inline">\(p\left(x,y\right)=p\left(x|y\right)p\left(y\right)\)</span> and for continuous variables <span class="math inline">\(p\left(x\right)=\int p\left(x,y\right)dy\)</span>. Here the integral is over the region for which our PDF for <span class="math inline">\(y\)</span> is defined (<em>e.g.</em>all real numbers or all positive real numbers). Additionally we may mix discrete and continuous variables. If, for example <span class="math inline">\(y\)</span> is discrete and <span class="math inline">\(x\)</span> is continuous, then we may write<span class="math display">\[
 P\left(y|x\right)=\frac{p\left(x|y\right)P\left(y\right)}{p\left(x\right)}.\]</span>Finally expectations under a PDF are also computed using the integral instead of the sum so <span class="math display">\[
 \left\langle f\left(x\right)\right\rangle _{p\left(x\right)}=\int f\left(x\right)p\left(x\right)dx\]</span>where the integral is over the region for which our PDF for <span class="math inline">\(x\)</span> is defined.</p>
 <h2 id="cumulative-distribution-functions">Cumulative Distribution Functions</h2>
@@ -138,15 +137,15 @@ P\left(x&lt;y\right)=\int_{0}^{y}p\left(x\right)dx.\]</span>To complete the dist
 <h1 id="sample-based-approximations">Sample Based Approximations</h1>
 <p>Recall from Section  <span class="math inline">\(\ref{sec:expectations}\)</span> that expectation of any given function, <span class="math inline">\(f\left(k\right)\)</span>, under a distribution, <span class="math inline">\(P\left(k\right)\)</span>, can be written as <span class="math display">\[
 \left\langle f\left(k\right)\right\rangle _{P\left(k\right)}=\sum_{k}f\left(k\right)P\left(k\right)\]</span>which is also written as $E{ f(k)} $. Recall our definition of probability from Table  <span class="math inline">\(\ref{cap:aJointDistribution}\)</span>. <span class="math display">\[
-P\left(k\right)=\lim_{S\rightarrow\infty}\frac{s_{k}}{S}\]</span>where we have now used <span class="math inline">\(S\)</span> (instead of <span class="math inline">\(N\)</span>) as the total number of samples or trials from a system and <span class="math inline">\(s_{k}\)</span> is the number that have state <span class="math inline">\(k\)</span>. When we make <em>sample based approximations </em>we hope that <span class="math inline">\(S\)</span> is `large enough’ such that it is a good approximation to say<span class="math display">\[
+P\left(k\right)=\lim_{S\rightarrow\infty}\frac{s_{k}}{S}\]</span>where we have now used <span class="math inline">\(S\)</span> (instead of <span class="math inline">\(N\)</span>) as the total number of samples or trials from a system and <span class="math inline">\(s_{k}\)</span> is the number that have state <span class="math inline">\(k\)</span>. When we make <em>sample based approximations</em>we hope that <span class="math inline">\(S\)</span> is `large enough’ such that it is a good approximation to say<span class="math display">\[
 \left\langle f\left(k\right)\right\rangle _{P\left(k\right)}\approx\sum_{k}f\left(k\right)\frac{s_{k}}{S}.\]</span>This formula may be rewritten as:<span class="math display">\[
 \sum_{k}f\left(k\right)\frac{s_{k}}{S}=\frac{1}{S}\sum_{k}f\left(k\right)s_{k}.\]</span>Now if <span class="math inline">\(\mathbf{k}\)</span> is a vector of samples from <span class="math inline">\(P\left(k\right)\)</span>with elements <span class="math inline">\(k_{i}\)</span> and length <span class="math inline">\(S\)</span> then we can rewrite the above<span class="math display">\[
 \frac{1}{S}\sum_{k}f\left(k\right)s_{k}=\frac{1}{S}\sum_{i=1}^{S}f\left(k_{i}\right)\]</span>which provides us with a sample based approximation to the true expectation: <span class="math display">\[
-\left\langle f\left(k\right)\right\rangle _{P\left(k\right)}\approx\frac{1}{S}\sum_{i=1}^{S}f\left(k_{i}\right).\]</span>Some well know special cases of this include the <em>sample mean, </em>often denoted by <span class="math inline">\(\bar{k}\)</span>, and computed as<span class="math display">\[
+\left\langle f\left(k\right)\right\rangle _{P\left(k\right)}\approx\frac{1}{S}\sum_{i=1}^{S}f\left(k_{i}\right).\]</span>Some well know special cases of this include the <em>sample mean,</em>often denoted by <span class="math inline">\(\bar{k}\)</span>, and computed as<span class="math display">\[
 \bar{k}=\frac{1}{S}\sum_{i=1}^{S}k_{i},\]</span>this sample based mean is an approximation to the true distribution mean<span class="math display">\[
 \left\langle k\right\rangle \approx\bar{k}.\]</span>The same approximations can be used in the context of continuous PDFs, so we have<span class="math display">\[\begin{eqnarray*}
 \left\langle f\left(x\right)\right\rangle _{p\left(x\right)} &amp; = &amp; \int f\left(x\right)p\left(x\right)dx\\
-&amp; \approx &amp; \frac{1}{S}\sum_{i=1}^{S}f\left(x_{i}\right),\end{eqnarray*}\]</span>where <span class="math inline">\(x_{i}\)</span> are independently obtained samples from the distribution <span class="math inline">\(p\left(x\right)\)</span>. The approximation gets better for increasing <span class="math inline">\(S\)</span> and worse if the samples from <span class="math inline">\(P\left(k\right)\)</span> are <em>not </em>independent.</p>
+&amp; \approx &amp; \frac{1}{S}\sum_{i=1}^{S}f\left(x_{i}\right),\end{eqnarray*}\]</span>where <span class="math inline">\(x_{i}\)</span> are independently obtained samples from the distribution <span class="math inline">\(p\left(x\right)\)</span>. The approximation gets better for increasing <span class="math inline">\(S\)</span> and worse if the samples from <span class="math inline">\(P\left(k\right)\)</span> are <em>not</em>independent.</p>
 <p>Returning to our example concerning the height of computer science students. If we don’t know the true underlying distribution of their heights, <span class="math inline">\(p\left(h\right)\)</span>, we cannot compute the mean of the distribution, but we can approximate it with the sample mean: so if we want the mean, <span class="math inline">\(f\left(h\right)=h\)</span>, we use<span class="math display">\[
 \int_{0}^{\infty}hp\left(h\right)dh\approx\frac{1}{S}\sum_{i=1}^{S}f\left(k_{i}\right).\]</span></p>
 <p>In most texts the word mean is used interchangeably to describe sample based means and the true mean of a distribution. However, you should always bear in mind the important difference between the two. Later in the course we will also come across time based averages and assumptions will be made that the time based average is equal to the average under a `steady state distribution’.</p>
@@ -154,90 +153,26 @@ P\left(k\right)=\lim_{S\rightarrow\infty}\frac{s_{k}}{S}\]</span>where we have n
 <p>We compute the mean of a Poisson in the following example. The variance is an exercise in the first tutorial sheet.</p>
 <h2 id="examples">Examples</h2>
 <ol type="1">
-<li>Compute the mean of the Poisson distribution, <em>i.e. </em>the expectation of <span class="math inline">\(k\)</span> under the distribution <span class="math inline">\(P\left(k|\mu\right)=\frac{\mu^{k}}{k!}e^{-\mu}\)</span>. [0] The mean is given by <span class="math display">\[
+<li>Compute the mean of the Poisson distribution, <em>i.e.</em>the expectation of <span class="math inline">\(k\)</span> under the distribution <span class="math inline">\(P\left(k|\mu\right)=\frac{\mu^{k}}{k!}e^{-\mu}\)</span>. [0] The mean is given by <span class="math display">\[
 \left\langle k\right\rangle _{P\left(k|\mu\right)}=\sum_{k=0}^{\infty}k\frac{\mu^{k}}{k!}e^{-\mu}\]</span> To make progress with this we first pull out <span class="math inline">\(\mu e^{-\mu}\)</span> and the first <span class="math inline">\(k\)</span> in the factorial, <span class="math inline">\(\frac{k}{k!}=\frac{k}{k(k-1)!}=\frac{1}{(k-1)!}\)</span>. We can also remove the first term from the sum because it is multiplied by <span class="math inline">\(k\)</span> which is zero for the first term. This leads to<span class="math display">\[
 \left\langle k\right\rangle =e^{-\mu}\mu\sum_{k=1}^{\infty}\frac{\mu^{(k-1)}}{(k-1)!}\]</span> Now we make the following substitution: <span class="math inline">\(m=k-1\)</span>. k=e^{-}_{m=0}^{} We now make use of the following geometric series,<span class="math display">\[
 e^{\mu}=\sum_{m=0}^{\infty}\frac{\mu^{m}}{m!}\]</span> Substituting this result back into (<span class="math inline">\(\ref{eq:poissonMean2}\)</span>) we find k=</li>
 </ol>
 <p><em>The variance of a Poisson is an exercise in Tutorial Sheet 1.</em></p>
-<h4 id="answer">Answer</h4>
-<p>% generated — do not edit; scripts/convert/run.py</p>
-<!-- original A4 foil 17: Probability Review -->
-<!-- original A4 foil 18: A Pictorial Definition of Probability -->
-<div class="figure">
-<div id="cap:aJointDistribution-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/probDiagram.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="cap:aJointDistribution-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:aJointDistribution&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="cap:aJointDistribution-caption" class="caption-frame">
-<p>Figure: Representation of joint and conditional probabilities.</p>
-</div>
-</div>
-<!-- original A4 foil 18: A Pictorial Definition of Probability -->
-<!-- original A4 foil 19: Different Distributions -->
-<!-- original A4 foil 20: Notational Details -->
-<!-- original A4 foil 20: Notational Details -->
-<!-- original A4 foil 21: Normalisation -->
-<!-- original A4 foil 22: The Sum Rule -->
-<!-- original A4 foil 23: The Product Rule -->
-<!-- original A4 foil 24: Bayes' Rule -->
-<!-- original A4 foil 25: Independence -->
-<!-- original A4 foil 26: Expectations\label{sec:expectations} -->
-<!-- original A4 foil 27: Expectations under a Simple Distribution -->
-<!-- original A4 foil 27: Expectations under a Simple Distribution -->
-<!-- original A4 foil 28: Variance of a Distribution -->
-<!-- original A4 foil 29: Distributions as Functions -->
-<!-- original A4 foil 29: Distributions as Functions -->
-<!-- original A4 foil 30: A Poisson with $\mu=2$ -->
-<!-- original A4 foil 31: Mean and Variance -->
-<!-- original A4 foil 32: Continuous Variables -->
-<!-- original A4 foil 32: Continuous Variables -->
-<!-- original A4 foil 33: Gaussian PDF -->
-<div class="figure">
-<div id="cap:heightPDF-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/pdfOfHeight.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="cap:heightPDF-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:heightPDF&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="cap:heightPDF-caption" class="caption-frame">
-<p>Figure: A Gaussian PDF representing heights of computer scientists.</p>
-</div>
-</div>
-<!-- original A4 foil 33: Gaussian PDF -->
-<!-- original A4 foil 34: Manipulating PDFs -->
-<!-- original A4 foil 35: Cumulative Distribution Functions\label{sub:CDFs} -->
-<!-- original A4 foil 36: Gaussian PDF and CDF -->
-<div class="figure">
-<div id="cdfOfHeight-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/cdfOfHeight.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="cdfOfHeight-magnify" class="magnify" onclick="magnifyFigure(&#39;cdfOfHeight&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="cdfOfHeight-caption" class="caption-frame">
-<p>Figure: The cumulative distribution function (CDF) for the heights of computer science students. The thick curve gives the CDF and the thinner curve the associated PDF.</p>
-</div>
-</div>
-<!-- original A4 foil 36: Gaussian PDF and CDF -->
-<!-- original A4 foil 37: Sample Based Approximations -->
-<!-- original A4 foil 38: Sample Based Approximations contd -->
-<!-- original A4 foil 39: Sample Mean vs True Mean -->
-<!-- original A4 foil 40: Note on Sample and Distribution Means -->
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>_root <span class="op">=</span> os.path.abspath(os.path.join(os.getcwd(), <span class="st">&#39;..&#39;</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>_py <span class="op">=</span> os.path.join(_root, <span class="st">&#39;python&#39;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> os.path.isdir(_py) <span class="kw">and</span> _py <span class="kw">not</span> <span class="kw">in</span> sys.path:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    sys.path.insert(<span class="dv">0</span>, _py)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> npa_plots</span></code></pre></div>
+<p>The MATLAB sampler <code>exponentialSamp.m</code> is <code>npa_plots.exponential_sample</code> (inverse CDF). Poisson counts are drawn with NumPy.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> <span class="fl">2.0</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">1</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> rng.poisson(mu, size<span class="op">=</span><span class="dv">20_000</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;sample mean&quot;</span>, k.mean(), <span class="st">&quot;sample variance&quot;</span>, k.var())</span></code></pre></div>
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -248,10 +183,18 @@ e^{\mu}=\sum_{m=0}^{\infty}\frac{\mu^{m}}{m!}\]</span> Substituting this result 
 <li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
 <li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li><p>Review of probability as needed for Chapter 3 of <span class="citation" data-cites="Bertsekas:data92">Bertsekas and Gallager (1992)</span></p></li>
+<li><p>Section 1.2, probability distributions of <span class="citation" data-cites="Bishop:book06">Bishop (2006)</span></p></li>
+</ul>
 <h1 class="unnumbered" id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Bertsekas:data92" class="csl-entry" role="listitem">
 Bertsekas, D.P., Gallager, R.G., 1992. Data networks, Second. ed. Prentice-Hall, Upper Saddle River, NJ.
+</div>
+<div id="ref-Bishop:book06" class="csl-entry" role="listitem">
+Bishop, C.M., 2006. Pattern recognition and machine learning. springer.
 </div>
 </div>
 

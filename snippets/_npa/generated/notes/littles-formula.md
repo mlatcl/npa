@@ -1,4 +1,3 @@
-% generated — do not edit; scripts/convert/run.py
 \ifndef{npaGenNotesLittlesFormula}
 \define{npaGenNotesLittlesFormula}
 
@@ -19,7 +18,6 @@
 \notes{You are driving past a nightclub, wondering how long you will have to wait to go in. You notice on Thursday nights that the queue typically contains 20 people and that people arrive at a rate of 40 per hour.
 According to Little's formula, how long would you expect to have to wait to get in?}
 
-\notes{#### Answer}
 
 \notes{The waiting time is given by Little's formula. $\bar{N}=20$, $\lambda=40$ and $\bar{T}=\frac{\bar{N}}{\lambda}=\frac{20}{40}=\frac{1}{2}\textrm{hour}$.}
 
@@ -56,15 +54,15 @@ The variable $\rho$ is known as the utilisation factor. It represents the fracti
 
 \notes{## Examples}
 
-\notes{1. **Graphical Proof of Little's Formula. **In this example we provide a graphical proof of Little's formula.\answer{
-  First we sketch two curves, the number of arrivals ($\alpha\left(\tau\right)$) and the number of departures ($\beta\left(\tau\right)$) from a queue vs time.
-  [ht]
-    \centering
-    \figure{\includepng{\diagramsDir/npa/littlesFormula}{60%}}{littlesFormula}{littlesFormula}
-    \caption{Graphical `proof' of Little's formula.}
-    \label{cap:littlesGraphical}
-  
-  By looking at Figure\  \ref{cap:littlesGraphical} we note that the area between the lines in the top figure can be expressed as both $\int_{0}^{t}N(\tau)d\tau$ and $\sum_{i=1}^{\alpha\left(t\right)}T_{i}$. We may therefore equate these expressions,$$
+\notes{1. **Graphical Proof of Little's Formula.**In this example we provide a graphical proof of Little's formula.}
+
+\notes{\subsection{Answer}}
+
+\notes{First we sketch two curves, the number of arrivals ($\alpha\left(\tau\right)$) and the number of departures ($\beta\left(\tau\right)$) from a queue vs time.}
+
+\figure{\includepng{\diagramsDir/npa/littlesFormula}{60%}}{littlesFormula}{littlesFormula}
+
+\notes{By looking at Figure\  \ref{cap:littlesGraphical} we note that the area between the lines in the top figure can be expressed as both $\int_{0}^{t}N(\tau)d\tau$ and $\sum_{i=1}^{\alpha\left(t\right)}T_{i}$. We may therefore equate these expressions,$$
 \int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},$$we then introduce the number of arrivals on the right hand side,$$
 \int_{0}^{t}N\left(\tau\right)d\tau=\alpha\left(t\right)\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}$$and divide both sides by $t$,$$
 \frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau=\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}.$$The equation now has the form of three averages. The term on the left hand side of the equation is an average, over time, of the number in the system. This average is a function of time and we write it $$
@@ -72,17 +70,19 @@ The variable $\rho$ is known as the utilisation factor. It represents the fracti
 \bar{\lambda}_{t}=\frac{\alpha\left(t\right)}{t},$$is the average of the arrivals over time and $$
 \bar{T}_{t}=\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}$$ is the average waiting time. So we write$$
 \bar{N}_{t}=\bar{\lambda}_{t}\bar{T}_{t}.$$Dividing both expressions by $t$, equating them, and taking the limit as $t\rightarrow\infty$ gives Little's formula. We wish to consider the steady state behaviour. The system may not have steady state behaviour. If the steady state exists, we can seek it in the limit as $t\rightarrow\infty$, giving $$
-\bar{N}=\lambda\bar{T}$$\}{0}}
+\bar{N}=\lambda\bar{T}$$}
 
-\notes{#### Answer}
 
-\notes{1. **Simple example of Little's formula**. You are at a queue in a bar and notice that the bar tender spends 10% of her time cleaning between serving customers. If the typical number of people waiting to be served is $3$, what is the ratio of time spent waiting to being served? \answer{
-  Information says $\rho=0.9$ and $\bar{N}_{Q}=3$. $$
+
+
+\notes{1. **Simple example of Little's formula**. You are at a queue in a bar and notice that the bar tender spends 10% of her time cleaning between serving customers. If the typical number of people waiting to be served is $3$, what is the ratio of time spent waiting to being served? }
+
+\notes{\subsection{Answer}}
+
+\notes{Information says $\rho=0.9$ and $\bar{N}_{Q}=3$. $$
 \lambda=\frac{0.9}{\bar{X}}.$$
   $$
 3=\lambda\bar{W}.$$
-  Therefore $\frac{\bar{W}}{\bar{X}}=3\frac{1}{3}$. \}{0}}
-
-\notes{#### Answer}
+  Therefore $\frac{\bar{W}}{\bar{X}}=3\frac{1}{3}$.}
 
 \endif

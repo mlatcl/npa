@@ -30,14 +30,13 @@ categories:
 <!--
 
 -->
-<p>% generated — do not edit; scripts/convert/run.py</p>
 <h1 id="pollaczek-khinchin-formula">Pollaczek-Khinchin formula</h1>
 <p>The Pollaczek-Khinchin formula is given as <span class="math display">\[
 \bar{W}=\frac{\lambda\left\langle X^{2}\right\rangle }{2(1-\rho)}\]</span>where <span class="math inline">\(\bar{W}\)</span> is expected waiting time,<span class="math inline">\(\left\langle X^{2}\right\rangle =\left\langle X^{2}\right\rangle _{p(X)}\)</span> is the second moment under the service time distribution, the utilisation factor is given as <span class="math inline">\(\rho=\lambda\bar{X}\)</span> and <span class="math inline">\(\bar{X}=\left\langle X\right\rangle _{p(X)}\)</span> is the mean under the service time distribution.</p>
 <h1 id="proof-of-pollaczek-khinchin-formula">Proof of Pollaczek-Khinchin Formula</h1>
 <p>In the examples, we review the first part of a simple proof of the Pollaczek-Khinchin formula. In our proof we will make three assumptions:</p>
 <ol type="1">
-<li>The queue is FIFO queue, <em>i.e. </em>customers are served in the order they arrive. This assumption may be relaxed but it will simplify our proof.</li>
+<li>The queue is FIFO queue, <em>i.e.</em>customers are served in the order they arrive. This assumption may be relaxed but it will simplify our proof.</li>
 <li>The arrival times are statistically independent of the service times.</li>
 <li>The arrival time distribution has a variance which is finite.</li>
 </ol>
@@ -111,181 +110,6 @@ A(t)=\frac{1}{2}\sum_{i=1}^{M(t)}X_{i}^{2}.\]</span> The average service time is
 </tr>
 </tbody>
 </table>
-<p>% generated — do not edit; scripts/convert/run.py</p>
-<!-- original A4 foil 147: $M$/$G$/$1$ Queue -->
-<!-- original A4 foil 147: $M$/$G$/$1$ Queue -->
-<!-- original A4 foil 148: Pollaczek-Khinchin formula -->
-<!-- original A4 foil 148: Pollaczek-Khinchin formula -->
-<!-- original A4 foil 149: Proof of Pollaczek-Khinchin Formula -->
-<!-- original A4 foil 149: Proof of Pollaczek-Khinchin Formula -->
-<!-- original A4 foil 150: The Residual Service Time\label{sub:theResidualServiceTime} -->
-<!-- original A4 foil 151: Simple Definitions and Schematic -->
-<div class="figure">
-<div id="cap:schemeaticRST-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/residualServiceOverview.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="cap:schemeaticRST-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:schemeaticRST&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="cap:schemeaticRST-caption" class="caption-frame">
-<p>Figure: Schematic representation of residual service time.</p>
-</div>
-</div>
-<!-- original A4 foil 151: Simple Definitions and Schematic -->
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><span class="math inline">\(W_{i}\)</span></th>
-<th>=</th>
-<th>Waiting time in queue of <span class="math inline">\(i\)</span>th customer.</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(R_{i}\)</span></td>
-<td>=</td>
-<td>`Residual service time’ seen by the <span class="math inline">\(i\)</span>th customer.</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(X_{i}\)</span></td>
-<td>=</td>
-<td>Service time of the <span class="math inline">\(i\)</span>th customer.</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(k_{i}\)</span></td>
-<td>=</td>
-<td>Number of customers in the system when the <span class="math inline">\(i\)</span>th customer arrives.</td>
-</tr>
-</tbody>
-</table>
-<!-- original A4 foil 152: Wait for \emph{i}th Customer -->
-<div class="figure">
-<div id="cap:schemeaticRST-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/residualServiceOverview.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="cap:schemeaticRST-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:schemeaticRST&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="cap:schemeaticRST-caption" class="caption-frame">
-<p>Figure: Schematic representation of residual service time.</p>
-</div>
-</div>
-<!-- original A4 foil 152: Wait for \emph{i}th Customer -->
-<!-- original A4 foil 153: Time Average Equivalence -->
-<!-- original A4 foil 153: Time Average Equivalence -->
-<!-- original A4 foil 154: Wait in Terms of Residual Service Time -->
-<!-- original A4 foil 154: Wait in Terms of Residual Service Time -->
-<!-- original A4 foil 155: Mean Residual Service Time from Departures Perspective -->
-<div class="figure">
-<div id="cap:meanResidualGraphical-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/residualTime.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="cap:meanResidualGraphical-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:meanResidualGraphical&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="cap:meanResidualGraphical-caption" class="caption-frame">
-<p>Figure: Graphical computation of mean residual time. <span class="math inline">\(M\left(t\right)\)</span> is the number of service completions in the interval <span class="math inline">\([0,\, t]\)</span>.</p>
-</div>
-</div>
-<!-- original A4 foil 155: Mean Residual Service Time from Departures Perspective -->
-<!-- original A4 foil 156: Residual Service Time -->
-<div class="figure">
-<div id="residualTime-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/residualTime.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="residualTime-magnify" class="magnify" onclick="magnifyFigure(&#39;residualTime&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="residualTime-caption" class="caption-frame">
-<p>Figure: residualTime</p>
-</div>
-</div>
-<!-- original A4 foil 157: Residual Service Time -->
-<!-- original A4 foil 158: Pollaczek-Khinchin Formula -->
-<!-- original A4 foil 159: Sanity Check --- Markov Service times -->
-<!-- original A4 foil 160: Deterministic Service --- $M/D/1$ -->
-<!-- original A4 foil 161: P-K Formula for Deterministic Systems -->
-<!-- original A4 foil 162: Table of Delays and Average Numbers in System -->
-<!-- original A4 foil 162: Table of Delays and Average Numbers in System -->
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Expected value</th>
-<th>General</th>
-<th>Exponential</th>
-<th>Deterministic</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(\bar{W}\)</span></td>
-<td>$X^{2}$</td>
-<td><span class="math inline">\(\frac{\rho}{\mu(1-\rho)}\)</span></td>
-<td><span class="math inline">\(\frac{\rho}{2\mu(1-\rho)}\)</span></td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(\bar{T}=\bar{W}+\frac{1}{\mu}\)</span></td>
-<td><span class="math inline">\(\frac{\lambda}{2(1-\rho)}\left\langle X^{2}\right\rangle +\frac{1}{\mu}\)</span></td>
-<td><span class="math inline">\(\frac{1}{\mu(1-\rho)}\)</span></td>
-<td><span class="math inline">\(\frac{2-\rho}{2\mu(1-\rho)}\)</span></td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(\bar{N_{Q}}=\lambda\bar{W}\)</span></td>
-<td>$X^{2}$</td>
-<td><span class="math inline">\(\frac{\rho^{2}}{(1-\rho)}\)</span></td>
-<td><span class="math inline">\(\frac{\rho^{2}}{2(1-\rho)}\)</span></td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(\bar{N}=\lambda\bar{W}+\rho=\)</span></td>
-<td><span class="math inline">\(\frac{\lambda^{2}}{2(1-\rho)}\left\langle X^{2}\right\rangle +\rho\)</span></td>
-<td><span class="math inline">\(\frac{\rho}{1-\rho}\)</span></td>
-<td><span class="math inline">\(\frac{\rho(2-\rho)}{2(1-\rho)}\)</span></td>
-</tr>
-</tbody>
-</table>
-<!-- original A4 foil 163: Example --- Uniform Service Times -->
-<!-- original A4 foil 164: Answer -->
-<!-- original A4 foil 165: Answer -->
-<!-- original A4 foil 166: Answer -->
-<!-- original A4 foil 167: Answer -->
-<!-- original A4 foil 168: Answer -->
-<!-- original A4 foil 169: Answer -->
-<!-- original A4 foil 170: Answer -->
-<!-- original A4 foil 171: Variance -->
-<!-- original A4 foil 172: Variance -->
-<!-- original A4 foil 173: Variance -->
-<!-- original A4 foil 174: Variance -->
-<!-- original A4 foil 175: Variance -->
-<!-- original A4 foil 176: Variance -->
-<!-- original A4 foil 177: Putting it Together -->
-<!-- original A4 foil 177: Putting it Together -->
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -296,5 +120,21 @@ A(t)=\frac{1}{2}\sum_{i=1}^{M(t)}X_{i}^{2}.\]</span> The average service time is
 <li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
 <li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
-<h1 id="references">References</h1>
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li>The <span class="math inline">\(M/G/1\)</span> queue, residual life, and vacations of <span class="citation" data-cites="Bertsekas:data92">Bertsekas and Gallager (1992)</span></li>
+</ul>
+<h2 id="exercises">Exercises</h2>
+<ul>
+<li>Tutorial Sheet 3: triangular service time in Pollaczek–Khinchin of <span class="citation" data-cites="npa-tutorial3">Lawrence (2006)</span></li>
+</ul>
+<h1 class="unnumbered" id="references">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Bertsekas:data92" class="csl-entry" role="listitem">
+Bertsekas, D.P., Gallager, R.G., 1992. Data networks, Second. ed. Prentice-Hall, Upper Saddle River, NJ.
+</div>
+<div id="ref-npa-tutorial3" class="csl-entry" role="listitem">
+Lawrence, N.D., 2006. <a href="https://mlatcl.github.io/npa/">Erlang delay and loss and the <span>M/G/1</span> queue</a>.
+</div>
+</div>
 

@@ -30,11 +30,10 @@ categories:
 <!--
 
 -->
-<p>% generated — do not edit; scripts/convert/run.py</p>
 <h1 id="markov-chains">Markov Chains</h1>
 <p>Time is a continuous variable, but sometimes it is convenient, or natural, to discretise time. One example of a form of discretised time would be turns in a board game. As the turns progress this discretised form of time progresses. Consider a discrete representation of time <span class="math inline">\(t=0,1,2...\)</span>. We associate a state variable, <span class="math inline">\(N\)</span>, with this time such that we have values for <span class="math inline">\(N\)</span> at <span class="math inline">\(N(0),\, N(1),\, N(2),\,...\)</span>.</p>
 <h2 id="markov-property">Markov Property</h2>
-<p>If this state variable exhibits the Markov property its value at time <span class="math inline">\(t\)</span> is dependent only on its value at time <span class="math inline">\(t-1\)</span>. The common way of putting this property is that the future is conditional independent of the past. The conditioning being on the present. In other words, the state of the system in the future is <em>not </em>dependent on what happened in the past if we know the state at the present time. Let’s consider a real-life example of a Markov chain, that of the board game of Monopoly.</p>
+<p>If this state variable exhibits the Markov property its value at time <span class="math inline">\(t\)</span> is dependent only on its value at time <span class="math inline">\(t-1\)</span>. The common way of putting this property is that the future is conditional independent of the past. The conditioning being on the present. In other words, the state of the system in the future is <em>not</em>dependent on what happened in the past if we know the state at the present time. Let’s consider a real-life example of a Markov chain, that of the board game of Monopoly.</p>
 <h2 id="monopoly-board">Monopoly Board</h2>
 <p>There are forty squares on a Monopoly board. We assume that there is only one player. That player’s state, <span class="math inline">\(N(t)\)</span>, will be the number of the square his/her counter is on <span class="math inline">\(+40\)</span> for every time he/she has reached GO. For example if you have circled the board twice and are currently on GO then <span class="math inline">\(N(t)=80\)</span>. Or if you have circled the board once and are on King’s Cross then <span class="math inline">\(N(t)=45\)</span>. The time <span class="math inline">\(t\)</span> is now clearly discrete and associated with the number of turns the player has had. In Monopoly you move your counter through rolling two six sided dice and adding them together. We will denote the result of this die roll at time <span class="math inline">\(t\)</span> with <span class="math inline">\(d(t)\)</span>. Notice that your state after turn <span class="math inline">\(t\)</span>, <span class="math inline">\(N(t)\)</span> depends only on your die role, <span class="math inline">\(d(t)\)</span>, and your state before turn <span class="math inline">\(t\)</span>, <span class="math inline">\(N(t-1)\)</span>. We write this as: <span class="math display">\[
 N(t)=N(t-1)+d(t).\]</span> This means that Monopoly exhibits the Markov property, as your future states are independent of your previous states given your current state.</p>
@@ -84,13 +83,17 @@ k\end{array}\right)P\left(h\right)^{k}(1-P\left(h\right))^{n-k}\label{eq:binomia
 P\left(k|\lambda,t\right)=\frac{(\lambda t)^{k}}{k!}e^{-\lambda t}.\label{eqn:poisson}\end{equation}\]</span> In other words, we have proved that a Poisson process is a particular type of Markov chain, in fact, taking the number of trials to <span class="math inline">\(\infty\)</span> is equivalent to taking the limit as <span class="math inline">\(\Delta t\rightarrow0\)</span>, this system is now continuous time, it is therefore known as a Markov process rather than a Markov chain. A Poisson process is therefore also a particular instance of a Markov process. ## Markov Process State Diagrams</p>
 When drawing state diagrams for continuous systems there a couple of small differences to the Markov chain state diagram given in Figure  <span class="math inline">\(\ref{cap:coinMonopolyStateDiagram}\)</span>. We no longer include the arrows that point to the same state and we replace the probability of state transfer with a rate of transfer between states (see Figure  <span class="math inline">\(\ref{cap:coinMonopolyProcess}\)</span>). You’ve now seen that a Poisson process can be derived starting from a simple Markov chain. This gives some deeper insight to a Poisson process. In the coin monopoly model there is a fixed (constant) probability of moving forward in every turn and whether a move forward occurs in each turn is completely independent of what happened in previous turns. The Poisson process is the continuous analogue of this stem. There is a constant probability of an arrival occurring at any time which is independent of what has gone before. This gives you an intuitive explanation of the two properties of the Poisson process given in Sections  <span class="math inline">\(\ref{sub:poissonIndependence}\)</span> and  <span class="math inline">\(\ref{sub:poissonSimilarities}\)</span>.
 <h2 id="examples">Examples</h2>
-<p>{1. It is possible to compute a probability distribution for a number of successes given a number of trials. This distribution is known as the binomial. For <span class="math inline">\(n\)</span> trials (equivalent to <span class="math inline">\(n\)</span> coin tosses or <span class="math inline">\(n\)</span> turns for Coin Monopoly) the probability of <span class="math inline">\(k\)</span> successes (equivalent to <span class="math inline">\(k\)</span> moves forward) is given by</p>
-<p>P(k)=({c} n\ k)P(h)<sup>{k}(1-P(h))</sup>{n-k}where <span class="math inline">\(\left({c} n\\ k\right)=\frac{n!}{k!(n-k)!}\)</span> is known as the binomial coefficient. By considering the limiting case as the probability of a success (or heads) goes to zero but the number of trials goes to <span class="math inline">\(\infty\)</span> show that a Poisson process can be recovered. [0] Since each of our turns takes <span class="math inline">\(\Delta t\)</span> time, we know that after <span class="math inline">\(t\)</span> time we will have completed n= turns. Since we defined <span class="math inline">\(P\left(h\right)=\lambda\Delta t\)</span> we can therefore write<span class="math display">\[
-P\left(h\right)=\frac{\lambda t}{n}.\]</span>We now substitute this expression for the probability of heads into the binomial distribution (<span class="math inline">\(\ref{eq:binomialDistirbution}\)</span>) giving P(k|,t) &amp; = &amp; ()<sup>{k}(1-)</sup>{n-k}\ &amp; = &amp; (1-)^{n}.The next step is to take the limit as <span class="math inline">\(n\rightarrow\infty\)</span>. From (<span class="math inline">\(\ref{eq:nInTermsOfDeltaT}\)</span>) we can see that this is equivalent to taking <span class="math inline">\(\Delta t\rightarrow0\)</span>. In this limit we can take advantage of the following <span class="math display">\[
-\lim_{n\rightarrow\infty}\frac{n\left(n-1\right)\dots\left(n-\left(k-1\right)\right)}{n^{k}\left(1-\frac{\lambda t}{n}\right)^{k}}=1.\]</span>You should recognise this from the fact that the dominant term in the numerator is <span class="math inline">\(n^{k}\)</span> and the dominant term in the denominator is <span class="math inline">\(n^{k}\)</span>. Secondly we use the fact that <span class="math display">\[
-\lim_{m\rightarrow\infty}\left(1+\frac{z}{m}\right)^{m}=\exp\left(z\right).\]</span>Inserting these two limits into the equation gives: P(k|,t)=e^{-t}.which is recognised as a Poisson process. In other words, we have proved that a Poisson process is a particular type of Markov chain, in fact, because we have taken the limit as <span class="math inline">\(\Delta t\rightarrow0\)</span>, this system is now continuous time, it is therefore known as a Markov process. }{0}</p>
-<h3 id="section"></h3>
-<p>*{Answer}</p>
+<ol type="1">
+<li>It is possible to compute a probability distribution for a number of successes given a number of trials. This distribution is known as the binomial. For <span class="math inline">\(n\)</span> trials (equivalent to <span class="math inline">\(n\)</span> coin tosses or <span class="math inline">\(n\)</span> turns for Coin Monopoly) the probability of <span class="math inline">\(k\)</span> successes (equivalent to <span class="math inline">\(k\)</span> moves forward) is given by</li>
+</ol>
+<p>P(k)=({c} n\ k)P(h)<sup>{k}(1-P(h))</sup>{n-k}where <span class="math inline">\(\left({c} n\\ k\right)=\frac{n!}{k!(n-k)!}\)</span> is known as the binomial coefficient. By considering the limiting case as the probability of a success (or heads) goes to zero but the number of trials goes to <span class="math inline">\(\infty\)</span> show that a Poisson process can be recovered.</p>
+<h2 id="answer">Answer</h2>
+<p>Since each of our turns takes <span class="math inline">\(\Delta t\)</span> time, we know that after <span class="math inline">\(t\)</span> time we will have completed n= turns. Since we defined <span class="math inline">\(P\left(h\right)=\lambda\Delta t\)</span> we can therefore write<span class="math display">\[
+P\left(h\right)=\frac{\lambda t}{n}.\]</span>We now substitute this expression for the probability of heads into the binomial distribution (<span class="math inline">\(\ref{eq:binomialDistirbution}\)</span>) giving <em>{n}=1.<span class="math display">\[You should recognise this from the fact that the dominant term in the numerator is $n^{k}$ and the dominant term in the denominator is $n^{k}$. Secondly we use the fact that \]</span> </em>{m}(1+)^{m}=(z).$$Inserting these two limits into the equation gives: P(k|,t)=e^{-t}.which is recognised as a Poisson process. In other words, we have proved that a Poisson process is a particular type of Markov chain, in fact, because we have taken the limit as <span class="math inline">\(\Delta t\rightarrow0\)</span>, this system is now continuous time, it is therefore known as a Markov process.</p>
+<p><span class="math display">\[\begin{eqnarray*}
+P\left(k|\lambda,t\right) &amp; = &amp; \frac{n!}{k!(n-k)!}\left(\frac{\lambda t}{n}\right)^{k}\left(1-\frac{\lambda t}{n}\right)^{n-k}\\
+&amp; = &amp; \frac{n\left(n-1\right)\dots\left(n-\left(k-1\right)\right)}{n^{k}\left(1-\frac{\lambda t}{n}\right)^{k}}\frac{(\lambda t)^{k}}{k!}\left(1-\frac{\lambda t}{n}\right)^{n}.The next step is to take the limit as $n\rightarrow\infty$. From (\ref{eq:nInTermsOfDeltaT}) we can see that this is equivalent to taking $\Delta t\rightarrow0$. In this limit we can take advantage of the following $$
+\end{eqnarray*}\]</span></p>
 <h1 id="steady-state">Steady State</h1>
 <p>Often we are interested in the steady state behaviour of a system, rather than the transient dynamics. We might ask the question: what is the average network delay when the system has reached steady state? What do we mean by steady state?</p>
 <ol type="1">
@@ -101,8 +104,8 @@ P\left(h\right)=\frac{\lambda t}{n}.\]</span>We now substitute this expression f
 \lim_{t\rightarrow\infty}p\left(k|t\right)=p\left(k\right)\]</span>the average value of <span class="math inline">\(k\)</span> at steady state is then given by<span class="math display">\[
 \left\langle k\right\rangle _{p\left(k\right)}=\sum_{k=0}^{\infty}p\left(k\right)k.\]</span></p>
 <h2 id="coin-monopoly-revisited">Coin Monopoly Revisited</h2>
-<p>The Markov chain underlying `Coin Monopoly’ (as presented in the previous chapter) has no associated <em>steady state </em>distribution, over time the value of <span class="math inline">\(k\)</span> will always increase. In this chapter we will introduce a slightly more complex Markov process called a birth-death processes. A birth-death process does have a steady state distribution. We will use a condition known as detailed balance to discover this distribution.</p>
-<p><em>Note.</em> In `Coin Monopoly’ Anne moved forward at each time step by tossing a coin, if it came up heads she moved forward, otherwise she stayed on the same square. Anne’s friend Bob suggests a variation of this game. At each of Anne’s turns Bob tosses a second coin. If Bob’s coin comes up heads then Anne has to move backwards one step. Anne likes this idea, but is concerned that she doesn’t want to go back from the start so she suggests an additional, and final rule, that if she haven’t been around the board yet and she is at GO (<em>i.e. </em> state <span class="math inline">\(N\left(t\right)=0\)</span>) then Bob is not allowed to toss his coin. At each time step we now have to consider Let’s represent the outcomes of this system If we assume, as before</p>
+<p>The Markov chain underlying `Coin Monopoly’ (as presented in the previous chapter) has no associated <em>steady state</em>distribution, over time the value of <span class="math inline">\(k\)</span> will always increase. In this chapter we will introduce a slightly more complex Markov process called a birth-death processes. A birth-death process does have a steady state distribution. We will use a condition known as detailed balance to discover this distribution.</p>
+<p><em>Note.</em> In `Coin Monopoly’ Anne moved forward at each time step by tossing a coin, if it came up heads she moved forward, otherwise she stayed on the same square. Anne’s friend Bob suggests a variation of this game. At each of Anne’s turns Bob tosses a second coin. If Bob’s coin comes up heads then Anne has to move backwards one step. Anne likes this idea, but is concerned that she doesn’t want to go back from the start so she suggests an additional, and final rule, that if she haven’t been around the board yet and she is at GO (<em>i.e.</em> state <span class="math inline">\(N\left(t\right)=0\)</span>) then Bob is not allowed to toss his coin. At each time step we now have to consider Let’s represent the outcomes of this system If we assume, as before</p>
 <h1 id="birth-death-process">Birth Death Process</h1>
 <p>Let’s consider a model for births and deaths in a population. Recall the Markov chain underlying `Coin Monopoly’ (Figure  <span class="math inline">\(\ref{cap:coinMonopolyStateDiagram}\)</span>). Consider a modification to this diagram whereby as well as moving forward in state space (a transition from state equalling <span class="math inline">\(k\)</span> to state equalling <span class="math inline">\(k+1\)</span>) you can also move backwards (a transition from state equalling <span class="math inline">\(k\)</span> and state equalling <span class="math inline">\(k-1\)</span>). The only restriction we impose is that the state cannot go negative. This system is known as a birth-death process. A birth is an increase in the state <span class="math inline">\(k\)</span> and a death is a decrease. We represent the discrete version of this system with a state diagrams in Figure  <span class="math inline">\(\ref{cap:birthDeathChainState}\)</span> is with a state diagram as follows.and the continuous version with that in Figure  <span class="math inline">\(\ref{cap:birthDeathChainProcess}\)</span>.</p>
 <div class="figure">
@@ -161,7 +164,7 @@ P\left(j\right)\sum_{i=0}^{\infty}q_{ji}=\sum_{i=0}^{\infty}P\left(i\right)q_{ij
 <p>For the birth death processes we are considering transitions only occur between state <span class="math inline">\(k\)</span> and <span class="math inline">\(k+1\)</span> or <span class="math inline">\(k-1\)</span>. In other words <span class="math inline">\(P_{ij}=0\)</span> if <span class="math inline">\(i&gt;j+1\)</span> and <span class="math inline">\(i&lt;j-1\)</span>. This leads us to a special case of the global balance equations known as the detailed balance equations which look at the flow between two states. For the discrete case<span class="math display">\[
 P\left(k-1\right)P_{k-1,k}=P\left(k\right)P_{k,k-1}\]</span>and for the continuous case <span class="math display">\[
 P\left(k-1\right)q_{k-1,k}=P\left(k\right)q_{k,k-1}.\]</span>In our notation rate from <span class="math inline">\(k\)</span> to state <span class="math inline">\(k-1\)</span>is given by <span class="math inline">\(\mu_{k}\)</span> and the rate from <span class="math inline">\(k-1\)</span> to <span class="math inline">\(k\)</span> is given by <span class="math inline">\(\lambda_{k-1}\)</span>so we have <span class="math display">\[
-P\left(k-1\right)\lambda_{k-1}=P\left(k\right)\mu_{k}.\]</span> To understand what this represents it is easier to consider the flow rates at a <em>boundary </em>between two states, <span class="math inline">\(k-1\)</span> and <span class="math inline">\(k\)</span>. This is shown in Figure  <span class="math inline">\(\ref{cap:flowAtBoundary}\)</span>. At steady state, flow from <span class="math inline">\(k-1\)</span> to <span class="math inline">\(k\)</span> is given by <span class="math inline">\(\lambda_{k-1}P\left(k-1\right)\)</span>. Flow from <span class="math inline">\(k\)</span> to <span class="math inline">\(k-1\)</span> is given <span class="math inline">\(\mu_{k}P\left(k\right)\)</span>. For flow to be balanced we have <span class="math display">\[
+P\left(k-1\right)\lambda_{k-1}=P\left(k\right)\mu_{k}.\]</span> To understand what this represents it is easier to consider the flow rates at a <em>boundary</em>between two states, <span class="math inline">\(k-1\)</span> and <span class="math inline">\(k\)</span>. This is shown in Figure  <span class="math inline">\(\ref{cap:flowAtBoundary}\)</span>. At steady state, flow from <span class="math inline">\(k-1\)</span> to <span class="math inline">\(k\)</span> is given by <span class="math inline">\(\lambda_{k-1}P\left(k-1\right)\)</span>. Flow from <span class="math inline">\(k\)</span> to <span class="math inline">\(k-1\)</span> is given <span class="math inline">\(\mu_{k}P\left(k\right)\)</span>. For flow to be balanced we have <span class="math display">\[
 \lambda_{k-1}P\left(k-1\right)=\mu_{k}P\left(k\right)\]</span> leading to <span class="math display">\[
 P\left(k\right)=\frac{\lambda_{k-1}}{\mu_{k}}P\left(k-1\right).\]</span>For different systems, the birth rate and death rate will differ. We will first study the <span class="math inline">\(M/M/1\)</span> queue which is a birth-death process where the birth rate and death rate are constant regardless of the state of the queue.</p>
 <div class="figure">
@@ -223,7 +226,7 @@ P\left(k\right) &amp; = &amp; \left(\frac{\lambda}{\mu}\right)^{k}P\left(0\right
 </div>
 </div>
 <h2 id="normalisation">Normalisation</h2>
-<p>To find <span class="math inline">\(P\left(0\right)\)</span> we exploit our knowledge that, for the <span class="math inline">\(M/M/1\)</span> queue <span class="math inline">\(0\leq k&lt;\infty\)</span>. Given that the steady state distribution <em>must </em>be normalised, we can write <span class="math display">\[
+<p>To find <span class="math inline">\(P\left(0\right)\)</span> we exploit our knowledge that, for the <span class="math inline">\(M/M/1\)</span> queue <span class="math inline">\(0\leq k&lt;\infty\)</span>. Given that the steady state distribution <em>must</em>be normalised, we can write <span class="math display">\[
 \sum_{k=0}^{\infty}P\left(k\right)=1\]</span> and therefore <span class="math display">\[
 1=P\left(0\right)\sum_{k=0}^{\infty}\rho^{k}\]</span> giving <span class="math display">\[\begin{equation}
 P\left(0\right)=\frac{1}{\sum_{k=0}^{\infty}\rho^{k}}.\label{eq:MM1Series}\end{equation}\]</span> We are once again faced with an infinite series in the denominator of (<span class="math inline">\(\ref{eq:MM1Series}\)</span>). This series converges if <span class="math inline">\(\rho&lt;1\)</span> (when the birth rate is less than the death rate), <span class="math display">\[
@@ -233,7 +236,7 @@ P\left(k\right)=\rho^{k}\left(1-\rho\right).\]</span></p>
 <h2 id="faster-arrivals-than-service">Faster Arrivals than Service</h2>
 <p>Notice that if the arrival rate (birth rate) is greater than the service rate (death rate) then <span class="math inline">\(\rho&gt;1\)</span> and the series in (<span class="math inline">\(\ref{eq:MM1Series}\)</span>) doesn’t converge. This is indicative of the fact that if the birth rate is greater than the death rate there is no steady state distribution: the queue simply continues to grow in size.</p>
 <h2 id="average-number-in-system">Average Number in System</h2>
-<p>For network design we might be interested in the average queue length. We can use the steady state probabilities to compute this quantity. The average number of customers in the system <em>is not</em> the same as the average queue length because a customer being served (<em>e.g. </em>a packet under transmission) is not in the queue. The average number of customers in the system is given by the expected state of the system,<span class="math display">\[
+<p>For network design we might be interested in the average queue length. We can use the steady state probabilities to compute this quantity. The average number of customers in the system <em>is not</em> the same as the average queue length because a customer being served (<em>e.g.</em>a packet under transmission) is not in the queue. The average number of customers in the system is given by the expected state of the system,<span class="math display">\[
 \left\langle k\right\rangle _{P\left(k\right)}=\sum_{k=0}^{\infty}kP\left(k\right)\]</span>in the examples section at the end of this chapter we show how this average can be computed as<span class="math display">\[\begin{eqnarray*}
 \left\langle k\right\rangle _{P\left(k\right)} &amp; = &amp; \frac{\rho}{1-\rho}\\
 &amp; = &amp; \frac{\lambda}{\mu-\lambda}.\end{eqnarray*}\]</span>The variance can also be computed, it is given by <span class="math display">\[
@@ -268,7 +271,7 @@ P\left(k\right)=\rho^{k}\left(1-\rho\right).\]</span></p>
 </button>
 </div>
 <div id="probOutcome-caption" class="caption-frame">
-<p>Figure: Testing for one of three outcomes. Generate a random number between 0 and 1 (in MATLAB use rand ), see where the result lies on the line above. If it is less than <span class="math inline">\(P\left(b\right)\)</span> then state of queue increases by 1, if it is greater than <span class="math inline">\(P\left(b\right)\)</span> but less than <span class="math inline">\(P\left(b\right)+P\left(d\right)\)</span> <em>and the queue is not empty</em> then state of queue decreases by one, otherwise queue state stays the same.</p>
+<p>Figure: Testing for one of three outcomes. Generate a random number between 0 and 1 (in Python, <code>numpy.random.random()</code>), see where the result lies on the line above. If it is less than <span class="math inline">\(P\left(b\right)\)</span> then state of queue increases by 1, if it is greater than <span class="math inline">\(P\left(b\right)\)</span> but less than <span class="math inline">\(P\left(b\right)+P\left(d\right)\)</span> <em>and the queue is not empty</em> then state of queue decreases by one, otherwise queue state stays the same.</p>
 </div>
 </div>
 <h2 id="approximating-a-continuous-mm1-queue">Approximating a Continuous <span class="math inline">\(M/M/1\)</span> Queue</h2>
@@ -311,246 +314,30 @@ P\left(k\right)=\rho^{k}\left(1-\rho\right).\]</span></p>
 <li>The mean number in the system for the <span class="math inline">\(M/M/1\)</span> queue is given by considering the expectation under the steady state distribution. Compute this value. [0]</li>
 </ol>
 <p>k<em>{P(k)} &amp; = &amp; </em>{k=0}^{}kP(k)\ &amp; = &amp; (1-)<em>{k=0}<sup>{}k</sup>{k}\ &amp; = &amp; (1-)</em>{k=0}<sup>{}k</sup>{k-1}\ &amp; = &amp; (1-)\ &amp; = &amp; (1-)\ &amp; = &amp; (1-)\ &amp; = &amp; \ &amp; = &amp; </p>
-<h2 id="section-1"></h2>
+<h2 id="section"></h2>
 <p>*{Answer}</p>
-<p>% generated — do not edit; scripts/convert/run.py</p>
-<!-- original A4 foil 52: Markov Chains and Markov Processes\label{cha:markovChainsAndProcesses} -->
-<!-- original A4 foil 53: Markov Chains -->
-<!-- original A4 foil 53: Markov Chains -->
-<!-- original A4 foil 54: Monopoly -->
-<div class="figure">
-<div id="smallMonopoly-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/smallMonopoly.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="smallMonopoly-magnify" class="magnify" onclick="magnifyFigure(&#39;smallMonopoly&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="smallMonopoly-caption" class="caption-frame">
-<p>Figure: smallMonopoly</p>
-</div>
-</div>
-<!-- original A4 foil 55: Markov Chain Monopoly -->
-<!-- original A4 foil 56: State Diagrams -->
-<!-- original A4 foil 57: Poisson Process as a Markov Process -->
-<!-- original A4 foil 58: Coin Monopoly -->
-<div class="figure">
-<div id="cap:coinMonopolyStateDiagram-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/stateDiagram.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="cap:coinMonopolyStateDiagram-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:coinMonopolyStateDiagram&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="cap:coinMonopolyStateDiagram-caption" class="caption-frame">
-<p>Figure: State diagram for coin monopoly. Each node (circle) represents a different possible state value. The state changes (or doesn’t change) with each time step according the probabilities associated with the arrows.</p>
-</div>
-</div>
-<!-- original A4 foil 58: Coin Monopoly -->
-<!-- original A4 foil 59: Fast Coin Monopoly -->
-<!-- original A4 foil 60: Binomial Distribution for $n$ Trials -->
-<!-- original A4 foil 61: Take Limits -->
-<!-- original A4 foil 62: Markov Process State Diagrams -->
-<div class="figure">
-<div id="cap:coinMonopolyProcess-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/stateDiagramProcess.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="cap:coinMonopolyProcess-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:coinMonopolyProcess&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="cap:coinMonopolyProcess-caption" class="caption-frame">
-<p>Figure: State diagram for the Markov process given by Coin Monopoly in the limit as <span class="math inline">\(\Delta t\rightarrow0\)</span>. This is the state diagram for a Poisson process. Notice in comparison to Figure  <span class="math inline">\(\ref{cap:coinMonopolyStateDiagram}\)</span>, the probabilities have been replaced by rates and there are no self-transition arrows.</p>
-</div>
-</div>
-<!-- original A4 foil 63: Summary -->
-<!-- original A4 foil 64: Steady State\label{sec:steadyState} -->
-<!-- original A4 foil 64: Steady State\label{sec:steadyState} -->
-<!-- original A4 foil 65: Steady State contd -->
-<!-- original A4 foil 66: Coin Monopoly Revisited -->
-<!-- original A4 foil 66: Coin Monopoly Revisited -->
-<!-- original A4 foil 67: Birth Death Process -->
-<div class="figure">
-<div id="cap:birthDeathChainState-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/birthDeathChain.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="cap:birthDeathChainState-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:birthDeathChainState&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="cap:birthDeathChainState-caption" class="caption-frame">
-<p>Figure: State diagram for a birth-death chain.</p>
-</div>
-</div>
-<!-- original A4 foil 67: Birth Death Process -->
-<div class="figure">
-<div id="cap:birthDeathChainProcess-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/birthDeathProcess.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="cap:birthDeathChainProcess-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:birthDeathChainProcess&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="cap:birthDeathChainProcess-caption" class="caption-frame">
-<p>Figure: State diagram for a birth-death process.</p>
-</div>
-</div>
-<!-- original A4 foil 68: Kendall's Notation\label{sec:kendall} -->
-<!-- original A4 foil 68: Kendall's Notation\label{sec:kendall} -->
-<!-- original A4 foil 69: Global Balance -->
-<!-- original A4 foil 70: Global Balance II -->
-<!-- original A4 foil 71: Detailed Balance -->
-<!-- original A4 foil 71: Detailed Balance -->
-<!-- original A4 foil 72: Boundary Flow -->
-<div class="figure">
-<div id="boundaryFlow-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/boundaryFlow.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="boundaryFlow-magnify" class="magnify" onclick="magnifyFigure(&#39;boundaryFlow&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="boundaryFlow-caption" class="caption-frame">
-<p>Figure: boundaryFlow</p>
-</div>
-</div>
-<!-- original A4 foil 72: Boundary Flow -->
-<!-- original A4 foil 73: Kendall's Notation --- $M/M/1$ -->
-<!-- original A4 foil 73: Kendall's Notation --- $M/M/1$ -->
-<!-- original A4 foil 74: $M/M/1$ Queue\label{sec:MM1Stationary} -->
-<div class="figure">
-<div id="stateMM1-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/stateMM1.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="stateMM1-magnify" class="magnify" onclick="magnifyFigure(&#39;stateMM1&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="stateMM1-caption" class="caption-frame">
-<p>Figure: State diagram for <span class="math inline">\(M/M/1\)</span> queue.</p>
-</div>
-</div>
-<!-- original A4 foil 74: $M/M/1$ Queue\label{sec:MM1Stationary} -->
-<!-- original A4 foil 75: $M/M/1$ Stationary Distribution -->
-<!-- original A4 foil 75: $M/M/1$ Stationary Distribution -->
-<div class="figure">
-<div id="boundaryFlowMM1-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/boundaryFlowMM1.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="boundaryFlowMM1-magnify" class="magnify" onclick="magnifyFigure(&#39;boundaryFlowMM1&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="boundaryFlowMM1-caption" class="caption-frame">
-<p>Figure: boundaryFlowMM1</p>
-</div>
-</div>
-<!-- original A4 foil 76: $M/M/1$ --- Stationary Distribution II -->
-<!-- original A4 foil 77: Normalisation\label{sub:normalisationMM1} -->
-<!-- original A4 foil 78: Faster Arrivals than Service -->
-<!-- original A4 foil 79: Average Number in System -->
-<!-- original A4 foil 80: Average Number in System II -->
-<!-- original A4 foil 81: Average Number in System II -->
-<!-- original A4 foil 82: Average Number in System II -->
-<!-- original A4 foil 83: Average Number in System II -->
-<!-- original A4 foil 84: Average Number in System II -->
-<!-- original A4 foil 85: Average Number in System II -->
-<!-- original A4 foil 86: Average Number in System II -->
-<!-- original A4 foil 87: Average Number in System II -->
-<!-- original A4 foil 88: Variance -->
-<!-- original A4 foil 89: Discrete Simulation of $M/M/1$ -->
-<div class="figure">
-<div id="discreteMM1State-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/discreteMM1State.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="discreteMM1State-magnify" class="magnify" onclick="magnifyFigure(&#39;discreteMM1State&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="discreteMM1State-caption" class="caption-frame">
-<p>Figure: discreteMM1State</p>
-</div>
-</div>
-<!-- original A4 foil 90: Hints for the Simulation -->
-<!-- original A4 foil 90: Hints for the Simulation -->
-<div class="figure">
-<div id="probOutcome-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/probOutcome.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="probOutcome-magnify" class="magnify" onclick="magnifyFigure(&#39;probOutcome&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="probOutcome-caption" class="caption-frame">
-<p>Figure: probOutcome</p>
-</div>
-</div>
-<!-- original A4 foil 91: Approximating a Continuous $M/M/1$ Queue -->
-<!-- original A4 foil 91: Approximating a Continuous $M/M/1$ Queue -->
-<!-- original A4 foil 92: Demonstration -->
-<!-- original A4 foil 92: Demonstration -->
-<!-- original A4 foil 93: Histograms -->
-<div class="figure">
-<div id="rho-half-1000-arrivals-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/rho_half_1000_arrivals.png" width="45%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="rho-half-1000-arrivals-magnify" class="magnify" onclick="magnifyFigure(&#39;rho-half-1000-arrivals&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="rho-half-1000-arrivals-caption" class="caption-frame">
-<p>Figure: Left figure: steady state probabilities after the first 100 seconds for <span class="math inline">\(\rho=0.5\)</span>. Right figure: steady state probabilities after the first 1000 seconds for <span class="math inline">\(\rho=0.5\)</span>.</p>
-</div>
-</div>
-<!-- original A4 foil 93: Histograms -->
-<div class="figure">
-<div id="rho-point95-1000-arrivals-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/rho_point95_1000_arrivals.png" width="45%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="rho-point95-1000-arrivals-magnify" class="magnify" onclick="magnifyFigure(&#39;rho-point95-1000-arrivals&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="rho-point95-1000-arrivals-caption" class="caption-frame">
-<p>Figure: Left figure: steady state probabilities after the first 100 seconds for <span class="math inline">\(\rho=0.95\)</span>. Right figure: steady state probabilities after the first 1000 seconds for <span class="math inline">\(\rho=0.95\)</span>.</p>
-</div>
-</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>_root <span class="op">=</span> os.path.abspath(os.path.join(os.getcwd(), <span class="st">&#39;..&#39;</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>_py <span class="op">=</span> os.path.join(_root, <span class="st">&#39;python&#39;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> os.path.isdir(_py) <span class="kw">and</span> _py <span class="kw">not</span> <span class="kw">in</span> sys.path:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    sys.path.insert(<span class="dv">0</span>, _py)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> npa_plots</span></code></pre></div>
+<p>The original MATLAB demo is <code>simulateQueue.m</code>. The helper <code>npa_plots.simulate_mm1</code> is the same loop. Compare the time-average occupancy with the geometric <span class="math inline">\(P(k)=(1-\rho)\rho^k\)</span>, first at <span class="math inline">\(\rho=1/2\)</span> and then at <span class="math inline">\(\rho=0.95\)</span>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> npa_plots.plot_mm1_occupancy(<span class="fl">1.0</span>, <span class="fl">2.0</span>, n_iters<span class="op">=</span><span class="dv">10_000</span>, rng<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r&quot;$\rho=0.5$, first 100 seconds&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> npa_plots.plot_mm1_occupancy(<span class="fl">1.0</span>, <span class="fl">2.0</span>, n_iters<span class="op">=</span><span class="dv">100_000</span>, rng<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r&quot;$\rho=0.5$, first 1000 seconds&quot;</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> npa_plots.plot_mm1_occupancy(<span class="fl">1.9</span>, <span class="fl">2.0</span>, n_iters<span class="op">=</span><span class="dv">10_000</span>, rng<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r&quot;$\rho=0.95$, first 100 seconds&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> npa_plots.plot_mm1_occupancy(<span class="fl">1.9</span>, <span class="fl">2.0</span>, n_iters<span class="op">=</span><span class="dv">100_000</span>, rng<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r&quot;$\rho=0.95$, first 1000 seconds&quot;</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -561,10 +348,25 @@ P\left(k\right)=\rho^{k}\left(1-\rho\right).\]</span></p>
 <li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
 <li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li>Markov chains and birth-death queues, including global and detailed balance of <span class="citation" data-cites="Bertsekas:data92">Bertsekas and Gallager (1992)</span></li>
+</ul>
+<h2 id="exercises">Exercises</h2>
+<ul>
+<li><p>Tutorial Sheet 2: occupancy variance of <span class="math inline">\(M/M/1\)</span> and related birth-death calculations of <span class="citation" data-cites="npa-tutorial2">Lawrence (2006a)</span></p></li>
+<li><p>Lab 1: discrete-time simulation of <span class="math inline">\(M/M/1\)</span> and comparison with the geometric occupancy of <span class="citation" data-cites="npa-lab1">Lawrence (2006b)</span></p></li>
+</ul>
 <h1 class="unnumbered" id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Bertsekas:data92" class="csl-entry" role="listitem">
 Bertsekas, D.P., Gallager, R.G., 1992. Data networks, Second. ed. Prentice-Hall, Upper Saddle River, NJ.
+</div>
+<div id="ref-npa-tutorial2" class="csl-entry" role="listitem">
+Lawrence, N.D., 2006a. <a href="https://mlatcl.github.io/npa/"><span>M/M/1</span> queue, little’s formula</a>.
+</div>
+<div id="ref-npa-lab1" class="csl-entry" role="listitem">
+Lawrence, N.D., 2006b. <a href="https://mlatcl.github.io/npa/">Discrete simulation of the <span><span class="math inline">\(M/M/1\)</span></span> queue</a>.
 </div>
 </div>
 

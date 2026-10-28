@@ -30,11 +30,10 @@ categories:
 <!--
 
 -->
-<p>% generated — do not edit; scripts/convert/run.py</p>
 <h1 id="introduction">Introduction</h1>
 <p>Welcome to Network Performance Analysis, 16 lectures and 2 lab sessions on queueing theory and network simulation. Queueing theory dates back to the beginning of the 20th Century and the pioneering work of <strong>Agner Krarup Erlang</strong> (1878-1929) a Danish Telecoms Engineer who published the first paper on queueing theory <span class="citation" data-cites="Erlang:theory09">(Erlang, 1909)</span>. In these first two chapters we will introduce the background for the material which follows: the development of worldwide communication networks. For further reading please check <a href="http://en.wikipedia.org">http://en.wikipedia.org</a> and <a href="http://www.computerhistory.org">http://www.computerhistory.org</a>.</p>
 <h1 id="early-milestones">Early Milestones</h1>
-<p>Perhaps the first major development in telecommunications was <em>the telegraph</em>. <strong>Samuel F. B. Morse</strong> developed ideas for the electrical telegraph which exploited the relationship between magnetism and electricity. His first working system sent a short message from Baltimore to Washington D.C. (two cities that are conveniently close together!). It was sent on May 24th, 1844: `What hath God wrought?’. Ten years later 23,000 miles of wire across the United States. At the time, a key limitation of the telegraph was that it only provided one channel per wire for communication. Work in using a single wire for multiple channels (multiplexing) indirectly led to the invention of <em>the telephone </em>which was patented by <strong>Alexander Graham Bell</strong> (1847-1922) in March 7th, 1876. The development of a <em>wireless telegraphy</em> system by the Italian born engineer <strong>Guglielmo Marconi</strong> (1874-1937), patented in July 1897, led to the foundation of the Wireless Telegraph &amp; Signal Company. By December 1901 short wave transmission across the Atlantic between England and Canada (over 2,100 miles).</p>
+<p>Perhaps the first major development in telecommunications was <em>the telegraph</em>. <strong>Samuel F. B. Morse</strong> developed ideas for the electrical telegraph which exploited the relationship between magnetism and electricity. His first working system sent a short message from Baltimore to Washington D.C. (two cities that are conveniently close together!). It was sent on May 24th, 1844: `What hath God wrought?’. Ten years later 23,000 miles of wire across the United States. At the time, a key limitation of the telegraph was that it only provided one channel per wire for communication. Work in using a single wire for multiple channels (multiplexing) indirectly led to the invention of <em>the telephone</em>which was patented by <strong>Alexander Graham Bell</strong> (1847-1922) in March 7th, 1876. The development of a <em>wireless telegraphy</em> system by the Italian born engineer <strong>Guglielmo Marconi</strong> (1874-1937), patented in July 1897, led to the foundation of the Wireless Telegraph &amp; Signal Company. By December 1901 short wave transmission across the Atlantic between England and Canada (over 2,100 miles).</p>
 <h1 id="automated-telephone-networks">Automated Telephone Networks</h1>
 <p>Initially, telephone call routing was achieved manually. Operators at the exchange used patch boards to make physical connections between the callers. The invention, by <strong>Almon Strowger</strong> (1839-1902), of the <em>automatic telephone exchange</em> (through the Strowger switch) in 1891 brought about the need for a theoretical study of the operation of telephone exchanges. The network of interconnected phone lines is now known as a <em>circuit switching network</em>. It is a network of lines which can be switched between two subscribers to form a connection. Erlang’s contribution was to provide theoretical studies of these networks which allowed telephone exchanges to be designed to meet demand.</p>
 <h1 id="information-theory">Information Theory</h1>
@@ -77,7 +76,7 @@ categories:
 <ol type="1">
 <li><strong>Message arrival rate</strong>. We can seek to model the arrivals as: <em>Poisson arrivals</em>, <em>deterministic arrivals</em>, <em>uniform arrivals</em> or as coming from a more general class of distributions.</li>
 <li><strong>Session holding time</strong>: The length of a session.</li>
-<li><strong>Expected message length</strong> and <strong>length distribution</strong>, message lengths can be modelled as <em>exponential distributions</em>,* uniform length*.</li>
+<li><strong>Expected message length</strong> and <strong>length distribution</strong>, message lengths can be modelled as <em>exponential distributions</em>,<em>uniform length</em>.</li>
 <li><strong>Allowable delay</strong> - acceptable expected delays vary. The acceptable delay is low for VoIP and quite high for FTP.</li>
 <li><strong>Reliability</strong> - FTP <em>must</em> be error free but VoIP can have some bit errors or packet loss without major consequences.</li>
 <li><strong>Message and packet ordering</strong> - Some sessions will require that the packets arrive in the order they are sent: for example database requests.</li>
@@ -129,7 +128,7 @@ categories:
 <p>Figure: A simple packet switching network connecting Alice, Bob, Carol and David.</p>
 </div>
 </div>
-<p>Now the fixed land line is managed by some form of router in the local area network in Bob’s house. The advantage is that Bob and Carol may both use the land line for communication the disadvantage is that if the land line becomes congested <em>e.g. </em> as a result of Carol downloading a large file from David’s web server, Bob will notice a variable delay (delays also occur with circuit switching but they are known as transmission delays and should be of fixed length) in his communication with Alice due to queueing occurring at his Internet Service Provider and in his LAN’s router. This can be particularly irritating for voice conversation, as anyone who has used MSN messenger for voice communication over a low bandwidth channel will attest.</p>
+<p>Now the fixed land line is managed by some form of router in the local area network in Bob’s house. The advantage is that Bob and Carol may both use the land line for communication the disadvantage is that if the land line becomes congested <em>e.g.</em> as a result of Carol downloading a large file from David’s web server, Bob will notice a variable delay (delays also occur with circuit switching but they are known as transmission delays and should be of fixed length) in his communication with Alice due to queueing occurring at his Internet Service Provider and in his LAN’s router. This can be particularly irritating for voice conversation, as anyone who has used MSN messenger for voice communication over a low bandwidth channel will attest.</p>
 <h1 id="the-layered-model">The Layered Model</h1>
 <p>We now review the layered model for TCP/IP networks, you are referred to Tanenbaum (4th Edition pg. 41) for more details.</p>
 <div class="figure">
@@ -150,11 +149,11 @@ categories:
 <p>The traditional OSI Reference model contains seven layers which reflect in a network how communication occurs at different layers using different protocols. By way of reviewing the TCP model we introduce a layered representation of the TCP/IP model which underlies the internet. As we mentioned above TCP/IP was introduced in 1974 as a standard which interconnects between networks. This is achieved through the Internet Protocol. The TCP/IP reference model is much more compact and will serve as a useful reminder.</p>
 <ul>
 <li>**Application** Layer This layer represents the interface to the user and consists of applications which are commonly used by users. As well as the examples in the diagram packetised voice communications, electronic news, HTTP and its secure variants etc.</li>
-<li>**The** Transport  Layer The layer above the internet layer is known as the transport layer and contains two protocols. The Transmission Control Protocol (TCP) allows applications to communicate in a lossless manner, <em>i.e. </em>any packets which are dropped are retransmitted. It also implements flow control in an effort to prevent network congestion and reorders arrivals at the destination. The User Datagram Protocol (UDP) is an unreliable protocol for applications which wish to provide their own sequencing and flow control (e.g. voice transmission or video).</li>
+<li>**The** Transport  Layer The layer above the internet layer is known as the transport layer and contains two protocols. The Transmission Control Protocol (TCP) allows applications to communicate in a lossless manner, <em>i.e.</em>any packets which are dropped are retransmitted. It also implements flow control in an effort to prevent network congestion and reorders arrivals at the destination. The User Datagram Protocol (UDP) is an unreliable protocol for applications which wish to provide their own sequencing and flow control (e.g. voice transmission or video).</li>
 <li>**The** Internet  Layer The key to the success of TCP/IP is the Internet Protocol. Its objective is to allow the interfacing of different networks by allowing hosts to place packets on any network and enabling them to travel to any other network.</li>
 </ul>
 <h1 id="communication-media">Communication Media</h1>
-<p>Circuit switching networks may share a communication line but this is done through multiplexing where a fixed proportion of the communication channel is dedicated to the session. The multiplexing may be time division multiplexing or frequency division multiplexing. The former splits the communication channel into time slots and allocates each to a different session, the latter uses different portions of the frequency bandwidth for each channel. Both are not 100% efficient (time multiplexing requires a small amount of time for switching to occur, and frequency division multiplexing requires a small <code>buffer' band of frequencies between each session. Packet switching networks dedicate communication bandwidth to each channel as required. In a simple</code>first in, first out’ (FIFO) system, packets arrive and, if the queue is empty, they are transmitted. Otherwise they are stored and await their turn for transmission. Thus there are two delays: a queueing delay and a transmission delay. The queueing delay is variable, whilst the transmission delay will be fixed and given by the packet length multiplied by the transmission rate of the channel. Radio transmission is a communication medium which dates back to Marconi. Transmission may occur across several bandwidths. Traditionally radio broadcast occurs through frequency division multiplexing. Radio communication involves taking turns to communicate over the channel (half-duplex). The most basic wireless packet networks (<em>e.g. </em>ALOHA) used one channel to broadcast their packets over. Delays may occur due to collisions. A collision is when two systems both attempt to communicate on the same channel at the same time. Both packets are then lost and such losses need to be detected. Similar principles occur for <em>e.g. </em> thinwire Ethernet, in this case the communication medium is a coaxial cable.</p>
+<p>Circuit switching networks may share a communication line but this is done through multiplexing where a fixed proportion of the communication channel is dedicated to the session. The multiplexing may be time division multiplexing or frequency division multiplexing. The former splits the communication channel into time slots and allocates each to a different session, the latter uses different portions of the frequency bandwidth for each channel. Both are not 100% efficient (time multiplexing requires a small amount of time for switching to occur, and frequency division multiplexing requires a small <code>buffer' band of frequencies between each session. Packet switching networks dedicate communication bandwidth to each channel as required. In a simple</code>first in, first out’ (FIFO) system, packets arrive and, if the queue is empty, they are transmitted. Otherwise they are stored and await their turn for transmission. Thus there are two delays: a queueing delay and a transmission delay. The queueing delay is variable, whilst the transmission delay will be fixed and given by the packet length multiplied by the transmission rate of the channel. Radio transmission is a communication medium which dates back to Marconi. Transmission may occur across several bandwidths. Traditionally radio broadcast occurs through frequency division multiplexing. Radio communication involves taking turns to communicate over the channel (half-duplex). The most basic wireless packet networks (<em>e.g.</em>ALOHA) used one channel to broadcast their packets over. Delays may occur due to collisions. A collision is when two systems both attempt to communicate on the same channel at the same time. Both packets are then lost and such losses need to be detected. Similar principles occur for <em>e.g.</em> thinwire Ethernet, in this case the communication medium is a coaxial cable.</p>
 <h1 id="the-road-ahead">The Road Ahead</h1>
 <ul>
 <li>**Probability** Review Review of probability theory.</li>
@@ -172,42 +171,6 @@ categories:
 <li>Which should you combine to make your two servers?</li>
 </ol>
 <p>% empty table [0] 8. You should match A with 2 and B with 1. 9. This avoids bottlenecks: 10. Disk 1 would wait for CPU A to process about 50% of the time. 11. CPU B would wait for disk 2 to access about 50% of the time.</p>
-<h4 id="answer">Answer</h4>
-<p>% generated — do not edit; scripts/convert/run.py</p>
-<!-- original A4 foil 5: Introduction and Background -->
-<!-- original A4 foil 5: Introduction and Background -->
-<!-- original A4 foil 6: Computer Networks -->
-<div class="figure">
-<div id="1975_net_map-figure" class="figure-frame">
-<div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/1975_net_map.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
-</div>
-</div>
-<div id="1975_net_map-magnify" class="magnify" onclick="magnifyFigure(&#39;1975_net_map&#39;)">
-<button type="button" class="img-button" aria-label="Enlarge figure">
-<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
-</button>
-</div>
-<div id="1975_net_map-caption" class="caption-frame">
-<p>Figure: 1975_net_map</p>
-</div>
-</div>
-<!-- original A4 foil 7: Network Performance Analysis -->
-<!-- original A4 foil 8: Practical Considerations -->
-<!-- original A4 foil 8: Practical Considerations -->
-<!-- original A4 foil 9: Terminology -->
-<!-- original A4 foil 10: Session Characteristics -->
-<!-- original A4 foil 10: Session Characteristics -->
-<!-- original A4 foil 11: Network Types -->
-<!-- original A4 foil 11: Network Types -->
-<!-- original A4 foil 12: Circuit\  Switching -->
-<!-- original A4 foil 12: Circuit\  Switching -->
-<!-- original A4 foil 13: Packet Switching -->
-<!-- original A4 foil 14: Communication Media -->
-<!-- original A4 foil 14: Communication Media -->
-<!-- original A4 foil 15: The Road Ahead -->
-<!-- original A4 foil 16: Examples -->
-<!-- original A4 foil 16: Examples -->
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -218,16 +181,31 @@ categories:
 <li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
 <li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li><p>Chapter 1, background and review of <span class="citation" data-cites="Bertsekas:data92">Bertsekas and Gallager (1992)</span></p></li>
+<li><p>Introductory computer networks; little queueing of <span class="citation" data-cites="Tanenbaum:computer96">Tanenbaum (2003)</span></p></li>
+<li><p>Alternative text for details on queues of <span class="citation" data-cites="Chan:performance00">Chan (2000)</span></p></li>
+</ul>
 <h1 class="unnumbered" id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Bertsekas:data92" class="csl-entry" role="listitem">
+Bertsekas, D.P., Gallager, R.G., 1992. Data networks, Second. ed. Prentice-Hall, Upper Saddle River, NJ.
+</div>
 <div id="ref-Cerf:packet74" class="csl-entry" role="listitem">
 Cerf, V.G., Kahn, R.E., 1974. A protocol for packet network intercommunication. IEEE Transactions on Communications COM-22, 637–648.
+</div>
+<div id="ref-Chan:performance00" class="csl-entry" role="listitem">
+Chan, W.-C., 2000. Performance analysis of telecommunications and local area networks. Kluwer, Dordrecht, The Netherlands.
 </div>
 <div id="ref-Erlang:theory09" class="csl-entry" role="listitem">
 Erlang, A.K., 1909. The theory of probabilities and telephone conversations. Nyt Tidsskrift for Matematik B 20.
 </div>
 <div id="ref-Kleinrock:communication64" class="csl-entry" role="listitem">
 Kleinrock, L., 1964. Communication nets: Stochastic message flow and delay. McGraw-Hill, New York, NY.
+</div>
+<div id="ref-Tanenbaum:computer96" class="csl-entry" role="listitem">
+Tanenbaum, A.S., 2003. Computer networks, Fourth. ed. Prentice-Hall, Upper Saddle River, NJ.
 </div>
 </div>
 
