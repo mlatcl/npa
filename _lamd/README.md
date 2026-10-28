@@ -73,6 +73,10 @@ python scripts/smoke_notebooks.py
 
 See the root `README.md` for the subset flags and the GitHub Actions workflow.
 
+`parking.md` is the overflow holding bay, not a lecture. When a live session
+overruns, move leftover slides there and record them in the `parked:`
+frontmatter list. Do not add `parking` to `lectures.csv`.
+
 Compile from `_lamd/`:
 
 ```bash
