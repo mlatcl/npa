@@ -1,12 +1,13 @@
 ---
-title: "Erlang Loss"
+title: |-
+  Erlang Loss
 abstract: |-
-  <p>The <span class="math inline">\(M/M/m/m\)</span> loss system: truncated Poisson occupancy, Erlang B as the blocking probability, carried load <span class="math inline">\(a&#39;=a(1-B(m,a))\)</span>, and the use of the carried rate in Little’s formula.</p>
+  <p>The <span class="math inline">\(M/M/m/m\)</span> loss system, truncated Poisson occupancy, Erlang B, and carried load.</p>
 edit_url: https://github.com/mlatcl/npa/edit/gh-pages/_lamd/erlang-loss.md
 date: 2006-10-23
 week: 5
 session: 1
-featured_image: slides/diagrams/npa/erlangLoss.png
+featured_image: slides/diagrams/npa/erlangLossFlowChart.png
 reveal: 05-01-erlang-loss.slides.html
 ipynb: 05-01-erlang-loss.ipynb
 layout: lecture
@@ -29,121 +30,256 @@ categories:
 <!--
 
 -->
-<h1 id="erlang-loss-mmmm">Erlang Loss: <span class="math inline">\(M/M/m/m\)</span></h1>
-<p>Erlang delay holds overflowing customers. Erlang <em>loss</em> does not: if all <span class="math inline">\(m\)</span> servers are busy the arrival is rejected. Kendall writes <span class="math inline">\(M/M/m/m\)</span> — <span class="math inline">\(m\)</span> servers and system capacity <span class="math inline">\(m\)</span>, so the waiting line has length zero. Offered load is still <span class="math inline">\(a=\lambda/\mu\)</span>, but carried load <span class="math inline">\(a&#39;\)</span> is smaller because some traffic is blocked, as in <span class="math inline">\(M/M/1/m\)</span>.</p>
+<p>% generated — do not edit; scripts/convert/run.py</p>
 <div class="figure">
-<div id="erlang-loss-flowchart-figure" class="figure-frame">
+<div id="cap:erlangLossFlowChart-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/erlangLossFlowChart.png" width="70%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/erlangLossFlowChart.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="erlang-loss-flowchart-magnify" class="magnify" onclick="magnifyFigure(&#39;erlang-loss-flowchart&#39;)">
+<div id="cap:erlangLossFlowChart-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:erlangLossFlowChart&#39;)">
 <button type="button" class="img-button" aria-label="Enlarge figure">
 <img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
 </button>
 </div>
-<div id="erlang-loss-flowchart-caption" class="caption-frame">
-<p>Figure: Flow chart of the Erlang loss system: offered load <span class="math inline">\(a\)</span> in, carried load <span class="math inline">\(a&#39;&lt;a\)</span> out.</p>
+<div id="cap:erlangLossFlowChart-caption" class="caption-frame">
+<p>Figure: Flow chart of the Erlang Loss System.</p>
 </div>
 </div>
+<p>The system is a limited capacity system. The maximum number in the system is <span class="math inline">\(m\)</span> which means the maximum queue size is zero because there are <span class="math inline">\(m\)</span> servers. In the diagram it shows the offered load is <span class="math inline">\(a\)</span>, while the carried load, <span class="math inline">\(a^{\prime}\)</span>, is less than <span class="math inline">\(a\)</span> because some packets are rejected, just as they were for the <span class="math inline">\(M/M/1/m\)</span> queue.</p>
+<h1 id="stationary-distribution">Stationary Distribution</h1>
+<p>The system is shown as a flow chart in Figure  <span class="math inline">\(\ref{cap:erlangLossFlowChart}\)</span>. The Erlang loss system may be analysed as a birth-death process with birth rate <span class="math display">\[
+\lambda_{k}=\left\{ \begin{array}{cc}
+\lambda &amp; k=0,1,\dots,m-1\\
+0 &amp; k\geq m\end{array}\right.\]</span> and death rate <span class="math display">\[
+\mu_{k}=\left\{ \begin{array}{cc}
+k\mu &amp; k=0,1,\dots,m\\
+0 &amp; k&gt;m\end{array}\right.\]</span> <em>Note: when </em><span class="math inline">\(k&gt;m\)</span><em>, it doesn’t matter what </em><span class="math inline">\(\mu_{k}\)</span>* is as we never reach this state.*}}</p>
+<h2 id="state-diagram">State Diagram</h2>
 <div class="figure">
-<div id="erlang-loss-state-figure" class="figure-frame">
+<div id="erlangLoss-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/erlangLoss.png" width="85%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/erlangLoss.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="erlang-loss-state-magnify" class="magnify" onclick="magnifyFigure(&#39;erlang-loss-state&#39;)">
+<div id="erlangLoss-magnify" class="magnify" onclick="magnifyFigure(&#39;erlangLoss&#39;)">
 <button type="button" class="img-button" aria-label="Enlarge figure">
 <img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
 </button>
 </div>
-<div id="erlang-loss-state-caption" class="caption-frame">
-<p>Figure: Markov chain for <span class="math inline">\(M/M/m/m\)</span>: the chain stops at <span class="math inline">\(m\)</span>; there is no queueing state.</p>
+<div id="erlangLoss-caption" class="caption-frame">
+<p>Figure: Markov chain for the Erlang loss system, <span class="math inline">\(M\)</span>/<span class="math inline">\(M\)</span>/<span class="math inline">\(m\)</span>/<span class="math inline">\(m\)</span></p>
 </div>
 </div>
-<p>Birth-death rates are <span class="math display">\[
-\lambda_k=\begin{cases}
-\lambda &amp; 0\le k&lt;m,\\
-0 &amp; k\ge m,
-\end{cases}
-\qquad
-\mu_k=k\mu\quad(1\le k\le m).
-\]</span> The value of <span class="math inline">\(\mu_k\)</span> for <span class="math inline">\(k&gt;m\)</span> is irrelevant: those states are unreachable.</p>
-<h2 id="truncated-poisson">Truncated Poisson</h2>
-<p>Interior detailed balance is the <span class="math inline">\(M/M/\infty\)</span> relation, <span class="math display">\[
-\lambda P(k-1)=k\mu P(k)\qquad\Rightarrow\qquad P(k)=\frac{a}{k}P(k-1)=\frac{a^k}{k!}P(0).
-\]</span> There is no <span class="math inline">\(k&gt;m\)</span> region to match. Normalisation over <span class="math inline">\(k=0,\ldots,m\)</span> produces the <em>truncated Poisson</em> <span class="math display">\[
-P(0)=\left(\sum_{n=0}^{m}\frac{a^n}{n!}\right)^{-1},\qquad
-P(k)=\frac{a^k/k!}{\sum_{n=0}^{m}a^n/n!}.
-\]</span> As <span class="math inline">\(m\to\infty\)</span> this recovers <span class="math inline">\(M/M/\infty\)</span>, as it must.</p>
+<p>The offered load, <span class="math inline">\(a=\frac{\lambda}{\mu}\)</span>, is again dimensionless with units of Erlangs, however to compute the carried load we will first have to determine what the probability of a customer being blocked is.</p>
+<h1 id="steady-state-probabilities">Steady State Probabilities</h1>
+<p>When the system’s state, <span class="math inline">\(k\)</span>, is less than or equal to the number of servers we have boundary flow as in Figure  <span class="math inline">\(\ref{cap:flowAtBoundaryMMmm}\)</span>, which leads to the following balance equation <span class="math display">\[
+\lambda P\left(k-1\right)=k\mu P\left(k\right).\]</span></p>
 <div class="figure">
-<div id="erlang-loss-boundary-figure" class="figure-frame">
+<div id="cap:flowAtBoundaryMMmm-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/boundaryFlowMMinf.png" width="45%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/boundaryFlowMMinf.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="erlang-loss-boundary-magnify" class="magnify" onclick="magnifyFigure(&#39;erlang-loss-boundary&#39;)">
+<div id="cap:flowAtBoundaryMMmm-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:flowAtBoundaryMMmm&#39;)">
 <button type="button" class="img-button" aria-label="Enlarge figure">
 <img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
 </button>
 </div>
-<div id="erlang-loss-boundary-caption" class="caption-frame">
-<p>Figure: Boundary flow for <span class="math inline">\(k\le m\)</span>: <span class="math inline">\(\lambda P(k-1)=k\mu P(k)\)</span>.</p>
+<div id="cap:flowAtBoundaryMMmm-caption" class="caption-frame">
+<p>Figure: Flow rates at a boundary.</p>
 </div>
 </div>
+<p>As a result, for <span class="math inline">\(k=0\dots m\)</span> we may write<span class="math display">\[\begin{equation}
+P\left(k\right)=\frac{\lambda}{k\mu}P\left(k-1\right).\label{eq:PkForkLessThanM}\end{equation}\]</span> In contrast to the <span class="math inline">\(M/M/m\)</span> queue, the system state cannot go above <span class="math inline">\(m\)</span> so we have no need to consider the region where <span class="math inline">\(k&gt;m\)</span>. Substituting in the offered load for <span class="math inline">\(\frac{\lambda}{\mu}\)</span> we have,<span class="math display">\[\begin{eqnarray*}
+P\left(k\right) &amp; = &amp; \frac{a}{k}P(k-1),\end{eqnarray*}\]</span> which means that <span class="math display">\[\begin{eqnarray*}
+P\left(k\right) &amp; = &amp; \prod_{n=1}^{k}\frac{a}{n}P\left(0\right)\\
+&amp; = &amp; \frac{a^{k}}{k!}P\left(0\right).\end{eqnarray*}\]</span></p>
+<h2 id="normalisation-condition">Normalisation Condition</h2>
+<p>The normalisation condition gives us <span class="math display">\[
+P\left(0\right)\sum_{k=0}^{m}\frac{a^{k}}{k!}=1\]</span><span class="math display">\[
+P\left(0\right)=\frac{1}{\sum_{k=0}^{m}\frac{a^{k}}{k!}},\]</span>which leads to the <em>truncated Poisson distribution</em>:<span class="math display">\[
+P\left(k\right)=\frac{\frac{a^{k}}{k!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}.\]</span> <em>Note if </em><span class="math inline">\(m\rightarrow\infty\)</span>* we recover the* <span class="math inline">\(M/M/\infty\)</span>* queue as we would expect.*</p>
 <h1 id="probability-of-blocking">Probability of Blocking</h1>
-<p>Waiting probability is zero: the chain never enters <span class="math inline">\(k&gt;m\)</span>. The quantity of interest is the blocking probability, which by PASTA is <span class="math inline">\(P(m)\)</span>, <span class="math display">\[
-B(m,a)=P(m)=\frac{a^m/m!}{\sum_{n=0}^{m}a^n/n!}.
-\]</span> This is <em>Erlang’s first formula</em>, or Erlang B. The same overflow caution as Erlang C applies; <code>npa_plots.erlang_b</code> evaluates it in log space, matching <code>erlangB.m</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>_root <span class="op">=</span> os.path.abspath(os.path.join(os.getcwd(), <span class="st">&#39;..&#39;</span>))</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>_py <span class="op">=</span> os.path.join(_root, <span class="st">&#39;python&#39;</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> os.path.isdir(_py) <span class="kw">and</span> _py <span class="kw">not</span> <span class="kw">in</span> sys.path:</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    sys.path.insert(<span class="dv">0</span>, _py)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> npa_plots</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> npa_plots.plot_erlang_curves(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>), np.linspace(<span class="fl">0.05</span>, <span class="dv">20</span>, <span class="dv">400</span>), kind<span class="op">=</span><span class="st">&quot;B&quot;</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">&quot;Erlang B, offered traffic 0 to 20&quot;</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p>For the <span class="math inline">\(M/M/m\)</span> queue we were interested in the probability that a customer would have to wait in the queue for service. In the <span class="math inline">\(M/M/m/m\)</span> system there is no queue because the maximum state of the system is the same as the number of servers. The probability of waiting is therefore zero. Of more interest is the probability of blocking: the probability that when we arrive the system is full and we are denied service. As we discussed for the <span class="math inline">\(M/M/1/m\)</span> queue the blocking probability is given by <span class="math inline">\(P\left(m\right)\)</span>, the steady state probability that the system is full. This is given as<span class="math display">\[
+B(m,a)=P\left(m\right)=\frac{\frac{a^{m}}{m!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}.\]</span>We have already discussed for the Erlang C system the problems of computing this quantity on a computer. They may be resolved in much the same way through computation in <span class="math inline">\(\log\)</span> space. Again we will turn to curves for use in exam questions and exercises. Erlang B curves plot the blocking probability for different numbers of servers as a function of the offered load.</p>
 <div class="figure">
-<div id="erlang-b-curves-20-figure" class="figure-frame">
+<div id="erlangBCurves0to20-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/erlangBCurves0to20.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/erlangBCurves0to20.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="erlang-b-curves-20-magnify" class="magnify" onclick="magnifyFigure(&#39;erlang-b-curves-20&#39;)">
+<div id="erlangBCurves0to20-magnify" class="magnify" onclick="magnifyFigure(&#39;erlangBCurves0to20&#39;)">
 <button type="button" class="img-button" aria-label="Enlarge figure">
 <img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
 </button>
 </div>
-<div id="erlang-b-curves-20-caption" class="caption-frame">
-<p>Figure: Historic Erlang B curves for offered traffic between 0 and 20.</p>
+<div id="erlangBCurves0to20-caption" class="caption-frame">
+<p>Figure: Erlang B curves.</p>
 </div>
 </div>
 <div class="figure">
-<div id="erlang-b-curves-100-figure" class="figure-frame">
+<div id="erlangBCurves0to100-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/erlangBCurves0to100.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/erlangBCurves0to100.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="erlang-b-curves-100-magnify" class="magnify" onclick="magnifyFigure(&#39;erlang-b-curves-100&#39;)">
+<div id="erlangBCurves0to100-magnify" class="magnify" onclick="magnifyFigure(&#39;erlangBCurves0to100&#39;)">
 <button type="button" class="img-button" aria-label="Enlarge figure">
 <img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
 </button>
 </div>
-<div id="erlang-b-curves-100-caption" class="caption-frame">
-<p>Figure: Historic Erlang B curves for offered traffic between 0 and 100.</p>
+<div id="erlangBCurves0to100-caption" class="caption-frame">
+<p>Figure: Erlang B curves.</p>
 </div>
 </div>
-<h1 id="carried-load-and-utilisation">Carried Load and Utilisation</h1>
-<p>Carried load is offered load times the probability of not being blocked, <span class="math display">\[
-a&#39;=a\bigl(1-B(m,a)\bigr).
-\]</span> Trunk occupancy — utilisation of a line — is then <span class="math inline">\(\rho=a&#39;/m\)</span>, not <span class="math inline">\(a/m\)</span>. In a lossless system <span class="math inline">\(a&#39;=a\)</span> and the two coincide. The throughput of the system, the rate at which customers actually enter service, is <span class="math display">\[
-\dot{\lambda}=\lambda\bigl(1-P(m)\bigr).
-\]</span> Little’s formula on a lossy system must use this carried rate, not the offered arrival rate: blocked customers never enter, so they do not contribute to occupancy.</p>
+<h1 id="carried-load-and-utilization-factors">Carried Load and Utilization Factors</h1>
+<p>Since traffic is lost in <span class="math inline">\(M/M/m/m\)</span> the carried load, <span class="math inline">\(a^{\prime}\)</span>, is smaller than the offered load. The carried load is given by the offered load multiplied by the probability that the packet is not blocked. <span class="math display">\[
+a^{\prime}=a(1-P\left(m\right))=a(1-B(m,a)).\]</span> The carried load per line is the trunk occupancy, <span class="math display">\[
+\rho=\frac{a^{\prime}}{m},\]</span> also known as the utilization factor. Note the contrast with the lossless systems where the trunk occupancy (or utilization factor) was given by <span class="math display">\[
+\rho=\frac{a}{m}\]</span>because the carried load is equal to the offered load <span class="math inline">\(a^{\prime}=a\)</span>. When computing utilization factors for lossy systems we have to take this loss into account (for example in the <span class="math inline">\(M/M/1/m\)</span> queue). Also note that the rate of service in the system is no longer given by the arrival rate, <span class="math inline">\(\lambda\)</span>, we need to consider those packets that are lost. This means the rate of service is given by <span class="math display">\[
+\dot{\lambda}=\lambda(1-P\left(m\right))\]</span>where <span class="math inline">\(P\left(m\right)\)</span> is the blocking probability. This has effects when studying the queue using Little’s formula. When using Little’s formula with a lossy system, the rate we use should be the service rate, <em>not</em> the arrival rate. Packets which are blocked by the system do not enter it and therefore have no effect on the system’s state.</p>
+<h2 id="examples">Examples</h2>
+<ol type="1">
+<li><strong>Load Tripling</strong>. In this example we will briefly consider the effect of increasing load in an Erlang Loss system.</li>
+<li>For a blocking probability of 0.01, what is the number of trunks needed for 6 Erlangs of offered load?</li>
+<li>For a blocking probability of 0.01, what is the number of trunks needed for 18 Erlangs?</li>
+<li>Comment on the increase in load compared to the increase in the number of trunks.</li>
+</ol>
+<p>[0] 5. 13 6. 28 7. A load increase of 200 % only lead to a trunk increase of 133 %. To understand this further we look at the utilization factors. For the first system the utilisation factor is <span class="math display">\[
+\rho_{1}=\frac{6}{13}\left(1-0.005\right)=0.459\]</span>whereas for the second system the utilisation factor is<span class="math display">\[
+\rho_{2}=\frac{18}{28}\left(1-0.007\right)=0.6384\]</span>The 30 trunk system is thus more efficient. This explains why it is cheaper to call the U.S.A. than Italy.</p>
+<h3 id="answer">Answer</h3>
+{{1. <strong>Example </strong><span class="math inline">\(M/M/m/n\)</span>. This example is from the Exam paper in 2002-3. A call centre employs thirty operators selling tickets for a major sporting event. The call centre has sixty lines in total. When all operators are active new calls are placed in a queue for the first available operator. The call centre is to be modelled as an <span class="math inline">\(M/M/m/n\)</span> queue, <em>i.e. </em> a queue in which there are <span class="math inline">\(m\)</span> servers and a maximum state of <span class="math inline">\(n\)</span>. 2. Draw a state diagram representing the queueing system. [0] [ht]
+<div class="caption" style="">
+Figure: State diagram for <span class="math inline">\(M/M/m/n\)</span> queue.
+</div>
+<ol start="3" type="1">
+<li>Write down the detailed balance equations for the two cases where the queue state <span class="math inline">\(k&lt;m\)</span> and when <span class="math inline">\(m\leq k&lt;n\)</span>. [0] When the system’s state, <span class="math inline">\(k\)</span>, is less than or equal to the number of servers we have boundary flow as in Figure  <span class="math inline">\(\ref{cap:flowAtBoundaryMMma}\)</span>,which leads to the following balance equation <span class="math display">\[
+\lambda P\left(k-1\right)=k\mu P\left(k\right).\]</span>As a result, for <span class="math inline">\(k=0\dots m\)</span> we may write P(k)=P(k-1). [ht]
+<div class="figure">
+<div id="boundaryFlowMMinf-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/boundaryFlowMMinf.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="boundaryFlowMMinf-magnify" class="magnify" onclick="magnifyFigure(&#39;boundaryFlowMMinf&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="boundaryFlowMMinf-caption" class="caption-frame">
+<p>Figure: boundaryFlowMMinf</p>
+</div>
+</div>
+<pre><code> &lt;div class=&quot;caption&quot; style=&quot;&quot;&gt;Figure: Flow rates at a boundary.&lt;/div&gt;
+ \label{cap:flowAtBoundaryMMma}</code></pre>
+The detailed balance for this case is<span class="math display">\[
+P\left(k\right)=\frac{\lambda}{m\mu}P\left(k-1\right)\]</span> When the system’s state is greater than <span class="math inline">\(m\)</span>, <span class="math inline">\(k&gt;m\)</span> the flow at the boundary is as in Figure  <span class="math inline">\(\ref{cap:flowAtBoundaryMMmb}\)</span>, the detailed balance equation is thenwhich leads to <span class="math display">\[
+\lambda P(k-1)=m\mu P\left(k\right)\]</span>}{0} [ht]
+<div class="figure">
+<div id="boundaryFlowMMm-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/boundaryFlowMMm.png" width="40%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="boundaryFlowMMm-magnify" class="magnify" onclick="magnifyFigure(&#39;boundaryFlowMMm&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="boundaryFlowMMm-caption" class="caption-frame">
+<p>Figure: boundaryFlowMMm</p>
+</div>
+</div>
+<pre><code> &lt;div class=&quot;caption&quot; style=&quot;&quot;&gt;Figure: Flow rates at a boundary.&lt;/div&gt;
+ \label{cap:flowAtBoundaryMMmb}</code></pre></li>
+<li>For each of the two cases outlined in the previous part write down the steady state distribution as a function of <span class="math inline">\(P\left(0\right)\)</span>, the probability of the system being empty. [0] From Detailed Balance we may write<span class="math display">\[
+P\left(k\right)=\frac{\lambda}{k\mu}P\left(k-1\right).\]</span>And defining <span class="math display">\[
+a=\frac{\lambda}{\mu}\]</span>which in turn gives <span class="math display">\[
+\frac{\lambda}{k\mu}=\frac{a}{k}\]</span>which we substitute back into the detailed balance obtaining<span class="math display">\[
+P\left(k\right)=\frac{a}{k}P\left(k-1\right)\]</span>and as before P(k)=P(0) &amp; &amp; km The detailed balance for this case is<span class="math display">\[
+P\left(k\right)=\frac{\lambda}{m\mu}P\left(k-1\right)\]</span>substituting for <span class="math inline">\(a\)</span> gives<span class="math display">\[
+P\left(k\right)=\frac{a}{m}P\left(k-1\right)\]</span> leading to <span class="math display">\[
+P\left(k\right)=\left(\frac{a}{m}\right)^{k-m}P\left(m\right).\]</span>Finally we use (<span class="math inline">\(\ref{eq:probabilitiesExercise}\)</span>) and substitute <span class="math inline">\(k\)</span> with <span class="math inline">\(m\)</span> to find <span class="math inline">\(P\left(m\right)\)</span> which leads to<span class="math display">\[
+P\left(m\right)=\frac{a^{m}}{m!}P\left(0\right)\]</span>therefore P(k)=P(0) &amp; &amp; k&gt;mthus we can write<span class="math display">\[
+P\left(k\right)=\left\{ {cc}
+P\left(0\right)\frac{a^{k}}{k!}, &amp; k\leq m\\
+P\left(0\right)\frac{a^{k}}{m^{k-m}m!} &amp; k&gt;m\right.\]</span>}{0}</li>
+<li>Use the fact that the steady state distribution must be normalised to show that <span class="math display">\[
+P\left(0\right)=\left[\sum_{k=0}^{m}\frac{a^{k}}{k!}+\sum_{k=m+1}^{n}\frac{a^{k}}{m!m^{k-m}}\right]^{-1}\]</span>where <span class="math inline">\(a=\frac{\lambda}{\mu}\)</span>, <span class="math inline">\(\lambda\)</span> is the arrival rate and <span class="math inline">\(\mu\)</span> is the rate of the service time distribution. [0] Once again we can compute <span class="math inline">\(P\left(0\right)\)</span> through normalisation _{k=0}^{}P(k) &amp; = &amp; 1\ P(0)&amp; = &amp; 1\ P(0) &amp; = &amp; ^{-1}.}{0}</li>
+</ol>
+<h3 id="answer-1">Answer</h3>
+<h3 id="answer-2">Answer</h3>
+<h4 id="case-1-kleq-m">Case 1) <span class="math inline">\(k\leq m\)</span></h4>
+<h4 id="case-2-mkleq-n.">Case 2) <span class="math inline">\(m&lt;k\leq n\)</span>.</h4>
+<h3 id="answer-3">Answer</h3>
+<h4 id="case-1-kleq-m-1">Case 1) <span class="math inline">\(k\leq m\)</span></h4>
+<h4 id="case-2-mkleq-n.-1">Case 2) <span class="math inline">\(m&lt;k\leq n\)</span>.</h4>
+<h3 id="answer-4">Answer</h3>
+<p>% generated — do not edit; scripts/convert/run.py</p>
+<!-- original A4 foil 138: Erlang Loss $M$/$M$/$m$/$m$ -->
+<div class="figure">
+<div id="cap:erlangLossFlowChart-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/erlangLossFlowChart.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="cap:erlangLossFlowChart-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:erlangLossFlowChart&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="cap:erlangLossFlowChart-caption" class="caption-frame">
+<p>Figure: Flow chart of the Erlang Loss System.</p>
+</div>
+</div>
+<!-- original A4 foil 138: Erlang Loss $M$/$M$/$m$/$m$ -->
+<!-- original A4 foil 139: State Diagram -->
+<div class="figure">
+<div id="erlangLoss-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/erlangLoss.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="erlangLoss-magnify" class="magnify" onclick="magnifyFigure(&#39;erlangLoss&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="erlangLoss-caption" class="caption-frame">
+<p>Figure: State Diagram for the Erlang loss system, <span class="math inline">\(M\)</span>/<span class="math inline">\(M\)</span>/<span class="math inline">\(m\)</span>/<span class="math inline">\(m\)</span></p>
+</div>
+</div>
+<!-- original A4 foil 139: State Diagram -->
+<!-- original A4 foil 140: Detailed Balance Equations -->
+<div class="figure">
+<div id="boundaryFlowMMinf-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/boundaryFlowMMinf.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="boundaryFlowMMinf-magnify" class="magnify" onclick="magnifyFigure(&#39;boundaryFlowMMinf&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="boundaryFlowMMinf-caption" class="caption-frame">
+<p>Figure: boundaryFlowMMinf</p>
+</div>
+</div>
+<!-- original A4 foil 140: Detailed Balance Equations -->
+<!-- original A4 foil 141: Normalisation Condition -->
+<!-- original A4 foil 142: Probability of Blocking -->
+<!-- original A4 foil 142: Probability of Blocking -->
+<!-- original A4 foil 143: Carried Load and Utilization Factors -->
+<!-- original A4 foil 143: Carried Load and Utilization Factors -->
+<!-- original A4 foil 144: Load Tripling -->
+<!-- original A4 foil 144: Load Tripling -->
+<!-- original A4 foil 145: Answer -->
+<!-- original A4 foil 145: Answer -->
+<!-- original A4 foil 146: Example $M/M/m/n$ -->
+<!-- original A4 foil 146: Example $M/M/m/n$ -->
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -154,21 +290,5 @@ a&#39;=a\bigl(1-B(m,a)\bigr).
 <li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
 <li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
-<h2 id="further-reading">Further Reading</h2>
-<ul>
-<li>The <span class="math inline">\(M/M/m/m\)</span> loss system and Erlang B of <span class="citation" data-cites="Bertsekas:data92">Bertsekas and Gallager (1992)</span></li>
-</ul>
-<h2 id="exercises">Exercises</h2>
-<ul>
-<li>Tutorial Sheet 3: trunk-group Erlang B of <span class="citation" data-cites="npa-tutorial3">Lawrence (2006)</span></li>
-</ul>
-<h1 class="unnumbered" id="references">References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-Bertsekas:data92" class="csl-entry" role="listitem">
-Bertsekas, D.P., Gallager, R.G., 1992. Data networks, Second. ed. Prentice-Hall, Upper Saddle River, NJ.
-</div>
-<div id="ref-npa-tutorial3" class="csl-entry" role="listitem">
-Lawrence, N.D., 2006. <a href="https://mlatcl.github.io/npa/">Erlang delay and loss and the <span>M/G/1</span> queue</a>.
-</div>
-</div>
+<h1 id="references">References</h1>
 

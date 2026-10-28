@@ -5,11 +5,16 @@ Canonical sources are the 2006–2007 files `lectureNotes.lyx` and
 not converted in parallel. `lectureNotes.tex` is stale (it stops before Burke,
 Jackson, and ALOHA).
 
-NPA-specific snippets live in `snippets/_npa/includes/` in this repository.
-They are **not** copied into `lawrennd/snippets` yet. Overlapping central
-snippets are included from `$HOME/lawrennd/snippets`. A symlink
-`_lamd/snippets` → `../snippets` lets `maketalk` resolve those local includes
-without putting them on the central snippets path.
+Lecture notes and slides are regenerated from `lectureNotes.lyx` and
+`lectureSlides.lyx` by `python3 scripts/convert/run.py`. Generated snippets
+live in `snippets/_npa/generated/{notes,slides}/`. Each `_lamd/*.md` lecture
+includes both, so notes stay complete and slides come from the A4 FoilTeX deck
+(split roughly two Reveal slides per original foil). See
+`scripts/convert/README.md`.
+
+Handwritten drafts remain in `snippets/_npa/includes/` until the conversion is
+trusted. They are **not** copied into `lawrennd/snippets` yet. A symlink
+`_lamd/snippets` → `../snippets` lets `maketalk` resolve local includes.
 
 ## Overlap with the central snippets repo
 

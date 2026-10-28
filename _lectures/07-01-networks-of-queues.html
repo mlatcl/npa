@@ -1,7 +1,8 @@
 ---
-title: "Networks of Queues and Jackson’s Theorem"
+title: |-
+  Networks of Queues and Jackson’s Theorem
 abstract: |-
-  <p>Tandem <span class="math inline">\(M/M/1\)</span>, time reversibility and Burke’s theorem, Kleinrock’s independence assumption, Jackson’s theorem, and ns-2 as the lab counterpart. Lectures 14 and 15, Monday of week 7.</p>
+  <p>Tandem <span class="math inline">\(M/M/1\)</span>, time reversibility and Burke’s theorem, Kleinrock’s independence assumption, Jackson’s theorem, and ns-2 as the lab counterpart.</p>
 edit_url: https://github.com/mlatcl/npa/edit/gh-pages/_lamd/networks-of-queues.md
 date: 2006-11-06
 week: 7
@@ -29,49 +30,543 @@ categories:
 <!--
 
 -->
-<h1 id="queues-in-tandem">Queues in Tandem</h1>
-<p>So far every model has been a single queue. Two transmission lines in series are the smallest network. Packet length does not change from hop to hop, and service time is proportional to length. Arrivals at the first queue are Poisson; lengths are exponential.</p>
-<p>The first hop is <span class="math inline">\(M/M/1\)</span>. The second is not. A long packet occupies the first server for a long time, during which the second queue can drain. A long packet therefore tends to arrive at the second hop when that queue is shorter, and waits <em>less</em> there than a short packet would. The analogy is a slow vehicle on a road: from that driver’s seat the road looks empty, because they never catch anyone. The first queue has destroyed independence between a packet’s length and the state of the second queue.</p>
-<p>That correlation is hard to treat exactly. The way through is to <em>break</em> it: pretend service times at the two hops are statistically independent, even though they are the same length. Lab 2 asked you to look at whether the simulated occupancies still match isolated <span class="math inline">\(M/M/1\)</span> formulae. Kleinrock’s independence assumption, below, is that pretence made systematic.</p>
-<h1 id="time-reversibility-and-burke">Time Reversibility and Burke</h1>
-<p>Birth-death chains (every Markov queue in the course except <span class="math inline">\(M/G/1\)</span>) satisfy detailed balance. They are also <em>time-reversible</em> in steady state: the arrival process is Poisson at rate <span class="math inline">\(\lambda\)</span>, and so is the <em>departure</em> process. The service rate <span class="math inline">\(\mu\)</span> is not the departure rate, because a departure can occur only when <span class="math inline">\(k&gt;0\)</span>. That happens a fraction <span class="math inline">\(\rho\)</span> of the time, so the departure rate is <span class="math inline">\(\mu\rho=\lambda\)</span>.</p>
-<p>Burke’s theorem: an <span class="math inline">\(M/M/1\)</span>, <span class="math inline">\(M/M/m\)</span>, or <span class="math inline">\(M/M/\infty\)</span> queue in steady state with Poisson arrivals at rate <span class="math inline">\(\lambda\)</span> has a Poisson departure process at rate <span class="math inline">\(\lambda\)</span>, <em>and</em> the occupancy at time <span class="math inline">\(t\)</span> is independent of the departure times before <span class="math inline">\(t\)</span>. Loss systems are excluded: blocked customers never enter, so the process that does enter is not rate <span class="math inline">\(\lambda\)</span>.</p>
-<p>The second claim is the surprising one. A burst of departures might seem to leave the queue short. Burke says it does not. The only way both can be true is that the occupancy <em>before</em> the burst was abnormally high.</p>
-<p>If we grant independent service at the second hop, Burke says the input to that hop is Poisson at <span class="math inline">\(\lambda\)</span>. Two <span class="math inline">\(M/M/1\)</span> queues in series then have occupancies <span class="math display">\[
-P_1(k)=(1-\rho_1)\rho_1^k,\qquad P_2(\ell)=(1-\rho_2)\rho_2^\ell,
-\]</span> and the joint distribution factors. Mean delay is the sum of the two sojourn times.</p>
-<h1 id="kleinrocks-independence-assumption">Kleinrock’s Independence Assumption</h1>
-<p>Kleinrock’s independence assumption treats every link as if it saw Poisson arrivals and independent service — as if merging streams restored the independence that tandem service destroys. It is a good approximation when many packets from outside the network enter at every queue, on densely connected networks, with exponential packet lengths, Poisson exogenous arrivals, and moderate to heavy traffic.</p>
-<p>Label nodes and links. Stream <span class="math inline">\(s\)</span> has rate <span class="math inline">\(x_s\)</span>; <span class="math inline">\(f_{ij}(s)\)</span> is the fraction of that stream that uses the link from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span>. The link rate is <span class="math display">\[
-\lambda_{ij}=\sum_s f_{ij}(s)\,x_s.
-\]</span> Each link is then an <span class="math inline">\(M/M/1\)</span> queue with mean occupancy and delay <span class="math display">\[
-\bar{N}_{ij}=\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}},\qquad
-\bar{T}_{ij}=\frac{1}{\mu_{ij}-\lambda_{ij}}.
-\]</span> The mean number in the network is the sum over links. We ignore propagation and processing delay; see Bertsekas and Gallager, Section 3.6.1.</p>
+<p>% generated — do not edit; scripts/convert/run.py</p>
+<h1 id="mm1-queues-in-tandem"><span class="math inline">\(M/M/1\)</span> Queues in Tandem</h1>
+<p>Consider a simple system involving two transmission lines in tandem. The packet length doesn’t change during transmission and transmission times are proportional to packet length. The packet lengths are exponentially distributed and arrivals occur at the first queue as a Poisson process. The first queue may be modelled as <span class="math inline">\(M/M/1\)</span>, but the second queue cannot be. A packet which is large will take a long time in the first queue. During this time the second queue will have a chance to clear. The result will be that for the second queue larger packets are likely to arrive when the queue is smaller. This means that a large packet will typically experience less delay at the second queue than a small one. One analogy for this situation is a slow moving vehicle on a road. From this vehicle’s driver’s perspective there is very little traffic on the road because the slow moving vehicle never catches up with any. A similar thing occurs with <span class="math inline">\(M/M/1\)</span> queues in tandem. A large packet arrives at the second queue to find it has less packets because the smaller packets have had time to be processed. The effect of the first queue is to destroy the independence of the packet length and the state of the second queue. This problem is difficult to deal with analytically. To proceed with our analysis we will need to break this dependency. This can be achieved by considering service times for each packet to be statistically independent at each queue. We will now look at the consequences of this assumption for our simple pairing of two queues, but first we must introduce the concept of time reversibility.</p>
+<h1 id="time-reversibility-burkes-theorem">Time Reversibility — Burke’s Theorem</h1>
+<p>In the analysis of the Markov chain systems we have seen so far (<span class="math inline">\(M/M/1\)</span>, <span class="math inline">\(M/M/1/m\)</span>, <span class="math inline">\(M/M/\infty\)</span>, <span class="math inline">\(M/M/m\)</span> and <span class="math inline">\(M/M/m/m\)</span>) we relied on detailed balance to find the steady state distribution. Detailed balance equations are a special case of global balance equations which arise when transitions only occur between neighbouring states in the Markov chain. Detailed balance can be applied to find the stationary distribution in any birth-death processes. In this section we will briefly mention an additional special property of birth-death processes (and other Markov systems for which detailed balance applies) known as <em>time reversibility. </em> The principle with time reversibility is as follows: for a birth-death process at steady state the arrival process is Poisson with rate <span class="math inline">\(\lambda\)</span>. Time reversibility states that the departure process will also be Poisson with rate <span class="math inline">\(\lambda\)</span>. We will now give some motivation for this statement, a proof is Given in Section 3.7 of <span class="citation" data-cites="Bertsekas:data92">(Bertsekas and Gallager, 1992)</span>. Consider the following `intuition’ for the <span class="math inline">\(M/M/1\)</span> queue. The service rate for the system is given by <span class="math inline">\(\mu\)</span>. However this is not the departure rate because a departure can only occur when the system has a state <span class="math inline">\(k&gt;0\)</span>. This condition is satisfied for a fraction of the time which is given by the utilization factor <span class="math inline">\(\rho\)</span>. the departure rate is therefore given by <span class="math inline">\(\mu\rho=\mu\frac{\lambda}{\mu}=\lambda\)</span>.</p>
+<h1 id="burkes-theorem">Burke’s Theorem</h1>
+<p>Burke’s theorem follows on from time reversibility. It states that if an <span class="math inline">\(M/M/1\)</span>, an <span class="math inline">\(M/M/m\)</span> or an <span class="math inline">\(M/M/\infty\)</span> queue at its stationary distribution has a Poisson arrival process with a rate <span class="math inline">\(\lambda\)</span> then the departure process is also Poisson with rate <span class="math inline">\(\lambda\)</span>. Furthermore the number of the customers in the system at time <span class="math inline">\(t\)</span> is <em>independent </em>of the sequence of the departure times prior to <span class="math inline">\(t\)</span>. The second property is worthy of comment as it sounds counterintuitive. You might expect that if there were a rapid series of departures from the queue then the queue would be shorter than normal, but Burke’s theorem tells us that this is not the case. From this we can infer that the state of a queue <em>before </em>a rapid series of departures is about to occur must be abnormally high. Otherwise it <em>would</em> be abnormally low after the departures, but Burke’s theorem tells us that this is not the case.</p>
+<h1 id="kleinrocks-independence-approximation">Kleinrock’s Independence Approximation</h1>
+<p>Kleinrock’s independence approximation suggests assuming independence for every node in the network. The approximation is good if large numbers of packets from outside the network are introduced at every queue. Consider a general network with labelled nodes and links between these nodes. There are several packet streams in the network, each stream has a rate of <span class="math inline">\(x_{s}\)</span>. We define <span class="math inline">\(f_{ij}\left(s\right)\)</span> as the fraction of packets from stream <span class="math inline">\(s\)</span> that cross the link between <span class="math inline">\(i\)</span> and j. The rate associated with a link between node <span class="math inline">\(i\)</span>and $ $j is then <span class="math display">\[
+\lambda_{ij}=\sum_{s}f_{ij}\left(s\right)x_{s}.\]</span>Kleinrock suggested that merging traffic streams on a transmission line has the effect of restoring independence of arrival and service times. The approach is to assume that each link can be treated as an <span class="math inline">\(M/M/1\)</span> queue. This is a good approximation for:</p>
+<ol type="1">
+<li>Arrivals which occur as a Poisson process.</li>
+<li>Exponentially distributed packets.</li>
+<li>Densely connected networks.</li>
+<li>Moderate to heavy traffic.</li>
+</ol>
+<p>Given this assumption, from the <span class="math inline">\(M/M/1\)</span> queue, we know that the average number at each link is<span class="math display">\[
+\bar{N}_{ij}=\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}}\]</span>thus the average number in the entire system is<span class="math display">\[\begin{eqnarray*}
+\bar{N} &amp; = &amp; \sum_{ij}\bar{N}_{ij}\\
+&amp; = &amp; \sum_{ij}\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}},\end{eqnarray*}\]</span>average delay at each link is given by Little’s theorem<span class="math display">\[
+\bar{T}_{ij}=\frac{1}{\mu_{ij}-\lambda_{ij}}.\]</span>In our studies we will assume that there is no further delay associated with each link (propagation, processing). In practice such delays may arise however we shall not consider them. See <span class="citation" data-cites="Bertsekas:data92">(Bertsekas and Gallager, 1992)</span> Section 3.6.1 for more details.</p>
 <h1 id="jacksons-theorem">Jackson’s Theorem</h1>
-<p>Kleinrock approximates each <em>link</em>. Jackson’s theorem is a statement about the <em>network</em>. Assumptions: no correlation between service times and queue lengths (Kleinrock’s premise), and routing that randomises among paths. Then the mean number of packets in the network is <span class="math display">\[
-\bar{N}=\sum_{i,j}\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}}.
-\]</span> The product-form occupancy is the deeper result; for this course the mean and the two assumptions are enough. Analysis is in Bertsekas and Gallager, Section 3.8. This is Question 4 of the 2004–05 paper.</p>
-<h1 id="a-five-node-example">A Five-Node Example</h1>
+<p>While Kleinrock’s independence assumption approximates the activities at each queue as <span class="math inline">\(M/M/1\)</span> queues, Jackson’s theorem provides a result for the number in the queueing system as a whole. Some analysis of the system is given in Section 3.8 of <span class="citation" data-cites="Bertsekas:data92">(Bertsekas and Gallager, 1992)</span>, but for our purposes it is sufficient to give the assumptions and the result. The first assumption is the premise of Kleinrock’s independence assumption: there is no correlation between service times and queue lengths. The second assumption is that randomisation is used to divide the traffic along different routes through the network. Given these assumptions the average number of packets in the network is given by<span class="math display">\[
+\bar{N}=\sum_{i,j}\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}}.\]</span></p>
+<h1 id="network-simulation">Network Simulation</h1>
+<p>The approximations we have outlined so far may be useful for <code>back of the envelope' style calculations. In practice though it is highly likely that you will wish to simulate the system. There are a range of simulation packages available, we will introduce a simple one based on the Tcl scripting language called</code>The Network Simulator’ or ns-2 (<a href="http://www.isi.edu/nsnam/ns/">http://www.isi.edu/nsnam/ns/</a>). It is a discrete event simulator aimed at networking research. It supports a range of protocols including TCP and multicast protocols and is straightforward to extend using C++. It is a powerful research tool that has the added advantage of being freely available. It is installed in the Lewin Laboratory on the Linux systems and, if you require a personal installation, it can be installed through the Cygwin API (<a href="http://www.cygwin.com">http://www.cygwin.com</a>).</p>
+<h1 id="network-simulation-with-ns-2">Network Simulation with NS-2</h1>
+<p>At the second lab class you will simulate some simple queues in NS2 and compare the simulations with approximate results obtained using Kleinrock’s independence assumption. The lab class will be completed in Linux so please make sure you know your Unix password for the DCS system before the lab starts. The lab sheet has some notes on simple commands you will need. If you are unfamiliar with Linux it is suggested that you try them out before starting the lab.</p>
+<h2 id="examples">Examples</h2>
+<p>{1. Figure  <span class="math inline">\(\ref{cap:fiveNodeNetwork}\)</span> shows a small network with five nodes. In the network flow only occurs from lower numbered nodes to higher numbered nodes. The connections in the network have average service times in milliseconds as follows: {llllll} <span class="math inline">\(\bar{X}\)</span> &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \ 1 &amp; - &amp; - &amp; - &amp; - &amp; - \ 2 &amp; 0.05 &amp; - &amp; - &amp; - &amp; - \ 3 &amp; 0.05 &amp; - &amp; - &amp; - &amp; - \ 4 &amp; 0.0333 &amp; - &amp; - &amp; - &amp; - \ 5 &amp; - &amp; 0.05 &amp; 0.05 &amp; 0.033 &amp; - \</p>
+[ht]
 <div class="figure">
-<div id="kleinrock-five-node-figure" class="figure-frame">
+<div id="kleinrockNetwork-figure" class="figure-frame">
 <div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/kleinrockNetwork.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="kleinrock-five-node-magnify" class="magnify" onclick="magnifyFigure(&#39;kleinrock-five-node&#39;)">
+<div id="kleinrockNetwork-magnify" class="magnify" onclick="magnifyFigure(&#39;kleinrockNetwork&#39;)">
 <button type="button" class="img-button" aria-label="Enlarge figure">
 <img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
 </button>
 </div>
-<div id="kleinrock-five-node-caption" class="caption-frame">
-<p>Figure: Five-node network used with Kleinrock’s assumption. Flow is from lower-numbered nodes to higher; thick routes carry the streams <span class="math inline">\(x_s\)</span>.</p>
+<div id="kleinrockNetwork-caption" class="caption-frame">
+<p>Figure: kleinrockNetwork</p>
 </div>
 </div>
-<p>Mean transmission times in milliseconds: <span class="math inline">\(\bar{X}_{12}=\bar{X}_{13}=\bar{X}_{25}=\bar{X}_{35}=0.05\)</span>, <span class="math inline">\(\bar{X}_{14}=\bar{X}_{45}=0.033\)</span>. Stream rates <span class="math inline">\(x_1=5\)</span>, <span class="math inline">\(x_2=10\)</span>, <span class="math inline">\(x_3=7\)</span>, <span class="math inline">\(x_4=12\)</span>, <span class="math inline">\(x_5=4\)</span>, <span class="math inline">\(x_6=8\)</span>, <span class="math inline">\(x_7=4\)</span>. Superposition on each link gives <span class="math inline">\(\lambda_{12}=15\)</span>, <span class="math inline">\(\lambda_{13}=7\)</span>, <span class="math inline">\(\lambda_{14}=16\)</span>, <span class="math inline">\(\lambda_{25}=10\)</span>, <span class="math inline">\(\lambda_{35}=15\)</span>, <span class="math inline">\(\lambda_{45}=16\)</span>. The most congested links under Kleinrock are <span class="math inline">\(1\to 2\)</span> and <span class="math inline">\(3\to 5\)</span> (<span class="math inline">\(\rho=3/4\)</span>, <span class="math inline">\(\bar{N}=3\)</span>). Mean delays <span class="math inline">\(\bar{T}=\bar{X}/(1-\rho)\)</span> make the route <span class="math inline">\(1\to 4\to 5\)</span> the shortest (<span class="math inline">\(1/7\)</span>), then <span class="math inline">\(1\to 3\to 5\)</span>, then <span class="math inline">\(1\to 2\to 5\)</span>.</p>
-<h1 id="simulation">Simulation</h1>
-<p>Kleinrock and Jackson are back-of-envelope tools. A real network is usually simulated. The 2006 lab used ns-2, a discrete-event network simulator driven by Tcl, supporting TCP and multicast, extensible in C++, and installed on the departmental Linux machines (Cygwin for a personal copy). Lab 2 is that comparison: occupancy from ns-2 against isolated <span class="math inline">\(M/M/1\)</span> formulae on a tandem pair and a multipath diamond.</p>
-<p>The approximations are useful <em>before</em> the simulator, and as a check on it. Lab 1 already showed that a sample mean from a short run at high <span class="math inline">\(\rho\)</span> is not the steady-state mean. The same warning applies to packet traces.</p>
+<pre><code>&lt;div class=&quot;caption&quot; style=&quot;&quot;&gt;Figure: A small network with five nodes.&lt;/div&gt;
+\label{cap:fiveNodeNetwork}</code></pre>
+<p>Different routes through the network are indicated with thick lines. Each route has a rate associated with it as follows {llllllll} &amp; <span class="math inline">\(x_{1}\)</span> &amp; <span class="math inline">\(x_{2}\)</span> &amp; <span class="math inline">\(x_{3}\)</span> &amp; <span class="math inline">\(x_{4}\)</span> &amp; <span class="math inline">\(x_{5}\)</span> &amp; <span class="math inline">\(x_{6}\)</span> &amp; <span class="math inline">\(x_{7}\)</span> \ <span class="math inline">\(\lambda\)</span> &amp; 5 &amp; 10 &amp; 7 &amp; 12 &amp; 4 &amp; 8 &amp; 4 \</p>
+<p>According to the Kleinrock independence assumption, what is the most congested link? What is the quickest route between node 1 &amp; 5? In your answers you should consider propagation or processing delays at each node to be negligible. [0] From the diagram we can see which links traffic flows down. Let us take each link in turn. Using the superposition of Poisson flows we have {llllll} <span class="math inline">\(\lambda\)</span> &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \ 1 &amp; - &amp; - &amp; - &amp; - &amp; - \ 2 &amp; <span class="math inline">\(x_{1}+x_{2}=15\)</span> &amp; - &amp; - &amp; - &amp; - \ 3 &amp; <span class="math inline">\(x_{3}=7\)</span> &amp; - &amp; - &amp; - &amp; - \ 4 &amp; <span class="math inline">\(x_{4}+x_{5}=16\)</span> &amp; - &amp; - &amp; - &amp; - \ 5 &amp; - &amp; <span class="math inline">\(x_{2}=10\)</span> &amp; <span class="math inline">\(x_{3}+x_{6}=15\)</span> &amp; <span class="math inline">\(x_{4}+x_{7}=16\)</span> &amp; - \</p>
+<pre><code>\tiny    \normalsize
+{llllll}
+  $\rho=\lambda\bar{X}$ &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \\
+  1 &amp; - &amp; - &amp; - &amp; - &amp; - \\
+  2 &amp; $15\times0.05=\frac{3}{4}$ &amp; - &amp; - &amp; - &amp; - \\
+  3 &amp; $7\times0.05=\frac{7}{20}$ &amp; - &amp; - &amp; - &amp; - \\
+  4 &amp; $16\times0.0333=\frac{8}{15}$ &amp; - &amp; - &amp; - &amp; - \\
+  5 &amp; - &amp; $10\times0.05=\frac{1}{2}$ &amp; $15\times0.05=\frac{3}{4}$ &amp; $16\times0.033=\frac{8}{15}$ &amp; - \\
+
+{llllll}
+  $1-\rho$ &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \\
+  1 &amp; - &amp; - &amp; - &amp; - &amp; - \\
+  2 &amp; $\frac{1}{4}$ &amp; - &amp; - &amp; - &amp; - \\
+  3 &amp; $\frac{13}{20}$ &amp; - &amp; - &amp; - &amp; - \\
+  4 &amp; $\frac{7}{15}$ &amp; - &amp; - &amp; - &amp; - \\
+  5 &amp; - &amp; $\frac{1}{2}$ &amp; $\frac{1}{4}$ &amp; $\frac{7}{15}$ &amp; - \\
+
+\normalsize
+{llllll}
+  $N=\frac{\rho}{1-\rho}$ &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \\
+  1 &amp; - &amp; - &amp; - &amp; - &amp; - \\
+  2 &amp; $3$ &amp; - &amp; - &amp; - &amp; - \\
+  3 &amp; $\frac{7}{13}$ &amp; - &amp; - &amp; - &amp; - \\
+  4 &amp; $\frac{8}{7}$ &amp; - &amp; - &amp; - &amp; - \\
+  5 &amp; - &amp; 1 &amp; 3 &amp; $\frac{8}{7}$ &amp; - \\
+
+**The most congested links are from 1 to 2 and 3 to 5.**
+To compute the answer to the second part we need the average delay at each link
+\tiny\normalsize
+{llllll}
+  $\bar{T}=\frac{\bar{X}}{1-\rho}$ &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \\
+  1 &amp; - &amp; - &amp; - &amp; - &amp; - \\
+  2 &amp; $4\times0.05=\frac{1}{5}$ &amp; - &amp; - &amp; - &amp; - \\
+  3 &amp; $\frac{20}{13}\times0.05=\frac{1}{13}$ &amp; - &amp; - &amp; - &amp; - \\
+  4 &amp; $\frac{15}{7}\times0.033=\frac{1}{14}$ &amp; - &amp; - &amp; - &amp; - \\
+  5 &amp; - &amp; $2\times0.05=\frac{1}{10}$ &amp; $4\times0.05=\frac{1}{5}$ &amp; $\frac{15}{7}\times0.033=\frac{1}{14}$ &amp; - \\
+
+This means that to go via node 2 takes $\frac{1}{5}+\frac{1}{10}=0.3$ via node 3 takes $\frac{1}{13}+\frac{1}{5}=0.277$ via node 4 it takes $\frac{1}{14}+\frac{1}{14}=\frac{1}{7}=0.1429$ according to Kleinrock&#39;s independence assumption.\}{0}</code></pre>
+<h3 id="answer">Answer</h3>
+<p>{1. <span class="math inline">\(M/M/1\)</span> Queues in Tandem Revisited Let’s return to the <span class="math inline">\(M/M/1\)</span> queues in tandem. Burke’s theorem tells us that the departure process from the first queue will be a Poisson with rate <span class="math inline">\(\lambda.\)</span> Now if we allow service times at the second queue to be independent of service times at the first queue we can break the dependence of the queue length at the second queue on the service time at the second queue. In this case the system can be modelled as two <span class="math inline">\(M/M/1\)</span> queues. What are the distributions for the states of the two systems? [0] If the service time distributions at the two queues are governed by exponential distributions with rate parameters <span class="math inline">\(\mu_{1}\)</span> and <span class="math inline">\(\mu_{2}\)</span> leading to utilization factors for each queue as <span class="math inline">\(\rho_{1}=\frac{\lambda}{\mu_{1}}\)</span> and <span class="math inline">\(\rho_{2}=\frac{\lambda}{\mu_{2}}\)</span>. then the distributions for the states of the systems are given by<span class="math display">\[
+P\left(k_{1}\right)=\rho_{1}^{k_{1}}\left(1-\rho_{1}\right)\]</span><span class="math display">\[
+P\left(k_{2}\right)=\rho_{2}^{k_{2}}\left(1-\rho_{2}\right).\]</span>The joint distribution for both systems is then P(k_{1},k_{2}) &amp; = &amp; P(k_{1})P(k_{2})\ &amp; = &amp; <em>{1}<sup>{k_{1}}(1-<em>{1})</em>{2}</sup>{k</em>{2}}(1-_{2})because the two queues can be considered independently. As a result the average delay in the system can be computed as the sum of the average delays in each queue,<span class="math display">\[
+\bar{T}=\bar{T}_{1}+\bar{T}_{2}=\frac{1}{\mu_{1}-\lambda}+\frac{1}{\mu_{2}-\lambda}.\]</span>}{0}</p>
+<h3 id="answer-1">Answer</h3>
+<p>% generated — do not edit; scripts/convert/run.py</p>
+<!-- original A4 foil 190: Networks of Queues and Simulation -->
+<!-- original A4 foil 191: `$M/M/1$' Queues in Tandem\label{sec:tandemQueuesOne} -->
+<div class="figure">
+<div id="MM1tandem-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/MM1tandem.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="MM1tandem-magnify" class="magnify" onclick="magnifyFigure(&#39;MM1tandem&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="MM1tandem-caption" class="caption-frame">
+<p>Figure: Two queues in tandem</p>
+</div>
+</div>
+<!-- original A4 foil 191: `$M/M/1$' Queues in Tandem\label{sec:tandemQueuesOne} -->
+<!-- original A4 foil 192: Implications -->
+<!-- original A4 foil 192: Implications -->
+<!-- original A4 foil 193: Analogy -->
+<!-- original A4 foil 193: Analogy -->
+<!-- original A4 foil 194: Lack of Independence -->
+<!-- original A4 foil 194: Lack of Independence -->
+<!-- original A4 foil 195: Time Reversibility --- Burke's Theorem -->
+<!-- original A4 foil 195: Time Reversibility --- Burke's Theorem -->
+<!-- original A4 foil 196: Time Reversibility -->
+<!-- original A4 foil 197: Time Revesibility Intuition -->
+<!-- original A4 foil 197: Time Revesibility Intuition -->
+<!-- original A4 foil 198: Burke's Theorem -->
+<!-- original A4 foil 199: Burke's Theorem -->
+<!-- original A4 foil 200: $M/M/1$ Queues in Tandem Revisited -->
+<!-- original A4 foil 200: $M/M/1$ Queues in Tandem Revisited -->
+<!-- original A4 foil 201: M/M/1 in Tandem -->
+<!-- original A4 foil 201: M/M/1 in Tandem -->
+<!-- original A4 foil 202: Relation to Reality -->
+<!-- original A4 foil 202: Relation to Reality -->
+<!-- original A4 foil 203: Kleinrock's Independence Approximation -->
+<!-- original A4 foil 204: Kleinrock's Independence Approximation -->
+<!-- original A4 foil 205: The Average in the System -->
+<!-- original A4 foil 206: Example --- A Simple Network -->
+<div class="figure">
+<div id="cap:fiveNodeNetwork-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/kleinrockNetwork.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="cap:fiveNodeNetwork-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:fiveNodeNetwork&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="cap:fiveNodeNetwork-caption" class="caption-frame">
+<p>Figure: A small network with five nodes.</p>
+</div>
+</div>
+<!-- original A4 foil 206: Example --- A Simple Network -->
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\bar{X}\)</span></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0.05</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>0.05</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>0.0333</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>-</td>
+<td>0.05</td>
+<td>0.05</td>
+<td>0.033</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(x_{1}\)</span></th>
+<th><span class="math inline">\(x_{2}\)</span></th>
+<th><span class="math inline">\(x_{3}\)</span></th>
+<th><span class="math inline">\(x_{4}\)</span></th>
+<th><span class="math inline">\(x_{5}\)</span></th>
+<th><span class="math inline">\(x_{6}\)</span></th>
+<th><span class="math inline">\(x_{7}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\lambda\)</span></td>
+<td>5</td>
+<td>10</td>
+<td>7</td>
+<td>12</td>
+<td>4</td>
+<td>8</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<!-- original A4 foil 207: Answer -->
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\lambda\)</span></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><span class="math inline">\(x_{1}+x_{2}=15\)</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><span class="math inline">\(x_{3}=7\)</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><span class="math inline">\(x_{4}+x_{5}=16\)</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>-</td>
+<td><span class="math inline">\(x_{2}=10\)</span></td>
+<td><span class="math inline">\(x_{3}+x_{6}=15\)</span></td>
+<td><span class="math inline">\(x_{4}+x_{7}=16\)</span></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\rho=\lambda\bar{X}\)</span></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><span class="math inline">\(15\times0.05=\frac{3}{4}\)</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><span class="math inline">\(7\times0.05=\frac{7}{20}\)</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><span class="math inline">\(16\times0.0333=\frac{8}{15}\)</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>-</td>
+<td><span class="math inline">\(10\times0.05=\frac{1}{2}\)</span></td>
+<td><span class="math inline">\(15\times0.05=\frac{3}{4}\)</span></td>
+<td><span class="math inline">\(16\times0.033=\frac{8}{15}\)</span></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<!-- original A4 foil 208: Answer Contd -->
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(1-\rho\)</span></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><span class="math inline">\(\frac{1}{4}\)</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><span class="math inline">\(\frac{13}{20}\)</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><span class="math inline">\(\frac{7}{15}\)</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>-</td>
+<td><span class="math inline">\(\frac{1}{2}\)</span></td>
+<td><span class="math inline">\(\frac{1}{4}\)</span></td>
+<td><span class="math inline">\(\frac{7}{15}\)</span></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(N=\frac{\rho}{1-\rho}\)</span></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><span class="math inline">\(3\)</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><span class="math inline">\(\frac{7}{13}\)</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><span class="math inline">\(\frac{8}{7}\)</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>-</td>
+<td>1</td>
+<td>3</td>
+<td><span class="math inline">\(\frac{8}{7}\)</span></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<!-- original A4 foil 209: Answer Contd -->
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\bar{T}=\frac{\bar{X}}{1-\rho}\)</span></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><span class="math inline">\(4\times0.05=\frac{1}{5}\)</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><span class="math inline">\(\frac{20}{13}\times0.05=\frac{1}{13}\)</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><span class="math inline">\(\frac{15}{7}\times0.033=\frac{1}{14}\)</span></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>-</td>
+<td><span class="math inline">\(2\times0.05=\frac{1}{10}\)</span></td>
+<td><span class="math inline">\(4\times0.05=\frac{1}{5}\)</span></td>
+<td><span class="math inline">\(\frac{15}{7}\times0.033=\frac{1}{14}\)</span></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<!-- original A4 foil 210: Jackson's Theorem -->
+<!-- original A4 foil 210: Jackson's Theorem -->
+<!-- original A4 foil 211: Network Simulation -->
+<!-- original A4 foil 211: Network Simulation -->
+<!-- original A4 foil 212: Network Simulation with NS2 -->
+<!-- original A4 foil 212: Network Simulation with NS2 -->
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -82,21 +577,10 @@ P_1(k)=(1-\rho_1)\rho_1^k,\qquad P_2(\ell)=(1-\rho_2)\rho_2^\ell,
 <li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
 <li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
-<h2 id="further-reading">Further Reading</h2>
-<ul>
-<li>Burke, Kleinrock independence, and Jackson’s theorem of <span class="citation" data-cites="Bertsekas:data92">Bertsekas and Gallager (1992)</span></li>
-</ul>
-<h2 id="exercises">Exercises</h2>
-<ul>
-<li>Lab 2: tandem and multipath occupancy versus Kleinrock of <span class="citation" data-cites="npa-lab2">Lawrence (2006)</span></li>
-</ul>
 <h1 class="unnumbered" id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Bertsekas:data92" class="csl-entry" role="listitem">
 Bertsekas, D.P., Gallager, R.G., 1992. Data networks, Second. ed. Prentice-Hall, Upper Saddle River, NJ.
-</div>
-<div id="ref-npa-lab2" class="csl-entry" role="listitem">
-Lawrence, N.D., 2006. <a href="https://mlatcl.github.io/npa/">Simulation of networks of queues in <span class="nocase">ns-2</span></a>.
 </div>
 </div>
 

@@ -1,5 +1,6 @@
 ---
-title: "Poisson Processes"
+title: |-
+  Poisson Processes
 abstract: |-
   <p>The Poisson process as a counting process, superposition and decomposition, independence on disjoint intervals, and exponential interarrival times including the memoryless property.</p>
 edit_url: https://github.com/mlatcl/npa/edit/gh-pages/_lamd/poisson-processes.md
@@ -29,120 +30,176 @@ categories:
 <!--
 
 -->
+<p>% generated — do not edit; scripts/convert/run.py</p>
 <h1 id="stochastic-processes">Stochastic Processes</h1>
-<p>A probabilistic process — a random process, or a stochastic process — is a random function: it maps inputs to a distribution over values rather than to a single value. The Wiener process sits behind Brownian motion. The Black–Scholes formula models the logarithm of a stock price as a Wiener process. Following <span class="citation" data-cites="Chan:performance00">(Chan, 2000)</span>, a random process is a random function which, for a particular input, is a random quantity.</p>
-<h1 id="the-poisson-process">The Poisson Process</h1>
-<p>The Poisson <em>distribution</em> gives probabilities over counts. The Poisson <em>process</em> gives probabilities of <span class="math inline">\(k\)</span> arrivals as a function of time <span class="math inline">\(t\)</span> for a rate <span class="math inline">\(\lambda\)</span>, <span class="math display">\[
-P(k\mid t,\lambda)=\frac{(\lambda t)^k}{k!}e^{-\lambda t}.
-\]</span> This is the Poisson distribution with <span class="math inline">\(\mu\)</span> replaced by <span class="math inline">\(\lambda t\)</span>. The mean number of arrivals by time <span class="math inline">\(t\)</span> is therefore <span class="math inline">\(\langle k\rangle=\lambda t\)</span>, so <span class="math inline">\(\lambda\)</span> is a rate. The Poisson process is a counting process whose counts are expected to grow linearly in time.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>_root <span class="op">=</span> os.path.abspath(os.path.join(os.getcwd(), <span class="st">&#39;..&#39;</span>))</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>_py <span class="op">=</span> os.path.join(_root, <span class="st">&#39;python&#39;</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> os.path.isdir(_py) <span class="kw">and</span> _py <span class="kw">not</span> <span class="kw">in</span> sys.path:</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    sys.path.insert(<span class="dv">0</span>, _py)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> npa_plots</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> <span class="fl">2.0</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># expected counts grow linearly</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">zip</span>(t, lam <span class="op">*</span> t)))</span></code></pre></div>
-<h1 id="properties-of-the-poisson-process">Properties of the Poisson Process</h1>
-<p>In the next chapter we will derive the Poisson process from assumptions about arrivals. For now, five properties.</p>
-<h2 id="superposition">Superposition</h2>
-<p>If <span class="math inline">\(N\)</span> independent Poisson processes with rates <span class="math inline">\(\lambda_1,\dots,\lambda_N\)</span> are combined, the result is Poisson with rate <span class="math inline">\(\lambda=\sum_n\lambda_n\)</span>. Two variables are independent when <span class="math inline">\(P(x,y)=P(x)P(y)\)</span>.</p>
+<p>A probabilistic process, also known as a random process or a stochastic process, can be viewed as a `random function’. A normal function maps a set of inputs to a point value. A probabilistic process maps a set of inputs to a probability distribution over values or a probability density function. Various systems are modelled with probabilistic processes. For example, the <em>Wiener process</em> is the process behind Brownian motion. Stock market data is often modelled as a stochastic process. For example the Black-Scholes formula assumes that the logarithm of the stock market data can be modelled as a Wiener Process. We will base our definition of a random process on that given by <span class="citation" data-cites="Chan:performance00">(Chan, 2000)</span>.</p>
+<ul>
+<li>**A** random  process May be defined as a <em>random function</em> which, for a particular value, is a random quantity.</li>
+</ul>
+<h1 id="poisson-process">Poisson Process</h1>
+<p>We’ve already met the Poisson distribution, there is a simple process which is related to the Poisson distribution: the Poisson process. The Poisson process gives probabilities of a number of arrivals, <span class="math inline">\(k\)</span>, as a function of time, <span class="math inline">\(t\)</span>, given a `rate’, <span class="math inline">\(\lambda\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+P\left(k|t,\lambda\right)=\frac{(\lambda t)^{k}}{k!}e^{-\lambda t}.\label{eq:process}\end{equation}\]</span>Note the similarity between (<span class="math inline">\(\ref{eq:poissonDist}\)</span>) and (<span class="math inline">\(\ref{eq:process}\)</span>). The process is simply the distribution with <span class="math inline">\(\mu\)</span> substituted with <span class="math inline">\(\lambda t\)</span>. Using this substitution the mean of the Poisson process (the first moment of <span class="math inline">\(k\)</span>) is given by<span class="math display">\[
+\left\langle k\right\rangle =\lambda t.\]</span>Which is the expected number of arrivals at a given time <span class="math inline">\(t\)</span>. The parameter <span class="math inline">\(\lambda\)</span> is therefore known as the of the process. This implies that the Poisson process is a form of counting process where the counts are to increase linearly with time at a rate given by <span class="math inline">\(\lambda\)</span>.</p>
+<h1 id="properties">Properties</h1>
+<p>In the Chapter  <span class="math inline">\(\ref{cha:markovChainsAndProcesses}\)</span> we will derive the Poisson process from some simple assumptions about how arrivals occur, for the moment though we will highlight some important properties of the Poisson process. We will describe each in more detail below, to summarise though the fiver properties are:</p>
+<ol type="1">
+<li>Superposition of Poisson processes.</li>
+<li>Decomposition of Poisson processes.</li>
+<li>Independence of arrivals.</li>
+<li>Similarity of arrival distribution.</li>
+<li>Interarrival time distributions.</li>
+</ol>
+<h2 id="superposition-of-poissons">Superposition of Poissons</h2>
+<p>The first property we will consider is superposition of Poisson flows. It is a property of a Poisson process that if we combine <span class="math inline">\(N\)</span> independent processes with rates <span class="math inline">\(\lambda_{1},\lambda_{2},\dots,\lambda_{N}\)</span> together the resulting process is also a Poisson process with a combined rate, <span class="math inline">\(\lambda\)</span>, equal to the sum of each of the input rates: <span class="math inline">\(\lambda=\sum_{n=1}^{N}\lambda_{n}\)</span>. This is shown pictorially in Figure  <span class="math inline">\(\ref{cap:poissonSuperposition}\)</span>. </p>
 <div class="figure">
-<div id="poisson-superposition-figure" class="figure-frame">
+<div id="cap:poissonSuperposition-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/sumPoisson.png" width="55%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/sumPoisson.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="poisson-superposition-magnify" class="magnify" onclick="magnifyFigure(&#39;poisson-superposition&#39;)">
+<div id="cap:poissonSuperposition-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:poissonSuperposition&#39;)">
 <button type="button" class="img-button" aria-label="Enlarge figure">
 <img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
 </button>
 </div>
-<div id="poisson-superposition-caption" class="caption-frame">
-<p>Figure: Independent Poisson processes merged into one flow yield a Poisson process whose rate is the sum of the input rates.</p>
+<div id="cap:poissonSuperposition-caption" class="caption-frame">
+<p>Figure: If independent Poisson processes form a single traffic flow overall process is a Poisson with a rate that s the sum of the rates of the separate processes.</p>
 </div>
 </div>
-<h2 id="decomposition">Decomposition</h2>
-<p>The converse also holds. A Poisson process of rate <span class="math inline">\(\lambda\)</span> is split onto <span class="math inline">\(N\)</span> output channels, each arrival independently assigned to channel <span class="math inline">\(n\)</span> with probability <span class="math inline">\(P(n)\)</span>. Then channel <span class="math inline">\(n\)</span> is Poisson with rate <span class="math inline">\(\lambda_n=P(n)\lambda\)</span>.</p>
+<h2 id="decomposition-of-poisson-flow">Decomposition of Poisson Flow</h2>
+<p>Just as Poisson processes can be combined to obtain a higher rate Poisson process, they can also be decomposed to obtain lower rate Poisson processes. Assume we have one input channel where arrivals are occurring with a Poisson process with rate <span class="math inline">\(\lambda\)</span>. This channel then splits into <span class="math inline">\(N\)</span> separate output channels. Each input arrival is then <em>independently</em> assigned to output channel <span class="math inline">\(n\)</span> with probability <span class="math inline">\(P\left(n\right)\)</span>. In this case the output channels then behave like Poisson processes with rates given by <span class="math inline">\(\lambda_{n}=P\left(n\right)\lambda\)</span>. This is shown in Figure  <span class="math inline">\(\ref{cap:decompositionPoisson}\)</span>.</p>
 <div class="figure">
-<div id="poisson-decomposition-figure" class="figure-frame">
+<div id="cap:decompositionPoisson-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/decomposePoisson.png" width="70%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/decomposePoisson.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="poisson-decomposition-magnify" class="magnify" onclick="magnifyFigure(&#39;poisson-decomposition&#39;)">
+<div id="cap:decompositionPoisson-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:decompositionPoisson&#39;)">
 <button type="button" class="img-button" aria-label="Enlarge figure">
 <img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
 </button>
 </div>
-<div id="poisson-decomposition-caption" class="caption-frame">
-<p>Figure: A Poisson process of rate <span class="math inline">\(\lambda\)</span> independently switched onto output <span class="math inline">\(n\)</span> with probability <span class="math inline">\(P(n)=\lambda_n/\lambda\)</span> yields Poisson outputs of rates <span class="math inline">\(\lambda_n\)</span>.</p>
+<div id="cap:decompositionPoisson-caption" class="caption-frame">
+<p>Figure: If a single Poisson process with rate <span class="math inline">\(\lambda\)</span> is switched to different output channels, with each arrival being switched to channel <span class="math inline">\(n\)</span> with probability <span class="math inline">\(P\left(n\right)=\lambda_{n}/\lambda\)</span>, each output channel will be a Poisson process with rate <span class="math inline">\(\lambda_{n}\)</span>.</p>
 </div>
 </div>
 <h2 id="independence-of-arrivals">Independence of Arrivals</h2>
-<p>On two <em>disjoint</em> time intervals the numbers of arrivals <span class="math inline">\(k_1\)</span> and <span class="math inline">\(k_2\)</span> are independent: <span class="math inline">\(P(k_1,k_2)=P(k_1)P(k_2)\)</span>.</p>
-<h2 id="identical-intervals">Identical Intervals</h2>
-<p>For a single rate <span class="math inline">\(\lambda\)</span>, the number of arrivals in <span class="math inline">\((s,s+t]\)</span> has the same distribution as the number in <span class="math inline">\((r,r+t]\)</span> on an independent copy of the process.</p>
-<h1 id="interarrival-times">Interarrival Times</h1>
-<p>The distribution of times between arrivals of a Poisson process is exponential, <span class="math display">\[
-p(X)=\lambda e^{-\lambda X}.
-\]</span> Stating that interarrival times are exponential with parameter <span class="math inline">\(\lambda\)</span> is the same as stating that arrivals are Poisson with rate <span class="math inline">\(\lambda\)</span>. If students register at a rate <span class="math inline">\(\lambda=2\)</span> per minute, the gaps between them are exponential with the same <span class="math inline">\(\lambda\)</span>.</p>
+<p>Consider a single Poisson process, if we look within this process at two <em>disjoint</em> time intervals (<em>i.e. </em> periods of time that don’t overlap). Assume we have <span class="math inline">\(k_{1}\)</span> arrivals in the first interval and <span class="math inline">\(k_{2}\)</span> arrivals in the second interval. The distribution of arrivals in the two intervals are independent of each other, <em>i.e.  </em><span class="math inline">\(P\left(k_{1},k_{2}\right)=P\left(k_{1}\right)P\left(k_{2}\right)\)</span>.</p>
+<h2 id="similarity-of-arrival-distributions-for-identical-intervals">Similarity of Arrival Distributions for Identical Intervals</h2>
+<p>Consider a single Poisson process with rate <span class="math inline">\(\lambda\)</span>, let the number of arrivals between time <span class="math inline">\(s\)</span> and <span class="math inline">\(s+t\)</span> be given by <span class="math inline">\(k_{1}\)</span>. Now consider a second independent Poisson process with the same rate <span class="math inline">\(\lambda\)</span>, let the number of arrivals between time <span class="math inline">\(r\)</span> and <span class="math inline">\(r+t\)</span> be given by <span class="math inline">\(k_{2}\)</span>. The distribution of <span class="math inline">\(k_{1}\)</span> and <span class="math inline">\(k_{2}\)</span> are then equal, <span class="math display">\[
+P\left(k_{1}\right)=P\left(k_{2}\right).\]</span></p>
+<h2 id="interarrival-times-and-poisson-processes">Interarrival Times and Poisson Processes</h2>
+<p>The Poisson process is a simple model of arrivals that is widely used due to its analytical properties. We have already seen how a superpositions and decompositions of Poisson processes also lead to Poisson processes. Another attractive analytical property is the ease with which we can compute the <em>interarrival time distribution</em> for the Poisson process. The interarrival time distribution is the distribution of times between arrivals. Consider waiting for the next bus at a bus stop. If you <em>just missed a bus</em> how long will you have to wait for the next bus to arrive? If the buses arrive as a Poisson process, then it is straightforward to work out the distribution of your waiting time. The interarrival time distribution for the Poisson process turns out to be the <em>exponential distribution</em>,<span class="math display">\[
+p\left(X\right)=\lambda e^{-\lambda X}.\]</span> This is derived in the examples at the end of this chapter. Stating that interarrival times are distributed exponentially is equivalent to stating that arrivals occur as a Poisson process. We will therefore use these formulations interchangeably, <em>i.e. </em>when we state that the interarrival times for students registering at the Goodwin Sports centre is given by an exponential distribution with parameter <span class="math inline">\(\lambda=2\)</span> we are equivalently stating that these students are arriving according to a Poisson process with rate parameter <span class="math inline">\(\lambda=2\)</span>.</p>
+<h1 id="the-exponential-distribution">The Exponential Distribution</h1>
+<p>In the last section we saw that the exponential distribution gives can be derived by considering the interarrival times of the Poisson distribution. Here we give a few properties of the exponential that will be relevant in this course.</p>
+<h2 id="the-memoryless-property">The Memoryless property</h2>
+<p>We have already seen in our derivation of the exponential as interarrival time distribution that it is <em>memoryless</em>. Formally speaking this means that for exponentially distributed variable <span class="math inline">\(X\)</span><span class="math display">\[
+P\left(X&gt;s+t|X&gt;t\right)=P\left(X&gt;s\right)\]</span>or in English, the probability of the waiting time being greater than <span class="math inline">\(s+t\)</span> given that the waiting time is already greater than <span class="math inline">\(t\)</span> is the same as the probability of the waiting time being greater than <span class="math inline">\(s\)</span>.</p>
+<h2 id="mean-and-variance">Mean and Variance</h2>
+<p>Recall the exponential distribution <span class="math display">\[
+p(X)=\lambda e^{-\lambda X}\]</span> The mean of an exponential can be found to be, <span class="math display">\[
+\left\langle X\right\rangle _{p(X)}=\frac{1}{\lambda}\]</span> and the variance is <span class="math display">\[
+\left\langle X^{2}\right\rangle _{p(X)}-\left\langle X\right\rangle _{p(X)}^{2}=\frac{1}{\lambda^{2}}.\]</span> These are easily confirmed — they are part of Tutorial 1.</p>
+<h2 id="examples">Examples</h2>
+<p>{{1. <strong>Superposition of Poisson processes. </strong> There are three queues for registration of MSc students from different courses at the University of Sheffield. Students for the first course, Physics and Fine Art, arrive with a rate of 4 students per minute. Students for the second course, The Psychology of Sociology, arrive with a rate of 2 students per minute and students for the third course, Computer Science and Aromatherapy arrive with a rate of 5 students a minute. Assuming the student arrivals are independent and occur as a Poisson process what is the probability that after 15 minutes there have been <strong>a)</strong> 90 student arrivals? <strong>b) </strong>180 arrivals? [0] If the arrivals are independent and occur as a Poisson process, the rate of arrivals for all student is the sum of the rates for each course. <span class="math inline">\(\lambda=4+2+5=11\)</span>. Now we simply evaluate (<span class="math inline">\(\ref{eq:process}\)</span>) with <span class="math inline">\(t=15\)</span>, <span class="math inline">\(\lambda=11\)</span> and <strong>a) </strong><span class="math inline">\(k=90\)</span> giving P(k=90|,t=15) &amp; = &amp; (-(11))\ &amp; = &amp; 5.5^{-11}.and <strong>b)</strong></p>
+<p>P(k=90|,t=15) &amp; = &amp; (-(11))\ &amp; = &amp; ?. Now ask someone with a calculator to work this out. Factorial 180 will definitely not work. Explain that it needs to be computed as:</p>
+<p>P(k=90|,t=15) &amp; = &amp; (180(11).\ &amp; &amp; .-(180!)-(11))\ &amp; = &amp; 0.015.}{0}</p>
+<h3 id="section"></h3>
+<p>*{Answer} 2. <strong>Example of Poisson Decomposition. </strong> There is one registration for all MSc courses. Students arrive in the hall and are assigned to registration desks according to the first letter of their surname. Desk 1 (<span class="math inline">\(d=1)\)</span>takes students with names from A-G, desk 2 (<span class="math inline">\(d=2\)</span>) from H-M, desk 3 (<span class="math inline">\(d=3\)</span>) from N to S and desk 4 (<span class="math inline">\(d=4\)</span>) from R to Z. Surnames are distributed amongst these four categories with the following probability distribution: {lllll} <span class="math inline">\(d\)</span> &amp; 1 &amp; 2 &amp; 3 &amp; 4 \ <span class="math inline">\(P\left(d\right)\)</span> &amp; <span class="math inline">\(0.20\)</span> &amp; <span class="math inline">\(0.27\)</span> &amp; <span class="math inline">\(0.25\)</span> &amp; <span class="math inline">\(0.28\)</span> \</p>
+<p>Assuming the students arrive <em>independently</em> of their surname as a Poisson process at a rate of 10 students per minute what is the probability that <strong>a) </strong>after 5 minutes 5 students have arrived at desk 1? <strong>b)</strong> after 10 minutes 20 students have arrived at desk 4? [0] If the splitting is independent of the arrival, then the arrivals at each desks will also occur as a Poisson process. For <strong>a) </strong>arrivals at** **desk 1 will occur as a Poisson process with rate <span class="math inline">\(\lambda_{1}=0.20\times10=2\)</span>. The probability that <span class="math inline">\(k=5\)</span> students will have arrived at desk 1 after <span class="math inline">\(t=5\)</span> minutes is given by substituting these values into (<span class="math inline">\(\ref{eq:process}\)</span>): P(k=5|_{1}=2,t=5) &amp; = &amp; (-(2))\ &amp; = &amp; 0.038.For <strong>b) </strong>arrivals at** **desk 4 will occur as a Poisson process with rate <span class="math inline">\(\lambda_{4}=0.28\times10=2.8\)</span>. The probability that <span class="math inline">\(k=20\)</span> students will have arrived at desk 1 after <span class="math inline">\(t=10\)</span> minutes is again given by substituting these values into (<span class="math inline">\(\ref{eq:process}\)</span>): P(k=20|_{4}=2.8,t=10) &amp; = &amp; (-(2.8))\ &amp; = &amp; 0.025.}{0}</p>
+<h3 id="section-1"></h3>
+*{Answer} 3. <strong>Interarrival times for the Poisson process. </strong>In Figure  <span class="math inline">\(\ref{cap:poissonInterArrival}\)</span> we show different arrival times, <span class="math inline">\(T_{1},\dots,T_{n}\)</span> for the process. You can think of these as the arrival times of the buses. [ht]
 <div class="figure">
-<div id="poisson-interarrivals-figure" class="figure-frame">
+<div id="interArrivals-figure" class="figure-frame">
 <div class="centered" style="">
 <img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/interArrivals.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="poisson-interarrivals-magnify" class="magnify" onclick="magnifyFigure(&#39;poisson-interarrivals&#39;)">
+<div id="interArrivals-magnify" class="magnify" onclick="magnifyFigure(&#39;interArrivals&#39;)">
 <button type="button" class="img-button" aria-label="Enlarge figure">
 <img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
 </button>
 </div>
-<div id="poisson-interarrivals-caption" class="caption-frame">
-<p>Figure: Arrival epochs <span class="math inline">\(T_n\)</span> and interarrival times <span class="math inline">\(X_n=T_n-T_{n-1}\)</span> for a Poisson process.</p>
+<div id="interArrivals-caption" class="caption-frame">
+<p>Figure: interArrivals</p>
 </div>
 </div>
-<p>The derivation uses the CDF. <span class="math inline">\(P(X_i&gt;t)\)</span> is the probability of no arrivals in an interval of length <span class="math inline">\(t\)</span>, which is <span class="math inline">\(e^{-\lambda t}\)</span>. Differentiating <span class="math inline">\(1-e^{-\lambda t}\)</span> recovers <span class="math inline">\(\lambda e^{-\lambda X}\)</span>. That argument is written out as an example at the end of the original notes and as an exercise below.</p>
-<h1 id="the-exponential-distribution">The Exponential Distribution</h1>
-<h2 id="memoryless">Memoryless</h2>
-<p>The exponential is <em>memoryless</em>: <span class="math display">\[
-P(X&gt;s+t\mid X&gt;t)=P(X&gt;s).
-\]</span> Having already waited <span class="math inline">\(t\)</span> does not change the distribution of the remaining wait. That is the property we will use for Markov queues.</p>
-<h2 id="mean-and-variance">Mean and Variance</h2>
-<p>For <span class="math inline">\(p(X)=\lambda e^{-\lambda X}\)</span>, <span class="math display">\[
-\langle X\rangle=\frac{1}{\lambda}, \qquad \mathrm{Var}(X)=\frac{1}{\lambda^2}.
-\]</span> Confirming these is part of Tutorial 1.</p>
-<p>The MATLAB helper <code>exponentialSamp.m</code> drew <span class="math inline">\(U\sim\mathrm{Uniform}(0,1)\)</span> and returned <span class="math inline">\(-\log U/\lambda\)</span>. That is the inverse-CDF sampler.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> <span class="fl">2.0</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> npa_plots.exponential_sample(lam, size<span class="op">=</span><span class="dv">20_000</span>, rng<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;sample mean&quot;</span>, x.mean(), <span class="st">&quot;should be&quot;</span>, <span class="dv">1</span><span class="op">/</span>lam)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;sample variance&quot;</span>, x.var(), <span class="st">&quot;should be&quot;</span>, <span class="dv">1</span><span class="op">/</span>lam<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt.hist(x, bins<span class="op">=</span><span class="dv">40</span>, density<span class="op">=</span><span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">&quot;samples&quot;</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, x.<span class="bu">max</span>(), <span class="dv">200</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.plot(t, lam <span class="op">*</span> np.exp(<span class="op">-</span>lam <span class="op">*</span> t), label<span class="op">=</span><span class="st">&quot;exponential pdf&quot;</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&quot;interarrival time&quot;</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<h1 id="worked-examples">Worked Examples</h1>
-<h2 id="superposition-1">Superposition</h2>
-<p>Three independent Poisson registration queues: Physics and Fine Art at rate 4 per minute, Psychology of Sociology at rate 2, Computer Science and Aromatherapy at rate 5. Combined rate <span class="math inline">\(\lambda=11\)</span>. After 15 minutes the expected number of arrivals is <span class="math inline">\(165\)</span>.</p>
-<p>Evaluate <span class="math inline">\(P(k\mid\lambda=11,t=15)\)</span> in the log domain, <span class="math display">\[
-\log P = k\log(\lambda t)-\log(k!)-(\lambda t),
-\]</span> because <span class="math inline">\(180!\)</span> will overflow a naive factorial.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> poisson</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>lam, t <span class="op">=</span> <span class="fl">11.0</span>, <span class="fl">15.0</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> lam <span class="op">*</span> t</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;P(k=90) =&quot;</span>, poisson.pmf(<span class="dv">90</span>, mu))</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;P(k=180) =&quot;</span>, poisson.pmf(<span class="dv">180</span>, mu))</span></code></pre></div>
-<h2 id="decomposition-1">Decomposition</h2>
-<p>One hall, four desks by first letter of surname, with <span class="math inline">\(P(d)=(0.20,0.27,0.25,0.28)\)</span> and total rate 10 students per minute. Desk 1 is Poisson with rate <span class="math inline">\(2\)</span>; <span class="math inline">\(P(k=5\mid t=5)\approx 0.038\)</span>. Desk 4 has rate <span class="math inline">\(2.8\)</span>; <span class="math inline">\(P(k=20\mid t=10)\approx 0.025\)</span>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;desk 1, k=5, t=5:&quot;</span>, poisson.pmf(<span class="dv">5</span>, <span class="fl">2.0</span> <span class="op">*</span> <span class="dv">5</span>))</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;desk 4, k=20, t=10:&quot;</span>, poisson.pmf(<span class="dv">20</span>, <span class="fl">2.8</span> <span class="op">*</span> <span class="dv">10</span>))</span></code></pre></div>
+<pre><code>&lt;div class=&quot;caption&quot; style=&quot;&quot;&gt;Figure: For a Poisson process, this figure shows the times of the arrivals, $T_{n}$, and the interarrival times, $X_{n}$.&lt;/div&gt;
+\label{cap:poissonInterArrival}</code></pre>
+<p>We are interested in computing the distribution of the variables <span class="math inline">\(X_{i}=T_{i}-T_{i-1}\)</span>: the times between bus arrivals. In this example you will derive this PDF for the interarrival times.\answer{ Firstly we define the number of arrivals at time <span class="math inline">\(t\)</span> to be given by the function <span class="math inline">\(N\left(t\right)\)</span>. Next we note that the cumulative density function (CDF) of the interarrival time distribution will be given by <span class="math inline">\(P\left(X_{i}\leq t\right)\)</span> (see Section  <span class="math inline">\(\ref{sub:CDFs}\)</span> for a reminder on CDFs). We can re-write this probability as<span class="math display">\[
+P\left(X_{i}\leq t\right)=1-P\left(X_{i}&gt;t\right),\]</span>so, rather than focusing on <span class="math inline">\(P\left(X_{i}\leq t\right)\)</span>, we can consider the distribution <span class="math inline">\(P\left(X_{i}&gt;t\right)\)</span>. Now we rewrite the condition in this distribution as (X_{i}&gt;t) &amp; &amp; (T_{i}-T_{i-1}&gt;t)\ &amp; &amp; (T_{i}&gt;T_{i-1}+t),where we have simply used the definition of <span class="math inline">\(X_{i}\)</span> and rearranged the inequality. Let’s take the time that <span class="math inline">\(T_{i-1}\)</span> occurs to be <span class="math inline">\(t_{i-1}\)</span>. This lets us write the condition (<span class="math inline">\(\ref{eq:conditionInterarrival}\)</span>) as <span class="math inline">\(\left(T_{i}&gt;T_{i-1}+t|T_{i-1}=t_{i-1}\right)\)</span>. This will be true if and only if the function <span class="math inline">\(N\left(t\right)\)</span> does not change during the interval <span class="math inline">\(\left(t_{i-1},t_{i-1}+t\right)\)</span>. We can express this mathematically as <span class="math display">\[
+\left(X_{i}&gt;t|T_{i-1}=t_{i-1}\right)\equiv\left(N\left(t_{i-1}+t\right)-N\left(t_{i-1}\right)=0\right).\]</span>The right hand side of this statement expresses the condition that no arrivals occur between time <span class="math inline">\(t_{i-1}=T_{i-1}\)</span> and time <span class="math inline">\(t\)</span>. <span class="math display">\[
+P\left(X_{i}&gt;t|T_{i-1}=t_{i-1}\right)=P\left(N\left(t_{i-1}+t\right)-N\left(t_{i-1}\right)=0\right)\]</span>now, because of the similarity of the arrival distributions for intervals of identical lengths (Section  <span class="math inline">\(\ref{sub:poissonSimilarities}\)</span>) we can write<span class="math display">\[
+P\left(N\left(t_{i-1}+t\right)-N\left(t_{i-1}\right)\right)=P\left(N\left(t\right)\right)\]</span>which means that<span class="math display">\[
+P\left(N\left(t_{i-1}+t\right)-N\left(t_{i-1}\right)=0\right)=P\left(N\left(t\right)=0\right)\]</span>and substituting <span class="math inline">\(N\left(t\right)=k=0\)</span> into (<span class="math inline">\(\ref{eq:process}\)</span>) we find that the probability of their being no arrivals at time <span class="math inline">\(t\)</span>, <span class="math inline">\(P\left(N\left(t\right)=0\right)\)</span>, is <span class="math display">\[
+P\left(N\left(t\right)=0\right)=\exp\left(-\lambda t\right)\]</span>so<span class="math display">\[
+P\left(X_{i}&gt;t\right)=\exp\left(-\lambda t\right)\]</span>and the CDF we are interested in is given by P(X_{i}t) &amp; = &amp; 1-P(X_{i}&gt;t)\ &amp; = &amp; 1-(-t).Now to obtain the PDF we simply differentiate the CDF (Section  <span class="math inline">\(\ref{sub:CDFs}\)</span>) giving<span class="math display">\[
+p\left(X_{i}\right)=\lambda e^{-\lambda X_{i}}\]</span>which is the interarrival time distribution. The form of the distribution is recognised as an <em>exponential distribution</em>. The parameter of the exponential, <span class="math inline">\(\lambda\)</span>, is the rate parameter from the Poisson process.}{0}</p>
+<h3 id="section-2"></h3>
+<p>*{Answer}</p>
+<p>% generated — do not edit; scripts/convert/run.py</p>
+<!-- original A4 foil 41: Stochastic Processes -->
+<!-- original A4 foil 41: Stochastic Processes -->
+<!-- original A4 foil 42: Poisson Process -->
+<!-- original A4 foil 42: Poisson Process -->
+<!-- original A4 foil 43: Properties -->
+<div class="figure">
+<div id="cap:poissonSuperposition-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/sumPoisson.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="cap:poissonSuperposition-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:poissonSuperposition&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="cap:poissonSuperposition-caption" class="caption-frame">
+<p>Figure: If independent Poisson processes form a single traffic flow overall process is a Poisson with a rate that s the sum of the rates of the separate processes.</p>
+</div>
+</div>
+<!-- original A4 foil 43: Properties -->
+<!-- original A4 foil 44: Example of Poisson Superposition -->
+<!-- original A4 foil 45: Properties Contd -->
+<div class="figure">
+<div id="cap:decompositionPoisson-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/decomposePoisson.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="cap:decompositionPoisson-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:decompositionPoisson&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="cap:decompositionPoisson-caption" class="caption-frame">
+<p>Figure: If a single Poisson process with rate <span class="math inline">\(\lambda\)</span> is switched to different output channels, with each arrival being switched to channel <span class="math inline">\(n\)</span> with probability <span class="math inline">\(P\left(n\right)=\lambda_{n}/\lambda\)</span>, each output channel will be a Poisson process with rate <span class="math inline">\(\lambda_{n}\)</span>.</p>
+</div>
+</div>
+<!-- original A4 foil 45: Properties Contd -->
+<!-- original A4 foil 46: Example of Poisson Decomposition -->
+<!-- original A4 foil 47: Properties III -->
+<!-- original A4 foil 48: Properties IV -->
+<!-- original A4 foil 49: Interarrival Times and Poisson Processes -->
+<!-- original A4 foil 50: Interarrival Distribution -->
+<div class="figure">
+<div id="interArrivals-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/interArrivals.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="interArrivals-magnify" class="magnify" onclick="magnifyFigure(&#39;interArrivals&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="interArrivals-caption" class="caption-frame">
+<p>Figure: interArrivals</p>
+</div>
+</div>
+<!-- original A4 foil 51: Properties of the Exponential Distribution -->
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -153,24 +210,10 @@ P(X&gt;s+t\mid X&gt;t)=P(X&gt;s).
 <li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
 <li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
-<h2 id="further-reading">Further Reading</h2>
-<ul>
-<li>Sections on the Poisson process and the exponential distribution of <span class="citation" data-cites="Bertsekas:data92">Bertsekas and Gallager (1992)</span></li>
-</ul>
-<h2 id="exercises">Exercises</h2>
-<ul>
-<li>Tutorial Sheet 1: Poisson probabilities, exponential sampling, and the Poisson variance of <span class="citation" data-cites="npa-tutorial1">Lawrence (2006)</span></li>
-</ul>
 <h1 class="unnumbered" id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-Bertsekas:data92" class="csl-entry" role="listitem">
-Bertsekas, D.P., Gallager, R.G., 1992. Data networks, Second. ed. Prentice-Hall, Upper Saddle River, NJ.
-</div>
 <div id="ref-Chan:performance00" class="csl-entry" role="listitem">
 Chan, W.-C., 2000. Performance analysis of telecommunications and local area networks. Kluwer, Dordrecht, The Netherlands.
-</div>
-<div id="ref-npa-tutorial1" class="csl-entry" role="listitem">
-Lawrence, N.D., 2006. <a href="https://mlatcl.github.io/npa/">Network performance analysis tutorial 1</a>.
 </div>
 </div>
 

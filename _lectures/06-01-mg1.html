@@ -1,7 +1,8 @@
 ---
-title: "The M/G/1 Queue"
+title: |-
+  The M/G/1 Queue
 abstract: |-
-  <p>Residual service time and the Pollaczek–Khinchin formula, the <span class="math inline">\(M/M/1\)</span> and <span class="math inline">\(M/D/1\)</span> special cases, and <span class="math inline">\(M/G/1\)</span> with vacations. Lectures 11 and 12, Monday of week 6.</p>
+  <p>Residual service time and the Pollaczek–Khinchin formula, the <span class="math inline">\(M/M/1\)</span> and <span class="math inline">\(M/D/1\)</span> special cases, and <span class="math inline">\(M/G/1\)</span> with vacations.</p>
 edit_url: https://github.com/mlatcl/npa/edit/gh-pages/_lamd/mg1.md
 date: 2006-10-30
 week: 6
@@ -29,110 +30,262 @@ categories:
 <!--
 
 -->
-<h1 id="mg1-and-pollaczekkhinchin"><span class="math inline">\(M/G/1\)</span> and Pollaczek–Khinchin</h1>
-<p>If service times are <em>generally</em> distributed we cannot use a birth-death process. The tool is mean residual service time, and it yields the Pollaczek–Khinchin formula: expected wait for any service-time distribution with finite variance, <span class="math display">\[
-\bar{W}=\frac{\lambda\langle X^2\rangle}{2(1-\rho)},
-\]</span> where <span class="math inline">\(\rho=\lambda\bar{X}\)</span> and <span class="math inline">\(\bar{X}=\langle X\rangle\)</span>.</p>
-<h2 id="assumptions">Assumptions</h2>
-<p>The derivation uses three assumptions. The queue is FIFO. Arrival times are statistically independent of service times. Service times have finite variance. (The notes originally wrote ``arrival-time variance’’; the 2005 paper, and the residual-time argument itself, require finite <em>service-time</em> variance.)</p>
-<p>Mean residual service time <span class="math inline">\(\bar{R}\)</span> is the leftover service seen by an arrival. Under those assumptions <span class="math display">\[
-\bar{W}=\frac{\bar{R}}{1-\rho}.
-\]</span> The rest of the argument is an expression for <span class="math inline">\(\bar{R}\)</span>.</p>
-<h2 id="residual-time-from-completions">Residual Time from Completions</h2>
+<p>% generated — do not edit; scripts/convert/run.py</p>
+<h1 id="pollaczek-khinchin-formula">Pollaczek-Khinchin formula</h1>
+<p>The Pollaczek-Khinchin formula is given as <span class="math display">\[
+\bar{W}=\frac{\lambda\left\langle X^{2}\right\rangle }{2(1-\rho)}\]</span>where <span class="math inline">\(\bar{W}\)</span> is expected waiting time,<span class="math inline">\(\left\langle X^{2}\right\rangle =\left\langle X^{2}\right\rangle _{p(X)}\)</span> is the second moment under the service time distribution, the utilisation factor is given as <span class="math inline">\(\rho=\lambda\bar{X}\)</span> and <span class="math inline">\(\bar{X}=\left\langle X\right\rangle _{p(X)}\)</span> is the mean under the service time distribution.</p>
+<h1 id="proof-of-pollaczek-khinchin-formula">Proof of Pollaczek-Khinchin Formula</h1>
+<p>In the examples, we review the first part of a simple proof of the Pollaczek-Khinchin formula. In our proof we will make three assumptions:</p>
+<ol type="1">
+<li>The queue is FIFO queue, <em>i.e. </em>customers are served in the order they arrive. This assumption may be relaxed but it will simplify our proof.</li>
+<li>The arrival times are statistically independent of the service times.</li>
+<li>The arrival time distribution has a variance which is finite.</li>
+</ol>
+<p>To formulate the proof we introduce a concept known as the mean residual service time, <span class="math inline">\(\bar{R}\)</span>. We show that the average waiting time is related to the mean residual service time as follows: <span class="math display">\[\begin{equation}
+\bar{W}=\frac{\bar{R}}{1-\rho}\label{eqn:arrivals}\end{equation}\]</span> We now have the average queueing time in terms of the mean residual service time. To complete the Pollaczek-Khinchin formula we simply need to calculate <span class="math inline">\(\bar{R}\)</span>.</p>
+<h1 id="residual-service-time-from-departures-perspective">Residual Service Time from Departures Perspective</h1>
+<p>We again turn to a graphical proof to obtain the value of the mean residual service time. In Figure  <span class="math inline">\(\ref{cap:meanResidualGraphical}\)</span> we present a plot of the residual service time over time.</p>
 <div class="figure">
-<div id="mg1-residual-graphical-figure" class="figure-frame">
+<div id="cap:meanResidualGraphical-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/residualTime.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/residualTime.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="mg1-residual-graphical-magnify" class="magnify" onclick="magnifyFigure(&#39;mg1-residual-graphical&#39;)">
+<div id="cap:meanResidualGraphical-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:meanResidualGraphical&#39;)">
 <button type="button" class="img-button" aria-label="Enlarge figure">
 <img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
 </button>
 </div>
-<div id="mg1-residual-graphical-caption" class="caption-frame">
-<p>Figure: Residual service time over a busy period: a sawtooth of triangles with sides <span class="math inline">\(X_i\)</span>. <span class="math inline">\(M(t)\)</span> is the number of completions in <span class="math inline">\([0,t]\)</span>.</p>
+<div id="cap:meanResidualGraphical-caption" class="caption-frame">
+<p>Figure: Graphical computation of mean residual time. <span class="math inline">\(M\left(t\right)\)</span> is the number of service completions in the interval <span class="math inline">\([0,\, t]\)</span>.</p>
 </div>
 </div>
-<p>The area under the residual-time curve up to <span class="math inline">\(t\)</span> is <span class="math display">\[
-A(t)=\frac12\sum_{i=1}^{M(t)}X_i^2.
-\]</span> The time average is <span class="math display">\[
-\frac{A(t)}{t}=\frac12\frac{M(t)}{t}\frac{\sum_{i=1}^{M(t)}X_i^2}{M(t)}.
-\]</span> As <span class="math inline">\(t\to\infty\)</span>, <span class="math inline">\(M(t)/t\to\lambda\)</span> and the sample second moment converges (finite variance), so <span class="math display">\[
-\bar{R}=\frac12\lambda\langle X^2\rangle.
-\]</span> Substitute into <span class="math inline">\(\bar{W}=\bar{R}/(1-\rho)\)</span> to recover Pollaczek–Khinchin. Sojourn time is then <span class="math inline">\(\bar{T}=\bar{X}+\bar{W}\)</span>, and Little gives <span class="math inline">\(\bar{N}_Q=\lambda\bar{W}\)</span> and <span class="math inline">\(\bar{N}=\lambda\bar{T}\)</span>. This derivation was Question 1 of the 2002–03 paper.</p>
-<h2 id="residual-time-from-an-arrival">Residual Time from an Arrival</h2>
+<p>The time average of the mean residual service time can then be calculated in terms of the area under the curve, <span class="math inline">\(A\left(t\right)\)</span>, which is given by the area under each of the triangles, <span class="math display">\[
+A(t)=\frac{1}{2}\sum_{i=1}^{M(t)}X_{i}^{2}.\]</span> The average service time is the area divided by time, <span class="math inline">\(t\)</span>, <span class="math display">\[\begin{eqnarray*}
+\frac{A(t)}{t} &amp; = &amp; \frac{M(t)}{t}\frac{A(t)}{M(t)}\\
+&amp; = &amp; \frac{1}{2}\frac{M(t)}{t}\frac{\sum_{i=1}^{M(t)}X_{i}^{2}}{M(t)}.\end{eqnarray*}\]</span>where we have introduced the number of arrivals after time <span class="math inline">\(t\)</span>, as <span class="math inline">\(M\left(t\right)\)</span>. As <span class="math inline">\(t\rightarrow\infty\)</span>, if the variance of the service time distribution is finite, we find that<span class="math display">\[
+\bar{R}=\frac{1}{2}\lambda\left\langle X^{2}\right\rangle .\]</span> Again, assuming that time averages and ensemble averages are equal, we substitute back into (<span class="math inline">\(\ref{eqn:arrivals}\)</span>) to obtain the Pollaczek-Khinchin formula <span class="math display">\[
+\bar{W}=\frac{\lambda\left\langle X^{2}\right\rangle }{2(1-\rho)}.\]</span>This implies that the total waiting time in the system is <span class="math display">\[
+\bar{T}=\bar{X}+\frac{\lambda\left\langle X^{2}\right\rangle }{2(1-\rho)}\]</span> and through Little’s formula we can obtain the expected queue length, <span class="math inline">\(\bar{N}_{Q}\)</span>, and the expected number in the system, <span class="math inline">\(\bar{N}\)</span>. <strong>Note that derivation of this formula was Question 1 in the 2002-2003 paper</strong>. Now consider Examples  <span class="math inline">\(\ref{example:MarkovService}\)</span>,  <span class="math inline">\(\ref{example:DeterministicService}\)</span> and  <span class="math inline">\(\ref{example:uniformService}\)</span> at the end of this chapter for the use of the Pollaczek-Khinchin formula.</p>
+<h2 id="table-of-delays-and-average-numbers-in-system">Table of Delays and Average Numbers in System</h2>
+<p>In the table below we summarise average waiting times and various other characteristics of the systems for the Pollaczek-Khinchin formula.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Expected value</th>
+<th>General</th>
+<th>Exponential</th>
+<th>Deterministic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\bar{W}\)</span></td>
+<td>$X^{2}$</td>
+<td><span class="math inline">\(\frac{\rho}{\mu(1-\rho)}\)</span></td>
+<td><span class="math inline">\(\frac{\rho}{2\mu(1-\rho)}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\bar{T}=\bar{W}+\frac{1}{\mu}\)</span></td>
+<td><span class="math inline">\(\frac{\lambda}{2(1-\rho)}\left\langle X^{2}\right\rangle +\frac{1}{\mu}\)</span></td>
+<td><span class="math inline">\(\frac{1}{\mu(1-\rho)}\)</span></td>
+<td><span class="math inline">\(\frac{2-\rho}{2\mu(1-\rho)}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\bar{N_{Q}}=\lambda\bar{W}\)</span></td>
+<td>$X^{2}$</td>
+<td><span class="math inline">\(\frac{\rho^{2}}{(1-\rho)}\)</span></td>
+<td><span class="math inline">\(\frac{\rho^{2}}{2(1-\rho)}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\bar{N}=\lambda\bar{W}+\rho=\)</span></td>
+<td><span class="math inline">\(\frac{\lambda^{2}}{2(1-\rho)}\left\langle X^{2}\right\rangle +\rho\)</span></td>
+<td><span class="math inline">\(\frac{\rho}{1-\rho}\)</span></td>
+<td><span class="math inline">\(\frac{\rho(2-\rho)}{2(1-\rho)}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>% generated — do not edit; scripts/convert/run.py</p>
+<!-- original A4 foil 147: $M$/$G$/$1$ Queue -->
+<!-- original A4 foil 147: $M$/$G$/$1$ Queue -->
+<!-- original A4 foil 148: Pollaczek-Khinchin formula -->
+<!-- original A4 foil 148: Pollaczek-Khinchin formula -->
+<!-- original A4 foil 149: Proof of Pollaczek-Khinchin Formula -->
+<!-- original A4 foil 149: Proof of Pollaczek-Khinchin Formula -->
+<!-- original A4 foil 150: The Residual Service Time\label{sub:theResidualServiceTime} -->
+<!-- original A4 foil 151: Simple Definitions and Schematic -->
 <div class="figure">
-<div id="mg1-residual-arrival-figure" class="figure-frame">
+<div id="cap:schemeaticRST-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/residualServiceOverview.png" width="75%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/residualServiceOverview.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="mg1-residual-arrival-magnify" class="magnify" onclick="magnifyFigure(&#39;mg1-residual-arrival&#39;)">
+<div id="cap:schemeaticRST-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:schemeaticRST&#39;)">
 <button type="button" class="img-button" aria-label="Enlarge figure">
 <img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
 </button>
 </div>
-<div id="mg1-residual-arrival-caption" class="caption-frame">
-<p>Figure: The <span class="math inline">\(i\)</span>th arrival sees residual <span class="math inline">\(R_i\)</span> on the customer in service and waiting times <span class="math inline">\(X\)</span> for each of the <span class="math inline">\(k_i-1\)</span> customers already queued.</p>
+<div id="cap:schemeaticRST-caption" class="caption-frame">
+<p>Figure: Schematic representation of residual service time.</p>
 </div>
 </div>
-<p>Write <span class="math inline">\(W_i\)</span> for the wait of the <span class="math inline">\(i\)</span>th customer, <span class="math inline">\(R_i\)</span> for the residual it sees, <span class="math inline">\(X_i\)</span> for its own service, and <span class="math inline">\(k_i\)</span> for the occupancy on arrival. Then <span class="math display">\[
-W_i=R_i+\sum_{j=1}^{k_i-1}X_{(j)}.
-\]</span> Average over the first <span class="math inline">\(I\)</span> arrivals and let <span class="math inline">\(I\to\infty\)</span>. Time averages equal steady-state means, and independence of the <span class="math inline">\(i\)</span>th arrival from the work already present, together with Little on the queue, recover <span class="math inline">\(\bar{W}=\bar{R}/(1-\rho)\)</span>.</p>
-<h1 id="special-cases">Special Cases</h1>
-<p>Second moment <span class="math inline">\(\langle X^2\rangle=\mathrm{Var}(X)+\bar{X}^2\)</span>. For exponential service, <span class="math inline">\(\bar{X}=1/\mu\)</span> and <span class="math inline">\(\mathrm{Var}(X)=1/\mu^2\)</span>, so <span class="math inline">\(\langle X^2\rangle=2/\mu^2\)</span> and Pollaczek–Khinchin collapses to the <span class="math inline">\(M/M/1\)</span> wait <span class="math inline">\(\bar{W}=\rho/(\mu(1-\rho))\)</span>.</p>
-<p>Deterministic service (<span class="math inline">\(M/D/1\)</span>, fixed-length packets on a fixed-bandwidth line) has <span class="math inline">\(\mathrm{Var}(X)=0\)</span>, so <span class="math inline">\(\langle X^2\rangle=1/\mu^2\)</span> and <span class="math display">\[
-\bar{W}=\frac{\rho}{2\mu(1-\rho)},
-\]</span> half the <span class="math inline">\(M/M/1\)</span> wait. Among distributions with a given mean, deterministic service gives the lowest delay: the residual sawtooth has the smallest area.</p>
-<p>Uniform service on <span class="math inline">\([0,b]\)</span> has mean <span class="math inline">\(b/2\)</span> and variance <span class="math inline">\(b^2/12\)</span>. With <span class="math inline">\(\mu=2/b\)</span>, the second moment is <span class="math inline">\(4/(3\mu^2)\)</span> and <span class="math display">\[
-\bar{W}=\frac{2\rho}{3\mu(1-\rho)}.
-\]</span></p>
-<p>Writing <span class="math inline">\(\mu=1/\bar{X}\)</span>: exponential wait <span class="math inline">\(\rho/(\mu(1-\rho))\)</span>, sojourn <span class="math inline">\(1/(\mu(1-\rho))\)</span>, <span class="math inline">\(\bar{N}=\rho/(1-\rho)\)</span>; deterministic wait half of that, sojourn <span class="math inline">\((2-\rho)/(2\mu(1-\rho))\)</span>, <span class="math inline">\(\bar{N}=\rho(2-\rho)/(2(1-\rho))\)</span>.</p>
-<h1 id="mg1-with-vacations"><span class="math inline">\(M/G/1\)</span> with Vacations</h1>
-<p>When the server is free it may attend to other work — control traffic, a kitchen check — a <em>vacation</em>. An arrival that finds the server on vacation waits until the vacation ends. If a vacation ends and the server is still idle, it takes another. Vacation lengths <span class="math inline">\(V_1,V_2,\ldots\)</span> are i.i.d. and independent of arrivals and service.</p>
+<!-- original A4 foil 151: Simple Definitions and Schematic -->
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(W_{i}\)</span></th>
+<th>=</th>
+<th>Waiting time in queue of <span class="math inline">\(i\)</span>th customer.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(R_{i}\)</span></td>
+<td>=</td>
+<td>`Residual service time’ seen by the <span class="math inline">\(i\)</span>th customer.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(X_{i}\)</span></td>
+<td>=</td>
+<td>Service time of the <span class="math inline">\(i\)</span>th customer.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(k_{i}\)</span></td>
+<td>=</td>
+<td>Number of customers in the system when the <span class="math inline">\(i\)</span>th customer arrives.</td>
+</tr>
+</tbody>
+</table>
+<!-- original A4 foil 152: Wait for \emph{i}th Customer -->
 <div class="figure">
-<div id="mg1-vacation-schematic-figure" class="figure-frame">
+<div id="cap:schemeaticRST-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/vacationMG1.png" width="70%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/residualServiceOverview.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="mg1-vacation-schematic-magnify" class="magnify" onclick="magnifyFigure(&#39;mg1-vacation-schematic&#39;)">
+<div id="cap:schemeaticRST-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:schemeaticRST&#39;)">
 <button type="button" class="img-button" aria-label="Enlarge figure">
 <img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
 </button>
 </div>
-<div id="mg1-vacation-schematic-caption" class="caption-frame">
-<p>Figure: An <span class="math inline">\(M/G/1\)</span> server that takes a vacation whenever the queue is empty.</p>
+<div id="cap:schemeaticRST-caption" class="caption-frame">
+<p>Figure: Schematic representation of residual service time.</p>
 </div>
 </div>
+<!-- original A4 foil 152: Wait for \emph{i}th Customer -->
+<!-- original A4 foil 153: Time Average Equivalence -->
+<!-- original A4 foil 153: Time Average Equivalence -->
+<!-- original A4 foil 154: Wait in Terms of Residual Service Time -->
+<!-- original A4 foil 154: Wait in Terms of Residual Service Time -->
+<!-- original A4 foil 155: Mean Residual Service Time from Departures Perspective -->
 <div class="figure">
-<div id="mg1-vacation-residual-figure" class="figure-frame">
+<div id="cap:meanResidualGraphical-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/vacationResidual.png" width="70%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/residualTime.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="mg1-vacation-residual-magnify" class="magnify" onclick="magnifyFigure(&#39;mg1-vacation-residual&#39;)">
+<div id="cap:meanResidualGraphical-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:meanResidualGraphical&#39;)">
 <button type="button" class="img-button" aria-label="Enlarge figure">
 <img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
 </button>
 </div>
-<div id="mg1-vacation-residual-caption" class="caption-frame">
-<p>Figure: Residual time now includes vacation triangles as well as service triangles.</p>
+<div id="cap:meanResidualGraphical-caption" class="caption-frame">
+<p>Figure: Graphical computation of mean residual time. <span class="math inline">\(M\left(t\right)\)</span> is the number of service completions in the interval <span class="math inline">\([0,\, t]\)</span>.</p>
 </div>
 </div>
-<p>The residual-time integral now has two families of triangles. With <span class="math inline">\(M(t)\)</span> service completions and <span class="math inline">\(L(t)\)</span> vacations in <span class="math inline">\([0,t]\)</span>, <span class="math display">\[
-\frac1t\int_0^t r(\tau)\,d\tau
-=\frac{M(t)}{t}\frac12\frac{\sum X_i^2}{M(t)}
-+\frac{L(t)}{t}\frac12\frac{\sum V_i^2}{L(t)}.
-\]</span> The fraction of time available for vacations is <span class="math inline">\(1-\rho\)</span>, so <span class="math inline">\(L(t)=t(1-\rho)/\bar{V}_t\)</span>. The limit is <span class="math display">\[
-\bar{R}=\frac12\lambda\langle X^2\rangle+\frac{(1-\rho)\langle V^2\rangle}{2\bar{V}},
-\]</span> and therefore <span class="math display">\[
-\bar{W}=\frac{\lambda\langle X^2\rangle}{2(1-\rho)}+\frac{\langle V^2\rangle}{2\bar{V}}.
-\]</span> Pollaczek–Khinchin plus a vacation residual that does <em>not</em> depend on <span class="math inline">\(\rho\)</span>.</p>
-<p>A bar with Poisson arrivals, exponential service of mean <span class="math inline">\(\bar{X}\)</span>, and exponential kitchen checks of mean <span class="math inline">\(\bar{V}\)</span> has <span class="math inline">\(\langle X^2\rangle=2\bar{X}^2\)</span> and <span class="math inline">\(\langle V^2\rangle=2\bar{V}^2\)</span>, so <span class="math display">\[
-\bar{W}=\frac{\rho\bar{X}}{1-\rho}+\bar{V}.
-\]</span> Deterministic vacations of the same mean would add only <span class="math inline">\(\bar{V}/2\)</span>.</p>
+<!-- original A4 foil 155: Mean Residual Service Time from Departures Perspective -->
+<!-- original A4 foil 156: Residual Service Time -->
+<div class="figure">
+<div id="residualTime-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/residualTime.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="residualTime-magnify" class="magnify" onclick="magnifyFigure(&#39;residualTime&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="residualTime-caption" class="caption-frame">
+<p>Figure: residualTime</p>
+</div>
+</div>
+<!-- original A4 foil 157: Residual Service Time -->
+<!-- original A4 foil 158: Pollaczek-Khinchin Formula -->
+<!-- original A4 foil 159: Sanity Check --- Markov Service times -->
+<!-- original A4 foil 160: Deterministic Service --- $M/D/1$ -->
+<!-- original A4 foil 161: P-K Formula for Deterministic Systems -->
+<!-- original A4 foil 162: Table of Delays and Average Numbers in System -->
+<!-- original A4 foil 162: Table of Delays and Average Numbers in System -->
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Expected value</th>
+<th>General</th>
+<th>Exponential</th>
+<th>Deterministic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\bar{W}\)</span></td>
+<td>$X^{2}$</td>
+<td><span class="math inline">\(\frac{\rho}{\mu(1-\rho)}\)</span></td>
+<td><span class="math inline">\(\frac{\rho}{2\mu(1-\rho)}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\bar{T}=\bar{W}+\frac{1}{\mu}\)</span></td>
+<td><span class="math inline">\(\frac{\lambda}{2(1-\rho)}\left\langle X^{2}\right\rangle +\frac{1}{\mu}\)</span></td>
+<td><span class="math inline">\(\frac{1}{\mu(1-\rho)}\)</span></td>
+<td><span class="math inline">\(\frac{2-\rho}{2\mu(1-\rho)}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\bar{N_{Q}}=\lambda\bar{W}\)</span></td>
+<td>$X^{2}$</td>
+<td><span class="math inline">\(\frac{\rho^{2}}{(1-\rho)}\)</span></td>
+<td><span class="math inline">\(\frac{\rho^{2}}{2(1-\rho)}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\bar{N}=\lambda\bar{W}+\rho=\)</span></td>
+<td><span class="math inline">\(\frac{\lambda^{2}}{2(1-\rho)}\left\langle X^{2}\right\rangle +\rho\)</span></td>
+<td><span class="math inline">\(\frac{\rho}{1-\rho}\)</span></td>
+<td><span class="math inline">\(\frac{\rho(2-\rho)}{2(1-\rho)}\)</span></td>
+</tr>
+</tbody>
+</table>
+<!-- original A4 foil 163: Example --- Uniform Service Times -->
+<!-- original A4 foil 164: Answer -->
+<!-- original A4 foil 165: Answer -->
+<!-- original A4 foil 166: Answer -->
+<!-- original A4 foil 167: Answer -->
+<!-- original A4 foil 168: Answer -->
+<!-- original A4 foil 169: Answer -->
+<!-- original A4 foil 170: Answer -->
+<!-- original A4 foil 171: Variance -->
+<!-- original A4 foil 172: Variance -->
+<!-- original A4 foil 173: Variance -->
+<!-- original A4 foil 174: Variance -->
+<!-- original A4 foil 175: Variance -->
+<!-- original A4 foil 176: Variance -->
+<!-- original A4 foil 177: Putting it Together -->
+<!-- original A4 foil 177: Putting it Together -->
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -143,21 +296,5 @@ W_i=R_i+\sum_{j=1}^{k_i-1}X_{(j)}.
 <li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
 <li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
-<h2 id="further-reading">Further Reading</h2>
-<ul>
-<li>The <span class="math inline">\(M/G/1\)</span> queue, residual life, and vacations of <span class="citation" data-cites="Bertsekas:data92">Bertsekas and Gallager (1992)</span></li>
-</ul>
-<h2 id="exercises">Exercises</h2>
-<ul>
-<li>Tutorial Sheet 3: triangular service time in Pollaczek–Khinchin of <span class="citation" data-cites="npa-tutorial3">Lawrence (2006)</span></li>
-</ul>
-<h1 class="unnumbered" id="references">References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-Bertsekas:data92" class="csl-entry" role="listitem">
-Bertsekas, D.P., Gallager, R.G., 1992. Data networks, Second. ed. Prentice-Hall, Upper Saddle River, NJ.
-</div>
-<div id="ref-npa-tutorial3" class="csl-entry" role="listitem">
-Lawrence, N.D., 2006. <a href="https://mlatcl.github.io/npa/">Erlang delay and loss and the <span>M/G/1</span> queue</a>.
-</div>
-</div>
+<h1 id="references">References</h1>
 

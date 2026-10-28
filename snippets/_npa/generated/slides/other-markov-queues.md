@@ -1,0 +1,119 @@
+% generated — do not edit; scripts/convert/run.py
+\ifndef{npaGenSlidesOtherMarkovQueues}
+\define{npaGenSlidesOtherMarkovQueues}
+
+<!-- original A4 foil 115: Other Markov Queues -->
+
+\newslide{Other Markov Queues}
+
+\slides{* The $M/M/1$ queue is perhaps the simplest Markov queue.
+* We will introduce two related Markov queues and compute their stationary distributions.}
+
+<!-- original A4 foil 115: Other Markov Queues -->
+
+\newslide{Other Markov Queues (continued)}
+
+\slides{* A simple modification to the $M/M/1$ queue: a *finite length *modification $M/M/1/m$
+* The *infinite server *queue*, *$M/M/\infty$.}
+
+<!-- original A4 foil 116: Finite Length $M$/$M$/$1$/$m$ -->
+
+\newslide{Finite Length $M$/$M$/$1$/$m$}
+
+\figure{\includepng{\diagramsDir/npa/stateMM1m}{100%}}{State diagram for the $M/M/1/m$ queue. Note that there are no transitions to states above the $m$th state.}{cap:stateDiagramMM1m}
+
+<!-- original A4 foil 116: Finite Length $M$/$M$/$1$/$m$ -->
+
+\newslide{Finite Length $M$/$M$/$1$/$m$ (continued)}
+
+\slides{* We have assumed that $M/M/1$ queue can have an infinite length.
+* In practice a restricted buffer size --- perhaps queue length is also restricted.
+* We assume the system can contain at maximum $m$ customers (*i.e. *the queue can contain $m-1$).}
+
+<!-- original A4 foil 117: Examples -->
+
+\newslide{Examples}
+
+\slides{* Example 1: Derive the stationary distribution for this queue.
+* Example 2: Blocking probabilities}
+
+<!-- original A4 foil 118: Infinite Serving Capacity --- $M$/$M$/$\infty$ -->
+
+\newslide{Infinite Serving Capacity --- $M$/$M$/$\infty$}
+
+\slides{* The $M/M/1/m$ queue covers the case where the queue length is bounded.
+* We can also derive when the number of servers is *unbounded*.
+* In the $M/M/1$ queue we assume that there is only one server.}
+
+<!-- original A4 foil 118: Infinite Serving Capacity --- $M$/$M$/$\infty$ -->
+
+\newslide{Infinite Serving Capacity --- $M$/$M$/$\infty$ (continued)}
+
+\slides{* It can be useful to consider an unlimited number of servers:
+* One server for every customer in the system.
+* The state diagram for this system can be drawn.
+    [ht]
+      \centering
+      \caption{State diagram for the $M/M/\infty$ queue.}
+      \label{cap:stateDiagramMMinf}}
+
+\figure{\includepng{\diagramsDir/npa/stateMMinf}{100%}}{stateMMinf}{stateMMinf}
+
+<!-- original A4 foil 119: Detailed Balance -->
+
+\newslide{Detailed Balance}
+
+\figure{\includepng{\diagramsDir/npa/boundaryFlowMMinf}{60%}}{Flow rates at a boundary for $M/M/\infty$ queue.}{cap:flowAtBoundaryMMinf}
+
+<!-- original A4 foil 119: Detailed Balance -->
+
+\newslide{Detailed Balance (continued)}
+
+\slides{* Make use of the standard detailed balance equations for this queue.
+* From the flow rates at the boundary we have in general$$
+\lambda_{k-1}P\left(k-1\right)=\mu_{k}P\left(k\right)$$
+* There is infinite service capacity in the queue the service rate at state $k$ is simply $\mu_{k}=k\mu$.
+* The rate of arrivals stays constant, $\lambda_{k}=\lambda$, so for this queue detailed balance gives.$$
+\lambda P\left(k-1\right)=k\mu P\left(k\right)$$
+* Reorganising in terms of $P\left(k\right)$ then gives$$
+P\left(k\right)=\frac{\lambda}{k\mu}P\left(k-1\right)$$and therefore$$
+P\left(k\right)=P\left(0\right)\left(\frac{\lambda}{\mu}\right)^{k}\frac{1}{k!}.$$}
+
+<!-- original A4 foil 120: Normalisation Condition -->
+
+\newslide{Normalisation Condition}
+
+\slides{* Using the normalisation condition for this queue, $$
+\sum_{k=0}^{\infty}P\left(k\right)=1,$$we obtain $P\left(0\right)$ as 
+P\left(0\right)=\left[\sum_{k=0}^{\infty}\left(\frac{\lambda}{\mu}\right)^{k}\frac{1}{k!}\right]^{-1}.\label{eq:MMinftyP0}}
+
+<!-- original A4 foil 121: The Offered Load\label{sub:offeredLoad} -->
+
+\newslide{The Offered Load\label{sub:offeredLoad}}
+
+\slides{* It is convenient to define the offered load, $$
+a=\frac{\lambda}{\mu}$$as arrival rate divided by service rate.
+* This is a dimensionless constant, but has international standard units of Erlangs (after A.\  K.\  Erlang).}
+
+<!-- original A4 foil 121: The Offered Load\label{sub:offeredLoad} -->
+
+\newslide{The Offered Load\label{sub:offeredLoad} (continued)}
+
+\slides{* Substituting this definition back into (\ref{eq:MMinftyP0}) we have, $$
+P\left(0\right)=\left[\sum_{k=0}^{\infty}\frac{a^{k}}{k!}\right]^{-1}.$$
+* Recalling that $$
+\sum_{n=0}^{\infty}\frac{x^{n}}{n!}=\exp\left(x\right)$$ we have$$
+P\left(0\right)=\exp\left(-a\right)$$and the steady state distribution is then$$
+P\left(k\right)=\frac{a^{k}}{k!}\exp\left(-a\right)$$
+* Which is recognised as a Poisson distribution with parameter $a$.}
+
+<!-- original A4 foil 122: Utilization Factor -->
+
+\newslide{Utilization Factor}
+
+\slides{* Notice that the utilization factor for this system, $\rho$, doesn't really exist.
+* For the $M/M/\infty$ there is infinite capacity so we can't ask what percentage is in use!
+* The proporation of time that some part of the system is in use is$$
+1-P\left(0\right)=1-\exp\left(-a\right).$$}
+
+\endif

@@ -1,7 +1,8 @@
 ---
-title: "ARQ as an M/G/1 Queue"
+title: |-
+  M/G/1 and Automatic Repeat Request
 abstract: |-
-  <p>Stop-and-wait automatic repeat request as a geometric service time, with Pollaczek–Khinchin for the wait. Lecture 13, Tuesday of week 6.</p>
+  <p>Stop-and-wait ARQ as an <span class="math inline">\(M/G/1\)</span> service time: geometric retransmissions, utilisation, and the second moment.</p>
 edit_url: https://github.com/mlatcl/npa/edit/gh-pages/_lamd/mg1-arq.md
 date: 2006-10-31
 week: 6
@@ -29,34 +30,200 @@ categories:
 <!--
 
 -->
-<h1 id="automatic-repeat-request">Automatic Repeat Request</h1>
-<p><span class="math inline">\(M/G/1\)</span> is a modelling tool, not only a formula. Bertsekas and Gallager’s ARQ example (Example 3.15) is a stop-and-wait retransmission protocol as a general service time.</p>
+<p>% generated — do not edit; scripts/convert/run.py</p>
+<h1 id="automatic-repeat-request-arq-system.">Automatic Repeat Request (ARQ) System.</h1>
+<p>The <span class="math inline">\(M/G/1\)</span> queue system can be used for modelling various systems of interest. In an ARQ system packets are transmitted and the system waits for an acknowledgement. If no acknowledgement is received the system retransmits. In this section we review Example  3.15 from <span class="citation" data-cites="Bertsekas:data92">(Bertsekas and Gallager, 1992)</span>. A schematic of the system is given in Figure  <span class="math inline">\(\ref{cap:ARQschemeatic}\)</span>. For the purposes of this analysis, we will assume</p>
 <div class="figure">
-<div id="mg1-arq-figure" class="figure-frame">
+<div id="cap:ARQschemeatic-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/ARQ.png" width="70%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/ARQ.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="mg1-arq-magnify" class="magnify" onclick="magnifyFigure(&#39;mg1-arq&#39;)">
+<div id="cap:ARQschemeatic-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:ARQschemeatic&#39;)">
 <button type="button" class="img-button" aria-label="Enlarge figure">
 <img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
 </button>
 </div>
-<div id="mg1-arq-caption" class="caption-frame">
-<p>Figure: ARQ: transmit a packet, wait up to <span class="math inline">\(n-1\)</span> milliseconds for an acknowledgement, retransmit on timeout.</p>
+<div id="cap:ARQschemeatic-caption" class="caption-frame">
+<p>Figure: The ARQ System.</p>
 </div>
 </div>
-<p>Assumptions: each packet takes <span class="math inline">\(1\)</span> millisecond to send; the system waits at most <span class="math inline">\(n-1\)</span> milliseconds for an ack, then retransmits; an ack arrives if and only if the packet is received without error; packet errors occur independently with probability <span class="math inline">\(p\)</span>; arrivals are Poisson at rate <span class="math inline">\(\lambda\)</span>. Independence of errors is the weak one: a bad channel typically clusters errors.</p>
-<p>The interval from the start of a given packet’s first transmission to the end of its successful transmission is <span class="math inline">\(1+kn\)</span> milliseconds with probability <span class="math inline">\((1-p)p^k\)</span> — <span class="math inline">\(k\)</span> failures and one success, a geometric: <span class="math display">\[
-P(X=1+kn)=(1-p)p^k.
-\]</span> The mean is <span class="math display">\[
-\langle X\rangle=\sum_{k=0}^{\infty}(1+kn)(1-p)p^k=1+n\frac{p}{1-p},
-\]</span> using <span class="math inline">\(\sum p^k=1/(1-p)\)</span> and <span class="math inline">\(\sum kp^k=p/(1-p)^2\)</span>. The busy factor <span class="math display">\[
-\rho=\lambda\langle X\rangle=\lambda+\lambda n\frac{p}{1-p}
-\]</span> must still be less than one. As <span class="math inline">\(p\to 1\)</span> the second term diverges. Calling <span class="math inline">\(\rho\)</span> utilisation is slightly misleading: much of the ``busy’’ time is waiting for an ack, not occupying the channel.</p>
-<p>The second moment is <span class="math display">\[
-\langle X^2\rangle=1+\frac{2np}{1-p}+\frac{n^2(p+p^2)}{(1-p)^2},
-\]</span> using <span class="math inline">\(\sum k^2 p^k=(p+p^2)/(1-p)^3\)</span>. Pollaczek–Khinchin then gives the wait. This is Question 3 of the 2004–05 paper.</p>
+<ol type="1">
+<li>That each packet takes 1 millisecond to be transmitted.</li>
+<li>The system waits a maximum of <span class="math inline">\(n-1\)</span> milliseconds for an acknowledgement. If there is no acknowledgement the system retransmits.</li>
+<li>The acknowledgement occurs if the packet is received without errors. Otherwise acknowledgement doesn’t occur.</li>
+<li>The probability of an error in a packet is taken to be <span class="math inline">\(p\)</span> and we take errors to occur independently.</li>
+<li>That packets arrive as a Poisson process with rate <span class="math inline">\(\lambda\)</span>.</li>
+</ol>
+<p>In practice, the fourth assumption (independence of errors) is probably unrealistic . If an error occurs due to problems in the transmission channel, it is likely that several packets in a row will not be received, so the errors do not occur independently. The time interval between transmission and re-transmission will be <span class="math inline">\(1+kn\)</span> milliseconds with probability <span class="math inline">\(\left(1-p\right)p^{k}\)</span>. This time interval is associated with <span class="math inline">\(k\)</span> retransmissions and one successful transmission. The probability of this being the service time is given by<span class="math display">\[
+P\left(X=1+kn\right)=\left(1-p\right)p^{k}\]</span>which is recognised as a <em>geometric distribution</em>.</p>
+<h2 id="average-service-time">Average Service Time</h2>
+<p>Using this distribution we can compute the expected service time which is given by<span class="math display">\[\begin{eqnarray*}
+\left\langle X\right\rangle  &amp; = &amp; \sum_{k=0}^{\infty}\left(1+kn\right)\left(1-p\right)p^{k}\\
+&amp; = &amp; \left(1-p\right)\left(\sum_{k=0}^{\infty}p^{k}+n\sum_{k=0}^{\infty}kp^{k}\right)\\
+&amp; = &amp; 1+n\frac{p}{1-p}\end{eqnarray*}\]</span> since <span class="math inline">\(\sum_{k=0}^{\infty}p^{k}=\frac{1}{1-p}\)</span> and <span class="math inline">\(\sum_{k=0}^{\infty}kp^{k}=\frac{p}{\left(1-p\right)^{2}}\)</span> .</p>
+<h2 id="arq-utilization-factor">ARQ Utilization Factor</h2>
+<p>Strictly speaking, it probably doesn’t make sense to use the term <code>utilization factor' for the ARQ system. This is because during a large portion of the wait it is not actually</code>utilizing’ the channel, it is merely waiting for an acknowledgement. However we can still consider, $=X<span class="math inline">\(, to be the proportion of time that the system will be `busy&#39;. This `busy factor&#39;,\)</span>$ =+n,$$obviously still has to be less than 1, otherwise the steady state would not exist. This busy time is affected by three parameters: the rate of arrivals, <span class="math inline">\(\lambda\)</span>, the amount of time that the system waits for an acknowledgement, <span class="math inline">\(n\)</span>, and the probability of an error, <span class="math inline">\(p\)</span>. Note that as <span class="math inline">\(p\rightarrow1\)</span> the second term <span class="math inline">\(\rightarrow\infty\)</span>.</p>
+<h2 id="arq-second-moment">ARQ Second Moment</h2>
+<p>The second moment of the service time is<span class="math display">\[\begin{eqnarray*}
+\left\langle X^{2}\right\rangle  &amp; = &amp; \sum_{k=0}^{\infty}\left(1+kn\right)^{2}\left(1-p\right)p^{k}\\
+&amp; = &amp; \left(1-p\right)\left(\sum_{k=0}^{\infty}p^{k}+2n\sum_{k=0}^{\infty}kp^{k}+n^{2}\sum_{k=0}^{\infty}k^{2}p^{k}\right)\\
+&amp; = &amp; 1+\frac{2np}{1-p}+\frac{n^{2}\left(p+p^{2}\right)}{\left(1-p\right)^{2}}\end{eqnarray*}\]</span>since <span class="math display">\[
+\sum_{k=0}^{\infty}k^{2}p^{k}=\frac{p+p^{2}}{\left(1-p\right)^{3}}\]</span> These moments can be used with the Pollaczek-Khinchin formula to obtain statistics for the queue. Examples</p>
+<p>{1. The Residual Service Time The residual service time is the amount of service time that remains for the customer under service from the perspective of a customer who has just arrived in the queue. The first part of the proof occurs from the perspective of the arriving customer. The arriving customer is considered to be the <span class="math inline">\(i\)</span>th customer. In the table below we introduce some simple definitions of terms. {lll} <span class="math inline">\(W_{i}\)</span> &amp; = &amp; Waiting time in queue of <span class="math inline">\(i\)</span>th customer. \ <span class="math inline">\(R_{i}\)</span> &amp; = &amp; `Residual service time’ seen by the <span class="math inline">\(i\)</span>th customer. \ <span class="math inline">\(X_{i}\)</span> &amp; = &amp; Service time of the <span class="math inline">\(i\)</span>th customer. \ <span class="math inline">\(k_{i}\)</span> &amp; = &amp; Number of customers in the system when the <span class="math inline">\(i\)</span>th customer arrives. \</p>
+[0] Given the notation we can draw a simple schematic of the system as it is perceived by the <span class="math inline">\(i\)</span>th arrival. This is shown in Figure  <span class="math inline">\(\ref{cap:schemeaticRST}\)</span>. [ht]
+<div class="figure">
+<div id="residualServiceOverview-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/residualServiceOverview.png" width="100%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="residualServiceOverview-magnify" class="magnify" onclick="magnifyFigure(&#39;residualServiceOverview&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="residualServiceOverview-caption" class="caption-frame">
+<p>Figure: residualServiceOverview</p>
+</div>
+</div>
+<pre><code>  &lt;div class=&quot;caption&quot; style=&quot;&quot;&gt;Figure: Schematic representation of residual service time.&lt;/div&gt;
+  \label{cap:schemeaticRST}
+
+We can use the figure to immediately write down that the wait for the $i$th customer will be given by$$</code></pre>
+<p>W_{i}=R_{i}+<em>{j=i-(k</em>{i}-1)}^{i-1}X_{j}<span class="math display">\[ summing over both sides (*i.e. *for all the arriving customers up to the $I$th) we obtain \]</span> <em>{i=1}^{I}W</em>{i}=<em>{i=1}^{I}R</em>{i}+<em>{i=1}<sup>{I}<em>{j=i-(k</em>{i}-1)}</sup>{i-1}X</em>{j}<span class="math display">\[dividing through by $I$ gives us \]</span> <em>{i=1}<sup>{I}=<em>{i=1}^{I}+</em>{i=1}</sup>{I}</em>{j=i-(k_{i}-1)}^{i-1}.<span class="math display">\[ In the limit as $I\rightarrow\infty$ this becomes \]</span> <em>{I}</em>{i=1}<sup>{I}=<em>{I}</em>{i=1}</sup>{I}+<em>{I}</em>{i=1}^{I},<span class="math display">\[the terms of which are recognised as *time averages*. If we assume *time averages* are equivalent to *steady state averages* this gives \]</span> W=R+(k-1)X.<span class="math display">\[Now since the length of the queue as seen by the $i$th arrival is independent of the $i$th arrival&#39;s length (our second assumption) this means $\left\langle (k-1)X\right\rangle =\left\langle k-1\right\rangle \left\langle X\right\rangle $ and since $(k-1)$ is the length of the queue we may write \]</span> {W}={R}+{N}<em>{Q}{X}<span class="math display">\[ Using Little&#39;s theorem for the queue we have\]</span> {N}</em>{Q}={W}<span class="math display">\[which gives in turn\]</span> {W}={R}+{X}{W}.<span class="math display">\[Using the fact that $\rho=\lambda\bar{X}$ (which stems from Little&#39;s formula for the packets under service) gives us \]</span> {W}={R}+{W}<span class="math display">\[ Leading to\]</span> {W}=.$$}{0}</p>
+<h3 id="answer">Answer</h3>
+<ol type="1">
+<li><strong>Markov Service times</strong>. Compute the average waiting time associated with exponentially distributed service times using the Pollaczek-Khinchin formula. [0] The exponentially distributed service times, <span class="math display">\[
+p\left(X\right)=\mu\exp\left(-\mu X\right),\]</span>have a mean of <span class="math display">\[
+\bar{X}=\frac{1}{\mu}\]</span> and a variance of <span class="math inline">\(\frac{1}{\mu^{2}}\)</span> leading to a second moment<span class="math display">\[
+\left\langle X^{2}\right\rangle =\frac{2}{\mu^{2}}\]</span> Substituting into the Pollaczek-Khinchin formula we obtain {W} &amp; = &amp; \ &amp; = &amp; which is identical to those we derived for the <span class="math inline">\(M/M/1\)</span> queue.</li>
+</ol>
+<h3 id="answer-1">Answer</h3>
+<p>{1. <strong>Deterministic Service times (</strong><span class="math inline">\(M/D/1\)</span><strong>)</strong>. Some systems have deterministic service times. For example, transmission of fixed length packets over a channel with a fixed bandwidth. [0] We represent a `deterministic distribution’ as<span class="math display">\[
+P\left(X\right)=\delta\left(X-\frac{1}{\mu}\right)\]</span>where <span class="math inline">\(\delta\left(\cdot\right)\)</span>is the Dirac delta function. For this system <span class="math display">\[
+\left\langle X\right\rangle =\frac{1}{\mu}\]</span>and <span class="math display">\[
+\left\langle X^{2}\right\rangle =\frac{1}{\mu^{2}}\]</span><em>i.e. </em> the variance is zero. Substituting into the Pollaczek-Khinchin formula we obtain <span class="math display">\[
+\bar{W}=\frac{\rho}{2\mu\left(1-\rho\right)}.\]</span>}{0}</p>
+<h3 id="answer-2">Answer</h3>
+<ol type="1">
+<li><strong>Uniform Service Times</strong> (<span class="math inline">\(M/U/1\)</span>). Consider a uniform probability distribution is defined between 0 and <span class="math inline">\(b\)</span> for <span class="math inline">\(X&gt;0\)</span> as<span class="math display">\[
+U\left(X|b\right)=\left\{ {cc}
+\frac{1}{b} &amp; 0&lt;X\leq b\\
+0 &amp; X&gt;b\right.\]</span>show that the mean of this uniform distribution is given by <span class="math inline">\(\frac{b}{2}\)</span> and its variance by <span class="math inline">\(\frac{b^{2}}{12}\)</span> and find the expected waiting time for an <span class="math inline">\(M/U/1\)</span> queue. [0] For the mean we have</li>
+</ol>
+<p>X&amp; = &amp; <em>{0}^{}Xp(X)dX\ &amp; = &amp; </em>{0}^{}XU(X|b)dX\ &amp; = &amp; <em>{0}^{b}dX\ &amp; = &amp; </em>{0}^{b}\ &amp; = &amp; -0\ &amp; = &amp; For the variance we also require</p>
+<p>X^{2}&amp; = &amp; <em>{0}<sup>{}X</sup>{2}p(X)dX\ &amp; = &amp; </em>{0}^{b}dX\ &amp; = &amp; _{0}^{b}\ &amp; = &amp; -0\ &amp; = &amp; The variance is <span class="math inline">\(\left\langle X^{2}\right\rangle -\left\langle X\right\rangle ^{2}=\frac{b^{2}}{3}-\left(\frac{b}{2}\right)=\frac{b^{2}}{12}\)</span>. 2. For simplicity we consider <span class="math inline">\(\mu=\frac{1}{\left\langle X\right\rangle }.\)</span> So <span class="math inline">\(\mu=\frac{2}{b}\)</span> and thus <span class="math inline">\(b=\frac{2}{\mu}\)</span>. 3. So we can write the second moment in terms of <span class="math inline">\(\mu\)</span>. <span class="math inline">\(\left\langle X^{2}\right\rangle =\frac{b^{2}}{3}\)</span>. 4. Substituting in <span class="math inline">\(b=\frac{2}{\mu}\)</span> we have <span class="math inline">\(\left\langle X^{2}\right\rangle =\frac{4}{3\mu^{2}}\)</span>. 5. Substituting in to the Pollaczek-Khinchin formula we recover<span class="math display">\[
+\bar{W}=\frac{2\rho}{3\mu\left(1-\rho\right)}.\]</span></p>
+<h2 id="section"></h2>
+<p>*{Answer} 6. <span class="math inline">\(M/G/1\)</span> Queues with Vacations Consider a server which, when it is free, attends to some other business. For example it could transmit control and record keeping traffic. These periods are sometimes known as vacations (which is an American word that means holidays). The vacation periods are characterised by 7. If a new arrival arrives during a vacation it must wait until the vacation is over before being dealt with. 8. If a vacation ends and the server is idle it immediately goes on a new vacation.</p>
+[ht]
+<div class="figure">
+<div id="vacationMG1-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/vacationMG1.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="vacationMG1-magnify" class="magnify" onclick="magnifyFigure(&#39;vacationMG1&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="vacationMG1-caption" class="caption-frame">
+<p>Figure: vacationMG1</p>
+</div>
+</div>
+<pre><code>&lt;div class=&quot;caption&quot; style=&quot;&quot;&gt;Figure: Schematic of $M/G/1$ queue&lt;/div&gt;</code></pre>
+We denote the length of these successive vacations to be <span class="math inline">\(V_{1}\)</span>, <span class="math inline">\(V_{2}\)</span>, <span class="math inline">\(\dots\)</span>. We assume that <span class="math inline">\(V_{1},\)</span><span class="math inline">\(V_{2}\)</span>, <span class="math inline">\(\dots\)</span> are independent and identically distributed (i.i.d.) random variables which are also independent of the customer times and the service times. We can then attempt to compute the mean residual service time for this queue for a <em>Poisson (Markov) arrival</em> system with <em>general service times</em> and <em>generally distributed vacation times</em>. [0] We need to compute residual service time For a system with vacations the residual service time is given by <em>{0}^{t}r()d&amp; = &amp; </em>{i=1}<sup>{M(t)}X_{i}</sup>{2}+_{i=1}<sup>{L(t)}V_{i}</sup>{2}\ &amp; = &amp; +where we have introduced the arrival process, <span class="math inline">\(M\left(t\right)\)</span>, and this time we have also introduced a process which indicates how many vacations there have been, <span class="math inline">\(L\left(t\right)\)</span>. This means we have to deal with the average number of vacations. On average the proportion of time available for vacations is <span class="math inline">\(\left(1-\rho\right)\)</span>, <em>i.e. </em>that time where the transmission line is not in use. If the average length of a vacation at time <span class="math inline">\(t\)</span> is <span class="math inline">\(\bar{V}_{t}\)</span> then the number of vacations that will have arrived at that time is <span class="math display">\[
+L\left(t\right)=\frac{t\left(1-\rho\right)}{\bar{V}_{t}}.\]</span>Taking the limit of (<span class="math inline">\(\ref{eq:forVacationResiduals}\)</span>) as <span class="math inline">\(t\rightarrow\infty\)</span> we can write <span class="math display">\[
+\bar{R}=\frac{1}{2}\lambda\left\langle X^{2}\right\rangle +\frac{\left(1-\rho\right)\left\langle V^{2}\right\rangle }{2\bar{V}}.\]</span>So given that the assumptions that we used to develop the formula <span class="math display">\[
+\bar{W}=\frac{\bar{R}}{1-\rho}\]</span>in Section  <span class="math inline">\(\ref{sub:theResidualServiceTime}\)</span> are still valid, we may write<span class="math display">\[
+\bar{W}=\frac{\lambda\left\langle X^{2}\right\rangle }{2\left(1-\rho\right)}+\frac{\left\langle V^{2}\right\rangle }{2\bar{V}}.\]</span>}{0} [ht]
+<div class="figure">
+<div id="vacationResidual-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/vacationResidual.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="vacationResidual-magnify" class="magnify" onclick="magnifyFigure(&#39;vacationResidual&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="vacationResidual-caption" class="caption-frame">
+<p>Figure: vacationResidual</p>
+</div>
+</div>
+<pre><code>  &lt;div class=&quot;caption&quot; style=&quot;&quot;&gt;Figure: Computation of residual service time for system with vacations.&lt;/div&gt;</code></pre>
+<h2 id="section-1"></h2>
+<p>*{Answer} 9. <span class="math inline">\(M/G/1\)</span><strong> with Vacations</strong>. A bar has Poisson arrivals and one member of staff serving. When there are no customers at the bar, the staff member leaves the bar to check on the kitchen. Assuming these checks are exponentially distributed in length, with mean <span class="math inline">\(\bar{V}\)</span> and that customer service times are exponentially distributed with mean <span class="math inline">\(\bar{X}\)</span> what is the average waiting time in the queue? [0] Exponential standard deviation = <span class="math inline">\(\frac{1}{\mu}\)</span>, mean<span class="math inline">\(=\frac{1}{\mu}\)</span>. So if mean is <span class="math inline">\(\bar{V}\)</span>, standard deviation is <span class="math inline">\(\bar{V}\)</span> and variance is <span class="math inline">\(\bar{V}^{2}\)</span>. Thus second moment is <span class="math inline">\(\left\langle V^{2}\right\rangle =2\bar{V}^{2}\)</span>. Similarly for second moment of service time <span class="math inline">\(\left\langle X^{2}\right\rangle =2\bar{X}^{2}\)</span>. Defining <span class="math inline">\(\rho=\lambda\bar{X}\)</span> we have <span class="math display">\[
+\bar{W}=\frac{\lambda\bar{X}}{\left(1-\rho\right)}+\bar{V}=\frac{\rho}{\left(1-\rho\right)}+\bar{V}.\]</span>Deterministic vacations would have lead to <span class="math display">\[
+\bar{W}=\frac{\lambda\bar{X}}{\left(1-\rho\right)}+\frac{\bar{V}}{2}=\frac{\rho}{\left(1-\rho\right)}+\frac{\bar{V}}{2}.\]</span></p>
+<h2 id="section-2"></h2>
+<p>*{Answer}</p>
+<p>% generated — do not edit; scripts/convert/run.py</p>
+<!-- original A4 foil 178: Automatic Repeat Request (ARQ) System. -->
+<!-- original A4 foil 178: Automatic Repeat Request (ARQ) System. -->
+<!-- original A4 foil 179: ARQ Schematic -->
+<div class="figure">
+<div id="cap:ARQschemeatic-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/ARQ.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="cap:ARQschemeatic-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:ARQschemeatic&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="cap:ARQschemeatic-caption" class="caption-frame">
+<p>Figure: The ARQ System.</p>
+</div>
+</div>
+<!-- original A4 foil 179: ARQ Schematic -->
+<!-- original A4 foil 180: ARQ Contd -->
+<!-- original A4 foil 180: ARQ Contd -->
+<!-- original A4 foil 181: Average Service Time -->
+<!-- original A4 foil 182: ARQ Utilization Factor -->
+<!-- original A4 foil 182: ARQ Utilization Factor -->
+<!-- original A4 foil 183: ARQ Second Moment -->
+<!-- original A4 foil 184: $M/G/1$ Queues with Vacations -->
+<!-- original A4 foil 185: $M/G/1$ with Vacations -->
+<div class="figure">
+<div id="vacationMG1-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/vacationMG1.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="vacationMG1-magnify" class="magnify" onclick="magnifyFigure(&#39;vacationMG1&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="vacationMG1-caption" class="caption-frame">
+<p>Figure: vacationMG1</p>
+</div>
+</div>
+<!-- original A4 foil 186: Residual Service Time -->
+<div class="figure">
+<div id="vacationResidual-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/vacationResidual.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="vacationResidual-magnify" class="magnify" onclick="magnifyFigure(&#39;vacationResidual&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="vacationResidual-caption" class="caption-frame">
+<p>Figure: Computation of residual service time for system with vacations.</p>
+</div>
+</div>
+<!-- original A4 foil 186: Residual Service Time -->
+<!-- original A4 foil 187: Average of Vacation Distribution -->
+<!-- original A4 foil 188: P-K Formula -->
+<!-- original A4 foil 189: $M/G/1$ with Vacations --- Simple example -->
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -66,10 +233,6 @@ P(X=1+kn)=(1-p)p^k.
 <li>podcast: <a href="http://thetalkingmachines.com">The Talking Machines</a></li>
 <li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
 <li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
-</ul>
-<h2 id="further-reading">Further Reading</h2>
-<ul>
-<li>Example 3.15, ARQ delay as <span class="math inline">\(M/G/1\)</span> of <span class="citation" data-cites="Bertsekas:data92">Bertsekas and Gallager (1992)</span></li>
 </ul>
 <h1 class="unnumbered" id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">

@@ -1,5 +1,6 @@
 ---
-title: "Little’s Formula"
+title: |-
+  Little’s Formula
 abstract: |-
   <p>Time averages versus distribution means, Little’s formula <span class="math inline">\(\bar{N}=\lambda\bar{T}\)</span> for <span class="math inline">\(G/G/1\)</span> in steady state, and its use on <span class="math inline">\(M/M/1\)</span> to split sojourn time into waiting and transmission.</p>
 edit_url: https://github.com/mlatcl/npa/edit/gh-pages/_lamd/littles-formula.md
@@ -29,54 +30,122 @@ categories:
 <!--
 
 -->
-<h1 id="time-averages">Time Averages</h1>
-<p>Birth-death analysis gave the mean number in the system. Quality of service asks for mean <em>delay</em>, and for the mean number waiting rather than the mean number in service. Little’s formula relates those quantities. It applies to <span class="math inline">\(G/G/1\)</span> queues, not only to <span class="math inline">\(M/M/1\)</span>, once the system is in steady state.</p>
-<p>Write <span class="math inline">\(N(t)\)</span> for occupancy as a function of time. The time average up to <span class="math inline">\(t\)</span> is <span class="math display">\[
-\bar{N}_t=\frac{1}{t}\int_0^t N(\tau)\,d\tau,
-\]</span> and we assume that the steady-state mean <span class="math inline">\(\langle k\rangle\)</span> equals <span class="math inline">\(\lim_{t\to\infty}\bar{N}_t\)</span> <span class="citation" data-cites="Bertsekas:data92">(Bertsekas and Gallager, 1992, pp. ~156–157)</span>.</p>
-<h1 id="littles-formula">Little’s Formula</h1>
-<p>Under that identification, <span class="math display">\[
-\bar{N}=\lambda\bar{T}:
-\]</span> mean number in the system equals arrival rate times mean delay.</p>
-<h2 id="a-nightclub-queue">A Nightclub Queue</h2>
-<p>On Thursday nights the queue typically holds 20 people, and people arrive at 40 per hour. Little’s formula gives <span class="math display">\[
-\bar{T}=\frac{\bar{N}}{\lambda}=\frac{20}{40}=\tfrac{1}{2}\text{ hour}.
-\]</span> If twenty people are waiting and they enter at forty per hour, half an hour is the wait one should expect. The formula does not use the arrival or service <em>distributions</em>, only steady state. It can be applied to the whole system or to a subsystem (the waiting line, or the server).</p>
+<p>% generated — do not edit; scripts/convert/run.py</p>
+<h1 id="time-and-steady-state-averages">Time and Steady State Averages</h1>
+<p>We have already introduced the concept of distribution means and sample based means. In this section we introduce a further type of average, a time based average. The time average is the average value of a particular function over time. If that function is continuous it is given by<span class="math display">\[
+\bar{f}_{t}=\frac{1}{t}\int_{0}^{t}f\left(\tau\right)d\tau.\]</span>The derivation of Little’s formula that follows will rely on an assumption. We will assume that averages under the steady state distribution are equivalent to the time average in the limit as <span class="math inline">\(t\rightarrow\infty\)</span>, where if the state of the system is given as a function of time as <span class="math inline">\(N\left(t\right)\)</span> the average number in the system as a function of time is given by <span class="math display">\[
+\bar{N}_{t}=\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau\]</span>and the time average after in the limit as <span class="math inline">\(t\rightarrow\infty\)</span> is given by <span class="math display">\[
+\bar{N}=\lim_{t\rightarrow\infty}\bar{N}\left(t\right).\]</span>which we assume is equivalent to <span class="math inline">\(\left\langle k\right\rangle _{p\left(k\right)}\equiv\bar{N}\)</span>. See pg 156-157 in <span class="citation" data-cites="Bertsekas:data92">(Bertsekas and Gallager, 1992)</span> for more details.</p>
+<h1 id="the-formula">The Formula</h1>
+<p>Little’s formula applies under steady state conditions (see Section  <span class="math inline">\(\ref{sec:steadyState}\)</span>). Under the steady state assumptions it states,<span class="math display">\[
+\bar{N}=\lambda\bar{T}.\]</span>In practice we can see what this means by considering a simple example of a nightclub queue.</p>
+<h4 id="question">Question</h4>
+<p>You are driving past a nightclub, wondering how long you will have to wait to go in. You notice on Thursday nights that the queue typically contains 20 people and that people arrive at a rate of 40 per hour. According to Little’s formula, how long would you expect to have to wait to get in?</p>
+<h4 id="answer">Answer</h4>
+<p>The waiting time is given by Little’s formula. <span class="math inline">\(\bar{N}=20\)</span>, <span class="math inline">\(\lambda=40\)</span> and <span class="math inline">\(\bar{T}=\frac{\bar{N}}{\lambda}=\frac{20}{40}=\frac{1}{2}\textrm{hour}\)</span>.</p>
+<h2 id="intuition">Intuition</h2>
+<p>When phrased in these terms the formula seems fairly obvious. If we see there are twenty people in a queue and they enter a building at a rate of 40 per hour, we might expect to have to wait half-an-hour in the queue. In the examples section at the end of this chapter we build on this intuition with a simple graphical `proof’ of the formula based upon that given in <span class="citation" data-cites="Bertsekas:data92">(Bertsekas and Gallager, 1992)</span>. The formula applies regardless of the arrival and service time distributions, it only relies on the system being in steady state. Little’s formula can be used at the level of the entire system (queueing time and service time), as we have seen, or it may be applied at a lower level.</p>
 <h1 id="average-delay-in-mm1">Average Delay in <span class="math inline">\(M/M/1\)</span></h1>
-<p>For <span class="math inline">\(M/M/1\)</span> we already have <span class="math inline">\(\bar{N}=\rho/(1-\rho)=\lambda/(\mu-\lambda)\)</span>. Little’s formula converts that into mean sojourn time, <span class="math display">\[
-\bar{T}=\frac{\bar{N}}{\lambda}=\frac{1}{\mu-\lambda}.
-\]</span> This is time in the <em>system</em>, queueing plus transmission, not waiting time alone.</p>
-<h2 id="queueing-time-and-transmission-time">Queueing Time and Transmission Time</h2>
-<p>Packet delay splits as <span class="math inline">\(T=X+W\)</span>, transmission plus waiting, so <span class="math inline">\(\bar{T}=\bar{X}+\bar{W}\)</span>. Little’s formula applies to each piece separately.</p>
-<p>Arrivals at the server equal arrivals at the queue if nothing is dropped. The mean number in service is the utilisation <span class="math inline">\(\rho\)</span>, and <span class="math display">\[
-\rho=\lambda\bar{X}.
-\]</span> For exponential service <span class="math inline">\(\bar{X}=1/\mu\)</span>, so <span class="math inline">\(\rho=\lambda/\mu\)</span> as before. Utilisation is the fraction of time the server is busy, which is also <span class="math inline">\(1-P(0)\)</span>. For a packet of <span class="math inline">\(L\)</span> bits on a line of <span class="math inline">\(C\)</span> bits per second, <span class="math inline">\(X=L/C\)</span>.</p>
-<p>For the waiting line, <span class="math display">\[
-\bar{N}_Q=\lambda\bar{W}.
-\]</span> With <span class="math inline">\(\bar{T}=\bar{X}+\bar{W}=1/\mu+\bar{W}\)</span> we obtain <span class="math display">\[
-\bar{W}=\frac{\rho}{\mu-\lambda},\qquad \bar{N}_Q=\frac{\rho^2}{1-\rho}.
-\]</span></p>
-<h1 id="graphical-argument">Graphical Argument</h1>
-<p>Sketch arrivals <span class="math inline">\(\alpha(\tau)\)</span> and departures <span class="math inline">\(\beta(\tau)\)</span> against time. The area between the curves is both <span class="math inline">\(\int_0^t N(\tau)\,d\tau\)</span> and <span class="math inline">\(\sum_{i=1}^{\alpha(t)} T_i\)</span>. Divide by <span class="math inline">\(t\)</span>: <span class="math display">\[
-\bar{N}_t=\bar{\lambda}_t\bar{T}_t.
-\]</span> If a steady state exists, the <span class="math inline">\(t\to\infty\)</span> limit is <span class="math inline">\(\bar{N}=\lambda\bar{T}\)</span>.</p>
+<p>In the last chapter we computed that the average state of an <span class="math inline">\(M/M/1\)</span> queue was given by<span class="math display">\[
+\bar{N}=\frac{\lambda}{\mu-\lambda}=\frac{\rho}{1-\rho}.\]</span>We can use Little’s formula to tell us the average delay associated with the system. From <span class="math inline">\(\bar{N}=\lambda\bar{T}\)</span> we rearrange to recover the average delay as<span class="math display">\[
+\bar{T}=\frac{1}{\mu-\lambda}\]</span> This is not the time spent in the queue however, this is the time spent in the system which includes <em>propagation delay</em>, the delay in transmitting the packet.</p>
+<h2 id="littles-formula-for-queueing-time-and-transmission-time">Little’s Formula for Queueing Time and Transmission Time</h2>
+<p>The total delay for packet switching systems can be divided into queueing time, <span class="math inline">\(W\)</span>, and service time or transmission time, <span class="math inline">\(X\)</span>. <span class="math inline">\(T=X+W.\)</span> Similarly the average delay may be decomposed as<span class="math display">\[
+\bar{T}=\bar{X}+\bar{W}.\]</span> Furthermore, both the queue itself and the transmission may the be analysed independently using Little’s formula.</p>
+<h2 id="the-transmission">The Transmission</h2>
+<p>If we assume that customers/packets do not leave the queue then the rate of arrivals at the queue must equal the rate of arrivals at transmission. If we define the the average number under transmission as <span class="math inline">\(\rho\)</span> then we can write<span class="math display">\[
+\rho=\lambda\bar{X},\]</span>where <span class="math inline">\(\bar{X}\)</span> is the average time spend under transmission for each packet. For the <span class="math inline">\(M/M/1\)</span> queue the average transmission time is given by the mean of an exponential distribution, <span class="math inline">\(\bar{X}=\frac{1}{\mu}\)</span>, so for the <span class="math inline">\(M/M/1\)</span> queue we have<span class="math display">\[
+\rho=\frac{\lambda}{\mu},\]</span> a formula which we have already used in the last chapter. The variable <span class="math inline">\(\rho\)</span> is known as the utilisation factor. It represents the fraction of time that the transmission line (or server) is in use and is therefore a measure of efficiency. Note that it is also the steady state probability that the transmission line is in use. For a lossless system (one that doesn’t drop packets) this probability is given by <span class="math inline">\(1-P\left(0\right)\)</span>. You can check that this is consistent for the <span class="math inline">\(M/M/1\)</span> by looking at equation (<span class="math inline">\(\ref{eq:MM1emptyProb}\)</span>). <em>Note</em>: time under transmission is often considered proportional to packet length. For packet length of <span class="math inline">\(L\)</span> bits and bandwidth of <span class="math inline">\(C\)</span> bits per second transmission time is <span class="math inline">\(X=\frac{L}{C}\)</span>.</p>
+<h2 id="the-queue">The Queue</h2>
+<p>Given <span class="math inline">\(\lambda\)</span>, an arrival rate, <span class="math inline">\(\bar{N}_{Q}\)</span>, the average number of packets waiting in the queue, and <span class="math inline">\(\bar{W}\)</span>, the average packet waiting time, Little’s formula gives <span class="math display">\[
+\bar{N}_{Q}=\lambda\bar{W}\]</span>for the number in the queue. For the <span class="math inline">\(M/M/1\)</span> queue <span class="math inline">\(\bar{T}=\bar{X}+\bar{W}=\frac{1}{\mu}+\bar{W}\)</span> so the average time spent waiting in the queue is given by<span class="math display">\[
+\bar{W}=\bar{T}-\frac{1}{\mu}=\frac{\rho}{\mu-\lambda}.\]</span>We can therefore recover the average number in the queue<span class="math display">\[
+\bar{N}_{Q}=\frac{\rho^{2}}{1-\rho}.\]</span></p>
+<h2 id="examples">Examples</h2>
+<ol type="1">
+<li><strong>Graphical Proof of Little’s Formula. </strong>In this example we provide a graphical proof of Little’s formula.\answer{ First we sketch two curves, the number of arrivals (<span class="math inline">\(\alpha\left(\tau\right)\)</span>) and the number of departures (<span class="math inline">\(\beta\left(\tau\right)\)</span>) from a queue vs time. [ht]
 <div class="figure">
-<div id="littles-formula-graph-figure" class="figure-frame">
+<div id="littlesFormula-figure" class="figure-frame">
 <div class="centered" style="">
-<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/littlesFormula.png" width="70%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/littlesFormula.png" width="60%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
 </div>
 </div>
-<div id="littles-formula-graph-magnify" class="magnify" onclick="magnifyFigure(&#39;littles-formula-graph&#39;)">
+<div id="littlesFormula-magnify" class="magnify" onclick="magnifyFigure(&#39;littlesFormula&#39;)">
 <button type="button" class="img-button" aria-label="Enlarge figure">
 <img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
 </button>
 </div>
-<div id="littles-formula-graph-caption" class="caption-frame">
-<p>Figure: Arrivals <span class="math inline">\(\alpha(\tau)\)</span> and departures <span class="math inline">\(\beta(\tau)\)</span>. The shaded area is both the integral of occupancy and the sum of sojourn times.</p>
+<div id="littlesFormula-caption" class="caption-frame">
+<p>Figure: littlesFormula</p>
 </div>
 </div>
-<h2 id="a-bar-queue">A Bar Queue</h2>
-<p>The bartender spends 10 percent of her time cleaning between customers, so <span class="math inline">\(\rho=0.9\)</span>. Typically three people are waiting, <span class="math inline">\(\bar{N}_Q=3\)</span>. Then <span class="math inline">\(\lambda=0.9/\bar{X}\)</span> and <span class="math inline">\(3=\lambda\bar{W}\)</span>, so <span class="math inline">\(\bar{W}/\bar{X}=3/0.9=10/3\)</span>: waiting time is a little more than three times service time.</p>
+<div class="caption" style="">
+Figure: Graphical `proof’ of Little’s formula.
+</div>
+</li>
+</ol>
+<p>By looking at Figure  <span class="math inline">\(\ref{cap:littlesGraphical}\)</span> we note that the area between the lines in the top figure can be expressed as both <span class="math inline">\(\int_{0}^{t}N(\tau)d\tau\)</span> and <span class="math inline">\(\sum_{i=1}^{\alpha\left(t\right)}T_{i}\)</span>. We may therefore equate these expressions,<span class="math display">\[
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},\]</span>we then introduce the number of arrivals on the right hand side,<span class="math display">\[
+\int_{0}^{t}N\left(\tau\right)d\tau=\alpha\left(t\right)\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}\]</span>and divide both sides by <span class="math inline">\(t\)</span>,<span class="math display">\[
+\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau=\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}.\]</span>The equation now has the form of three averages. The term on the left hand side of the equation is an average, over time, of the number in the system. This average is a function of time and we write it <span class="math display">\[
+\bar{N}_{t}=\frac{1}{t}\int_{0}^{t}N\left(\tau\right).\]</span>We also note that the right hand side of the equation is also composed of two averages: <span class="math display">\[
+\bar{\lambda}_{t}=\frac{\alpha\left(t\right)}{t},\]</span>is the average of the arrivals over time and <span class="math display">\[
+\bar{T}_{t}=\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}\]</span> is the average waiting time. So we write<span class="math display">\[
+\bar{N}_{t}=\bar{\lambda}_{t}\bar{T}_{t}.\]</span>Dividing both expressions by <span class="math inline">\(t\)</span>, equating them, and taking the limit as <span class="math inline">\(t\rightarrow\infty\)</span> gives Little’s formula. We wish to consider the steady state behaviour. The system may not have steady state behaviour. If the steady state exists, we can seek it in the limit as <span class="math inline">\(t\rightarrow\infty\)</span>, giving <span class="math display">\[
+\bar{N}=\lambda\bar{T}\]</span>}{0}</p>
+<h4 id="answer-1">Answer</h4>
+<ol type="1">
+<li><strong>Simple example of Little’s formula</strong>. You are at a queue in a bar and notice that the bar tender spends 10% of her time cleaning between serving customers. If the typical number of people waiting to be served is <span class="math inline">\(3\)</span>, what is the ratio of time spent waiting to being served? \answer{ Information says <span class="math inline">\(\rho=0.9\)</span> and <span class="math inline">\(\bar{N}_{Q}=3\)</span>. <span class="math display">\[
+\lambda=\frac{0.9}{\bar{X}}.\]</span> <span class="math display">\[
+3=\lambda\bar{W}.\]</span> Therefore <span class="math inline">\(\frac{\bar{W}}{\bar{X}}=3\frac{1}{3}\)</span>. }{0}</li>
+</ol>
+<h4 id="answer-2">Answer</h4>
+<p>% generated — do not edit; scripts/convert/run.py</p>
+<!-- original A4 foil 94: Little's Formula -->
+<!-- original A4 foil 94: Little's Formula -->
+<!-- original A4 foil 95: Time and Steady State Averages -->
+<!-- original A4 foil 96: Time and Steady State Averages II -->
+<!-- original A4 foil 97: The Formula -->
+<!-- original A4 foil 97: The Formula -->
+<!-- original A4 foil 98: Intuition -->
+<!-- original A4 foil 99: Graphical Proof I -->
+<div class="figure">
+<div id="cap:littlesGraphical-figure" class="figure-frame">
+<div class="centered" style="">
+<img class="" src="https://mlatcl.github.io/npa/slides/diagrams/npa/littlesFormula.png" width="80%" height="auto" align="center" style="background:none; border:none; box-shadow:none; display:block; margin-left:auto; margin-right:auto;vertical-align:middle">
+</div>
+</div>
+<div id="cap:littlesGraphical-magnify" class="magnify" onclick="magnifyFigure(&#39;cap:littlesGraphical&#39;)">
+<button type="button" class="img-button" aria-label="Enlarge figure">
+<img src="{{ '/assets/images/Magnify_Large.svg' | relative_url }}" style="width:1.5em; min-width:44px; min-height:44px; padding:0.5em">
+</button>
+</div>
+<div id="cap:littlesGraphical-caption" class="caption-frame">
+<p>Figure: Graphical `proof’ of Little’s formula.</p>
+</div>
+</div>
+<!-- original A4 foil 99: Graphical Proof I -->
+<!-- original A4 foil 100: Graphical Proof II -->
+<!-- original A4 foil 101: Little's Formula Derivation -->
+<!-- original A4 foil 102: Little's Formula Derivation -->
+<!-- original A4 foil 103: Little's Formula Derivation -->
+<!-- original A4 foil 104: Little's Formula Derivation -->
+<!-- original A4 foil 105: Little's Formula Derivation -->
+<!-- original A4 foil 106: Little's Formula Derivation -->
+<!-- original A4 foil 107: Little's Formula Derivation -->
+<!-- original A4 foil 108: Little's Formula -->
+<!-- original A4 foil 108: Little's Formula -->
+<!-- original A4 foil 109: Average Delay in $M/M/1$ -->
+<!-- original A4 foil 109: Average Delay in $M/M/1$ -->
+<!-- original A4 foil 110: Little's Formula for Queueing Time and Transmission Time -->
+<!-- original A4 foil 110: Little's Formula for Queueing Time and Transmission Time -->
+<!-- original A4 foil 111: The Transmission -->
+<!-- original A4 foil 111: The Transmission -->
+<!-- original A4 foil 112: Utilisation Factor -->
+<!-- original A4 foil 112: Utilisation Factor -->
+<!-- original A4 foil 113: Utilisation Example -->
+<!-- original A4 foil 113: Utilisation Example -->
+<!-- original A4 foil 114: The Queue -->
 <h2 id="thanks">Thanks!</h2>
 <p>For more information on these subjects and more you might want to check the following resources.</p>
 <ul>
@@ -87,21 +156,10 @@ categories:
 <li>newspaper: <a href="http://www.theguardian.com/profile/neil-lawrence">Guardian Profile Page</a></li>
 <li>blog: <a href="http://inverseprobability.com/blog.html">http://inverseprobability.com</a></li>
 </ul>
-<h2 id="further-reading">Further Reading</h2>
-<ul>
-<li>Little’s theorem and the <span class="math inline">\(M/M/1\)</span> delay formulae of <span class="citation" data-cites="Bertsekas:data92">Bertsekas and Gallager (1992)</span></li>
-</ul>
-<h2 id="exercises">Exercises</h2>
-<ul>
-<li>Lab 1: sample-mean occupancy versus <span class="math inline">\(\bar{N}=\rho/(1-\rho)\)</span>, and when the time average is not yet the steady state of <span class="citation" data-cites="npa-lab1">Lawrence (2006)</span></li>
-</ul>
 <h1 class="unnumbered" id="references">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Bertsekas:data92" class="csl-entry" role="listitem">
 Bertsekas, D.P., Gallager, R.G., 1992. Data networks, Second. ed. Prentice-Hall, Upper Saddle River, NJ.
-</div>
-<div id="ref-npa-lab1" class="csl-entry" role="listitem">
-Lawrence, N.D., 2006. <a href="https://mlatcl.github.io/npa/">Discrete simulation of the <span><span class="math inline">\(M/M/1\)</span></span> queue</a>.
 </div>
 </div>
 

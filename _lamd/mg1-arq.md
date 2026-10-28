@@ -1,17 +1,15 @@
 ---
 week: 6
 session: 2
-featured_image: slides/diagrams/npa/ARQ.png
-title: ARQ as an M/G/1 Queue
+title: "M/G/1 and Automatic Repeat Request"
 abstract: >
-  Stop-and-wait automatic repeat request as a geometric service time, with
-  Pollaczek--Khinchin for the wait. Lecture 13, Tuesday of week 6.
+  Stop-and-wait ARQ as an $M/G/1$ service time: geometric retransmissions, utilisation, and the second moment.
 date: 2006-10-31
+featured_image: slides/diagrams/npa/ARQ.png
 ---
 
-\include{snippets/_npa/includes/mg1-arq.md}
-
-\addreading{@Bertsekas:data92}{Example 3.15, ARQ delay as $M/G/1$}
+\include{snippets/_npa/generated/notes/mg1-arq.md}
+\include{snippets/_npa/generated/slides/mg1-arq.md}
 
 \thanks
 
