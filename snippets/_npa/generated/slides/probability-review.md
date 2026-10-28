@@ -21,8 +21,8 @@
 
 \slides{* Typically we should write out $P\left(X=x,Y=y\right)$.
 * In practice, we often use $P\left(x,y\right)$.
-* This looks very much like we might write a multivariate function, *e.g.*$f\left(x,y\right)=\frac{x}{y}$.
-* For a multivariate function though, $f\left(x,y\right)\neq f\left(y,x\right)$.}
+* This looks very much like we might write a multivariate function, *e.g.*$f\left(x,y\right)=\ensuremath{\frac{x}{y}}$.
+* For a multivariate function though, $f\left(x,y\right)\ensuremath{\neq} f\left(y,x\right)$.}
 
 \newslide{Notational Details (continued)}
 
@@ -35,21 +35,21 @@
 \newslide{Normalisation}
 
 \slides{* All distributions are normalised. This is clear from the fact that $\sum_{x}n_{X=x}=N$, which gives $$
-\sum_{x}P\left(x\right)=\lim_{N\rightarrow\infty}\frac{\sum_{x}n_{X=x}}{N}=\lim_{N\rightarrow\infty}\frac{N}{N}=1.$$A similar result can be derived for the marginal and conditional distributions.}
+\sum_{x}P\left(x\right)=\lim_{N\ensuremath{\rightarrow\infty}}\ensuremath{\frac{\sum_{x}n_{X=x}}{N}}=\lim_{N\ensuremath{\rightarrow\infty}}\ensuremath{\frac{N}{N}}=1.$$A similar result can be derived for the marginal and conditional distributions.}
 
 \newslide{The Sum Rule}
 
-\slides{* The marginal probability $P\left(y\right)$ is given by $\lim_{N\rightarrow\infty}\frac{n_{Y=y}}{N}$.
-* The joint distribution $P\left(x,y\right)$ is given by $\lim_{N\rightarrow\infty}\frac{n_{X=x,Y=y}}{N}$.
+\slides{* The marginal probability $P\left(y\right)$ is given by $\lim_{N\ensuremath{\rightarrow\infty}}\ensuremath{\frac{n_{Y=y}}{N}}$.
+* The joint distribution $P\left(x,y\right)$ is given by $\lim_{N\ensuremath{\rightarrow\infty}}\ensuremath{\frac{n_{X=x,Y=y}}{N}}$.
 * $n_{Y=y}=\sum_{x}n_{X=x,Y=y}$ so$$
-\lim_{N\rightarrow\infty}\frac{n_{Y=y}}{N}=\lim_{N\rightarrow\infty}\sum_{x}\frac{n_{X=x,Y=y}}{N},$$in other words$$
+\lim_{N\ensuremath{\rightarrow\infty}}\ensuremath{\frac{n_{Y=y}}{N}}=\lim_{N\ensuremath{\rightarrow\infty}}\sum_{x}\ensuremath{\frac{n_{X=x,Y=y}}{N}},$$in other words$$
 P\left(y\right)=\sum_{x}P\left(x,y\right).$$This is known as the sum rule of probability.}
 
 \newslide{The Product Rule}
 
-\slides{* $P\left(x|y\right)$ is given by $\lim_{N\rightarrow\infty}\frac{n_{X=x,Y=y}}{n_{Y=y}}$.
+\slides{* $P\left(x|y\right)$ is given by $\lim_{N\ensuremath{\rightarrow\infty}}\ensuremath{\frac{n_{X=x,Y=y}}{n_{Y=y}}}$.
 * $P\left(x,y\right)$ is given by $$
-\lim_{N\rightarrow\infty}\frac{n_{X=x,Y=y}}{N}=\lim_{N\rightarrow\infty}\frac{n_{X=x,Y=y}}{n_{Y=y}}\frac{n_{Y=y}}{N}$$or in other words$$
+\lim_{N\ensuremath{\rightarrow\infty}}\ensuremath{\frac{n_{X=x,Y=y}}{N}}=\lim_{N\ensuremath{\rightarrow\infty}}\ensuremath{\frac{n_{X=x,Y=y}}{n_{Y=y}}\frac{n_{Y=y}}{N}}$$or in other words$$
 P\left(x,y\right)=P\left(x|y\right)P\left(y\right).$$This is known as the product rule of probability.}
 
 \newslide{Bayes' Rule}
@@ -58,7 +58,7 @@ P\left(x,y\right)=P\left(x|y\right)P\left(y\right).$$This is known as the produc
 P\left(x,y\right)=P\left(y,x\right)=P\left(y|x\right)P\left(x\right),$$
   so$$
 P\left(x|y\right)P\left(y\right)=P\left(y|x\right)P\left(x\right)$$which leads to Bayes' Rule, $$
-P\left(x|y\right)=\frac{P\left(y|x\right)P\left(x\right)}{P\left(y\right)}.$$}
+P\left(x|y\right)=\ensuremath{\frac{P\left(y|x\right)P\left(x\right)}{P\left(y\right)}}.$$}
 
 \newslide{Independence}
 
@@ -72,7 +72,7 @@ P\left(y|x\right)=P\left(y\right).$$The factorisation of the joint distribution 
 \slides{* A probabilistic model summarises our beliefs.
 * Sometimes need to summarise the model by its expectations.
 * Expected value of $f\left(x\right)$ under $P\left(x\right)$ is $$
-\left\langle f\left(x\right)\right\rangle _{P\left(x\right)}=\sum_{x}P\left(x\right)f\left(x\right).$$Here we have introduced a particular notation for the expectation, you will also see expectations written in the form $E\left\{ f\left(x\right)\right\} $.}
+\left\langle f\left(x\right)\right\rangle _{P\left(x\right)}=\sum_{x}P\left(x\right)f\left(x\right).$$Here we have introduced a particular notation for the expectation, you will also see expectations written in the form $E\left\lbrace f\left(x\right)\right\rbrace$.}
 
 \newslide{Expectations under a Simple Distribution}
 
@@ -90,11 +90,11 @@ P\left(y|x\right)=P\left(y\right).$$The factorisation of the joint distribution 
 \newslide{Variance of a Distribution}
 
 \slides{* The expectation of $x^{2}$ is known as the second moment --- normally used to obtain the variance.
-* Variance: given by the difference between the second moment and the square of the mean. It is often denoted by $\sigma^{2}$.$$
-\sigma^{2}=\left\langle x^{2}\right\rangle -\left\langle x\right\rangle ^{2}.$$For our example above the variance is given by$$
+* Variance: given by the difference between the second moment and the square of the mean. It is often denoted by $\ensuremath{\sigma^{2}}$.$$
+\ensuremath{\sigma^{2}}=\left\langle x^{2}\right\rangle -\left\langle x\right\rangle ^{2}.$$For our example above the variance is given by$$
 1.7-\left(1.1\right)^{2}=0.49,$$
 * Its square root is known as the standard deviation$$
-\sigma=\sqrt{\left\langle x^{2}\right\rangle -\left\langle x\right\rangle ^{2}},$$$$
+\ensuremath{\sigma}=\sqrt{\left\langle x^{2}\right\rangle -\left\langle x\right\rangle ^{2}},$$$$
 \sqrt{1.7-\left(1.1\right)^{2}}=0.7.$$}
 
 \newslide{Distributions as Functions}
@@ -108,11 +108,11 @@ P\left(y|x\right)=P\left(y\right).$$The factorisation of the joint distribution 
 \slides{* Defined over the space of all non-negative integers.
 * This set is countably infinite: impossible to summarise in a table!
 * The Poisson distribution is therefore defined as
-P\left(k|\mu\right)=\frac{\mu^{k}}{k!}\exp\left(-\mu\right).\label{eq:poissonDist}where $k$ is any integer from $0$ to $\infty$, and $\mu$ is a parameter of the distribution.}
+P\left(k|\ensuremath{\mu\right)}=\ensuremath{\frac{\mu^{k}}{k!}\exp\left(}-\ensuremath{\mu\right)}.\label{eq:poissonDist}where $k$ is any integer from $0$ to $\ensuremath{\infty}$, and $\ensuremath{\mu}$ is a parameter of the distribution.}
 
 \newslide{A Poisson with $\mu=2$}
 
-\slides{* To work out the probability of $k$ in a Poisson $\mu=2$ we can start filling a table.
+\slides{* To work out the probability of $k$ in a Poisson $\ensuremath{\mu}=2$ we can start filling a table.
 * The values in a table are computed from (\ref{eq:poissonDist})
   % empty table}
 
@@ -122,12 +122,12 @@ P\left(k|\mu\right)=\frac{\mu^{k}}{k!}\exp\left(-\mu\right).\label{eq:poissonDis
   As we mentioned in Section\  \ref{sec:expectations}, the expectations under a distribution are important for summarising the distributions characteristics. Expectations of distributions that take the form of a function can also be computed. Typically we expect the resulting expectation to be a function of the distributions parameters.
 * Mean of the Poisson process
     $$
-\left\langle k\right\rangle _{P\left(k|\mu\right)}=\sum_{k=0}^{\infty}k\frac{\mu^{k}}{k!}e^{-\mu}$$ To make progress with this we first pull out $\mu e^{-\mu}$ and the first $k$ in the factorial, $\frac{k}{k!}=\frac{k}{k(k-1)!}=\frac{1}{(k-1)!}$. We can also remove the first term from the sum because it is multiplied by $k$ which is zero for the first term.
+\left\langle k\right\rangle _{P\left(k|\ensuremath{\mu\right)}}=\sum_{k=0}^{\ensuremath{\infty}}k\ensuremath{\frac{\mu^{k}}{k!}}e^{-\ensuremath{\mu}}$$ To make progress with this we first pull out $\ensuremath{\mu} e^{-\ensuremath{\mu}}$ and the first $k$ in the factorial, $\ensuremath{\frac{k}{k!}}=\ensuremath{\frac{k}{k(k-1)!}}=\ensuremath{\frac{1}{(k-1)!}}$. We can also remove the first term from the sum because it is multiplied by $k$ which is zero for the first term.
     This leads to$$
-\left\langle k\right\rangle =e^{-\mu}\mu\sum_{k=1}^{\infty}\frac{\mu^{(k-1)}}{(k-1)!}$$ Now we make the following substitution: $m=k-1$. 
-\left\langle k\right\rangle =e^{-\mu}\mu\sum_{m=0}^{\infty}\frac{\mu^{m}}{m!}\label{eq:poissonMean2} Finally we note that the geometric series $\sum_{m=0}^{\infty}\frac{\mu^{m}}{m!}=e^{\mu}$. Substituting this result back into (\ref{eq:poissonMean2}) we find 
-\left\langle k\right\rangle =\mu\label{eq:poissonMean3}
-* The variance of a Poisson is also $\mu$ --- see Tutorial 1.}
+\left\langle k\right\rangle =e^{-\ensuremath{\mu}}\ensuremath{\mu\sum_{k=1}^{\infty}\frac{\mu^{(k-1)}}{(k-1)!}}$$ Now we make the following substitution: $m=k-1$. 
+\left\langle k\right\rangle =e^{-\ensuremath{\mu}}\ensuremath{\mu\sum_{m=0}^{\infty}\frac{\mu^{m}}{m!}\label{eq:poissonMean2}} Finally we note that the geometric series $\sum_{m=0}^{\ensuremath{\infty}}\ensuremath{\frac{\mu^{m}}{m!}}=e^{\ensuremath{\mu}}$. Substituting this result back into (\ref{eq:poissonMean2}) we find 
+\left\langle k\right\rangle =\ensuremath{\mu\label{eq:poissonMean3}}
+* The variance of a Poisson is also $\ensuremath{\mu}$ --- see Tutorial 1.}
 
 \newslide{Continuous Variables}
 
@@ -148,23 +148,23 @@ P\left(k|\mu\right)=\frac{\mu^{k}}{k!}\exp\left(-\mu\right).\label{eq:poissonDis
 \newslide{Gaussian PDF (continued)}
 
 \slides{* One example is the Gaussian: we can query the distribution by integrating over regions of it.
-* Represent a PDF with a small $p\left(\cdot\right)$ to differentiate it from a probability distribution: $P\left(\cdot\right)$.
+* Represent a PDF with a small $p\left(\ensuremath{\cdot\right)}$ to differentiate it from a probability distribution: $P\left(\ensuremath{\cdot\right)}$.
 * It is a positive function, integral over the region of interest is one.
   \footnote{In what follows we shall use the word distribution to refer to both discrete probabilities and continuous probability density functions.}}
 
 \newslide{Manipulating PDFs}
 
 \slides{* Same rules for PDFs as distributions *e.g.*$$
-p\left(y|x\right)=\frac{p\left(x|y\right)p\left(y\right)}{p\left(x\right)}$$where $p\left(x,y\right)=p\left(x|y\right)p\left(y\right)$ and for continuous variables $p\left(x\right)=\int p\left(x,y\right)dy$.
+p\left(y|x\right)=\ensuremath{\frac{p\left(x|y\right)p\left(y\right)}{p\left(x\right)}}$$where $p\left(x,y\right)=p\left(x|y\right)p\left(y\right)$ and for continuous variables $p\left(x\right)=\ensuremath{\int} p\left(x,y\right)dy$.
 * Expectations under a PDF$$
-\left\langle f\left(x\right)\right\rangle _{p\left(x\right)}=\int f\left(x\right)p\left(x\right)dx$$where the integral is over the region for which our PDF for $x$ is defined.}
+\left\langle f\left(x\right)\right\rangle _{p\left(x\right)}=\ensuremath{\int} f\left(x\right)p\left(x\right)dx$$where the integral is over the region for which our PDF for $x$ is defined.}
 
 \newslide{Cumulative Distribution Functions\label{sub:CDFs}}
 
 \slides{* PDF doesn't represent probabilities directly
 * One very common question is: what is the probability that $x<y$?
-* The cumulative distribution function (CDF) represents the answer for $-\infty<x<\infty$ the CDF is given by$$
-P\left(x>y\right)=\int_{-\infty}^{y}p\left(x\right)dx,$$for $0\leq x<\infty$ then the CDF is given by$$
+* The cumulative distribution function (CDF) represents the answer for $-\ensuremath{\infty}<x<\ensuremath{\infty}$ the CDF is given by$$
+P\left(x>y\right)=\int_{-\ensuremath{\infty}}^{y}p\left(x\right)dx,$$for $0\ensuremath{\leq} x<\ensuremath{\infty}$ then the CDF is given by$$
 P\left(x>y\right)=\int_{0}^{y}p\left(x\right)dx.$$}
 
 \newslide{Gaussian PDF and CDF}
@@ -180,28 +180,30 @@ P\left(x>y\right)=\int_{0}^{y}p\left(x\right)dx.$$}
 
 \slides{* Recall that expectation of any given function, $f\left(k\right)$, under a distribution, $P\left(k\right)$, can be written as $$
 \left\langle f\left(k\right)\right\rangle _{P\left(k\right)}=\sum_{k}f\left(k\right)P\left(k\right)$$Recall our definition of probability from Table\  \ref{cap:aJointDistribution}. $$
-P\left(k\right)=\lim_{S\rightarrow\infty}\frac{s_{k}}{S}$$where we have now used $S$ (instead of $N$)
+P\left(k\right)=\lim_{S\ensuremath{\rightarrow\infty}}\ensuremath{\frac{s_{k}}{S}}$$where we have now used $S$ (instead of $N$)
 * *Sample based approximations*hope that $S$ is `large enough' such that it to say$$
-\left\langle f\left(k\right)\right\rangle _{P\left(k\right)}\approx\sum_{k}f\left(k\right)\frac{s_{k}}{S}.$$}
+\left\langle f\left(k\right)\right\rangle _{P\left(k\right)}\ensuremath{\approx\sum_{k}}f\left(k\right)\ensuremath{\frac{s_{k}}{S}}.$$}
 
 \newslide{Sample Based Approximations contd}
 
 \slides{* This formula may be rewritten as:$$
-\sum_{k}f\left(k\right)\frac{s_{k}}{S}=\frac{1}{S}\sum_{k}f\left(k\right)s_{k}.$$For $\mathbf{k}$ a vector of samples from $P\left(k\right)$with elements $k_{i}$ and length $S$ $$
-\frac{1}{S}\sum_{k}f\left(k\right)s_{k}=\frac{1}{S}\sum_{i=1}^{S}f\left(k_{i}\right)$$
+\sum_{k}f\left(k\right)\ensuremath{\frac{s_{k}}{S}}=\ensuremath{\frac{1}{S}\sum_{k}}f\left(k\right)s_{k}.$$For $\mathbf{k}$ a vector of samples from $P\left(k\right)$with elements $k_{i}$ and length $S$ $$
+\ensuremath{\frac{1}{S}\sum_{k}}f\left(k\right)s_{k}=\ensuremath{\frac{1}{S}\sum_{i=1}^{S}}f\left(k_{i}\right)$$
 * This provides us with a sample based approximation $$
-\left\langle f\left(k\right)\right\rangle _{P\left(k\right)}\approx\frac{1}{S}\sum_{i=1}^{S}f\left(k_{i}\right).$$
-* Special cases of this include the *sample mean,*often denoted by $\bar{k}$, and computed as$$
-\bar{k}=\frac{1}{S}\sum_{i=1}^{S}k_{i},$$}
+\left\langle f\left(k\right)\right\rangle _{P\left(k\right)}\ensuremath{\approx\frac{1}{S}\sum_{i=1}^{S}}f\left(k_{i}\right).$$
+* Special cases of this include the *sample mean,*often denoted by $\ensuremath{\bar{k}}$, and computed as$$
+\ensuremath{\bar{k}}=\ensuremath{\frac{1}{S}\sum_{i=1}^{S}}k_{i},$$}
 
 \newslide{Sample Mean vs True Mean}
 
 \slides{* This is an approximation to the true distribution mean$$
-\left\langle k\right\rangle \approx\bar{k}.$$
+\left\langle k\right\rangle \ensuremath{\approx\bar{k}}.$$
 * The same approximations can used for continuous PDFs, so we have
-\left\langle f\left(x\right)\right\rangle _{p\left(x\right)} & = & \int f\left(x\right)p\left(x\right)dx\\
- & \approx & \frac{1}{S}\sum_{i=1}^{S}f\left(x_{i}\right),where $x_{i}$ are independently obtained samples from the distribution $p\left(x\right)$.
-* Approximation gets better for increasing $S$ and worse if the samples from $P\left(k\right)$ are *not*independent.}
+* Approximation gets better for increasing $S$ and worse if the samples from $P\left(k\right)$ are *not*independent.
+
+| \left\langle f\left(x\right)\right\rangle _{p\left(x\right)} | = | \ensuremath{\int} f\left(x\right)p\left(x\right)dx |
+| --- | --- | --- |
+|  | \ensuremath{\approx} | \ensuremath{\frac{1}{S}\sum_{i=1}^{S}}f\left(x_{i}\right),where $x_{i}$ are independently obtained samples from the distribution $p\left(x\right)$. |}
 
 \newslide{Note on Sample and Distribution Means}
 

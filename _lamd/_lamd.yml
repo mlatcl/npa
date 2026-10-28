@@ -33,7 +33,8 @@ slidesheader: slides-header.html
 notation: talk-notation.tex
 posts: True
 docx: False
-notespdf: False
+notespdf: True
+slidespdf: True
 slidesipynb: False
 pptx: False
 pdf: False

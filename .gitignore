@@ -68,5 +68,9 @@ _site/
 slides/diagrams/ml/
 slides/diagrams/mlai/
 
+# Generated lecture PDFs (rebuild with maketalk; compare via scripts/compare_pdfs.py)
+_notes/*.pdf
+slides/*.slides.pdf
+
 # Notebook smoke artefacts
 _notebooks/test-results/

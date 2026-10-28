@@ -62,6 +62,370 @@ def latex_inline_to_md(text: str) -> str:
     return text.strip()
 
 
+def _strip_macro(text: str, cmd: str) -> str:
+    token = "\\" + cmd
+    while True:
+        i = text.find(token)
+        if i < 0:
+            return text
+        j = i + len(token)
+        while j < len(text) and text[j].isspace():
+            j += 1
+        if j < len(text) and text[j] == "{":
+            text = text[:i] + text[_consume_braced(text, j) :]
+        else:
+            text = text[:i] + text[j:]
+
+
+def strip_figure_chrome(text: str) -> str:
+    """Drop leftover LyX figure wrappers once the image is a \\figure{...}."""
+    text = re.sub(r"\\begin\{figure\}\s*\[[^\]]*\]", "", text)
+    text = re.sub(r"\\begin\{figure\}", "", text)
+    text = re.sub(r"\\end\{figure\}", "", text)
+    text = re.sub(r"\\centering\b", "", text)
+    text = _strip_macro(text, "caption")
+    text = re.sub(r"^\s*\[ht(?:b)?\]\s*$", "", text, flags=re.M)
+    text = re.sub(r"\[ht(?:b)?\]", "", text)
+    return text
+
+
+def strip_answer_macros(text: str) -> str:
+    text = re.sub(r"\\answer\{", "", text)
+    text = re.sub(r"\\\}[ \t]*\{\d+\}", "", text)
+    text = re.sub(r"\}\{\d+\}", "", text)
+    return text
+
+
+def fix_cases_arrays(text: str) -> str:
+    """LyX cases often survive as \\left\\{ {cc} rather than array."""
+    text = re.sub(r"\\left\s*\\\{\s*\{([clr|]+)\}", r"\\begin{array}{\1}", text)
+    text = re.sub(r"\\left\s*\(\s*\{([clr|]+)\}", r"\\begin{array}{\1}", text)
+    while text.count(r"\begin{array}") > text.count(r"\end{array}"):
+        m = re.search(r"\\right\s*\.", text)
+        if not m:
+            text += r"\end{array}"
+            break
+        text = text[: m.start()] + r"\end{array}" + text[m.end() :]
+    text = re.sub(r"\{l{3,}\}", "", text)
+    text = re.sub(r"\\tiny\b", "", text)
+    text = re.sub(r"\\normalsize\b", "", text)
+    return text
+
+
+def _try_consume_braced(text: str, i: int) -> int | None:
+    depth = 0
+    for j in range(i, len(text)):
+        if text[j] == "{":
+            depth += 1
+        elif text[j] == "}":
+            depth -= 1
+            if depth == 0:
+                return j + 1
+    return None
+
+
+def tidy_dollar_math(text: str) -> str:
+    """Keep `$...$` (pandoc's tex_math_dollars); trim spaces and un-escape braces."""
+    out: list[str] = []
+    i = 0
+    n = len(text)
+    while i < n:
+        if text.startswith(r"\(", i):
+            j = text.find(r"\)", i + 2)
+            if j < 0:
+                out.append(text[i:])
+                break
+            out.append("$" + text[i + 2 : j].strip() + "$")
+            i = j + 2
+            continue
+        out.append(text[i])
+        i += 1
+    text = "".join(out)
+
+    def repl(m: re.Match[str]) -> str:
+        inner = m.group(1).strip()
+        inner = inner.replace(r"\left\{", r"\left\lbrace")
+        inner = inner.replace(r"\right\}", r"\right\rbrace")
+        return "$" + inner + "$"
+
+    parts = text.split("$$")
+    for i in range(0, len(parts), 2):
+        parts[i] = re.sub(r"\$([^$]+)\$", repl, parts[i])
+    return "$$".join(parts)
+
+
+MATH_CMD_RE = re.compile(
+    r"\\(?:infty|rightarrow|leftarrow|Delta|lambda|mu|rho|alpha|beta|gamma|theta|"
+    r"sigma|omega|bar|hat|tilde|frac|times|exp|sum|prod|int|"
+    r"partial|cdot|leq|geq|neq|approx|dots|ldots|cdots|prime|quad|qquad|"
+    r"lim|ln|log|sin|cos|tan|mathrm|mathbf)\b"
+)
+
+
+def _consume_mathish(text: str, i: int) -> int:
+    n = len(text)
+    while i < n:
+        if text[i] == "\\":
+            j = i + 1
+            if j < n and text[j] in "{}%$&_#":
+                i = j + 1
+                continue
+            while j < n and text[j].isalpha():
+                j += 1
+            cmd = text[i + 1 : j]
+            i = j
+            if cmd in {"left", "right"} and i < n:
+                if text.startswith(r"\langle", i) or text.startswith(r"\rangle", i):
+                    i += 7
+                elif text[i] in ".()[]|/<>":
+                    i += 1
+            continue
+        if text[i] == "{":
+            end = _try_consume_braced(text, i)
+            if end is None:
+                break
+            i = end
+            continue
+        if text[i] in "([":
+            opener = text[i]
+            closer = ")" if opener == "(" else "]"
+            depth = 1
+            i += 1
+            while i < n and depth:
+                if text[i] == opener:
+                    depth += 1
+                elif text[i] == closer:
+                    depth -= 1
+                i += 1
+            continue
+        if text[i] in "^_":
+            i += 1
+            if i < n and text[i] == "{":
+                end = _try_consume_braced(text, i)
+                if end is None:
+                    break
+                i = end
+            elif i < n and not text[i].isspace():
+                i += 1
+            continue
+        if text[i] in " \t" and i + 1 < n and text[i + 1] == "\\":
+            i += 1
+            continue
+        break
+    return i
+
+
+def wrap_bare_tex(text: str) -> str:
+    """Wrap leftover TeX commands that sit outside `$...$` / `$$...$$`."""
+    out: list[str] = []
+    i = 0
+    n = len(text)
+    in_display = False
+    in_inline = False
+    while i < n:
+        if not in_inline and text.startswith("$$", i):
+            in_display = not in_display
+            out.append("$$")
+            i += 2
+            continue
+        if not in_display and text[i] == "$" and (i == 0 or text[i - 1] != "\\"):
+            in_inline = not in_inline
+            out.append("$")
+            i += 1
+            continue
+        if not in_display and not in_inline:
+            if text.startswith(r"\left", i):
+                j = text.find(r"\right", i + 5)
+                k = i
+                while k > 0 and text[k - 1].isalpha():
+                    k -= 1
+                if j < 0:
+                    end = _consume_mathish(text, i)
+                    chunk = text[k:end] + r"\right."
+                else:
+                    end = _consume_mathish(text, j)
+                    chunk = text[k:end]
+                out.append("$" + chunk + "$")
+                i = end
+                continue
+            m = MATH_CMD_RE.match(text, i)
+            if m:
+                end = _consume_mathish(text, i)
+                chunk = text[i:end]
+                if chunk:
+                    out.append("$" + chunk + "$")
+                    i = end
+                    continue
+        out.append(text[i])
+        i += 1
+    return "".join(out)
+
+
+def latex_envs_for_markdown(text: str) -> str:
+    text = text.replace(r"\[", "$$").replace(r"\]", "$$")
+    text = re.sub(r"\\begin\{equation\*?\}", "$$", text)
+    text = re.sub(r"\\end\{equation\*?\}", "$$", text)
+
+    def eqna(m: re.Match[str]) -> str:
+        inner = m.group(1).replace(r"\&", "&")
+        math_lines: list[str] = []
+        chunks: list[str] = []
+
+        def flush() -> None:
+            if math_lines:
+                chunks.append(
+                    "$$\n\\begin{aligned}\n" + "\n".join(math_lines) + "\n\\end{aligned}\n$$"
+                )
+                math_lines.clear()
+
+        for ln in inner.splitlines():
+            s = ln.strip()
+            if not s:
+                continue
+            if "&" in s or s.endswith(r"\\") or s.startswith("\\"):
+                math_lines.append(ln)
+            else:
+                flush()
+                chunks.append(s)
+        flush()
+        return "\n\n".join(chunks) if chunks else ""
+
+    text = re.sub(
+        r"\\begin\{eqnarray\*?\}(.*?)\\end\{eqnarray\*?\}",
+        eqna,
+        text,
+        flags=re.S,
+    )
+    return fix_cases_arrays(text)
+
+
+def wrap_alignments(body: str) -> str:
+    """Orphan `&` rows from LyX tabular/eqnarray become aligned math."""
+    if "&" not in body:
+        return body
+    if r"\begin{aligned}" in body or r"\begin{array}" in body:
+        return body
+    lines = body.splitlines()
+    aligned = [ln for ln in lines if "&" in ln]
+    if not aligned:
+        return body
+    if any(ln.count("&") >= 2 for ln in aligned):
+        cells = []
+        for ln in aligned:
+            row = [c.strip() for c in ln.replace(r"\\", "").split("&")]
+            cells.append(row)
+        width = max(len(r) for r in cells)
+        cells = [r + [""] * (width - len(r)) for r in cells]
+        header, rest = cells[0], cells[1:]
+        table = [
+            "| " + " | ".join(header) + " |",
+            "| " + " | ".join(["---"] * width) + " |",
+        ]
+        for row in rest:
+            table.append("| " + " | ".join(row) + " |")
+        other = [ln for ln in lines if "&" not in ln]
+        return "\n\n".join(["\n".join(other), "\n".join(table)] if other else ["\n".join(table)])
+    wrapped = "$$\n\\begin{aligned}\n" + "\n".join(aligned) + "\n\\end{aligned}\n$$"
+    other = [ln for ln in lines if "&" not in ln]
+    return "\n\n".join(["\n".join(other), wrapped] if other else [wrapped])
+
+
+def prepare_tex_body(text: str) -> str:
+    text = strip_answer_macros(strip_figure_chrome(text))
+    text = latex_envs_for_markdown(text)
+    text = wrap_alignments(text)
+    text = tidy_dollar_math(text)
+    text = repair_fracs(text)
+    text = inject_ensuremath(text)
+    text = text.replace(r"\ensuremath{\lambda\}", r"\ensuremath{\lambda}")
+    text = re.sub(
+        r"\\ensuremath\{\\frac\{([^{}]+)\}\{([^{}]+)\}\\\}",
+        r"\\ensuremath{\\frac{\1}{\2}}",
+        text,
+    )
+    return text
+
+
+def inject_ensuremath(text: str) -> str:
+    """Wrap leftover math commands so they are legal in text mode."""
+    cmd_re = re.compile(
+        r"\\(?:infty|rightarrow|leftarrow|Delta|lambda|mu|rho|alpha|beta|gamma|"
+        r"theta|sigma|omega|bar|hat|tilde|frac|times|exp|sum|prod|int|partial|"
+        r"cdot|leq|geq|neq|approx|dots|ldots|cdots|lim|ln|log)\b"
+    )
+    out: list[str] = []
+    i = 0
+    n = len(text)
+    while i < n:
+        m = cmd_re.search(text, i)
+        if not m:
+            out.append(text[i:])
+            break
+        start = m.start()
+        if text.rfind(r"\ensuremath{", i, start) > text.rfind("}", i, start):
+            out.append(text[i : m.end()])
+            i = m.end()
+            continue
+        out.append(text[i:start])
+        end = _consume_mathish(text, start)
+        chunk = text[start:end]
+        if chunk.startswith(r"\ensuremath{"):
+            out.append(chunk)
+        else:
+            out.append(r"\ensuremath{" + chunk + "}")
+        i = end
+    return "".join(out)
+
+
+def repair_fracs(text: str) -> str:
+    """Give \\frac two brace arguments, or flatten it if LyX left it unclosed."""
+
+    def once(src: str) -> str:
+        out: list[str] = []
+        i = 0
+        n = len(src)
+        while i < n:
+            if src.startswith(r"\frac", i) and (i == 0 or not src[i - 1].isalpha()):
+                i += 5
+                args: list[str] = []
+                broken = False
+                while len(args) < 2 and not broken:
+                    while i < n and src[i].isspace():
+                        i += 1
+                    if i < n and src[i] == "{":
+                        end = _try_consume_braced(src, i)
+                        if end is None:
+                            cut = n
+                            for sep in ("$", "\n"):
+                                p = src.find(sep, i + 1)
+                                if p >= 0:
+                                    cut = min(cut, p)
+                            args.append(src[i + 1 : cut])
+                            i = cut
+                            broken = True
+                        else:
+                            args.append(src[i + 1 : end - 1])
+                            i = end
+                    else:
+                        args.append("1")
+                if broken:
+                    out.append(" ".join(args))
+                else:
+                    out.append(r"\frac{" + args[0] + "}{" + args[1] + "}")
+                continue
+            out.append(src[i])
+            i += 1
+        return "".join(out)
+
+    prev = None
+    for _ in range(6):
+        if src := once(text):
+            if src == prev:
+                return src
+            prev, text = src, src
+    return text
+
+
 def stem_of(path: str) -> str:
     name = Path(path).name
     for ext in (".eps", ".pdf", ".png", ".jpg", ".gif", ".ps"):
@@ -89,7 +453,7 @@ def notes_wrap(text: str) -> str:
     text = text.strip()
     if not text:
         return ""
-    text = text.replace(r"\[", "$$").replace(r"\]", "$$")
+    text = prepare_tex_body(text)
     # GPP is brace-aware; keep the block balanced.
     extra = text.count("{") - text.count("}")
     if extra > 0:
@@ -103,7 +467,7 @@ def slides_wrap(lines: list[str]) -> str:
     body = "\n".join(lines).strip()
     if not body:
         return ""
-    body = body.replace(r"\[", "$$").replace(r"\]", "$$")
+    body = prepare_tex_body(body)
     extra = body.count("{") - body.count("}")
     if extra > 0:
         body += "}" * extra
@@ -189,11 +553,13 @@ def env_to_notes(block: TexBlock) -> str:
     if kind == "figure":
         return figure_from_tex(body)
     if kind in {"itemize", "enumerate", "description"}:
-        items = itemize_to_md(body, kind)
+        items = itemize_to_md(strip_figure_chrome(strip_answer_macros(body)), kind)
         return notes_wrap(items)
     if kind == "answer":
         inner = "\n".join(block.lines[1:-1]).strip()
-        return "\\notes{\\subsection{Answer}}\n\n" + notes_wrap(latex_inline_to_md(inner))
+        return "\\notes{\\subsection{Answer}}\n\n" + notes_wrap(
+            latex_inline_to_md(strip_figure_chrome(strip_answer_macros(inner)))
+        )
     if kind == "lyxnote":
         inner = "\n".join(block.lines[1:-1]).strip()
         return notes_wrap("*Note.* " + latex_inline_to_md(inner))
@@ -299,8 +665,9 @@ def units_to_notes(units: list[TexBlock]) -> str:
             raw = "\n".join(unit.lines)
             gm = GRAPHICS_RE.search(raw)
             if gm:
-                parts.append(figure_lamd(gm.group(2), gm.group(1), "", ""))
+                parts.append(figure_from_tex(raw) if r"\caption" in raw else figure_lamd(gm.group(2), gm.group(1), "", ""))
                 raw = GRAPHICS_RE.sub("", raw)
+            raw = strip_figure_chrome(raw)
             text = latex_inline_to_md(raw)
             if text:
                 parts.append(notes_wrap(text))
@@ -485,7 +852,63 @@ def polish_notes(text: str) -> str:
     )
     text = re.sub(r"\\notes\{\{+", r"\\notes{", text)
     text = re.sub(r"\\notes\{\s*\}", "", text)
+    text = lift_figures_from_notes(text)
     return text
+
+
+def lift_figures_from_notes(text: str) -> str:
+    """\\figure must sit outside \\notes so GPP expands it as a float."""
+    prev = None
+    while prev != text:
+        prev = text
+        text = _lift_figures_once(text)
+    return text
+
+
+def _figure_end(text: str, k: int) -> int:
+    i = k + len("\\figure")
+    for _ in range(3):
+        while i < len(text) and text[i].isspace():
+            i += 1
+        if i < len(text) and text[i] == "{":
+            i = _consume_braced(text, i)
+    return i
+
+
+def _lift_figures_once(text: str) -> str:
+    token = "\\notes{"
+    out: list[str] = []
+    i = 0
+    while True:
+        k = text.find(r"\figure{", i)
+        if k < 0:
+            out.append(text[i:])
+            break
+        prefix = text[i:k]
+        last_notes = prefix.rfind(token)
+        unclosed = False
+        if last_notes >= 0:
+            rest = prefix[last_notes + len(token) - 1 :]
+            depth = 0
+            for ch in rest:
+                if ch == "{":
+                    depth += 1
+                elif ch == "}":
+                    depth -= 1
+            unclosed = depth > 0
+        if unclosed:
+            out.append(prefix)
+            out.append("}\n\n")
+            end = _figure_end(text, k)
+            out.append(text[k:end].strip())
+            out.append("\n\n\\notes{")
+            i = end
+            continue
+        out.append(prefix)
+        end = _figure_end(text, k)
+        out.append(text[k:end])
+        i = end
+    return "".join(out)
 
 
 @dataclass
@@ -609,8 +1032,13 @@ def foil_to_slides(title: str, units: list[TexBlock], continued: bool, orig_inde
             extras.append(slides_wrap([figure_from_tex(raw)]))
             continue
         for gm in GRAPHICS_RE.finditer(raw):
-            extras.append(slides_wrap([figure_lamd(gm.group(2), gm.group(1), "", stem_of(gm.group(2)))]))
+            extras.append(
+                slides_wrap(
+                    [figure_from_tex(raw) if r"\caption" in raw else figure_lamd(gm.group(2), gm.group(1), "", stem_of(gm.group(2)))]
+                )
+            )
         raw = GRAPHICS_RE.sub("", raw)
+        raw = strip_figure_chrome(strip_answer_macros(raw))
         if unit.kind.startswith("env:itemize") or unit.kind.startswith("env:enumerate") or unit.kind.startswith("env:description"):
             md = pythonise_matlab(itemize_to_md(raw, unit.kind.split(":")[-1]))
             bullets.extend(line for line in md.splitlines() if line.strip())

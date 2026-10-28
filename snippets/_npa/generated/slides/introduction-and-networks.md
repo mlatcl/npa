@@ -16,12 +16,9 @@
 
 \slides{* Circuit switched networks were designed for telephone communication between two correspondents.
 * By the early 1960s *packet switching networks* came into being.
-* ARPANET was predecessor of the internet.
-  [ht]
-    \centering
-    \caption{The ARPANET in 1975, image courtesy of the Computer History Museum, [http://www.computerhistory.org](http://www.computerhistory.org).}}
+* ARPANET was predecessor of the internet.}
 
-\slides{\figure{\includepng{\diagramsDir/npa/1975_net_map}{80%}}{1975_net_map}{1975_net_map}}
+\slides{\figure{\includepng{\diagramsDir/npa/1975_net_map}{80%}}{The ARPANET in 1975, image courtesy of the Computer History Museum, [http://www.computerhistory.org](http://www.computerhistory.org).}{1975-net-map}}
 
 \newslide{Network Performance Analysis}
 
@@ -98,7 +95,7 @@
 \newslide{The Road Ahead}
 
 \slides{* **Probability\** Review Review of probability theory.
-* **Simple\** Queuing\  models Simple models of queues based on probability theory. Little's formula, $M/M/1$ queue, $M/M/\infty$, $M/M/m$, $M/M/m/m$ and $M/G/1$.
+* **Simple\** Queuing\  models Simple models of queues based on probability theory. Little's formula, $M/M/1$ queue, $M/M/\ensuremath{\infty}$, $M/M/m$, $M/M/m/m$ and $M/G/1$.
 * **Simulation** Simulation of queueing systems.}
 
 \newslide{Examples}
@@ -107,19 +104,22 @@
 2. You are starting an e-commerce company.
 3. You have a tight budget.
 4. You have:
+
+$$
+\begin{aligned}
 5. two disk systems (1 & 2).
-6. two CPU systems (A & B).}
+6. two CPU systems (A & B).
+\end{aligned}
+$$}
 
 \newslide{Examples (continued)}
 
 \slides{1. Which should you combine to make your two servers?
   % empty table
-    \answer{
 2. Answer
 3. You should match A with 2 and B with 1.
 4. This avoids bottlenecks:
 5. Disk 1 would wait for CPU A to process about 50% of the time.
-6. CPU B would wait for disk 2 to access about 50% of the time.
-      \}{0}}
+6. CPU B would wait for disk 2 to access about 50% of the time.}
 
 \endif

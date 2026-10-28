@@ -5,7 +5,7 @@
 
 \notes{The Pollaczek-Khinchin formula is given as
 $$
-\bar{W}=\frac{\lambda\left\langle X^{2}\right\rangle }{2(1-\rho)}$$where $\bar{W}$ is expected waiting time,$\left\langle X^{2}\right\rangle =\left\langle X^{2}\right\rangle _{p(X)}$ is the second moment under the service time distribution, the utilisation factor is given as $\rho=\lambda\bar{X}$ and $\bar{X}=\left\langle X\right\rangle _{p(X)}$ is the mean under the service time distribution.}
+\ensuremath{\bar{W}}=\ensuremath{\frac{\lambda\left\langle X^{2}\right\rangle }{2(1-\rho)}}$$where $\ensuremath{\bar{W}}$ is expected waiting time,$\left\langle X^{2}\right\rangle =\left\langle X^{2}\right\rangle _{p(X)}$ is the second moment under the service time distribution, the utilisation factor is given as $\ensuremath{\rho}=\ensuremath{\lambda\bar{X}}$ and $\ensuremath{\bar{X}}=\left\langle X\right\rangle _{p(X)}$ is the mean under the service time distribution.}
 
 \notes{\section{Proof of Pollaczek-Khinchin Formula}}
 
@@ -15,8 +15,8 @@ $$
 2. The arrival times are statistically independent of the service times.
 3. The arrival time distribution has a variance which is finite.}
 
-\notes{To formulate the proof we introduce a concept known as the mean residual service time, $\bar{R}$. We show that the average waiting time is related to the mean residual service time as follows: \begin{equation}
-\bar{W}=\frac{\bar{R}}{1-\rho}\label{eqn:arrivals}\end{equation} We now have the average queueing time in terms of the mean residual service time. To complete the Pollaczek-Khinchin formula we simply need to calculate $\bar{R}$.}
+\notes{To formulate the proof we introduce a concept known as the mean residual service time, $\ensuremath{\bar{R}}$. We show that the average waiting time is related to the mean residual service time as follows: $$
+\ensuremath{\bar{W}}=\ensuremath{\frac{\bar{R}}{1-\rho}\label{eqn:arrivals}}$$ We now have the average queueing time in terms of the mean residual service time. To complete the Pollaczek-Khinchin formula we simply need to calculate $\ensuremath{\bar{R}}$.}
 
 \notes{\section{Residual Service Time from Departures Perspective}}
 
@@ -26,12 +26,15 @@ $$
 
 \notes{The time average of the mean residual service time can then be calculated in terms of the area under the curve, $A\left(t\right)$, which is given by the area under each of the triangles,
 $$
-A(t)=\frac{1}{2}\sum_{i=1}^{M(t)}X_{i}^{2}.$$ The average service time is the area divided by time, $t$, \begin{eqnarray*}
-\frac{A(t)}{t} & = & \frac{M(t)}{t}\frac{A(t)}{M(t)}\\
- & = & \frac{1}{2}\frac{M(t)}{t}\frac{\sum_{i=1}^{M(t)}X_{i}^{2}}{M(t)}.\end{eqnarray*}where we have introduced the number of arrivals after time $t$, as $M\left(t\right)$. As $t\rightarrow\infty$, if the variance of the service time distribution is finite, we find that$$
-\bar{R}=\frac{1}{2}\lambda\left\langle X^{2}\right\rangle .$$ Again, assuming that time averages and ensemble averages are equal, we substitute back into (\ref{eqn:arrivals}) to obtain the Pollaczek-Khinchin formula $$
-\bar{W}=\frac{\lambda\left\langle X^{2}\right\rangle }{2(1-\rho)}.$$This implies that the total waiting time in the system is $$
-\bar{T}=\bar{X}+\frac{\lambda\left\langle X^{2}\right\rangle }{2(1-\rho)}$$ and through Little's formula we can obtain the expected queue length, $\bar{N}_{Q}$, and the expected number in the system, $\bar{N}$. **Note that derivation of this formula was Question 1 in the 2002-2003 paper**. Now consider Examples\  \ref{example:MarkovService},\  \ref{example:DeterministicService}  and\  \ref{example:uniformService} at the end of this chapter for the use of the Pollaczek-Khinchin formula.}
+A(t)=1\sum_{i=1}^{M(t)}X_{i}^{2}.$$ The average service time is the area divided by time, $t$, $$
+\begin{aligned}
+\ensuremath{\frac{A(t)}{t}} & = & \ensuremath{\frac{M(t)}{t}\frac{A(t)}{M(t)}\\}
+ & = & 1\ensuremath{\frac{M(t)}{t}\frac{\sum_{i=1}^{M(t)}X_{i}^{2}}{M(t)}}.
+\end{aligned}
+$$where we have introduced the number of arrivals after time $t$, as $M\left(t\right)$. As $t\ensuremath{\rightarrow\infty}$, if the variance of the service time distribution is finite, we find that$$
+\ensuremath{\bar{R}}=1\ensuremath{\lambda\left\langle} X^{2}\right\rangle .$$ Again, assuming that time averages and ensemble averages are equal, we substitute back into (\ref{eqn:arrivals}) to obtain the Pollaczek-Khinchin formula $$
+\ensuremath{\bar{W}}=\ensuremath{\frac{\lambda\left\langle X^{2}\right\rangle }{2(1-\rho)}}.$$This implies that the total waiting time in the system is $$
+\ensuremath{\bar{T}}=\ensuremath{\bar{X}}+\ensuremath{\frac{\lambda\left\langle X^{2}\right\rangle }{2(1-\rho)}}$$ and through Little's formula we can obtain the expected queue length, $\ensuremath{\bar{N}_{Q}}$, and the expected number in the system, $\ensuremath{\bar{N}}$. **Note that derivation of this formula was Question 1 in the 2002-2003 paper**. Now consider Examples\  \ref{example:MarkovService},\  \ref{example:DeterministicService}  and\  \ref{example:uniformService} at the end of this chapter for the use of the Pollaczek-Khinchin formula.}
 
 \notes{\subsection{Table of Delays and Average Numbers in System}}
 
@@ -39,9 +42,9 @@ A(t)=\frac{1}{2}\sum_{i=1}^{M(t)}X_{i}^{2}.$$ The average service time is the ar
 
 \notes{| Expected value | General | Exponential | Deterministic |
 | --- | --- | --- | --- |
-| $\bar{W}$ | $\frac{\lambda}{2(1-\rho)}\left\langle X^{2}\right\rangle $ | $\frac{\rho}{\mu(1-\rho)}$ | $\frac{\rho}{2\mu(1-\rho)}$ |
-| $\bar{T}=\bar{W}+\frac{1}{\mu}$ | $\frac{\lambda}{2(1-\rho)}\left\langle X^{2}\right\rangle +\frac{1}{\mu}$ | $\frac{1}{\mu(1-\rho)}$ | $\frac{2-\rho}{2\mu(1-\rho)}$ |
-| $\bar{N_{Q}}=\lambda\bar{W}$ | $\frac{\lambda^{2}}{2(1-\rho)}\left\langle X^{2}\right\rangle $ | $\frac{\rho^{2}}{(1-\rho)}$ | $\frac{\rho^{2}}{2(1-\rho)}$ |
-| $\bar{N}=\lambda\bar{W}+\rho=$ | $\frac{\lambda^{2}}{2(1-\rho)}\left\langle X^{2}\right\rangle +\rho$ | $\frac{\rho}{1-\rho}$ | $\frac{\rho(2-\rho)}{2(1-\rho)}$ |}
+| $\ensuremath{\bar{W}}$ | $\ensuremath{\frac{\lambda}{2(1-\rho)}\left\langle} X^{2}\right\rangle$ | $\ensuremath{\frac{\rho}{\mu(1-\rho)}}$ | $\ensuremath{\frac{\rho}{2\mu(1-\rho)}}$ |
+| $\ensuremath{\bar{T}}=\ensuremath{\bar{W}}+\ensuremath{\frac{1}{\mu}}$ | $\ensuremath{\frac{\lambda}{2(1-\rho)}\left\langle} X^{2}\right\rangle +\ensuremath{\frac{1}{\mu}}$ | $\ensuremath{\frac{1}{\mu(1-\rho)}}$ | $\ensuremath{\frac{2-\rho}{2\mu(1-\rho)}}$ |
+| $\ensuremath{\bar{N_{Q}}}=\ensuremath{\lambda\bar{W}}$ | $\ensuremath{\frac{\lambda^{2}}{2(1-\rho)}\left\langle} X^{2}\right\rangle$ | $\ensuremath{\frac{\rho^{2}}{(1-\rho)}}$ | $\ensuremath{\frac{\rho^{2}}{2(1-\rho)}}$ |
+| $\ensuremath{\bar{N}}=\ensuremath{\lambda\bar{W}}+\ensuremath{\rho}=$ | $\ensuremath{\frac{\lambda^{2}}{2(1-\rho)}\left\langle} X^{2}\right\rangle +\ensuremath{\rho}$ | $\ensuremath{\frac{\rho}{1-\rho}}$ | $\ensuremath{\frac{\rho(2-\rho)}{2(1-\rho)}}$ |}
 
 \endif

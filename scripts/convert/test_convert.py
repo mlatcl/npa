@@ -80,6 +80,33 @@ def test_collect_foils_from_tex():
     assert n_new >= 243, n_new
 
 
+def test_pdf_sanitize_strips_figure_chrome_and_math():
+    from emit_lamd import notes_wrap, prepare_tex_body, strip_figure_chrome
+
+    leftover = r"""
+ARPANET was predecessor of the internet.
+  [ht]
+    \caption{The ARPANET in 1975.}
+"""
+    cleaned = strip_figure_chrome(leftover)
+    assert r"\caption" not in cleaned
+    assert "[ht]" not in cleaned
+    assert "ARPANET was predecessor" in cleaned
+
+    math = r"also see expectations written in the form $E\left\{ f\left(x\right)\right\} $."
+    wrapped = notes_wrap(math)
+    assert r"\left\lbrace" in wrapped
+    assert r"\$E\left" not in wrapped
+
+    cases = r"\mu_{k}=\left\{ {cc} k\mu & k=0 \\ m\mu & k>m\right."
+    out = prepare_tex_body(cases)
+    assert r"\begin{array}{cc}" in out
+    assert r"\end{array}" in out
+    # Do not rewrite \right) belonging to \left(k-1\right).
+    balanced = r"\lambda P\left(k-1\right)=\mu P\left(k\right)"
+    assert r"\end{array}" not in prepare_tex_body(balanced)
+
+
 if __name__ == "__main__":
     test_expand_answers_and_slides_stay_off_notes()
     print("notes polish ok")
@@ -91,3 +118,5 @@ if __name__ == "__main__":
     print("slides foils ok")
     test_collect_foils_from_tex()
     print("collect foils ok")
+    test_pdf_sanitize_strips_figure_chrome_and_math()
+    print("pdf sanitize ok")

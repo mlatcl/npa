@@ -11,7 +11,12 @@ In these first two chapters we will introduce the background for the material wh
 
 \notes{Perhaps the first major development in telecommunications was *the telegraph*. **Samuel F. B. Morse** developed ideas for the electrical telegraph which exploited the relationship between magnetism and electricity. His first working system sent a short message from Baltimore to Washington D.C. (two cities that are conveniently close together!). It was sent on May 24th, 1844: `What hath God wrought?'. Ten years later 23,000 miles of wire across the United States.
 At the time, a key limitation of the telegraph was that it only provided one channel per wire for communication. Work in using a single wire for multiple channels (multiplexing) indirectly led to the invention of *the telephone*which was patented by **Alexander Graham Bell** (1847-1922) in March 7th, 1876.
-The development of a *wireless telegraphy* system by the Italian born engineer **Guglielmo Marconi** (1874-1937), patented in July 1897, led to the foundation of the Wireless Telegraph & Signal Company. By December 1901 short wave transmission across the Atlantic between England and Canada (over 2,100 miles).}
+
+$$
+\begin{aligned}
+The development of a *wireless telegraphy* system by the Italian born engineer **Guglielmo Marconi** (1874-1937), patented in July 1897, led to the foundation of the Wireless Telegraph & Signal Company. By December 1901 short wave transmission across the Atlantic between England and Canada (over 2,100 miles).
+\end{aligned}
+$$}
 
 \notes{\section{Automated Telephone Networks}}
 
@@ -152,7 +157,7 @@ Similar principles occur for *e.g.* thinwire Ethernet, in this case the communic
 \notes{\section{The Road Ahead}}
 
 \notes{* **Probability\** Review Review of probability theory.
-* **Simple\** Queueing\  models Simple models of queues based on probability theory. Little's formula, $M/M/1$ queue, $M/M/\infty$, $M/M/m$, $M/M/m/m$ and $M/G/1$.
+* **Simple\** Queueing\  models Simple models of queues based on probability theory. Little's formula, $M/M/1$ queue, $M/M/\ensuremath{\infty}$, $M/M/m$, $M/M/m/m$ and $M/G/1$.
 * **Simulation** Simulation of queueing systems.}
 
 \notes{## Examples}
@@ -161,8 +166,6 @@ Similar principles occur for *e.g.* thinwire Ethernet, in this case the communic
 2. You are starting an e-commerce company.
 3. You have a tight budget.
 4. You have:
-5. two disk systems (1 & 2).
-6. two CPU systems (A & B).
 7. Which should you combine to make your two servers?
     
   
@@ -171,6 +174,13 @@ Similar principles occur for *e.g.* thinwire Ethernet, in this case the communic
 8. You should match A with 2 and B with 1.
 9. This avoids bottlenecks:
 10. Disk 1 would wait for CPU A to process about 50% of the time.
-11. CPU B would wait for disk 2 to access about 50% of the time.}
+11. CPU B would wait for disk 2 to access about 50% of the time.
+
+$$
+\begin{aligned}
+5. two disk systems (1 & 2).
+6. two CPU systems (A & B).
+\end{aligned}
+$$}
 
 \endif

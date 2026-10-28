@@ -13,30 +13,30 @@
 
 \slides{* Can be applied to $G/G/1$ queues.
 * Gives the relationship between
-* Steady-state average size of a queue, $\bar{N}$.
-* The steady-state arrival rate, $\lambda$.
-* The steady-state customer delay, $\bar{T}$.}
+* Steady-state average size of a queue, $\ensuremath{\bar{N}}$.
+* The steady-state arrival rate, $\ensuremath{\lambda}$.
+* The steady-state customer delay, $\ensuremath{\bar{T}}$.}
 
 \newslide{Time and Steady State Averages}
 
 \slides{* We have already introduced the distribution means and sample based means.
 * Time based averages are a further type of average.
 * The time average is the average value of a particular function over time.$$
-\bar{f}_{t}=\frac{1}{t}\int_{0}^{t}f\left(\tau\right)d\tau.$$}
+\ensuremath{\bar{f}_{t}}=\ensuremath{\frac{1}{t}\int_{0}^{t}}f\left(\tau\right)d\tau.$$}
 
 \newslide{Time and Steady State Averages II}
 
 \slides{* The derivation of Little's formula relies on an assumption.
-* Assume that averages under the steady state distribution are equivalent to the time average in the limit as $t\rightarrow\infty$,
+* Assume that averages under the steady state distribution are equivalent to the time average in the limit as $t\ensuremath{\rightarrow\infty}$,
 * Average number in the system as a function of time is given by $$
-\bar{N}_{t}=\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau$$and the time average after in the limit as $t\rightarrow\infty$ is given by $$
-\bar{N}=\lim_{t\rightarrow\infty}\bar{N}\left(t\right).$$which we assume is equivalent to $\left\langle k\right\rangle _{p\left(k\right)}\equiv\bar{N}$. See pg 156-157 in [@Bertsekas:data92].}
+\ensuremath{\bar{N}_{t}}=\ensuremath{\frac{1}{t}\int_{0}^{t}}N\left(\tau\right)d\tau$$and the time average after in the limit as $t\ensuremath{\rightarrow\infty}$ is given by $$
+\ensuremath{\bar{N}}=\lim_{t\ensuremath{\rightarrow\infty}}\ensuremath{\bar{N}\left(}t\right).$$which we assume is equivalent to $\left\langle k\right\rangle _{p\left(k\right)}\equiv\ensuremath{\bar{N}}$. See pg 156-157 in [@Bertsekas:data92].}
 
 \newslide{The Formula}
 
 \slides{* Applies under steady state conditions.
 * Under the steady state assumptions it states,$$
-\bar{N}=\lambda\bar{T}.$$}
+\ensuremath{\bar{N}}=\ensuremath{\lambda\bar{T}}.$$}
 
 \newslide{The Formula (continued)}
 
@@ -56,94 +56,94 @@ According to Little's formula, how long would you expect to have to wait to get 
 \newslide{Graphical Proof I (continued)}
 
 \slides{* Example 1, Chapter 7. Graphical Proof of Little's Formula.
-* Sketch two curves vs time: the number of arrivals ($\alpha\left(\tau\right)$) and the number of departures ($\beta\left(\tau\right)$) .
+* Sketch two curves vs time: the number of arrivals ($\ensuremath{\alpha\left(\tau\right)}$) and the number of departures ($\ensuremath{\beta\left(\tau\right)}$) .
 * Also plot $N\left(t\right)$ the number in the queue as function of time.
-* By looking at Figure\  \ref{cap:littlesGraphical} we note that the area between the lines in the top figure can be expressed as both $\int_{0}^{t}N(\tau)d\tau$ and $\sum_{i=1}^{\alpha\left(t\right)}T_{i}$. We may therefore equate these expressions,$$
-\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i}.$$
+* By looking at Figure\  \ref{cap:littlesGraphical} we note that the area between the lines in the top figure can be expressed as both $\int_{0}^{t}N(\tau)d\tau$ and $\sum_{i=1}^{\ensuremath{\alpha\left(}t\right)}T_{i}$. We may therefore equate these expressions,$$
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\ensuremath{\alpha(t)}}T_{i}.$$
 * $$
-\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},$$
-    introduce $\alpha\left(t\right)$
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\ensuremath{\alpha(t)}}T_{i},$$
+    introduce $\ensuremath{\alpha\left(}t\right)$
     $$
-\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},$$
-    introduce $\alpha\left(t\right)$
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\ensuremath{\alpha(t)}}T_{i},$$
+    introduce $\ensuremath{\alpha\left(}t\right)$
     $$
-\int_{0}^{t}N\left(\tau\right)d\tau=\alpha\left(t\right)\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}$$
+\int_{0}^{t}N\left(\tau\right)d\tau=\ensuremath{\alpha\left(}t\right)\ensuremath{\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}}$$
     and divide both sides by $t$,
     $$
-\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},$$
-    introduce $\alpha\left(t\right)$
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\ensuremath{\alpha(t)}}T_{i},$$
+    introduce $\ensuremath{\alpha\left(}t\right)$
     $$
-\int_{0}^{t}N\left(\tau\right)d\tau=\alpha\left(t\right)\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}$$
+\int_{0}^{t}N\left(\tau\right)d\tau=\ensuremath{\alpha\left(}t\right)\ensuremath{\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}}$$
     and divide both sides by $t$,
     $$
-\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau=\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}.$$
+\ensuremath{\frac{1}{t}\int_{0}^{t}}N\left(\tau\right)d\tau=\ensuremath{\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}}.$$
     The equation now has the form of three averages.
     $$
-\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},$$
-    introduce $\alpha\left(t\right)$
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\ensuremath{\alpha(t)}}T_{i},$$
+    introduce $\ensuremath{\alpha\left(}t\right)$
     $$
-\int_{0}^{t}N\left(\tau\right)d\tau=\alpha\left(t\right)\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}$$
+\int_{0}^{t}N\left(\tau\right)d\tau=\ensuremath{\alpha\left(}t\right)\ensuremath{\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}}$$
     and divide both sides by $t$,
     $$
-\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau=\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}.$$
+\ensuremath{\frac{1}{t}\int_{0}^{t}}N\left(\tau\right)d\tau=\ensuremath{\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}}.$$
     The equation now has the form of three averages.
     $$
-\bar{N}_{t}=\frac{1}{t}\int_{0}^{t}N\left(\tau\right).$$
+\ensuremath{\bar{N}_{t}}=\ensuremath{\frac{1}{t}\int_{0}^{t}}N\left(\tau\right).$$
     an average, over time, of the queue length
     $$
-\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},$$
-    introduce $\alpha\left(t\right)$
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\ensuremath{\alpha(t)}}T_{i},$$
+    introduce $\ensuremath{\alpha\left(}t\right)$
     $$
-\int_{0}^{t}N\left(\tau\right)d\tau=\alpha\left(t\right)\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}$$
+\int_{0}^{t}N\left(\tau\right)d\tau=\ensuremath{\alpha\left(}t\right)\ensuremath{\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}}$$
     and divide both sides by $t$,
     $$
-\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau=\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}.$$
+\ensuremath{\frac{1}{t}\int_{0}^{t}}N\left(\tau\right)d\tau=\ensuremath{\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}}.$$
     The equation now has the form of three averages.
     $$
-\bar{N}_{t}=\frac{1}{t}\int_{0}^{t}N\left(\tau\right).$$
+\ensuremath{\bar{N}_{t}}=\ensuremath{\frac{1}{t}\int_{0}^{t}}N\left(\tau\right).$$
     an average, over time, of the queue length
     $$
-\bar{\lambda}_{t}=\frac{\alpha\left(t\right)}{t},$$
+\ensuremath{\bar{\lambda}_{t}}=\ensuremath{\frac{\alpha\left(t\right)}{t}},$$
     the average of the arrivals over time
     $$
-\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},$$
-    introduce $\alpha\left(t\right)$
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\ensuremath{\alpha(t)}}T_{i},$$
+    introduce $\ensuremath{\alpha\left(}t\right)$
     $$
-\int_{0}^{t}N\left(\tau\right)d\tau=\alpha\left(t\right)\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}$$
+\int_{0}^{t}N\left(\tau\right)d\tau=\ensuremath{\alpha\left(}t\right)\ensuremath{\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}}$$
     and divide both sides by $t$,
     $$
-\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau=\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}.$$
+\ensuremath{\frac{1}{t}\int_{0}^{t}}N\left(\tau\right)d\tau=\ensuremath{\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}}.$$
     The equation now has the form of three averages.
     $$
-\bar{N}_{t}=\frac{1}{t}\int_{0}^{t}N\left(\tau\right).$$
+\ensuremath{\bar{N}_{t}}=\ensuremath{\frac{1}{t}\int_{0}^{t}}N\left(\tau\right).$$
     an average, over time, of the queue length
     $$
-\bar{\lambda}_{t}=\frac{\alpha\left(t\right)}{t},$$
+\ensuremath{\bar{\lambda}_{t}}=\ensuremath{\frac{\alpha\left(t\right)}{t}},$$
     the average of the arrivals over time
     $$
-\bar{T}_{t}=\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}$$
+\ensuremath{\bar{T}_{t}}=\ensuremath{\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}}$$
     the average waiting time
     $$
-\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\alpha(t)}T_{i},$$
-    introduce $\alpha\left(t\right)$
+\int_{0}^{t}N\left(\tau\right)d\tau=\sum_{i=1}^{\ensuremath{\alpha(t)}}T_{i},$$
+    introduce $\ensuremath{\alpha\left(}t\right)$
     $$
-\int_{0}^{t}N\left(\tau\right)d\tau=\alpha\left(t\right)\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}$$
+\int_{0}^{t}N\left(\tau\right)d\tau=\ensuremath{\alpha\left(}t\right)\ensuremath{\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}}$$
     and divide both sides by $t$,
     $$
-\frac{1}{t}\int_{0}^{t}N\left(\tau\right)d\tau=\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}.$$
+\ensuremath{\frac{1}{t}\int_{0}^{t}}N\left(\tau\right)d\tau=\ensuremath{\frac{\alpha\left(t\right)}{t}\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}}.$$
     The equation now has the form of three averages.
     $$
-\bar{N}_{t}=\frac{1}{t}\int_{0}^{t}N\left(\tau\right).$$
+\ensuremath{\bar{N}_{t}}=\ensuremath{\frac{1}{t}\int_{0}^{t}}N\left(\tau\right).$$
     an average, over time, of the queue length
     $$
-\bar{\lambda}_{t}=\frac{\alpha\left(t\right)}{t},$$
+\ensuremath{\bar{\lambda}_{t}}=\ensuremath{\frac{\alpha\left(t\right)}{t}},$$
     the average of the arrivals over time
     $$
-\bar{T}_{t}=\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}$$
+\ensuremath{\bar{T}_{t}}=\ensuremath{\frac{\sum_{i=1}^{\alpha\left(t\right)}T_{i}}{\alpha\left(t\right)}}$$
     the average waiting time
     $$
-\bar{N}_{t}=\bar{\lambda}_{t}\bar{T}_{t}.$$
-    taking the limit as $t\rightarrow\infty$}
+\ensuremath{\bar{N}_{t}}=\ensuremath{\bar{\lambda}_{t}\bar{T}_{t}}.$$
+    taking the limit as $t\ensuremath{\rightarrow\infty}$}
 
 \newslide{Graphical Proof II}
 
@@ -164,7 +164,7 @@ According to Little's formula, how long would you expect to have to wait to get 
 \newslide{Little's Formula}
 
 \slides{* $$
-\bar{N}=\lambda\bar{T}$$}
+\ensuremath{\bar{N}}=\ensuremath{\lambda\bar{T}}$$}
 
 \newslide{Little's Formula (continued)}
 
@@ -177,10 +177,10 @@ According to Little's formula, how long would you expect to have to wait to get 
 \newslide{Average Delay in $M/M/1$}
 
 \slides{* The mean of the steady state distribution for an $M/M/1$ queue is$$
-\bar{N}=\frac{\lambda}{\mu-\lambda}=\frac{\rho}{1-\rho}.$$
+\ensuremath{\bar{N}}=\ensuremath{\frac{\lambda}{\mu-\lambda}}=\ensuremath{\frac{\rho}{1-\rho}}.$$
 * Can use Little's formula to tell us the average delay.
-* From $\bar{N}=\lambda\bar{T}$ we rearrange to recover $$
-\bar{T}=\frac{1}{\mu-\lambda}$$}
+* From $\ensuremath{\bar{N}}=\ensuremath{\lambda\bar{T}}$ we rearrange to recover $$
+\ensuremath{\bar{T}}=\ensuremath{\frac{1}{\mu-\lambda}}$$}
 
 \newslide{Average Delay in $M/M/1$ (continued)}
 
@@ -199,7 +199,7 @@ According to Little's formula, how long would you expect to have to wait to get 
 \slides{* and service time $X$. $$
 T=X+W.$$
 * Similarly the average delay may be decomposed as$$
-\bar{T}=\bar{X}+\bar{W}.$$
+\ensuremath{\bar{T}}=\ensuremath{\bar{X}}+\ensuremath{\bar{W}}.$$
 * The queue and transmission may the be analysed independently using Little's formula.}
 
 \newslide{The Transmission}
@@ -209,15 +209,15 @@ T=X+W.$$
 
 \newslide{The Transmission (continued)}
 
-\slides{* We define the the average number under transmission as $\rho$ $$
-\rho=\lambda\bar{X},$$where $\bar{X}$ is the average time spend under transmission for each packet.
-* For the $M/M/1$ queue the average transmission time is given by $\bar{X}=\frac{1}{\mu}$,
+\slides{* We define the the average number under transmission as $\ensuremath{\rho}$ $$
+\ensuremath{\rho}=\ensuremath{\lambda\bar{X}},$$where $\ensuremath{\bar{X}}$ is the average time spend under transmission for each packet.
+* For the $M/M/1$ queue the average transmission time is given by $\ensuremath{\bar{X}}=\ensuremath{\frac{1}{\mu}}$,
 * So for the $M/M/1$ queue we have$$
-\rho=\frac{\lambda}{\mu},$$ a formula which we have already used in the last chapter.}
+\ensuremath{\rho}=\ensuremath{\frac{\lambda}{\mu}},$$ a formula which we have already used in the last chapter.}
 
 \newslide{Utilisation Factor}
 
-\slides{* $\rho$ is the utilisation factor.
+\slides{* $\ensuremath{\rho}$ is the utilisation factor.
 * Represents the fraction of time that the transmission line (or server) is in use.}
 
 \newslide{Utilisation Factor (continued)}
@@ -233,20 +233,20 @@ T=X+W.$$
 \newslide{Utilisation Example (continued)}
 
 \slides{* **Answer**
-    \answer{Information says $\rho=0.9$ and $\bar{N}_{Q}=3$. $$
-\lambda=\frac{0.9}{\bar{X}}.$$
+    Information says $\ensuremath{\rho}=0.9$ and $\ensuremath{\bar{N}_{Q}}=3$. $$
+\ensuremath{\lambda}=\ensuremath{\frac{0.9}{\bar{X}}}.$$
     $$
-3=\lambda\bar{W}.$$
-    Therefore $\frac{\bar{W}}{\bar{X}}=3\frac{1}{3}$. \}{6}}
+3=\ensuremath{\lambda\bar{W}}.$$
+    Therefore $\ensuremath{\frac{\bar{W}}{\bar{X}}}=31$.}
 
 \newslide{The Queue}
 
-\slides{* For arrival rate $\lambda$, and $\bar{N}_{Q}$, the average number in queue, and $\bar{W}$, the average queueing (waiting) time.$$
-\bar{N}_{Q}=\lambda\bar{W}$$
+\slides{* For arrival rate $\ensuremath{\lambda}$, and $\ensuremath{\bar{N}_{Q}}$, the average number in queue, and $\ensuremath{\bar{W}}$, the average queueing (waiting) time.$$
+\ensuremath{\bar{N}_{Q}}=\ensuremath{\lambda\bar{W}}$$
 * For the $M/M/1$ queue $$
-\bar{T}=\bar{X}+\bar{W}=\frac{1}{\mu}+\bar{W}$$ so the average time spent waiting in the queue is given by$$
-\bar{W}=\bar{T}-\frac{1}{\mu}=\frac{\rho}{\mu-\lambda}.$$
+\ensuremath{\bar{T}}=\ensuremath{\bar{X}}+\ensuremath{\bar{W}}=\ensuremath{\frac{1}{\mu}}+\ensuremath{\bar{W}}$$ so the average time spent waiting in the queue is given by$$
+\ensuremath{\bar{W}}=\ensuremath{\bar{T}}-\ensuremath{\frac{1}{\mu}}=\ensuremath{\frac{\rho}{\mu-\lambda}}.$$
 * Average number in the queue is then$$
-\bar{N}_{Q}=\frac{\rho^{2}}{1-\rho}.$$}
+\ensuremath{\bar{N}_{Q}}=\ensuremath{\frac{\rho^{2}}{1-\rho}}.$$}
 
 \endif

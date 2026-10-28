@@ -20,6 +20,17 @@ python3 scripts/convert/run.py
 python3 scripts/convert/test_convert.py
 ```
 
+PDF reconstruction (notes article + Beamer slides) is a separate check. After
+`maketalk --format notes --to pdf` and `maketalk --format slides --to pdf`:
+
+```bash
+python3 scripts/compare_pdfs.py
+```
+
+That compares `_notes/*.notes.pdf` and `slides/*.slides.pdf` (copied to
+`build/pdf/`) against `lectureNotesLecturer.pdf` and `lectureSlides.pdf`.
+Page counts are diagnostics; the pass is heading recall and token overlap.
+
 Handwritten material in `snippets/_npa/includes/` is not used by the generated
 lecture files. Keep it until the conversion is trusted; do not promote generated
 snippets into `lawrennd/snippets` yet.
