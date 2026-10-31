@@ -202,16 +202,36 @@ STRUCTURAL_HEADINGS = {
     "ShortFoilhead",
 }
 
+FOIL_HEADINGS = {"Foilhead", "ShortFoilhead"}
+
+
+def _is_foil_heading(block: Block) -> bool:
+    return isinstance(block, Heading) and block.layout in FOIL_HEADINGS
+
+
+def _split_at_foilheads(blocks: list[Block]) -> tuple[list[Block], list[Block]]:
+    """Keep the preamble; lift overlay foilheads together with their bodies."""
+    for i, block in enumerate(blocks):
+        if _is_foil_heading(block):
+            return blocks[:i], blocks[i:]
+    return blocks, []
+
 
 def promote_structural_headings(blocks: list[Block]) -> list[Block]:
-    """Pull chapter/section/foil heads out of unclosed \\begin_deeper nests."""
+    """Pull chapter/section/foil heads out of notes and unclosed \\begin_deeper nests.
+
+    Overlay sequences live inside LyX Note insets as repeated ShortFoilhead
+    layouts. Lift each foilhead *and* the blocks that follow it, otherwise the
+    titles become empty pages and every overlay step piles onto the first foil.
+    """
     out: list[Block] = []
     for block in blocks:
         if isinstance(block, Paragraph):
             nested = promote_structural_headings(block.nested)
+            preamble, lifted = _split_at_foilheads(nested)
             kept: list[Block] = []
             promoted: list[Block] = []
-            for child in nested:
+            for child in preamble:
                 if isinstance(child, Heading) and child.layout in STRUCTURAL_HEADINGS:
                     promoted.append(child)
                 else:
@@ -219,18 +239,13 @@ def promote_structural_headings(blocks: list[Block]) -> list[Block]:
             block.nested = kept
             out.append(block)
             out.extend(promoted)
+            out.extend(lifted)
         elif isinstance(block, (Answer, Note, Footnote)):
             inner = promote_structural_headings(block.blocks)
-            kept: list[Block] = []
-            promoted: list[Block] = []
-            for child in inner:
-                if isinstance(child, Heading) and child.layout in STRUCTURAL_HEADINGS:
-                    promoted.append(child)
-                else:
-                    kept.append(child)
+            kept, lifted = _split_at_foilheads(inner)
             block.blocks = kept
             out.append(block)
-            out.extend(promoted)
+            out.extend(lifted)
         else:
             out.append(block)
     return out
@@ -599,6 +614,8 @@ def group_answers(blocks: list[Block]) -> list[Block]:
                 if _is_answer_close(blocks[i]):
                     vspace = _answer_vspace(blocks[i])
                     i += 1
+                    break
+                if _is_foil_heading(blocks[i]):
                     break
                 inner.append(blocks[i])
                 i += 1

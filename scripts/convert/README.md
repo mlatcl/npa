@@ -12,16 +12,29 @@ by summarising the notes.
 4. Rewrite `_lamd/{lecture}.md` to include the generated notes and slides.
 5. Write `build/conversion/fidelity.md` (word, figure, and foil counts).
 
-Each original A4 `\foilhead` becomes two Reveal `\newslide`s unless the foil
-is already short or is one frame of a same-title overlay sequence.
+Each original portrait Letter `\foilhead` becomes two Reveal `\newslide`s
+unless the foil is already short or is one frame of a same-title overlay
+sequence. The 2006 FoilTeX deck is US Letter portrait (612x792), 20pt; Beamer
+PDFs from LaMD are a separate landscape reconstruction.
 
 ```bash
 python3 scripts/convert/run.py
 python3 scripts/convert/test_convert.py
 ```
 
-PDF reconstruction (notes article + Beamer slides) is a separate check. After
-`maketalk --format notes --to pdf` and `maketalk --format slides --to pdf`:
+To rebuild the **portrait FoilTeX** PDF (not Beamer), after `run.py` or on its
+own:
+
+```bash
+python3 scripts/convert/compile_foils.py
+```
+
+That fetches CTAN FoilTeX into gitignored `build/texmf/` (the class is not in
+TeX Live) and writes `build/conversion/slides.pdf`. MediaBox should be
+612x792, matching `lectureSlides.pdf`.
+
+PDF reconstruction via LaMD (notes article + Beamer slides) is a separate check.
+After `maketalk --format notes --to pdf` and `maketalk --format slides --to pdf`:
 
 ```bash
 python3 scripts/compare_pdfs.py

@@ -28,8 +28,9 @@ from lyx14 import (
 
 
 def escape_text(text: str) -> str:
-    text = text.replace("~", " ")
-    # LyX already stored most special chars; keep TeX specials that arrived as text.
+    # Keep ~ as a non-breaking space (LyX InsetSpace). Replacing it with a
+    # normal space turned "Lab~Classes" into a description label "Lab" and a
+    # body starting with "Classes", and a following ] became the TeX closer \].
     return text
 
 
@@ -44,7 +45,9 @@ def run_to_tex(run: Run) -> str:
     if isinstance(run, Formula):
         return run.tex
     if isinstance(run, Command):
-        raw = run.raw
+        raw = run.raw.strip()
+        if raw in {"~", "\\~"}:
+            return "~"
         if not raw.startswith("\\"):
             raw = "\\" + raw
         return raw
@@ -55,8 +58,37 @@ def run_to_tex(run: Run) -> str:
     return ""
 
 
+# 2006 FoilTeX logos lived on the lecturer machine; map to copies in this repo.
+LOGO_MAP = {
+    "sheffieldlogo.eps": "sheffield-lockup-2005.png",
+    "sheffieldlogo": "sheffield-lockup-2005.png",
+}
+
+
+def _prefer_printable(name: str) -> str:
+    """pdflatex+epstopdf fails when .eps is not on the TeX search path."""
+    root = Path(__file__).resolve().parents[2]
+    mapped = LOGO_MAP.get(name, name)
+    base = Path(mapped).stem
+    search_dirs = [
+        root / "slides" / "diagrams" / "logos",
+        root / "diagrams",
+        root,
+    ]
+    for directory in search_dirs:
+        for ext in (".png", ".pdf", ".jpg"):
+            candidate = directory / f"{base}{ext}"
+            if candidate.is_file():
+                return candidate.name
+        for ext in (".eps", ".EPS"):
+            candidate = directory / f"{base}{ext}"
+            if candidate.is_file():
+                return candidate.name
+    return mapped
+
+
 def include_graphics(filename: str, width: str | None) -> str:
-    stem = Path(filename).name
+    stem = _prefer_printable(Path(filename).name)
     option = ""
     if width:
         frac = width_to_frac(width)
@@ -118,6 +150,18 @@ def collect_list(blocks: list[Block], i: int) -> tuple[list[Paragraph], int]:
     return group, i
 
 
+def description_item(body: str) -> tuple[str, str]:
+    """LyX description labels use InsetSpace (~) to include extra words."""
+    body = body.replace("\\~", "~").replace("\n", " ")
+    parts = body.split()
+    if not parts:
+        return "", ""
+    if parts[0].endswith("~") and len(parts) > 1:
+        label = parts[0][:-1] + "~" + parts[1]
+        return label, " ".join(parts[2:])
+    return parts[0], " ".join(parts[1:])
+
+
 def emit_list(items: list[Paragraph], indent: str) -> str:
     env = {"Enumerate": "enumerate", "Itemize": "itemize", "Description": "description"}[
         items[0].layout
@@ -126,8 +170,8 @@ def emit_list(items: list[Paragraph], indent: str) -> str:
     for item in items:
         body = emit_runs(item.runs).strip()
         if items[0].layout == "Description" and " " in body:
-            label, rest = body.split(" ", 1)
-            lines.append(f"{indent}  \\item[{label}] {rest}")
+            label, rest = description_item(body)
+            lines.append(f"{indent}  \\item[{{{label}}}] {rest}")
         else:
             lines.append(f"{indent}  \\item {body}")
         if item.nested:
@@ -138,21 +182,65 @@ def emit_list(items: list[Paragraph], indent: str) -> str:
     return "\n".join(lines)
 
 
+_SIZE_CMD = re.compile(
+    r"\\(?:tiny|scriptsize|footnotesize|small|normalsize|large|Large|LARGE|huge|Huge)\b"
+)
+
+
+def _is_size_only(body: str) -> bool:
+    stripped = _SIZE_CMD.sub("", body)
+    return bool(body) and not stripped.strip()
+
+
+def _split_size_wrap(body: str) -> tuple[str, str]:
+    """LyX ERT \\tiny / \\normalsize arrive as runs; the table is nested."""
+    cmds = _SIZE_CMD.findall(body)
+    opens = [c for c in cmds if c != r"\normalsize"]
+    closes = [c for c in cmds if c == r"\normalsize"]
+    before = "".join(opens) or body
+    after = "".join(closes) or (r"\normalsize" if opens else "")
+    return before, after
+
+
+FOIL_CHROME = {
+    "Left Header": "leftheader",
+    "Right Header": "rightheader",
+    "Right Footer": "rightfooter",
+    "My Logo": "MyLogo",
+}
+
+
 def emit_block(block: Block, indent: str = "") -> str:
     if isinstance(block, Heading):
-        if block.layout in {"Left Header", "Right Header", "Right Footer", "My Logo"}:
-            return ""
+        title = emit_runs(block.runs).strip()
+        if block.layout == "My Logo":
+            return (
+                f"{indent}\\MyLogo{{\\includegraphics[height=1.2cm]"
+                f"{{sheffield-lockup-2005.png}}}}"
+            )
+        if block.layout == "Right Footer":
+            return (
+                f"{indent}\\rightfooter{{\\includegraphics[height=1cm]"
+                f"{{dcslogo.pdf}}\\quad\\thepage}}"
+            )
+        if block.layout in FOIL_CHROME:
+            return f"{indent}\\{FOIL_CHROME[block.layout]}{{{title}}}"
         macro, starred = heading_macro(block.layout)
         star = "*" if starred else ""
-        title = emit_runs(block.runs).strip()
         if macro in {"title", "author", "date"}:
             return f"{indent}\\{macro}{{{title}}}"
+        if macro == "foilhead":
+            # Match the 2006 LyX export: tighten the gap above the foil title.
+            return f"{indent}\\foilhead[-0.5in]{{{title}}}"
         return f"{indent}\\{macro}{star}{{{title}}}"
     if isinstance(block, Paragraph):
         body = emit_runs(block.runs).strip()
         nested = emit_blocks(block.nested, indent) if block.nested else ""
         if block.layout == "Caption":
             return f"{indent}\\caption{{{body}}}\n{nested}".rstrip()
+        if nested and _is_size_only(body):
+            before, after = _split_size_wrap(body)
+            return "\n".join(p for p in (f"{indent}{before}", nested, f"{indent}{after}") if p)
         parts = [f"{indent}{body}"] if body else []
         if nested:
             parts.append(nested)
@@ -174,6 +262,8 @@ def emit_block(block: Block, indent: str = "") -> str:
         return f"{indent}\\begin{{answer}}[{block.vspace}]\n{inner}\n{indent}\\end{{answer}}"
     if isinstance(block, Note):
         inner = emit_blocks(block.blocks, indent + "  ")
+        if not inner.strip():
+            return ""
         return f"{indent}\\begin{{lyxnote}}\n{inner}\n{indent}\\end{{lyxnote}}"
     if isinstance(block, Footnote):
         inner = emit_blocks(block.blocks, "").replace("\n", " ")
@@ -183,6 +273,11 @@ def emit_block(block: Block, indent: str = "") -> str:
     return ""
 
 
+def _escape_cell_amps(text: str) -> str:
+    """LyX cells contain literal '&' ('Lectures 1 & 2'); those are not columns."""
+    return text.replace("\\&", "&").replace("&", r"\&")
+
+
 def emit_table(table: Table, indent: str) -> str:
     if not table.rows:
         return f"{indent}% empty table"
@@ -190,7 +285,7 @@ def emit_table(table: Table, indent: str) -> str:
     spec = "l" * cols
     lines = [f"{indent}\\begin{{tabular}}{{{spec}}}"]
     for row in table.rows:
-        cells = [emit_runs(cell).strip() for cell in row]
+        cells = [_escape_cell_amps(emit_runs(cell).strip()) for cell in row]
         while len(cells) < cols:
             cells.append("")
         lines.append(indent + "  " + " & ".join(cells) + " \\\\")
@@ -198,20 +293,161 @@ def emit_table(table: Table, indent: str) -> str:
     return "\n".join(lines)
 
 
+ARTICLE_PREAMBLE = """\
+\\documentclass{article}
+\\usepackage[utf8]{inputenc}
+\\usepackage{amsmath,amssymb,graphicx}
+\\usepackage[authoryear]{natbib}
+\\newif\\ifanswer\\answertrue
+\\newenvironment{answer}[1][0]{\\par\\textbf{Answer.}\\par}{\\par}
+\\newenvironment{lyxnote}{\\par\\textit{Note.}\\par}{\\par}
+\\providecommand{\\foilhead}[1]{\\section{#1}}
+"""
+
+# Portrait Letter, 20pt sans, matching lectureSlides.lyx (\\options 20pt and
+# \\paperorientation portrait). Do not pass dvips: we compile with pdflatex.
+# foils.cls is not in TeX Live; compile_foils.py puts CTAN FoilTeX on TEXINPUTS.
+FOILS_PREAMBLE = """\
+\\documentclass[20pt,letterpaper]{foils}
+\\usepackage[T1]{fontenc}
+\\usepackage[utf8]{inputenc}
+\\usepackage{amsmath,amssymb,graphicx,pifont,url,color}
+\\usepackage[authoryear]{natbib}
+\\graphicspath{{../../diagrams/}{diagrams/}{../../}{../../slides/diagrams/logos/}{slides/diagrams/logos/}}
+\\providecommand{\\tabularnewline}{\\\\}
+\\newcommand{\\lyxdot}{.}
+\\newif\\ifanswer\\answertrue
+\\newenvironment{answer}[1][0]{\\par\\textbf{Answer.}\\par}{\\par}
+\\newenvironment{lyxnote}{\\par\\textit{Note.}\\par}{\\par}
+\\AtBeginDocument{%
+  \\def\\labelitemi{\\ding{122}}%
+  \\def\\labelitemii{\\ding{229}}%
+  \\renewcommand{\\bibsection}{\\foilhead[-0.5in]{\\refname}}%
+}
+\\newcounter{npafoil}
+\\makeatletter
+\\let\\npa@oldfoilhead\\foilhead
+\\renewcommand{\\foilhead}[2][-0.5in]{%
+  \\npa@oldfoilhead[#1]{#2}%
+  \\stepcounter{npafoil}%
+  \\typeout{NPAFOIL \\thenpafoil\\space PAGE \\thepage}%
+}
+\\makeatother
+"""
+
+
+_ALIGN_ENVS = {
+    "tabular",
+    "array",
+    "align",
+    "align*",
+    "aligned",
+    "eqnarray",
+    "eqnarray*",
+    "cases",
+    "matrix",
+    "pmatrix",
+    "bmatrix",
+    "vmatrix",
+    "split",
+}
+
+
+def escape_bare_ampersands(text: str) -> str:
+    """Turn literal '&' into '\\&' outside alignment environments."""
+    out: list[str] = []
+    i = 0
+    n = len(text)
+    depth = 0
+    begin_re = re.compile(r"\\begin\{([^}]+)\}")
+    end_re = re.compile(r"\\end\{([^}]+)\}")
+    while i < n:
+        if text.startswith(r"\&", i):
+            out.append(r"\&")
+            i += 2
+            continue
+        m = begin_re.match(text, i)
+        if m:
+            out.append(m.group(0))
+            if m.group(1) in _ALIGN_ENVS:
+                depth += 1
+            i = m.end()
+            continue
+        m = end_re.match(text, i)
+        if m:
+            out.append(m.group(0))
+            if m.group(1) in _ALIGN_ENVS and depth:
+                depth -= 1
+            i = m.end()
+            continue
+        if text[i] == "&" and depth == 0:
+            out.append(r"\&")
+            i += 1
+            continue
+        out.append(text[i])
+        i += 1
+    return "".join(out)
+
+
+def _expand_bibtex(text: str) -> str:
+    """LyX \\bibtex[style]{files} is \\bibliographystyle + \\bibliography.
+
+    The .bib files live in the publications tree (BIBINPUTS / ~lawrennd/publications).
+    """
+
+    def repl(match: re.Match[str]) -> str:
+        style = match.group(1) or "abbrvnat"
+        files = match.group(2)
+        return f"\\bibliographystyle{{{style}}}\n\\bibliography{{{files}}}"
+
+    return re.sub(r"\\bibtex(?:\[([^\]]*)\])?\{([^}]+)\}", repl, text)
+
+
+def _sanitize_foils_body(body: str) -> str:
+    """Keep FoilTeX compiling: LyX leftovers that are fatal in \\foilhead."""
+    from emit_lamd import (
+        fix_cases_arrays,
+        repair_fracs,
+        strip_answer_macros,
+        strip_figure_chrome,
+    )
+
+    body = body.replace("\\~", "~")
+    body = strip_answer_macros(strip_figure_chrome(body))
+    body = fix_cases_arrays(body)
+    body = repair_fracs(body)
+    body = _expand_bibtex(body)
+    return escape_bare_ampersands(body)
+
+
+def _insert_maketitle(body: str) -> str:
+    """FoilTeX needs \\maketitle after \\title/\\author/\\date for the title foil."""
+    if r"\maketitle" in body:
+        return body
+    for macro in (r"\date{", r"\author{", r"\title{"):
+        i = body.find(macro)
+        if i < 0:
+            continue
+        nl = body.find("\n", i)
+        if nl < 0:
+            return body + "\n\\maketitle\n"
+        return body[: nl + 1] + "\\maketitle\n" + body[nl + 1 :]
+    return "\\maketitle\n" + body
+
+
 def document_to_tex(doc: Document) -> str:
     blocks = group_answers(doc.blocks)
     body = emit_blocks(blocks)
-    cls = "foils" if doc.textclass == "foils" else "article"
+    foils = doc.textclass == "foils"
+    if foils:
+        body = _sanitize_foils_body(body)
+        body = _insert_maketitle(body)
+        preamble = FOILS_PREAMBLE
+    else:
+        preamble = ARTICLE_PREAMBLE
     return (
         f"% Generated from {doc.path}. Do not edit; regenerate with scripts/convert/run.py.\n"
-        f"\\documentclass{{{cls}}}\n"
-        "\\usepackage[utf8]{inputenc}\n"
-        "\\usepackage{amsmath,amssymb,graphicx}\n"
-        "\\usepackage[authoryear]{natbib}\n"
-        "\\newif\\ifanswer\\answertrue\n"
-        "\\newenvironment{answer}[1][0]{\\par\\textbf{Answer.}\\par}{\\par}\n"
-        "\\newenvironment{lyxnote}{\\par\\textit{Note.}\\par}{\\par}\n"
-        "\\providecommand{\\foilhead}[1]{\\section{#1}}\n"
+        f"{preamble}"
         "\\begin{document}\n\n"
         f"{body}\n"
         "\\end{document}\n"

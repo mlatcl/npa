@@ -23,6 +23,21 @@ def _macro_arg(line: str, names: tuple[str, ...]) -> tuple[str, str, bool] | Non
         starred = rest.startswith("*")
         if starred:
             rest = rest[1:]
+        rest = rest.lstrip()
+        if rest.startswith("["):
+            depth = 0
+            end = None
+            for i, ch in enumerate(rest):
+                if ch == "[":
+                    depth += 1
+                elif ch == "]":
+                    depth -= 1
+                    if depth == 0:
+                        end = i
+                        break
+            if end is None:
+                return None
+            rest = rest[end + 1 :].lstrip()
         if not rest.startswith("{"):
             return None
         depth = 0
@@ -106,9 +121,6 @@ def fix_cases_arrays(text: str) -> str:
             text += r"\end{array}"
             break
         text = text[: m.start()] + r"\end{array}" + text[m.end() :]
-    text = re.sub(r"\{l{3,}\}", "", text)
-    text = re.sub(r"\\tiny\b", "", text)
-    text = re.sub(r"\\normalsize\b", "", text)
     return text
 
 
@@ -332,6 +344,8 @@ def wrap_alignments(body: str) -> str:
 
 def prepare_tex_body(text: str) -> str:
     text = strip_answer_macros(strip_figure_chrome(text))
+    text = re.sub(r"\\tiny\b", "", text)
+    text = re.sub(r"\\normalsize\b", "", text)
     text = latex_envs_for_markdown(text)
     text = wrap_alignments(text)
     text = tidy_dollar_math(text)
@@ -501,6 +515,18 @@ def split_tex_units(tex: str) -> list[TexBlock]:
         if line.strip() in {"\\begin{document}", "\\end{document}"}:
             continue
         if line.startswith("%") or line.startswith("\\documentclass") or line.startswith("\\usepackage") or line.startswith("\\new") or line.startswith("\\providecommand") or line.startswith("\\newenvironment"):
+            continue
+        if line.startswith(
+            (
+                "\\leftheader",
+                "\\rightheader",
+                "\\rightfooter",
+                "\\MyLogo",
+                "\\maketitle",
+                "\\graphicspath",
+                "\\AtBeginDocument",
+            )
+        ):
             continue
         heading = _macro_arg(
             line,

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 from lyx14 import Heading, parse_file
@@ -80,6 +81,36 @@ def test_collect_foils_from_tex():
     assert n_new >= 243, n_new
 
 
+def test_foils_preamble_is_portrait_letter():
+    from emit_tex import document_to_tex
+
+    doc = parse_file(ROOT / "lectureSlides.lyx")
+    tex = document_to_tex(doc)
+    assert r"\documentclass[20pt,letterpaper]{foils}" in tex
+    assert r"\providecommand{\foilhead}[1]{\section{#1}}" not in tex
+    assert r"\foilhead[-0.5in]{" in tex
+    assert r"\leftheader{Neil Lawrence}" in tex
+    assert r"\maketitle" in tex
+    assert r"\item[Lab\]" not in tex
+    assert "Lab~Classes" in tex
+    body = tex.split(r"\begin{document}", 1)[-1]
+    assert body.count(r"\foilhead[-0.5in]{") == 243
+    assert r"\begin{tabular}{lll}" in tex
+    assert not re.search(r"\\begin\{tabular\}\s*\n", tex)
+    assert r"\foilhead[-0.5in]{Reading List \& Evaluation}" in tex
+    assert r"Lectures 1 \& 2" in tex
+    assert r"\tiny" in tex
+    assert r"\tiny\normalsize" not in tex
+    tiny_at = tex.find(r"\tiny")
+    tab_at = tex.find(r"\begin{tabular}{lll}")
+    norm_at = tex.find(r"\normalsize")
+    assert 0 <= tiny_at < tab_at < norm_at
+    assert r"\bibtex" not in tex
+    assert r"\bibliographystyle{abbrvnat}" in tex
+    assert r"\bibliography{lawrence,other,zbooks}" in tex
+    assert r"\renewcommand{\bibsection}" in tex
+
+
 def test_pdf_sanitize_strips_figure_chrome_and_math():
     from emit_lamd import notes_wrap, prepare_tex_body, strip_figure_chrome
 
@@ -106,6 +137,53 @@ ARPANET was predecessor of the internet.
     balanced = r"\lambda P\left(k-1\right)=\mu P\left(k\right)"
     assert r"\end{array}" not in prepare_tex_body(balanced)
 
+    from emit_lamd import fix_cases_arrays
+
+    table = r"\begin{tabular}{lll}" + "\n  a & b & c \\\\\n\\end{tabular}"
+    assert r"\begin{tabular}{lll}" in fix_cases_arrays(table)
+
+
+def test_overlay_foilheads_keep_their_bodies():
+    from emit_tex import document_to_tex
+    from lyx14 import Heading, parse_file
+
+    doc = parse_file(ROOT / "lectureSlides.lyx")
+    blocks = doc.blocks
+    titles = []
+    for i, block in enumerate(blocks):
+        if isinstance(block, Heading) and block.layout in {"ShortFoilhead", "Foilhead"}:
+            titles.append((i, "".join(getattr(r, "text", "") for r in block.runs)))
+    seq = [i for i, title in titles if title == "Average Number in System II"]
+    assert len(seq) == 8, len(seq)
+    for pos, block_i in enumerate(seq):
+        nxt = titles[titles.index((block_i, "Average Number in System II")) + 1][0] if pos + 1 < len(seq) else None
+        # Use the next heading of any kind as the end of this foil.
+        end = len(blocks)
+        for j, other in enumerate(blocks[block_i + 1 :], block_i + 1):
+            if isinstance(other, Heading) and other.layout in {"ShortFoilhead", "Foilhead"}:
+                end = j
+                break
+        body = blocks[block_i + 1 : end]
+        assert body, f"overlay frame {pos} has no body"
+
+    tex = document_to_tex(doc)
+    chunks = tex.split(r"\foilhead[-0.5in]{Average Number in System II}")
+    assert len(chunks) == 9, len(chunks)  # split yields preamble + 8 frames
+    for i, chunk in enumerate(chunks[1:], 1):
+        next_head = chunk.find(r"\foilhead[-0.5in]{")
+        body = chunk if next_head < 0 else chunk[:next_head]
+        assert r"\begin{eqnarray" in body or r"\left\langle k" in body, f"frame {i} empty: {body[:80]!r}"
+
+
+def test_escape_bare_ampersands():
+    from emit_tex import escape_bare_ampersands
+
+    body = "Reading List & Evaluation\n\\begin{tabular}{ll}\n  a & b \\\\\n\\end{tabular}\nnode 1 & 5"
+    out = escape_bare_ampersands(body)
+    assert r"Reading List \& Evaluation" in out
+    assert r"  a & b \\" in out
+    assert r"node 1 \& 5" in out
+
 
 if __name__ == "__main__":
     test_expand_answers_and_slides_stay_off_notes()
@@ -118,5 +196,11 @@ if __name__ == "__main__":
     print("slides foils ok")
     test_collect_foils_from_tex()
     print("collect foils ok")
+    test_foils_preamble_is_portrait_letter()
+    print("foils preamble ok")
     test_pdf_sanitize_strips_figure_chrome_and_math()
     print("pdf sanitize ok")
+    test_overlay_foilheads_keep_their_bodies()
+    print("overlay bodies ok")
+    test_escape_bare_ampersands()
+    print("ampersands ok")
