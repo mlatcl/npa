@@ -37,8 +37,8 @@ def test_expand_answers_and_slides_stay_off_notes():
   Waiting time $\bar{T}=1/2$. \}{0}}
 """
     out = polish_notes(raw)
-    assert r"\answer{" not in out, out
-    assert r"\subsection{Answer}" in out
+    assert r"\answer{" in out, out
+    assert r"\subsection{Answer}" not in out
     assert "Waiting time" in out
     bracketed = r"""
 \notes{Question text.
@@ -108,6 +108,8 @@ def test_foils_preamble_is_portrait_letter():
     assert r"\bibtex" not in tex
     assert r"\bibliographystyle{abbrvnat}" in tex
     assert r"\bibliography{lawrence,other,zbooks}" in tex
+    assert r"height=0.45\textheight" in tex
+    assert "residualServiceOverview.png" in tex
     assert r"\renewcommand{\bibsection}" in tex
 
 
@@ -175,6 +177,66 @@ def test_overlay_foilheads_keep_their_bodies():
         assert r"\begin{eqnarray" in body or r"\left\langle k" in body, f"frame {i} empty: {body[:80]!r}"
 
 
+def test_speaker_notes_and_answers():
+    from emit_lamd import collect_foils, split_tex_units, units_to_notes, units_to_slides
+    from emit_tex import document_to_tex
+    from lyx14 import group_answers, parse_file
+
+    notes_md = units_to_notes(split_tex_units(document_to_tex(parse_file(ROOT / "lectureNotes.lyx"))))
+    assert "Student exercise: summarise differences" in notes_md
+    assert r"*Note.* Student exercise" not in notes_md
+    exercise_at = notes_md.find("Student exercise")
+    assert r"\speakernotes{" in notes_md[max(0, exercise_at - 40) : exercise_at]
+    assert r"\answer{" in notes_md
+    assert "You should match A with 2 and B with 1" in notes_md
+
+    slides = parse_file(ROOT / "lectureSlides.lyx")
+    tex = document_to_tex(slides)
+    assert r"\newenvironment{lyxnote}{\setbox0\vbox\bgroup}{\egroup}" in tex
+    assert r"\begin{lyxnote}" in tex
+    foils = collect_foils(split_tex_units(tex))
+    inter = next(f for f in foils if f.title == "Interarrival Distribution")
+    assert any(u.kind.startswith("env:lyxnote") for u in inter.units), [u.kind for u in inter.units]
+
+    md = units_to_slides(split_tex_units(tex))
+    chunks = [
+        p
+        for p in md.split(r"\newslide{")
+        if p.startswith("Interarrival Distribution")
+    ]
+    chunk = r"\newslide{" + r"\newslide{".join(chunks)
+    assert r"\speakernotes{" in chunk
+    assert "Firstly we define the number of arrivals" in chunk
+    slides_body = re.sub(r"\\speakernotes\{.*\}", "", chunk, flags=re.S)
+    assert "Firstly we define the number of arrivals" not in slides_body
+
+    nightclub = "\n".join(
+        p for p in md.split(r"\newslide{") if p.startswith("The Formula")
+    )
+    assert "waiting time is given by Little's formula" in nightclub
+    assert r"}{6}" not in nightclub
+
+    vs = [b.vspace for b in _all_answers(group_answers(slides.blocks))]
+    assert "6" in vs, vs
+
+
+def _all_answers(blocks):
+    from lyx14 import Answer, Footnote, Note, Paragraph
+
+    out = []
+    for b in blocks:
+        if isinstance(b, Answer):
+            out.append(b)
+            out.extend(_all_answers(b.blocks))
+        elif isinstance(b, Note):
+            out.extend(_all_answers(b.blocks))
+        elif isinstance(b, Paragraph) and b.nested:
+            out.extend(_all_answers(b.nested))
+        elif isinstance(b, Footnote):
+            out.extend(_all_answers(b.blocks))
+    return out
+
+
 def test_escape_bare_ampersands():
     from emit_tex import escape_bare_ampersands
 
@@ -183,6 +245,140 @@ def test_escape_bare_ampersands():
     assert r"Reading List \& Evaluation" in out
     assert r"  a & b \\" in out
     assert r"node 1 \& 5" in out
+
+
+def test_poisson_answers_keep_aligned_math():
+    from emit_lamd import (
+        _answer_to_notes,
+        itemize_to_md,
+        polish_notes,
+        wrap_alignments,
+    )
+    from lyx14 import Answer, Heading, Paragraph, group_answers, parse_file, plain_text
+
+    aligned = (
+        r"giving \begin{eqnarray*}" "\n"
+        r"P\left(k=90|\lambda=11,t=15\right) & = & \frac{\left(11\times15\right)^{90}}{90!}"
+        r"\exp\left(-\left(11\times15\right)\right)\\" "\n"
+        r" & = & 5.5\times10^{-11}.\end{eqnarray*}"
+    )
+    slot = _answer_to_notes(aligned, "0")
+    out = polish_notes(slot)
+    assert r"\begin{aligned}" in out
+    assert r"\begin{aligned}" + "\n\\end{aligned}" not in out
+    assert r"5.5\times10^{-11}" in out
+    assert out.count(r"\begin{aligned}") == slot.count(r"\begin{aligned}")
+
+    eqn = "lhs & = & rhs \\\\\n & = & 1"
+    wrapped = wrap_alignments(eqn)
+    assert r"\begin{aligned}" in wrapped
+    assert "| lhs |" not in wrapped
+
+    table = "$d$ & 1 & 2 & 3 & 4 \\\\\n$P(d)$ & 0.20 & 0.27 & 0.25 & 0.28"
+    md = wrap_alignments(table)
+    assert "| $d$ |" in md
+
+    item = (
+        r"\item Q" "\n"
+        r"\begin{eqnarray*}" "\n"
+        r"a & = & b \\" "\n"
+        r"\end{eqnarray*}" "\n"
+    )
+    md_item = itemize_to_md(r"\begin{enumerate}" + item + r"\end{enumerate}", "enumerate")
+    assert r"\begin{eqnarray*}" in md_item
+    assert r"a & = & b" in md_item
+
+    doc = parse_file(ROOT / "lectureNotes.lyx")
+    blocks = group_answers(doc.blocks)
+    i = next(
+        n
+        for n, b in enumerate(blocks)
+        if isinstance(b, Heading)
+        and b.layout.startswith("Chapter")
+        and "Poisson Processes" in "".join(getattr(r, "text", "") for r in b.runs)
+    )
+    j = next(
+        n
+        for n in range(i + 1, len(blocks))
+        if isinstance(blocks[n], Heading) and blocks[n].layout.startswith("Chapter")
+    )
+    chunk = blocks[i:j]
+    enumerates = [
+        n
+        for n, b in enumerate(chunk)
+        if isinstance(b, Paragraph)
+        and b.layout == "Enumerate"
+        and any(
+            key in plain_text(b.runs)
+            for key in ("three queues", "Poisson Decomposition", "Interarrival times")
+        )
+    ]
+    assert len(enumerates) == 3, enumerates
+    between = chunk[enumerates[0] : enumerates[-1] + 1]
+    assert not any(isinstance(b, Heading) for b in between), [
+        type(b).__name__ for b in between
+    ]
+    inter = chunk[enumerates[-1]]
+    assert any(isinstance(n, Answer) for n in inter.nested), [
+        type(n).__name__ for n in inter.nested
+    ]
+
+
+def test_isolate_display_math_for_pandoc():
+    from emit_lamd import isolate_display_math, prepare_tex_body
+
+    jammed = r"as$$P\left(x\right)=1,$$so rather"
+    out = isolate_display_math(jammed)
+    assert "$$so" not in out
+    assert out.count("$$") == 2
+    assert "so rather" in out
+    inline_then_display = r"variable $X$$$P\left(x\right)=1$$or"
+    out2 = isolate_display_math(inline_then_display)
+    assert "$X$" in out2
+    assert out2.count("$$") == 2
+    assert "P\\left(x\\right)=1" in out2
+    body = r"We rewrite this as\[P\left(x\right)=1,\]so rather"
+    prepped = prepare_tex_body(body)
+    assert "$$so" not in prepped
+    assert "so rather" in prepped
+    assert "\n$$\n" in prepped
+
+
+def test_empty_includegraphics_not_emitted():
+    from emit_lamd import figure_lamd, strip_figure_chrome, units_to_notes, split_tex_units
+    from emit_tex import include_graphics, emit_blocks
+    from lyx14 import Figure, TextRun
+
+    assert include_graphics("", None) == ""
+    assert include_graphics("   ", None) == ""
+    tex = emit_blocks(
+        [Figure(filename="", width=None, caption=[TextRun(text="State diagram")], label=None)]
+    )
+    assert r"\includegraphics" not in tex
+    assert "State diagram" in tex
+    assert figure_lamd("", None, "caption", "") == "caption"
+    leftover = r"\includegraphics[width=\linewidth,height=0.45\textheight,keepaspectratio]{}"
+    assert leftover not in strip_figure_chrome(leftover)
+    notes = units_to_notes(
+        split_tex_units(
+            r"\begin{answer}[0]" "\n"
+            r"\includegraphics[width=\linewidth,height=0.45\textheight,keepaspectratio]{}"
+            "\n"
+            r"\end{answer}"
+        )
+    )
+    assert r"\includegraphics" not in notes
+
+
+def test_inject_ensuremath_skips_display_math():
+    from emit_lamd import inject_ensuremath, prepare_tex_body
+
+    display = r"$$\exp\left(-\lambda t\right)$$"
+    assert inject_ensuremath(display) == display
+    body = r"giving \begin{eqnarray*}" "\n" r"x & = & \exp\left(-\lambda t\right)" "\n" r"\end{eqnarray*}"
+    out = prepare_tex_body(body)
+    assert r"\ensuremath{\exp\left(}" not in out
+    assert r"\exp\left(-\lambda t\right)" in out or r"\exp\left(-\ensuremath{\lambda} t\right)" in out
 
 
 if __name__ == "__main__":
@@ -202,5 +398,15 @@ if __name__ == "__main__":
     print("pdf sanitize ok")
     test_overlay_foilheads_keep_their_bodies()
     print("overlay bodies ok")
+    test_speaker_notes_and_answers()
+    print("speaker notes and answers ok")
     test_escape_bare_ampersands()
     print("ampersands ok")
+    test_poisson_answers_keep_aligned_math()
+    print("poisson answers ok")
+    test_isolate_display_math_for_pandoc()
+    print("display math isolate ok")
+    test_empty_includegraphics_not_emitted()
+    print("empty includegraphics ok")
+    test_inject_ensuremath_skips_display_math()
+    print("ensuremath display skip ok")

@@ -67,6 +67,7 @@ def _find_graphic(name: str) -> Path | None:
     base = Path(name).name
     stem = Path(base).stem
     for directory in (
+        ROOT / "slides" / "diagrams" / "npa",
         ROOT / "slides" / "diagrams" / "logos",
         ROOT / "diagrams",
         ROOT,
@@ -95,20 +96,20 @@ def stage_graphics(tex_path: Path) -> None:
             continue
         if src.suffix.lower() == ".eps":
             pdf = dest / f"{src.stem}.pdf"
-            if not pdf.is_file():
-                subprocess.run(
-                    [
-                        "gs",
-                        "-dSAFER",
-                        "-dBATCH",
-                        "-dNOPAUSE",
-                        "-dQUIET",
-                        "-sDEVICE=pdfwrite",
-                        f"-sOutputFile={pdf}",
-                        str(src),
-                    ],
-                    check=False,
-                )
+            subprocess.run(
+                [
+                    "gs",
+                    "-dSAFER",
+                    "-dBATCH",
+                    "-dNOPAUSE",
+                    "-dQUIET",
+                    "-dEPSCrop",
+                    "-sDEVICE=pdfwrite",
+                    f"-sOutputFile={pdf}",
+                    str(src),
+                ],
+                check=False,
+            )
             if pdf.is_file():
                 replacements[name] = pdf.name
                 continue

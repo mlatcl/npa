@@ -65,17 +65,20 @@ LOGO_MAP = {
 }
 
 
+GRAPHIC_DIRS = [
+    Path("slides") / "diagrams" / "npa",
+    Path("slides") / "diagrams" / "logos",
+    Path("diagrams"),
+    Path("."),
+]
+
+
 def _prefer_printable(name: str) -> str:
     """pdflatex+epstopdf fails when .eps is not on the TeX search path."""
     root = Path(__file__).resolve().parents[2]
     mapped = LOGO_MAP.get(name, name)
     base = Path(mapped).stem
-    search_dirs = [
-        root / "slides" / "diagrams" / "logos",
-        root / "diagrams",
-        root,
-    ]
-    for directory in search_dirs:
+    for directory in [root / rel for rel in GRAPHIC_DIRS]:
         for ext in (".png", ".pdf", ".jpg"):
             candidate = directory / f"{base}{ext}"
             if candidate.is_file():
@@ -88,13 +91,16 @@ def _prefer_printable(name: str) -> str:
 
 
 def include_graphics(filename: str, width: str | None) -> str:
+    if not (filename or "").strip():
+        return ""
     stem = _prefer_printable(Path(filename).name)
-    option = ""
-    if width:
-        frac = width_to_frac(width)
-        if frac:
-            option = f"[width={frac}\\textwidth]"
-    return f"\\includegraphics{option}{{{stem}}}"
+    frac = width_to_frac(width) if width else None
+    w = f"{frac}\\linewidth" if frac else "\\linewidth"
+    # EPS distilled without -dEPSCrop becomes a full Letter page; cap height.
+    return (
+        f"\\includegraphics[width={w},height=0.45\\textheight,"
+        f"keepaspectratio]{{{stem}}}"
+    )
 
 
 def width_to_frac(width: str) -> str | None:
@@ -248,6 +254,10 @@ def emit_block(block: Block, indent: str = "") -> str:
     if isinstance(block, Figure):
         cap = emit_runs(block.caption).strip()
         inc = include_graphics(block.filename, block.width)
+        if not inc:
+            # LyX caption-only floats (no Graphics inset) must not emit
+            # \\includegraphics{}. Keep the caption as ordinary text.
+            return f"{indent}{cap}" if cap else ""
         lines = [f"{indent}\\begin{{figure}}[ht]", f"{indent}  \\centering", f"{indent}  {inc}"]
         if cap:
             lines.append(f"{indent}  \\caption{{{cap}}}")
@@ -293,32 +303,50 @@ def emit_table(table: Table, indent: str) -> str:
     return "\n".join(lines)
 
 
-ARTICLE_PREAMBLE = """\
+# LyX Note insets are speaker cribs (not exported by LyX). Keep the
+# environment in the .tex so LaMD can map it to \\speakernotes, but do not
+# typeset it. \\answer matches notes.cls: lecturer prints the body, student
+# option (\\answerfalse) leaves \\vspace*{#1cm}.
+_NOTE_ANSWER_ENVS = """\
+\\newif\\ifanswer\\answertrue
+\\newenvironment{lyxnote}{\\setbox0\\vbox\\bgroup}{\\egroup}
+\\newenvironment{answer}[1][0]{%
+  \\def\\npaanswervspace{#1}%
+  \\ifanswer\\par\\else\\setbox0\\vbox\\bgroup\\fi
+}{%
+  \\ifanswer\\par\\else\\egroup\\vspace*{\\npaanswervspace cm}\\fi
+}
+"""
+
+ARTICLE_PREAMBLE = (
+    """\
 \\documentclass{article}
 \\usepackage[utf8]{inputenc}
 \\usepackage{amsmath,amssymb,graphicx}
 \\usepackage[authoryear]{natbib}
-\\newif\\ifanswer\\answertrue
-\\newenvironment{answer}[1][0]{\\par\\textbf{Answer.}\\par}{\\par}
-\\newenvironment{lyxnote}{\\par\\textit{Note.}\\par}{\\par}
+"""
+    + _NOTE_ANSWER_ENVS
+    + """\
 \\providecommand{\\foilhead}[1]{\\section{#1}}
 """
+)
 
 # Portrait Letter, 20pt sans, matching lectureSlides.lyx (\\options 20pt and
 # \\paperorientation portrait). Do not pass dvips: we compile with pdflatex.
 # foils.cls is not in TeX Live; compile_foils.py puts CTAN FoilTeX on TEXINPUTS.
-FOILS_PREAMBLE = """\
+FOILS_PREAMBLE = (
+    """\
 \\documentclass[20pt,letterpaper]{foils}
 \\usepackage[T1]{fontenc}
 \\usepackage[utf8]{inputenc}
 \\usepackage{amsmath,amssymb,graphicx,pifont,url,color}
 \\usepackage[authoryear]{natbib}
-\\graphicspath{{../../diagrams/}{diagrams/}{../../}{../../slides/diagrams/logos/}{slides/diagrams/logos/}}
+\\graphicspath{{../../diagrams/}{diagrams/}{../../}{../../slides/diagrams/npa/}{slides/diagrams/npa/}{../../slides/diagrams/logos/}{slides/diagrams/logos/}}
 \\providecommand{\\tabularnewline}{\\\\}
 \\newcommand{\\lyxdot}{.}
-\\newif\\ifanswer\\answertrue
-\\newenvironment{answer}[1][0]{\\par\\textbf{Answer.}\\par}{\\par}
-\\newenvironment{lyxnote}{\\par\\textit{Note.}\\par}{\\par}
+"""
+    + _NOTE_ANSWER_ENVS
+    + """\
 \\AtBeginDocument{%
   \\def\\labelitemi{\\ding{122}}%
   \\def\\labelitemii{\\ding{229}}%
@@ -334,6 +362,7 @@ FOILS_PREAMBLE = """\
 }
 \\makeatother
 """
+)
 
 
 _ALIGN_ENVS = {

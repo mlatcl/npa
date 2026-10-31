@@ -8,6 +8,7 @@ same-title overlay sequence.
 from __future__ import annotations
 
 import re
+import textwrap
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -53,8 +54,19 @@ def _macro_arg(line: str, names: tuple[str, ...]) -> tuple[str, str, bool] | Non
 BEGIN_ENV_RE = re.compile(r"^\\begin\{([a-zA-Z*]+)\}(?:\[(.*)\])?")
 END_ENV_RE = re.compile(r"^\\end\{([a-zA-Z*]+)\}")
 GRAPHICS_RE = re.compile(
-    r"\\includegraphics(?:\[width=([0-9.]+)\\textwidth\])?\{([^}]+)\}"
+    r"\\includegraphics(?:\[([^\]]*)\])?\{([^}]+)\}"
 )
+
+
+def _width_frac_from_opts(opts: str | None) -> str | None:
+    if not opts:
+        return None
+    m = re.search(r"width=([0-9.]+)\\(?:text|line)width", opts)
+    if m:
+        return m.group(1)
+    if r"\linewidth" in opts or r"\textwidth" in opts:
+        return "1"
+    return None
 
 
 def strip_tex(text: str) -> str:
@@ -101,14 +113,23 @@ def strip_figure_chrome(text: str) -> str:
     text = _strip_macro(text, "caption")
     text = re.sub(r"^\s*\[ht(?:b)?\]\s*$", "", text, flags=re.M)
     text = re.sub(r"\[ht(?:b)?\]", "", text)
+    text = re.sub(
+        r"\\includegraphics(?:\[[^\]]*\])?\{\s*\}",
+        "",
+        text,
+    )
     return text
 
 
-def strip_answer_macros(text: str) -> str:
-    text = re.sub(r"\\answer\{", "", text)
-    text = re.sub(r"\\\}[ \t]*\{\d+\}", "", text)
-    text = re.sub(r"\}\{\d+\}", "", text)
-    return text
+def strip_answer_macros(text: str, *, keep_lyx_close: bool = False) -> str:
+    """Drop leftover LyX \\}{n} closers.
+
+    Notes still need those closers so expand_answers can finish a leftover
+    \\answer{ ... } pair; FoilTeX sanitising should strip them.
+    """
+    if keep_lyx_close:
+        return text
+    return re.sub(r"\\\}[ \t]*\{\d+\}", "", text)
 
 
 def fix_cases_arrays(text: str) -> str:
@@ -284,11 +305,12 @@ def latex_envs_for_markdown(text: str) -> str:
         chunks: list[str] = []
 
         def flush() -> None:
-            if math_lines:
+            rows = [ln for ln in math_lines if ln.strip()]
+            math_lines.clear()
+            if rows:
                 chunks.append(
-                    "$$\n\\begin{aligned}\n" + "\n".join(math_lines) + "\n\\end{aligned}\n$$"
+                    "$$\n\\begin{aligned}\n" + "\n".join(rows) + "\n\\end{aligned}\n$$"
                 )
-                math_lines.clear()
 
         for ln in inner.splitlines():
             s = ln.strip()
@@ -311,21 +333,51 @@ def latex_envs_for_markdown(text: str) -> str:
     return fix_cases_arrays(text)
 
 
+_ALIGN_REL = {
+    "=",
+    r"\equiv",
+    r"\leq",
+    r"\geq",
+    r"\neq",
+    r"\approx",
+    r"\rightarrow",
+    r"\leftarrow",
+    r"\propto",
+    r"\sim",
+    r"\subset",
+    r"\in",
+}
+
+
+def _align_row_cells(ln: str) -> list[str]:
+    return [c.strip() for c in ln.replace(r"\\", "").split("&")]
+
+
+def _is_eqnarray_row(ln: str) -> bool:
+    """LyX eqnarray is `lhs & = & rhs`, not a table row."""
+    cells = _align_row_cells(ln)
+    if len(cells) != 3:
+        return False
+    mid = cells[1].split()[0] if cells[1] else ""
+    return mid in _ALIGN_REL or mid.startswith("\\") and mid[1:].isalpha()
+
+
 def wrap_alignments(body: str) -> str:
-    """Orphan `&` rows from LyX tabular/eqnarray become aligned math."""
+    """Orphan `&` rows from LyX tabular/eqnarray become a table or aligned math."""
     if "&" not in body:
         return body
-    if r"\begin{aligned}" in body or r"\begin{array}" in body:
+    if r"\begin{aligned}" in body or r"\begin{array}" in body or r"\begin{tabular}" in body:
         return body
     lines = body.splitlines()
     aligned = [ln for ln in lines if "&" in ln]
     if not aligned:
         return body
-    if any(ln.count("&") >= 2 for ln in aligned):
-        cells = []
-        for ln in aligned:
-            row = [c.strip() for c in ln.replace(r"\\", "").split("&")]
-            cells.append(row)
+    if aligned and all(_is_eqnarray_row(ln) for ln in aligned):
+        wrapped = "$$\n\\begin{aligned}\n" + "\n".join(aligned) + "\n\\end{aligned}\n$$"
+        other = [ln for ln in lines if "&" not in ln]
+        return "\n\n".join(["\n".join(other), wrapped] if other else [wrapped])
+    if any(ln.count("&") >= 2 for ln in aligned) and not any(_is_eqnarray_row(ln) for ln in aligned):
+        cells = [_align_row_cells(ln) for ln in aligned]
         width = max(len(r) for r in cells)
         cells = [r + [""] * (width - len(r)) for r in cells]
         header, rest = cells[0], cells[1:]
@@ -343,14 +395,16 @@ def wrap_alignments(body: str) -> str:
 
 
 def prepare_tex_body(text: str) -> str:
-    text = strip_answer_macros(strip_figure_chrome(text))
+    text = strip_answer_macros(strip_figure_chrome(text), keep_lyx_close=True)
     text = re.sub(r"\\tiny\b", "", text)
     text = re.sub(r"\\normalsize\b", "", text)
     text = latex_envs_for_markdown(text)
     text = wrap_alignments(text)
     text = tidy_dollar_math(text)
+    text = wrap_bare_tex(text)
     text = repair_fracs(text)
     text = inject_ensuremath(text)
+    text = isolate_display_math(text)
     text = text.replace(r"\ensuremath{\lambda\}", r"\ensuremath{\lambda}")
     text = re.sub(
         r"\\ensuremath\{\\frac\{([^{}]+)\}\{([^{}]+)\}\\\}",
@@ -360,34 +414,96 @@ def prepare_tex_body(text: str) -> str:
     return text
 
 
+def isolate_display_math(text: str) -> str:
+    """Put $$...$$ blocks on their own paragraphs so pandoc sees display math.
+
+    Walk character-by-character so ``$X$$`` (inline close then display open)
+    is not split through the middle of the inline math.
+    """
+    if "$$" not in text:
+        return text
+    out: list[str] = []
+    i = 0
+    n = len(text)
+    in_inline = False
+    while i < n:
+        if not in_inline and text.startswith("$$", i):
+            j = text.find("$$", i + 2)
+            if j < 0:
+                out.append(text[i:])
+                break
+            math = text[i + 2 : j].strip()
+            if math:
+                out.append("\n\n$$\n" + math + "\n$$\n\n")
+            i = j + 2
+            continue
+        ch = text[i]
+        if ch == "$" and (i == 0 or text[i - 1] != "\\"):
+            in_inline = not in_inline
+        out.append(ch)
+        i += 1
+    text = "".join(out)
+    return re.sub(r"\n{3,}", "\n\n", text)
+
+
 def inject_ensuremath(text: str) -> str:
-    """Wrap leftover math commands so they are legal in text mode."""
+    """Wrap leftover math commands so they are legal in text mode.
+
+    Skip material already in `$...$`, `$$...$$`, or a math environment — wrapping
+    ``\\exp\\left(-`` there splits the atom at the minus and breaks pdflatex.
+    """
     cmd_re = re.compile(
         r"\\(?:infty|rightarrow|leftarrow|Delta|lambda|mu|rho|alpha|beta|gamma|"
         r"theta|sigma|omega|bar|hat|tilde|frac|times|exp|sum|prod|int|partial|"
         r"cdot|leq|geq|neq|approx|dots|ldots|cdots|lim|ln|log)\b"
     )
+    math_begin = re.compile(r"\\begin\{(aligned|align\*?|equation\*?|eqnarray\*?|array|cases)\}")
+    math_end = re.compile(r"\\end\{(aligned|align\*?|equation\*?|eqnarray\*?|array|cases)\}")
     out: list[str] = []
     i = 0
     n = len(text)
+    in_display = False
+    in_inline = False
+    env_depth = 0
     while i < n:
-        m = cmd_re.search(text, i)
-        if not m:
-            out.append(text[i:])
-            break
-        start = m.start()
-        if text.rfind(r"\ensuremath{", i, start) > text.rfind("}", i, start):
-            out.append(text[i : m.end()])
-            i = m.end()
+        if not in_inline and env_depth == 0 and text.startswith("$$", i):
+            in_display = not in_display
+            out.append("$$")
+            i += 2
             continue
-        out.append(text[i:start])
-        end = _consume_mathish(text, start)
-        chunk = text[start:end]
-        if chunk.startswith(r"\ensuremath{"):
-            out.append(chunk)
-        else:
-            out.append(r"\ensuremath{" + chunk + "}")
-        i = end
+        if not in_display and env_depth == 0 and text[i] == "$" and (i == 0 or text[i - 1] != "\\"):
+            in_inline = not in_inline
+            out.append("$")
+            i += 1
+            continue
+        mb = math_begin.match(text, i)
+        if mb:
+            env_depth += 1
+            out.append(mb.group(0))
+            i = mb.end()
+            continue
+        me = math_end.match(text, i)
+        if me and env_depth:
+            env_depth -= 1
+            out.append(me.group(0))
+            i = me.end()
+            continue
+        m = cmd_re.match(text, i)
+        if m and not in_display and not in_inline and env_depth == 0:
+            if text.rfind(r"\ensuremath{", 0, i) > text.rfind("}", 0, i):
+                out.append(m.group(0))
+                i = m.end()
+                continue
+            end = _consume_mathish(text, i)
+            chunk = text[i:end]
+            if chunk.startswith(r"\ensuremath{"):
+                out.append(chunk)
+            else:
+                out.append(r"\ensuremath{" + chunk + "}")
+            i = end
+            continue
+        out.append(text[i])
+        i += 1
     return "".join(out)
 
 
@@ -450,6 +566,8 @@ def stem_of(path: str) -> str:
 
 def figure_lamd(filename: str, width_frac: str | None, caption: str, label: str) -> str:
     stem = stem_of(filename)
+    if not stem:
+        return latex_inline_to_md(caption) if caption else ""
     pct = "80%"
     if width_frac:
         try:
@@ -463,18 +581,25 @@ def figure_lamd(filename: str, width_frac: str | None, caption: str, label: str)
     )
 
 
-def notes_wrap(text: str) -> str:
+def _brace_wrap(macro: str, text: str) -> str:
     text = text.strip()
     if not text:
         return ""
     text = prepare_tex_body(text)
-    # GPP is brace-aware; keep the block balanced.
     extra = text.count("{") - text.count("}")
     if extra > 0:
         text += "}" * extra
     elif extra < 0:
         text = ("{" * (-extra)) + text
-    return f"\\notes{{{text}}}"
+    return f"\\{macro}{{{text}}}"
+
+
+def notes_wrap(text: str) -> str:
+    return _brace_wrap("notes", text)
+
+
+def speakernotes_wrap(text: str) -> str:
+    return _brace_wrap("speakernotes", text)
 
 
 def slides_wrap(lines: list[str]) -> str:
@@ -573,22 +698,153 @@ def split_tex_units(tex: str) -> list[TexBlock]:
     return [u for u in units if u.kind != "preamble"]
 
 
+def extract_env_blocks(text: str, env: str) -> tuple[list[str], str]:
+    """Pull \\begin{env}...\\end{env} bodies out of text; return (bodies, remainder)."""
+    begin = f"\\begin{{{env}}}"
+    end = f"\\end{{{env}}}"
+    found: list[str] = []
+    rest: list[str] = []
+    i = 0
+    while True:
+        j = text.find(begin, i)
+        if j < 0:
+            rest.append(text[i:])
+            break
+        rest.append(text[i:j])
+        k = j + len(begin)
+        if k < len(text) and text.startswith("[", k):
+            close = text.find("]", k)
+            k = close + 1 if close >= 0 else k
+        depth = 1
+        pos = k
+        inner_end = None
+        while pos < len(text):
+            b = text.find(begin, pos)
+            e = text.find(end, pos)
+            if e < 0:
+                break
+            if b >= 0 and b < e:
+                depth += 1
+                pos = b + len(begin)
+                continue
+            depth -= 1
+            if depth == 0:
+                inner_end = e
+                break
+            pos = e + len(end)
+        if inner_end is None:
+            rest.append(text[j:])
+            break
+        found.append(text[k:inner_end].strip())
+        i = inner_end + len(end)
+    return found, "".join(rest)
+
+
+def extract_answer_blocks(text: str) -> tuple[list[tuple[str, str]], str]:
+    """Pull \\begin{answer}[vspace]...\\end{answer} bodies; return ([(body, vspace)], remainder)."""
+    begin = "\\begin{answer}"
+    end = "\\end{answer}"
+    found: list[tuple[str, str]] = []
+    rest: list[str] = []
+    i = 0
+    while True:
+        j = text.find(begin, i)
+        if j < 0:
+            rest.append(text[i:])
+            break
+        rest.append(text[i:j])
+        k = j + len(begin)
+        vspace = "0"
+        if k < len(text) and text.startswith("[", k):
+            close = text.find("]", k)
+            if close >= 0:
+                vspace = text[k + 1 : close].strip() or "0"
+                k = close + 1
+        depth = 1
+        pos = k
+        inner_end = None
+        while pos < len(text):
+            b = text.find(begin, pos)
+            e = text.find(end, pos)
+            if e < 0:
+                break
+            if b >= 0 and b < e:
+                depth += 1
+                pos = b + len(begin)
+                continue
+            depth -= 1
+            if depth == 0:
+                inner_end = e
+                break
+            pos = e + len(end)
+        if inner_end is None:
+            rest.append(text[j:])
+            break
+        found.append((text[k:inner_end].strip(), vspace))
+        i = inner_end + len(end)
+    return found, "".join(rest)
+
+
+def _vspace_from_answer_begin(line: str) -> str:
+    m = re.search(r"\\begin\{answer\}(?:\[([^\]]*)\])?", line)
+    if m and m.group(1):
+        return m.group(1).strip() or "0"
+    return "0"
+
+
+def _answer_slot(body: str, vspace: str = "0") -> str:
+    body = textwrap.dedent(body).strip()
+    if not body:
+        return ""
+    vspace = vspace.strip() or "0"
+    # Pandoc treats a 4-space indent as a code block; keep the slot flush left.
+    body = "\n".join(ln.lstrip() if ln.startswith("    ") else ln for ln in body.splitlines())
+    return f"\\answer{{\n{body}\n}}{{{vspace}}}"
+
+
+def _answer_to_notes(inner: str, vspace: str = "0") -> str:
+    inner = strip_figure_chrome(strip_answer_macros(inner)).strip()
+    if not inner:
+        return ""
+    if r"\item" in inner:
+        md = itemize_to_md(inner, "itemize")
+    else:
+        md = latex_inline_to_md(inner)
+    slot = _answer_slot(md, vspace)
+    return notes_wrap(slot) if slot else ""
+
+
 def env_to_notes(block: TexBlock) -> str:
     kind = block.kind.split(":", 1)[-1]
     body = "\n".join(block.lines)
     if kind == "figure":
         return figure_from_tex(body)
     if kind in {"itemize", "enumerate", "description"}:
-        items = itemize_to_md(strip_figure_chrome(strip_answer_macros(body)), kind)
-        return notes_wrap(items)
-    if kind == "answer":
-        inner = "\n".join(block.lines[1:-1]).strip()
-        return "\\notes{\\subsection{Answer}}\n\n" + notes_wrap(
-            latex_inline_to_md(strip_figure_chrome(strip_answer_macros(inner)))
+        speakers, body = extract_env_blocks(body, "lyxnote")
+        answers, body = extract_answer_blocks(body)
+        figures, body = extract_env_blocks(body, "figure")
+        items = itemize_to_md(
+            strip_figure_chrome(strip_answer_macros(body, keep_lyx_close=True)), kind
         )
+        parts = [notes_wrap(items)] if items.strip() else []
+        for fig in figures:
+            parts.append(figure_from_tex(fig))
+        for sp in speakers:
+            parts.append(speakernotes_wrap(latex_inline_to_md(_strip_answer_env(sp))))
+        for ans, vspace in answers:
+            parts.append(_answer_to_notes(ans, vspace))
+        return "\n\n".join(p for p in parts if p)
+    if kind == "answer":
+        vspace = _vspace_from_answer_begin(block.lines[0] if block.lines else "")
+        inner = "\n".join(block.lines[1:-1]).strip()
+        return _answer_to_notes(inner, vspace)
     if kind == "lyxnote":
         inner = "\n".join(block.lines[1:-1]).strip()
-        return notes_wrap("*Note.* " + latex_inline_to_md(inner))
+        answers, inner = extract_answer_blocks(inner)
+        parts = [speakernotes_wrap(latex_inline_to_md(_strip_answer_env(inner)))]
+        for ans, _vspace in answers:
+            parts.append(speakernotes_wrap(latex_inline_to_md(_strip_answer_env(ans))))
+        return "\n\n".join(p for p in parts if p)
     if kind == "tabular":
         return notes_wrap(tabular_to_md(body))
     if kind in {"equation", "eqnarray", "eqnarray*"}:
@@ -616,7 +872,7 @@ def _cmd_arg(text: str, cmd: str) -> str:
 def figure_from_tex(body: str) -> str:
     gm = GRAPHICS_RE.search(body)
     filename = gm.group(2) if gm else "unknown"
-    width = gm.group(1) if gm else None
+    width = _width_frac_from_opts(gm.group(1) if gm else None)
     caption = _cmd_arg(body, "caption")
     caption = re.sub(r"\\answer\{.*?\}(?:\{\d+\})?", "", caption)
     caption = caption.replace(r"\}", "").strip()
@@ -624,12 +880,38 @@ def figure_from_tex(body: str) -> str:
     return figure_lamd(filename, width, caption, label)
 
 
+def _replace_tabulars(text: str) -> str:
+    """Turn nested \\begin{tabular}...\\end{tabular} into markdown tables."""
+    out: list[str] = []
+    i = 0
+    begin = r"\begin{tabular}"
+    end = r"\end{tabular}"
+    while True:
+        j = text.find(begin, i)
+        if j < 0:
+            out.append(text[i:])
+            break
+        out.append(text[i:j])
+        k = text.find(end, j)
+        if k < 0:
+            out.append(text[j:])
+            break
+        out.append("\n" + tabular_to_md(text[j : k + len(end)]) + "\n")
+        i = k + len(end)
+    return "".join(out)
+
+
 def itemize_to_md(body: str, kind: str) -> str:
     items = re.split(r"\\item\s*", body)
     out: list[str] = []
     n = 0
     for item in items[1:]:
-        item = re.sub(r"\\begin\{[^}]+\}|\\end\{[^}]+\}", "", item).strip()
+        item = re.sub(
+            r"\\begin\{(?:enumerate|itemize|description)\}|\\end\{(?:enumerate|itemize|description)\}",
+            "",
+            item,
+        )
+        item = _replace_tabulars(item).strip()
         if not item:
             continue
         n += 1
@@ -691,7 +973,11 @@ def units_to_notes(units: list[TexBlock]) -> str:
             raw = "\n".join(unit.lines)
             gm = GRAPHICS_RE.search(raw)
             if gm:
-                parts.append(figure_from_tex(raw) if r"\caption" in raw else figure_lamd(gm.group(2), gm.group(1), "", ""))
+                parts.append(
+                    figure_from_tex(raw)
+                    if r"\caption" in raw
+                    else figure_lamd(gm.group(2), _width_frac_from_opts(gm.group(1)), "", "")
+                )
                 raw = GRAPHICS_RE.sub("", raw)
             raw = strip_figure_chrome(raw)
             text = latex_inline_to_md(raw)
@@ -702,7 +988,7 @@ def units_to_notes(units: list[TexBlock]) -> str:
             continue
     text = "\n\n".join(p for p in parts if p)
     text = GRAPHICS_RE.sub(
-        lambda m: figure_lamd(m.group(2), m.group(1), "", ""),
+        lambda m: figure_lamd(m.group(2), _width_frac_from_opts(m.group(1)), "", ""),
         text,
     )
     return polish_notes(text)
@@ -721,8 +1007,8 @@ def pythonise_matlab(text: str) -> str:
     return text
 
 
-def _parse_answer_macro(text: str, start: int) -> tuple[str, int]:
-    """Return (body, index after \\answer{body}{vspace}) starting at \\answer{."""
+def _parse_answer_macro(text: str, start: int) -> tuple[str, str, int, bool]:
+    """Return (body, vspace, index after slot, lyx_escaped_close) at \\answer{."""
     i = start + len("\\answer{")
     depth = 1
     body: list[str] = []
@@ -731,8 +1017,9 @@ def _parse_answer_macro(text: str, start: int) -> tuple[str, int]:
             body_text = "".join(body)
             rest = text[i + 3 :]
             m = re.match(r"(\d+)\}", rest)
+            vspace = m.group(1) if m else "0"
             end = i + 3 + (m.end() if m else 0)
-            return body_text, end
+            return body_text, vspace, end, True
         ch = text[i]
         if ch == "{":
             depth += 1
@@ -741,11 +1028,12 @@ def _parse_answer_macro(text: str, start: int) -> tuple[str, int]:
             if depth == 0:
                 rest = text[i + 1 :]
                 m = re.match(r"\{(\d+)\}", rest)
+                vspace = m.group(1) if m else "0"
                 end = i + 1 + (m.end() if m else 0)
-                return "".join(body), end
+                return "".join(body), vspace, end, False
         body.append(ch)
         i += 1
-    return "".join(body), len(text)
+    return "".join(body), "0", len(text), True
 
 
 def _close_open_notes(prefix: str) -> tuple[str, bool]:
@@ -797,10 +1085,15 @@ def tidy_answer_body(body: str) -> str:
     body = re.sub(r"\\caption\{[^{}]*\}", "", body)
     body = re.sub(r"\\label\{[^{}]*\}", "", body)
     body = re.sub(r"^\s*\[0\]\s*$", "", body, flags=re.M)
-    if "&" in body and r"\begin{eqnarray" not in body:
+    if (
+        "&" in body
+        and r"\begin{eqnarray" not in body
+        and r"\begin{aligned}" not in body
+        and r"\begin{tabular}" not in body
+    ):
         lines = [ln for ln in body.splitlines() if ln.strip()]
         aligned = [ln for ln in lines if "&" in ln]
-        if aligned:
+        if aligned and all(_is_eqnarray_row(ln) for ln in aligned):
             wrapped = "\\begin{eqnarray*}\n" + "\n".join(aligned) + "\n\\end{eqnarray*}"
             other = [ln for ln in lines if "&" not in ln]
             body = "\n\n".join(["\n".join(other), wrapped] if other else [wrapped])
@@ -808,7 +1101,7 @@ def tidy_answer_body(body: str) -> str:
 
 
 def expand_answers(text: str) -> str:
-    """Turn leftover LyX \\answer{...}{n} into Answer subsections."""
+    """Turn leftover LyX \\answer{...}{n} into \\answer slots inside \\notes."""
     out: list[str] = []
     i = 0
     while True:
@@ -816,21 +1109,27 @@ def expand_answers(text: str) -> str:
         if j < 0:
             out.append(text[i:])
             break
+        body, vspace, end, escaped = _parse_answer_macro(text, j)
+        if not escaped:
+            # Already a first-class LaMD slot; do not re-prepare (that empties
+            # aligned environments and can swallow the next table).
+            out.append(text[i:end])
+            i = end
+            continue
         prefix, closed = _close_open_notes(text[i:j])
         out.append(prefix)
-        body, end = _parse_answer_macro(text, j)
         cleaned = tidy_answer_body(body)
-        chunks = [notes_wrap("\\subsection{Answer}")]
+        chunks: list[str] = []
         if r"\figure{" in cleaned:
             before, fig_block, after = _split_figure(cleaned)
             if before.strip():
-                chunks.append(notes_wrap(latex_inline_to_md(before)))
+                chunks.append(notes_wrap(_answer_slot(latex_inline_to_md(before), vspace)))
             if fig_block:
                 chunks.append(fig_block.strip())
             if after.strip():
-                chunks.append(notes_wrap(latex_inline_to_md(after)))
+                chunks.append(notes_wrap(_answer_slot(latex_inline_to_md(after), vspace)))
         elif cleaned:
-            chunks.append(notes_wrap(latex_inline_to_md(cleaned)))
+            chunks.append(notes_wrap(_answer_slot(latex_inline_to_md(cleaned), vspace)))
         out.append("\n\n" + "\n\n".join(c for c in chunks if c) + "\n\n")
         i = end
         if closed:
@@ -849,9 +1148,7 @@ def expand_bracket_answers(text: str) -> str:
         body = tidy_answer_body(m.group(1))
         return (
             "}\n\n"
-            + notes_wrap("\\subsection{Answer}")
-            + "\n\n"
-            + notes_wrap(latex_inline_to_md(body))
+            + notes_wrap(_answer_slot(latex_inline_to_md(body), "0"))
             + "\n\n\\notes{"
         )
 
@@ -963,10 +1260,55 @@ def collect_foils(units: list[TexBlock]) -> list[Foil]:
     return foils
 
 
+def _strip_answer_env(text: str) -> str:
+    text = re.sub(r"\\begin\{answer\}(?:\[[^\]]*\])?", "", text)
+    text = re.sub(r"\\end\{answer\}", "", text)
+    return text.strip()
+
+
 def _unwrap_container(unit: TexBlock) -> list[TexBlock]:
-    """LyX notes and answers wrap figures and lists; flatten them into foil body."""
-    if not unit.kind.startswith("env:lyxnote") and not unit.kind.startswith("env:answer"):
+    """Lift leftover LyX notes to speaker-note units; flatten answers that wrap figures."""
+    if unit.kind.startswith("env:lyxnote"):
         return [unit]
+    raw = "\n".join(unit.lines)
+    if r"\begin{lyxnote}" in raw or (
+        not unit.kind.startswith("env:answer") and r"\begin{answer}" in raw
+    ):
+        notes, rest = extract_env_blocks(raw, "lyxnote")
+        answers, rest = extract_answer_blocks(rest)
+        out: list[TexBlock] = []
+        rest = rest.strip()
+        if rest:
+            rebuilt = TexBlock(
+                kind=unit.kind,
+                title=unit.title,
+                lines=rest.split("\n"),
+                starred=unit.starred,
+            )
+            if rebuilt.kind.startswith("env:answer"):
+                out.extend(_flatten_answer(rebuilt))
+            else:
+                out.append(rebuilt)
+        for n in notes:
+            out.append(
+                TexBlock(kind="env:lyxnote", lines=["\\begin{lyxnote}", n, "\\end{lyxnote}"])
+            )
+        for a, vspace in answers:
+            out.extend(
+                _flatten_answer(
+                    TexBlock(
+                        kind="env:answer",
+                        lines=[f"\\begin{{answer}}[{vspace}]", a, "\\end{answer}"],
+                    )
+                )
+            )
+        return out or [unit]
+    if unit.kind.startswith("env:answer"):
+        return _flatten_answer(unit)
+    return [unit]
+
+
+def _flatten_answer(unit: TexBlock) -> list[TexBlock]:
     inner = "\n".join(unit.lines[1:-1] if len(unit.lines) >= 2 else unit.lines)
     nested = split_tex_units(inner)
     if not nested:
@@ -975,7 +1317,7 @@ def _unwrap_container(unit: TexBlock) -> list[TexBlock]:
     out: list[TexBlock] = []
     for child in nested:
         out.extend(_unwrap_container(child))
-    return out
+    return out or [unit]
 
 
 def content_units(foil: Foil) -> int:
@@ -1054,13 +1396,35 @@ def foil_to_slides(title: str, units: list[TexBlock], continued: bool, orig_inde
     extras: list[str] = []
     for unit in units:
         raw = "\n".join(unit.lines)
+        if unit.kind.startswith("env:lyxnote"):
+            inner = _strip_answer_env("\n".join(unit.lines[1:-1] if len(unit.lines) >= 2 else unit.lines))
+            text = pythonise_matlab(latex_inline_to_md(inner))
+            if text.strip():
+                extras.append(speakernotes_wrap(text))
+            continue
+        if unit.kind.startswith("env:answer"):
+            vspace = _vspace_from_answer_begin(unit.lines[0] if unit.lines else "")
+            inner = latex_inline_to_md("\n".join(unit.lines[1:-1]))
+            slot = _answer_slot(inner, vspace)
+            if slot:
+                extras.append(slides_wrap([slot]))
+            continue
         if unit.kind.startswith("env:figure"):
             extras.append(slides_wrap([figure_from_tex(raw)]))
             continue
         for gm in GRAPHICS_RE.finditer(raw):
             extras.append(
                 slides_wrap(
-                    [figure_from_tex(raw) if r"\caption" in raw else figure_lamd(gm.group(2), gm.group(1), "", stem_of(gm.group(2)))]
+                    [
+                        figure_from_tex(raw)
+                        if r"\caption" in raw
+                        else figure_lamd(
+                            gm.group(2),
+                            _width_frac_from_opts(gm.group(1)),
+                            "",
+                            stem_of(gm.group(2)),
+                        )
+                    ]
                 )
             )
         raw = GRAPHICS_RE.sub("", raw)
@@ -1082,11 +1446,6 @@ def foil_to_slides(title: str, units: list[TexBlock], continued: bool, orig_inde
             if table:
                 extras.append(slides_wrap([table]))
             continue
-        if unit.kind.startswith("env:answer"):
-            bullets.append("* **Answer.**")
-            inner = latex_inline_to_md("\n".join(unit.lines[1:-1]))
-            if inner:
-                bullets.append(f"* {inner}")
     if not bullets and not extras:
         if continued:
             return ""

@@ -6,6 +6,7 @@ Unknown insets are kept as raw text so conversion cannot silently drop them.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterator
@@ -233,7 +234,14 @@ def promote_structural_headings(blocks: list[Block]) -> list[Block]:
             promoted: list[Block] = []
             for child in preamble:
                 if isinstance(child, Heading) and child.layout in STRUCTURAL_HEADINGS:
-                    promoted.append(child)
+                    title = plain_text(child.runs).strip().lower()
+                    # LyX "Answer" subheads sit inside enumerate items; lifting
+                    # them splits one numbered list into several and loses the
+                    # \\answer{ opener that follows the question text.
+                    if title == "answer":
+                        kept.append(child)
+                    else:
+                        promoted.append(child)
                 else:
                     kept.append(child)
             block.nested = kept
@@ -600,19 +608,42 @@ def plain_text(runs: list[Run]) -> str:
     return " ".join(p for p in parts if p)
 
 
+def _text_paragraph(text: str) -> Paragraph:
+    return Paragraph(layout="Standard", runs=[TextRun(text=text)])
+
+
 def group_answers(blocks: list[Block]) -> list[Block]:
-    """Turn split ERT \\answer{ ... }{n} pairs into Answer blocks."""
+    """Turn split ERT \\answer{ ... }{n} pairs into Answer blocks.
+
+    The open and close often share a LyX paragraph with the answer body, so
+    leftover text on those paragraphs is kept as inner content. Recurse into
+    Note insets: slide stickies wrap several of the worked solutions.
+    """
     out: list[Block] = []
     i = 0
     while i < len(blocks):
         block = blocks[i]
-        if _is_answer_open(block):
-            inner: list[Block] = []
+        parsed = _parse_answer_paragraph(block)
+        if parsed is not None:
+            kind, prefix, body, vspace, leftover = parsed
+            if prefix.strip():
+                out.append(_text_paragraph(prefix))
+            if kind == "full":
+                inner = [_text_paragraph(body)] if body.strip() else []
+                if leftover.strip():
+                    inner.append(_text_paragraph(leftover))
+                out.append(Answer(blocks=group_answers(inner), vspace=vspace))
+                i += 1
+                continue
+            inner = [_text_paragraph(body)] if body.strip() else []
             i += 1
             vspace = "0"
             while i < len(blocks):
-                if _is_answer_close(blocks[i]):
-                    vspace = _answer_vspace(blocks[i])
+                close = _parse_answer_close(blocks[i])
+                if close is not None:
+                    prefix, vspace = close
+                    if prefix.strip():
+                        inner.append(_text_paragraph(prefix))
                     i += 1
                     break
                 if _is_foil_heading(blocks[i]):
@@ -623,27 +654,54 @@ def group_answers(blocks: list[Block]) -> list[Block]:
             continue
         if isinstance(block, Paragraph) and block.nested:
             block.nested = group_answers(block.nested)
+        if isinstance(block, (Note, Answer, Footnote)):
+            block.blocks = group_answers(block.blocks)
         out.append(block)
         i += 1
     return out
 
 
-def _is_answer_open(block: Block) -> bool:
+def _parse_answer_paragraph(block: Block) -> tuple[str, str, str, str, str] | None:
+    """Return ('full'|'open', prefix, body, vspace, leftover) if this block opens \\answer.
+
+    The opener is often a suffix of the question paragraph, not a line of its own.
+    """
     if not isinstance(block, Paragraph):
-        return False
+        return None
     text = plain_text(block.runs).strip()
-    return text.startswith("\\answer{") and not text.endswith("}")
+    idx = text.find("\\answer{")
+    if idx < 0:
+        return None
+    prefix = text[:idx].strip()
+    text = text[idx:]
+    i = len("\\answer{")
+    depth = 1
+    for j, ch in enumerate(text[i:], i):
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                body = text[i:j]
+                rest = text[j + 1 :].lstrip()
+                m = re.match(r"^\{(\d+)\}\s*(.*)$", rest, re.S)
+                if m:
+                    return "full", prefix, body, m.group(1), m.group(2)
+                return "open", prefix, body + ((" " + rest) if rest else ""), "0", ""
+    return "open", prefix, text[i:], "0", ""
 
 
-def _is_answer_close(block: Block) -> bool:
+def _parse_answer_close(block: Block) -> tuple[str, str] | None:
+    """Return (prefix, vspace) if this block closes a \\answer{ ... }{n} pair."""
     if not isinstance(block, Paragraph):
-        return False
+        return None
     text = plain_text(block.runs).strip()
-    return text.startswith("}{") or text == "}"
-
-
-def _answer_vspace(block: Block) -> str:
-    text = plain_text(block.runs).strip()
-    if text.startswith("}{") and text.endswith("}"):
-        return text[2:-1]
-    return "0"
+    if text in {"}", r"\}"}:
+        return "", "0"
+    m = re.search(r"\\?\}[ \t]*\{(\d+)\}[ \t]*$", text)
+    if not m:
+        if text.startswith("}{") or text.startswith(r"\}{"):
+            rest = text.split("{", 1)[1]
+            return "", rest.rstrip("}").strip() or "0"
+        return None
+    return text[: m.start()].strip().rstrip("\\"), m.group(1)

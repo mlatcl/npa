@@ -16,7 +16,9 @@ $$
 \begin{aligned}
 The development of a *wireless telegraphy* system by the Italian born engineer **Guglielmo Marconi** (1874-1937), patented in July 1897, led to the foundation of the Wireless Telegraph & Signal Company. By December 1901 short wave transmission across the Atlantic between England and Canada (over 2,100 miles).
 \end{aligned}
-$$}
+$$
+
+}
 
 \notes{\section{Automated Telephone Networks}}
 
@@ -34,21 +36,21 @@ Erlang's contribution was to provide theoretical studies of these networks which
 \footnote{Voice over IP, the protocol for having phone conversations over the internet.}
 \footnote{FTP is the file transfer protocol, a much older protocol which dates back to the formation of the ARPANET.}}
 
-\notes{*Note.* Student exercise: summarise differences between packet switched and circuit switched networks.}
+\speakernotes{Student exercise: summarise differences between packet switched and circuit switched networks.}
 
 \notes{\subsection{ARPANET}}
 
 \notes{The Advanced Research Projects Agency (ARPA) funded a network that actually implemented these ideas. In 1969 the ARPA network connected four nodes at the University of California, Los Angeles (UCSB); the Stanford Research Institute; the University of California, Santa Barbara (UCSB) and the University of Utah. By 1975 (see Figure\  \ref{cap:arpaNet1975}) the network had expanded to cover most of the major universities (61 nodes) in the U.S. as well as a node at University College London in the U.K..
 ARPANET was the first network for computer communications, it was restricted to non-commercial use and funded by ARPA and NSF until 1990. With the increase in communication, protocols became far more important. Just as spellings of European languages became standardised after the introduction of the the printing press communication protocols also became more prevalent. Telnet and file transfer protocols (FTP) were developed in 1971, but perhaps the most important protocol developed at that time was the transmission control protocol (TCP) developed in the mid-seventies by **Vinton G. Cerf** (1943-) and **Robert E. Kahn** (1938-) [@Cerf:packet74]. These protocols allow interconnection between networks thereby enabling the formation of the internet.}
 
-\figure{\includepng{\diagramsDir/npa/1975_net_map}{80%}}{The ARPANET in 1975, image courtesy of the Computer History Museum, [http://www.computerhistory.org](http://www.computerhistory.org). Some abbreviations: UCB - University of California at Berkeley; UCSD - University of California at San Diego; UCLA - University of California at Los Angeles; PDP-XX - the PDP machines were early mini-computers made by DEC with a price tag of around $20,000. The machines starting with 360 and 370 are IBM mainframe machines. Note the transatlantic link to London and the link over the Pacific to Hawaii. There are 61 nodes in total on this network.}{cap:arpaNet1975}
+\figure{\includepng{\diagramsDir/npa/1975_net_map}{100%}}{The ARPANET in 1975, image courtesy of the Computer History Museum, [http://www.computerhistory.org](http://www.computerhistory.org). Some abbreviations: UCB - University of California at Berkeley; UCSD - University of California at San Diego; UCLA - University of California at Los Angeles; PDP-XX - the PDP machines were early mini-computers made by DEC with a price tag of around $20,000. The machines starting with 360 and 370 are IBM mainframe machines. Note the transatlantic link to London and the link over the Pacific to Hawaii. There are 61 nodes in total on this network.}{cap:arpaNet1975}
 
 \notes{\subsection{The Internet}}
 
 \notes{By 1977 Cerf and Kahn were able to send messages across networks including the `Packet Radio net', SATNET and the ARPANET. At a similar time **Robert Metcalfe** (1946-) was developing Ethernet at Xerox PARC. Ethernet was inspired by the ALOHA networks at the University of Hawaii. Each machine in the ALOHA network communicated across the same frequency radio channel. This meant that if several communications where sent at the same time `collisions' could occur resulting in garbled messages. A procedure for detecting and retransmitting the message was required. For Ethernet networks a cable is the medium of transmission, rather than a radio frequency. Ethernet was supported by an alliance of companies: DEC, Intel and Xerox. This led to Ethernet networks superseding other competing approaches such as token ring, FDDI and ARCNET. The cheap availability of Ethernet and computers in general contributed to an explosion in the number of networks associated with the internet.
 By 1990 when ARPANET was formally shutdown it had grown to 300,000 hosts and connected countries across the globe, it evolved into the NSFNet which became the backbone of the internet. In 1991 the internet was opened to commercial traffic, the commercialisation of the internet in combination with the invention of the hyper-text markup language (HTML) and universal resource locaters (URL) by **Tim Berners-Lee** (1955-) formed the foundations of the modern internet.}
 
-\notes{*Note.* \begin{itemize}
+\speakernotes{\begin{itemize}
     \item Design and analysis of networks.
     \item Queues arise in a variety of IT scenarios.
     \begin{itemize}
@@ -66,7 +68,7 @@ By 1990 when ARPANET was formally shutdown it had grown to 300,000 hosts and con
 
 \notes{These are important because resources are finite, there are limitations on the available bandwidth, processor speeds and memory.}
 
-\notes{*Note.* \begin{itemize}
+\speakernotes{\begin{itemize}
     \item In our analysis we should consider:
     \begin{enumerate}
       \item **Design Issues**:
@@ -107,10 +109,10 @@ Each of the following six criteria/characteristics of a session may need to be c
 
 \notes{In our review of the history of communication networks, we have already met two distinct kinds of network.}
 
-\notes{* **Circuit\** Switching: used for telephone routing. Guarantees an open `channel' between two peers.
-* **Packet\** Switching or Store and Forward Switching: used for data. May operate via
-* **Dynamic\** Routing Each packet of the message moves through the network independently.
-* **Virtual\** Circuit\  Routing A fixed path through the network is provided for the entire message.}
+\notes{* **{Circuit~Switching:}** used for telephone routing. Guarantees an open `channel' between two peers.
+* **{Packet~Switching}** or Store and Forward Switching: used for data. May operate via
+* **{Dynamic~Routing}** Each packet of the message moves through the network independently.
+* **{Virtual~Circuit~}** Routing A fixed path through the network is provided for the entire message.}
 
 \notes{The character of the two approaches are quite different.}
 
@@ -143,9 +145,9 @@ In a circuit switching network, the sum of rates for all sessions using a link c
 
 \notes{The traditional OSI Reference model contains seven layers which reflect in a network how communication occurs at different layers using different protocols. By way of reviewing the TCP model we introduce a layered representation of the TCP/IP model which underlies the internet. As we mentioned above TCP/IP was introduced in 1974 as a standard which interconnects between networks. This is achieved through the Internet Protocol. The TCP/IP reference model is much more compact and will serve as a useful reminder.}
 
-\notes{* **Application\** Layer This layer represents the interface to the user and consists of applications which are commonly used by users. As well as the examples in the diagram packetised voice communications, electronic news, HTTP and its secure variants etc.
-* **The\** Transport\  Layer The layer above the internet layer is known as the transport layer and contains two protocols. The Transmission Control Protocol (TCP) allows applications to communicate in a lossless manner, *i.e.*any packets which are dropped are retransmitted. It also implements flow control in an effort to prevent network congestion and reorders arrivals at the destination. The User Datagram Protocol (UDP) is an unreliable protocol for applications which wish to provide their own sequencing and flow control (e.g. voice transmission or video).
-* **The\** Internet\  Layer The key to the success of TCP/IP is the Internet Protocol. Its objective is to allow the interfacing of different networks by allowing hosts to place packets on any network and enabling them to travel to any other network.}
+\notes{* **{Application~Layer}** This layer represents the interface to the user and consists of applications which are commonly used by users. As well as the examples in the diagram packetised voice communications, electronic news, HTTP and its secure variants etc.
+* **{The~Transport~}** Layer The layer above the internet layer is known as the transport layer and contains two protocols. The Transmission Control Protocol (TCP) allows applications to communicate in a lossless manner, *i.e.*any packets which are dropped are retransmitted. It also implements flow control in an effort to prevent network congestion and reorders arrivals at the destination. The User Datagram Protocol (UDP) is an unreliable protocol for applications which wish to provide their own sequencing and flow control (e.g. voice transmission or video).
+* **{The~Internet~}** Layer The key to the success of TCP/IP is the Internet Protocol. Its objective is to allow the interfacing of different networks by allowing hosts to place packets on any network and enabling them to travel to any other network.}
 
 \notes{\section{Communication Media}}
 
@@ -156,31 +158,39 @@ Similar principles occur for *e.g.* thinwire Ethernet, in this case the communic
 
 \notes{\section{The Road Ahead}}
 
-\notes{* **Probability\** Review Review of probability theory.
-* **Simple\** Queueing\  models Simple models of queues based on probability theory. Little's formula, $M/M/1$ queue, $M/M/\ensuremath{\infty}$, $M/M/m$, $M/M/m/m$ and $M/G/1$.
-* **Simulation** Simulation of queueing systems.}
+\notes{* **{Probability~Review}** Review of probability theory.
+* **{Simple~Queueing~}** models Simple models of queues based on probability theory. Little's formula, $M/M/1$ queue, $M/M/\infty$, $M/M/m$, $M/M/m/m$ and $M/G/1$.
+* **{Simulation}** Simulation of queueing systems.}
 
 \notes{## Examples}
 
 \notes{1. As a simple example let's consider a database (perhaps MySQL). We are constructing it from existing parts. We have two CPU/motherboard systems and two separate disk systems, their expected characteristics are shown in Table\  \ref{cap:SQLserver}. Which should we match with which? Are we better off building one faster system and one slower system? Or should we build two systems that have a similar performance?
-2. You are starting an e-commerce company.
-3. You have a tight budget.
-4. You have:
-7. Which should you combine to make your two servers?
-    
   
-  % empty table
-  [0]
-8. You should match A with 2 and B with 1.
-9. This avoids bottlenecks:
-10. Disk 1 would wait for CPU A to process about 50% of the time.
-11. CPU B would wait for disk 2 to access about 50% of the time.
+  % empty table}
+
+\speakernotes{\begin{itemize}
+      \item You are starting an e-commerce company.
+      \item You have a tight budget.
+      \item You have:
+      \begin{itemize}
+      \end{itemize}
+      \item Which should you combine to make your two servers?
+    \end{itemize}
 
 $$
 \begin{aligned}
-5. two disk systems (1 & 2).
-6. two CPU systems (A & B).
+        \item two disk systems (1 & 2).
+        \item two CPU systems (A & B).
 \end{aligned}
-$$}
+$$
+
+}
+
+\notes{\answer{
+* You should match A with 2 and B with 1.
+* This avoids bottlenecks:
+* Disk 1 would wait for CPU A to process about 50% of the time.
+* CPU B would wait for disk 2 to access about 50% of the time.
+}{0}}
 
 \endif

@@ -3,58 +3,93 @@
 
 \newslide{Erlang Loss $M$/$M$/$m$/$m$}
 
-\slides{\figure{\includepng{\diagramsDir/npa/erlangLossFlowChart}{80%}}{Flow chart of the Erlang Loss System.}{cap:erlangLossFlowChart}}
+\slides{\figure{\includepng{\diagramsDir/npa/erlangLossFlowChart}{80%}}{erlangLossFlowChart}{erlangLossFlowChart}}
 
 \newslide{Erlang Loss $M$/$M$/$m$/$m$ (continued)}
 
 \slides{* The Erlang delay system contained $m$ servers.
 * It was assumed that, if all servers were occupied, the customer would be placed on hold until a server became available.
-* In the $M/M/m/m$ system there is a maximum number of customers.}
+* In the $M/M/m/m$ system there is a maximum number of customers.
+* \label{cap:erlangLossFlowChart}}
 
 \newslide{State Diagram}
 
-\slides{\figure{\includepng{\diagramsDir/npa/erlangLoss}{100%}}{State Diagram for the Erlang loss system, $M$/$M$/$m$/$m$}{erlangLoss}}
+\slides{\figure{\includepng{\diagramsDir/npa/erlangLoss}{100%}}{erlangLoss}{erlangLoss}}
 
 \newslide{State Diagram (continued)}
 
-\slides{* The offered load, $a=\ensuremath{\frac{\lambda}{\mu}}$, is again dimensionless with units of Erlangs.
-* The Erlang loss system may be analysed as a birth-death process with birth rate $$
-\lambda_{k}=\begin{array}{cc}
-\ensuremath{\lambda} & k=0,1,\ensuremath{\dots},m-1\\
-0 & k\ensuremath{\geq} m\end{array}$$
-* And death rate $$
-\mu_{k}=\begin{array}{cc}
-k\ensuremath{\mu} & k=0,1,\ensuremath{\dots},m\\
-0 & k>m\end{array}$$}
+\slides{* The offered load, $a=\frac{\lambda}{\mu}$, is again dimensionless with units of Erlangs.
+* The Erlang loss system may be analysed as a birth-death process with birth rate
+* 
+
+$$
+\mu_{k}=\left\{ \begin{array}{cc}
+k\mu & k=0,1,\dots,m\\
+0 & k>m\end{array}\right.
+$$
+
+}}
 
 \newslide{Detailed Balance Equations}
 
-\slides{* When the system's state, $k\ensuremath{\leq} m$, we have boundary flow as below
-      \label{cap:flowAtBoundaryMMmm}
-* This leads to the following balance equation $$
-\ensuremath{\lambda} P\left(k-1\right)=k\ensuremath{\mu} P\left(k\right).$$}
+\slides{* When the system's state, $k\leq m$, we have boundary flow as below
+    \label{cap:flowAtBoundaryMMmm}
+* This leads to the following balance equation 
 
-\slides{\figure{\includepng{\diagramsDir/npa/boundaryFlowMMinf}{60%}}{Flow rates at a boundary.}{cap:flowAtBoundaryMMmm}}
+$$
+\lambda P\left(k-1\right)=k\mu P\left(k\right).
+$$
+
+}
+
+\slides{\figure{\includepng{\diagramsDir/npa/boundaryFlowMMinf}{60%}}{boundaryFlowMMinf}{boundaryFlowMMinf}}
 
 \newslide{Detailed Balance Equations (continued)}
 
-\slides{* So for $k=0\ensuremath{\dots} m$ we may write
-P\left(k\right)=\ensuremath{\frac{\lambda}{k\mu}}P\left(k-1\right).\label{eq:PkForkLessThanM}
+\slides{* So for $k=0\dots m$ we may write
+
+$$
+P\left(k\right)=\frac{\lambda}{k\mu}P\left(k-1\right).\label{eq:PkForkLessThanM}
+$$
+
 * The system state cannot go above $m$ so we have no need to consider the region where $k>m$. Substituting in the offered load we have,
 
-| P\left(k\right) | = | \ensuremath{\frac{a}{k}}P(k-1), which means that |
-| --- | --- | --- |
-| P\left(k\right) | = | \prod_{n=1}^{k}\ensuremath{\frac{a}{n}}P\left(0\right) |
-|  | = | \ensuremath{\frac{a^{k}}{k!}}P\left(0\right). |}
+$$
+\begin{aligned}
+P\left(k\right) & = & \frac{a}{k}P(k-1),
+\end{aligned}
+$$
+
+ which means that 
+
+$$
+\begin{aligned}
+P\left(k\right) & = & \prod_{n=1}^{k}\frac{a}{n}P\left(0\right)\\
+ & = & \frac{a^{k}}{k!}P\left(0\right).
+\end{aligned}
+$$
+
+}
 
 \newslide{Normalisation Condition}
 
-\slides{* The normalisation condition gives us $$
-P\left(0\right)\sum_{k=0}^{m}\ensuremath{\frac{a^{k}}{k!}}=1$$$$
-P\left(0\right)=\ensuremath{\frac{1}{\sum_{k=0}^{m}\frac{a^{k}}{k!}}},$$
-* Which leads to the truncated Poisson distribution $$
-P\left(k\right)=\ensuremath{\frac{\frac{a^{k}}{k!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}}$$
-* *Note if*$m\ensuremath{\rightarrow\infty}$*we recover the* $M/M/\ensuremath{\infty}$*queue as we would expect.*}
+\slides{* The normalisation condition gives us 
+
+$$
+P\left(0\right)\sum_{k=0}^{m}\frac{a^{k}}{k!}=1
+$$
+
+$$
+P\left(0\right)=\frac{1}{\sum_{k=0}^{m}\frac{a^{k}}{k!}},
+$$
+
+* Which leads to the truncated Poisson distribution 
+
+$$
+P\left(k\right)=\frac{\frac{a^{k}}{k!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}
+$$
+
+* *Note if*$m\rightarrow\infty$*we recover the* $M/M/\infty$*queue as we would expect.*}
 
 \newslide{Probability of Blocking}
 
@@ -65,25 +100,47 @@ P\left(k\right)=\ensuremath{\frac{\frac{a^{k}}{k!}}{\sum_{n=0}^{m}\frac{a^{n}}{n
 \newslide{Probability of Blocking (continued)}
 
 \slides{* The probability of blocking is of interest: the probability that when we arrive the system is full and we are denied service.
-* As we discussed for the $M/M/1/m$ queue the blocking probability is given by $P\left(m\right)$$$
-B(m,a)=P\left(m\right)=\ensuremath{\frac{\frac{a^{m}}{m!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}}.$$
+* As we discussed for the $M/M/1/m$ queue the blocking probability is given by $P\left(m\right)$
+
+$$
+B(m,a)=P\left(m\right)=\frac{\frac{a^{m}}{m!}}{\sum_{n=0}^{m}\frac{a^{n}}{n!}}.
+$$
+
 * Use Erlang B curves to compute.}
 
 \newslide{Carried Load and Utilization Factors}
 
 \slides{* Since traffic is lost in $M/M/m/m$ the carried load, $a^{\prime}$, is smaller than the offered load.
-* The carried load is given by the offered load multiplied by the probability that the packet is not blocked. $$
-a^{\prime}=a(1-P\left(m\right))=a(1-B(m,a))$$
-* The carried load per line is the trunk occupancy (the utilization facctor), $$
-\ensuremath{\rho}=\ensuremath{\frac{a^{\prime}}{m}}.$$}
+* The carried load is given by the offered load multiplied by the probability that the packet is not blocked. 
+
+$$
+a^{\prime}=a(1-P\left(m\right))=a(1-B(m,a))
+$$
+
+* The carried load per line is the trunk occupancy (the utilization facctor), 
+
+$$
+\rho=\frac{a^{\prime}}{m}.
+$$
+
+}
 
 \newslide{Carried Load and Utilization Factors (continued)}
 
-\slides{* Note the contrast with the lossless systems where $$
-\ensuremath{\rho}=\ensuremath{\frac{a}{m}}$$because the carried load is equal to the offered load $a^{\prime}=a$.
+\slides{* Note the contrast with the lossless systems where 
+
+$$
+\rho=\frac{a}{m}
+$$
+
+because the carried load is equal to the offered load $a^{\prime}=a$.
 * This also applies for the other system with loss we have seen, the $M/M/1/m$ queue.
-* The rate of service in the system is no longer given by the arrival rate, $\ensuremath{\lambda}$, we need to consider those packets that are lost. $$
-\dot{\ensuremath{\lambda}}=\ensuremath{\lambda(1-P\left(m\right))}$$
+* The rate of service in the system is no longer given by the arrival rate, $\lambda$, we need to consider those packets that are lost. 
+
+$$
+\dot{\lambda}=\lambda(1-P\left(m\right))
+$$
+
 * This has effects when studying the queue using Little's formula.}
 
 \newslide{Load Tripling}
@@ -100,13 +157,19 @@ a^{\prime}=a(1-P\left(m\right))=a(1-B(m,a))$$
 
 \slides{1. 13
 2. 28
-3. A tripling in load only leads to a (just over doubling) of the resources required. To understand this further we look at the utilization factors. For the first system the utilisation factor is $$
-\rho_{1}=6\left(1-0.005\right)=0.459$$whereas for the second system the utilisation factor is$$
-\rho_{2}=18\left(1-0.007\right)=0.6384$$The 30 trunk system is thus more efficient. This explains why it is cheaper to call the U.S.A. than Italy.}
+3. A tripling in load only leads to a (just over doubling) of the resources required. To understand this further we look at the utilization factors. For the first system the utilisation factor is 
 
-\newslide{Answer (continued)}
+$$
+\rho_{1}=\frac{6}{13}\left(1-0.005\right)=0.459
+$$
 
-\slides{* \end{answer}}
+whereas for the second system the utilisation factor is
+
+$$
+\rho_{2}=\frac{18}{28}\left(1-0.007\right)=0.6384
+$$
+
+The 30 trunk system is thus more efficient. This explains why it is cheaper to call the U.S.A. than Italy.}
 
 \newslide{Example $M/M/m/n$}
 
@@ -117,9 +180,14 @@ a^{\prime}=a(1-P\left(m\right))=a(1-B(m,a))$$
 \slides{* Question
 1. A call centre employs thirty operators selling tickets for a major sporting event. The call centre has sixty lines in total. When all operators are active new calls are placed in a queue for the first available operator. The call centre is to be modelled as an $M/M/m/n$ queue, *i.e.* a queue in which there are $m$ servers and a maximum state of $n$.
 2. Draw a state diagram representing the queueing system.
-3. Write down the detailed balance equations for the two cases where the queue state $k<m$ and when $m\ensuremath{\leq} k<n$.
+3. Write down the detailed balance equations for the two cases where the queue state $k<m$ and when $m\leq k<n$.
 4. For each of the two cases outlined in the previous part write down the steady state distribution as a function of $P\left(0\right)$, the probability of the system being empty.
-5. Use the fact that the steady state distribution must be normalised to show that $$
-P\left(0\right)=\left[\sum_{k=0}^{m}\ensuremath{\frac{a^{k}}{k!}}+\sum_{k=m+1}^{n}\ensuremath{\frac{a^{k}}{m!m^{k-m}}\right]^{-1}}$$where $a=\ensuremath{\frac{\lambda}{\mu}}$, $\ensuremath{\lambda}$ is the arrival rate and $\ensuremath{\mu}$ is the rate of the service time distribution.}
+5. Use the fact that the steady state distribution must be normalised to show that 
+
+$$
+P\left(0\right)=\left[\sum_{k=0}^{m}\frac{a^{k}}{k!}+\sum_{k=m+1}^{n}\frac{a^{k}}{m!m^{k-m}}\right]^{-1}
+$$
+
+where $a=\frac{\lambda}{\mu}$, $\lambda$ is the arrival rate and $\mu$ is the rate of the service time distribution.}
 
 \endif
