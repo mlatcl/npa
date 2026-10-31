@@ -68,9 +68,11 @@ _site/
 slides/diagrams/ml/
 slides/diagrams/mlai/
 
-# Generated lecture PDFs (rebuild with maketalk; compare via scripts/compare_pdfs.py)
+# Intermediate lecture PDFs from maketalk. Published copies live in notes/
+# (Jekyll does not copy _notes/) and as numbered slides/*.slides.pdf.
 _notes/*.pdf
 slides/*.slides.pdf
+!slides/[0-9][0-9]-*.slides.pdf
 
 # Notebook smoke artefacts
 _notebooks/test-results/
