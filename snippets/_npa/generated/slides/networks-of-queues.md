@@ -9,7 +9,7 @@
 
 \newslide{`$M/M/1$' Queues in Tandem\label{sec:tandemQueuesOne}}
 
-\slides{\figure{\includepng{\diagramsDir/npa/MM1tandem}{100%}}{Two queues in tandem}{MM1tandem}}
+\slides{\figure{\includepng{\diagramsDir/npa/MM1tandem}{100%}}{MM1tandem}{MM1tandem}}
 
 \newslide{`$M/M/1$' Queues in Tandem\label{sec:tandemQueuesOne} (continued)}
 
@@ -60,28 +60,33 @@
 \newslide{Time Reversibility}
 
 \slides{* The principle with time reversibility is as follows:
-* for a birth-death process at steady state the arrival process is Poisson with rate $\ensuremath{\lambda}$. Time reversibility states that the *departure process* will also be Poisson with rate $\ensuremath{\lambda}$.
-* A proof is given in Section\  3.7 of Bertsekas and Gallager.}
+* for a birth-death process at steady state the arrival process is Poisson with rate $\lambda$. Time reversibility states that the *departure process* will also be Poisson with rate $\lambda$.
+* A proof is given in Section  3.7 of Bertsekas and Gallager.}
 
 \newslide{Time Revesibility Intuition}
 
 \slides{* Consider the following `intuition' for the $M/M/1$ queue.
-* The service rate for the system is given by $\ensuremath{\mu}$.}
+* The service rate for the system is given by $\mu$.}
 
 \newslide{Time Revesibility Intuition (continued)}
 
 \slides{* The service rate is *not* the departure rate because a departure can only occur when the system has a state $k>0$.
-* This condition is satisfied for a fraction of the time which is given by the utilization factor $\ensuremath{\rho}$.
-* The departure rate is therefore given by $$
-\ensuremath{\mu\rho}=\ensuremath{\mu\frac{\lambda}{\mu}}=\ensuremath{\lambda}$$.}
+* This condition is satisfied for a fraction of the time which is given by the utilization factor $\rho$.
+* The departure rate is therefore given by 
+
+$$
+\mu\rho=\mu\frac{\lambda}{\mu}=\lambda
+$$
+
+.}
 
 \newslide{Burke's Theorem}
 
 \slides{* Burke's theorem follows on from time reversibility. It states that
-* if an $M/M/1$, an $M/M/m$ or an $M/M/\ensuremath{\infty}$ queue at its stationary distribution has a Poisson arrival process with a rate $\ensuremath{\lambda}$
-* then the departure process is also Poisson with rate $\ensuremath{\lambda}$.
+* if an $M/M/1$, an $M/M/m$ or an $M/M/\infty$ queue at its stationary distribution has a Poisson arrival process with a rate $\lambda$
+* then the departure process is also Poisson with rate $\lambda$.
 * Furthermore the number of the customers in the system at time $t$ is *independent* of the sequence of departure times prior to $t$.
-* Queues with loss are slightly more complex because the arrival process does not have rate $\ensuremath{\lambda}$ due to blocked packets.}
+* Queues with loss are slightly more complex because the arrival process does not have rate $\lambda$ due to blocked packets.}
 
 \newslide{Burke's Theorem}
 
@@ -94,7 +99,7 @@
 \newslide{$M/M/1$ Queues in Tandem Revisited}
 
 \slides{* Lets return to the $M/M/1$ queues in tandem. --- Example 2 in notes.
-* Burke's theorem tells us that the departure process from the first queue will be a Poisson with rate $\ensuremath{\lambda}$.}
+* Burke's theorem tells us that the departure process from the first queue will be a Poisson with rate $\lambda$.}
 
 \newslide{$M/M/1$ Queues in Tandem Revisited (continued)}
 
@@ -105,20 +110,37 @@
 \newslide{M/M/1 in Tandem}
 
 \slides{* If the service time distributions at the two queues are governed by exponential distributions with rate parameters $\mu_{1}$ and $\mu_{2}$.
-* This leads to utilization factors for each queue as $\rho_{1}=\ensuremath{\frac{\lambda}{\mu_{1}}}$ and $\rho_{2}=\ensuremath{\frac{\lambda}{\mu_{2}}}$ .}
+* This leads to utilization factors for each queue as $\rho_{1}=\frac{\lambda}{\mu_{1}}$ and $\rho_{2}=\frac{\lambda}{\mu_{2}}$ .}
 
 \newslide{M/M/1 in Tandem (continued)}
 
-\slides{* The distributions for the states of the systems are given by$$
-p\left(k_{1}\right)=\rho_{1}^{k_{1}}\left(1-\rho_{1}\right)$$$$
-p\left(k_{2}\right)=\rho_{2}^{k_{2}}\left(1-\rho_{2}\right).$$
-* The joint distribution for both systems is then
-* As a result the average delay in the system can be computed as the sum of the average delays in each queue$$
-\ensuremath{\bar{T}}=\ensuremath{\bar{T}_{1}}+\ensuremath{\bar{T}_{2}}=\ensuremath{\frac{1}{\mu_{1}-\lambda}}+\ensuremath{\frac{1}{\mu_{2}-\lambda}}.$$
+\slides{* The distributions for the states of the systems are given by
 
-| p\left(k_{1},k_{2}\right) | = | p\left(k_{1}\right)p\left(k_{2}\right) |
-| --- | --- | --- |
-|  | = | \rho_{1}^{k_{1}}\left(1-\rho_{1}\right)\rho_{2}^{k_{2}}\left(1-\rho_{2}\right)because the two queues can be viewed independently. |}
+$$
+p\left(k_{1}\right)=\rho_{1}^{k_{1}}\left(1-\rho_{1}\right)
+$$
+
+$$
+p\left(k_{2}\right)=\rho_{2}^{k_{2}}\left(1-\rho_{2}\right).
+$$
+
+* The joint distribution for both systems is then
+
+$$
+\begin{aligned}
+p\left(k_{1},k_{2}\right) & = & p\left(k_{1}\right)p\left(k_{2}\right)\\
+ & = & \rho_{1}^{k_{1}}\left(1-\rho_{1}\right)\rho_{2}^{k_{2}}\left(1-\rho_{2}\right)
+\end{aligned}
+$$
+
+because the two queues can be viewed independently.
+* As a result the average delay in the system can be computed as the sum of the average delays in each queue
+
+$$
+\bar{T}=\bar{T}_{1}+\bar{T}_{2}=\frac{1}{\mu_{1}-\lambda}+\frac{1}{\mu_{2}-\lambda}.
+$$
+
+}
 
 \newslide{Relation to Reality}
 
@@ -139,8 +161,13 @@ p\left(k_{2}\right)=\rho_{2}^{k_{2}}\left(1-\rho_{2}\right).$$
 * We define $f_{ij}\left(s\right)$ as the fraction of packets from stream $s$ that cross the link between $i$ and $j$.
 * The rate associated with a link between node $i$ and $j$ is then 
 
-| \lambda_{ij} | = | \sum_{s\textrm{ }}f_{ij}\left(s\right)x_{s}. |
-| --- | --- | --- |}
+$$
+\begin{aligned}
+\lambda_{ij} & = & \sum_{s\textrm{ }}f_{ij}\left(s\right)x_{s}.
+\end{aligned}
+$$
+
+}
 
 \newslide{Kleinrock's Independence Approximation}
 
@@ -150,36 +177,54 @@ p\left(k_{2}\right)=\rho_{2}^{k_{2}}\left(1-\rho_{2}\right).$$
 * exponentially distributed packets
 * densely connected networks
 * moderate-heavy traffic.
-* Given this assumption, from the $M/M/1$ queue, we know that the average number at each link is $$
-\ensuremath{\bar{N}_{ij}}=\ensuremath{\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}}}$$}
+* Given this assumption, from the $M/M/1$ queue, we know that the average number at each link is 
+
+$$
+\bar{N}_{ij}=\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}}
+$$
+
+}
 
 \newslide{The Average in the System}
 
 \slides{* Thus the average number in the entire system is
-* Average delay at each link is given by Little's theorem$$
-\ensuremath{\bar{T}_{ij}}=\ensuremath{\frac{1}{\mu_{ij}-\lambda_{ij}}}.$$
-
-| \ensuremath{\bar{N}} | = | \sum_{ij}\ensuremath{\bar{N}_{ij}} |
-| --- | --- | --- |
-|  | = | \sum_{ij}\ensuremath{\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}}} |}
-
-\newslide{Example --- A Simple Network}
-
-\slides{\figure{\includepng{\diagramsDir/npa/kleinrockNetwork}{80%}}{A small network with five nodes.}{cap:fiveNodeNetwork}}
-
-\newslide{Example --- A Simple Network (continued)}
-
-\slides{* **Question**
-  Figure\  \ref{cap:fiveNodeNetwork} shows a simple five node network. In the network flow only occurs from lower numbered nodes to higher numbered nodes. The connections in the network have average service times in milliseconds as follows:
-* Different routes through the network are indicated with thick lines. Each route has a rate associated with it as follows
 
 $$
 \begin{aligned}
-* According to the Kleinrock independence assumption, what is the most congested link? What is the quickest route between node 1 & 5?
+\bar{N} & = & \sum_{ij}\bar{N}_{ij}\\
+ & = & \sum_{ij}\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}}
 \end{aligned}
-$$}
+$$
 
-\slides{| $\ensuremath{\bar{X}}$ | 1 | 2 | 3 | 4 | 5 |
+* Average delay at each link is given by Little's theorem
+
+$$
+\bar{T}_{ij}=\frac{1}{\mu_{ij}-\lambda_{ij}}.
+$$
+
+}
+
+\newslide{Example --- A Simple Network}
+
+\slides{* \label{cap:fiveNodeNetwork}
+**Question**
+Figure  \ref{cap:fiveNodeNetwork} shows a simple five node network. In the network flow only occurs from lower numbered nodes to higher numbered nodes. The connections in the network have average service times in milliseconds as follows:}
+
+\slides{\figure{\includepng{\diagramsDir/npa/kleinrockNetwork}{100%}}{kleinrockNetwork}{kleinrockNetwork}}
+
+\newslide{Example --- A Simple Network (continued)}
+
+\slides{* Different routes through the network are indicated with thick lines. Each route has a rate associated with it as follows
+
+$$
+\begin{aligned}
+* According to the Kleinrock independence assumption, what is the most congested link? What is the quickest route between node 1 \& 5?
+\end{aligned}
+$$
+
+}
+
+\slides{| $\bar{X}$ | 1 | 2 | 3 | 4 | 5 |
 | --- | --- | --- | --- | --- | --- |
 | 1 | - | - | - | - | - |
 | 2 | 0.05 | - | - | - | - |
@@ -189,13 +234,13 @@ $$}
 
 \slides{|  | $x_{1}$ | $x_{2}$ | $x_{3}$ | $x_{4}$ | $x_{5}$ | $x_{6}$ | $x_{7}$ |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| $\ensuremath{\lambda}$ | 5 | 10 | 7 | 12 | 4 | 8 | 4 |}
+| $\lambda$ | 5 | 10 | 7 | 12 | 4 | 8 | 4 |}
 
 \newslide{Answer}
 
 \slides{*     }
 
-\slides{| $\ensuremath{\lambda}$ | 1 | 2 | 3 | 4 | 5 |
+\slides{| $\lambda$ | 1 | 2 | 3 | 4 | 5 |
 | --- | --- | --- | --- | --- | --- |
 | 1 | - | - | - | - | - |
 | 2 | $x_{1}+x_{2}=15$ | - | - | - | - |
@@ -203,67 +248,76 @@ $$}
 | 4 | $x_{4}+x_{5}=16$ | - | - | - | - |
 | 5 | - | $x_{2}=10$ | $x_{3}+x_{6}=15$ | $x_{4}+x_{7}=16$ | - |}
 
-\slides{| $\ensuremath{\rho}=\ensuremath{\lambda\bar{X}}$ | 1 | 2 | 3 | 4 | 5 |
+\slides{| $\rho=\lambda\bar{X}$ | 1 | 2 | 3 | 4 | 5 |
 | --- | --- | --- | --- | --- | --- |
 | 1 | - | - | - | - | - |
-| 2 | $15\times0.05=3$ | - | - | - | - |
-| 3 | $7\times0.05=7$ | - | - | - | - |
-| 4 | $16\times0.0333=8$ | - | - | - | - |
-| 5 | - | $10\times0.05=1$ | $15\times0.05=3$ | $16\times0.033=8$ | - |}
+| 2 | $15\times0.05=\frac{3}{4}$ | - | - | - | - |
+| 3 | $7\times0.05=\frac{7}{20}$ | - | - | - | - |
+| 4 | $16\times0.0333=\frac{8}{15}$ | - | - | - | - |
+| 5 | - | $10\times0.05=\frac{1}{2}$ | $15\times0.05=\frac{3}{4}$ | $16\times0.033=\frac{8}{15}$ | - |}
 
 \newslide{Answer Contd}
 
 \slides{* 
-* **The most congested links are from 1 to 2 and 3 to 5.**}
+* 
+**The most congested links are from 1 to 2 and 3 to 5.**}
 
-\slides{| $1-\ensuremath{\rho}$ | 1 | 2 | 3 | 4 | 5 |
+\slides{| $1-\rho$ | 1 | 2 | 3 | 4 | 5 |
 | --- | --- | --- | --- | --- | --- |
 | 1 | - | - | - | - | - |
-| 2 | $1$ | - | - | - | - |
-| 3 | $13$ | - | - | - | - |
-| 4 | $7$ | - | - | - | - |
-| 5 | - | $1$ | $1$ | $7$ | - |}
+| 2 | $\frac{1}{4}$ | - | - | - | - |
+| 3 | $\frac{13}{20}$ | - | - | - | - |
+| 4 | $\frac{7}{15}$ | - | - | - | - |
+| 5 | - | $\frac{1}{2}$ | $\frac{1}{4}$ | $\frac{7}{15}$ | - |}
 
-\slides{| $N=\ensuremath{\frac{\rho}{1-\rho}}$ | 1 | 2 | 3 | 4 | 5 |
+\slides{| $N=\frac{\rho}{1-\rho}$ | 1 | 2 | 3 | 4 | 5 |
 | --- | --- | --- | --- | --- | --- |
 | 1 | - | - | - | - | - |
 | 2 | $3$ | - | - | - | - |
-| 3 | $7$ | - | - | - | - |
-| 4 | $8$ | - | - | - | - |
-| 5 | - | 1 | 3 | $8$ | - |}
+| 3 | $\frac{7}{13}$ | - | - | - | - |
+| 4 | $\frac{8}{7}$ | - | - | - | - |
+| 5 | - | 1 | 3 | $\frac{8}{7}$ | - |}
 
 \newslide{Answer Contd}
 
 \slides{* To compute the answer to the second part we need the average delay at each link
-    
-* This means that to go via node 2 takes $1+1=0.3$ via node 3 takes $1+1=0.277$ via node 4 it takes $1+1=1=0.1429$ according to Kleinrock's independence assumption.
+
+* 
+This means that to go via node 2 takes $\frac{1}{5}+\frac{1}{10}=0.3$ via node 3 takes $\frac{1}{13}+\frac{1}{5}=0.277$ via node 4 it takes $\frac{1}{14}+\frac{1}{14}=\frac{1}{7}=0.1429$ according to Kleinrock's independence assumption.
 
 $$
 \begin{aligned}
-    Here we have assumed that there is no further delay associated with each link (propagation, processing). In practice such delays may arise however we shall not consider them. See Bertsekas & Gallager Section 3.6.1 for more details.
+Here we have assumed that there is no further delay associated with each link (propagation, processing). In practice such delays may arise however we shall not consider them. See Bertsekas \& Gallager Section 3.6.1 for more details.
 \end{aligned}
-$$}
+$$
 
-\slides{| $\ensuremath{\bar{T}}=\ensuremath{\frac{\bar{X}}{1-\rho}}$ | 1 | 2 | 3 | 4 | 5 |
+}
+
+\slides{| $\bar{T}=\frac{\bar{X}}{1-\rho}$ | 1 | 2 | 3 | 4 | 5 |
 | --- | --- | --- | --- | --- | --- |
 | 1 | - | - | - | - | - |
-| 2 | $4\times0.05=1$ | - | - | - | - |
-| 3 | $20\times0.05=1$ | - | - | - | - |
-| 4 | $15\times0.033=1$ | - | - | - | - |
-| 5 | - | $2\times0.05=1$ | $4\times0.05=1$ | $15\times0.033=1$ | - |}
+| 2 | $4\times0.05=\frac{1}{5}$ | - | - | - | - |
+| 3 | $\frac{20}{13}\times0.05=\frac{1}{13}$ | - | - | - | - |
+| 4 | $\frac{15}{7}\times0.033=\frac{1}{14}$ | - | - | - | - |
+| 5 | - | $2\times0.05=\frac{1}{10}$ | $4\times0.05=\frac{1}{5}$ | $\frac{15}{7}\times0.033=\frac{1}{14}$ | - |}
 
 \newslide{Jackson's Theorem}
 
 \slides{* While Kleinrock's independence assumption approximates the activities at each queue as $M/M/1$ queues, Jackson's theorem provides a result for the number in the queueing system as a whole.
-* Some analysis of the system is given in Section\  3.8 of Bertsekas and Gallager.
+* Some analysis of the system is given in Section  3.8 of Bertsekas and Gallager.
 * For our purposes it is sufficient to give the assumptions and the result.}
 
 \newslide{Jackson's Theorem (continued)}
 
 \slides{* there is no correlation between service times and queue lengths.
 * randomisation is used to divide the traffic along different routes through the network.
-* Given these assumptions the average number of packets in the network is given by$$
-N=\sum_{i,j}\ensuremath{\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}}}.$$}
+* Given these assumptions the average number of packets in the network is given by
+
+$$
+N=\sum_{i,j}\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}}.
+$$
+
+}
 
 \newslide{Network Simulation}
 

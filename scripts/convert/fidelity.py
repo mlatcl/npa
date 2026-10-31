@@ -48,7 +48,7 @@ def lyx_stats(doc: Document) -> dict:
 def tex_stats(tex: str) -> dict:
     figures = len(re.findall(r"\\includegraphics", tex))
     display = len(re.findall(r"\\\[|\\begin\{equation\}|\\begin\{eqnarray", tex))
-    foilheads = len(re.findall(r"^\s*\\foilhead\{", tex, re.M))
+    foilheads = len(re.findall(r"^\s*\\foilhead(?:\[[^\]]*\])?\{", tex, re.M))
     chapters = len(re.findall(r"\\chapter", tex))
     # Strip macros for a rough word count of remaining text.
     stripped = re.sub(r"\\[A-Za-z]+\*?(\[[^\]]*\])?\{[^{}]*\}", " ", tex)

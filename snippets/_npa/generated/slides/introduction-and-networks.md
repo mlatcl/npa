@@ -18,7 +18,7 @@
 * By the early 1960s *packet switching networks* came into being.
 * ARPANET was predecessor of the internet.}
 
-\slides{\figure{\includepng{\diagramsDir/npa/1975_net_map}{80%}}{The ARPANET in 1975, image courtesy of the Computer History Museum, [http://www.computerhistory.org](http://www.computerhistory.org).}{1975-net-map}}
+\slides{\figure{\includepng{\diagramsDir/npa/1975_net_map}{100%}}{1975_net_map}{1975_net_map}}
 
 \newslide{Network Performance Analysis}
 
@@ -57,21 +57,21 @@
 
 \newslide{Network Types}
 
-\slides{* **Circuit\** Switching: used for telephone routing. Guarantees an open `channel' between two peers.
-* **Packet\** Switching or Store and Forward Switching: used for data. May operate via
-* **Dynamic\** Routing Each packet of the message moves through the network independently.
-* **Virtual\** Circuit\  Routing A fixed path through the network is provided for the entire message.}
+\slides{* **{Circuit~Switching:}** used for telephone routing. Guarantees an open `channel' between two peers.
+* **{Packet~Switching}** or Store and Forward Switching: used for data. May operate via
+* **{Dynamic~Routing}** Each packet of the message moves through the network independently.
+* **{Virtual~Circuit~}** Routing A fixed path through the network is provided for the entire message.}
 
 \newslide{Network Types (continued)}
 
 \slides{* The character of the two approaches are quite different.}
 
-\newslide{Circuit\  Switching}
+\newslide{Circuit  Switching}
 
 \slides{* wasteful in terms of bandwidth. Nodes may not be using all the available bandwidth reserved for them.
 * a guaranteed channel is provided with a known communication delay associated with it.}
 
-\newslide{Circuit\  Switching (continued)}
+\newslide{Circuit  Switching (continued)}
 
 \slides{* the sum of rates for all sessions using a link cannot exceed the total capacity of the link. New sessions must be rejected when the link capacity is reached.
 * used for telephone networks where the session rate, $r_{s}$, is the same for each session. Switching would be more complex for data networks and the nature of transmission would also mean that the links are inefficiently used.}
@@ -94,32 +94,46 @@
 
 \newslide{The Road Ahead}
 
-\slides{* **Probability\** Review Review of probability theory.
-* **Simple\** Queuing\  models Simple models of queues based on probability theory. Little's formula, $M/M/1$ queue, $M/M/\ensuremath{\infty}$, $M/M/m$, $M/M/m/m$ and $M/G/1$.
-* **Simulation** Simulation of queueing systems.}
+\slides{* **{Probability~Review}** Review of probability theory.
+* **{Simple~Queuing~}** models Simple models of queues based on probability theory. Little's formula, $M/M/1$ queue, $M/M/\infty$, $M/M/m$, $M/M/m/m$ and $M/G/1$.
+* **{Simulation}** Simulation of queueing systems.}
 
 \newslide{Examples}
 
-\slides{1. As a simple example let's consider a database (perhaps MySQL). We are constructing it from existing parts. We have two CPU/motherboard systems and two separate disk systems, their expected characteristics are shown in Table\  \ref{cap:SQLserver}. Which should we match with which? Are we better off building one faster system and one slower system? Or should we build two systems that have a similar performance?
-2. You are starting an e-commerce company.
-3. You have a tight budget.
-4. You have:
-
-$$
-\begin{aligned}
-5. two disk systems (1 & 2).
-6. two CPU systems (A & B).
-\end{aligned}
-$$}
+\slides{1. As a simple example let's consider a database (perhaps MySQL). We are constructing it from existing parts. We have two CPU/motherboard systems and two separate disk systems, their expected characteristics are shown in Table  \ref{cap:SQLserver}. Which should we match with which? Are we better off building one faster system and one slower system? Or should we build two systems that have a similar performance?
+  % empty table}
 
 \newslide{Examples (continued)}
 
-\slides{1. Which should you combine to make your two servers?
-  % empty table
-2. Answer
-3. You should match A with 2 and B with 1.
-4. This avoids bottlenecks:
-5. Disk 1 would wait for CPU A to process about 50% of the time.
-6. CPU B would wait for disk 2 to access about 50% of the time.}
+\speakernotes{\begin{itemize}
+      \item You are starting an e-commerce company.
+      \item You have a tight budget.
+      \item You have:
+      \begin{itemize}
+      \end{itemize}
+      \item Which should you combine to make your two servers?
+    \end{itemize}
+
+$$
+\begin{aligned}
+        \item two disk systems (1 \& 2).
+        \item two CPU systems (A \& B).
+\end{aligned}
+$$
+
+}
+
+\speakernotes{\begin{itemize}
+        \item Answer
+        \begin{itemize}
+          \item You should match A with 2 and B with 1.
+          \item This avoids bottlenecks:
+          \begin{itemize}
+            \item Disk 1 would wait for CPU A to process about 50% of the time.
+            \item CPU B would wait for disk 2 to access about 50% of the time.
+          \end{itemize}
+        \end{itemize}
+
+      \end{itemize}}
 
 \endif
